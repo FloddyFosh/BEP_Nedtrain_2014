@@ -1,0 +1,274 @@
+#include <QApplication>
+#include <QSettings>
+#include <QFile>
+
+#include "solver.h"
+#include "controller/exceptions.h"
+#include "model/frame.h"
+
+Solver::Solver(QString name, QString binary, QString arguments, QObject *parent) :
+    QObject (parent), name (name), binary (binary), arguments (arguments), instance(0), solved(false), peakResource(-1), mutexJob(-1)
+{
+    process.setProcessChannelMode(QProcess::MergedChannels);
+}
+
+QList<Solver *> Solver::loadAll() {
+    QList<Solver *> solvers;
+
+    QSettings settings;
+
+    settings.beginGroup("solvers");
+
+    QStringList groups = settings.childGroups();
+    for (int i = 0; i < groups.size(); ++i) {
+        settings.beginGroup(groups[i]);
+
+        QString binary = settings.value("binary").toString();
+        QString arguments = settings.value("arguments").toString();
+
+        solvers.append(new Solver(groups[i], binary, arguments));
+
+        settings.endGroup();
+    }
+
+    return solvers;
+}
+
+Solver *Solver::load(QString name) {
+    QSettings settings;
+
+    settings.beginGroup("solvers");
+    settings.beginGroup(name);
+
+    if (!settings.contains("binary"))
+        throw SolverNotFoundException();
+
+    QString binary = settings.value("binary").toString();
+    QString arguments = settings.value("arguments").toString();
+
+    QFile f(binary);
+    if(!f.exists())
+        throw SolverNotFoundException();
+
+    return new Solver(name, binary, arguments);
+}
+
+void Solver::remove() {
+    QSettings settings;
+    settings.beginGroup("solvers");
+    settings.remove(name);
+}
+
+QString Solver::getName() const { return name; }
+QString Solver::getBinary() const { return binary; }
+QString Solver::getArguments() const { return arguments; }
+
+void Solver::setName(QString newname) {
+    remove();
+    name = newname;
+    save();
+}
+
+void Solver::setBinary(QString newbinary) {
+    binary = newbinary;
+    save();
+}
+
+void Solver::setArguments(QString newarguments) {
+    arguments = newarguments;
+    save();
+}
+
+void Solver::save() {
+    QSettings settings;
+    settings.beginGroup("solvers");
+    settings.beginGroup(name);
+    settings.setValue("binary", binary);
+    settings.setValue("arguments", arguments);
+}
+
+bool Solver::start(Instance *p) {
+    instance = p;
+    replayFrames.clear();
+    wasLocked.clear();
+    // Save first frame.
+    Frame * first_frame (new Frame);
+    foreach(Group * g, instance->getGroups()) {
+        first_frame->addGroup(g);
+        foreach(Activity * a, g->getActivities()) {
+            wasLocked[a] = g->isLocked();
+        }
+        if (not g->isLocked())
+            g->setST(g->getEST());
+    }
+    replayFrames.append(first_frame);
+    
+    QByteArray ba;
+    QString s = instance->toString();
+    ba.append(s);
+
+    connect(&process, SIGNAL(readyRead()), this, SLOT(processOutput()));
+    connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(solverFinished(int, QProcess::ExitStatus)));
+    process.start(binary, arguments.split(" "));
+
+    process.write(ba);
+    process.closeWriteChannel();
+
+    return true;
+}
+
+void Solver::solverFinished(int x, QProcess::ExitStatus state) {
+    processOutput();
+    // copy last frame
+    Frame * lastFrame (new Frame);
+    foreach(Group * g, replayFrames.back()->getGroups()) {
+        Group * g_ (new Group (g->getJob(), g->getEST(), g->getLST(), g->getST()));
+        g_->setLocked(g->isLocked());
+        foreach(Activity * a, g->getActivities()) g_->addActivity(a);
+        lastFrame->addGroup(g_);
+    }
+    replayFrames.append(lastFrame);
+    instance->setFrames(replayFrames);
+
+    emit finished(x, state);
+}
+
+void Solver::cancel() {
+    process.kill();
+}
+
+void Solver::setSolved(bool s) {
+    solved = s;
+}
+
+bool Solver::isSolved() {
+    return solved;
+}
+
+int Solver::getPeakResource() {
+    return peakResource;
+}
+
+int Solver::getMutexJob() {
+    return mutexJob;
+}
+
+void Solver::processOutput() {
+    QApplication::processEvents(); // keep event loop going so UI stays responsive
+    while (process.canReadLine()) {
+        QByteArray line = process.readLine();
+        if (line.startsWith("PROGRESS: ")) {
+            processProgressLine(line);
+        } else if (line.startsWith("PC: ")) {
+            processPrecedenceLine(line);
+        } else if (line.startsWith("MRG: ") or line.startsWith("EST: ")) {
+            /* ignored for now */
+        } else if (line.startsWith("STATE: ")) {
+            processStateLine(line);
+        } else if (line.startsWith("PEAK: ")) {
+            processPeakLine(line);
+        } else if (line.startsWith("MUTEX: ")) {
+            processMutexLine(line);
+        } else if (line.startsWith("STATUS: ")) {
+            emit statusReceived(QString(line.trimmed()));
+            emit messageReceived(QString(line.trimmed()));
+        } else {
+            if(line.contains("Instance solved."))
+                setSolved(true);
+            else if(line.contains("Instance not solved."))
+                setSolved(false);
+            emit messageReceived(QString(line.trimmed()));
+        }
+    }
+}
+
+void Solver::processProgressLine(QByteArray &line) {
+    QList<QByteArray> tokens = line.trimmed().split(' ');
+    if (tokens.size() == 2) {
+        int progress = tokens[1].toInt();
+        emit progressMade(progress);
+    }
+}
+
+void Solver::processPrecedenceLine(QByteArray &line) {
+    QList<QByteArray> fields = line.trimmed().split(' ');
+
+    if(fields.size() == 5) {
+        fields.takeFirst();
+        int j1 = fields.takeFirst().toInt();
+        int a1 = fields.takeFirst().toInt();
+        int j2 = fields.takeFirst().toInt();
+        int a2 = fields.takeFirst().toInt();
+
+        try {
+            instance->addPrecedence(j1, a1, j2, a2, false, replayFrames.size());
+        } catch(InstanceManipulationException const& e) { e.printWarning(); }
+    }
+}
+
+void Solver::processStateLine(QByteArray &line) {
+    QList<QByteArray> fields = line.trimmed().split(' ');
+    fields.takeFirst();
+    Frame * nextFrame (new Frame);
+    processStateGroups(fields, nextFrame);
+    replayFrames.append(nextFrame);
+}
+
+void Solver::processStateGroups(QList<QByteArray> fields, Frame *frame) {
+    while (1) {
+        int jobId = fields.takeFirst().toInt();
+        if (jobId == -1) break;
+        int est   = fields.takeFirst().toInt();
+        int lst   = fields.takeFirst().toInt();
+        int nActs = fields.takeFirst().toInt();
+        Group * g (new Group(jobId, est, lst, est));
+        bool isResourceDecrease = (instance->J(jobId) == NULL);
+        if (isResourceDecrease) {
+            while (nActs --) fields.takeFirst(), fields.takeFirst();
+        }
+        else {
+            while (nActs --) {
+                int jobId1 = fields.takeFirst().toInt();
+                int actId1 = fields.takeFirst().toInt();
+                
+                g->addActivity(instance->A(jobId1, actId1));
+                if (wasLocked[instance->A(jobId1, actId1)]) g->setLocked(true);
+            }
+            frame->addGroup(g);
+        }
+    }
+}
+
+void Solver::processPeakLine(QByteArray &line) {
+    QList<QByteArray> fields = line.trimmed().split(' ');
+    fields.takeFirst();
+
+    int time = fields.takeFirst().toInt();
+    peakResource = fields.takeFirst().toInt();
+    int capacity = fields.takeFirst().toInt();
+    emit peak(time, peakResource, capacity);
+
+    eatRemainingOutput(fields);
+}
+
+void Solver::processMutexLine(QByteArray &line) {
+    QList<QByteArray> fields = line.trimmed().split(' ');
+    fields.takeFirst();
+    fields.takeFirst();
+    mutexJob = fields.takeFirst().toInt();
+    fields.takeFirst();
+
+    eatRemainingOutput(fields);
+}
+
+void Solver::eatRemainingOutput(QList<QByteArray> &fields) {
+    while (1) {
+        int jobId = fields.takeFirst().toInt();
+        if (jobId == -1) break;
+        fields.takeFirst();
+    }
+}
+
+QProcess* Solver::getProcess() {
+    return &process;
+}

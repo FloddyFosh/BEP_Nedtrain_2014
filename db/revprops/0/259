@@ -1,0 +1,13 @@
+K 10
+svn:author
+V 3
+jan
+K 8
+svn:date
+V 27
+2012-05-08T12:45:42.412925Z
+K 7
+svn:log
+V 55
+tijdelijke fix van performance bug bij resource profile
+END

@@ -1,0 +1,13 @@
+K 10
+svn:author
+V 5
+erwin
+K 8
+svn:date
+V 27
+2012-06-11T09:47:42.500315Z
+K 7
+svn:log
+V 103
+timeline heeft andere cursor bij mouseover, toont afgemelde interval, memory leak in instancewidget weg
+END

@@ -1,0 +1,236 @@
+id: h-81.2-83.r686/0
+type: file
+pred: h-81.2-83.r684/1228
+count: 86
+text: 676 427 503 14494 c7d37d61d1f5156d8903d786db126a17 b48f5f06d5a23b663e201a45d0f7338ec1f52a5e 685-j1/_4
+cpath: /trunk/application/model/instance_manip.cpp
+copyroot: 83 /trunk/application/model
+
+PLAIN
+K 12
+activity.cpp
+V 23
+file 8-81.2-83.r654/728
+K 10
+activity.h
+V 24
+file b-81.2-83.r630/3693
+K 20
+activitytemplate.cpp
+V 26
+file a-107.2-83.r574/20003
+K 18
+activitytemplate.h
+V 26
+file d-107.2-83.r574/21590
+K 14
+comparison.cpp
+V 24
+file 9-599.2-83.r607/918
+K 12
+comparison.h
+V 25
+file b-599.2-83.r607/1181
+K 17
+est_generator.cpp
+V 24
+file 3-281.2-83.r685/573
+K 15
+est_generator.h
+V 25
+file 6-281.2-83.r575/1252
+K 9
+frame.cpp
+V 26
+file 5-327.2-83.r574/20545
+K 7
+frame.h
+V 26
+file 7-327.2-83.r574/17895
+K 9
+group.cpp
+V 24
+file 3-253.2-83.r678/377
+K 7
+group.h
+V 25
+file 6-253.2-83.r676/1578
+K 10
+instance.h
+V 22
+file d-81.2-83.r620/80
+K 18
+instance_manip.cpp
+V 21
+file h-81.2-83.r686/0
+K 17
+instance_misc.cpp
+V 23
+file j-81.2-83.r591/143
+K 7
+job.cpp
+V 23
+file l-81.2-83.r685/839
+K 5
+job.h
+V 24
+file n-81.2-83.r641/2051
+K 14
+precedence.cpp
+V 25
+file 6-232.2-83.r541/1939
+K 12
+precedence.h
+V 25
+file 8-232.2-83.r525/6918
+K 15
+requirement.cpp
+V 24
+file p-81.2-83.r453/2623
+K 13
+requirement.h
+V 25
+file 3-454.2-83.r525/7183
+K 12
+resource.cpp
+V 24
+file r-81.2-83.r599/8204
+K 10
+resource.h
+V 24
+file t-81.2-83.r599/9000
+K 20
+resourcedecrease.cpp
+V 26
+file 8-316.2-83.r574/19730
+K 18
+resourcedecrease.h
+V 25
+file a-316.2-83.r525/8491
+END
+ENDREP
+id: 7-81.2-83.r686/1507
+type: dir
+pred: 7-81.2-83.r685/2336
+count: 177
+text: 686 266 1228 1228 eb5f5b9da0ac30edd8fcf30be06e49f6
+cpath: /trunk/application/model
+copyroot: 83 /trunk/application/model
+
+PLAIN
+K 8
+Doxyfile
+V 24
+file 2-81.0-83.r507/4190
+K 10
+controller
+V 21
+dir 2-256.0.r685/3092
+K 4
+data
+V 21
+dir 4-95.0.r574/46211
+K 5
+icons
+V 21
+dir 2-199.0.r619/4643
+K 8
+main.cpp
+V 24
+file 5-81.1-83.r683/3927
+K 5
+model
+V 23
+dir 7-81.2-83.r686/1507
+K 5
+solve
+V 23
+dir x-81.4-83.r685/6534
+K 12
+translations
+V 21
+dir 7-139.0.r629/3530
+K 4
+util
+V 25
+dir 13-81.5-83.r630/12143
+K 7
+widgets
+V 24
+dir 1d-81.6-83.r685/5960
+END
+ENDREP
+id: 1-83.0.r686/2130
+type: dir
+pred: 1-83.0.r685/7154
+count: 477
+text: 686 1706 411 411 04484e0f76ee6b8b4cce2dbebd4158d0
+cpath: /trunk/application
+copyroot: 0 /
+
+PLAIN
+K 11
+application
+V 20
+dir 1-83.0.r686/2130
+K 13
+gen_pro_files
+V 22
+file 3-147.0.r359/8234
+K 12
+headers.list
+V 21
+file 5-147.0.r637/148
+K 12
+sources.list
+V 21
+file 7-147.0.r637/359
+K 10
+tests.list
+V 23
+file 1-163.0.r599/14589
+K 9
+testsuite
+V 20
+dir 4-83.0.r616/1852
+END
+ENDREP
+id: 0-81.0.r686/2574
+type: dir
+pred: 0-81.0.r685/7598
+count: 552
+text: 686 2292 269 269 ea9e7c3a90d8979e0a3433c50b3f570d
+cpath: /trunk
+copyroot: 0 /
+
+PLAIN
+K 12
+documentatie
+V 22
+dir 0-1.0.r673/1255271
+K 4
+tags
+V 22
+dir 0-192.0.r563/12081
+K 10
+test-trunk
+V 19
+dir 0-62.0-80.r80/0
+K 5
+trunk
+V 20
+dir 0-81.0.r686/2574
+END
+ENDREP
+id: 0.0.r686/2901
+type: dir
+pred: 0.0.r685/7925
+count: 686
+text: 686 2724 164 164 b5f7f654ef3a576a03fae48c94abda43
+cpath: /
+copyroot: 0 /
+
+h-81.2-83.t685-j1 modify-file true false /trunk/application/model/instance_manip.cpp
+
+
+2901 3040

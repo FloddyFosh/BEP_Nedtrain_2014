@@ -1,0 +1,13 @@
+K 10
+svn:author
+V 4
+erik
+K 8
+svn:date
+V 27
+2012-05-14T12:32:46.379752Z
+K 7
+svn:log
+V 89
+Nieuwe SolverNotFoundException die de problemen met niet gevonden solvers in de GUI toont
+END

@@ -1,0 +1,55 @@
+id: 0-81.0-192.r192/0
+type: dir
+pred: 0-81.0.r191/6867
+count: 109
+text: 191 6586 268 268 0cf30c6301ffefa3c9bf3f9b36315cde
+cpath: /tags/sprint1
+copyfrom: 191 /trunk
+
+PLAIN
+K 7
+sprint1
+V 21
+dir 0-81.0-192.r192/0
+END
+ENDREP
+id: 0-192.0.r192/221
+type: dir
+count: 0
+text: 192 165 43 43 660bcb75487117501c755c02b25ad8b7
+cpath: /tags
+copyroot: 0 /
+
+PLAIN
+K 12
+documentatie
+V 19
+dir 0-1.0.r186/2933
+K 4
+tags
+V 20
+dir 0-192.0.r192/221
+K 10
+test-trunk
+V 19
+dir 0-62.0-80.r80/0
+K 5
+trunk
+V 20
+dir 0-81.0.r191/6867
+END
+ENDREP
+id: 0.0.r192/514
+type: dir
+pred: 0.0.r191/7154
+count: 192
+text: 192 342 159 159 eda85db7b0c74c0ff8d5e9f71dc418da
+cpath: /
+copyroot: 0 /
+
+_0.0.t191-5b add-dir false false /tags
+
+0-81._0.t191-5b add-dir false false /tags/sprint1
+191 /trunk
+
+514 651

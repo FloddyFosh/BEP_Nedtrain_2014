@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+import sys,getopt,os
+args = sys.argv[1:]
+args_clean = args[:]
+if "-cache" in args:
+	args_clean.remove("-cache")
+argstr = " ".join(args_clean)
+
+if "-c" in args:
+	for arg in args:
+		if arg.endswith(".cpp") and arg.startswith("../app"):
+			argstr += " -fprofile-arcs -ftest-coverage"
+ 
+if "-cache" in args:
+	instr = "ccache g++ " + argstr
+else:
+	instr = "g++ " + argstr
+print instr
+os.system(instr)

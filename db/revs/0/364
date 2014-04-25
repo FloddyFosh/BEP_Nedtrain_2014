@@ -1,0 +1,468 @@
+id: 21-81.5-364.r364/0
+type: file
+pred: 21-81.6-83.r363/1142
+count: 11
+text: 363 438 69 3602 91b104a78c7de3a83d56a1548bde73b0 52f02417423ba63b25fba636edc4063e607129b1 362-a2/_8
+cpath: /tags/sprint2/application/widgets/dialogs/solvingprogressdialog.cpp
+copyfrom: 363 /trunk/application/widgets/dialogs/solvingprogressdialog.cpp
+
+PLAIN
+K 18
+activitydialog.cpp
+V 25
+file 1k-81.6-83.r358/5273
+K 16
+activitydialog.h
+V 25
+file 1n-81.6-83.r164/3803
+K 22
+activityinfodialog.cpp
+V 25
+file 4-154.6-83.r316/8848
+K 20
+activityinfodialog.h
+V 25
+file 7-154.6-83.r154/1660
+K 19
+filteredspinbox.cpp
+V 25
+file 4-185.6-83.r185/1005
+K 17
+filteredspinbox.h
+V 25
+file 7-185.6-83.r185/1257
+K 13
+jobdialog.cpp
+V 25
+file 1p-81.6-83.r350/3034
+K 11
+jobdialog.h
+V 22
+file 1r-81.0.r81/68562
+K 19
+managetemplates.cpp
+V 24
+file 5-126.6-83.r318/406
+K 17
+managetemplates.h
+V 25
+file 8-126.6-83.r142/2977
+K 26
+resourcedecreasedialog.cpp
+V 25
+file f-316.6-83.r358/4700
+K 24
+resourcedecreasedialog.h
+V 25
+file h-316.6-83.r316/8308
+K 18
+resourcedialog.cpp
+V 25
+file 1t-81.6-83.r358/4990
+K 16
+resourcedialog.h
+V 25
+file 1v-81.6-83.r358/5554
+K 16
+scrollfilter.cpp
+V 25
+file b-145.6-83.r145/2732
+K 14
+scrollfilter.h
+V 25
+file d-145.6-83.r145/2983
+K 22
+setstarttimedialog.cpp
+V 25
+file 8-321.6-83.r321/5805
+K 20
+setstarttimedialog.h
+V 25
+file b-321.6-83.r321/6064
+K 22
+solverconfigdialog.cpp
+V 25
+file 1x-81.6-83.r317/2072
+K 20
+solverconfigdialog.h
+V 22
+file 1z-81.0.r81/69200
+K 25
+solvingprogressdialog.cpp
+V 23
+file 21-81.5-364.r364/0
+K 23
+solvingprogressdialog.h
+V 25
+file 23-81.6-83.r292/4855
+END
+ENDREP
+id: 1j-81.4-364.r364/1568
+type: dir
+pred: 1j-81.6-83.r358/7076
+count: 54
+text: 364 328 1227 1227 667bee9feef1d7826c7f70f9bff29ff9
+cpath: /tags/sprint2/application/widgets/dialogs
+copyroot: 83 /trunk/application/widgets
+
+PLAIN
+K 18
+activitywidget.cpp
+V 25
+file 1e-81.6-83.r358/4428
+K 16
+activitywidget.h
+V 25
+file 1h-81.6-83.r358/7570
+K 10
+app_icon.h
+V 25
+file 3-317.6-83.r317/4523
+K 7
+dialogs
+V 25
+dir 1j-81.4-364.r364/1568
+K 21
+instancemdiwidget.cpp
+V 25
+file 25-81.6-83.r348/3682
+K 19
+instancemdiwidget.h
+V 25
+file 27-81.6-83.r347/1157
+K 18
+instancewidget.cpp
+V 25
+file 29-81.6-83.r358/7841
+K 16
+instancewidget.h
+V 25
+file 2b-81.6-83.r358/8395
+K 19
+jobheaderwidget.cpp
+V 25
+file 2d-81.6-83.r344/2016
+K 17
+jobheaderwidget.h
+V 25
+file 2f-81.6-83.r344/2290
+K 13
+jobwidget.cpp
+V 25
+file 2h-81.6-83.r353/6972
+K 11
+jobwidget.h
+V 25
+file 2j-81.6-83.r284/7224
+K 14
+mainwindow.cpp
+V 25
+file 2l-81.6-83.r355/8499
+K 12
+mainwindow.h
+V 25
+file 2n-81.6-83.r334/4473
+K 15
+otssplitter.cpp
+V 22
+file 2p-81.0.r81/75054
+K 13
+otssplitter.h
+V 22
+file 2r-81.0.r81/71387
+K 17
+overlaywidget.cpp
+V 25
+file 3-251.6-83.r358/8668
+K 15
+overlaywidget.h
+V 25
+file 6-251.6-83.r354/8334
+K 24
+resourceheaderwidget.cpp
+V 25
+file 2t-81.6-83.r358/7289
+K 22
+resourceheaderwidget.h
+V 25
+file 2v-81.6-83.r358/8117
+K 18
+resourcewidget.cpp
+V 25
+file 2x-81.6-83.r358/8942
+K 16
+resourcewidget.h
+V 25
+file 2z-81.6-83.r354/6162
+K 12
+timeline.cpp
+V 25
+file 31-81.6-83.r353/6157
+K 10
+timeline.h
+V 25
+file 33-81.6-83.r320/2823
+K 12
+zoomable.cpp
+V 25
+file 35-81.6-83.r354/6979
+K 10
+zoomable.h
+V 25
+file 37-81.6-83.r354/7522
+END
+ENDREP
+id: 1d-81.4-364.r364/3155
+type: dir
+pred: 1d-81.6-83.r358/10583
+count: 156
+text: 364 1788 1354 1354 776401fc03718f6180f9f683798b59f4
+cpath: /tags/sprint2/application/widgets
+copyroot: 83 /trunk/application/widgets
+
+id: 11-81.3-364.r364/3370
+type: file
+pred: 11-81.4-83.r363/4458
+count: 6
+text: 363 322 91 3934 560d4f8971196ee42e7e276815f754d9 5aa622f38da02f12b3aa942bb82143d3e82b50f3 362-a2/_5
+cpath: /tags/sprint2/application/solve/solver.h
+copyfrom: 363 /trunk/application/solve/solver.h
+
+id: y-81.2-364.r364/3646
+type: file
+pred: y-81.4-83.r363/4716
+count: 22
+text: 363 0 299 6618 395d0a31a0f19862753a45b1d2fea040 147b96628dd028496d5f708829bcc402737bae19 362-a2/_4
+cpath: /tags/sprint2/application/solve/solver.cpp
+copyfrom: 363 /trunk/application/solve/solver.cpp
+
+PLAIN
+K 10
+solver.cpp
+V 25
+file y-81.2-364.r364/3646
+K 8
+solver.h
+V 26
+file 11-81.3-364.r364/3370
+END
+ENDREP
+id: x-81.1-364.r364/4033
+type: dir
+pred: x-81.4-83.r359/4822
+count: 22
+text: 364 3924 96 96 db45598ee5b20240e4ba934b4c1e8158
+cpath: /tags/sprint2/application/solve
+copyroot: 83 /trunk/application/solve
+
+PLAIN
+K 8
+Doxyfile
+V 22
+file 2-81.0-83.r83/426
+K 10
+controller
+V 21
+dir 2-256.0.r352/2230
+K 4
+data
+V 20
+dir 4-95.0.r260/8045
+K 8
+icon.png
+V 23
+file 2-124.0.r124/15827
+K 5
+icons
+V 21
+dir 2-199.0.r228/8481
+K 8
+main.cpp
+V 23
+file 5-81.1-83.r303/160
+K 5
+model
+V 23
+dir 7-81.2-83.r355/7517
+K 8
+myutil.h
+V 22
+file 5-139.0.r259/2028
+K 5
+solve
+V 24
+dir x-81.1-364.r364/4033
+K 12
+translations
+V 21
+dir 7-139.0.r355/8324
+K 4
+util
+V 25
+dir 13-81.5-83.r353/10561
+K 7
+widgets
+V 25
+dir 1d-81.4-364.r364/3155
+END
+ENDREP
+id: 1-83.0-364.r364/4741
+type: dir
+pred: 1-83.0.r359/5521
+count: 229
+text: 364 4236 492 492 9b184658a13c1ed27fa40f3833973aa2
+cpath: /tags/sprint2/application
+copyroot: 364 /tags/sprint2
+
+id: 2-360.6-364.r364/4928
+type: dir
+pred: 2-360.0-363.r363/6590
+count: 2
+text: 363 6464 113 113 867ea1f77e551dc1fdb66fc10fd54501
+cpath: /tags/sprint2/testsuite/solve
+copyfrom: 363 /trunk/testsuite/solve
+
+PLAIN
+K 19
+app_environment.cpp
+V 22
+file 8-359.0.r359/6702
+K 4
+data
+V 21
+dir 7-100.0.r156/1611
+K 13
+fake-compiler
+V 20
+file 4-84.0.r356/553
+K 5
+gcovr
+V 19
+file 7-84.0.r84/751
+K 11
+gmock-1.6.0
+V 23
+dir 2-200.0.r200/126220
+K 11
+gtest-1.6.0
+V 19
+dir 2-85.0.r85/7590
+K 5
+model
+V 20
+dir 2-91.0.r359/6536
+K 9
+resources
+V 20
+dir 2-87.0.r359/7286
+K 5
+solve
+V 25
+dir 2-360.6-364.r364/4928
+K 13
+testsuite.cpp
+V 21
+file 9-84.0.r359/7454
+END
+ENDREP
+id: 4-83.0-364.r364/5569
+type: dir
+pred: 4-83.0.r360/2062
+count: 57
+text: 364 5132 424 424 de973221710a293ee56e837aa33b3f7d
+cpath: /tags/sprint2/testsuite
+copyroot: 364 /tags/sprint2
+
+PLAIN
+K 11
+application
+V 24
+dir 1-83.0-364.r364/4741
+K 13
+gen_pro_files
+V 22
+file 3-147.0.r359/8234
+K 12
+headers.list
+V 22
+file 5-147.0.r327/8417
+K 12
+sources.list
+V 22
+file 7-147.0.r327/8634
+K 10
+tests.list
+V 22
+file 1-163.0.r359/8505
+K 9
+testsuite
+V 24
+dir 4-83.0-364.r364/5569
+END
+ENDREP
+id: 0-81.0-364.r364/6044
+type: dir
+pred: 0-81.0.r360/2504
+count: 275
+text: 364 5753 278 278 0ffe9b13419d4bb6608442d9743adb19
+cpath: /tags/sprint2
+copyfrom: 362 /trunk
+
+PLAIN
+K 7
+sprint1
+V 21
+dir 0-81.0-192.r192/0
+K 7
+sprint2
+V 24
+dir 0-81.0-364.r364/6044
+END
+ENDREP
+id: 0-192.0.r364/6310
+type: dir
+pred: 0-192.0.r192/221
+count: 1
+text: 364 6212 85 85 7e304673e0f6614340f7fd11449d1901
+cpath: /tags
+copyroot: 0 /
+
+PLAIN
+K 12
+documentatie
+V 20
+dir 0-1.0.r362/21622
+K 4
+tags
+V 21
+dir 0-192.0.r364/6310
+K 10
+test-trunk
+V 19
+dir 0-62.0-80.r80/0
+K 5
+trunk
+V 20
+dir 0-81.0.r363/7662
+END
+ENDREP
+id: 0.0.r364/6630
+type: dir
+pred: 0.0.r363/7985
+count: 364
+text: 364 6456 161 161 8983efc8862091bec36a2850dd6fffbb
+cpath: /
+copyroot: 0 /
+
+2-360._6.t363-a3 replace-dir false false /tags/sprint2/testsuite/solve
+363 /trunk/testsuite/solve
+21-81._5.t363-a3 replace-file false false /tags/sprint2/application/widgets/dialogs/solvingprogressdialog.cpp
+363 /trunk/application/widgets/dialogs/solvingprogressdialog.cpp
+y-81._2.t363-a3 replace-file false false /tags/sprint2/application/solve/solver.cpp
+363 /trunk/application/solve/solver.cpp
+11-81._3.t363-a3 replace-file false false /tags/sprint2/application/solve/solver.h
+363 /trunk/application/solve/solver.h
+0-81._0.t363-a3 add-dir false false /tags/sprint2
+362 /trunk
+
+6630 6769

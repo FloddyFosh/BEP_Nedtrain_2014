@@ -1,0 +1,13 @@
+K 10
+svn:author
+V 4
+erik
+K 8
+svn:date
+V 27
+2012-05-14T10:23:04.748593Z
+K 7
+svn:log
+V 74
+Seg fault bij job verwijderen weg; jobwidget werd niet uit de qmap gehaald
+END

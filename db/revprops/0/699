@@ -1,0 +1,13 @@
+K 10
+svn:author
+V 4
+erik
+K 8
+svn:date
+V 27
+2012-06-13T08:23:58.352802Z
+K 7
+svn:log
+V 79
+Warnings in testsuite gefixt; pointer naar job wordt verwijderd bij removeJob()
+END

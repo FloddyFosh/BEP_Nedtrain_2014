@@ -1,0 +1,13 @@
+K 10
+svn:author
+V 4
+erik
+K 8
+svn:date
+V 27
+2012-06-06T13:16:37.527164Z
+K 7
+svn:log
+V 51
+JobWidget::getActivityWidgets() is weer betrouwbaar
+END

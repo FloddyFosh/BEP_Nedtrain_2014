@@ -1,0 +1,62 @@
+id: 0-81.0-420.r420/0
+type: dir
+pred: 0-81.0.r419/2991
+count: 331
+text: 419 2708 270 270 587e9576d2bc5c0b8fe2920dbe272278
+cpath: /tags/sprint3
+copyfrom: 419 /trunk
+
+PLAIN
+K 7
+sprint1
+V 21
+dir 0-81.0-192.r192/0
+K 7
+sprint2
+V 24
+dir 0-81.0-364.r364/6044
+K 7
+sprint3
+V 21
+dir 0-81.0-420.r420/0
+END
+ENDREP
+id: 0-192.0.r420/302
+type: dir
+pred: 0-192.0.r364/6310
+count: 2
+text: 420 165 124 124 1351d1fa7b676bcd96aea80437ef95f5
+cpath: /tags
+copyroot: 0 /
+
+PLAIN
+K 12
+documentatie
+V 20
+dir 0-1.0.r362/21622
+K 4
+tags
+V 20
+dir 0-192.0.r420/302
+K 10
+test-trunk
+V 19
+dir 0-62.0-80.r80/0
+K 5
+trunk
+V 20
+dir 0-81.0.r419/2991
+END
+ENDREP
+id: 0.0.r420/622
+type: dir
+pred: 0.0.r419/3315
+count: 420
+text: 420 449 160 160 594b0e3fab7f90111bd5fa3c06d435c9
+cpath: /
+copyroot: 0 /
+
+0-81._0.t419-bn add-dir false false /tags/sprint3
+419 /trunk
+
+622 759

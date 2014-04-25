@@ -1,0 +1,176 @@
+id: d-139.5-83.r860/0
+type: file
+pred: d-139.5-83.r856/15240
+count: 9
+text: 574 4002 20 1626 ff40c02120c897a4aeef634fe500f175 923b65a7d575deaba5e2973719d1884601db6897 859-nv/_4
+cpath: /trunk/application/util/language.cpp
+copyroot: 83 /trunk/application/util
+
+PLAIN
+K 9
+arrow.cpp
+V 26
+file 5-264.5-83.r574/47716
+K 7
+arrow.h
+V 26
+file 8-264.5-83.r574/46379
+K 9
+grammar.y
+V 26
+file 14-81.5-83.r816/25062
+K 12
+language.cpp
+V 22
+file d-139.5-83.r860/0
+K 10
+language.h
+V 25
+file g-139.5-83.r560/1022
+K 24
+randomcolorgenerator.cpp
+V 22
+file 17-81.5-83.r583/0
+K 22
+randomcolorgenerator.h
+V 26
+file 19-81.5-83.r574/47975
+K 22
+resourcecalculator.cpp
+V 25
+file 3-386.5-83.r850/1750
+K 20
+resourcecalculator.h
+V 25
+file 6-386.5-83.r850/2022
+K 7
+token.h
+V 22
+file 1b-81.0.r81/77368
+END
+ENDREP
+id: 13-81.5-83.r860/779
+type: dir
+pred: 13-81.5-83.r856/16028
+count: 46
+text: 860 259 507 507 6c6d1004e6dec67f7f648a398beeb735
+cpath: /trunk/application/util
+copyroot: 83 /trunk/application/util
+
+PLAIN
+K 8
+Doxyfile
+V 24
+file 2-81.0-83.r507/4190
+K 10
+controller
+V 21
+dir 2-256.0.r856/7247
+K 4
+data
+V 20
+dir 4-95.0.r736/1952
+K 5
+icons
+V 21
+dir 2-199.0.r619/4643
+K 8
+main.cpp
+V 24
+file 5-81.1-83.r683/3927
+K 5
+model
+V 23
+dir 7-81.2-83.r858/3660
+K 5
+solve
+V 24
+dir x-81.4-83.r856/15044
+K 12
+translations
+V 21
+dir 7-139.0.r855/3623
+K 4
+util
+V 23
+dir 13-81.5-83.r860/779
+K 7
+widgets
+V 24
+dir 1d-81.6-83.r859/2766
+END
+ENDREP
+id: 1-83.0.r860/1397
+type: dir
+pred: 1-83.0.r859/3395
+count: 582
+text: 860 975 409 409 b9bc1e291d6b322bb1b69e2ce5bf0e40
+cpath: /trunk/application
+copyroot: 0 /
+
+PLAIN
+K 11
+application
+V 20
+dir 1-83.0.r860/1397
+K 13
+gen_pro_files
+V 22
+file 3-147.0.r359/8234
+K 12
+headers.list
+V 23
+file 5-147.0.r816/26636
+K 12
+sources.list
+V 23
+file 7-147.0.r816/26856
+K 10
+tests.list
+V 23
+file 1-163.0.r722/11798
+K 9
+testsuite
+V 20
+dir 4-83.0.r858/8552
+END
+ENDREP
+id: 0-81.0.r860/1844
+type: dir
+pred: 0-81.0.r859/3843
+count: 664
+text: 860 1558 273 273 c9ea655948ae682624a6681d1445979d
+cpath: /trunk
+copyroot: 0 /
+
+PLAIN
+K 12
+documentatie
+V 20
+dir 0-1.0.r853/23863
+K 4
+tags
+V 22
+dir 0-192.0.r563/12081
+K 10
+test-trunk
+V 19
+dir 0-62.0-80.r80/0
+K 5
+trunk
+V 20
+dir 0-81.0.r860/1844
+END
+ENDREP
+id: 0.0.r860/2169
+type: dir
+pred: 0.0.r859/4168
+count: 860
+text: 860 1994 162 162 14c92203d7f46f57dee6f406616af67f
+cpath: /
+copyroot: 0 /
+
+d-139.5-83.t859-nv modify-file true false /trunk/application/util/language.cpp
+
+
+2169 2308
