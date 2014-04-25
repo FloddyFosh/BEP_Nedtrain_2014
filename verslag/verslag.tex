@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+
+\usepackage{a4wide}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs} 
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{float}
+\usepackage{algorithm2e,setspace}
+
+\restylefloat{table}
+\restylefloat{figure}
+\newtheorem{rexmp}{Example}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\setlist[1]{itemsep=0pt}
+
+\title{TI3700 Bachelor Seminarium\\ Resource Constrained Project Scheduling}
+\author{Chris Bakker\\4107799 \and
+    Anton Bouter\\4167562 \and
+    Martijn den Hoedt\\4143760}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\input{content/sample.tex}
+
+\newpage
+
+\bibliographystyle{abbrv}
+\bibliography{References}
+
+\end{document}
