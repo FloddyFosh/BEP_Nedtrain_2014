@@ -1,4 +1,5 @@
 # Compiled Object files
+/__obj__
 *.slo
 *.lo
 *.o
@@ -25,7 +26,7 @@ moc_*.cpp
 qrc_*.cpp
 ui_*.h
 
-# Debug and Release directories (created under Windows, not Linux)
+# Debug and Release directories Windows
 Debug/
 Release/
 
@@ -37,15 +38,17 @@ Release/
 *.blg
 *.bbl
 
-# Windows-specific files
+# Windows-specific
 Thumbs.db
 desktop.ini
-# Mac-specific things (thanks to Michael Aaron Safyan)
+
+# Mac-specific
 .DS_Store
 
 # Project Files
 Makefile*
 application
+testsuite
 *.pro
 *.pro.user
 db.sqlite
