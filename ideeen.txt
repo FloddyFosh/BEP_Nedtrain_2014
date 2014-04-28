@@ -1,0 +1,3 @@
+- undo functie
+- compare functie duidelijker maken
+
