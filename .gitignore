@@ -17,8 +17,17 @@
 
 # Executables
 *.exe
-*.out
 *.app
+
+# Generated MOC, resource and UI files
+/__moc__
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Debug and Release directories (created under Windows, not Linux)
+Debug/
+Release/
 
 #LaTeX
 *.out
@@ -27,3 +36,23 @@
 *.aux
 *.blg
 *.bbl
+
+# Windows-specific files
+Thumbs.db
+desktop.ini
+# Mac-specific things (thanks to Michael Aaron Safyan)
+.DS_Store
+
+# Project Files
+Makefile*
+application
+*.pro
+*.pro.user
+db.sqlite
+*.qm
+grammar.tab.cpp
+grammar.tab.hpp
+
+
+# Editors temporary files 
+*~
