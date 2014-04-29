@@ -1,20 +1,55 @@
 \documentclass[a4paper]{article}
 
+\usepackage[dutch]{babel}
 \usepackage{a4wide}
 \usepackage{enumitem}
+\usepackage{graphicx}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \setlist[1]{itemsep=0pt}
 
-\title{TI3800 Bachelor Eindproject\\ NedTrain}
-\author{Chris Bakker\\4107799 \and
-    Anton Bouter\\4167562 \and
-    Martijn den Hoedt\\4143760}
-\date{\today}
-
 \begin{document}
-\maketitle
 
-\newpage
+\begin{titlepage}
+	
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center
+
+\textsc{\huge TI3800 Bachelor Eindproject}\\[1.5cm]
+	
+\HRule \\[0.4cm]
+{ \Huge \bfseries Plan van aanpak}\\[0.4cm]
+\HRule \\[1.5cm]
+
+\begin{Large}
+\begin{tabular}{c c c}
+\specialcell[c]{Chris Bakker\\4107799} & \specialcell[c]{Anton Bouter\\4167562} & \specialcell[c]{Martijn den Hoedt\\4143760}\\
+\end{tabular}\\[2cm]
+\end{Large}
+
+{\large \today}\\[2cm]
+
+\begin{figure}[b]
+\centering
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\includegraphics[width=0.9\linewidth]{content/images/TU_Delft_logo.png}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright}
+\includegraphics[width=0.9\linewidth]{content/images/NedTrain_logo.png}
+\end{flushright}
+\end{minipage}\\[2cm]
+\end{figure}
+
+\vfill
+
+\end{titlepage}
+
 
 \input{content/voorwoord.tex}
 \input{content/samenvatting.tex}
