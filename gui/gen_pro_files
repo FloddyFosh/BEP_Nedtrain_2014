@@ -7,6 +7,7 @@
 # De source-files worden uit './sources.list' gelezen.
 
 import sys
+import os
 
 def opslaan_in_bestand(filename, contents):
 	f = open(filename, "w")
@@ -94,17 +95,18 @@ QMAKE_CXXFLAGS += -g
 #QMAKE_LFLAGS += -m32
 """
 
-headers_txt = "HEADERS += " + " \\\n".join(["$$RELPAD$$/" + x for x in file("headers.list").read().split()]) + "\n\n"
+DIR = os.path.dirname(os.path.realpath(__file__))+"\\"
+print DIR
+headers_txt = "HEADERS += " + " \\\n".join(["$$RELPAD$$/" + x for x in file(DIR+"headers.list").read().split()]) + "\n\n"
 
-sources_files = file("sources.list").read().split()
+sources_files = file(DIR+"sources.list").read().split()
 sources_txt = "SOURCES += " + " \\\n".join(["$$RELPAD$$/" + x for x in sources_files]) + "\n\n"
-opslaan_in_bestand("application/application.pro", (contents_common + contents_application + headers_txt + sources_txt).replace("$$RELPAD$$","."))
+opslaan_in_bestand(DIR+"application/application.pro", (contents_common + contents_application + headers_txt + sources_txt).replace("$$RELPAD$$","."))
 
 sources_files.remove("main.cpp")
 sources_txt = "SOURCES += " + " \\\n".join(["$$RELPAD$$/" + x for x in sources_files]) + "\n\n"
-tests_txt = "HEADERS += " + " \\\n".join(file("tests.list").read().split())
-opslaan_in_bestand("testsuite/testsuite.pro",     (contents_common + contents_testsuite   + headers_txt + sources_txt + tests_txt).replace("$$RELPAD$$","../application"))
+tests_txt = "HEADERS += " + " \\\n".join(file(DIR+"tests.list").read().split())
+opslaan_in_bestand(DIR+"testsuite/testsuite.pro",     (contents_common + contents_testsuite   + headers_txt + sources_txt + tests_txt).replace("$$RELPAD$$","../application"))
 
 print "application.pro and testsuite.pro generated; now update language files\n"
-import os
-os.system("cd application && lrelease application.pro && cd ../")
+os.system("cd "+DIR+"application && lrelease application.pro && cd ../")
