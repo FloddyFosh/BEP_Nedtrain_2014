@@ -38,6 +38,7 @@ Release/
 *.aux
 *.blg
 *.bbl
+verslag.pdf
 
 # Windows-specific
 Thumbs.db
