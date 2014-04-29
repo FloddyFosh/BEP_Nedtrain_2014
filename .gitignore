@@ -49,8 +49,8 @@ desktop.ini
 
 # Project Files
 Makefile*
-application
-testsuite
+application/application
+testsuite/testsuite
 *.pro
 *.pro.user
 db.sqlite
