@@ -13,11 +13,11 @@
  - Nieuwe view voor resources met chains
  - De output op stdout en de debug op stderr.
  - Vergelijken van instanties met verschillende solvers (bijv. chaining met verschillende heuristieken), waarvan de flexibiliteit berekend wordt. Vervolgens kan de meest flexibele oplossing gekozen worden.
- ## Bugs
+## Bugs
  - Precedence constraints, na het verwijderen van een constraint kan een task niet vrij bewegen. Mogelijke oplossing: bij de edit functie de earliest start time laten aanpassen. 
  - Pijltjes buiten groene vlakken blijven soms niet heel bij het verslepen van een task.
  - In een aantal invoer velden waar alleen getallen toegestaan zijn, kunnen wel punten (".") worden ingevoerd, maar deze worden later ineens verwijderd omdat het niet mag. 
  - Knoppen ineeens weg geen idee waarom, herstarten applicatie helpt niet.
  - Bij het toevoegen van constraints aan taken, kan het zijn dat de tool crashed met op de console: "The program has unexpectedly finished." Daarvoor komt nog in de GUI een melding dat de constraint niet toegevoegd kan worden. 
- ## Vragen
+## Vragen
  - Wat doet de optie "Clear generated constraints before solving"?

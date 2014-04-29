@@ -1,5 +1,5 @@
 # Compiled Object files
-/__obj__
+__obj__
 *.slo
 *.lo
 *.o
@@ -21,7 +21,7 @@
 *.app
 
 # Generated MOC, resource and UI files
-/__moc__
+__moc__
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
@@ -49,8 +49,8 @@ desktop.ini
 
 # Project Files
 Makefile*
-application/application
-testsuite/testsuite
+gui/application/application
+gui/testsuite/testsuite
 *.pro
 *.pro.user
 db.sqlite
