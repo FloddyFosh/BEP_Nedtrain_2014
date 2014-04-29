@@ -1,3 +1,6 @@
 - undo functie
 - compare functie duidelijker maken
-
+- windows
+- bug precedence constraints, na het verwijderen van een constraint kan een task niet vrij bewegen. Mogelijke oplossing: bij de edit functie de earliest start time laten aanpassen. 
+- Pijltjes buiten groene vlakken blijven soms niet heel bij het verslepen van een task. 
+- zoom functie ook met ctrl+scroll en verticaal scrollen shift+scroll
