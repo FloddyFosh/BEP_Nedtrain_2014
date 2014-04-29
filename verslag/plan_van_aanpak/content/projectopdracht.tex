@@ -3,17 +3,32 @@
 De opdrachtgever is NedTrain, het bedrijf dat zorgt voor het onderhoud aan en de reparatie van de treinen van de Nederlandse Spoorwegen (NS). In het verleden is er door NedTrain, in samenwerking met de TU Delft, een tool ontwikkeld waarin het plannen van taken gevisualiseerd kan worden. Bovendien zijn er zogenaamde solvers ontwikkeld, waarmee voor een verzameling van taken een schema gemaakt wordt dat consistent is met de tijd- en resource-restricties. Deze tool, de NedTrain planner, kan echter niet weten hoe flexibel een berekend schema is. Daarnaast kan een schema dat met \'e\'en van de huidige solvers is opgelost inconsistent worden als er taken verschoven worden, doordat er op een bepaald moment meer resources gebruikt worden dan er beschikbaar zijn.
 
 \subsection{Doelstelling project}
-De wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een functie waarmee de flexibiliteit van een tijdschema bepaald wordt en op een duidelijker manier weergegeven kan worden. Daarnaast wil de opdrachtgever dat er een solver wordt geschreven die een schema berekent waarin het verschuiven van taken niet kan leiden tot een inconsistente oplossing. Ook moet deze tool voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is.
+De wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een functie waarmee de flexibiliteit van een tijdschema bepaald wordt en op een duidelijker manier weergegeven kan worden. Daarnaast wil de opdrachtgever dat er een solver wordt geschreven die een schema berekent waarin het verschuiven van taken niet kan leiden tot een inconsistente oplossing. Ook moet de NedTrain planner voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is.
+
+
 
 
 \subsection{Opdrachtformulering}
 De volgende zaken zullen behoren tot de taken van de projectgroep:
 \begin{itemize}
 	\item Onderzoek doen naar de hoeveelheid tijd die nodig is om deze tool ook beschikbaar te maken voor Windows 7. Als verwacht wordt dat het porten naar Windows in redelijke tijd uitgevoerd kan worden, zal dit ook gedaan worden. 
-	\item De flexibiliteit van het schema moet zichtbaar zijn door te laten zien hoeveel de taken mogen uitlopen en door een metriek te gebruiken. 
-	\item De gebruiker van de NedTrain planner moet taken kunnen verplaatsen en kunnen zien wat de gevolgen daarvan zijn. Met andere woorden: welke taken worden dan ook verplaatst?
+	\item De flexibiliteit van het schema moet zichtbaar zijn door te laten zien hoeveel de taken mogen uitlopen en door een metriek te gebruiken.
+	\item 
 \end{itemize}
 
 \subsection{Op te leveren producten en diensten}
+De volgende features worden verwacht om ge\"implementeerd te worden:
+\begin{itemize}
+\item Chaining zodat bij het verslepen van een taak er geen resource conflicts ontstaan.
+\item Vergelijken van instanties met verschillende solvers, waarvan de flexibiliteit berekend wordt.
+\item Porten naar Windows
+\item Nieuwe view voor resources, waarbij weergegeven wordt tot welke chains de gebruikte resources behoren.
+\item Undo functie om het verslepen en veranderen van taken ongedaan te maken.
+\item Horizontaal scrollen moet mogelijk worden met shift+scroll.
+\item Zoom functie moet ook mogelijk zijn met ctrl+scroll.
+\item Sluit knopje op de tab zelf in plaats van erboven.
+\item De output op stdout en de debug op stderr.
+\end{itemize}
+
 \subsection{Eisen en beperkingen}
 \subsection{Voorwaarden}
