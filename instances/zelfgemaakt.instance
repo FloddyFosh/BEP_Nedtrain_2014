@@ -1,0 +1,29 @@
+R 0 8 "Monteurs"
+R 1 8 "Schoonmakers"
+R 2 3 "Managers"
+R 3 2 "Schilders"
+
+J 0 0 20 "Intercity"
+A 0 0 5 "Intercom Repareren" 10
+Q 0 0 0 2
+Q 0 0 1 1
+Q 0 0 2 1
+A 0 1 5 "Schoonmaken" 0
+Q 0 1 1 2
+
+
+J 1 0 20 "Sprinter"
+A 1 0 1 "Schoonmaak" 10
+Q 1 0 1 4
+Q 1 0 2 1
+A 1 1 10 "Prullenbakken legen" 0
+Q 1 1 1 3
+
+
+J 2 0 20 "Fyra"
+A 2 0 10 "Buitenkant Verven" 0
+Q 2 0 3 2
+
+
+S 1 1 0 0
+S 1 1 1 0
