@@ -38,6 +38,7 @@ Release/
 *.aux
 *.blg
 *.bbl
+*.dvi
 verslag.pdf
 
 # Windows-specific
