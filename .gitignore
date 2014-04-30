@@ -52,6 +52,7 @@ desktop.ini
 Makefile*
 gui/application/application
 gui/testsuite/testsuite
+gui/testsuite/resources/tms
 *.pro
 *.pro.user
 db.sqlite
@@ -64,3 +65,6 @@ tms/grammar.output
 
 # Editors temporary files 
 *~
+
+# Exceptions of ignoring files
+!libgtest.a
