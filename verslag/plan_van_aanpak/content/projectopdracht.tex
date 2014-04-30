@@ -21,18 +21,33 @@ De volgende zaken zullen behoren tot de taken van de projectgroep:
 \end{itemize}
 
 \subsection{Op te leveren producten en diensten}
-De volgende features worden verwacht om ge\"implementeerd te worden:
+De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit.
+
+\subsubsection*{Hoge prioriteit}
 \begin{itemize}
-	\item Chaining zodat bij het verslepen van een taak er geen resource conflicts ontstaan.
+	\item Het maken van een solver die er voor zorgt dat er bij het verslepen van een taak geen resource conflicten ontstaan, bijvoorbeeld met de chaining methode.
+	\item Het implementeren van een metriek die de flexibiliteit van een schema berekent.
 	\item Vergelijken van instanties met verschillende solvers, waarvan de flexibiliteit berekend wordt.
-	\item De tool voor zowel Linux als Windows 7 en 8 beschikbaar maken. De tool is nu alleen voor Linux systemen beschikbaar. 
 	\item Nieuwe view voor resources, waarbij weergegeven wordt tot welke chains de gebruikte resources behoren.
+	\item De tool voor zowel Linux als Windows 7 beschikbaar maken. Op dit moment is deze alleen voor Linux systemen beschikbaar.
+\end{itemize}
+
+\subsubsection*{Gemiddelde prioriteit}
+\begin{itemize}
 	\item Undo en redo functies om het verslepen en veranderen van taken ongedaan te maken. De laatste tien acties worden opgeslagen, zodat die ongedaan gemaakt kunnen worden. Deze acties zijn niet meer ongedaan te maken na het afsluiten van de tool. 
+	\item De output van de TMS solver moet op stdout komen en de debug op stderr.
+\end{itemize}
+
+\subsubsection*{Lage prioriteit}
+\begin{itemize}
 	\item Horizontaal scrollen moet mogelijk worden met shift\plus scroll. Deze functie heeft verder hetzelfde gedrag als wanneer er met de muis een scrollbalk verschoven wordt. De muis moet in de gebied staan dat horizontaal gescrolled moet worden. 
 	\item Zoom functie moet ook mogelijk zijn met ctrl\plus scroll. Dit werkt verder hetzelfde als de knoppen 'inzoomen' en 'uitzoomen'.
 	\item Sluit knopje op de tab van elke instantie die geopend is in de tool. Het sluit knopje in  zelf in plaats van erboven.
-	\item De output op stdout en de debug op stderr.
 \end{itemize}
 
+
+
 \subsection{Eisen en beperkingen}
+
+
 \subsection{Voorwaarden}
