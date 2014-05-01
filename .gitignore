@@ -32,6 +32,7 @@ Release/
 
 #LaTeX
 *.out
+*.out.ps
 *.toc
 *.synctex.gz
 *.log
