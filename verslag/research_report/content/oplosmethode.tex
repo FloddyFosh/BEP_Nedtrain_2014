@@ -4,8 +4,10 @@ In dit hoofdstuk wordt besproken hoe we het probleem gaan aanpakken.
 \subsection{Oplossing}
 Chaining
 
+Voor het oplossen van Linear Programming problemen bestaan er al verschillende solvers. E\'en daarvan is Gurobi commercieel software pakket, dat de problemen zeer snel kan oplossen. COIN-OR LP\footnote{projects.coin-or.org/Clp}, afgekort Clp, is een open source Linear Programming solver in \cpp . We kiezen voor Clp, omdat deze open source is, iets wat voor onze opdrachtgever aantrekkelijker is dan Gurobi, omdat daar wel een licentie voor gekocht moet worden als de 'NedTrain Planner' echt gebruikt gaat worden en niet alleen voor educatieve doeleinde. 
+
 \subsection{Werkwijze}
-Scrum
+Tijdens de ontwikkelfase gaat het teamwerken met scrum in wekelijkse sprints. 
 
 \subsection{Hulpmiddelen}
 Als versiebeheersysteem gebruiken we BitBucket. Op deze website zijn private Git repositories gratis beschikbaar. Bij de concurrent GitHub zijn ook private Git repositories beschikbaar, maar dan moet het account wel geactiveerd worden met een TU Delft e-mailadres. Op BitBucket is dit dus eenvoudiger in te stellen. We hebben voor Git gekozen en niet voor Subversion, omdat meer (goede) ervaring hebben met Git. BitBucket heeft ook een ingebouwd issue-trackingsysteem waarvan wij gebruik gaan maken, dit is in Subversion minder makkelijk in te stellen.
