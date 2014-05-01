@@ -8,12 +8,15 @@
 \usepackage[titletoc, title]{appendix}
 \usepackage{titlesec}
 \usepackage{parskip}
+\usepackage{perpage} %the perpage package
+
 \setlength{\parskip}{5pt}
+\MakePerPage{footnote} %the perpage package command
 
 \newcommand{\plus}{\,\texttt{+}\,}
 \newcommand{\cpp}{C\texttt{++}}
 
-\newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 \setlist[1]{itemsep=0pt}
