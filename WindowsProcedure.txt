@@ -2,3 +2,7 @@
 - Voeg Qt, Python, Bison, minGW (g++) toe aan path:
 - set PATH=%PATH%;C:\Qt\4.8.6\bin
 - set PATH=%PATH%;C:\Python27
+
+- compiler settings in Qt
+cd C:/Qt/4.8.6 configure -static
+reconfigure: run mingw32-make confclean and configure

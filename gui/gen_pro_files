@@ -59,6 +59,7 @@ TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
+INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
 """
 else:
 	contents_application = """
@@ -66,6 +67,7 @@ TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
+INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
 """
 
 if "-cache" in args:
@@ -74,9 +76,9 @@ TARGET = testsuite
 SOURCES += testsuite.cpp
 INCLUDEPATH += ./gtest-1.6.0/include ../application
 LIBS += -lgcov
-LIBS += ./libgtest.a
+LIBS += ../../gui/testsuite/libgtest.a
 CONFIG += qtestlib
-QMAKE_CXX = ./fake-compiler
+QMAKE_CXX = python fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
 QMAKE_CXXFLAGS += -g -cache 
 #QMAKE_LFLAGS += -m32
@@ -85,11 +87,11 @@ else:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application
+INCLUDEPATH += ./gtest-1.6.0/include ../application C:\Qt\4.8.6\lib\pkgconfig
 LIBS += -lgcov
-LIBS += ./libgtest.a
+LIBS += ../../gui/testsuite/libgtest.a
 CONFIG += qtestlib
-QMAKE_CXX = ./fake-compiler
+QMAKE_CXX = python fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
 QMAKE_CXXFLAGS += -g 
 #QMAKE_LFLAGS += -m32
