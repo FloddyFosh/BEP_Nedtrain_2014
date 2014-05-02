@@ -1,16 +1,53 @@
 \section{Projectopdracht}
+In dit hoofdstuk zal de precieze omschrijving van het projectopdracht beschreven worden. Informatie over de opdrachtgever zal gegeven worden en een overzicht van zijn gestelde eisen en beperkingen.
+
+\subsection{Opdrachtgever}
+De opdrachtgever voor dit project bestaat uit NedTrain en de Technische Universiteit Delft.
+NedTrain is een dochterbedrijf van de Nederlandse Spoorwegen (NS) die zorgt voor het onderhouden en repareren van de treinen die NS gebruiken. De contactpersoon binnen NedTrain is ir. Bob Huisman (b.huisman@nedtrain.nl). Hij heeft ook vorige projecten die zich bezig hielden met software van NedTrain begeleid. Onze begeleider van de TU Delft is prof. dr. Cees Witteveen (c.witteveen@tudelft.nl). Hij is werkzaam binnen de Algoritmiek Groep op de faculteit EWI (Elektrotechniek, Wiskunde en Informatica).
+
 \subsection{Projectomgeving}
-Onze opdrachtgever is NedTrain, het bedrijf dat zorgt voor het onderhoud aan en de reparatie van de treinen van de Nederlandse Spoorwegen (NS). NedTrain en TU Delft ontwikkelen samen een tool voor het maken van schema's voor het repareren van de treinen. 
-De huidige situatie. 
+In het verleden is er door NedTrain, in samenwerking met de TU Delft, een tool ontwikkeld waarin het plannen van taken gevisualiseerd kan worden. Bovendien zijn er zogenaamde solvers ontwikkeld, waarmee voor een verzameling van taken een schema gemaakt wordt dat consistent is met de tijd- en resource-restricties. Deze tool, de NedTrain planner, wordt gebruikt door NedTrain om onderzoek te doen naar scheduling-algoritmes en het verbeteren daarvan. Daarnaast heeft het ook een educatief doel door werknemers er mee te laten werken om zo gevoel te krijgen voor het plannen van taken. Volgens NedTrain mist deze tool enige functionaliteit en zou er hier en daar wat verbeterd kunnen worden.
+
 \subsection{Doelstelling project}
-De opdrachtgever wil een tool hebben waarmee de reparatie van treinen geplant kan worden. Ook moet deze tool inzicht bieden hoe deze aan het schema komt. 
-Er zijn een aantal doelen die we willen behalen.
-\begin{itemize}
-	\item Onderzoek doen naar de hoeveelheid tijd die nodig is om deze tool ook beschikbaar te maken voor Windows 7. Als verwacht wordt dat het poorten naar Windows niet te lang duurt, dan gaan we dit ook uitvoeren. 
-	\item De flexibilteit van het schema moet zichtbaar zijn door te laten zien hoeveel bepaalde taken mogen uitlopen. 
-	\item De gebruiker van de tool moet taken kunnen verplaatsen en kunnen zien wat de gevolgen daarvan zijn. Met andere woorden: welke taken worden dan ook verplaatst?
-\end{itemize}
+De wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een functie waarmee de flexibiliteit van een tijdschema bepaald wordt en op een duidelijker manier weergegeven kan worden. Daarnaast wil de opdrachtgever dat er een solver wordt geschreven die een schema berekent waarin het verschuiven van taken niet kan leiden tot een inconsistente oplossing. Ook moet de NedTrain planner voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is.
+
 \subsection{Opdrachtformulering}
+De volgende zaken zullen behoren tot de verantwoordelijkheden van de projectgroep:
+\begin{itemize}
+	\item Onderzoek doen naar de hoeveelheid tijd die nodig is om de tool ook beschikbaar te maken voor Windows 7. Als verwacht wordt dat het porten naar Windows in redelijke tijd uitgevoerd kan worden, zal dit ook gedaan worden. 
+	\item De flexibiliteit van het schema moet zichtbaar zijn door te laten zien hoeveel de taken mogen uitlopen en door een metriek te gebruiken.
+	\item Kwalitatief programmeren zodat het uiteindelijke product makkelijk uitgebreid kan worden.
+	\item De gebruikerservaring verbeteren door een aantal opties en shortcuts toe te voegen en door een aantal functies te veranderen.
+\end{itemize}
+
 \subsection{Op te leveren producten en diensten}
+De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit. 
+
+\subsubsection*{Hoge prioriteit}
+\begin{itemize}
+	\item Het maken van een solver die er voor zorgt dat er bij het verslepen van een taak geen resource conflicten ontstaan, bijvoorbeeld met de chaining methode.
+	\item Het implementeren van een metriek die de flexibiliteit van een schema berekent.
+	\item Vergelijken van instanties met verschillende solvers, waarvan de flexibiliteit berekend wordt.
+	\item Nieuwe view voor resources, waarbij weergegeven wordt tot welke chains de gebruikte resources behoren.
+	\item De tool voor zowel Linux als Windows 7 beschikbaar maken. Op dit moment is deze alleen voor Linux systemen beschikbaar.
+\end{itemize}
+
+\subsubsection*{Gemiddelde prioriteit}
+\begin{itemize}
+	\item Undo en redo functies om het verslepen en veranderen van taken ongedaan te maken. De laatste tien acties worden opgeslagen, zodat die ongedaan gemaakt kunnen worden. Deze acties zijn niet meer ongedaan te maken na het afsluiten van de tool.
+	\item De output van de TMS solver moet op stdout komen en de debug op stderr.
+	\item Het porten van de applicatie van Qt versie 4.8 naar versie 5.2.
+\end{itemize}
+
+\subsubsection*{Lage prioriteit}
+\begin{itemize}
+	\item Horizontaal scrollen moet mogelijk worden met shift\plus scroll. Deze functie heeft verder hetzelfde gedrag als wanneer er met de muis een scrollbalk verschoven wordt. De muis moet in de gebied staan dat horizontaal gescrolled moet worden. 
+	\item Zoom functie moet ook mogelijk zijn met ctrl\plus scroll. Dit werkt verder hetzelfde als de knoppen 'inzoomen' en 'uitzoomen'.
+	\item Sluit knopje op de tab van elke instantie die geopend is in de tool. Het sluit knopje in  zelf in plaats van erboven.
+\end{itemize}
+
 \subsection{Eisen en beperkingen}
+Er wordt ge\"eisd dat alle hierboven genoemde features met hoge prioriteit, met uitzondering van het porten naar Windows, worden uitgevoerd. Het porten naar Windows zal onderzocht worden en worden uitgevoerd als verwacht wordt dat dit in redelijke tijd kan gebeuren. Eventuele veranderingen aan de eisen zullen met de opdrachtgever gecommuniceerd worden.
+
 \subsection{Voorwaarden}
+Van de opdrachtgever wordt verwacht dat deze duidelijk de eisen van het product communiceert en feedback geeft op de geleverde documentatie.  

@@ -1,5 +1,5 @@
 # Compiled Object files
-/__obj__
+__obj__
 *.slo
 *.lo
 *.o
@@ -21,7 +21,7 @@
 *.app
 
 # Generated MOC, resource and UI files
-/__moc__
+__moc__
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
@@ -32,12 +32,15 @@ Release/
 
 #LaTeX
 *.out
+*.out.ps
 *.toc
 *.synctex.gz
 *.log
 *.aux
 *.blg
 *.bbl
+*.dvi
+verslag.pdf
 
 # Windows-specific
 Thumbs.db
@@ -48,8 +51,9 @@ desktop.ini
 
 # Project Files
 Makefile*
-application
-testsuite
+gui/application/application
+gui/testsuite/testsuite
+gui/testsuite/resources/tms
 *.pro
 *.pro.user
 db.sqlite
@@ -62,3 +66,6 @@ tms/grammar.output
 
 # Editors temporary files 
 *~
+
+# Exceptions of ignoring files
+!libgtest.a
