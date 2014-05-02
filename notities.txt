@@ -1,0 +1,4 @@
+Om de test te runnen en ook een xml output file te maken waar Jenkins wat mee kan: 
+$ ./testsuite --gtest_output=xml:gtestresults.xml
+
+
