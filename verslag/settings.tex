@@ -9,11 +9,11 @@
 \usepackage{tabularx}
 \usepackage[titletoc, title]{appendix}
 \usepackage{titlesec}
-\usepackage[hidelinks]{hyperref}
-\usepackage{bookmark}
 \usepackage{parskip}
 \usepackage{perpage} %the perpage package
 \usepackage{sectsty}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
 
 \sectionfont{\fontsize{20}{22}\selectfont}
 \subsectionfont{\fontsize{15}{16}\selectfont}
@@ -21,23 +21,8 @@
 \setlength{\parskip}{5pt}
 \MakePerPage{footnote} %the perpage package command
 
-%\hypersetup{colorlinks,breaklinks,
-%            urlcolor=[rgb]{0.22,0.6,1},
-%            linkcolor=[rgb]{0.22,0.6,1},
-%            citecolor=[rgb]{0.22,0.6,1}
-%}
-
-\hypersetup{
-	colorlinks,
-	citecolor=black,
-	filecolor=black,
-	linkcolor=black,
-	urlcolor=black
-}
-
 \newcommand{\plus}{\,\texttt{+}\,}
 \newcommand{\cpp}{C\texttt{++}}
-\newcommand{\TODO}[1]{\textcolor{red}{\textbf{TODO:} #1}} 
 
 \newcommand{\specialcell}[2][c]{\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
