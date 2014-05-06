@@ -40,7 +40,7 @@ Release/
 *.blg
 *.bbl
 *.dvi
-verslag.pdf
+*.pdf
 
 # Windows-specific
 Thumbs.db
@@ -69,3 +69,4 @@ tms/grammar.output
 
 # Exceptions of ignoring files
 !libgtest.a
+!verslag/voorbeelden

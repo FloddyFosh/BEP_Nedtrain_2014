@@ -1,10 +1,22 @@
-\section{Kwaliteitsborging}
-In dit hoofdstuk zal uitgewerkt worden welke middelen gebruikt zullen worden om bij te dragen aan de kwaliteit van het product.
+\section{Kwaliteitsbewaking}
+Het bewaken van de kwaliteit is in elk project een belangrijk onderdeel waarover nagedacht moet worden. Voor ons project is het belangrijk omdat de tool na dit project verder gebruikt zal worden binnen NedTrain en moet onderhoudbaar zijn en blijven voor toekomstige ontwikkelaars en nieuwe projecten. In dit hoofdstuk zal uitgewerkt worden welke middelen en welke technieken gebruikt zullen worden om deze doelen te bereiken.
 
-\subsection{Kwaliteitsbewaking}
-Om de werking van de code te garanderen, zal uiteraard testcode geschreven worden. Deze code zal bovendien gedraaid worden door een continuous integration service, bijvoorbeeld Jenkins \footnote{\url{jenkins-ci.org}}, zodat er gelijk een melding wordt gedaan van een testcase die niet slaagt.
-
-Zoals eerder genoemd in sectie \ref{subsec:resources}, wordt er gebruik gemaakt van de issue tracker van Bitbucket. Hierop zullen gevonden bugs geplaatst worden en zal bijgehouden worden welke features al ge\"implementeerd zijn en welke niet.
+\subsection{Documentatie}
+Documentatie is belangrijk voor anderen die niet betrokken geweest zijn tijdens het project om inzicht te krijgen in de keuzes en implementaties die toegepast zijn tijdens het project. Daarnaast geeft het ook een goed overzicht voor de opdrachtgever welke functionaliteiten toegevoegd zijn en hoe ze werken. Het is daarbij belangrijk voor de projectleden om gedurende het project de documentatie bij te houden en de dingen op te schrijven die uiteindelijk in het eindverslag moeten komen te staan. Voorbeelden hiervan zijn de gesprekken tussen opdrachtgever en projectleden en de gemaakte Scrum sprints.
 
 \subsection{Versiebeheer}
-Er zal gebruik gemaakt worden van een private repository op Bitbucket dat werkt met Git. Subversion behoorde ook tot de mogelijkheden, maar omdat het team beter bekend is met git en dit ook populairder is onder andere ontwikkelaars hebben we voor een Git repository gekozen. Subversion wordt gratis beschikbaar gesteld voor studenten door de faculteit EWI. Daarentegen kan Git gratis gebruikt worden door iedereen en bestaat ook zo de mogelijkheid om later het project publiekelijk toegankelijk te maken. Er is voldoende documentatie te vinden voor Git als we ergens niet uitkomen. Er is voor de website Bitbucket gekozen en niet voor het bekendere Github.com, omdat op Bitbucket gemakkelijk en gratis een repository aangemaakt kan worden die alleen door het team bekeken kan worden. 
+Er zal gebruik gemaakt worden van een private repository op Bitbucket dat werkt met Git. Subversion behoorde ook tot de mogelijkheden, maar omdat het team beter bekend is met Git en dit ook populairder is onder andere ontwikkelaars hebben we voor een Git repository gekozen. Subversion wordt gratis beschikbaar gesteld voor studenten door de faculteit EWI. Daarentegen kan Git gratis gebruikt worden door iedereen en bestaat ook zo de mogelijkheid om later het project publiekelijk toegankelijk te maken. Er is voldoende documentatie te vinden voor Git als we ergens niet uitkomen. Er is voor de website Bitbucket gekozen en niet voor het bekendere Github.com, omdat op Bitbucket gemakkelijk en gratis een repository aangemaakt kan worden die alleen door het team bekeken kan worden. 
+
+\subsection{Evaluatie}
+Het evalueren van de gemaakte code en de tool zal in dit project op drie manier gebeuren. De code zal getest worden met bestaande en nieuwe tests door middel van een continuous integration service. Daarnaast zal de code opgestuurd worden naar de Software Improvement Group (SIG) \footnote{\url{http://www.sig.eu/nl.}} die feedback zullen geven op de kwaliteit en structuur van de software. Het project zal eindigen met een pilottest.
+
+\subsubsection{Code Testen}
+Om de werking van de code te garanderen zal er tijdens het project tests geschreven worden. Alle tests zullen automatisch uitgevoerd worden door een continuous integration service. Er zal gebruik gemaakt worden van Jenkins \footnote{\url{jenkins-ci.org}} die de code en tests op een server uitvoeren en hierover resultaten en statistieken geeft. Aangezien Jenkins dit meerdere malen op een dag doet krijgen wij gelijk een melding als een testcase niet slaagt.
+
+Zoals eerder genoemd in paragraaf \ref{subsec:resources}, wordt er gebruik gemaakt van de issue tracker van Bitbucket. Hierop zullen gevonden bugs geplaatst worden en zal bijgehouden worden welke features al ge\"implementeerd zijn en welke niet. Dit geeft een goed overzicht aan de projectleden wat er in de code nog gedaan moet worden.
+
+\subsubsection{SIG Evaluatie}
+Zoals beschreven in paragraaf \ref{subsubsec:testen}, beoordeelt SIG de kwaliteit van de code handmatig en met behulp van geautomatiseerde tools. De kwaliteit wordt beoordeeld door het geven van sterren op een schaal van 1 t/m 5. Daarnaast wordt informatie gegeven over hoe deze uitkomst tot stand is gekomen en hoe de code verbeterd kan worden. Het opsturen van de code naar SIG moet gebeuren op 13 juni 2014. Ongeveer een week later ontvangen wij hun feedback.
+
+\subsubsection{Pilots}
+De tool zal moeten worden getest worden door het uitvoeren van gebruikerstest in de vorm van een pilot. Dit zal tijdens en aan het einde van het project gedaan worden. De tool zal minimaal gepresenteerd worden aan de opdrachtgever en door hem getest worden, aangezien de opdrachtgever een goede indicatie geeft van de gemiddelde gebruiker bij NedTrain en hierbij meteen geconcludeerd kan worden of zijn verwachtingen en eisen gehaald zijn.
