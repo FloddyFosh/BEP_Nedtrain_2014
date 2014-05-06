@@ -8,7 +8,7 @@ De contactpersoon binnen NedTrain is ir. Bob Huisman (b.huisman@nedtrain.nl). Hi
 \subsection{Probleemstelling}
 De NedTrain solver, ontwikkeld in samenwerking met de TU Delft, is een grafische tool die moeilijke schedulings problemen kan oplossen. De NedTrain planner wordt gebruikt door NedTrain om onderzoek te doen naar scheduling-algoritmes en het verbeteren daarvan. Daarnaast heeft het ook een educatief doel door werknemers er mee te laten werken om zo gevoel te krijgen voor het plannen van taken. De versie voor hoe het er nu uitziet is een resultaat van meerdere projecten van studenten aan de TU Delft. De applicatie dient als \emph{proof of concept} om te laten zien wat er mogelijk is met software op het gebied van het plannen van treinonderhoud. Er kunnen zelfgemaakte instanties van problemen geladen en opgelost worden met zelfgemaakte oplossing-scripts. Toch meent NedTrain dat de huidige software enige functionaliteit mist en er nog veel verbeterpunten bestaan. Zo zou er nog gekeken kunnen worden naar de flexibiliteit van oplossingen en het eenvoudiger en duidelijker maken van de stappen die gemaakt worden bij de oplossingen. 
 
-\subsection{Doelstelling project}
+\subsection{Doelstelling Project}
 De belangrijkste wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een functie waarmee de flexibiliteit van een tijdschema bepaald wordt en op een duidelijker manier weergegeven kan worden. Daarnaast wil de opdrachtgever dat er een solver wordt geschreven die een schema berekent waarin het verschuiven van taken niet kan leiden tot een inconsistente oplossing. Ook moet de NedTrain planner voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is. Als laatst moet er gekeken worden of de tool, die op dit moment alleen onder Linux werkt, geport kan worden naar Windows 7 om de bruikbaarheid te vergroten.
 
 \subsection{Opdrachtformulering}
@@ -20,11 +20,11 @@ De volgende zaken zullen behoren tot de verantwoordelijkheden van de projectgroe
 	\item De gebruikerservaring verbeteren door een aantal opties en shortcuts toe te voegen en door een aantal functies te veranderen.
 \end{itemize}
 
-\subsection{Op te leveren producten en diensten}
+\subsection{Op te leveren Producten en Diensten}
 \label{subsec:producten}
 De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit. 
 
-\subsubsection*{Hoge prioriteit}
+\subsubsection*{Hoge Prioriteit}
 \begin{itemize}
 	\item Het maken van een solver die er voor zorgt dat er bij het verslepen van een taak geen resource conflicten ontstaan, bijvoorbeeld met de chaining methode.
 	\item Het implementeren van een metriek die de flexibiliteit van een schema berekent.
@@ -33,21 +33,21 @@ De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn o
 	\item De tool voor zowel Linux als Windows 7 beschikbaar maken. Op dit moment is deze alleen voor Linux systemen beschikbaar.
 \end{itemize}
 
-\subsubsection*{Gemiddelde prioriteit}
+\subsubsection*{Gemiddelde Prioriteit}
 \begin{itemize}
 	\item Undo en redo functies om het verslepen en veranderen van taken ongedaan te maken. De laatste tien acties worden opgeslagen, zodat die ongedaan gemaakt kunnen worden. Deze acties zijn niet meer ongedaan te maken na het afsluiten van de tool.
 	\item De output van de TMS solver moet op stdout komen en de debug op stderr.
 	\item Het porten van de applicatie van Qt versie 4.8 naar versie 5.2.
 \end{itemize}
 
-\subsubsection*{Lage prioriteit}
+\subsubsection*{Lage Prioriteit}
 \begin{itemize}
 	\item Horizontaal scrollen moet mogelijk worden met shift\plus scroll. Deze functie heeft verder hetzelfde gedrag als wanneer er met de muis een scrollbalk verschoven wordt. De muis moet in de gebied staan dat horizontaal gescrolld moet worden. 
 	\item Zoom functie moet ook mogelijk zijn met ctrl\plus scroll. Dit werkt verder hetzelfde als de knoppen 'inzoomen' en 'uitzoomen'.
 	\item Sluit knopje op de tab van elke instantie die geopend is in de tool. Het sluit knopje in  zelf in plaats van erboven.
 \end{itemize}
 
-\subsection{Eisen en beperkingen}
+\subsection{Eisen en Beperkingen}
 Er wordt ge\"eisd dat alle in \ref{subsec:producten} genoemde features met hoge prioriteit, met uitzondering van het porten naar Windows, worden uitgevoerd. Het porten naar Windows zal onderzocht worden en worden uitgevoerd als verwacht wordt dat dit in redelijke tijd kan gebeuren. Eventuele veranderingen aan de eisen zullen met de opdrachtgever gecommuniceerd worden.
 
 \subsection{Voorwaarden}
