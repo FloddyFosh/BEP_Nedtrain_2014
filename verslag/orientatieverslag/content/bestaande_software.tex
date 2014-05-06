@@ -15,4 +15,6 @@ Qt is een gebruikers-interface framework voor \cpp . De 'NedTrain Planner' maakt
 Voor de bestaande software is er ook testcode geschreven, waarbij gebruik is gemaakt van de Google Test library. Dit maakt het mogelijk om 'unit testing' te doen. Ook ondersteunt de Google Test library fixture, mocks, exceptions, macro's en templates.
 
 \subsection{Solver}
+Voor het oplossen van de schedulingsproblemen zijn er twee solvers beschikbaar. De ene is geschreven in python door Michel Wilson en maakt gebruik van een na\"ieve chaining methode die alleen werkt op de Kolisch benchmark-instanties. Op complexere instanties, zoals die van NedTrain, werkt deze solver niet.
 
+De andere solver, genaamd TMS, is geschreven voor de 'OnTrack Scheduler' door Ronald Evers en is verder ontwikkeld door de bachelorprojectgroep in 2012. 
