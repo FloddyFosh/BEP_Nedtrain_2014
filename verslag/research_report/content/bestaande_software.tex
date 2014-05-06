@@ -1,15 +1,18 @@
 \section{Bestaande Software}
-Het doel van ons project is het verbeteren van bestaande software de 'NedTrain Planner'. Deze software maakt gebruik van frameworks. In dit hoofdstuk wordt uiteengezet met welke software er al bestaat en gebruikt gaat worden. Eerst bespreken we de 'NedTrain Planner' zelf en daarna bespreken we het framework Qt, dat is gebruikt voor de tool. 
+Het doel van ons project is het verbeteren van bestaande software de 'NedTrain Planner'. Deze software maakt gebruik van verschillende frameworks. In dit hoofdstuk wordt uiteengezet welke software er al bestaat en wat gebruikt gaat worden. Eerst bespreken we de 'NedTrain Planner' zelf en daarna het framework Qt, dat is gebruikt voor de tool.
 
 \subsection{NedTrain Planner}
-De 'NedTrain Planner' bestaat grofweg uit drie componenten namelijk de gebruikers interface, een solver en de communicatie tussen die twee. De gebruikers interface maakt het mogelijk om een probleeminstantie te maken, deze op te lossen door de solver en de oplossing te bekijken. De solver lost het probleem op.
+De 'NedTrain Planner' bestaat grofweg uit drie componenten, namelijk de gebruikers-interface, een solver en de communicatie tussen die twee. De gebruikers-interface maakt het mogelijk om een probleeminstantie te maken, deze op te laten lossen door de solver en de oplossing te bekijken.
 
-In vorige bachelorprojecten en masterthesissen is deze tool steeds verder uitgebreid. De 'OnTrack Scheduler' is een tool met een eenvoudige GUI en een solver. Zijn onderzoek in 2010 voor de masterthesis had als doel om een goede solver te bouwen. \cite{ronaldevers2010}
+In vorige bachelorprojecten en mastertheses is deze tool steeds verder uitgebreid. De 'OnTrack Scheduler' is een tool met een eenvoudige GUI en een solver die ontwikkeld is door Ronald Evers. Zijn onderzoek in 2010 voor de masterthesis had als doel om een goede solver te bouwen. \cite{ronaldevers2010}
 
-Daarna in 2011 door Edwin Bruurs en Cis van der Louw een verbeterde gebruikers interface gemaakt.\cite{bep2011nedtrain} Deze verbeteringen waren gebruikers vriendelijk, maar de code kwaliteit was niet goed volgens het bachelorproject uit 2012.\cite{bep2012nedtrain} In 2012 hebben Erik Ammeraan, Jan Elffers, Erwin Walraven en Wilco Wisse opnieuw een verbeterde gebruikers interface gemaakt voor de 'OnTrack Scheduler' deze hebben zij de 'NedTrain Planner' genoemd.
+Daarna is in 2011 door Edwin Bruurs en Cis van der Louw een verbeterde gebruikers interface gemaakt.\cite{bep2011nedtrain} Deze verbeteringen waren gebruiksvriendelijker, maar de kwaliteit van de code was volgens het bachelorproject uit 2012 niet goed.\cite{bep2012nedtrain} Deze groep, bestaande uit Erik Ammerlaan, Jan Elffers, Erwin Walraven en Wilco Wisse, heeft in 2012 opnieuw een verbeterde gebruikers-interface gemaakt voor de 'OnTrack Scheduler'. Deze hebben zij de 'NedTrain Planner' genoemd.
 
 \subsection{Qt Framework}
-Qt is een gebruikers interface framework voor \cpp . De 'NedTrain Planner' maakt gebruik van versie 4.8. De huidige nieuwste versie is 5.2. Er zijn een aantal verschillen tussen 4.8 en 5.2, sinds 5.0 waardoor de 'NedTrain Planner' niet werkt op 5.2. Qt is een open source software dat voor meerdere besturingsystemen geschikt is, het moet dus mogelijk zijn om de tool beschikbaar te maken voor o.a.: Windows, Linux en Mac. Er is een IDE genaamd Qt Creator, dat het mogelijk maakt om eenvoudig GUI's te ontwikkelen en \cpp\ code te compileren. \cite{seminarium2014}
+Qt is een gebruikers-interface framework voor \cpp . De 'NedTrain Planner' maakt gebruik van versie 4.8. De huidige nieuwste versie is 5.2. Er is een aantal verschillen tussen 4.8 en 5.2 dat ge\"introduceerd is in 5.0, waardoor de 'NedTrain Planner' niet werkt op 5.2. Qt is open source software die voor meerdere besturingssystemen geschikt is. Het moet dus mogelijk zijn om de tool beschikbaar te maken voor o.a. Windows, Linux en Mac OS. Er is een IDE genaamd Qt Creator, die het mogelijk maakt om eenvoudig GUI's te ontwikkelen en \cpp\ code te compileren. \cite{seminarium2014}
+
+\subsection{Google Test}
+Voor de bestaande software is er ook testcode geschreven, waarbij gebruik is gemaakt van de Google Test library. Dit maakt het mogelijk om 'unit testing' te doen. Ook ondersteunt de Google Test library fixture, mocks, exceptions, macro's en templates.
 
 \subsection{Solver}
 
