@@ -17,7 +17,8 @@ Onze Jenkins server is te vinden op: [77.163.248.47](http://77.163.248.47)
  - Nieuwe view voor resources met chains
  - De output op stdout en de debug op stderr.
  - Vergelijken van instanties met verschillende solvers (bijv. chaining met verschillende heuristieken), waarvan de flexibiliteit berekend wordt. Vervolgens kan de meest flexibele oplossing gekozen worden.
-
+ - Default solver na opstarten van de tool (chaining)
+ 
 ## Bugs
  - Precedence constraints, na het verwijderen van een constraint kan een task niet vrij bewegen. Mogelijke oplossing: bij de edit functie de earliest start time laten aanpassen. 
  - Pijltjes buiten groene vlakken blijven soms niet heel bij het verslepen van een task.
