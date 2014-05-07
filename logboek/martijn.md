@@ -11,4 +11,5 @@ Datum      | Uren   | Beschrijving
 04-05-2014 | 3      | Jenkins server installeren
 05-05-2014 | 4      | Jenkins server installeren
 06-05-2014 | 6      | Plan van Aanpak afmaken en opsturen
-07-05-2014 | 7      | ... vandaag ...
+07-05-2014 | 7      | Jenkins server: het werkt bijna
+08-05-2014 | -      | -
