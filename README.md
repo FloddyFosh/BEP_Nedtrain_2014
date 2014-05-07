@@ -6,7 +6,7 @@ Onze Jenkins server is te vinden op: [77.163.248.47](http://77.163.248.47)
  - gui - alle code voor de gui
  - tms - alle code voor solvers
  - verslag - het verslag
- - logboek - [Anton](https://bitbucket.org/abouter/bep_nedtrain_2014/src/d5bc7935059c40d55cf8c549a31db8eff571e023/logboek/anton.md?at=master) - [Chris](https://bitbucket.org/abouter/bep_nedtrain_2014/src/d5bc7935059c40d55cf8c549a31db8eff571e023/logboek/chris.md?at=master) - [Martijn](https://bitbucket.org/abouter/bep_nedtrain_2014/src/6746af8b0530f56a795049dca60899f2c83bce00/logboek/martijn.md?at=master)
+ - logboek - [Anton](https://bitbucket.org/abouter/bep_nedtrain_2014/src/master/logboek/anton.md) | [Chris](https://bitbucket.org/abouter/bep_nedtrain_2014/src/master/logboek/chris.md) | [Martijn](https://bitbucket.org/abouter/bep_nedtrain_2014/src/master/logboek/martijn.md)
 
 ## Features TODO
  - Chaining zodat bij het verslepen van een taak er geen resource conflicts ontstaan.
