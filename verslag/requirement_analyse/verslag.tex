@@ -1,0 +1,61 @@
+\input{../settings.tex}
+
+\begin{document}
+\begin{titlepage}
+\center
+\textsc{\huge TI3800 Bachelor Eindproject}\\[1.5cm]
+\HRule \\[0.4cm]
+{\Huge \bfseries Requirement Analyse}\\[0.4cm]
+\HRule \\[1.5cm]
+\begin{Large}
+\begin{tabular}{c}
+Chris Bakker\\
+Anton Bouter\\
+Martijn den Hoedt\\
+\end{tabular}\\[2cm]
+\end{Large}
+
+{\large \today}\\[2cm]
+
+\begin{figure}[b]
+\centering
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft}
+\includegraphics[width=0.9\linewidth]{../images/TU_Delft_logo.png}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright}
+\includegraphics[width=0.9\linewidth]{../images/NedTrain_logo.png}
+\end{flushright}
+\end{minipage}\\[2cm]
+\end{figure}
+
+\vfill
+
+\end{titlepage}
+
+% \input{content/voorwoord.tex}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\input{content/inleiding}
+\input{content/visiescope}
+\input{content/requirements}
+\input{content/usecases}
+\input{content/userstories}
+
+\newpage
+\addcontentsline{toc}{section}{Referenties}
+\bibliographystyle{abbrv}
+\bibliography{../references}
+
+\newpage
+\input{content/appendix.tex}
+
+\end{document}
