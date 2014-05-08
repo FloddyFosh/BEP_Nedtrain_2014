@@ -23,8 +23,10 @@ Onze Jenkins server is te vinden op: [77.163.248.47](http://77.163.248.47)
  - Precedence constraints, na het verwijderen van een constraint kan een task niet vrij bewegen. Mogelijke oplossing: bij de edit functie de earliest start time laten aanpassen. 
  - Pijltjes buiten groene vlakken blijven soms niet heel bij het verslepen van een task.
  - In een aantal invoer velden waar alleen getallen toegestaan zijn, kunnen wel punten (".") worden ingevoerd, maar deze worden later ineens verwijderd omdat het niet mag. 
- - Knoppen ineeens weg geen idee waarom, herstarten applicatie helpt niet.
+ - Knoppen ineens weg geen idee waarom, herstarten applicatie helpt niet.
  - Bij het toevoegen van constraints aan taken, kan het zijn dat de tool crashed met op de console: "The program has unexpectedly finished." Daarvoor komt nog in de GUI een melding dat de constraint niet toegevoegd kan worden. 
 
 ## Vragen
  - Wat doet de optie "Clear generated constraints before solving"?
+ - Waar staat "tms" voor?
+ - Waar staat "STJN" voor?

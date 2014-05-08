@@ -10,3 +10,4 @@ Datum      | Uren   | Beschrijving
 05-05-2014 | 2      | Ubuntu software configureren en updaten
 06-05-2014 | 6      | Plan van Aanpak afronden
 07-05-2014 | 7      | Orientatieverslag schrijven
+08-05-2014 | 7      | Orientatieverslag schrijven, Plan van Aanpak herschrijven, code doorlezen en begrijpen
