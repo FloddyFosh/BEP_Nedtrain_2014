@@ -49,6 +49,9 @@ desktop.ini
 # Mac-specific
 .DS_Store
 
+# Generated testoutput files
+gtestresults.xml
+
 # Project Files
 Makefile*
 gui/application/application
