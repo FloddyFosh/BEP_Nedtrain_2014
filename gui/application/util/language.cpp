@@ -22,8 +22,7 @@ Language * Language::check(Language * t) {
 
 Language * Language::defaultLang() {
     QSettings settings;
-    if (settings.contains("language"))
-    {
+    if (settings.contains("language")) {
         QString name (settings.value("language").toString());
         if (name == lang_nedtrain.id) return check(&lang_nedtrain);
         if (name == lang_english .id) return check(&lang_english);
@@ -42,7 +41,10 @@ QList<Language *> Language::loadAll() {
 
 bool Language::loadDefaultLang(QApplication & app) {
     QTranslator * translator (new QTranslator);
-    Language * t (defaultLang()); if (!t) {return false;}
+    Language * t (defaultLang()); 
+    if (!t) {
+        return false;
+    }
     if (!translator->load(QApplication::applicationDirPath() + t->pathToFile)){
     	qDebug() << "Error while loading language " << endl;
     	return false;
