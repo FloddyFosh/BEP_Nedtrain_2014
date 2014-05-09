@@ -1,53 +1,58 @@
 \section{Projectopdracht}
-In dit hoofdstuk zal de precieze omschrijving van het projectopdracht beschreven worden. Informatie over de opdrachtgever zal gegeven worden en een overzicht van zijn gestelde eisen en beperkingen.
+Om een beschrijving te geven van de taken die we gaan doen in dit project, geven we eerst informatie over onze opdrachtgever en wat zijn belang bij het project is. Daarna geven we de probleemstelling, gevolgd door de beschrijving van de opdracht en onze doelen. Aan de hand hiervan stellen we de op te leveren producten en diensten op, evenals de beperkingen en voorwaarden die gelden voor de opdracht.
 
 \subsection{Opdrachtgever}
 De opdrachtgever voor dit project bestaat uit NedTrain en de Technische Universiteit Delft.
-NedTrain is een dochterbedrijf van de Nederlandse Spoorwegen (NS) die zorgt voor het onderhouden en repareren van de treinen die NS gebruiken. De contactpersoon binnen NedTrain is ir. Bob Huisman (b.huisman@nedtrain.nl). Hij heeft ook vorige projecten die zich bezig hielden met software van NedTrain begeleid. Onze begeleider van de TU Delft is prof. dr. Cees Witteveen (c.witteveen@tudelft.nl). Hij is werkzaam binnen de Algoritmiek Groep op de faculteit EWI (Elektrotechniek, Wiskunde en Informatica).
+De contactpersoon binnen NedTrain is ir. Bob Huisman (b.huisman@nedtrain.nl). Hij heeft ook vorige projecten die zich bezig hielden met software van NedTrain begeleid. Onze begeleider van de TU Delft is prof. dr. Cees Witteveen (c.witteveen@tudelft.nl). Hij is werkzaam binnen de Algoritmiek Groep op de faculteit EWI (Elektrotechniek, Wiskunde en Informatica).
 
-\subsection{Projectomgeving}
-In het verleden is er door NedTrain, in samenwerking met de TU Delft, een tool ontwikkeld waarin het plannen van taken gevisualiseerd kan worden. Bovendien zijn er zogenaamde solvers ontwikkeld, waarmee voor een verzameling van taken een schema gemaakt wordt dat consistent is met de tijd- en resource-restricties. Deze tool, de NedTrain planner, wordt gebruikt door NedTrain om onderzoek te doen naar scheduling-algoritmes en het verbeteren daarvan. Daarnaast heeft het ook een educatief doel door werknemers er mee te laten werken om zo gevoel te krijgen voor het plannen van taken. Volgens NedTrain mist deze tool enige functionaliteit en zou er hier en daar wat verbeterd kunnen worden.
+\subsection{Probleemstelling}
+De NedTrain planner, ontwikkeld in samenwerking met de TU Delft, is een grafische tool die moeilijke schedulings problemen kan oplossen. Deze planner wordt gebruikt door NedTrain om onderzoek te doen naar schedulingsalgoritmen en het verbeteren daarvan. Daarnaast heeft het voor de TU Delft ook een educatief doel, doordat deze op een visuele manier duidelijke maakt hoe schedulingsalgoritmen te werk gaan. De huidige versie is een resultaat van meerdere projecten van studenten aan de TU Delft. De applicatie dient als proof of concept om te laten zien wat er mogelijk is met complexe algoritmen op het gebied van het plannen van treinonderhoud. Er kunnen zelfgemaakte instanties van problemen geladen en opgelost worden met zelfgemaakte oplossing-scripts. NedTrain zou echter graag willen dat de laatste ontwikkelingen op het gebied van schedulingsalgoritmen ook in de tool worden ge\"implementeerd. Zo zou er nog gekeken kunnen worden naar de flexibiliteit van oplossingen en het eenvoudiger en duidelijker maken van de stappen die gemaakt worden bij de oplossingen. 
 
-\subsection{Doelstelling project}
-De wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een functie waarmee de flexibiliteit van een tijdschema bepaald wordt en op een duidelijker manier weergegeven kan worden. Daarnaast wil de opdrachtgever dat er een solver wordt geschreven die een schema berekent waarin het verschuiven van taken niet kan leiden tot een inconsistente oplossing. Ook moet de NedTrain planner voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is.
+\subsection{Doelstelling Project}
+Een belangrijke wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een algoritme dat de chaining methode implementeert, zodat taken verschoven kunnen worden zonder dat hierdoor resource conflicten ontstaan. Het verschuiven van taken kan echter wel het gevolg hebben dat ook ander taken verschoven worden. Om dit tegen te gaan, wil NedTrain ook dat er door middel van een \emph{Linear Programming (LP)} solver een schema wordt gevonden, waarbij elke taak een interval heeft waarover deze verschoven kan worden, zonder dat dit invloed heeft op de andere taken. De mate waarin dit kan gebeuren, wordt gezien als de flexibiliteit van een schema. Ook moet de NedTrain planner voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is. Tenslotte moet er gekeken worden of de tool, die op dit moment alleen onder Linux werkt, geport kan worden naar Windows 7 om de bruikbaarheid te vergroten.
 
 \subsection{Opdrachtformulering}
-De volgende zaken zullen behoren tot de verantwoordelijkheden van de projectgroep:
+\label{subsec:opdrachtformulering}
+De volgende hoofdzaken zullen behoren tot de verantwoordelijkheden van de projectgroep:
+\begin{enumerate}
+	\item \label{enum:chaining} Het implementeren van een solver die gebruik maakt van de chaining methode.
+	\item \label{enum:LP} Het uitbreiden van de solver met de functionaliteit om aan elke taak een onafhankelijk interval toewijst waarover het zonder andere gevolgen verschoven kan worden, door middel van een LP solver.
+	\item \label{enum:visueel} Het visualiseren van de manier waarop de solver tot zijn antwoord komt.
+	\item \label{enum:windows} Onderzoek doen naar de hoeveelheid tijd die nodig is om de NedTrain planner ook beschikbaar te maken voor Windows 7. Als verwacht wordt dat het porten naar Windows 7 in redelijke tijd uitgevoerd kan worden, zal dit ook gedaan worden. 
+	\item \label{enum:kwaliteit} Kwalitatief programmeren zodat het uiteindelijke product makkelijk gebruikt, uitgebreid en overgedragen kan worden.
+	\item \label{enum:gebruiker} De gebruikerservaring verbeteren door een aantal opties en shortcuts toe te voegen en door een aantal functies te veranderen.
+\end{enumerate}
+
+\subsection{Op te leveren Producten en Diensten}
+\label{subsec:producten}
+De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit en horen bij \'e\'en van de hoofdzaken genoemd in \ref{subsec:opdrachtformulering}.
+
+\subsubsection*{Hoge Prioriteit}
+\begin{description}
+	\item[\ref{enum:chaining}] Het maken van een solver die er voor zorgt dat er bij het verslepen van een taak geen resource conflicten ontstaan, door middel van de chaining methode.
+	\item[\ref{enum:LP}] Het toevoegen van functionaliteit aan de solver, zodat deze aan elke taak een onafhankelijk interval toewijst waarover deze taak verschoven kan worden, door middel van een LP solver.
+	\item[\ref{enum:visueel}] Het visualiseren van chains in de interface van taken, zodat duidelijk is tot welke chain elke taak behoort en hoe het algoritme hiertoe gekomen is.
+	\item[\ref{enum:windows}] De tool voor zowel Linux als Windows 7 beschikbaar maken. Op dit moment is deze alleen voor Linux systemen beschikbaar.
+\end{description}
+
+\subsubsection*{Gemiddelde Prioriteit}
 \begin{itemize}
-	\item Onderzoek doen naar de hoeveelheid tijd die nodig is om de tool ook beschikbaar te maken voor Windows 7. Als verwacht wordt dat het porten naar Windows in redelijke tijd uitgevoerd kan worden, zal dit ook gedaan worden. 
-	\item De flexibiliteit van het schema moet zichtbaar zijn door te laten zien hoeveel de taken mogen uitlopen en door een metriek te gebruiken.
-	\item Kwalitatief programmeren zodat het uiteindelijke product makkelijk uitgebreid kan worden.
-	\item De gebruikerservaring verbeteren door een aantal opties en shortcuts toe te voegen en door een aantal functies te veranderen.
+	\item[\ref{enum:visueel}] Nieuwe view voor resources, waarbij weergegeven wordt tot welke chains de gebruikte resources behoren.
+	\item[\ref{enum:kwaliteit}] De gewone output van de bestaande solver moet op stdout komen en de debug output op stderr.
+	\item[\ref{enum:kwaliteit}] Het porten van de applicatie van Qt versie 4.8 naar versie 5.2.
+	\item[\ref{enum:gebruiker}] Undo en redo functies om het verslepen en veranderen van taken ongedaan te maken. De laatste tien acties worden opgeslagen, zodat die ongedaan gemaakt kunnen worden. Deze acties zijn niet meer ongedaan te maken na het afsluiten van de tool.
 \end{itemize}
 
-\subsection{Op te leveren producten en diensten}
-De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit. 
-
-\subsubsection*{Hoge prioriteit}
+\subsubsection*{Lage Prioriteit}
 \begin{itemize}
-	\item Het maken van een solver die er voor zorgt dat er bij het verslepen van een taak geen resource conflicten ontstaan, bijvoorbeeld met de chaining methode.
-	\item Het implementeren van een metriek die de flexibiliteit van een schema berekent.
-	\item Vergelijken van instanties met verschillende solvers, waarvan de flexibiliteit berekend wordt.
-	\item Nieuwe view voor resources, waarbij weergegeven wordt tot welke chains de gebruikte resources behoren.
-	\item De tool voor zowel Linux als Windows 7 beschikbaar maken. Op dit moment is deze alleen voor Linux systemen beschikbaar.
+	\item[\ref{enum:gebruiker}] Het verduidelijken van het vergelijken van verschillende oplossingen.
+	\item[\ref{enum:gebruiker}] Horizontaal scrollen moet mogelijk worden met shift\plus scroll. Deze functie heeft verder hetzelfde gedrag als wanneer er met de muis een scrollbalk verschoven wordt. De muis moet in het gebied staan dat horizontaal gescrolld moet worden. 
+	\item[\ref{enum:gebruiker}] Zoomfunctie moet ook mogelijk zijn met ctrl\plus scroll. Dit werkt verder hetzelfde als de knoppen 'inzoomen' en 'uitzoomen'.
+	\item[\ref{enum:gebruiker}] Sluitknopje op de tab van elke instantie die geopend is in de tool.
 \end{itemize}
 
-\subsubsection*{Gemiddelde prioriteit}
-\begin{itemize}
-	\item Undo en redo functies om het verslepen en veranderen van taken ongedaan te maken. De laatste tien acties worden opgeslagen, zodat die ongedaan gemaakt kunnen worden. Deze acties zijn niet meer ongedaan te maken na het afsluiten van de tool.
-	\item De output van de TMS solver moet op stdout komen en de debug op stderr.
-	\item Het porten van de applicatie van Qt versie 4.8 naar versie 5.2.
-\end{itemize}
-
-\subsubsection*{Lage prioriteit}
-\begin{itemize}
-	\item Horizontaal scrollen moet mogelijk worden met shift\plus scroll. Deze functie heeft verder hetzelfde gedrag als wanneer er met de muis een scrollbalk verschoven wordt. De muis moet in de gebied staan dat horizontaal gescrolled moet worden. 
-	\item Zoom functie moet ook mogelijk zijn met ctrl\plus scroll. Dit werkt verder hetzelfde als de knoppen 'inzoomen' en 'uitzoomen'.
-	\item Sluit knopje op de tab van elke instantie die geopend is in de tool. Het sluit knopje in  zelf in plaats van erboven.
-\end{itemize}
-
-\subsection{Eisen en beperkingen}
-Er wordt ge\"eisd dat alle hierboven genoemde features met hoge prioriteit, met uitzondering van het porten naar Windows, worden uitgevoerd. Het porten naar Windows zal onderzocht worden en worden uitgevoerd als verwacht wordt dat dit in redelijke tijd kan gebeuren. Eventuele veranderingen aan de eisen zullen met de opdrachtgever gecommuniceerd worden.
+\subsection{Eisen en Beperkingen}
+Er wordt ge\"eisd dat alle in \ref{subsec:producten} genoemde features met hoge prioriteit, met uitzondering van het porten naar Windows 7, worden uitgevoerd. Het porten naar Windows 7 zal onderzocht worden en worden uitgevoerd als verwacht wordt dat dit in redelijke tijd kan gebeuren. Eventuele veranderingen aan de eisen zullen met de opdrachtgever gecommuniceerd worden.
 
 \subsection{Voorwaarden}
-Van de opdrachtgever wordt verwacht dat deze duidelijk de eisen van het product communiceert en feedback geeft op de geleverde documentatie.  
+De projectleden worden verwacht om duidelijk en op tijd te communiceren met de opdrachtgever, bijvoorbeeld in het geval van tegenvallers bij de implementatie of bij het maken van een afspraak voor feedback. Bij eventuele wijzigingen aan eisen en dergelijke moet dit zo spoedig mogelijk met de projectleden besproken worden. Van de opdrachtgever wordt verwacht dat deze duidelijk de eisen van het product communiceert en feedback geeft op de geleverde documentatie.

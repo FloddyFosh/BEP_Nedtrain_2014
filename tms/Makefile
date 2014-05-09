@@ -1,5 +1,5 @@
 CFLAGS=-Wall
-LDLIBS=-lfl -lm
+LDLIBS=-LC:/GnuWin32/lib -lfl -lm
 LSOURCES=lex.l
 YSOURCES=grammar.ypp
 CSOURCES=debug.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp token.cpp
@@ -17,7 +17,7 @@ tms.release: $(OBJECTS) main.o
 	g++ $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
-	$(CC) -c $(CFLAGS) -o $@ $<
+	g++ -c $(CFLAGS) -o $@ $<
 
 lex.cpp: lex.l grammar.tab.cpp grammar.tab.hpp
 	flex -o $@ $<

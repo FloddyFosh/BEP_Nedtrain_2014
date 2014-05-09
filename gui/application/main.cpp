@@ -47,6 +47,7 @@
 
 int main(int argc, char *argv[])
 {
+    QApplication::setStyle("CleanLooks");
     QApplication app(argc, argv);
     app.setOrganizationName("TU Delft");
     app.setApplicationName("Task scheduler");

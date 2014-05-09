@@ -40,7 +40,7 @@ Release/
 *.blg
 *.bbl
 *.dvi
-verslag.pdf
+*.pdf
 
 # Windows-specific
 Thumbs.db
@@ -48,6 +48,9 @@ desktop.ini
 
 # Mac-specific
 .DS_Store
+
+# Generated testoutput files
+gtestresults.xml
 
 # Project Files
 Makefile*
@@ -69,3 +72,4 @@ tms/grammar.output
 
 # Exceptions of ignoring files
 !libgtest.a
+!verslag/voorbeelden/*
