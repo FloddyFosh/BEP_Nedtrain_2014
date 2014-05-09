@@ -72,4 +72,4 @@ tms/grammar.output
 
 # Exceptions of ignoring files
 !libgtest.a
-!verslag/voorbeelden
+!verslag/voorbeelden/*
