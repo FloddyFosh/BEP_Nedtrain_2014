@@ -3,13 +3,15 @@ Om een beschrijving te geven van de taken die we gaan doen in dit project, geven
 
 \subsection{Opdrachtgever}
 De opdrachtgever voor dit project bestaat uit NedTrain en de Technische Universiteit Delft.
-De contactpersoon binnen NedTrain is ir. Bob Huisman (b.huisman@nedtrain.nl). Hij heeft ook vorige projecten die zich bezig hielden met software van NedTrain begeleid. Onze begeleider van de TU Delft is prof. dr. Cees Witteveen (c.witteveen@tudelft.nl). Hij is werkzaam binnen de Algoritmiek Groep op de faculteit EWI (Elektrotechniek, Wiskunde en Informatica).
+De contactpersoon binnen NedTrain is ir. Bob Huisman (\href{mailto:b.huisman@nedtrain.nl}{b.huisman@nedtrain.nl}). Hij heeft ook vorige projecten die zich bezig hielden met software van NedTrain begeleid. Onze begeleider van de TU Delft is prof. dr. Cees Witteveen (\href{mailto:c.witteveen@tudelft.nl}{c.witteveen@tudelft.nl}). Hij is werkzaam binnen de Algoritmiek Groep op de faculteit EWI (Elektrotechniek, Wiskunde en Informatica).
 
 \subsection{Probleemstelling}
 De NedTrain planner, ontwikkeld in samenwerking met de TU Delft, is een grafische tool die moeilijke schedulings problemen kan oplossen. Deze planner wordt gebruikt door NedTrain om onderzoek te doen naar schedulingsalgoritmen en het verbeteren daarvan. Daarnaast heeft het voor de TU Delft ook een educatief doel, doordat deze op een visuele manier duidelijke maakt hoe schedulingsalgoritmen te werk gaan. De huidige versie is een resultaat van meerdere projecten van studenten aan de TU Delft. De applicatie dient als proof of concept om te laten zien wat er mogelijk is met complexe algoritmen op het gebied van het plannen van treinonderhoud. Er kunnen zelfgemaakte instanties van problemen geladen en opgelost worden met zelfgemaakte oplossing-scripts. NedTrain zou echter graag willen dat de laatste ontwikkelingen op het gebied van schedulingsalgoritmen ook in de tool worden ge\"implementeerd. Zo zou er nog gekeken kunnen worden naar de flexibiliteit van oplossingen en het eenvoudiger en duidelijker maken van de stappen die gemaakt worden bij de oplossingen. 
 
 \subsection{Doelstelling Project}
 Een belangrijke wens van de opdrachtgever is dat de NedTrain planner uitgebreid wordt met een algoritme dat de chaining methode implementeert, zodat taken verschoven kunnen worden zonder dat hierdoor resource conflicten ontstaan. Het verschuiven van taken kan echter wel het gevolg hebben dat ook ander taken verschoven worden. Om dit tegen te gaan, wil NedTrain ook dat er door middel van een \emph{Linear Programming (LP)} solver een schema wordt gevonden, waarbij elke taak een interval heeft waarover deze verschoven kan worden, zonder dat dit invloed heeft op de andere taken. De mate waarin dit kan gebeuren, wordt gezien als de flexibiliteit van een schema. Ook moet de NedTrain planner voor educatieve doeleinden gebruikt kunnen worden en dus inzicht kunnen bieden in hoe deze aan het schema gekomen is. Tenslotte moet er gekeken worden of de tool, die op dit moment alleen onder Linux werkt, geport kan worden naar Windows 7 om de bruikbaarheid te vergroten.
+
+\newpage
 
 \subsection{Opdrachtformulering}
 \label{subsec:opdrachtformulering}
@@ -25,15 +27,15 @@ De volgende hoofdzaken zullen behoren tot de verantwoordelijkheden van de projec
 
 \subsection{Op te leveren Producten en Diensten}
 \label{subsec:producten}
-De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit en horen bij \'e\'en van de hoofdzaken genoemd in \ref{subsec:opdrachtformulering}.
+De volgende features worden verwacht om ge\"implementeerd te worden. Deze zijn onderverdeeld in verschillende maten van prioriteit en horen bij \'e\'en van de hoofdzaken genoemd in \ref{subsec:opdrachtformulering}. De nummers van de onderstaande producten en diensten komen overeen met een nummer van \'e\'en van de hoofdzaken in \ref{subsec:opdrachtformulering}
 
 \subsubsection*{Hoge Prioriteit}
-\begin{description}
+\begin{itemize}
 	\item[\ref{enum:chaining}] Het maken van een solver die er voor zorgt dat er bij het verslepen van een taak geen resource conflicten ontstaan, door middel van de chaining methode.
 	\item[\ref{enum:LP}] Het toevoegen van functionaliteit aan de solver, zodat deze aan elke taak een onafhankelijk interval toewijst waarover deze taak verschoven kan worden, door middel van een LP solver.
 	\item[\ref{enum:visueel}] Het visualiseren van chains in de interface van taken, zodat duidelijk is tot welke chain elke taak behoort en hoe het algoritme hiertoe gekomen is.
 	\item[\ref{enum:windows}] De tool voor zowel Linux als Windows 7 beschikbaar maken. Op dit moment is deze alleen voor Linux systemen beschikbaar.
-\end{description}
+\end{itemize}
 
 \subsubsection*{Gemiddelde Prioriteit}
 \begin{itemize}
