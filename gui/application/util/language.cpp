@@ -6,8 +6,13 @@
 #include <QDebug>
 
 // Path should be _without_ ".qm" extension.
-Language lang_nedtrain ("nedtrain", "NedTrain (Dutch)", "/../../../gui/application/translations/lang_nedtrain"),
-         lang_english  ("english",  "English",          "/../../../gui/application/translations/lang_english");
+//Linux
+Language lang_nedtrain ("nedtrain", "NedTrain (Dutch)", "/../../gui/application/translations/lang_nedtrain"),
+         lang_english  ("english",  "English",          "/../../gui/application/translations/lang_english");
+
+//Windows
+//Language lang_nedtrain ("nedtrain", "NedTrain (Dutch)", "/../../../gui/application/translations/lang_nedtrain"),
+//         lang_english  ("english",  "English",          "/../../../gui/application/translations/lang_english");
 
 Language::Language (QString id, QString name, QString pathToFile) : id (id), name (name), pathToFile (pathToFile) { }
 
