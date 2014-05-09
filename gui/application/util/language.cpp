@@ -41,13 +41,13 @@ QList<Language *> Language::loadAll() {
 
 bool Language::loadDefaultLang(QApplication & app) {
     QTranslator * translator (new QTranslator);
-    Language * t (defaultLang()); 
+    Language * t (defaultLang());
     if (!t) {
         return false;
     }
     if (!translator->load(QApplication::applicationDirPath() + t->pathToFile)){
-    	qDebug() << "Error while loading language " << endl;
-    	return false;
+        qDebug() << "Error while loading language " << endl;
+        return false;
     }
 
     app.installTranslator(translator);
