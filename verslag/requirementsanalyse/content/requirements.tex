@@ -3,13 +3,14 @@ In deze sectie wordt met de tool gerefereerd naar de 'NedTrain planner'.
 
 \subsection{Functionele Requirements}
 \begin{enumerate}
-    \item De bestaande functionaliteit blijft bestaan en wordt dus slechts uitegebereid. \textbf{(Uitzonderingen?)}
-    \item De tool bevat een nieuwe solver dat gebruik maakt van de chaining-methode. 
-    \item De tool
+    \item De bestaande functionaliteit moet blijven bestaan en wordt dus slechts uitgebereid. \textbf{(Uitzonderingen?)}
+    \item De tool bevat een nieuwe solver dat gebruik maakt van de chaining-methode. Deze solver lost probleeminstanties op in het bestaande format en geeft de oplossing in een nieuw format, zodat ook de flexibileitsintervals (?) worden meegegeven in de oplossing. 
+    \item De tool moet een undo-functionaliteit hebben. Deze undo-functionaliteit maakt het mogelijk om veranderingen aan taken, projecten en resources ongedaan gemaakt kunnen worden. 
 \end{enumerate}
 
 \subsection{Niet-functionele Requirements}
 \begin{enumerate}
+    \item Het generen van een oplossing mag niet te lang duren. Voor grote probleeminstanties mag dit niet meer dan 10 minuten bedragen. 
     \item Gehele project moet gemakkelijk overdraagbaar zijn naar een volgende groep van ontwikkelaars. Voldoende documentatie en testcode speelt hierbij een rol.
     \item De tool is te gebruiken op Windows 7 computer met minstens 200MB vrije schijfruimte, 2 GB RAM of meer en een processor met 1 GHz of sneller.
     \item De tool is te gebruiken op een computer met een Linux versie, minstens 200MB vrije schijfruimte, 2 GB RAM of meer en een processor met 1 GHz of sneller. Op deze computer moet het dan wel mogelijk zijn om grafische interfaces te gebruiken, dit is bijvoorbeeld mogelijk op Ubuntu Desktop. De tool is niet geschikt voor bijvoorbeeld Ubuntu Server. 
