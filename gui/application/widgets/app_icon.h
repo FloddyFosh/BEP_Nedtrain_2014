@@ -17,7 +17,7 @@ public:
      * @param fileName filename of the icon file
      */
     AppIcon(const QString &fileName) {
-        addFile(QApplication::applicationDirPath() + "/icons/" + fileName);
+        addFile(QApplication::applicationDirPath() + "/../../../gui/application/icons/" + fileName);
     };
 
     ~AppIcon() {};
