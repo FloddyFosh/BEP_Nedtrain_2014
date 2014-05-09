@@ -78,7 +78,7 @@ INCLUDEPATH += ./gtest-1.6.0/include ../application
 LIBS += -lgcov
 LIBS += ../../gui/testsuite/libgtest.a
 CONFIG += qtestlib
-QMAKE_CXX = python fake-compiler
+QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
 QMAKE_CXXFLAGS += -g -cache 
 #QMAKE_LFLAGS += -m32
@@ -87,17 +87,17 @@ else:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application C:\Qt\4.8.6\lib\pkgconfig
+INCLUDEPATH += ./gtest-1.6.0/include ../application C:/Qt/4.8.6/lib/pkgconfig
 LIBS += -lgcov
 LIBS += ../../gui/testsuite/libgtest.a
 CONFIG += qtestlib
-QMAKE_CXX = python fake-compiler
+QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
 QMAKE_CXXFLAGS += -g 
 #QMAKE_LFLAGS += -m32
 """
 
-DIR = os.path.dirname(os.path.realpath(__file__))+"\\"
+DIR = os.path.dirname(os.path.realpath(__file__))+"/"
 print DIR
 headers_txt = "HEADERS += " + " \\\n".join(["$$RELPAD$$/" + x for x in file(DIR+"headers.list").read().split()]) + "\n\n"
 
