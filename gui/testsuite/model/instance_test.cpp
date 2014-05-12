@@ -4,7 +4,7 @@
 #include "controller/exceptions.h"
 
 TEST(InstanceTest, readFile) {
-	Instance *instance = InstanceReader::load(qApp->applicationDirPath()+"/resources/small.instance");
+    Instance *instance = InstanceReader::load(qApp->applicationDirPath()+"/resources/small.instance");
     ASSERT_EQ(1, instance->getResources().size());
     ASSERT_EQ(2, instance->getJobs().size());
 }

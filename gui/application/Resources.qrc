@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/about_logos.jpg</file>
+        <file>icons/add_constraint.png</file>
+        <file>icons/add_project.png</file>
+        <file>icons/add_resource_profile.png</file>
+        <file>icons/add_task.png</file>
+        <file>icons/close.png</file>
+        <file>icons/compare.png</file>
+        <file>icons/edit.png</file>
+        <file>icons/go-next.png</file>
+        <file>icons/go-previous.png</file>
+        <file>icons/icon.png</file>
+        <file>icons/list-add.png</file>
+        <file>icons/list-remove.png</file>
+        <file>icons/new.png</file>
+        <file>icons/open.png</file>
+        <file>icons/remove.png</file>
+        <file>icons/remove_constraint.png</file>
+        <file>icons/save.png</file>
+        <file>icons/solve.png</file>
+        <file>icons/solve-params.png</file>
+        <file>icons/zoom_in.png</file>
+        <file>icons/zoom_out.png</file>
+    </qresource>
+    <qresource prefix="/translations">
+        <file>translations/lang_english.qm</file>
+        <file>translations/lang_nedtrain.qm</file>
+    </qresource>
+</RCC>

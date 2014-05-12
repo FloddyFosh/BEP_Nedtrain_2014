@@ -59,7 +59,8 @@ TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+RESOURCES += Resources.qrc
 """
 else:
 	contents_application = """
@@ -67,7 +68,8 @@ TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+RESOURCES += Resources.qrc
 """
 
 if "-cache" in args:
@@ -87,6 +89,7 @@ QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
 QMAKE_CXXFLAGS += -g -cache 
 #QMAKE_LFLAGS += -m32
+RESOURCES += Resources.qrc
 """
 else:
 	contents_testsuite = """
@@ -105,6 +108,7 @@ QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
 QMAKE_CXXFLAGS += -g 
 #QMAKE_LFLAGS += -m32
+RESOURCES += Resources.qrc
 """
 
 DIR = os.path.dirname(os.path.realpath(__file__))+"/"
