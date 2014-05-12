@@ -13,4 +13,5 @@ Datum      | Uren   | Beschrijving
 06-05-2014 | 6      | Plan van Aanpak afmaken en opsturen
 07-05-2014 | 7      | Jenkins server: het werkt bijna
 08-05-2014 | 7      | Jenkins server werkt bijna, code gelezen en aan requirements gewerkt. 
-09-05-2014 |        | Verder gewerkt aan requirements
+09-05-2014 | 7      | Verder gewerkt aan requirements
+12-05-2014 |        | 
