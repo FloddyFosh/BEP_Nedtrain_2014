@@ -1,0 +1,8 @@
+- Installeer python (2.7.6 64bit) en Bison (2.4.1) en Flex (2.5.4a)
+- Voeg Qt, Python, Bison, minGW (g++) en flex toe aan path:
+- set PATH=%PATH%;C:\Qt\4.8.6\bin
+- set PATH=%PATH%;C:\Python27
+
+- compiler settings in Qt
+cd C:/Qt/4.8.6 configure -static
+reconfigure: run mingw32-make confclean and configure
