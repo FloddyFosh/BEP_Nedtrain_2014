@@ -76,7 +76,12 @@ TARGET = testsuite
 SOURCES += testsuite.cpp
 INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
-LIBS += ../../gui/testsuite/libgtest.a
+unix {
+    LIBS += ../../gui/testsuite/libgtest.a
+}
+win32 {
+    LIBS += ../../gui/testsuite/libgtest_win32.a
+}
 CONFIG += qtestlib
 QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
@@ -89,7 +94,12 @@ TARGET = testsuite
 SOURCES += testsuite.cpp
 INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite C:/Qt/4.8.6/lib/pkgconfig
 LIBS += -lgcov
-LIBS += ../../gui/testsuite/libgtest.a
+unix {
+    LIBS += ../../gui/testsuite/libgtest.a
+}
+win32 {
+    LIBS += ../../gui/testsuite/libgtest_win32.a
+}
 CONFIG += qtestlib
 QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
