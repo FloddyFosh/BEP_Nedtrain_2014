@@ -11,14 +11,13 @@ Datum      | Uren   | Beschrijving
 06-05-2014 | 6      | Afmaken en opsturen PvA
 07-05-2014 | 6      | Orientatieverslag
 08-05-2014 | 7.5    | Afspraak voor feedback PvA, Orientatieverslag, PvA verbeteren
-09-05-2014 | -      | 
-
+09-05-2014 | 7.5    | Verbeteren PvA, tool werkend op Windows
+11-05-2014 | 3		| Verbeteren requirementsanalyse, research naar implementatie chaining
 12-05-2014 | -      | 
 13-05-2014 | -      | 
 14-05-2014 | -      | 
 15-05-2014 | -      | 
 16-05-2014 | -      | 
-
 19-05-2014 | -      | 
 20-05-2014 | -      | 
 21-05-2014 | -      | 
