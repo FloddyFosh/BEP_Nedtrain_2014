@@ -59,7 +59,7 @@ TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
 """
 else:
 	contents_application = """
@@ -67,7 +67,7 @@ TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
 """
 
 if "-cache" in args:
