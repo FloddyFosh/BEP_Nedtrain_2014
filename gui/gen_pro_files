@@ -74,7 +74,7 @@ if "-cache" in args:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application
+INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
 LIBS += ../../gui/testsuite/libgtest.a
 CONFIG += qtestlib
@@ -87,7 +87,7 @@ else:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite C:/Qt/4.8.6/lib/pkgconfig
 LIBS += -lgcov
 LIBS += ../../gui/testsuite/libgtest.a
 CONFIG += qtestlib
