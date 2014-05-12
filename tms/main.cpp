@@ -141,7 +141,7 @@ int main(int argc, char *argv[]) {
 	// parser
 	timing_start("parsing");
 	yyin = stdin;
-	if (yyparse() != 0) { // yyparse doet iets met bison grammar
+	if (yyparse() != 0) {
 		fprintf(stderr, "Parsing failed. Aborting!\n");
 	}
 	timing_stop("parsing");

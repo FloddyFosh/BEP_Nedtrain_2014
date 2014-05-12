@@ -1,4 +1,5 @@
-#include "tms/tmsp.h"
+#include "tmsp.h"
+#include "chaining.h"
 
 int flexibility() {
 	return 1;
