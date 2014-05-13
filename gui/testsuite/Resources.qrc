@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>resources/j1201_1.instance</file>
+        <file>resources/precedences.instance</file>
+        <file>resources/small.instance</file>
+        <file>resources/test.instance</file>
+        <file>resources/test.precedence.adding</file>
+    </qresource>
+</RCC>

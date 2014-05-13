@@ -5,9 +5,9 @@
 #include <QTranslator>
 #include <QDebug>
 
-// Path should be _without_ ".qm" extension.
-Language lang_nedtrain ("nedtrain", "NedTrain (Dutch)", "/translations/lang_nedtrain"),
-         lang_english  ("english",  "English",          "/translations/lang_english");
+Language lang_nedtrain ("nedtrain", "NedTrain (Dutch)", ":/translations/translations/lang_nedtrain.qm"),
+         lang_english  ("english",  "English",          ":/translations/translations/lang_english.qm");
+
 
 Language::Language (QString id, QString name, QString pathToFile) : id (id), name (name), pathToFile (pathToFile) { }
 
@@ -17,7 +17,7 @@ void Language::setDefaultLang() {
 }
 
 Language * Language::check(Language * t) {
-    return QFile::exists(QApplication::applicationDirPath() + t->pathToFile + ".qm") ? t : 0;
+    return QFile::exists(t->pathToFile) ? t : 0;
 }
 
 Language * Language::defaultLang() {
@@ -41,13 +41,13 @@ QList<Language *> Language::loadAll() {
 
 bool Language::loadDefaultLang(QApplication & app) {
     QTranslator * translator (new QTranslator);
-    Language * t (defaultLang()); 
+    Language * t (defaultLang());
     if (!t) {
         return false;
     }
-    if (!translator->load(QApplication::applicationDirPath() + t->pathToFile)){
-    	qDebug() << "Error while loading language " << endl;
-    	return false;
+    if (!translator->load(t->pathToFile)){
+        qDebug() << "Error while loading language " << endl;
+        return false;
     }
 
     app.installTranslator(translator);

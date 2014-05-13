@@ -26,6 +26,7 @@ int main(int argc, char **argv) {
     ::testing::AddGlobalTestEnvironment(env);
 
     int r = RUN_ALL_TESTS();
+
     while(r>0) r--;
 
     return r;

@@ -17,7 +17,7 @@ public:
      * Constructs a language object and sets attributes.
      * @param id the id of the language
      * @param name the name of the language
-     * @param pathToFile path to the language file, without .qm
+     * @param pathToFile path to the language file
      */
     Language (QString id, QString name, QString pathToFile);
 

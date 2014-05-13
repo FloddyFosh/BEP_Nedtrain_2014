@@ -7,6 +7,7 @@
 # De source-files worden uit './sources.list' gelezen.
 
 import sys
+import os
 
 def opslaan_in_bestand(filename, contents):
 	f = open(filename, "w")
@@ -58,6 +59,8 @@ TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
+INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+RESOURCES += Resources.qrc
 """
 else:
 	contents_application = """
@@ -65,46 +68,61 @@ TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
+INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+RESOURCES += Resources.qrc
 """
 
 if "-cache" in args:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application
+INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
-LIBS += ./libgtest.a
+unix {
+    LIBS += ../../gui/testsuite/libgtest.a
+}
+win32 {
+    LIBS += ../../gui/testsuite/libgtest_win32.a
+}
 CONFIG += qtestlib
-QMAKE_CXX = ./fake-compiler
+QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
 QMAKE_CXXFLAGS += -g -cache 
 #QMAKE_LFLAGS += -m32
+RESOURCES += Resources.qrc
 """
 else:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application
+INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite C:/Qt/4.8.6/lib/pkgconfig
 LIBS += -lgcov
-LIBS += ./libgtest.a
+unix {
+    LIBS += ../../gui/testsuite/libgtest.a
+}
+win32 {
+    LIBS += ../../gui/testsuite/libgtest_win32.a
+}
 CONFIG += qtestlib
-QMAKE_CXX = ./fake-compiler
+QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
 QMAKE_CXXFLAGS += -g 
 #QMAKE_LFLAGS += -m32
+RESOURCES += Resources.qrc
 """
 
-headers_txt = "HEADERS += " + " \\\n".join(["$$RELPAD$$/" + x for x in file("headers.list").read().split()]) + "\n\n"
+DIR = os.path.dirname(os.path.realpath(__file__))+"/"
+print DIR
+headers_txt = "HEADERS += " + " \\\n".join(["$$RELPAD$$/" + x for x in file(DIR+"headers.list").read().split()]) + "\n\n"
 
-sources_files = file("sources.list").read().split()
+sources_files = file(DIR+"sources.list").read().split()
 sources_txt = "SOURCES += " + " \\\n".join(["$$RELPAD$$/" + x for x in sources_files]) + "\n\n"
-opslaan_in_bestand("application/application.pro", (contents_common + contents_application + headers_txt + sources_txt).replace("$$RELPAD$$","."))
+opslaan_in_bestand(DIR+"application/application.pro", (contents_common + contents_application + headers_txt + sources_txt).replace("$$RELPAD$$","."))
 
 sources_files.remove("main.cpp")
 sources_txt = "SOURCES += " + " \\\n".join(["$$RELPAD$$/" + x for x in sources_files]) + "\n\n"
-tests_txt = "HEADERS += " + " \\\n".join(file("tests.list").read().split())
-opslaan_in_bestand("testsuite/testsuite.pro",     (contents_common + contents_testsuite   + headers_txt + sources_txt + tests_txt).replace("$$RELPAD$$","../application"))
+tests_txt = "HEADERS += " + " \\\n".join(file(DIR+"tests.list").read().split())
+opslaan_in_bestand(DIR+"testsuite/testsuite.pro",     (contents_common + contents_testsuite   + headers_txt + sources_txt + tests_txt).replace("$$RELPAD$$","../application"))
 
 print "application.pro and testsuite.pro generated; now update language files\n"
-import os
-os.system("cd application && lrelease application.pro && cd ../")
+os.system("cd "+DIR+"application && lrelease application.pro && cd ../")
