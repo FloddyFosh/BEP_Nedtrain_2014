@@ -13,11 +13,31 @@ Meer over RCPSP en de mogelijke oplossingsmethoden ervan is te vinden in het bac
 De grootste hindernissen van het project zijn het implementeren van een nieuwe solver die gebruik maakt van het chaining-algoritme en flexibiliteitsintervallen berekent door middel van een linear programming solver. Het onderzoek dat naar deze problemen gedaan is en de gekozen oplossing zal in deze paragraaf besproken worden.
 
 \subsubsection*{Chaining}
-Zoals eerder genoemd in paragraaf \ref{subsec:solver}, kan een schema inconsistent worden met de resources als er in de interface taken verschoven worden. Om dit probleem op te lossen, kan de \emph{chaining} methode gebruikt worden \cite{policella2007precedence}. Voor deze methode moet eerst een oplossing voor de instantie gevonden worden die resource consistent is. Daarna wordt er aan elke eenheid van een resource een zogenaamde chain van taken toegekend. Zo'n chain is een lijst van taken $a_1, \dots a_n$, waarbij voor elke taak $a_i$ geldt dat deze taak afgerond moet zijn, voordat taak $a_{i+1}$ mag beginnen. Deze voorrangsrelatie wordt ook wel genoteerd als $a_i \prec a_{i+1}$. Pseudocode voor het chaining-algoritme is weergegeven in Figuur \ref{fig:chainingPseudo}.
+Zoals eerder genoemd in paragraaf \ref{subsec:solver}, kan een schema inconsistent worden met de resources als er in de interface taken verschoven worden. Om dit probleem op te lossen, kan de \emph{chaining} methode gebruikt worden \cite{policella2007precedence}. Voor deze methode moet eerst een oplossing voor de instantie gevonden worden die resource consistent is. Daarna wordt er aan elke eenheid van een resource een zogenaamde chain van taken toegekend. Zo'n chain is een lijst van taken $a_1, \dots a_n$, waarbij voor elke taak $a_i$ geldt dat deze taak afgerond moet zijn, voordat taak $a_{i+1}$ mag beginnen. Deze voorrangsrelatie wordt ook wel genoteerd als $a_i \prec a_{i+1}$. Pseudocode voor het chaining-algoritme is weergegeven in Algorithm \ref{alg:chaining}.
 
-\begin{figure}[H]
---insert pseudocode--
-\end{figure}
+\begin{algorithm}
+\caption{Chaining \cite{policella2007precedence} }\label{alg:chaining}
+\textbf{Input:} A problem P and one of its fixed-times schedules $S$ \\
+\textbf{Output:} A partial order solution $POS^{ch}$
+\begin{algorithmic}[1]
+  \Function{Chaining}{$P, S$}
+    \Let{$POS^{ch}$}{$P$}
+    \State Sort all the activities according to their start times in $S$  
+    \State Initialize all the chains empty
+    \For{\textbf{each} resource $r_j$}
+      \For{\textbf{each} activity $a_i$}
+        \For{$1$ \textbf{to} $req_{ij}$}
+          \Let{$k$}{$SelectChain(a_i,r_j)$}
+          \Let{$a_k$}{$last(k)$}
+          \State{$AddConstraint(POS^{ch},a_k \prec a_i)$}
+          \Let{$last(k)$}{$a_i$}
+        \EndFor
+      \EndFor
+    \EndFor
+    \State{\Return{$POS^{ch}$}}
+  \EndFunction
+\end{algorithmic}
+\end{algorithm}
 
 Omdat de chaining methode als input een consistent schema nodig heeft, kan de in paragraaf \ref{subsec:solver} genoemde solver gebruikt worden. Deze solver levert een earliest starting time oplossing, die vervolgens dus door het chaining algoritme gebruikt kan worden.
 
