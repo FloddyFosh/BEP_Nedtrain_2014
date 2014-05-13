@@ -7,7 +7,7 @@
 #include "controller/exceptions.h"
 #include "data/instance_reader.h"
 
-Q_DECLARE_METATYPE(QProcess::ExitStatus);
+Q_DECLARE_METATYPE(QProcess::ExitStatus)
 
 TEST_F(SolverTest, testGetSetName) {
     ASSERT_EQ("Solver", s->getName());
