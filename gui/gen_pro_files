@@ -75,7 +75,7 @@ if "-cache" in args:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include
+INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
 unix {
     LIBS += ../../gui/testsuite/libgtest.a
