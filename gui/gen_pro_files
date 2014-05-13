@@ -59,7 +59,7 @@ TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
 RESOURCES += Resources.qrc
 """
 else:
@@ -68,7 +68,7 @@ TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
 RESOURCES += Resources.qrc
 """
 
@@ -95,7 +95,7 @@ else:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += . ./gtest-1.6.0/include ../application ../testsuite C:/Qt/4.8.6/lib/pkgconfig
 LIBS += -lgcov
 unix {
     LIBS += ../../gui/testsuite/libgtest.a
