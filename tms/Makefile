@@ -1,4 +1,4 @@
-CFLAGS=-Wall
+CFLAGS=-Wall -std=gnu++0x
 LDLIBS=-LC:/GnuWin32/lib -lfl -lm
 LSOURCES=lex.l
 YSOURCES=grammar.ypp

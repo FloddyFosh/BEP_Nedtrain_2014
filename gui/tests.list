@@ -13,6 +13,7 @@ model/comparison_test.cpp
 model/comparison_fixture.cpp
 model/requirement_test.cpp
 solve/solver_test.cpp
+solve/solver_fixture.cpp
 util/resourcecalculator_test.cpp
 util/resourcecalculator_fixture.cpp
 widgets/smoke_ui_test.cpp
