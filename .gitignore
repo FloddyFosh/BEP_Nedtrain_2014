@@ -29,6 +29,8 @@ ui_*.h
 # Debug and Release directories Windows
 Debug/
 Release/
+*.debug
+*.release
 
 #LaTeX
 *.out
@@ -56,6 +58,9 @@ gtestresults.xml
 gui/application/application
 gui/testsuite/testsuite
 gui/testsuite/resources/tms
+gui/Makefile
+gui/application/Makefile
+gui/testsuite/Makefile
 *.pro
 *.pro.user
 db.sqlite

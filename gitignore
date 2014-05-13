@@ -1,0 +1,34 @@
+*
+
+# Python scripts
+!*.py
+
+# C/C++ files
+!*.cpp
+!*.hpp
+!*.h
+!*.c
+
+# LaTeX
+!*.tex
+!*.bib
+!*.sty
+!verslag/voorbeelden/*
+
+# Project specific
+!*solver/Makefile
+!*tms/Makefile
+!*.md
+!.gitignore
+!*.list
+!*gen_pro_files
+!*.instance
+!*lex.l
+!*grammar.ypp
+!libgtest.a
+
+*grammar.tab.hpp
+*grammar.tab.cpp
+*lex.cpp
+__obj__
+__moc__
