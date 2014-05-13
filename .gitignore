@@ -71,4 +71,5 @@ solver/tms/grammar.output
 
 # Exceptions of ignoring files
 !libgtest.a
+!libgtest_win32.a
 !verslag/voorbeelden/*

@@ -17,10 +17,10 @@ public:
      * @param fileName filename of the icon file
      */
     AppIcon(const QString &fileName) {
-        addFile(QApplication::applicationDirPath() + "/icons/" + fileName);
-    };
+        addFile(":/icons/icons/" + fileName);
+    }
 
-    ~AppIcon() {};
+    ~AppIcon() {}
 };
 
 #endif // APP_ICON_H
