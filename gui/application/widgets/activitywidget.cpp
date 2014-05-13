@@ -230,11 +230,13 @@ void ActivityWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 void ActivityWidget::mouseReleaseEvent(QMouseEvent *event) {
-    changeDuration = false;
-    selectedX = -1;
-    if (stPropagator) {
-        delete stPropagator;
-        stPropagator = NULL;
+    if (event->button() == Qt::LeftButton) {
+        changeDuration = false;
+        selectedX = -1;
+        if (stPropagator) {
+            delete stPropagator;
+            stPropagator = NULL;
+        }
     }
 }
 

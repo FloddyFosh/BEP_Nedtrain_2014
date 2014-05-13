@@ -273,7 +273,7 @@ int ResourceWidget::vZoom() const {
     return _vZoom;
 }
 
-void ResourceWidget::paintPeak(int t, int c) {
+void ResourceWidget::paintPeak(int t) {
     peak = t;
     update();
 }
