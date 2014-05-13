@@ -1,0 +1,65 @@
+%{
+#include <stdio.h>
+
+#include "token.h"
+
+#include "tmsp.h"
+
+#define YYERROR_VERBOSE
+
+
+int yylex(void);
+void yyerror(char const *s);
+int ttoi(Token* token);
+
+int error_counter = 0;
+
+%}
+
+%union {
+    Token *token;
+}
+
+%token <token> T_INT
+%token <token> T_STRING
+%token <token> T_LINE_SEP
+
+%%
+
+tmsp			: /* no statements */
+				| declarations
+				;
+
+declarations	: declaration T_LINE_SEP
+				| declarations declaration T_LINE_SEP
+				;
+
+declaration		:
+				| 'R' T_INT T_INT T_STRING			{ add_resource(   ttoi($2), ttoi($3), $4->text); }
+				| 'T' T_INT T_INT T_INT T_STRING	{ add_train(      ttoi($2), ttoi($3), ttoi($4), $5->text); }
+				| 'J' T_INT T_INT T_INT T_STRING	{ add_train(      ttoi($2), ttoi($3), ttoi($4), $5->text); }
+				| 'A' T_INT T_INT T_INT T_STRING 	{ add_activity(   ttoi($2), ttoi($3), ttoi($4), $5->text); }
+				| 'A' T_INT T_INT T_INT T_STRING T_INT	{ add_activity(   ttoi($2), ttoi($3), ttoi($4), $5->text); }
+				| 'A' T_INT T_INT T_INT T_STRING T_INT T_INT T_INT	{ add_activity(   ttoi($2), ttoi($3), ttoi($4), $5->text, ttoi($7), ttoi($8)); }
+				| 'D' T_INT T_INT T_INT T_STRING	{ add_train(      ttoi($2), ttoi($3), ttoi($4), $5->text); }
+				| 'Q' T_INT T_INT T_INT T_INT		{ add_requirement(ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
+				| 'S' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
+				| 'P' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
+				| 'p' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
+				| 'F' T_INT T_INT T_INT     		{ add_flex(       ttoi($2), ttoi($3), ttoi($4)); }
+				| 'G' T_INT T_INT T_INT T_INT		{ add_groupchild( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
+				;
+
+%%
+
+int ttoi(Token* token) {
+	return atoi(token->text);
+}
+
+void yyerror (char const *s) {
+	++error_counter;
+	fprintf(stderr, "error: at token [%s]: %s\n", 
+			yylval.token->text,
+			s);
+}
+
