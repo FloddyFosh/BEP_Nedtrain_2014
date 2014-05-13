@@ -1,3 +1,5 @@
+#include <list>
+
 #include "chaining.h"
 #include "alles.h"
 
@@ -7,13 +9,24 @@
 #include "debug.h"
 #include "heap.h"
 
+map< pair<int,int>, list<activity*> > chains;
+
 bool compareActivities(const activity* a, const activity* b) {
     return (a->est < b->est);
 }
 
-//Resource unit j of activity i with resource k
-int selectChain(int i, int j, int k){
-    return 1;
+list<activity*>* selectChain(int tr, int act, int res){
+    printf("selectChain voor act(%d,%d) en resource %d\n",tr,act, res);
+    FOREACH(chains,elem){
+        //pair<int,int> newPair(tr,act);
+        list<activity*> curChain = *elem;
+        activity* chainEnd = curChain.back();
+        if(A(tr,act)->est >= chainEnd->est + chainEnd->duration){
+            printf("selected chain\n");
+            return &curChain;
+        }
+    }
+    return 0;
 }
 
 int chaining() {
@@ -46,24 +59,31 @@ int chaining() {
     }
 	
 	//INITIALIZE CHAINS
-	//splits resources in resource units
-
-
+    //splits resources r_i in resource units u_j
+    int c = 0;
+    for(int r_i=0; r_i<tmsp->n_resources; r_i++){
+        for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
+            pair<int,int> newPair(r_i, u_j);
+            chains[newPair];
+            c++;
+        }
+    }
+    //cout << "chains.size(): " << chains.size() << endl;
+    //cout << "c: " << c << endl;
 	
-    /*for(int i=0; i<tmsp->n_resources; i++){
+    for(int i=0; i<tmsp->n_resources; i++){
         for(int j=0; j<R(i)->capacity; j++){
             for(int k=0; k<activities.size(); k++){
                 activity* act = activities[k];
-                for(int m=0; m<REQ(act->i,act->j,i); m++){
-                    vector<activity*> chain = selectChain(i,j,k);
-                    activity* chainEnd = list_get(chain, chain.size());
-                    chain.push_back(act);
+                for(int m=0; m<REQ(act->i,act->j,i)->amount; m++){
+                    list<activity*>* chain = selectChain(i,j,k);
+                    activity* chainEnd = chain->back();
+                    chain->push_back(act);
                     add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
+                    printf("new constraint: (%d,%d) < (%d,%d)\n",chainEnd->i,chainEnd->j,act->i,act->j);
                 }
             }
         }
-    }*/
-	
-	
+    }
 	return 1;
 }

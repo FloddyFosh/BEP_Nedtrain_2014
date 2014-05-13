@@ -108,6 +108,7 @@ int stjn_construct() {
     stjn_calculate_est();
     int re = stjn_calculate_lst();
     chkEST(), chkLST();
+    insertToTmsp();
     return re;
 }
 
@@ -430,6 +431,16 @@ void print_est_schedule() {
             //fprintf(stderr, "G: %x\n", !!acts[i][j]->group.size());
             fprintf(stderr, "EST: %d %d %d\n", i, j, acts[i][j]->est);
             //fprintf(stderr, "LST: %d %d %d\n", i, j, acts[i][j]->lst);
+        }
+    }
+}
+
+void insertToTmsp() {
+    int i,j;
+
+    for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+        for(j = 0; j < N(i); j++) if (A(i,j)) {
+            A(i,j)->est = acts[i][j]->est;
         }
     }
 }

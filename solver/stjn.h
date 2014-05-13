@@ -36,6 +36,7 @@ node_t *stjn_merge_init(node_t *parent, node_t *child);
 node_t *stjn_merge(node_t *n, node_t *m);
 int stjn_construct();
 void print_est_schedule();
+void insertToTmsp();
 
 #define BEFORE(a, b)   (b->lst >= (a->est + a->len))
 #define SLACK(a, b)     (b->lst - a->est - a->len)
