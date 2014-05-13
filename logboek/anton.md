@@ -2,7 +2,7 @@
 Datum      | Uren   | Beschrijving
 :----------| :------|:------------
 25-04-2014 | 6      | Afspraak bij NedTrain, begin porten naar windows, begin plan van aanpak
-27-04-2014 | 2 		| Ubuntu en Qt installeren
+27-04-2014 | 2 	    | Ubuntu en Qt installeren
 28-04-2014 | 7      | Porten Windows
 29-04-2014 | 8      | Porten Windows, Plan van Aanpak
 30-04-2014 | 7      | Plan van Aanpak
