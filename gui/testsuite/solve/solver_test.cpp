@@ -17,7 +17,7 @@ TEST_F(SolverTest, testGetSetName) {
 }
 
 TEST_F(SolverTest, testGetBinary) {
-    ASSERT_EQ(qApp->applicationDirPath()+"/resources/tms", s->getBinary());
+    ASSERT_EQ(filepath, s->getBinary());
 
     s->setBinary("solver");
     ASSERT_EQ("solver", s->getBinary());
@@ -33,7 +33,7 @@ TEST_F(SolverTest, testGetArguments) {
 TEST_F(SolverTest, testSaveAndLoad) {
     s->save();
     Solver *s2 = Solver::load("Solver");
-    ASSERT_EQ(qApp->applicationDirPath()+"/resources/tms", s2->getBinary());
+    ASSERT_EQ(filepath, s2->getBinary());
     ASSERT_EQ("-x", s2->getArguments());
 }
 
