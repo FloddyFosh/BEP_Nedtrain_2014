@@ -29,8 +29,8 @@ ui_*.h
 # Debug and Release directories Windows
 Debug/
 Release/
-*.debug
-*.release
+*.Debug
+*.Release
 
 #LaTeX
 *.out
