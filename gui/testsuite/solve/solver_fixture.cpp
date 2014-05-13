@@ -8,14 +8,22 @@ private:
 protected:
     virtual void SetUp() {
         failed = false;
-        QString binary = qApp->applicationDirPath()+"/resources/tms";
-        QFile f(binary);
+        filepath = qApp->applicationDirPath()+"/resources/tms";
+        QFile f(filepath);
+
         if(!f.exists()) {
+            //Might be windows
+            filepath += ".exe";
+        }
+
+        QFile fw(filepath);
+
+        if(!fw.exists()) {
             failed = true;
-            FAIL() << "The testing environment requires the tms solver to be at /resources/tms.";
+            FAIL() << "The testing environment requires the tms solver to be at /resources/.";
         } else {
-            s = new Solver("Solver", binary, "-x");
-            s2 = new Solver("Solver", binary, "-x");
+            s = new Solver("Solver", filepath, "-x");
+            s2 = new Solver("Solver", filepath, "-x");
         }
     }
     virtual void TearDown() {
@@ -25,4 +33,5 @@ protected:
         }
     }
     Solver *s, *s2;
+    QString filepath;
 };
