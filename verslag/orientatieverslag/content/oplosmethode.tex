@@ -15,7 +15,7 @@ De grootste hindernissen van het project zijn het implementeren van een nieuwe s
 \subsubsection*{Chaining}
 Zoals eerder genoemd in paragraaf \ref{subsec:solver}, kan een schema inconsistent worden met de resources als er in de interface taken verschoven worden. Om dit probleem op te lossen, kan de \emph{chaining} methode gebruikt worden \cite{policella2007precedence}. Voor deze methode moet eerst een oplossing voor de instantie gevonden worden die resource consistent is. Daarna wordt er aan elke eenheid van een resource een zogenaamde chain van taken toegekend. Zo'n chain is een lijst van taken $a_1, \dots a_n$, waarbij voor elke taak $a_i$ geldt dat deze taak afgerond moet zijn, voordat taak $a_{i+1}$ mag beginnen. Deze voorrangsrelatie wordt ook wel genoteerd als $a_i \prec a_{i+1}$. Pseudocode voor het chaining-algoritme is weergegeven in Figuur \ref{fig:chainingPseudo}.
 
-\begin{figure}
+\begin{figure}[H]
 --insert pseudocode--
 \end{figure}
 
