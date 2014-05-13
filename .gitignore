@@ -67,9 +67,12 @@ db.sqlite
 *.qm
 grammar.tab.cpp
 grammar.tab.hpp
-solver/tms/tms
-solver/tms/lex.cpp
-solver/tms/grammar.output
+tms/tms
+tms/tms.exe
+solver/tms
+solver/tms.exe
+lex.cpp
+grammar.output
 
 # Editors temporary files 
 *~
