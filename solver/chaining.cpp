@@ -17,14 +17,15 @@ bool compareActivities(const activity* a, const activity* b) {
 
 list<activity*>* selectChain(int tr, int act, int res){
     printf("selectChain voor act(%d,%d) en resource %d\n",tr,act, res);
-    FOREACH(chains,elem){
+    map< pair<int,int>, list<activity*> >::iterator it;
+    for(it=chains.begin();it!=chains.end();it++){
         //pair<int,int> newPair(tr,act);
-        list<activity*> curChain = *elem;
+        /*list<activity*> curChain = chains[*it];
         activity* chainEnd = curChain.back();
         if(A(tr,act)->est >= chainEnd->est + chainEnd->duration){
             printf("selected chain\n");
             return &curChain;
-        }
+        }*/
     }
     return 0;
 }
@@ -68,13 +69,32 @@ int chaining() {
             c++;
         }
     }
-    //cout << "chains.size(): " << chains.size() << endl;
-    //cout << "c: " << c << endl;
+    cout << "chains.size(): " << chains.size() << endl;
+    cout << "c: " << c << endl;
+    vector<activity*>::iterator i;
+    vector<requirement*>::iterator j;
+    cout << "act size" << activities.size() << endl;
+    for(i=activities.begin(); i!=activities.end(); i++){
+        activity* act = *i;
+        vector<requirement*> reqList = act->requirements;
+        for(j=reqList.begin();j!=reqList.end();j++){
+            requirement* req = *j;
+            printf("(%d,%d) amount: %d\n",act->est,act->duration,0);
+        }
+    }
 	
+    cout << "bla" << endl;
+
     for(int i=0; i<tmsp->n_resources; i++){
+        cout << "a" << i << endl;
         for(int j=0; j<R(i)->capacity; j++){
+            cout << "b" << j << endl;
             for(int k=0; k<activities.size(); k++){
+                cout << "c" << k << endl;
                 activity* act = activities[k];
+                cout << "d" << endl;
+                //cout << "amount: "<< A(i,j)->requirements.begin()->amount << endl;
+                printf("resource %d, unit %d, activity (%d,%d), req %d\n",i,j,act->i,act->j,0);
                 for(int m=0; m<REQ(act->i,act->j,i)->amount; m++){
                     list<activity*>* chain = selectChain(i,j,k);
                     activity* chainEnd = chain->back();

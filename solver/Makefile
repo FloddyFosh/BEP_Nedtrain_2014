@@ -20,7 +20,7 @@ solver.release: $(OBJECTS) main.o
 	g++ -c $(CFLAGS) -o $@ $<
 
 lex.cpp: lex.l grammar.tab.cpp grammar.tab.hpp
-	flex -o $@ $<
+	flex -o$@ $<
 
 %.tab.cpp %.tab.hpp: %.ypp
 	bison --verbose -d $<
