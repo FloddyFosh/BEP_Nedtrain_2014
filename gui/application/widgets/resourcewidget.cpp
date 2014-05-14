@@ -148,7 +148,7 @@ void ResourceWidget::updatePixmap() {
 
 
     // draw bottom-border
-    painter.setPen(Qt::SolidLine);
+    painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
     painter.setPen(QPen(QBrush(Qt::darkGray), 2));
     painter.drawLine(0, hint.height() - 1, hint.width(), hint.height() - 1);
 
@@ -169,7 +169,7 @@ void ResourceWidget::paintDemandProfile(QPainter &painter){
 
 		// setup painter style
 		painter.setBrush(usedCapacityGradient);
-		painter.setPen(Qt::SolidLine);
+        painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
 
 		// draw demand profile
 		painter.drawPolygon(polygon);
@@ -178,20 +178,19 @@ void ResourceWidget::paintDemandProfile(QPainter &painter){
 
 void ResourceWidget::paintResourceProfile(QPainter &painter){
 	QPolygon polyline = calculator->getResourcePolyline(size().width()/hZoom()-offset);
-	if (!polyline.isEmpty()) {
-		painter.setPen(Qt::black);
-		painter.setPen(Qt::DotLine);
+    if (!polyline.isEmpty()) {
+        painter.setPen(QPen(QColor("black"), 0, Qt::DotLine));
 		painter.drawPolyline(polyline);
 	}
 
 	QPolygon exceed = calculator->getExceedPolygon(size().width()/hZoom()-offset);
 	if(!exceed.isEmpty()){
 		painter.setBrush(Qt::red);
-		painter.setPen(Qt::NoPen);
+        painter.setPen(Qt::NoPen);
 		painter.drawPolygon(exceed);
 
 		painter.setBrush(Qt::NoBrush);
-		painter.setPen(Qt::black);
+        painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
 		painter.drawPolygon(calculator->getDemandPolygon());
 	}
 }
@@ -201,7 +200,7 @@ void ResourceWidget::paintJobProfile(QPainter &painter){
 
 	if(!polygon.isEmpty()){
 		painter.setBrush(QColor(0,0,0,120));
-		painter.setPen(Qt::NoPen);
+        painter.setPen(Qt::NoPen);
 		painter.drawPolygon(polygon);
 	}
 }
@@ -210,7 +209,7 @@ void ResourceWidget::paintSelectedRegion(QPainter& painter){
 	 if(pattern.x() != -1){
 		painter.save();
 		painter.setBrush(Qt::BDiagPattern);
-		painter.setPen(Qt::NoPen);
+        painter.setPen(Qt::NoPen);
 		painter.drawRect(pattern);
 		painter.restore();
 	}
@@ -285,7 +284,7 @@ void ResourceWidget::removePeak() {
 
 void ResourceWidget::paintPeak(QPainter& painter) {
     if(peak >= 0) {
-        painter.setPen(Qt::red);
+        painter.setPen(QPen(QColor("red"), 0, Qt::SolidLine));
         painter.drawLine(peak*hZoom(), 0, peak*hZoom(), height());
         painter.drawLine(peak*hZoom()+1, 0, peak*hZoom()+1, height());
         painter.drawLine(peak*hZoom()-1, 0, peak*hZoom()-1, height());
