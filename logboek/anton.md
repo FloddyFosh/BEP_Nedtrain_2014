@@ -15,7 +15,7 @@ Datum      | Uren   | Beschrijving
 11-05-2014 | 3	    | Verbeteren requirementsanalyse, research naar implementatie chaining
 12-05-2014 | 8.5    | Chaining implementatie, porten Windows
 13-05-2014 | 8      | Chaining implementatie, orientatieverslag/requirementsanalyse verbeteren
-14-05-2014 | -      | 
+14-05-2014 | 8      | Chaining implementatie debuggen, qt upgrade naar 5.2 werkend krijgen
 15-05-2014 | -      | 
 16-05-2014 | -      | 
 19-05-2014 | -      | 
