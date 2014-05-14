@@ -78,6 +78,6 @@ grammar.output
 *~
 
 # Exceptions of ignoring files
-!libgtest.a
+!libgtest_linux.a
 !libgtest_win32.a
 !verslag/voorbeelden/*
