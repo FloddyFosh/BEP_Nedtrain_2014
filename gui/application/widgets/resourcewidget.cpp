@@ -168,8 +168,10 @@ void ResourceWidget::paintDemandProfile(QPainter &painter){
 		usedCapacityGradient.setColorAt(_resource->capacity() / (double) rows, Qt::yellow);
 
 		// setup painter style
-		painter.setBrush(usedCapacityGradient);
+        painter.setBrush(usedCapacityGradient);
         painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
+
+
 
 		// draw demand profile
 		painter.drawPolygon(polygon);
@@ -199,7 +201,7 @@ void ResourceWidget::paintJobProfile(QPainter &painter){
 	//polygon.translate(offset,0);
 
 	if(!polygon.isEmpty()){
-		painter.setBrush(QColor(0,0,0,120));
+        painter.setBrush(QColor(0,0,0,120));
         painter.setPen(Qt::NoPen);
 		painter.drawPolygon(polygon);
 	}
