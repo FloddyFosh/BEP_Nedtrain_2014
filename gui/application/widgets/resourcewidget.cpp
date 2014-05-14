@@ -6,12 +6,12 @@
 ResourceWidget::ResourceWidget(Resource *r, InstanceController *c, QWidget *parent) :
     QWidget(parent), _resource(r), controller(c)
 {
-	offset=0;
-	selected = QPoint(-1,-1); //dont select any part of the resource
-	calculator = new ResourceCalculator(r);
-	_hZoom = 8;
-	_vZoom = 10;
-	peak = -1;
+    offset=0;
+    selected = QPoint(-1,-1); //dont select any part of the resource
+    calculator = new ResourceCalculator(r);
+    _hZoom = 8;
+    _vZoom = 10;
+    peak = -1;
 
     // set height fixed to sizehint
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
@@ -52,13 +52,13 @@ QSize ResourceWidget::sizeHint() const {
 }
 
 void ResourceWidget::addResourceMark(int time){
-	resourceMarks.append(time);
-	updatePixmap();
+    resourceMarks.append(time);
+    updatePixmap();
 }
 
 void ResourceWidget::clearResourceMarks(){
-	resourceMarks.clear();
-	updatePixmap();
+    resourceMarks.clear();
+    updatePixmap();
 }
 
 QSize ResourceWidget::minimumSize() const {
@@ -66,28 +66,28 @@ QSize ResourceWidget::minimumSize() const {
 }
 
 void ResourceWidget::calculateResourceProfile() {
-	calculator->calculate(); // calculates all the profiles
+    calculator->calculate(); // calculates all the profiles
 
-	calculator->getExceedPolygon(size().width()/hZoom());
+    calculator->getExceedPolygon(size().width()/hZoom());
 
 
-	//determine which part is selected
-	if(selected != QPoint(-1,-1)){
-		QRect selectedRect = calculator->selectedResourceRegion(selected);
-		int start = selectedRect.x();
-		int end = selectedRect.x()+selectedRect.width();
-		if(start!=-1 && end !=-1){
-			int rows = calculator->getRowCount();
-			double factor = size().height()/rows;
-			pattern = QRect(QPoint((start+offset)*hZoom(), selected.y()*factor), QPoint((end+offset)*hZoom(),(selected.y()-1)*factor));
-			controller->shadeActivities(start,end,_resource);
-		}
-		else{
-			pattern = QRect(-1,-1,-1,-1);
-			selected = QPoint(-1,-1);
-			controller->shadeActivities(-1,-1,_resource);
-		}
-	}
+    //determine which part is selected
+    if(selected != QPoint(-1,-1)){
+        QRect selectedRect = calculator->selectedResourceRegion(selected);
+        int start = selectedRect.x();
+        int end = selectedRect.x()+selectedRect.width();
+        if(start!=-1 && end !=-1){
+            int rows = calculator->getRowCount();
+            double factor = size().height()/rows;
+            pattern = QRect(QPoint((start+offset)*hZoom(), selected.y()*factor), QPoint((end+offset)*hZoom(),(selected.y()-1)*factor));
+            controller->shadeActivities(start,end,_resource);
+        }
+        else{
+            pattern = QRect(-1,-1,-1,-1);
+            selected = QPoint(-1,-1);
+            controller->shadeActivities(-1,-1,_resource);
+        }
+    }
 
     updateGeometry();
     updatePixmap();
@@ -134,15 +134,15 @@ void ResourceWidget::updatePixmap() {
     //3. draw job profile
     paintJobProfile(painter);  //uses scaled painter
 
-	painter.restore(); //restore scaled painter
+    painter.restore(); //restore scaled painter
 
-	//4. draw selected region
-	paintSelectedRegion(painter); //does not use scaled painter
+    //4. draw selected region
+    paintSelectedRegion(painter); //does not use scaled painter
 
-	//5. draw resource marks
-	paintResourceMarks(painter); //does not use scaled painter
+    //5. draw resource marks
+    paintResourceMarks(painter); //does not use scaled painter
 
-	paintPeak(painter); //does not use scaled painter
+    paintPeak(painter); //does not use scaled painter
 
     painter.restore();
 
@@ -157,72 +157,72 @@ void ResourceWidget::updatePixmap() {
 }
 
 void ResourceWidget::paintDemandProfile(QPainter &painter){
-	int rows = calculator->getRowCount();
+    int rows = calculator->getRowCount();
 
-	QPolygon polygon = calculator->getDemandPolygon();
+    QPolygon polygon = calculator->getDemandPolygon();
 
-	if (!polygon.isEmpty()) {
-		// create gradient
-		QLinearGradient usedCapacityGradient(0, 0, 0, rows);
-		usedCapacityGradient.setColorAt(0, Qt::green);
-		usedCapacityGradient.setColorAt(_resource->capacity() / (double) rows, Qt::yellow);
+    if (!polygon.isEmpty()) {
+        // create gradient
+        QLinearGradient usedCapacityGradient(0, 0, 0, rows);
+        usedCapacityGradient.setColorAt(0, Qt::green);
+        usedCapacityGradient.setColorAt(_resource->capacity() / (double) rows, Qt::yellow);
 
-		// setup painter style
+        // setup painter style
         painter.setBrush(usedCapacityGradient);
         painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
 
 
 
-		// draw demand profile
-		painter.drawPolygon(polygon);
-	}
+        // draw demand profile
+        painter.drawPolygon(polygon);
+    }
 }
 
 void ResourceWidget::paintResourceProfile(QPainter &painter){
-	QPolygon polyline = calculator->getResourcePolyline(size().width()/hZoom()-offset);
+    QPolygon polyline = calculator->getResourcePolyline(size().width()/hZoom()-offset);
     if (!polyline.isEmpty()) {
         painter.setPen(QPen(QColor("black"), 0, Qt::DotLine));
-		painter.drawPolyline(polyline);
-	}
+        painter.drawPolyline(polyline);
+    }
 
-	QPolygon exceed = calculator->getExceedPolygon(size().width()/hZoom()-offset);
-	if(!exceed.isEmpty()){
-		painter.setBrush(Qt::red);
+    QPolygon exceed = calculator->getExceedPolygon(size().width()/hZoom()-offset);
+    if(!exceed.isEmpty()){
+        painter.setBrush(Qt::red);
         painter.setPen(Qt::NoPen);
-		painter.drawPolygon(exceed);
+        painter.drawPolygon(exceed);
 
-		painter.setBrush(Qt::NoBrush);
+        painter.setBrush(Qt::NoBrush);
         painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
-		painter.drawPolygon(calculator->getDemandPolygon());
-	}
+        painter.drawPolygon(calculator->getDemandPolygon());
+    }
 }
 void ResourceWidget::paintJobProfile(QPainter &painter){
-	QPolygon polygon = calculator->getJobPolygon();
-	//polygon.translate(offset,0);
+    QPolygon polygon = calculator->getJobPolygon();
+    //polygon.translate(offset,0);
 
-	if(!polygon.isEmpty()){
+    if(!polygon.isEmpty()){
         painter.setBrush(QColor(0,0,0,120));
         painter.setPen(Qt::NoPen);
-		painter.drawPolygon(polygon);
-	}
+        painter.drawPolygon(polygon);
+    }
 }
 
 void ResourceWidget::paintSelectedRegion(QPainter& painter){
-	 if(pattern.x() != -1){
-		painter.save();
-		painter.setBrush(Qt::BDiagPattern);
+     if(pattern.x() != -1){
+        painter.save();
+        painter.setBrush(Qt::BDiagPattern);
         painter.setPen(Qt::NoPen);
-		painter.drawRect(pattern);
-		painter.restore();
-	}
+        painter.drawRect(pattern);
+        painter.restore();
+    }
 }
 
 void ResourceWidget::paintResourceMarks(QPainter& painter){
-	double vScale = (double) height()/calculator->getRowCount();
-	foreach(int time, resourceMarks){
-		QPoint usage = calculator->getResourceUsageAt(time);
-		painter.drawEllipse(QPointF((time+offset)*hZoom(), (double)usage.y()*vScale),4, 4);
-	}
+    double vScale = (double) height()/calculator->getRowCount();
+    foreach(int time, resourceMarks){
+        QPoint usage = calculator->getResourceUsageAt(time);
+        painter.drawEllipse(QPointF((time+offset)*hZoom(), (double)usage.y()*vScale),4, 4);
+    }
 }
 
 void ResourceWidget::paintEvent(QPaintEvent *e) {
@@ -232,31 +232,31 @@ void ResourceWidget::paintEvent(QPaintEvent *e) {
 }
 
 void ResourceWidget::removeShade(){
-	pattern = QRect(-1,-1,-1,-1);
-	selected = QPoint(-1,-1);
-	calculateResourceProfile();
+    pattern = QRect(-1,-1,-1,-1);
+    selected = QPoint(-1,-1);
+    calculateResourceProfile();
 }
 
 void ResourceWidget::setShadedJob(Job *j){
-	calculator->setJob(j);
-	removeShade();
+    calculator->setJob(j);
+    removeShade();
 }
 
 Resource* ResourceWidget::getResource(){
-	return _resource;
+    return _resource;
 }
 
 void ResourceWidget::mousePressEvent(QMouseEvent *event){
-	controller->shadeResources(0); //dont show resource profile
+    controller->shadeResources(0); //dont show resource profile
 
-	int x = event->x()/hZoom();
-	int y = event->y();
+    int x = event->x()/hZoom();
+    int y = event->y();
 
-	QSize hint = size();
-	int rows = calculator->getRowCount();
-	int row = ceil((double)(hint.height()-y)/hint.height()*rows);
-	selected = QPoint(x-offset, row);
-	calculateResourceProfile();
+    QSize hint = size();
+    int rows = calculator->getRowCount();
+    int row = ceil((double)(hint.height()-y)/hint.height()*rows);
+    selected = QPoint(x-offset, row);
+    calculateResourceProfile();
 }
 
 void ResourceWidget::setHZoom(int z) {
