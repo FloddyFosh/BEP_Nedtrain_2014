@@ -16,4 +16,6 @@ Datum      | Uren   | Beschrijving
 09-05-2014 | 7      | Verder gewerkt aan requirements
 12-05-2014 | 7      | Werken aan verslagen en chaining
 13-05-2014 | 8      | Jenkins server werkt, en verslagen ingeleverd
-14-05-2014 |        |
+14-05-2014 | 6      | COIN installeren en onderzoeken. Chaining. Eclipse geïnstalleerd.
+15-05-2014 |        | 
+16-05-2014 |        | 
