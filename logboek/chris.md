@@ -16,7 +16,7 @@ Datum      | Uren   | Beschrijving
 12-05-2014 | 7 + 4  | Hele dag en avond bezig geweest tool tegelijk te laten werken op windows en ubuntu, gelukt!
 13-05-2014 | 8      | Qt van tool upgraden van versie 4.8.6 naar 5.2.1, orientatieverslag en requirementsanalyse verbeteren
 14-05-2014 | 6      | Qt van tool upgraden van versie 4.8.6 naar 5.2.1, gelukt!
-15-05-2014 | -      | 
+15-05-2014 | 8      | Afspraak met Cees en de gegeven feedback aanpassen in de verslagen, kleine code aanpassingen.
 16-05-2014 | -      | 
 19-05-2014 | -      | 
 20-05-2014 | -      | 
