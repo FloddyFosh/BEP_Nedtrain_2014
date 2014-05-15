@@ -3,19 +3,19 @@ Onze opdracht is het verbeteren en uitbreiden van de 'NedTrain planner', die het
 
 \subsection{NedTrain Planner}
 \label{subsec:planner}
-De NedTrain Planner bestaat grofweg uit drie componenten, namelijk de gebruikers-interface, een solver en de communicatie tussen die twee. De gebruikers-interface maakt het mogelijk om een probleeminstantie te maken, deze op te laten lossen door de solver en de oplossing te bekijken.
+De NedTrain Planner bestaat grofweg uit drie componenten, namelijk de gebruikers-interface, een solver en de communicatie tussen die twee. De gebruikers-interface maakt het mogelijk om een probleeminstantie, dat beschreven zal worden in \cite{subsec:probleem}, te maken en oplossingen hiervan door een solver te visualiseren.
 
-In vorige bachelorprojecten en mastertheses is deze tool steeds verder uitgebreid. De 'OnTrack Scheduler' is een tool met een eenvoudige GUI en een solver die ontwikkeld is door Ronald Evers. Zijn onderzoek in 2010 voor de masterthesis had als doel om een goede solver te bouwen. \cite{ronaldevers2010}
+In vorige bachelorprojecten en mastertheses is deze tool steeds verder uitgebreid. De 'OnTrack Scheduler' is een tool met een eenvoudige GUI en een solver die ontwikkeld is door Ronald Evers. Zijn onderzoek in 2010 voor de masterthesis had als doel om een goede solver te bouwen \cite{ronaldevers2010}.
 
-Daarna is in 2011 door Edwin Bruurs en Cis van der Louw een verbeterde gebruikers interface gemaakt. \cite{bep2011nedtrain} Deze verbeteringen waren gebruiksvriendelijker, maar de kwaliteit van de code was volgens het bachelorproject uit 2012 niet goed. \cite{bep2012nedtrain} Deze groep, bestaande uit Erik Ammerlaan, Jan Elffers, Erwin Walraven en Wilco Wisse, heeft in 2012 opnieuw een verbeterde gebruikers-interface gemaakt voor de 'OnTrack Scheduler'. Deze hebben zij de NedTrain planner genoemd.
+Daarna is in 2011 door Edwin Bruurs en Cis van der Louw een verbeterde gebruikers interface gemaakt \cite{bep2011nedtrain}. Deze verbeteringen waren gebruiksvriendelijker, maar de kwaliteit van de code was volgens het bachelorproject uit 2012 niet goed \cite{bep2012nedtrain}. Deze groep, bestaande uit Erik Ammerlaan, Jan Elffers, Erwin Walraven en Wilco Wisse, heeft in 2012 opnieuw een verbeterde gebruikers-interface gemaakt voor de 'OnTrack Scheduler'. Deze hebben zij de NedTrain planner genoemd.
 
-In deze nieuwe versie is onder andere de gebruikersinterface uitgebreid, kan het oplosproces stap voor stap weergegeven worden en kunnen probleeminstanties gemakkelijk geladen en opgeslagen worden. De interface van de NedTrain planner is te zien in Figuur \ref{fig:plannergui}.
+In deze nieuwe versie is onder andere de gebruikersinterface uitgebreid, kan het oplosproces stap voor stap weergegeven worden en kunnen probleeminstanties gemakkelijk geladen en opgeslagen worden. De gebruikersinterface van de NedTrain planner gemaakt in het Bachelor Eindproject van 2012 is te zien in Figuur \ref{fig:plannergui}.
 
 \begin{figure}[!h]
 \label{fig:plannergui}
 \centering
 \includegraphics[width=\textwidth]{../images/plannergui.png}
-\caption{De gebruikersinterface van de NedTrain planner, zoals deze door het bachelor eindproject in 2012 gemaakt is.}
+\caption{Gebruikersinterface NedTrain planner (Bachelor Eindproject 2012)}
 \end{figure}
 
 \subsection{Qt Framework}
@@ -28,9 +28,8 @@ QTestLib is bedoeld voor het testen van Qt applicaties en bevat zowel ondersteun
 
 \subsection{Solver}
 \label{subsec:solver}
-%Voor het oplossen van de schedulingsproblemen zijn er twee solvers beschikbaar. De ene is geschreven in python door Michel Wilson en maakt gebruik van een na\"ieve chaining methode die alleen werkt op de Kolisch benchmark-instanties. Op complexere instanties, zoals die van NedTrain, werkt deze solver niet.
+Een programma dat een instantie van een schedulingsprobleem oplost wordt een solver genoemd. De solver die wij tot onze beschikking hebben, genaamd TMS, is ontwikkeld door \mbox{Ronald Evers} \cite{ronaldevers2010} en later verder ontwikkeld door \mbox{Michel Wilson} en de in paragraaf \ref{subsec:planner} genoemde groep voor hun Bachelor Eindproject in 2012. Een solver krijgt als input een instantie van een schedulingsprobleem bestaande uit een verzameling taken, resources en voorrangsrelaties in combinatie met enkele restricties, zoals release- en deadlinetijden en de maximale capaciteit van resources. De parser \emph{Bison}\footnote{\url{http://www.gnu.org/software/bison/}} zorgt ervoor dat de data van een dergelijke instantie omgezet wordt in een datastructuur die een solver kan begrijpen. Deze solver maakt gebruik van \emph{Precedence Constraint Posting} \cite{seminarium2014}, waarbij er op basis van een heuristiek voorrangsrelaties aan de taken worden toegevoegd om resource conflicten te verhelpen.
 
-Een programma dat een instantie van een schedulingsprobleem oplost wordt een solver genoemd. De solver die wij tot onze beschikking hebben, genaamd TMS, is ontwikkeld door \mbox{Ronald Evers} \cite{ronaldevers2010} en later verder ontwikkeld door \mbox{Michel Wilson} en de in paragraaf \ref{subsec:planner} genoemde groep voor hun bachelor eindproject in 2012. Deze solver maakt gebruik van \emph{Precedence Constraint Posting} \cite{seminarium2014}, waarbij er op basis van een heuristiek voorrangsrelaties aan de taken worden toegevoegd om resource conflicten te verhelpen.
-%Omdat het hier om een NP-compleet probleem gaat, kan het dus zo zijn dat er geen oplossing gevonden wordt, zelfs als deze wel zou bestaan.
+Tijdens het oplossen van een instantie door een solver is er continu communicatie tussen de solver en de visualisatie tool. Zo wordt er onder andere doorgegeven hoe ver de solver is met het oplossen en of er een oplossing bestaat. Als de solver een oplossing gevonden heeft geeft de solver een signaal en wordt de output ingelezen door de visualisatie tool. 
 
-Als de solver een oplossing gevonden heeft, worden de taken in de interface zo geplaatst dat er geen enkel resource conflict meer is. De methode die wordt gebruikt, garandeert echter alleen dat de \emph{Earliest Starting Time} oplossing consistent is. Dit betekent dat elke taak op de vroegst mogelijke starttijd begint. In de interface kan er ook met taken geschoven worden, maar dit kan er toe leiden dat er een resource conflict ontstaat. 
+Volgens de output die gegeven is door een solver wordt de oplossing van een probleem gevisualiseerd. Zo zorgt de solver die wij tot onze beschikking hebben er voor dat er geen enkel resource conflict meer is. De methode die wordt gebruikt, garandeert echter alleen dat de \emph{Earliest Starting Time} oplossing consistent is. Dit betekent dat elke taak op de vroegst mogelijke starttijd begint. In de tool kan er ook met taken geschoven worden, maar dit kan er toe leiden dat er een resource conflict ontstaat.
