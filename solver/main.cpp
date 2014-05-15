@@ -108,7 +108,18 @@ int main(int argc, char *argv[]) {
 
     // parser
     timing_start("parsing");
-    yyin = stdin;
+//    yyin = stdin;
+
+    // open a file handle to a particular file:
+    	FILE *myfile = fopen("../instances/demo.instance", "r");
+    	// make sure it's valid:
+    	if (!myfile) {
+    		cout << "I can't open a.snazzle.file!" << endl;
+    		return -1;
+    	}
+    	// set lex to read from it instead of defaulting to STDIN:
+
+    yyin = myfile;
     if (yyparse() != 0) { // yyparse doet iets met bison grammar
         fprintf(stderr, "Parsing failed. Aborting!\n");
     }

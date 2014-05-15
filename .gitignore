@@ -77,6 +77,12 @@ grammar.output
 # Editors temporary files 
 *~
 
+# ignore eclipse files
+*.metadata/
+*/.cproject
+*/.project
+*/.settings
+
 # Exceptions of ignoring files
 !libgtest.a
 !libgtest_win32.a

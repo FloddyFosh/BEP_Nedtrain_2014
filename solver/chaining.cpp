@@ -77,8 +77,10 @@ int chaining() {
     for(i=activities.begin(); i!=activities.end(); i++){
         activity* act = *i;
         vector<requirement*> reqList = act->requirements;
-        for(j=reqList.begin();j!=reqList.end();j++){
+        cout << "size reqList = " << reqList.size() << endl;
+        for(j=reqList.begin(); j!=reqList.end(); j++){
             requirement* req = *j;
+            cout << "req->amount = " << req->amount << endl;
             printf("(%d,%d) amount: %d\n",act->est,act->duration,0);
         }
     }
