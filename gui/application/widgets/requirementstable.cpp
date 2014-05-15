@@ -22,7 +22,7 @@ void RequirementsTable::setActivityTemplate(ActivityTemplate* a) {
 
 void RequirementsTable::init() {
     editor = 0;
-    horizontalHeader()->setResizeMode(0, QHeaderView::Stretch);
+    horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     verticalHeader()->setVisible(false);
     setSelectionMode(QAbstractItemView::NoSelection);
 
