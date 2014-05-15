@@ -82,6 +82,7 @@ int chaining() {
             requirement* req = *j;
             cout << "req->amount = " << req->amount << endl;
             printf("(%d,%d) amount: %d\n",act->est,act->duration,0);
+            printf("(%d,%d) amount: %d\n",act->i,act->j,req->amount);
         }
     }
 	
@@ -97,7 +98,9 @@ int chaining() {
                 cout << "d" << endl;
                 //cout << "amount: "<< A(i,j)->requirements.begin()->amount << endl;
                 printf("resource %d, unit %d, activity (%d,%d), req %d\n",i,j,act->i,act->j,0);
-                for(int m=0; m<REQ(act->i,act->j,i)->amount; m++){
+                for(int m=0;
+                    m<REQ(act->i,act->j,i)->amount;
+                    m++){
                     list<activity*>* chain = selectChain(i,j,k);
                     activity* chainEnd = chain->back();
                     chain->push_back(act);
