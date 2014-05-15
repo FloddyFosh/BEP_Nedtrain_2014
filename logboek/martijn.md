@@ -17,5 +17,5 @@ Datum      | Uren   | Beschrijving
 12-05-2014 | 7      | Werken aan verslagen en chaining
 13-05-2014 | 8      | Jenkins server werkt, en verslagen ingeleverd
 14-05-2014 | 6      | COIN installeren en onderzoeken. Chaining. Eclipse geïnstalleerd.
-15-05-2014 |        | 
+15-05-2014 | 7      | Uitzoeken Clp, Osi en wat zijn MPS-bestanden. Overleg met Cees over de drie verslagen.
 16-05-2014 |        | 
