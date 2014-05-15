@@ -20,12 +20,16 @@ list<activity*>* selectChain(int tr, int act, int res){
     map< pair<int,int>, list<activity*> >::iterator it;
     for(it=chains.begin();it!=chains.end();it++){
         //pair<int,int> newPair(tr,act);
-        /*list<activity*> curChain = chains[*it];
+        list<activity*> curChain = it->second;
+        if(curChain.size() == 0){
+            printf("size 0 -> selected chain (%d,%d)\n",it->first.first, it->first.second);
+            return &curChain;
+        }
         activity* chainEnd = curChain.back();
-        if(A(tr,act)->est >= chainEnd->est + chainEnd->duration){
+        if(A(tr,act)->est >= chainEnd->est + chainEnd->duration + chainEnd->flex){
             printf("selected chain\n");
             return &curChain;
-        }*/
+        }
     }
     return 0;
 }
@@ -79,7 +83,7 @@ int chaining() {
         vector<requirement*> reqList = act->requirements;
         for(j=reqList.begin();j!=reqList.end();j++){
             requirement* req = *j;
-            printf("(%d,%d) amount: %d\n",act->i,act->j,req->amount);
+            if(req!=NULL) printf("(%d,%d) amount: %d\n",act->i,act->j,req->amount);
         }
     }
 	
@@ -95,10 +99,12 @@ int chaining() {
                 cout << "d" << endl;
                 //cout << "amount: "<< A(i,j)->requirements.begin()->amount << endl;
                 printf("resource %d, unit %d, activity (%d,%d), req %d\n",i,j,act->i,act->j,0);
-                for(int m=0;
-                    m<REQ(act->i,act->j,i)->amount;
-                    m++){
+                for(int m=0;m<Q(act->i,act->j,i);m++){
                     list<activity*>* chain = selectChain(i,j,k);
+                    if(chain==0){
+                        printf("Failed to select a chain\n");
+                        continue;
+                    }
                     activity* chainEnd = chain->back();
                     chain->push_back(act);
                     add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
@@ -107,5 +113,6 @@ int chaining() {
             }
         }
     }
+    cout << "end" << endl;
 	return 1;
 }
