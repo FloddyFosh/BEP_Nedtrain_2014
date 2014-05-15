@@ -2,13 +2,13 @@ Grammar
 
     0 $accept: tmsp $end
 
-    1 tmsp: /* empty */
+    1 tmsp: %empty
     2     | declarations
 
     3 declarations: declaration T_LINE_SEP
     4             | declarations declaration T_LINE_SEP
 
-    5 declaration: /* empty */
+    5 declaration: %empty
     6            | 'R' T_INT T_INT T_STRING
     7            | 'T' T_INT T_INT T_INT T_STRING
     8            | 'J' T_INT T_INT T_INT T_STRING
@@ -56,7 +56,7 @@ declaration (20)
     on left: 5 6 7 8 9 10 11 12 13 14 15 16 17 18, on right: 3 4
 
 
-state 0
+State 0
 
     0 $accept: . tmsp $end
 
@@ -80,28 +80,28 @@ state 0
     declaration   go to state 14
 
 
-state 1
+State 1
 
     6 declaration: 'R' . T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 15
 
 
-state 2
+State 2
 
     7 declaration: 'T' . T_INT T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 16
 
 
-state 3
+State 3
 
     8 declaration: 'J' . T_INT T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 17
 
 
-state 4
+State 4
 
     9 declaration: 'A' . T_INT T_INT T_INT T_STRING
    10            | 'A' . T_INT T_INT T_INT T_STRING T_INT
@@ -110,63 +110,63 @@ state 4
     T_INT  shift, and go to state 18
 
 
-state 5
+State 5
 
    12 declaration: 'D' . T_INT T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 19
 
 
-state 6
+State 6
 
    13 declaration: 'Q' . T_INT T_INT T_INT T_INT
 
     T_INT  shift, and go to state 20
 
 
-state 7
+State 7
 
    14 declaration: 'S' . T_INT T_INT T_INT T_INT
 
     T_INT  shift, and go to state 21
 
 
-state 8
+State 8
 
    15 declaration: 'P' . T_INT T_INT T_INT T_INT
 
     T_INT  shift, and go to state 22
 
 
-state 9
+State 9
 
    16 declaration: 'p' . T_INT T_INT T_INT T_INT
 
     T_INT  shift, and go to state 23
 
 
-state 10
+State 10
 
    17 declaration: 'F' . T_INT T_INT T_INT
 
     T_INT  shift, and go to state 24
 
 
-state 11
+State 11
 
    18 declaration: 'G' . T_INT T_INT T_INT T_INT
 
     T_INT  shift, and go to state 25
 
 
-state 12
+State 12
 
     0 $accept: tmsp . $end
 
     $end  shift, and go to state 26
 
 
-state 13
+State 13
 
     2 tmsp: declarations .
     4 declarations: declarations . declaration T_LINE_SEP
@@ -189,35 +189,35 @@ state 13
     declaration  go to state 27
 
 
-state 14
+State 14
 
     3 declarations: declaration . T_LINE_SEP
 
     T_LINE_SEP  shift, and go to state 28
 
 
-state 15
+State 15
 
     6 declaration: 'R' T_INT . T_INT T_STRING
 
     T_INT  shift, and go to state 29
 
 
-state 16
+State 16
 
     7 declaration: 'T' T_INT . T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 30
 
 
-state 17
+State 17
 
     8 declaration: 'J' T_INT . T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 31
 
 
-state 18
+State 18
 
     9 declaration: 'A' T_INT . T_INT T_INT T_STRING
    10            | 'A' T_INT . T_INT T_INT T_STRING T_INT
@@ -226,98 +226,98 @@ state 18
     T_INT  shift, and go to state 32
 
 
-state 19
+State 19
 
    12 declaration: 'D' T_INT . T_INT T_INT T_STRING
 
     T_INT  shift, and go to state 33
 
 
-state 20
+State 20
 
    13 declaration: 'Q' T_INT . T_INT T_INT T_INT
 
     T_INT  shift, and go to state 34
 
 
-state 21
+State 21
 
    14 declaration: 'S' T_INT . T_INT T_INT T_INT
 
     T_INT  shift, and go to state 35
 
 
-state 22
+State 22
 
    15 declaration: 'P' T_INT . T_INT T_INT T_INT
 
     T_INT  shift, and go to state 36
 
 
-state 23
+State 23
 
    16 declaration: 'p' T_INT . T_INT T_INT T_INT
 
     T_INT  shift, and go to state 37
 
 
-state 24
+State 24
 
    17 declaration: 'F' T_INT . T_INT T_INT
 
     T_INT  shift, and go to state 38
 
 
-state 25
+State 25
 
    18 declaration: 'G' T_INT . T_INT T_INT T_INT
 
     T_INT  shift, and go to state 39
 
 
-state 26
+State 26
 
     0 $accept: tmsp $end .
 
     $default  accept
 
 
-state 27
+State 27
 
     4 declarations: declarations declaration . T_LINE_SEP
 
     T_LINE_SEP  shift, and go to state 40
 
 
-state 28
+State 28
 
     3 declarations: declaration T_LINE_SEP .
 
     $default  reduce using rule 3 (declarations)
 
 
-state 29
+State 29
 
     6 declaration: 'R' T_INT T_INT . T_STRING
 
     T_STRING  shift, and go to state 41
 
 
-state 30
+State 30
 
     7 declaration: 'T' T_INT T_INT . T_INT T_STRING
 
     T_INT  shift, and go to state 42
 
 
-state 31
+State 31
 
     8 declaration: 'J' T_INT T_INT . T_INT T_STRING
 
     T_INT  shift, and go to state 43
 
 
-state 32
+State 32
 
     9 declaration: 'A' T_INT T_INT . T_INT T_STRING
    10            | 'A' T_INT T_INT . T_INT T_STRING T_INT
@@ -326,84 +326,84 @@ state 32
     T_INT  shift, and go to state 44
 
 
-state 33
+State 33
 
    12 declaration: 'D' T_INT T_INT . T_INT T_STRING
 
     T_INT  shift, and go to state 45
 
 
-state 34
+State 34
 
    13 declaration: 'Q' T_INT T_INT . T_INT T_INT
 
     T_INT  shift, and go to state 46
 
 
-state 35
+State 35
 
    14 declaration: 'S' T_INT T_INT . T_INT T_INT
 
     T_INT  shift, and go to state 47
 
 
-state 36
+State 36
 
    15 declaration: 'P' T_INT T_INT . T_INT T_INT
 
     T_INT  shift, and go to state 48
 
 
-state 37
+State 37
 
    16 declaration: 'p' T_INT T_INT . T_INT T_INT
 
     T_INT  shift, and go to state 49
 
 
-state 38
+State 38
 
    17 declaration: 'F' T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 50
 
 
-state 39
+State 39
 
    18 declaration: 'G' T_INT T_INT . T_INT T_INT
 
     T_INT  shift, and go to state 51
 
 
-state 40
+State 40
 
     4 declarations: declarations declaration T_LINE_SEP .
 
     $default  reduce using rule 4 (declarations)
 
 
-state 41
+State 41
 
     6 declaration: 'R' T_INT T_INT T_STRING .
 
     $default  reduce using rule 6 (declaration)
 
 
-state 42
+State 42
 
     7 declaration: 'T' T_INT T_INT T_INT . T_STRING
 
     T_STRING  shift, and go to state 52
 
 
-state 43
+State 43
 
     8 declaration: 'J' T_INT T_INT T_INT . T_STRING
 
     T_STRING  shift, and go to state 53
 
 
-state 44
+State 44
 
     9 declaration: 'A' T_INT T_INT T_INT . T_STRING
    10            | 'A' T_INT T_INT T_INT . T_STRING T_INT
@@ -412,70 +412,70 @@ state 44
     T_STRING  shift, and go to state 54
 
 
-state 45
+State 45
 
    12 declaration: 'D' T_INT T_INT T_INT . T_STRING
 
     T_STRING  shift, and go to state 55
 
 
-state 46
+State 46
 
    13 declaration: 'Q' T_INT T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 56
 
 
-state 47
+State 47
 
    14 declaration: 'S' T_INT T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 57
 
 
-state 48
+State 48
 
    15 declaration: 'P' T_INT T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 58
 
 
-state 49
+State 49
 
    16 declaration: 'p' T_INT T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 59
 
 
-state 50
+State 50
 
    17 declaration: 'F' T_INT T_INT T_INT .
 
     $default  reduce using rule 17 (declaration)
 
 
-state 51
+State 51
 
    18 declaration: 'G' T_INT T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 60
 
 
-state 52
+State 52
 
     7 declaration: 'T' T_INT T_INT T_INT T_STRING .
 
     $default  reduce using rule 7 (declaration)
 
 
-state 53
+State 53
 
     8 declaration: 'J' T_INT T_INT T_INT T_STRING .
 
     $default  reduce using rule 8 (declaration)
 
 
-state 54
+State 54
 
     9 declaration: 'A' T_INT T_INT T_INT T_STRING .
    10            | 'A' T_INT T_INT T_INT T_STRING . T_INT
@@ -486,49 +486,49 @@ state 54
     $default  reduce using rule 9 (declaration)
 
 
-state 55
+State 55
 
    12 declaration: 'D' T_INT T_INT T_INT T_STRING .
 
     $default  reduce using rule 12 (declaration)
 
 
-state 56
+State 56
 
    13 declaration: 'Q' T_INT T_INT T_INT T_INT .
 
     $default  reduce using rule 13 (declaration)
 
 
-state 57
+State 57
 
    14 declaration: 'S' T_INT T_INT T_INT T_INT .
 
     $default  reduce using rule 14 (declaration)
 
 
-state 58
+State 58
 
    15 declaration: 'P' T_INT T_INT T_INT T_INT .
 
     $default  reduce using rule 15 (declaration)
 
 
-state 59
+State 59
 
    16 declaration: 'p' T_INT T_INT T_INT T_INT .
 
     $default  reduce using rule 16 (declaration)
 
 
-state 60
+State 60
 
    18 declaration: 'G' T_INT T_INT T_INT T_INT .
 
     $default  reduce using rule 18 (declaration)
 
 
-state 61
+State 61
 
    10 declaration: 'A' T_INT T_INT T_INT T_STRING T_INT .
    11            | 'A' T_INT T_INT T_INT T_STRING T_INT . T_INT T_INT
@@ -538,14 +538,14 @@ state 61
     $default  reduce using rule 10 (declaration)
 
 
-state 62
+State 62
 
    11 declaration: 'A' T_INT T_INT T_INT T_STRING T_INT T_INT . T_INT
 
     T_INT  shift, and go to state 63
 
 
-state 63
+State 63
 
    11 declaration: 'A' T_INT T_INT T_INT T_STRING T_INT T_INT T_INT .
 

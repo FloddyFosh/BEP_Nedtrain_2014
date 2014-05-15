@@ -9,6 +9,7 @@
 #include <string.h>
 
 #include "token.h"
+#include <string.h>
 #include "grammar.tab.hpp"	/* import token definitions from Yacc */
 
 #define YY_NO_INPUT
