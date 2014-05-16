@@ -45,6 +45,8 @@ int solve() {
         return 0;
     }
 
+    print_est_schedule();
+
     printf("Running chaining algorithm.\n");
     timing_start("chaining");
     if(chaining()){
@@ -56,8 +58,6 @@ int solve() {
         progress(100);
         return 0;
     }
-
-    print_est_schedule();
 
     debug("Constructing flexibility intervals using Linear Programming solver.\n");
     timing_start("LP");

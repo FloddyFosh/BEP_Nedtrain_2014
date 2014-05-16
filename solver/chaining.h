@@ -10,7 +10,7 @@
 
 bool compareActivities(const activity*, const activity*);
 
-list<activity*>* selectChain(int, int, int);
+pair<int,int>* selectChain(int, int, int);
 
 int chaining();
 

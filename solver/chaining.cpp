@@ -15,22 +15,31 @@ bool compareActivities(const activity* a, const activity* b) {
     return (a->est < b->est);
 }
 
-list<activity*>* selectChain(int tr, int act, int res){
+pair<int,int>* selectChain(int tr, int act, int res){
     printf("selectChain voor act(%d,%d) en resource %d\n",tr,act, res);
     map< pair<int,int>, list<activity*> >::iterator it;
     for(it=chains.begin();it!=chains.end();it++){
-        //pair<int,int> newPair(tr,act);
+        pair<int,int> chainId = it->first;
+        //inefficient; should only iterate over the correct resource
+        if(chainId.first!=res) continue;
         list<activity*> curChain = it->second;
         if(curChain.size() == 0){
-            printf("size 0 -> selected chain (%d,%d)\n",it->first.first, it->first.second);
-            return &curChain;
+            printf("size 0 -> selected chain (%d,%d)\n",chainId.first, chainId.second);
+            printf("NEW: est: %d, eft: %d flex: %d\n",A(tr,act)->est, A(tr,act)->est + A(tr,act)->duration,A(tr,act)->flex);
+            return &chainId;
         }
         activity* chainEnd = curChain.back();
+        //if(tr==0 && act==4 && res==2){
+            printf("chain: %d unit: %d\n",chainId.first,chainId.second);
+            printf("HEAD: est: %d, eft: %d flex: %d\n",chainEnd->est,chainEnd->est + chainEnd->duration, chainEnd->flex);
+        //}
         if(A(tr,act)->est >= chainEnd->est + chainEnd->duration + chainEnd->flex){
-            printf("selected chain\n");
-            return &curChain;
+            printf("selected chain (%d,%d)\n",chainId.first,chainId.second);
+            printf("NEW: est: %d, eft: %d flex: %d\n",A(tr,act)->est, A(tr,act)->est + A(tr,act)->duration,A(tr,act)->flex);
+            return &chainId;
         }
     }
+    printf("NO CHAIN SELECTED!\n");
     return 0;
 }
 
@@ -49,7 +58,7 @@ int chaining() {
 	9.						AddConstraint(POS, a_k < a_i)
 	10.						last(k) <- a_i
 	11. return POS	
-	*/
+    */
 	
 	//SORT
     vector<activity*> activities;
@@ -65,58 +74,31 @@ int chaining() {
 	
 	//INITIALIZE CHAINS
     //splits resources r_i in resource units u_j
-    int c = 0;
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             pair<int,int> newPair(r_i, u_j);
             chains[newPair];
-            c++;
+            printf("res %d cap %d\n",r_i,u_j);
         }
     }
-    cout << "chains.size(): " << chains.size() << endl;
-    cout << "c: " << c << endl;
-    vector<activity*>::iterator i;
-    vector<requirement*>::iterator j;
-    cout << "act size" << activities.size() << endl;
-    for(i=activities.begin(); i!=activities.end(); i++){
-        activity* act = *i;
-        vector<requirement*> reqList = act->requirements;
-        cout << "size reqList = " << reqList.size() << endl;
-        for(j=reqList.begin(); j!=reqList.end(); j++){
-            requirement* req = *j;
-            if(req!=NULL) printf("(%d,%d) amount: %d\n",act->i,act->j,req->amount);
-            cout << "req->amount = " << req->amount << endl;
-            printf("(%d,%d) amount: %d\n",act->est,act->duration,0);
-            printf("(%d,%d) amount: %d\n",act->i,act->j,req->amount);
-        }
-    }
-	
-    cout << "bla" << endl;
 
     for(int i=0; i<tmsp->n_resources; i++){
-        cout << "a" << i << endl;
-        for(int j=0; j<R(i)->capacity; j++){
-            cout << "b" << j << endl;
-            for(int k=0; k<activities.size(); k++){
-                cout << "c" << k << endl;
-                activity* act = activities[k];
-                cout << "d" << endl;
-                //cout << "amount: "<< A(i,j)->requirements.begin()->amount << endl;
-                printf("resource %d, unit %d, activity (%d,%d), req %d\n",i,j,act->i,act->j,0);
-                for(int m=0;m<Q(act->i,act->j,i);m++){
-                    list<activity*>* chain = selectChain(i,j,k);
-                    if(chain==0){
-                        printf("Failed to select a chain\n");
-                        continue;
-                    }
+        for(int k=0; k<activities.size(); k++){
+            activity* act = activities[k];
+            if(Q(act->i,act->j,i)>0)
+                printf("activity (%d,%d), resource %d, req %d\n",act->i,act->j,i,Q(act->i,act->j,i));
+            for(int m=0;m<Q(act->i,act->j,i);m++){
+                pair<int,int> chainId = *selectChain(act->i,act->j,i);
+                list<activity*>* chain = &chains[chainId];
+                if(!chain->empty()){
                     activity* chainEnd = chain->back();
-                    chain->push_back(act);
                     add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
                     printf("new constraint: (%d,%d) < (%d,%d)\n",chainEnd->i,chainEnd->j,act->i,act->j);
                 }
+                chain->push_back(act);
+                printf("\n");
             }
         }
     }
-    cout << "end" << endl;
 	return 1;
 }
