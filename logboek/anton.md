@@ -16,8 +16,8 @@ Datum      | Uren   | Beschrijving
 12-05-2014 | 8.5    | Chaining implementatie, porten Windows
 13-05-2014 | 8      | Chaining implementatie, orientatieverslag/requirementsanalyse verbeteren
 14-05-2014 | 8      | Chaining implementatie debuggen, qt upgrade naar 5.2 werkend krijgen
-15-05-2014 | -      | 
-16-05-2014 | -      | 
+15-05-2014 | 7      | Chaining debuggen
+16-05-2014 | 5.5    | Chaining werkt! Tests maken
 19-05-2014 | -      | 
 20-05-2014 | -      | 
 21-05-2014 | -      | 
