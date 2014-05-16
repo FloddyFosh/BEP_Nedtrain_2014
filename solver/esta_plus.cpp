@@ -617,6 +617,7 @@ cleanup:
         for (int i = 0; i < tmsp->n_trains; i ++) if (T(i)) {
             for (int j = 0; j < N(i); j ++) if (A(i, j)) {
                 node_t * act (acts[i][j]);
+                A(i,j)->est = acts[i][j]->est;
                 if (!act->group.empty()) {
                     if (act->est < RD(i)) wrong = 1;
                     if (act->est + act->len > DD(i)) wrong = 1;

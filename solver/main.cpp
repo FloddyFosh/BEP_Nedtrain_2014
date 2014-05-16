@@ -63,7 +63,7 @@ int solve() {
     debug("Constructing flexibility intervals using Linear Programming solver.\n");
     timing_start("LP");
     if(flexibility()){
-        progress(75);
+        progress(90);
         timing_stop("LP");
     } else {
         timing_stop("LP");
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
     int readFromFile = 0;
     if(readFromFile==1){
     // open a file handle to a particular file:
-        string filepath = "../instances/j120/j1201_5.instance";
+        char* filepath = "../instances/j120/j1201_5.instance";
         FILE *myfile = fopen(filepath, "r");
     	// make sure it's valid:
     	if (!myfile) {
