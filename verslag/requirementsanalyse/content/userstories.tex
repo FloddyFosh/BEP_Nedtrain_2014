@@ -2,43 +2,50 @@
 \setcounter{userstory}{0}
 \nextUserStory
 \textbf{Als} gebruiker \textbf{wil} ik op een knop kunnen drukken \textbf{om} de resources-chains weer te geven op het scherm. Die chains worden afgebeeld als lijnen die van taak naar taak gaan. 
-\begin{itemize} [label=\emph{ - Gegeven}, itemindent=2.5em, labelsep=0.3em]
+\beginGegeven
     \item dat er een probleeminstantie geladen is.
     \item dat de probleeminstantie opgelost is met de solver die chaining gebruikt. 
-\end{itemize}
+\endGegeven
+
+\nextUserStory
+\textbf{Als} gebruiker \textbf{wil} ik op een knop kunnen drukken \textbf{om} de flexibiliteit van taken zichtbaar te maken. Die flexibilteit wordt weergegeven met een lijn die begint bij de vroegste begintijd en stopt bij de laaste eindtijd.
+\beginGegeven
+    \item dat er een probleeminstantie geladen is.
+    \item dat de probleeminstantie opgelost is met de solver die chaining gebruikt. 
+\endGegeven
 
 \nextUserStory
 \textbf{Als} gebruiker \textbf{wil} ik op een knop kunnen drukken \textbf{om} de laatste actie ongedaan te maken. \textbf{Als} ik, als gebruiker, nog een keer op diezelfde knop druk, \textbf{wil ik} dat de actie daarvoor ongedaan wordt gemaakt. Het ongedaan maken van de acties gebeurt dus van meest recent tot minst recent. 
-\begin{itemize} [label=\emph{ - Gegeven}, itemindent=2.5em, labelsep=0.3em]
+\beginGegeven
     \item er is een actie gedaan door de gebruiker nadat de tool is gestart. Het is namelijk niet mogelijk om acties ongedaan te maken in een vorige sessie. 
     \item de actie betreft niet: het openen of sluiten van een instantie.
     \item de actie betreft wel: een aanpassing aan een taak, een project of een resource. 
-\end{itemize}
+\endGegeven
 
 \nextUserStory
 \textbf{Als} gebruiker \textbf{wil} ik op een knop kunnen drukken \textbf{om} de laatste undo actie te herstellen.
-\begin{itemize} [label=\emph{ - Gegeven}, itemindent=2.5em, labelsep=0.3em]
+\beginGegeven
     \item ik, als gebruiker, heb een actie ongedaan gemaakt met de 'undo' knop. 
     \item de undo-actie is in deze sessie uitgevoerd. Met andere woorden de tool is na de undo-actie niet opnieuw opgestart. 
-\end{itemize}
+\endGegeven
 
 \nextUserStory
 \textbf{Als} gebruiker \textbf{wil} ik op een knop drukken op een tab van een instantie \textbf{om} die instantie te sluiten. 
-\begin{itemize} [label=\emph{ - Gegeven}, itemindent=2.5em, labelsep=0.3em]
+\beginGegeven
     \item er zijn \'e\'en of meerdere instanties geopend.
-\end{itemize}
+\endGegeven
 
 \nextUserStory
 \textbf{Als} gebruiker \textbf{wil} ik door middel van het indrukken van de 'shift' toets en het scrollen met de muis \textbf{om} horizontaal te scrollen. 
-\begin{itemize} [label=\emph{ - Gegeven}, itemindent=2.5em, labelsep=0.3em]
+\beginGegeven
     \item de muis staat in het gebied wat ik, als gebruiker, horizontaal wil bewegen.
     \item het gebied wat ik, als gebruiker, horizontaal wil scrollen, heeft een scrollbalk voor horizontaal scrollen. Met andere woorden moet er normaal dus ook de mogelijkheid zijn om horizontaal te scrollen.
-\end{itemize}
+\endGegeven
 
 \nextUserStory
 \textbf{Als} gebruiker \textbf{wil} ik, de 'ctrl' toets indrukken en tegelijkertijd scrollen met de muis \textbf{om} te kunnen in- en uitzoomen. 
-\begin{itemize} [label=\emph{ - Gegeven}, itemindent=2.5em, labelsep=0.3em]
+\beginGegeven
     \item de muis staat in het gebied wat ik, als gebruiker, wil in- en uitzoomen. 
     \item het gebied dat in- of uitgezoomd moet worden betreft een timeline met resources en/of taken.
-\end{itemize}
+\endGegeven
 

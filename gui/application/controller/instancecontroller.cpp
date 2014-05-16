@@ -111,8 +111,8 @@ void InstanceController::setStatusMessage(QString message, int timeout) {
     controller->setStatusMessage(message, timeout);
 }
 
-void InstanceController::peak(int time, int resource, int capacity) {
+void InstanceController::peak(int time, int resource) {
     if(!getResourceWidgets().contains(resource)) return;
     ResourceWidget *rw = getResourceWidgets().value(resource);
-    rw->paintPeak(time, capacity);
+    rw->paintPeak(time);
 }

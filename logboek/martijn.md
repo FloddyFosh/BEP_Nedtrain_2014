@@ -14,4 +14,8 @@ Datum      | Uren   | Beschrijving
 07-05-2014 | 7      | Jenkins server: het werkt bijna
 08-05-2014 | 7      | Jenkins server werkt bijna, code gelezen en aan requirements gewerkt. 
 09-05-2014 | 7      | Verder gewerkt aan requirements
-12-05-2014 |        | 
+12-05-2014 | 7      | Werken aan verslagen en chaining
+13-05-2014 | 8      | Jenkins server werkt, en verslagen ingeleverd
+14-05-2014 | 6      | COIN installeren en onderzoeken. Chaining. Eclipse geïnstalleerd.
+15-05-2014 | 7      | Uitzoeken: Clp en Osi. Uitzoeken: LP, GMPL en MPS-bestanden. Overleg met Cees over de drie verslagen.
+16-05-2014 |        | 

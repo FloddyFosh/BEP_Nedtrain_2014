@@ -69,6 +69,8 @@ grammar.tab.cpp
 grammar.tab.hpp
 tms/tms
 tms/tms.exe
+tms/lex.cpp
+tms/grammar.output
 solver/solver
 solver/solver.exe
 solver/lex.cpp
@@ -77,13 +79,16 @@ solver/grammar.output
 # Editors temporary files 
 *~
 
+<<<<<<< HEAD
 # ignore eclipse files
 *.metadata/
+# eclipse
+*.metadata
 */.cproject
 */.project
 */.settings
 
 # Exceptions of ignoring files
-!libgtest.a
+!libgtest_linux.a
 !libgtest_win32.a
 !verslag/voorbeelden/*

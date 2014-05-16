@@ -27,7 +27,7 @@ contents_common = """
 OBJECTS_DIR = __obj__
 MOC_DIR = __moc__
 
-QT += sql
+QT += sql widgets testlib
 TRANSLATIONS = $$RELPAD$$/translations/lang_nedtrain.ts $$RELPAD$$/translations/lang_english.ts
 
 BISONSOURCES = $$RELPAD$$/util/grammar.y
@@ -49,7 +49,6 @@ bisonheader.name = bison \
     header
 bisonheader.depends = $$RELPAD$$/util/grammar.tab.cpp
 QMAKE_EXTRA_COMPILERS += bisonheader
-OTHER_FILES += $$RELPAD$$/util/grammar.y
 """
 
 args = sys.argv[1:]
@@ -59,7 +58,7 @@ TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += .
 RESOURCES += Resources.qrc
 """
 else:
@@ -68,7 +67,7 @@ TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
 #QMAKE_LFLAGS += -m32
-INCLUDEPATH += . C:/Qt/4.8.6/lib C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += .
 RESOURCES += Resources.qrc
 """
 
@@ -84,7 +83,6 @@ unix {
 win32 {
     LIBS += ../../gui/testsuite/libgtest_win32.a
 }
-CONFIG += qtestlib
 QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
 QMAKE_CXXFLAGS += -g -cache 
@@ -95,7 +93,7 @@ else:
 	contents_testsuite = """
 TARGET = testsuite
 SOURCES += testsuite.cpp
-INCLUDEPATH += . ./gtest-1.6.0/include ../application ../testsuite C:/Qt/4.8.6/lib/pkgconfig
+INCLUDEPATH += . ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
 unix {
     LIBS += ../../gui/testsuite/libgtest.a
@@ -103,7 +101,6 @@ unix {
 win32 {
     LIBS += ../../gui/testsuite/libgtest_win32.a
 }
-CONFIG += qtestlib
 QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
 QMAKE_CXXFLAGS += -g 
