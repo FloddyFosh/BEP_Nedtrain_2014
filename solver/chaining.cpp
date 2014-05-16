@@ -11,7 +11,7 @@
 
 map< pair<int,int>, list<activity*> > chains;
 
-bool compareActivities(const activity* a, const activity* b) {
+bool compareEST(const activity* a, const activity* b) {
     return (a->est < b->est);
 }
 
@@ -66,10 +66,10 @@ int chaining() {
         activities.insert(activities.end(), T(i)->activities.begin(), T(i)->activities.end());
     }
 
-    sort(activities.begin(), activities.end(), compareActivities);
+    sort(activities.begin(), activities.end(), compareEST);
 
     for(int i=0;i<activities.size();i++){
-        cout << "trein" << list_get(activities,i)->i << " act" << list_get(activities,i)->j << " " << list_get(activities,i)->est << "\n";
+        printf("act(%d,%d) est: %d\n",activities[i]->i,activities[i]->j,activities[i]->est);
     }
 	
 	//INITIALIZE CHAINS
@@ -93,7 +93,7 @@ int chaining() {
                 if(!chain->empty()){
                     activity* chainEnd = chain->back();
                     add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
-                    printf("new constraint: (%d,%d) < (%d,%d)\n",chainEnd->i,chainEnd->j,act->i,act->j);
+                    fprintf(stderr, "PC: %d %d %d %d\n", chainEnd->i, chainEnd->j, act->i, act->j);
                 }
                 chain->push_back(act);
                 printf("\n");

@@ -70,7 +70,7 @@ int stjn_construct() {
                 acts[i][j]->canmerge = true;
                 acts[i][j]->flex = 0;
             }
-            
+
             acts[i][j]->i = i;
             acts[i][j]->j = j;
             acts[i][j]->group.append(A(i, j));
@@ -89,7 +89,7 @@ int stjn_construct() {
             }
         }
     }
-    
+
     for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j) and len(acts[i][j]->group)) {
             acts[i][j]->est = A(i,j)->est != -1 ? A(i,j)->est : RD(i);
@@ -99,7 +99,7 @@ int stjn_construct() {
             acts[i][j]->old_est = -1;
         }
     }
-    
+
     FOREACH(tmsp->precedences, it) {
         set_precedence(activity_to_node[A((*it)->i1, (*it)->j1)],
                        activity_to_node[A((*it)->i2, (*it)->j2)]);
@@ -108,7 +108,6 @@ int stjn_construct() {
     stjn_calculate_est();
     int re = stjn_calculate_lst();
     chkEST(), chkLST();
-    insertToTmsp();
     return re;
 }
 
@@ -126,7 +125,7 @@ void stjn_calculate_est() {
 
     while (!q.empty()) {
         node_t * n = q.front(); q.pop_front();
-        
+
         n->order = order;
         ordinv.append(n);
         order++;
@@ -159,7 +158,7 @@ int stjn_calculate_lst() {
     while (!q.empty()) {
         node_t * n = q.front(); q.pop_front();
         if (n->lst < n->est) inconsistent = 1, cycle_node = n;
-        
+
         FOREACH(n->prev, it) {
             node_t * m (*it);
             if (m->lst > n->lst - m->len) {
@@ -196,11 +195,11 @@ int update_ordering(node_t *n, node_t *m) {
             FOREACH(w->next, it) q.push_back(*it);
         }
     }
-    
+
     if(n->flag == 1) {
         return 0; // We started at m, so if n is reached we have a cycle: abort
     }
-    
+
     shift = 0;
     vector<node_t *> l;
     end = n->order;
@@ -297,7 +296,7 @@ int stjn_add_precedence(node_t *from, node_t *to) {
         from->node_succ = to;
         inconsistent |= stjn_update_lst(from);
     }
-    
+
     return !inconsistent;
 }
 
@@ -389,7 +388,7 @@ node_t *stjn_merge(node_t *n1, node_t *n2) {
     node_t * node_pred = (n1->est > n2->est) ? n1->node_pred : n2->node_pred;
     int            lst = min(n1->lst + n1->len, n2->lst + n2->len) - (n1->len + n2->len);
     node_t * node_succ = (n1->lst < n2->lst) ? n1->node_succ : n2->node_succ;
-    
+
     node_t * g = n1, * a = n2;
     g->len=len,g->old_est=old_est,g->est=est,g->node_pred=node_pred,g->lst=lst,g->node_succ=node_succ;
     FOREACH(a->group, it) g->group.append(*it);
@@ -425,21 +424,12 @@ node_t *stjn_merge(node_t *n1, node_t *n2) {
 
 void print_est_schedule() {
     int i, j;
-	
+
     for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j)) {
             //fprintf(stderr, "G: %x\n", !!acts[i][j]->group.size());
             fprintf(stderr, "EST: %d %d %d\n", i, j, acts[i][j]->est);
             //fprintf(stderr, "LST: %d %d %d\n", i, j, acts[i][j]->lst);
-        }
-    }
-}
-
-void insertToTmsp() {
-    int i,j;
-
-    for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
-        for(j = 0; j < N(i); j++) if (A(i,j)) {
             A(i,j)->est = acts[i][j]->est;
         }
     }
@@ -456,4 +446,3 @@ ostream & operator<< (ostream & o, activity * act)
 {
     o << "act(i=" << act->i << ",j=" << act->j << ",dur="<<act->duration<<")"; return o;
 }
-

@@ -46,6 +46,7 @@ int solve() {
     }
 
     print_est_schedule();
+    fflush(stdout);
 
     printf("Running chaining algorithm.\n");
     timing_start("chaining");
@@ -70,8 +71,6 @@ int solve() {
         progress(100);
         return 0;
     }
-
-    fflush(stdout);
 
     progress(100);
     return 1;
@@ -108,18 +107,22 @@ int main(int argc, char *argv[]) {
 
     // parser
     timing_start("parsing");
-//    yyin = stdin;
-
+    int readFromFile = 0;
+    if(readFromFile==1){
     // open a file handle to a particular file:
-    	FILE *myfile = fopen("../instances/demo.instance", "r");
+        string filepath = "../instances/j120/j1201_5.instance";
+        FILE *myfile = fopen(filepath, "r");
     	// make sure it's valid:
     	if (!myfile) {
-    		cout << "I can't open a.snazzle.file!" << endl;
+            cout << "Could not find " << filepath << "." << endl;
     		return -1;
     	}
     	// set lex to read from it instead of defaulting to STDIN:
-
-    yyin = myfile;
+        yyin = myfile;
+    }
+    else{
+        yyin = stdin;
+    }
     if (yyparse() != 0) { // yyparse doet iets met bison grammar
         fprintf(stderr, "Parsing failed. Aborting!\n");
     }
