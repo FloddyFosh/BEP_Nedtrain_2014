@@ -29,10 +29,8 @@ pair<int,int>* selectChain(int tr, int act, int res){
             return &chainId;
         }
         activity* chainEnd = curChain.back();
-        //if(tr==0 && act==4 && res==2){
-            printf("chain: %d unit: %d\n",chainId.first,chainId.second);
-            printf("HEAD: est: %d, eft: %d flex: %d\n",chainEnd->est,chainEnd->est + chainEnd->duration, chainEnd->flex);
-        //}
+        printf("chain: %d unit: %d\n",chainId.first,chainId.second);
+        printf("HEAD: est: %d, eft: %d flex: %d\n",chainEnd->est,chainEnd->est + chainEnd->duration, chainEnd->flex);
         if(A(tr,act)->est >= chainEnd->est + chainEnd->duration + chainEnd->flex){
             printf("selected chain (%d,%d)\n",chainId.first,chainId.second);
             printf("NEW: est: %d, eft: %d flex: %d\n",A(tr,act)->est, A(tr,act)->est + A(tr,act)->duration,A(tr,act)->flex);
@@ -68,9 +66,9 @@ int chaining() {
 
     sort(activities.begin(), activities.end(), compareEST);
 
-    for(int i=0;i<activities.size();i++){
+    /*for(int i=0;i<activities.size();i++){
         printf("act(%d,%d) est: %d\n",activities[i]->i,activities[i]->j,activities[i]->est);
-    }
+    }*/
 	
 	//INITIALIZE CHAINS
     //splits resources r_i in resource units u_j
