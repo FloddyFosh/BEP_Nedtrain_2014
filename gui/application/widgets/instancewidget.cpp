@@ -273,6 +273,7 @@ void InstanceWidget::setupButtons() {
     prevButton->setDisabled(frameNumber <= 0);
     nextButton->setDisabled(frameNumber >= slider->maximum());
     frameLabel->setText(tr("%1 of %2").arg(frameNumber+1).arg(slider->maximum()+1));
+    slider->setValue(frameNumber);
 }
 
 void InstanceWidget::setupSlider(bool reset) {
