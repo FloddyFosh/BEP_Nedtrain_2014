@@ -1,8 +1,8 @@
 # Martijn
 Datum      | Uren   | Beschrijving
 :----------| :------|:------------
-25-04-2014 | 6      | Afspraak bij NedTrain
-28-04-2014 | 7      | Tool werkend krijgen
+25-04-2014 | 6      | Afspraak bij NedTrain en code downloaden + op git zetten
+28-04-2014 | 7      | Tool werkend krijgen en begin Plan van Aanpak
 29-04-2014 | 7      | Plan van Aanpak
 30-04-2014 | 7      | Plan van Aanpak en begin Research Report
 01-05-2014 | 7      | Research report
@@ -19,5 +19,5 @@ Datum      | Uren   | Beschrijving
 14-05-2014 | 6      | COIN installeren en onderzoeken. Chaining. Eclipse geïnstalleerd.
 15-05-2014 | 7      | Uitzoeken: Clp en Osi. Uitzoeken: LP, GMPL en MPS-bestanden. Overleg met Cees over de drie verslagen.
 16-05-2014 | 7      | Basic voorbeeld voor Clp werkt bijna
-18-05-2014 | 3      | Op server Qt versie updaten
-19-05-2014 |        | 
+18-05-2014 | 3      | Op server Qt versie updaten (is nog niet helemaal gelukt)
+19-05-2014 | 7      | Clp example werkt en er kan een instantie via stdin worden ingevoerd. 

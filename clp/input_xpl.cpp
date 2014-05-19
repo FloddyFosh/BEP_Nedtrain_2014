@@ -3,7 +3,7 @@
 
 /* First try to use the Clp library. I use the following example: 
     
-    # short examplecd
+    # short example
      maximize obj: 0.6 * x1 + 0.5 * x2;
      s.t. c_1:     x1 + 2 * x2 <= 1;
      s.t. c_2: 3 * x1 +     x2 <= 2;
