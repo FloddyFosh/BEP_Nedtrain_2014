@@ -136,7 +136,7 @@ private:
     Activity *selectedActivity;
 
 public slots:
-    void peak(int, int); ///< solvers peak signal is connected to this slot, it paints peaks in the resource profile.
+    void peak(int, int, int); ///< solvers peak signal is connected to this slot, it paints peaks in the resource profile.
 };
 
 #endif /* INSTANCECONTROLLER_H_ */
