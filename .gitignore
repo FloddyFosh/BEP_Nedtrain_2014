@@ -84,6 +84,8 @@ grammar.output
 */.settings
 
 # Exceptions of ignoring files
-!libgtest_linux.a
+!libgtest_unix32.a
+!libgtest_unix64.a
 !libgtest_win32.a
+!libgtest_win64.a
 !verslag/voorbeelden/*

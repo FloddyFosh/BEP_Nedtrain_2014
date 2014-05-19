@@ -77,11 +77,17 @@ TARGET = testsuite
 SOURCES += testsuite.cpp
 INCLUDEPATH += ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
-unix {
-    LIBS += ../../gui/testsuite/libgtest.a
+linux-g++-32 {
+   # 32 bit Linux stuff here
+   LIBS += ../../gui/testsuite/libgtest_unix32.a
+}
+linux-g++-64 {
+   # 64 bit Linux stuff here
+   LIBS += ../../gui/testsuite/libgtest_unix64.a
 }
 win32 {
-    LIBS += ../../gui/testsuite/libgtest_win32.a
+   # Windows stuff here (not checking bit system)
+   LIBS += ../../gui/testsuite/libgtest_win64.a
 }
 QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -cache -m32
@@ -95,11 +101,17 @@ TARGET = testsuite
 SOURCES += testsuite.cpp
 INCLUDEPATH += . ./gtest-1.6.0/include ../application ../testsuite
 LIBS += -lgcov
-unix {
-    LIBS += ../../gui/testsuite/libgtest.a
+linux-g++-32 {
+   # 32 bit Linux stuff here
+   LIBS += ../../gui/testsuite/libgtest_unix32.a
+}
+linux-g++-64 {
+   # 64 bit Linux stuff here
+   LIBS += ../../gui/testsuite/libgtest_unix64.a
 }
 win32 {
-    LIBS += ../../gui/testsuite/libgtest_win32.a
+   # Windows stuff here (not checking bit system)
+   LIBS += ../../gui/testsuite/libgtest_win64.a
 }
 QMAKE_CXX = python ../../gui/testsuite/fake-compiler
 #QMAKE_CXXFLAGS += -g -m32
