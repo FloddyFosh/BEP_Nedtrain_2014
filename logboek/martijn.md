@@ -18,4 +18,6 @@ Datum      | Uren   | Beschrijving
 13-05-2014 | 8      | Jenkins server werkt, en verslagen ingeleverd
 14-05-2014 | 6      | COIN installeren en onderzoeken. Chaining. Eclipse geïnstalleerd.
 15-05-2014 | 7      | Uitzoeken: Clp en Osi. Uitzoeken: LP, GMPL en MPS-bestanden. Overleg met Cees over de drie verslagen.
-16-05-2014 |        | 
+16-05-2014 | 7      | Basic voorbeeld voor Clp werkt bijna
+18-05-2014 | 3      | Op server Qt versie updaten
+19-05-2014 |        | 
