@@ -52,8 +52,6 @@ int main(int argc, const char *argv[]) {
     model.addRow(2, cols_1, c_1, -100.0, 1.0);
     model.addRow(2, cols_2, c_2, -100.0, 2.0);
 
-    model.writeMps("model.mps");
-
     // solve
     model.initialSolve();
     
