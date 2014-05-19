@@ -29,7 +29,7 @@ int main(int argc, const char *argv[]) {
 
     // define objective coefficients
     // define upper- and lowerbounds
-    double objec[] = { -0.6,  -0.5};
+    double objec[] = { -0.6, -0.5};
     double lower[] = {-10.0, -10.0};    
     double upper[] = { 10.0,  10.0};
 
@@ -50,20 +50,31 @@ int main(int argc, const char *argv[]) {
     // set coefficients of the constraints
     // (wss in row = 0 de objective)
     model.addRow(2, cols_1, c_1, -100.0, 1.0);
-    model.addRow(1, cols_2, c_2, -100.0, 2.0);
+    model.addRow(2, cols_2, c_2, -100.0, 2.0);
+
+    model.writeMps("model.mps");
 
     // solve
-    model.dual(); 
+    model.initialSolve();
     
-    // print solution
+    // get solution
     int numberCols = model.numberColumns();
-    const double* sol = model.primalColumnSolution();
-    double* obj = model.objective();
+    const double* sol1 = model.primalColumnSolution();
+
+    // print solution
     cout << endl << "### SOLUTION ###" << endl;
-    cout << "status = " << model.status() << endl;
+    cout << "status     = " << model.status() << endl;
     for(int i = 0; i < numberCols; i++) {
-        cout << "x_" << (i+1) << " = " << sol[i] << endl;
+        cout << "x_" << (i+1) << " = " << sol1[i] << endl;
     }
     cout << endl;
+
+    // some checks
+    if(model.isAbandoned())
+        cout << "Numerical problems found" << endl;
+    if(model.isProvenPrimalInfeasible())
+        cout << "Primal Infeasible" << endl;
+    if(model.isProvenDualInfeasible())
+        cout << "Dual Infeasible" << endl;
     return 0;
 }
