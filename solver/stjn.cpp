@@ -430,7 +430,6 @@ void print_est_schedule() {
             //fprintf(stderr, "G: %x\n", !!acts[i][j]->group.size());
             fprintf(stderr, "EST: %d %d %d\n", i, j, acts[i][j]->est);
             //fprintf(stderr, "LST: %d %d %d\n", i, j, acts[i][j]->lst);
-            //A(i,j)->est = acts[i][j]->est;
         }
     }
 }

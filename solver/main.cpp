@@ -46,7 +46,6 @@ int solve() {
     }
 
     print_est_schedule();
-    fflush(stdout);
 
     printf("Running chaining algorithm.\n");
     timing_start("chaining");
@@ -73,6 +72,7 @@ int solve() {
     }
 
     progress(100);
+    fflush(stdout);
     return 1;
 }
 
