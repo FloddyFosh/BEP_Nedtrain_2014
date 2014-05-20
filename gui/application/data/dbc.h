@@ -30,7 +30,12 @@ public:
 	/**
 	 * Closes the database connection if connected.
 	 */
-	void close();
+    void close();
+
+    /**
+     * Returns if the database is open.
+     */
+    bool isOpenDB();
 };
 
 #endif /* DBC_H_ */

@@ -1,18 +1,3 @@
-// Voor het compileren gebruik ik een ingewikkelde makefile, die je
-// bij clp erbij krijgt.
-
-/* First try to use the Clp library. I use the following example: 
-    
-    # short example
-     maximize obj: 0.6 * x1 + 0.5 * x2;
-     s.t. c_1:     x1 + 2 * x2 <= 1;
-     s.t. c_2: 3 * x1 +     x2 <= 2;
-
-    # solution
-     x_1 = 0.6 
-     x_2 = 0.2
-*/
-
 #include "ClpSimplex.hpp"
 #include "CoinBuild.hpp"
 #include "CoinModel.hpp"
@@ -63,7 +48,6 @@ int main(int argc, const char *argv[]) {
     // add constraints to the model
     for (int i = 0; i < n_rows; i++) {
         // make variables for addRow(...)
-        int nonzero = 0;
         double low_bounds;
         vector<double> constraints(n_cols);
         double upr_bounds;
@@ -75,15 +59,12 @@ int main(int argc, const char *argv[]) {
         for(int k = 0; k < n_cols; k++) {
             double temp;
             cin >> temp;
-            if (temp != 0.0) {
-                nonzero++;
-            }
             constraints[k] = temp;
         }
         cin >> upr_bounds;
 
         // add the constraint to the model
-        model.addRow(nonzero, &col_indx[0], &constraints[0], low_bounds, upr_bounds);
+        model.addRow(n_cols, &col_indx[0], &constraints[0], low_bounds, upr_bounds);
     }
     
     // solve

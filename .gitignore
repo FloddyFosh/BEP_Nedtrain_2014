@@ -72,6 +72,8 @@ grammar.tab.hpp
 */lex.cpp
 */grammar.output
 */solver
+solver/solver
+clp/clp
 */solver.exe
 
 # Editors temporary files 
@@ -91,3 +93,4 @@ grammar.tab.hpp
 !libgtest_win32.a
 !libgtest_win64.a
 !verslag/voorbeelden/*
+!clp/sample/*.out

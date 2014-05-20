@@ -32,3 +32,8 @@ void dbc::close() {
     }
 
 }
+
+bool dbc::isOpenDB() {
+    QSqlDatabase db = QSqlDatabase::database();
+    return db.isOpen();
+}

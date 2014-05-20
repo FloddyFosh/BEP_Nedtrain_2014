@@ -11,10 +11,10 @@
 
 # To compile other examples, either changed the following line, or
 # add the argument DRIVER=problem_name to make
-DRIVER = input_xpl
+DRIVER = flexibility
 
 # CHANGEME: This should be the name of your executable
-EXE = $(DRIVER)
+EXE = clp
 
 # CHANGEME: Here is the name of all object files corresponding to the source
 #           code that you wrote in order to define the problem statement
