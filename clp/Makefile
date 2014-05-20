@@ -11,7 +11,7 @@
 
 # To compile other examples, either changed the following line, or
 # add the argument DRIVER=problem_name to make
-DRIVER = input_xpl
+DRIVER = flexibility
 
 # CHANGEME: This should be the name of your executable
 EXE = clp
