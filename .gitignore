@@ -93,3 +93,4 @@ clp/clp
 !libgtest_win32.a
 !libgtest_win64.a
 !verslag/voorbeelden/*
+!clp/sample/*.out
