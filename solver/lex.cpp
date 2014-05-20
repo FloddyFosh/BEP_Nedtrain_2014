@@ -468,13 +468,14 @@ char *yytext;
 #line 8 "lex.l"
 
 #include "token.h"
+#include <string.h>
 #include "grammar.tab.hpp"	/* import token definitions from Yacc */
 
 #define YY_NO_INPUT
 
 Token *new_token(int);
 
-#line 478 "lex.cpp"
+#line 479 "lex.cpp"
 
 #define INITIAL 0
 
@@ -659,10 +660,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 24 "lex.l"
+#line 25 "lex.l"
 
 
-#line 666 "lex.cpp"
+#line 667 "lex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -748,45 +749,45 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 26 "lex.l"
+#line 27 "lex.l"
 { yylval.token = new_token(T_LINE_SEP); return yylval.token->type; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 28 "lex.l"
+#line 29 "lex.l"
 { yylval.token = new_token(yytext[0]); return yylval.token->type; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 29 "lex.l"
+#line 30 "lex.l"
 { yylval.token = new_token(T_INT); return yylval.token->type; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 30 "lex.l"
+#line 31 "lex.l"
 { yylval.token = new_token(T_STRING); return yylval.token->type; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "lex.l"
+#line 33 "lex.l"
 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "lex.l"
+#line 34 "lex.l"
 
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 35 "lex.l"
+#line 36 "lex.l"
 { fprintf(stderr, "error: unexpected character in input: \"%s\"\n", yytext); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 37 "lex.l"
+#line 38 "lex.l"
 ECHO;
 	YY_BREAK
-#line 790 "lex.cpp"
+#line 791 "lex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1747,7 +1748,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 37 "lex.l"
+#line 38 "lex.l"
 
 
 

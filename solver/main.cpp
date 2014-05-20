@@ -45,6 +45,8 @@ int solve() {
         return 0;
     }
 
+    print_est_schedule();
+
     printf("Running chaining algorithm.\n");
     timing_start("chaining");
     if(chaining()){
@@ -57,12 +59,10 @@ int solve() {
         return 0;
     }
 
-    print_est_schedule();
-
     debug("Constructing flexibility intervals using Linear Programming solver.\n");
     timing_start("LP");
     if(flexibility()){
-        progress(75);
+        progress(90);
         timing_stop("LP");
     } else {
         timing_stop("LP");
@@ -71,9 +71,8 @@ int solve() {
         return 0;
     }
 
-    fflush(stdout);
-
     progress(100);
+    fflush(stdout);
     return 1;
 }
 
@@ -108,7 +107,22 @@ int main(int argc, char *argv[]) {
 
     // parser
     timing_start("parsing");
-    yyin = stdin;
+    int readFromFile = 0;
+    if(readFromFile==1){
+    // open a file handle to a particular file:
+        char* filepath = "../instances/j120/j1201_5.instance";
+        FILE *myfile = fopen(filepath, "r");
+    	// make sure it's valid:
+    	if (!myfile) {
+            cout << "Could not find " << filepath << "." << endl;
+    		return -1;
+    	}
+    	// set lex to read from it instead of defaulting to STDIN:
+        yyin = myfile;
+    }
+    else{
+        yyin = stdin;
+    }
     if (yyparse() != 0) { // yyparse doet iets met bison grammar
         fprintf(stderr, "Parsing failed. Aborting!\n");
     }
@@ -134,4 +148,3 @@ int main(int argc, char *argv[]) {
 
     return !solved;
 }
-

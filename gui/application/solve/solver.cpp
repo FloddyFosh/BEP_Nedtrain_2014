@@ -172,6 +172,8 @@ void Solver::processOutput() {
         } else if (line.startsWith("STATUS: ")) {
             emit statusReceived(QString(line.trimmed()));
             emit messageReceived(QString(line.trimmed()));
+        } else if (line.startsWith(("CLEARSOFTPREC"))) {
+           instance->clearSoftPrecedences();
         } else {
             if(line.contains("Instance solved."))
                 setSolved(true);

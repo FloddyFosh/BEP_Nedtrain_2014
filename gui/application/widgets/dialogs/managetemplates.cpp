@@ -32,12 +32,12 @@ ManageTemplatesDialog::ManageTemplatesDialog(Instance *inst, QWidget *parent) :
     connect(nameEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
     connect(durationEdit, SIGNAL(valueChanged(QString)), this, SLOT(setModified()));
 
-    setEditable(true);
     setUpLayout();
     initTemplates();
 }
 
 void ManageTemplatesDialog::initTemplates() {
+    setEditable(false);
     formList->clear();
     foreach(ActivityTemplate *a, TemplateGateway::getAll()) {
         QListWidgetItem *newItem = new QListWidgetItem;
@@ -93,6 +93,7 @@ void ManageTemplatesDialog::setEditable(bool editable) {
     durationEdit->setDisabled(!editable);
     requirementsTable->setDisabled(!editable);
     applyButton->setDisabled(!editable);
+    removeButton->setDisabled(!editable);
 }
 
 void ManageTemplatesDialog::apply() {

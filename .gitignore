@@ -67,16 +67,18 @@ db.sqlite
 *.qm
 grammar.tab.cpp
 grammar.tab.hpp
-tms/tms
-tms/tms.exe
-solver/tms
-solver/tms.exe
-lex.cpp
-grammar.output
+*/tms
+*/tms.exe
+*/lex.cpp
+*/grammar.output
+*/solver
+*/solver.exe
 
 # Editors temporary files 
 *~
 
+# ignore eclipse files
+*.metadata/
 # eclipse
 *.metadata
 */.cproject

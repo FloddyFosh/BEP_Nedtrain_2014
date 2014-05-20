@@ -8,9 +8,9 @@
 #include "tmsp.h"
 #include "stjn.h"
 
-bool compareActivities(const activity*, const activity*);
+bool compareEST(const activity*, const activity*);
 
-list<activity*>* selectChain(int, int, int);
+pair<int,int>* selectChain(int, int, int);
 
 int chaining();
 
