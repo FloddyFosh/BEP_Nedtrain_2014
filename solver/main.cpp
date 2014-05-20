@@ -45,7 +45,7 @@ int solve() {
         return 0;
     }
 
-    print_est_schedule();
+    //print_est_schedule();
 
     printf("Running chaining algorithm.\n");
     timing_start("chaining");
