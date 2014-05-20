@@ -37,6 +37,7 @@ Job const *JobWidget::job() const {
 void JobWidget::doExpand(bool expanded) {
     this->expanded = expanded;
     updateGeometry();
+    raise();
 }
 
 void JobWidget::addActivities() {
