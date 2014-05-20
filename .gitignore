@@ -72,6 +72,8 @@ grammar.tab.hpp
 */lex.cpp
 */grammar.output
 */solver
+solver/solver
+clp/clp
 */solver.exe
 
 # Editors temporary files 
