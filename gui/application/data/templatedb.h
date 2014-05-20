@@ -86,6 +86,11 @@ public:
      */
     void update(ActivityTemplate *activity);
 
+    /**
+     * Initializes the database with the correct tables.
+     */
+    void init();
+
 };
 
 #endif /* TEMPLATEDB_H_ */

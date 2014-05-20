@@ -1,10 +1,14 @@
 #include <QDebug>
 #include <QSqlError>
+#include <iostream>
 #include "data/templatedb.h"
 
 TemplateDB::TemplateDB() {
     db = new dbc();
     db->open();
+    if(db->isOpenDB()) {
+        init();
+    }
 }
 
 TemplateDB::~TemplateDB() {
@@ -120,6 +124,16 @@ void TemplateDB::update(ActivityTemplate *activity){
 
     removeRequirements(activity->getID());
     saveRequirements(activity->getRequirements(), activity->getID());
+}
+
+void TemplateDB::init() {
+    QSqlQuery query;
+    query.prepare("CREATE TABLE activities(id INTEGER PRIMARY KEY, name TEXT, duration INTEGER)");
+    query.exec();
+    showQueryError(query);
+    query.prepare("CREATE TABLE requirements(activity INTEGER, resource TEXT, demand INTEGER)");
+    query.exec();
+    showQueryError(query);
 }
 
 void TemplateDB::showQueryError(QSqlQuery query) {
