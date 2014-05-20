@@ -1,6 +1,3 @@
-// Voor het compileren gebruik ik een ingewikkelde makefile, die je
-// bij clp erbij krijgt.
-
 /* First try to use the Clp library. I use the following example: 
     
     # short example
