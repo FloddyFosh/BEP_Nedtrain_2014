@@ -33,7 +33,8 @@ int main () {
         
     // TODO: Have to add something to read the first task,
     //       because we need to know what [lst_0] and [est_0]
-    //       is. 
+    //       is.
+    //       Now take the first variable mentioned
 
     // now read [n_constraints] constraints
     Constraints constraints;
@@ -110,15 +111,16 @@ int main () {
     // solve the problem
     model.initialSolve();
     
-    // TODO: get solution
+    // get solution
     int numberCols = model.numberColumns();
-    const double* sol1 = model.primalColumnSolution();
+    const double* sol = model.primalColumnSolution();
 
-    // TODO: print solution
+    // print solution
     cout << endl << "### SOLUTION ###" << endl;
     cout << "status     = " << model.status() << endl;
-    for(int i = 0; i < numberCols; i++) {
-        cout << "x_" << (i+1) << " = " << sol1[i] << endl;
+    for(int i = 0; i < numberCols / 2; i++) {
+        cout << constraints.getVariableName(i) << "^+ = " << sol[i] << endl;
+        cout << constraints.getVariableName(i+1) << "^- = " << sol[i+1] << endl;
     }
     cout << endl;
 

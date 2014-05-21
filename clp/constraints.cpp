@@ -35,3 +35,10 @@ int Constraints::size() {
 Constraint Constraints::operator [](int i) const {
     return constraintVector[i];
 }
+
+string Constraints::getVariableName(int id) {
+    if(variablesName.count(id)) {
+        return variablesName[id];
+    }
+    return ""; // throw exception    
+}

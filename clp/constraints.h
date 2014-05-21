@@ -30,6 +30,7 @@ class Constraints {
         int getAmountOfVariables();
         int size();
         Constraint operator [](int i) const;
+        string getVariableName(int id);
 };
 
 #endif
