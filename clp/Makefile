@@ -11,14 +11,14 @@
 
 # To compile other examples, either changed the following line, or
 # add the argument DRIVER=problem_name to make
-DRIVER = flexibility
+DRIVER = main
 
 # CHANGEME: This should be the name of your executable
 EXE = clp
 
 # CHANGEME: Here is the name of all object files corresponding to the source
 #           code that you wrote in order to define the problem statement
-OBJS =  $(DRIVER).o 
+OBJS =  $(DRIVER).o constraints.o
 
 # CHANGEME: Additional libraries
 ADDLIBS =
