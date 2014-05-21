@@ -244,7 +244,7 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
         if(!existing->isHard() && hard) // remove soft precedence, so that a hard precedence is added
             removePrecedence(existing);
         else{
-            existing->setFrameNr(frameNumber);
+            existing->addFrameNr(frameNumber);
             throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
         }
     }
@@ -254,7 +254,7 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
         precedences.push_back(p);
     } else {
         softPrecedences.push_back(p);
-        p->setFrameNr(frameNumber);
+        p->addFrameNr(frameNumber);
     }
     a1->addPrecedence(p);
     a2->addPrecedence(p);

@@ -19,16 +19,24 @@ bool Precedence::isHard() {
     return hard;
 }
 
-int Precedence::getFrameNr() {
-    return frameNumber;
+set<int> Precedence::getFrameNrs() {
+    return frameNumbers;
 }
 
-void Precedence::setFrameNr(int frameNr) {
-    frameNumber = frameNr;
+void Precedence::addFrameNr(int frameNr) {
+    frameNumbers.insert(frameNr);
 }
 
 bool Precedence::isIncoming(Activity *a) {
     return a == _a2;
+}
+
+bool Precedence::isPosted(int frameNr){
+    if (hard) return true;
+    foreach(int nr, frameNumbers){
+        if(nr <= frameNr) return true;
+    }
+    return false;
 }
 
 bool Precedence::isOutgoing(Activity *a) {
