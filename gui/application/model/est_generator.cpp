@@ -17,8 +17,11 @@ QList<Precedence *> EST_Generator::getAdded(int frameNr){
 	Instance *instance = controller->getInstance();
     QList<Precedence *> constraints;
     foreach(Precedence * p, instance->getSoftPrecedences()) {
-        if (!p->isHard() and p->getFrameNr() == frameNr) constraints.append(p);
+        if (!p->isHard() && p->getFrameNr() == frameNr) constraints.append(p);
     }
+    /*foreach(Precedence * p, instance->getHardPrecedences()) {
+        if (p->isHard() && p->getFrameNr() == frameNr) constraints.append(p);
+    }*/
     return constraints;
 }
 

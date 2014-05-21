@@ -5,6 +5,7 @@
 #include <climits>
 #include <algorithm>
 #include <set>
+#include <stdio.h>
 
 Resource* Instance::addResource(unsigned int i, unsigned int capacity, QString name) {
     int resId = i;
@@ -242,8 +243,10 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
     if (Precedence *existing = precedenceExists(a1, a2)) {
         if(!existing->isHard() && hard) // remove soft precedence, so that a hard precedence is added
             removePrecedence(existing);
-        else
+        else{
+            existing->setFrameNr(frameNumber);
             throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
+        }
     }
 
     Precedence * p (new Precedence(a1, a2, hard));

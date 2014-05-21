@@ -20,12 +20,10 @@ bool Precedence::isHard() {
 }
 
 int Precedence::getFrameNr() {
-    assert(!hard);
     return frameNumber;
 }
 
 void Precedence::setFrameNr(int frameNr) {
-    assert(!hard);
     frameNumber = frameNr;
 }
 
