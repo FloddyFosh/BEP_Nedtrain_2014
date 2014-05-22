@@ -24,7 +24,7 @@ void InstanceMdiWidget::addInstance(Instance *i) {
     QMdiSubWindow *sub = new InstanceMdiSubWindow (iw->getInstanceController(), this);
     sub->setWidget(iw);
     sub->setAttribute(Qt::WA_DeleteOnClose);
-    sub->setWindowIcon(AppIcon("icon.png"));
+    sub->setWindowIcon(QIcon());
     if(i->getFileName().isEmpty())
         updateFileName(tr("untitled %1").arg(controller->getUntitledNumber()), sub);
     else

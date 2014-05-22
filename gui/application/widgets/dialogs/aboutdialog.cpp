@@ -24,9 +24,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
             was based on earlier work by Ronald Evers (2010). <br /><br />\
             <strong>Developed by:</strong><br /> \
             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.<br /><br /> \
+            <strong>Redeveloped by:</strong><br /> \
+            C. Bakker, A. Bouter and M. den Hoedt.<br /><br /> \
             <strong>Supervised by:</strong><br /> \
             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.<br /><br />"
-            "&copy; 2012")
+            "&copy; 2012, 2014")
     );
     QLabel *logo = new QLabel;
     logo->setPixmap(QPixmap(qApp->applicationDirPath()+"/icons/about_logos.jpg"));
