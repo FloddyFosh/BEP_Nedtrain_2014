@@ -128,7 +128,7 @@ void TemplateDB::update(ActivityTemplate *activity){
 
 void TemplateDB::init() {
     QSqlQuery query;
-    query.prepare("CREATE TABLE activities(id INTEGER PRIMARY KEY, name TEXT, duration INTEGER) END");
+    query.prepare("CREATE TABLE activities(id INTEGER PRIMARY KEY, name TEXT, duration INTEGER)");
     query.exec();
     query.prepare("CREATE TABLE requirements(activity INTEGER, resource TEXT, demand INTEGER)");
     query.exec();
