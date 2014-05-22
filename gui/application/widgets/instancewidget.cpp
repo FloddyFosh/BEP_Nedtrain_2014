@@ -91,8 +91,8 @@ bool InstanceWidget::eventFilter(QObject *o, QEvent *e) {
     ResourceWidget *rw = qobject_cast<ResourceWidget *>(o);
     ActivityWidget *aw = qobject_cast<ActivityWidget *>(o);
 
-    if((o==jobsZoomable || o==resourcesZoomable || o==jobTimeline || o == resourceTimeline) &&
-            e->type() == QEvent::Leave){ // hide vertical mouse follower on mouse leave event
+    if(e->type() == QEvent::Leave && (o==jobsZoomable || o==resourcesZoomable || o==jobTimeline ||
+            o == resourceTimeline)){ // hide vertical mouse follower on mouse leave event
         setMouseX(-1);
     }
     // replicate change of width of jobs widget to resources widget
@@ -103,15 +103,35 @@ bool InstanceWidget::eventFilter(QObject *o, QEvent *e) {
         resourcesZoomable->setFixedWidth(resizeEvent->size().width());
         resourceTimeline->setFixedWidth(resizeEvent->size().width());
 
-    } else if (e->type() == QEvent::MouseMove &&
-               (o == jobTimeline || o == jobsZoomable ||
-                o == resourceTimeline || o == resourcesZoomable || jw || rw || aw
-               )
-              )
-    {
+    }
+    else if (e->type() == QEvent::MouseMove && (o == jobTimeline || o == jobsZoomable || o == resourceTimeline ||
+                                                  o == resourcesZoomable || jw || rw || aw)) {
         // replicate mouse cursor follower
         QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(e);
         setMouseX(mouseEvent->x());
+    }
+    else if (e->type() == QEvent::Wheel && (o == jobTimeline || o == jobsZoomable || o == resourceTimeline ||
+            o == resourcesZoomable)) {
+
+        QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(e);
+        if(wheelEvent->modifiers().testFlag(Qt::ControlModifier)) {
+            //Control button held down
+            if(wheelEvent->delta() > 0) controller->zoomIn();
+            else controller->zoomOut();
+            wheelEvent->accept();
+            return true;
+        }
+        else if(wheelEvent->modifiers().testFlag(Qt::ShiftModifier)) {
+            //Shift button held down
+            QScrollBar * slider = jobsScroller->horizontalScrollBar();
+            int sliderv = slider->value();
+            if((wheelEvent->delta() > 0 && sliderv != slider->maximum()) || (wheelEvent->delta() < 0 && sliderv != slider->minimum())) {
+                slider->setSliderPosition(slider->value() + wheelEvent->delta());
+                setMouseX(wheelEvent->x() - (sliderv-slider->value()));
+            }
+            wheelEvent->accept();
+            return true;
+        }
     }
     
     return QWidget::eventFilter(o, e);
