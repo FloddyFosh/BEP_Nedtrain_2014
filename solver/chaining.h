@@ -10,8 +10,8 @@
 
 bool compareEST(const activity*, const activity*);
 
-pair<int,int>* selectChain(int, int, int);
+pair<int,int> selectChain(int, int, int);
 
-int chaining();
+bool chaining();
 
 #endif

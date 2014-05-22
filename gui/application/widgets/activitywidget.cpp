@@ -55,8 +55,8 @@ QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type, 
 	QList<ActivityWidget*> adjacentWidgets;
 	QList<Precedence *> precedences = type==InComing ? a->getIncomingPrecedences() : a->getOutgoingPrecedences();
 	foreach(Precedence* p, precedences){
-		if (!p->isHard() && p->getFrameNr() > controller->getInstanceWidget()->getFrameNumber())
-			continue;
+        if(!p->isPosted(controller->getInstanceWidget()->getFrameNumber()))
+            continue;
 
 		Job * jobOfActivity = type==InComing ? p->a1()->job() : p->a2()->job();
 		JobWidget * actparent = controller->getInstanceWidget()->getJobWidgets().value(jobOfActivity->id());

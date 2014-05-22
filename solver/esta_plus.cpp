@@ -618,6 +618,7 @@ cleanup:
             for (int j = 0; j < N(i); j ++) if (A(i, j)) {
                 node_t * act (acts[i][j]);
                 A(i,j)->est = acts[i][j]->est;
+                A(i,j)->lst = acts[i][j]->lst;
                 if (!act->group.empty()) {
                     if (act->est < RD(i)) wrong = 1;
                     if (act->est + act->len > DD(i)) wrong = 1;

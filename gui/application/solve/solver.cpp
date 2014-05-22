@@ -172,8 +172,10 @@ void Solver::processOutput() {
         } else if (line.startsWith("STATUS: ")) {
             emit statusReceived(QString(line.trimmed()));
             emit messageReceived(QString(line.trimmed()));
-        } else if (line.startsWith(("CLEARSOFTPREC"))) {
+        } else if (line.startsWith("CLEARSOFTPREC")) {
            instance->clearSoftPrecedences();
+        } else if (line.startsWith("CHAINS")) {
+            processChainsLine(line);
         } else {
             if(line.contains("Instance solved."))
                 setSolved(true);
@@ -261,6 +263,23 @@ void Solver::processMutexLine(QByteArray &line) {
     fields.takeFirst();
 
     eatRemainingOutput(fields);
+}
+
+void Solver::processChainsLine(QByteArray &line) {
+    QList<QByteArray> fields = line.trimmed().split(' ');
+    fields.takeFirst();
+
+    int res, chain, numActs, ai, aj;
+    res = fields.takeFirst().toInt();
+    while(res != -1){
+        chain = fields.takeFirst().toInt();
+        numActs = fields.takeFirst().toInt();
+        for(int i=0;i<numActs;i++){
+            ai = fields.takeFirst().toInt();
+            aj = fields.takeFirst().toInt();
+        }
+        res = fields.takeFirst().toInt();
+    }
 }
 
 void Solver::eatRemainingOutput(QList<QByteArray> &fields) {

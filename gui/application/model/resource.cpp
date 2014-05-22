@@ -1,4 +1,5 @@
 #include "model/instance.h"
+#include "model/chain.h"
 #include "resource.h"
 
 Resource::Resource(Instance *instance, int id, QString name, int capacity, QObject *parent) :
@@ -29,6 +30,10 @@ void Resource::setCapacity(int capacity) {
 
 QVector<Requirement*> Resource::getRequirements() {
     return requirements;
+}
+
+QVector<Chain*> Resource::getChains() {
+    return chains;
 }
 
 void Resource::addActivity(Requirement *req) {

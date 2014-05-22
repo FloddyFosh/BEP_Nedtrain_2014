@@ -119,7 +119,8 @@ void OverlayWidget::paintIncomingPrecedences(QPainter& painter, ActivityWidget *
     QList<ActivityWidget*> allWidgets = controller->getActivityWidgets();
 
     foreach(Precedence* p, incoming) {
-        if (!p->isHard() && p->getFrameNr() > controller->getInstanceWidget()->getFrameNumber()) continue;
+        if(!p->isPosted(controller->getInstanceWidget()->getFrameNumber()))
+            continue;
         foreach(ActivityWidget* aw, allWidgets){
             if(aw->activity() == p->a1()) {
                 if(p->isHard())
@@ -137,7 +138,8 @@ void OverlayWidget::paintOutgoingPrecedences(QPainter& painter, ActivityWidget *
     QList<ActivityWidget*> allWidgets = controller->getActivityWidgets();
 
     foreach(Precedence* p, outgoing) {
-        if (!p->isHard() && p->getFrameNr() > controller->getInstanceWidget()->getFrameNumber()) continue;
+        if(!p->isPosted(controller->getInstanceWidget()->getFrameNumber()))
+            continue;
         foreach(ActivityWidget* aw, allWidgets){
             if(aw->activity() == p->a2()) {
                 if(p->isHard())

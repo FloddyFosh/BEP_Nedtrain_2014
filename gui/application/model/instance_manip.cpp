@@ -5,6 +5,7 @@
 #include <climits>
 #include <algorithm>
 #include <set>
+#include <stdio.h>
 
 Resource* Instance::addResource(unsigned int i, unsigned int capacity, QString name) {
     int resId = i;
@@ -242,19 +243,24 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
     if (Precedence *existing = precedenceExists(a1, a2)) {
         if(!existing->isHard() && hard) // remove soft precedence, so that a hard precedence is added
             removePrecedence(existing);
-        else
-            throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
+        else{
+            if(existing->getFrameNrs().count(frameNumber))
+                throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
+            else
+                existing->addFrameNr(frameNumber);
+        }
     }
-
-    Precedence * p (new Precedence(a1, a2, hard));
-    if(hard) {
-        precedences.push_back(p);
-    } else {
-        softPrecedences.push_back(p);
-        p->setFrameNr(frameNumber);
+    else{
+        Precedence * p (new Precedence(a1, a2, hard));
+        if(hard) {
+            precedences.push_back(p);
+        } else {
+            softPrecedences.push_back(p);
+            p->addFrameNr(frameNumber);
+        }
+        a1->addPrecedence(p);
+        a2->addPrecedence(p);
     }
-    a1->addPrecedence(p);
-    a2->addPrecedence(p);
 }
 
 void Instance::mergeGroup(unsigned int i1, unsigned int j1, unsigned int i2, unsigned int j2) {

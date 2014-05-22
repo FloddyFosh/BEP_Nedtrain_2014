@@ -16,6 +16,7 @@ widgets/dialogs/scrollfilter.cpp
 widgets/dialogs/aboutdialog.cpp
 widgets/dialogs/importdialog.cpp
 widgets/dialogs/flexibilitydialog.cpp
+model/chain.cpp
 model/instance_manip.cpp
 model/instance_misc.cpp
 model/resource.cpp
