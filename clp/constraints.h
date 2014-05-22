@@ -22,7 +22,6 @@ class Constraints {
         map<string, int> variablesId;
         map<int, string> variablesName;
         vector<Constraint> constraintVector;
-        int addVariable(string name);
 
     public:
         Constraints();
@@ -31,6 +30,7 @@ class Constraints {
         int size();
         Constraint operator [](int i) const;
         string getVariableName(int id);
+        int addVariable(string name);
 };
 
 #endif
