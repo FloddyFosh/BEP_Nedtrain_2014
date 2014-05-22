@@ -20,4 +20,7 @@ Datum      | Uren   | Beschrijving
 15-05-2014 | 7      | Uitzoeken: Clp en Osi. Uitzoeken: LP, GMPL en MPS-bestanden. Overleg met Cees over de drie verslagen.
 16-05-2014 | 7      | Basic voorbeeld voor Clp werkt bijna
 18-05-2014 | 3      | Op server Qt versie updaten (is nog niet helemaal gelukt)
-19-05-2014 | 6      | Clp example werkt en er kan een instantie via stdin worden ingevoerd. 
+19-05-2014 | 6      | Clp example werkt en er kan een instantie via stdin worden ingevoerd.
+20-05-2014 | 7      | Bekijken python-code van Michel en bedenken welke input/output nodig is onze tool. 
+21-05-2014 | 6      | Clp example kunnen nu gewoon constraints in de vorm "A B 12" ingevoerd worden
+22-05-2014 |        | 
