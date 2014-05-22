@@ -71,8 +71,7 @@ grammar.tab.hpp
 */tms.exe
 */lex.cpp
 */grammar.output
-*/solver
-solver/solver
+**/src/solver
 clp/clp
 */solver.exe
 
