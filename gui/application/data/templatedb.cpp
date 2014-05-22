@@ -128,16 +128,14 @@ void TemplateDB::update(ActivityTemplate *activity){
 
 void TemplateDB::init() {
     QSqlQuery query;
-    query.prepare("CREATE TABLE activities(id INTEGER PRIMARY KEY, name TEXT, duration INTEGER)");
+    query.prepare("CREATE TABLE activities(id INTEGER PRIMARY KEY, name TEXT, duration INTEGER) END");
     query.exec();
-    showQueryError(query);
     query.prepare("CREATE TABLE requirements(activity INTEGER, resource TEXT, demand INTEGER)");
     query.exec();
-    showQueryError(query);
 }
 
 void TemplateDB::showQueryError(QSqlQuery query) {
     if(query.lastError().type() != QSqlError::NoError) {
-        qDebug() << query.lastError().databaseText();
+        qDebug() << query.lastError();
     }
 }

@@ -12,7 +12,7 @@ InstanceMdiWidget::InstanceMdiWidget(Controller *controller, QSlider * framesSli
 {
     setViewMode(QMdiArea::TabbedView);
     setActivationOrder(QMdiArea::ActivationHistoryOrder);
-    //setTabsClosable(true); Works only with Qt 4.8
+    setTabsClosable(true);
     connect(this, SIGNAL(subWindowActivated(QMdiSubWindow *)), controller, SLOT(disableToolbarButtons()));
     connect(this, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(updateSlider()));
     connect(this, SIGNAL(subWindowActivated(QMdiSubWindow *)), this, SLOT(setTimelineMenuOptions()));

@@ -125,10 +125,8 @@ bool InstanceWidget::eventFilter(QObject *o, QEvent *e) {
             //Shift button held down
             QScrollBar * slider = jobsScroller->horizontalScrollBar();
             int sliderv = slider->value();
-            if((wheelEvent->delta() > 0 && sliderv != slider->maximum()) || (wheelEvent->delta() < 0 && sliderv != slider->minimum())) {
-                slider->setSliderPosition(slider->value() + wheelEvent->delta());
-                setMouseX(wheelEvent->x() - (sliderv-slider->value()));
-            }
+            slider->setSliderPosition(slider->value() + wheelEvent->delta());
+            setMouseX(wheelEvent->x() - (sliderv-slider->value()));
             wheelEvent->accept();
             return true;
         }
