@@ -4,6 +4,8 @@
 #include "model/resourcedecrease.h"
 #include "model/instance.h"
 
+class Chain;
+
 /** Resource definition. A resource has a constant capacity, a name and a list
  * of requirements. The requirements supply a list of activities that need to
  * use this resource. Instead of keeping a list of activities, we keep a list
@@ -20,6 +22,7 @@ class Resource : public QObject
     int _capacity;
     QVector<Requirement*> requirements;
     QMap<int, ResourceDecrease*> decreases;
+    QVector<Chain*> chains;
 public:
     /** Constructor to construct a complete resource object.
       * @param instance pointer to the instance object this resource belongs to
@@ -48,6 +51,11 @@ public:
      * @return a QVector of Requirement objects
      */
     QVector<Requirement*> getRequirements();
+
+    /**
+     * @return A QMap that maps the resource units of this resource to a list of activities (chain).
+     */
+    QVector<Chain*> getChains();
 
     /** Add an activity that requires this resource. The parameter is a Requirement pointer
       * that has an activity pointer and an integer amount. This method is used when an

@@ -80,6 +80,7 @@ private:
     void processStateGroups(QList<QByteArray> fields, Frame *frame);  ///< processes a state line with groups outputted by the solver.
     void processPeakLine(QByteArray &line);  ///< processes a peak line outputted by the solver.
     void processMutexLine(QByteArray &line);  ///< processes a mutex line outputted by the solver.
+    void processChainsLine(QByteArray &line); ///< processes a line that contains the list of activities of each chain, outputted by the solver.
     void eatRemainingOutput(QList<QByteArray> &fields); ///< processes unused output.
 
 signals:

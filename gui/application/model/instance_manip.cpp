@@ -244,20 +244,23 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
         if(!existing->isHard() && hard) // remove soft precedence, so that a hard precedence is added
             removePrecedence(existing);
         else{
-            existing->addFrameNr(frameNumber);
-            throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
+            if(existing->getFrameNrs().count(frameNumber))
+                throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
+            else
+                existing->addFrameNr(frameNumber);
         }
     }
-
-    Precedence * p (new Precedence(a1, a2, hard));
-    if(hard) {
-        precedences.push_back(p);
-    } else {
-        softPrecedences.push_back(p);
-        p->addFrameNr(frameNumber);
+    else{
+        Precedence * p (new Precedence(a1, a2, hard));
+        if(hard) {
+            precedences.push_back(p);
+        } else {
+            softPrecedences.push_back(p);
+            p->addFrameNr(frameNumber);
+        }
+        a1->addPrecedence(p);
+        a2->addPrecedence(p);
     }
-    a1->addPrecedence(p);
-    a2->addPrecedence(p);
 }
 
 void Instance::mergeGroup(unsigned int i1, unsigned int j1, unsigned int i2, unsigned int j2) {

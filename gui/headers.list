@@ -22,6 +22,7 @@ widgets/dialogs/listformdialog.h
 widgets/dialogs/flexibilitydialog.h
 widgets/comparewindow.h
 widgets/compareinstancewidget.h
+model/chain.h
 model/job.h
 model/activity.h
 model/group.h

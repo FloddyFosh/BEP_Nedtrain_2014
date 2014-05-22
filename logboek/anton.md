@@ -18,6 +18,6 @@ Datum      | Uren   | Beschrijving
 14-05-2014 | 8      | Chaining implementatie debuggen, qt upgrade naar 5.2 werkend krijgen
 15-05-2014 | 7      | Chaining debuggen
 16-05-2014 | 5.5    | Chaining werkt! Tests maken
-19-05-2014 | -      | 
-20-05-2014 | -      | 
-21-05-2014 | -      | 
+19-05-2014 | 7.5    | Visualisatie chaining
+20-05-2014 | 7.5    | Visualisatie chaining
+21-05-2014 | 7      | Visualisatie chaining
