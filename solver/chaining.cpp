@@ -66,8 +66,8 @@ void pushToChain(activity* act, pair<int,int>* chainId){
 void add_frame() {
     int i, j, k;
     fprintf(stderr, "STATE:");
-    FOREACH(activities, it) {
-        activity * act = *it;
+    FOREACH(activities, it){
+        activity* act = *it;
         i = act->i, j = act->j;
         activity* a = A(i,j);
         fprintf(stderr, " %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));
@@ -81,6 +81,22 @@ void add_frame() {
         }
     }
     fprintf(stderr, " -1\n");
+}
+
+void print_chains() {
+    fprintf(stderr, "CHAINS:");
+    map< pair<int,int>, list<activity*> >::iterator it;
+    for(it=chains.begin();it!=chains.end();it++){
+        pair<int,int> chainId = it->first;
+        // <resource> <chain> <nrOfActivities>
+        fprintf(stderr," %d %d %d",chainId.first,chainId.second,len(it->second));
+        FOREACH(it->second, actIt){
+            activity* act = *actIt;
+            //<job/train> <activity>
+            fprintf(stderr," %d %d",act->i,act->j);
+        }
+    }
+    fprintf(stderr," -1\n");
 }
 
 bool chaining() {
