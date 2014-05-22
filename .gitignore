@@ -67,13 +67,13 @@ db.sqlite
 *.qm
 grammar.tab.cpp
 grammar.tab.hpp
-*/tms
-*/tms.exe
-*/lex.cpp
-*/grammar.output
+grammar.output
+**/tms
+**/tms.exe
+**/lex.cpp
 **/src/solver
-clp/clp
-*/solver.exe
+**/clp/clp
+**/solver.exe
 
 # Editors temporary files 
 *~
@@ -92,4 +92,3 @@ clp/clp
 !libgtest_win32.a
 !libgtest_win64.a
 !verslag/voorbeelden/*
-!clp/**/*.out
