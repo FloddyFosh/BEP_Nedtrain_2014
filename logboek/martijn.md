@@ -23,4 +23,4 @@ Datum      | Uren   | Beschrijving
 19-05-2014 | 6      | Clp example werkt en er kan een instantie via stdin worden ingevoerd.
 20-05-2014 | 7      | Bekijken python-code van Michel en bedenken welke input/output nodig is onze tool. 
 21-05-2014 | 6      | Clp example kunnen nu gewoon constraints in de vorm "A B 12" ingevoerd worden
-22-05-2014 |        | 
+22-05-2014 | 6      | Begin met testsuite (met Google Test) voor solver en Clp gefixed
