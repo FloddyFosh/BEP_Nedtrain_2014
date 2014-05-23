@@ -4,8 +4,15 @@ cmake_minimum_required(VERSION 2.6)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-# Link runTests with what we want to test and the GTest and pthread library
-add_executable(testsuite testsuite.cpp 
-    ../src/clp/constraints)
+# Include some directories for the Clp and CoinUtils libs
+include_directories(/home/martijn/Downloads/COIN/coin-Clp/include/coin)
+include_directories(home/martijn/Downloads/COIN/coin-Clp/CoinUtils/src)
+link_directories(/home/martijn/Downloads/COIN/coin-Clp/lib)
 
-target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread)
+# Add the source files are going to be tested to this list:
+add_executable(testsuite testsuite.cpp 
+    ../src/clp/constraints.cpp
+    ../src/clp/flexibility.cpp)
+
+# Link testsuite with GTest, pthread, Clp en CoinUtils
+target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread Clp CoinUtils)
