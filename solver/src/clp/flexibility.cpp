@@ -25,6 +25,7 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     ClpSimplex model; // child of ClpModel
     model.setOptimizationDirection(-1);
     model.resize(0, n_cols);
+    model.setLogLevel(0); // turns off all output of Clp
 
     // set coefficients
     for(int i = 0; i< n_cols; i++) {

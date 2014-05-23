@@ -1,6 +1,7 @@
 #include  <gtest/gtest.h>
 
 #include "../src/clp/flexibility.h"
+#include "../src/clp/constraints.h"
 
 class FlexibilityTest : public ::testing::Test {
   protected:
@@ -9,11 +10,15 @@ class FlexibilityTest : public ::testing::Test {
     // virtual void TearDown() {}
 };
 
-TEST(FlexibilityTest, Test_1) {
-    
-    // useClpToSolve(constraints);
+TEST_F(FlexibilityTest, Test_1) {
+    cstr.addVariable("A");
+    cstr.addConstraint("B", "A", 3);
+    cstr.addConstraint("C", "B", 2);
+    cstr.addConstraint("C", "A", 4);
+    double flex = useClpToSolve(cstr).first;
+    EXPECT_EQ(5.0, flex);
 }
 
-TEST(FlexibilityTest, Test_2) {
+TEST_F(FlexibilityTest, Test_2) {
 
 }
