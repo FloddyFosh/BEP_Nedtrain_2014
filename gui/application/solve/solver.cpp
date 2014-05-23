@@ -5,6 +5,8 @@
 #include "solver.h"
 #include "controller/exceptions.h"
 #include "model/frame.h"
+#include "model/instance.h"
+#include "model/chain.h"
 
 Solver::Solver(QString name, QString binary, QString arguments, QObject *parent) :
     QObject (parent), name (name), binary (binary), arguments (arguments), instance(0), solved(false), peakResource(-1), mutexJob(-1)
@@ -270,16 +272,20 @@ void Solver::processChainsLine(QByteArray &line) {
     fields.takeFirst();
 
     int res, chain, numActs, ai, aj;
+    QMap<int,Resource*> resources = instance->getResources();
     res = fields.takeFirst().toInt();
     while(res != -1){
+        Resource* curResource = resources[res];
         chain = fields.takeFirst().toInt();
         numActs = fields.takeFirst().toInt();
         for(int i=0;i<numActs;i++){
             ai = fields.takeFirst().toInt();
             aj = fields.takeFirst().toInt();
+            curResource->addActToChain(ai,aj,chain);
         }
         res = fields.takeFirst().toInt();
     }
+
 }
 
 void Solver::eatRemainingOutput(QList<QByteArray> &fields) {

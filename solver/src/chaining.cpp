@@ -143,5 +143,6 @@ bool chaining() {
         }
         add_frame();
     }
+    print_chains();
     return true;
 }

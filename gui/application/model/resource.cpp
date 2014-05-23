@@ -32,8 +32,26 @@ QVector<Requirement*> Resource::getRequirements() {
     return requirements;
 }
 
-QVector<Chain*> Resource::getChains() {
-    return chains;
+QMap<int, Chain*>* Resource::getChains() {
+    return &chains;
+}
+
+void Resource::addActToChain(int jobId, int actId, int chainId) {
+    Activity* act = _instance->getJobs()[jobId]->getActivities().value(actId);
+    QMap<int,Chain*>* chainsPointer = getChains();
+    if(!chainsPointer->contains(chainId)){
+        QVector<Activity*> actVec;
+        Chain newChain(_id,chainId,&actVec);
+        chainsPointer->insert(chainId, &newChain);
+    }
+
+    /*QVector<Activity*> actVec;
+    Chain newChain(_id,chainId,actVec);
+    chains[chainId] = &newChain;*/
+    Chain* chain = chainsPointer->value(chainId);
+    //chain->getActivities().append(act);
+    chain->addActivity(act);
+    Chain* chain2 = chain;
 }
 
 void Resource::addActivity(Requirement *req) {

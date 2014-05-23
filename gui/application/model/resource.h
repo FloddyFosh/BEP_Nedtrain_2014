@@ -22,7 +22,7 @@ class Resource : public QObject
     int _capacity;
     QVector<Requirement*> requirements;
     QMap<int, ResourceDecrease*> decreases;
-    QVector<Chain*> chains;
+    QMap<int,Chain*> chains;
 public:
     /** Constructor to construct a complete resource object.
       * @param instance pointer to the instance object this resource belongs to
@@ -55,7 +55,13 @@ public:
     /**
      * @return A QMap that maps the resource units of this resource to a list of activities (chain).
      */
-    QVector<Chain*> getChains();
+    QMap<int,Chain*>* getChains();
+
+    /**
+     * @param act Activity that will be added to following chain.
+     * @param chain Chain that was selected by chaining algorithm.
+     */
+    void addActToChain(int jobId, int actId, int chainId);
 
     /** Add an activity that requires this resource. The parameter is a Requirement pointer
       * that has an activity pointer and an integer amount. This method is used when an

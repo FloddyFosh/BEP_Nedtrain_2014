@@ -10,14 +10,15 @@ class Chain
 {
 private:
     int _resourceId, _chainId;
-    QVector<Activity*> activities;
+    QVector<Activity*>* activities;
 
 public:
-    Chain(int resourceId, int id, QVector<Activity*> activities);
+    Chain(int resourceId, int chainId, QVector<Activity*>* activities);
+    //Chain(int resourceId, int chainId);
 
     int resourceId();
     int chainId();
-    QVector<Activity*> getActivities();
+    QVector<Activity*>* getActivities();
 
     void addActivity(Activity* act);
 };
