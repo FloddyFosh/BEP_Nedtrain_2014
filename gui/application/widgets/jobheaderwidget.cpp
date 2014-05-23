@@ -19,6 +19,14 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
         editButton->setGeometry(10, 5, 10, 10);
         editButton->setFlat(true);
 
+        downButton = new QPushButton(AppIcon("down.png"),"", this);
+        downButton->setGeometry(10, 5, 10, 10);
+        downButton->setFlat(true);
+
+        upButton = new QPushButton(AppIcon("up.png"),"", this);
+        upButton->setGeometry(10, 5, 10, 10);
+        upButton->setFlat(true);
+
         expandButton = new QPushButton("+", this);
         expandButton->setCheckable(true);
         expandButton->setMaximumWidth(20);
@@ -45,6 +53,10 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
         //connect edit and remove button
         connect(removeButton, SIGNAL(clicked()), this, SLOT(removeJob()));
         connect(editButton, SIGNAL(clicked()), this, SLOT(editJob()));
+
+        //connect up and down button
+        connect(upButton, SIGNAL(clicked()), this, SLOT(upJob()));
+        connect(downButton, SIGNAL(clicked()), this, SLOT(downJob()));
     }
 }
 
@@ -73,6 +85,8 @@ void JobHeaderWidget::createLayout() {
 
     if(!compare) {
         layout->addStretch();
+        layout->addWidget(upButton,0, Qt::AlignTop|Qt::AlignRight);
+        layout->addWidget(downButton,0, Qt::AlignTop|Qt::AlignRight);
         layout->addWidget(editButton,0, Qt::AlignTop|Qt::AlignRight);
         layout->addWidget(removeButton,0, Qt::AlignTop|Qt::AlignRight);
     }
@@ -107,4 +121,14 @@ void JobHeaderWidget::removeJob() {
     controller->stopDrawingDependencies();
     if(!(_job->hasActivities() && QMessageBox::No == QMessageBox::question(this, tr("Are you sure?"), tr("Are you sure you want to remove this job with its activities?"),QMessageBox::Yes | QMessageBox::No)))
         emit remove(_job);
+}
+
+void JobHeaderWidget::upJob() {
+    int index = controller->getInstanceWidget()->getJobIndex(this);
+    controller->getInstanceWidget()->relocateJobWidget(index,index-1);
+}
+
+void JobHeaderWidget::downJob() {
+    int index = controller->getInstanceWidget()->getJobIndex(this);
+    controller->getInstanceWidget()->relocateJobWidget(index, index+1);
 }

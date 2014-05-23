@@ -22,8 +22,10 @@ class JobHeaderWidget : public HeaderWidget
     bool _expanded;
     InstanceController *controller;
     bool compare;
-    QPushButton *expandButton, *removeButton, *editButton;
+    QPushButton *expandButton, *removeButton, *editButton, *upButton, *downButton;
     QLabel *nameLabel;
+
+    void createLayout();
 
 public:
     /**
@@ -44,6 +46,8 @@ private slots:
     void updateGeometry(); ///< make updateGeometry available as slot to connect the expanded signal to
     void removeJob(); ///< remove the job represented by this row.
     void editJob(); ///< shows edit job dialog
+    void upJob(); ///< sets the job one higher in the layout index
+    void downJob(); ///< sets the job one lower in the layout index
 
 public slots:
     void doExpand(bool); ///< handler for the expanded button

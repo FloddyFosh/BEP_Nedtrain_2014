@@ -13,6 +13,7 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
         setWindowTitle(tr("Edit Job"));
     }
     nameEdit = new QLineEdit(j ? j->name() : QString());
+    nameEdit->setMaxLength(40);
 
     if(i->hoursOnTimeline()) {
         releaseDateTimeEdit = new QDateTimeEdit;
