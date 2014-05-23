@@ -18,7 +18,7 @@ EXE = clp
 
 # CHANGEME: Here is the name of all object files corresponding to the source
 #           code that you wrote in order to define the problem statement
-OBJS =  $(DRIVER).o constraints.o
+OBJS =  $(DRIVER).o constraints.o flexibility.o
 
 # CHANGEME: Additional libraries
 ADDLIBS =
