@@ -1,6 +1,6 @@
 #include  <gtest/gtest.h>
 
-#include "constraints.cpp"
+#include "../src/clp/constraints.h"
 
 TEST(Constraints, Size_Test) {
     Constraints cstr;
