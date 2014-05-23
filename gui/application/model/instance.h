@@ -258,6 +258,13 @@ public:
      */
     void removeDecreasePrecedence(ResourceDecrease *dec);
 
+    /** If precedence a1 < a2 exists, show it on frameNumber
+     * @param a1 activity 1 object
+     * @param a2 activity 2 object
+     * @param frameNumber ID of a frame
+     */
+    void addPrecedenceFrame(Activity* a1, Activity* a2, int frameNumber);
+
     /** Add a precedence constraint to the instance, used by the parser.
      * @param i1 job 1 index
      * @param j1 activity 1 index

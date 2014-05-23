@@ -99,6 +99,20 @@ void print_chains() {
     fprintf(stderr," -1\n");
 }
 
+void print_chain(int i, int j) {
+    fprintf(stderr, "CHAIN:");
+    pair<int,int> newPair(i,j);
+    list<activity*> chain = chains[newPair];
+    // <resource> <chain> <nrOfActivities>
+    fprintf(stderr," %d %d %d",i,j,len(chain));
+    FOREACH(chain, it){
+        activity* act = *it;
+        //<job/train> <activity>
+        fprintf(stderr," %d %d",act->i,act->j);
+    }
+    fprintf(stderr," -1\n");
+}
+
 bool chaining() {
 	/* PSEUDOCODE: [Generating Robust Partial Order Schedules, Policella 2004]
 	Input: A problem P and one of its fixed-times schedules S
@@ -141,8 +155,14 @@ bool chaining() {
                 pushToChain(act, &chainId);
             }
         }
-        add_frame();
+        FOREACH(chains, it){
+            pair<int,int> chainId = it->first;
+            if(chainId.first==i){
+                print_chain(chainId.first,chainId.second);
+                add_frame();
+            }
+        }
     }
-    print_chains();
+    //print_chains();
     return true;
 }

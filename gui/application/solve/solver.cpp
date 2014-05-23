@@ -176,8 +176,8 @@ void Solver::processOutput() {
             emit messageReceived(QString(line.trimmed()));
         } else if (line.startsWith("CLEARSOFTPREC")) {
            instance->clearSoftPrecedences();
-        } else if (line.startsWith("CHAINS")) {
-            processChainsLine(line);
+        } else if (line.startsWith("CHAIN")) {
+            processChainLine(line);
         } else {
             if(line.contains("Instance solved."))
                 setSolved(true);
@@ -218,6 +218,7 @@ void Solver::processStateLine(QByteArray &line) {
     Frame * nextFrame (new Frame);
     processStateGroups(fields, nextFrame);
     replayFrames.append(nextFrame);
+    instance->setFrames(replayFrames);
 }
 
 void Solver::processStateGroups(QList<QByteArray> fields, Frame *frame) {
@@ -267,7 +268,7 @@ void Solver::processMutexLine(QByteArray &line) {
     eatRemainingOutput(fields);
 }
 
-void Solver::processChainsLine(QByteArray &line) {
+void Solver::processChainLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
@@ -281,11 +282,11 @@ void Solver::processChainsLine(QByteArray &line) {
         for(int i=0;i<numActs;i++){
             ai = fields.takeFirst().toInt();
             aj = fields.takeFirst().toInt();
-            curResource->addActToChain(ai,aj,chain);
+            Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
+            curResource->addActToChain(act,chain);
         }
         res = fields.takeFirst().toInt();
     }
-
 }
 
 void Solver::eatRemainingOutput(QList<QByteArray> &fields) {

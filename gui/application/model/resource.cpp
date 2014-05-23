@@ -36,22 +36,23 @@ QMap<int, Chain*>* Resource::getChains() {
     return &chains;
 }
 
-void Resource::addActToChain(int jobId, int actId, int chainId) {
-    Activity* act = _instance->getJobs()[jobId]->getActivities().value(actId);
+void Resource::addActToChain(Activity* act, int chainId) {
     QMap<int,Chain*>* chainsPointer = getChains();
     if(!chainsPointer->contains(chainId)){
         QVector<Activity*> actVec;
-        Chain newChain(_id,chainId,&actVec);
-        chainsPointer->insert(chainId, &newChain);
+        Chain* newChain = new Chain(_id,chainId,actVec,this);
+        chainsPointer->insert(chainId, newChain);
     }
-
-    /*QVector<Activity*> actVec;
-    Chain newChain(_id,chainId,actVec);
-    chains[chainId] = &newChain;*/
+    QVector<Precedence*> precs = _instance->getSoftPrecedences();
     Chain* chain = chainsPointer->value(chainId);
-    //chain->getActivities().append(act);
+    if(!chain->getActivities()->empty()){
+        Activity* lastAct = chain->getActivities()->last();
+        if(Precedence* prec = _instance->precedenceExists(lastAct,act)){
+            int maxFrameNr = _instance->getMaxFrameNr();
+            _instance->addPrecedenceFrame(lastAct,act,maxFrameNr);
+        }
+    }
     chain->addActivity(act);
-    Chain* chain2 = chain;
 }
 
 void Resource::addActivity(Requirement *req) {

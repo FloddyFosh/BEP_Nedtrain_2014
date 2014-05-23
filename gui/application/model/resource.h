@@ -61,7 +61,7 @@ public:
      * @param act Activity that will be added to following chain.
      * @param chain Chain that was selected by chaining algorithm.
      */
-    void addActToChain(int jobId, int actId, int chainId);
+    void addActToChain(Activity *act, int chainId);
 
     /** Add an activity that requires this resource. The parameter is a Requirement pointer
       * that has an activity pointer and an integer amount. This method is used when an
