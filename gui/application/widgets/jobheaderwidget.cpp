@@ -34,7 +34,7 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
     }
 
     // make sure sizehint is used as size (at least for height)
-    setContentsMargins(10, 5, 0, 0);
+    setContentsMargins(10, 2, 0, 0);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 
     createLayout();
