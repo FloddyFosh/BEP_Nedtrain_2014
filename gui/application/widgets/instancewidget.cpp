@@ -223,6 +223,36 @@ void InstanceWidget::removeResource(Resource *r) {
     instance->removeResource(r->id());
 }
 
+void InstanceWidget::relocateJobWidget(int from, int to) {
+    //Index shouldn't be outside of scope.
+    if(from < 0 || to < 0) return;
+    if(from >= jobHeadersLayout->count() || to >= jobHeadersLayout->count()) return;
+
+    JobHeaderWidget *jhw = static_cast<JobHeaderWidget*>(jobHeadersLayout->itemAt(from)->widget());
+    JobWidget *jw = static_cast<JobWidget*>(jobsLayout->itemAt(from)->widget());
+
+    jobHeadersLayout->removeWidget(jhw);
+    jobsLayout->removeWidget(jw);
+    jobHeadersLayout->insertWidget(to, jhw);
+    jobsLayout->insertWidget(to, jw);
+    update();
+}
+
+void InstanceWidget::relocateResourceWidget(int from, int to) {
+    //Index shouldn't be outside of scope.
+    if(from < 0 || to < 0) return;
+    if(from >= resourceHeadersLayout->count() || to >= resourceHeadersLayout->count()) return;
+
+    ResourceHeaderWidget *rhw = static_cast<ResourceHeaderWidget*>(resourceHeadersLayout->itemAt(from)->widget());
+    ResourceWidget *rw = static_cast<ResourceWidget*>(resourcesLayout->itemAt(from)->widget());
+
+    resourceHeadersLayout->removeWidget(rhw);
+    resourcesLayout->removeWidget(rw);
+    resourceHeadersLayout->insertWidget(to, rhw);
+    resourcesLayout->insertWidget(to, rw);
+    update();
+}
+
 void InstanceWidget::disconnectActivitiesFromResourceWidgets() {
     foreach(ResourceWidget * rw, resourceWidgets) rw->disconnectActivities();
 }
