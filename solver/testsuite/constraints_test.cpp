@@ -61,16 +61,29 @@ TEST(Constraints, GetAmountOfVariables_Test) {
 TEST(Constraints, GetVariableName_Test) {
     Constraints cstr;
     cstr.addConstraint("aaa", "bbb", 1);
-    ASSERT_EQ(cstr.getVariableName(1), "bbb"); 
+    ASSERT_EQ("bbb", cstr.getVariableName(1)); 
     cstr.addConstraint("eee", "aaa", 2);
-    ASSERT_EQ(cstr.getVariableName(2), "eee");
-    ASSERT_EQ(cstr.getVariableName(0), "aaa");  
+    ASSERT_EQ("eee", cstr.getVariableName(2));
+    ASSERT_EQ("aaa", cstr.getVariableName(0));  
     cstr.addConstraint("a", "b", 9);
-    ASSERT_EQ(cstr.getVariableName(3), "a"); 
-    ASSERT_EQ(cstr.getVariableName(4), "b"); 
+    ASSERT_EQ("a", cstr.getVariableName(3)); 
+    ASSERT_EQ("b", cstr.getVariableName(4)); 
 }
 
 TEST(Constraints, AddVariable_Test) {
     Constraints cstr;
+    ASSERT_EQ(0, cstr.addVariable("a"));    
+    ASSERT_EQ("a", cstr.getVariableName(0));    
+    ASSERT_EQ(1, cstr.addVariable("b"));
+    ASSERT_EQ(0, cstr.addVariable("a"));
+    ASSERT_EQ(1, cstr.addVariable("b"));
+    ASSERT_EQ(2, cstr.getAmountOfVariables());
+
+    cstr.addConstraint("aaa", "bbb", 1);
+    ASSERT_EQ(4, cstr.getAmountOfVariables());
+    ASSERT_EQ(2, cstr.addVariable("aaa"));
+    ASSERT_EQ(3, cstr.addVariable("bbb"));
+    ASSERT_EQ("aaa", cstr.getVariableName(2));
+    ASSERT_EQ(4, cstr.getAmountOfVariables());
     
 }
