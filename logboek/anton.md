@@ -21,3 +21,7 @@ Datum      | Uren   | Beschrijving
 19-05-2014 | 7.5    | Visualisatie chaining
 20-05-2014 | 7.5    | Visualisatie chaining
 21-05-2014 | 7      | Visualisatie chaining
+22-05-2014 | 7      | 
+23-05-2014 | 7      | Fixen memory leak, chains apart weergegeven laten worden
+24-05-2014 | 1      | Bug gefixt met weergeven van aparte chains
+25-05-2014 | 3      | Laten painten van resources die chains gebruiken
