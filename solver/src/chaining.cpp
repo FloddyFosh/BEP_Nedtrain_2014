@@ -136,11 +136,10 @@ bool chaining() {
     initializeActivities();
     sort(activities.begin(), activities.end(), compareEST);
 
-    add_frame();
-
     initializeChains();
 
     for(int i=0; i<tmsp->n_resources; i++){
+        add_frame();
         FOREACH(activities, it){
             activity* act = *it;
             for(int m=0;m<Q(act->i,act->j,i);m++){
@@ -157,9 +156,9 @@ bool chaining() {
         }
         FOREACH(chains, it){
             pair<int,int> chainId = it->first;
-            if(chainId.first==i){
+            if(chainId.first==i && len(it->second)>1){
+                //add_frame();
                 print_chain(chainId.first,chainId.second);
-                add_frame();
             }
         }
     }
