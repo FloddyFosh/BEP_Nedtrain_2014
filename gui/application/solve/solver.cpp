@@ -7,6 +7,7 @@
 #include "model/frame.h"
 #include "model/instance.h"
 #include "model/chain.h"
+#include "model/chainframe.h"
 
 Solver::Solver(QString name, QString binary, QString arguments, QObject *parent) :
     QObject (parent), name (name), binary (binary), arguments (arguments), instance(0), solved(false), peakResource(-1), mutexJob(-1)
@@ -272,7 +273,8 @@ void Solver::processChainLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    int res, chain, numActs, ai, aj;
+    int res, prevRes, chain, numActs, ai, aj;
+    prevRes = -1;
     QMap<int,Resource*> resources = instance->getResources();
     res = fields.takeFirst().toInt();
     while(res != -1){
@@ -285,6 +287,18 @@ void Solver::processChainLine(QByteArray &line) {
             Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
             curResource->addActToChain(act,chain);
         }
+        Chain* c = curResource->getChains()->value(chain);
+        ChainFrame* nextFrame = new ChainFrame(c);
+        foreach(Group* g, replayFrames.last()->getGroups()){
+            nextFrame->addGroup(g);
+        }
+        if(res==prevRes){
+            ChainFrame* prevFrame = replayFrames.last();
+            nextFrame->setUsedProfile(prevFrame->getSelectedChainProfile());
+        }
+        replayFrames.append(nextFrame);
+        instance->setFrames(replayFrames);
+        prevRes = res;
         res = fields.takeFirst().toInt();
     }
 }

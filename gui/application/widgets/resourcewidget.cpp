@@ -99,7 +99,8 @@ void ResourceWidget::resizeEvent(QResizeEvent *) {
 
 void ResourceWidget::updatePixmap() {
     //get horizontal offset iff an instance has been loaded
-    offset = controller->getInstance()->getTimeOffset();
+    Instance* instance = controller->getInstance();
+    offset = instance->getTimeOffset();
 
     // determine size of this widget
     QSize hint = size();

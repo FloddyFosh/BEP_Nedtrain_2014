@@ -9,8 +9,7 @@ void EST_Generator::gotoFrame(int frameNr) {
 
     if (!(0 <= frameNr && frameNr <= instance->getMaxFrameNr())) { return; }
     Frame *frame = instance->getFrame(frameNr);
-
-    instance->setGroupPartition(frame->getGroups());
+    frame->display(instance);
 }
 
 QList<Precedence *> EST_Generator::getAdded(int frameNr){

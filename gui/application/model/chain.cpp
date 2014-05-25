@@ -26,10 +26,10 @@ QVector<Activity*>* Chain::getActivities() {
 }
 
 void Chain::addActivity(Activity* act) {
-    if(!activities.empty()){
+    /*if(!activities.empty()){
         Activity* last = activities.last();
         assert(last->est() + last->duration() + last->getFlex() <= act->est());
 
-    }
+    }*/
     activities.append(act);
 }
