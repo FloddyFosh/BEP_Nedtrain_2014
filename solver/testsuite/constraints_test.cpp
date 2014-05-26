@@ -5,7 +5,7 @@
 class ConstraintsTest : public ::testing::Test {
   protected:
     Constraints cstr;
-    // virtual void setUp() {}
+    // virtual void SetUp() {}
     // virtual void TearDown() {}
 }; 
 
