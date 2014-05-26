@@ -23,7 +23,7 @@ using namespace std;
 pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     int n_cols = constraints.getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
-    model.setOptimizationDirection(-1);
+    model.setOptimizationDirection(-1); // maximize instead of min.
     model.resize(0, n_cols);
     model.setLogLevel(0); // turns off all output of Clp
 
@@ -68,7 +68,7 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     assert(n_cols == numberCols);
     const double* sol = model.primalColumnSolution();
 
-    // print solution
+    // return solution
     map<string, double> vars;
     double flexibility = 0.0;
     for(int i = 0; i < numberCols; i+=2) {
