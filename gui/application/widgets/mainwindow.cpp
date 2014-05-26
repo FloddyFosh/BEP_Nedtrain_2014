@@ -30,6 +30,7 @@ using namespace std;
 MainWindow::MainWindow(Controller *controller)
     : controller(controller), languageActions (this)
 {
+    undostack = new QUndoStack(this);
     setAttribute(Qt::WA_DeleteOnClose);
 
     // init ui
@@ -109,11 +110,11 @@ void MainWindow::openRecent() {
 }
 
 void MainWindow::undo() {
-    qDebug() << "undo \n";
+    qDebug() << "undo";
 }
 
 void MainWindow::redo() {
-    qDebug() << "redo \n";
+    qDebug() << "redo";
 }
 
 void MainWindow::newResource() {
@@ -337,12 +338,14 @@ void MainWindow::createActions() {
     undoAct->setShortcuts(QKeySequence::Undo);
     undoAct->setStatusTip("Undo last action");
     undoAct->setIcon(AppIcon("undo.png"));
+    disableIfInstanceEmpty(undoAct);
     connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
 
     redoAct = new QAction(tr("&Redo"), this);
     redoAct->setShortcuts(QKeySequence::Redo);
     redoAct->setStatusTip("Redo last undo");
     redoAct->setIcon(AppIcon("redo.png"));
+    disableIfInstanceEmpty(redoAct);
     connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
 
     importAct = new QAction(tr("&Import Instance..."), this);

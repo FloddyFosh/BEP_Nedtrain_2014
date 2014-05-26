@@ -45,7 +45,8 @@
 
 #include "widgets/instancemdiwidget.h"
 
-#include<QActionGroup>
+#include <QActionGroup>
+#include <QUndoStack>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -184,6 +185,8 @@ private:
     QList<QAction*> disabledActions; ///< actions which are disabled if instance==0
     
     QSlider * framesSlider;
+
+    QUndoStack* undostack;
 };
 
 #endif
