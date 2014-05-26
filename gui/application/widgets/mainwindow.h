@@ -109,6 +109,8 @@ protected:
 private slots:
     void newInstance(); ///< handles File -- New Instance action
     void open(); ///< handles File -- Open Instance action
+    void undo(); ///< undo
+    void redo(); ///< redo
     void openRecent(); ///< handles opening an instance from the recent instances list in the File menu
     
     void newResource(); ///< handles the edit -- new resource action
@@ -153,7 +155,7 @@ private:
     QMenu *fileMenu, *editMenu, *solveMenu, *solveButtonMenu, *langMenu, *helpMenu;
 
     // file menu
-    QAction *newAct, *openAct, *importAct, *saveAct, *saveAsAct, *closeAct, *exitAct, *separatorAct;
+    QAction *newAct, *openAct, *undoAct, *redoAct, *importAct, *saveAct, *saveAsAct, *closeAct, *exitAct, *separatorAct;
 
     enum { MaxRecentFiles = 5 };
     QAction *recentFileActs[MaxRecentFiles];

@@ -7,6 +7,8 @@
 #include <QFileDialog>
 #include <QAction>
 
+#include <QDebug>
+
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
 #include "data/template_gateway.h"
@@ -104,6 +106,14 @@ void MainWindow::openRecent() {
     if (action)
         loadFile(action->data().toString());
     setButtonState();
+}
+
+void MainWindow::undo() {
+    qDebug() << "undo \n";
+}
+
+void MainWindow::redo() {
+    qDebug() << "redo \n";
 }
 
 void MainWindow::newResource() {
@@ -323,6 +333,18 @@ void MainWindow::createActions() {
     openAct->setIcon(AppIcon("open.png"));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
+    undoAct = new QAction(tr("&Undo"), this);
+    undoAct->setShortcuts(QKeySequence::Undo);
+    undoAct->setStatusTip("Undo last action");
+    undoAct->setIcon(AppIcon("undo.png"));
+    connect(undoAct, SIGNAL(triggered()), this, SLOT(undo()));
+
+    redoAct = new QAction(tr("&Redo"), this);
+    redoAct->setShortcuts(QKeySequence::Redo);
+    redoAct->setStatusTip("Redo last undo");
+    redoAct->setIcon(AppIcon("redo.png"));
+    connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
+
     importAct = new QAction(tr("&Import Instance..."), this);
     importAct->setStatusTip(tr("Import an existing instance"));
     disableIfInstanceEmpty(importAct);
@@ -488,6 +510,9 @@ void MainWindow::createMenus() {
     updateRecentFileActions();
 
     editMenu = menuBar()->addMenu(tr("&Edit"));
+    editMenu->addAction(undoAct);
+    editMenu->addAction(redoAct);
+    editMenu->addSeparator();
     editMenu->addAction(newResourceAct);
     editMenu->addAction(newJobAct);
     editMenu->addAction(newActivityAct);
@@ -524,13 +549,19 @@ void MainWindow::createToolbar() {
 	toolbar->addAction(newAct);
 	toolbar->addAction(openAct);
 	toolbar->addAction(saveAct);
-	toolbar->addAction(closeAct);
-	toolbar->addSeparator();
+    // toolbar->addAction(closeAct);
+
+    toolbar->addSeparator();
 	toolbar->addAction(newResourceAct);
 	toolbar->addAction(newJobAct);
 	toolbar->addAction(newActivityAct);
     toolbar->addAction(newPrecedenceAct);
     toolbar->addAction(removePrecedenceAct);
+
+    toolbar->addSeparator();
+    toolbar->addAction(undoAct);
+    toolbar->addAction(redoAct);
+
     toolbar->addSeparator();
     toolbar->addAction(zoomInAct);
     toolbar->addAction(zoomOutAct);
