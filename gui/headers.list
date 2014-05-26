@@ -62,6 +62,7 @@ util/language.h
 model/est_generator.h
 model/st_propagator.h
 model/frame.h
+model/chainframe.h
 controller/instancecontroller.h
 
 widgets/instancemdisubwindow.h
