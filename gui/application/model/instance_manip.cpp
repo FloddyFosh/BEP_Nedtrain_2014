@@ -241,26 +241,36 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
     if(impliedPrecedenceExists(a2, a1))
         throw InstanceManipulationException(tr("The constraint was not added, because it would create a cycle. A chain of constraints in the opposite direction already exists."));
     if (Precedence *existing = precedenceExists(a1, a2)) {
-        if(!existing->isHard() && hard) // remove soft precedence, so that a hard precedence is added
-            removePrecedence(existing);
-        else{
-            if(existing->getFrameNrs().count(frameNumber))
-                throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
-            else
-                existing->addFrameNr(frameNumber);
-        }
-    }
-    else{
-        Precedence * p (new Precedence(a1, a2, hard));
         if(hard) {
-            precedences.push_back(p);
-        } else {
-            softPrecedences.push_back(p);
-            p->addFrameNr(frameNumber);
+            if(!existing->isHard()) {
+                // Remove soft precedence, so that a hard precedence is added.
+                removePrecedence(existing);
+            }
+            else {
+                throw InstanceManipulationException(tr("Adding of the hard precedence constraint ignored, because it was already present."));
+            }
         }
-        a1->addPrecedence(p);
-        a2->addPrecedence(p);
+        else {
+            if(!existing->isHard() && !existing->getFrameNrs().count(frameNumber)) {
+                // Soft precedences can be added to multiple frames, because of multiple algorithms.
+                existing->addFrameNr(frameNumber);
+                return;
+            }
+            else {
+                throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
+            }
+        }
     }
+
+    Precedence * p (new Precedence(a1, a2, hard));
+    if(hard) {
+        precedences.push_back(p);
+    } else {
+        softPrecedences.push_back(p);
+        p->addFrameNr(frameNumber);
+    }
+    a1->addPrecedence(p);
+    a2->addPrecedence(p);
 }
 
 void Instance::mergeGroup(unsigned int i1, unsigned int j1, unsigned int i2, unsigned int j2) {
