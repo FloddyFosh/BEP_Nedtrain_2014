@@ -23,4 +23,7 @@ Datum      | Uren   | Beschrijving
 19-05-2014 | 6      | Clp example werkt en er kan een instantie via stdin worden ingevoerd.
 20-05-2014 | 7      | Bekijken python-code van Michel en bedenken welke input/output nodig is onze tool. 
 21-05-2014 | 6      | Clp example kunnen nu gewoon constraints in de vorm "A B 12" ingevoerd worden
-22-05-2014 |        | 
+22-05-2014 | 6      | Refactoren van code zodat deze makkelijker te testen en hergebruiken is.
+23-05-2014 | 7      | Testcode schrijven voor flexibility.cpp en constraints.cpp (Clp related)
+25-05-2014 | 4      | Jenkins server is weer volledig werkend
+26-06-2014 |        | 
