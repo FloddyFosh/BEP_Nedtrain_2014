@@ -26,4 +26,4 @@ Datum      | Uren   | Beschrijving
 22-05-2014 | 6      | Refactoren van code zodat deze makkelijker te testen en hergebruiken is.
 23-05-2014 | 7      | Testcode schrijven voor flexibility.cpp en constraints.cpp (Clp related)
 25-05-2014 | 4      | Jenkins server is weer volledig werkend
-26-06-2014 |        | 
+26-06-2014 | 6      | Begin aan undo/redo functionaliteit, sprint review, testsuite verbeteren van clp 
