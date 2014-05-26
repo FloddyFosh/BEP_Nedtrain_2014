@@ -243,7 +243,7 @@ void InstanceWidget::relocateJobWidget(int from, int to) {
     jobsLayout->removeWidget(jw);
     jobHeadersLayout->insertWidget(to, jhw);
     jobsLayout->insertWidget(to, jw);
-    update();
+    jw->raise();
 }
 
 void InstanceWidget::relocateResourceWidget(int from, int to) {
@@ -258,7 +258,7 @@ void InstanceWidget::relocateResourceWidget(int from, int to) {
     resourcesLayout->removeWidget(rw);
     resourceHeadersLayout->insertWidget(to, rhw);
     resourcesLayout->insertWidget(to, rw);
-    update();
+    rw->raise();
 }
 
 void InstanceWidget::disconnectActivitiesFromResourceWidgets() {
@@ -409,6 +409,7 @@ void InstanceWidget::updateZoom() {
 void InstanceWidget::updateWidgetsLayout() {
     jobsLayout->update();
     resourcesLayout->update();
+    raise();
 }
 
 InstanceController * InstanceWidget::getInstanceController() {
