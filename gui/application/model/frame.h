@@ -14,7 +14,7 @@ class Frame {
 private:
     QVector<Group *> groups;
     //QList<QPoint*>* usedProfile;
-    //QList<QPoint*>* selectedProfile;
+    QList<QPoint*>* selectedProfile;
 public:
     Frame();
     bool isChain;
@@ -25,8 +25,8 @@ public:
      */
     QVector<Group *> getGroups();
 
-    //QList<QPoint*>* getUsedProfile();
-    //QList<QPoint*>* getSelectedProfile();
+    virtual QList<QPoint*>* getUsedProfile();
+    virtual QList<QPoint*>* getSelectedProfile();
 
     /**
      * add a group to this frame.

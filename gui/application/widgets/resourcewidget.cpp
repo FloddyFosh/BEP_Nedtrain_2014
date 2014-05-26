@@ -235,21 +235,28 @@ void ResourceWidget::paintChainResources(QPainter& painter){
     int frameNr = controller->getFrameNumber();
     Instance* inst = controller->getInstance();
     if(inst->getMaxFrameNr() != -1){
-        ChainFrame* curFrame = static_cast<ChainFrame*>(inst->getFrame(frameNr));
-        if(curFrame == 0) return;
+        ChainFrame* curFrame = (ChainFrame*) inst->getFrame(frameNr);
         if(QList<QPoint*>* selectedProfile = curFrame->getSelectedProfile()){
-            painter.setBrush(QColor(0,0,255));
-            painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
+            if(_resource->id() != curFrame->getChain()->resourceId()) return;
+            int rows = calculator->getRowCount();
+            QLinearGradient grad(0, 0, 0, rows);
+            grad.setColorAt(0, QColor(50,50,255));
+            grad.setColorAt(_resource->capacity() / (double) rows, QColor(200,200,255));
+            painter.setBrush(grad);
+            painter.setPen(QPen(QColor("black"), 0, Qt::NoPen));
             painter.drawPolygon(calculator->getChainPolygon(selectedProfile));
-            //painter.drawPolygon(calculator->getDemandPolygon());
         }
         if(QList<QPoint*>* usedProfile = curFrame->getUsedProfile()){
+            if(_resource->id() != curFrame->getChain()->resourceId()) return;
             painter.setBrush(QColor(255,255,255));
             painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
             painter.drawPolygon(calculator->getChainPolygon(usedProfile));
             painter.setBrush(QColor(0,0,0,120));
             painter.drawPolygon(calculator->getChainPolygon(usedProfile));
         }
+        QPolygon outline = calculator->getDemandPolygon();
+        painter.setBrush(Qt::NoBrush);
+        painter.drawPolygon(outline);
     }
 }
 

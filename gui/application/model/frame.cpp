@@ -7,13 +7,13 @@ QVector<Group *> Frame::getGroups() {
     return groups;
 }
 
-/*QList<QPoint*>* Frame::getUsedProfile() {
-    return usedProfile;
+QList<QPoint*>* Frame::getUsedProfile() {
+    return 0;
 }
 
 QList<QPoint*>* Frame::getSelectedProfile() {
-    return selectedProfile;
-}*/
+    return 0;
+}
 
 void Frame::addGroup(Group * g) {
     groups.append(g);

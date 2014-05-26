@@ -11,7 +11,7 @@ void ChainFrame::initialize(){
     QVector<Activity*>* activities = chain->getActivities();
     foreach(Activity* act, *activities){
         Requirement* req = act->getRequirements().value(chain->resourceId());
-        int amount = req->amount(); //moet nog amount van used bij
+        int amount = 1; //moet nog amount van used bij
         selectedProfile->append(new QPoint(act->est(),0));
         selectedProfile->append(new QPoint(act->est(),amount));
         selectedProfile->append(new QPoint(act->eet(),amount));
