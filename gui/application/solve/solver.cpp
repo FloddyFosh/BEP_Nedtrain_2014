@@ -288,13 +288,15 @@ void Solver::processChainLine(QByteArray &line) {
             curResource->addActToChain(act,chain);
         }
         Chain* c = curResource->getChains()->value(chain);
-        ChainFrame* nextFrame = new ChainFrame(c);
+        QList<QPoint*>* usedProfile = 0;
+        if(res==prevRes){
+            ChainFrame* lastFrame = static_cast<ChainFrame*>(replayFrames.last());
+            if(lastFrame)
+                usedProfile = lastFrame->getUsedProfile();
+        }
+        ChainFrame* nextFrame = new ChainFrame(c,usedProfile);
         foreach(Group* g, replayFrames.last()->getGroups()){
             nextFrame->addGroup(g);
-        }
-        if(res==prevRes){
-            ChainFrame* prevFrame = replayFrames.last();
-            nextFrame->setUsedProfile(prevFrame->getSelectedChainProfile());
         }
         replayFrames.append(nextFrame);
         instance->setFrames(replayFrames);

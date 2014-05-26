@@ -4,23 +4,26 @@
 #include "frame.h"
 #include "activity.h"
 #include "instance.h"
+#include "chain.h"
 
 #include <QPoint>
 
 class ChainFrame : public Frame {
 private:
     Chain* chain;
-    QList<QPoint*> usedProfile;
-    QList<QPoint*> selectedChainProfile;
+    QList<QPoint*>* selectedProfile;
+    QList<QPoint*>* usedProfile;
 public:
-    ChainFrame(Chain* c);
+    bool isChain;
+    ChainFrame(Chain* c, QList<QPoint*>* prev);
+    void initialize();
 
     Chain* getChain();
-    QList<QPoint*> getUsedProfile();
-    QList<QPoint*> getSelectedChainProfile();
+    QList<QPoint*>* getSelectedProfile();
+    QList<QPoint*>* getUsedProfile();
 
-    void setUsedProfile(QList<QPoint*> p);
-    //void addToSelectedChainProfile(QPoint* p);
+    void setUsedProfile(QList<QPoint *> *p);
+    void setSelectedProfile(QList<QPoint*>* p);
     void display(Instance *inst);
 };
 

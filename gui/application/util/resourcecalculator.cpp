@@ -44,6 +44,7 @@ QPolygon ResourceCalculator::getDemandPolygon() {
 	}
 	return polygon;
 }
+
 QPolygon ResourceCalculator::getResourcePolygon(int width) {
 	QPolygon polygon;
 
@@ -92,6 +93,19 @@ QPolygon ResourceCalculator::getExceedPolygon(int width) {
 	QPolygon resourcePolygon = getResourcePolygon(width);
 	QPolygon exceedPolygon = demandPolygon.intersected(resourcePolygon);
 	return exceedPolygon;
+}
+
+QPolygon ResourceCalculator::getChainPolygon(QList<QPoint*>* points){
+    QPolygon polygon;
+    if (!points->empty()) {
+        for (int i = 0; i < points->size(); ++i) {
+            polygon << QPoint(points->at(i)->x(), i == 0 ? 0 : points->at(i - 1)->y())
+                    << *points->at(i);
+        }
+        // finish
+        polygon << polygon.first();
+    }
+    return polygon;
 }
 
 int ResourceCalculator::getRowCount() {

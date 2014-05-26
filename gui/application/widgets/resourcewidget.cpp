@@ -1,4 +1,6 @@
 #include "controller/instancecontroller.h"
+#include "model/frame.h"
+#include "model/chainframe.h"
 
 #include <QPainter>
 #include <cmath>
@@ -135,6 +137,9 @@ void ResourceWidget::updatePixmap() {
     //3. draw job profile
     paintJobProfile(painter);  //uses scaled painter
 
+    //4. draw resources used by selected chain
+    paintChainResources(painter);
+
     painter.restore(); //restore scaled painter
 
     //4. draw selected region
@@ -223,6 +228,28 @@ void ResourceWidget::paintResourceMarks(QPainter& painter){
     foreach(int time, resourceMarks){
         QPoint usage = calculator->getResourceUsageAt(time);
         painter.drawEllipse(QPointF((time+offset)*hZoom(), (double)usage.y()*vScale),4, 4);
+    }
+}
+
+void ResourceWidget::paintChainResources(QPainter& painter){
+    int frameNr = controller->getFrameNumber();
+    Instance* inst = controller->getInstance();
+    if(inst->getMaxFrameNr() != -1){
+        ChainFrame* curFrame = static_cast<ChainFrame*>(inst->getFrame(frameNr));
+        if(curFrame == 0) return;
+        if(QList<QPoint*>* selectedProfile = curFrame->getSelectedProfile()){
+            painter.setBrush(QColor(0,0,255));
+            painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
+            painter.drawPolygon(calculator->getChainPolygon(selectedProfile));
+            //painter.drawPolygon(calculator->getDemandPolygon());
+        }
+        if(QList<QPoint*>* usedProfile = curFrame->getUsedProfile()){
+            painter.setBrush(QColor(255,255,255));
+            painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
+            painter.drawPolygon(calculator->getChainPolygon(usedProfile));
+            painter.setBrush(QColor(0,0,0,120));
+            painter.drawPolygon(calculator->getChainPolygon(usedProfile));
+        }
     }
 }
 

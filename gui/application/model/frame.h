@@ -13,12 +13,20 @@ using namespace std;
 class Frame {
 private:
     QVector<Group *> groups;
+    //QList<QPoint*>* usedProfile;
+    //QList<QPoint*>* selectedProfile;
 public:
+    Frame();
+    bool isChain;
+
     /**
      * Return groups belonging to this frame.
      * @return A vector of groups.
      */
     QVector<Group *> getGroups();
+
+    //QList<QPoint*>* getUsedProfile();
+    //QList<QPoint*>* getSelectedProfile();
 
     /**
      * add a group to this frame.
