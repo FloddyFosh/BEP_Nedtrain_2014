@@ -193,7 +193,7 @@ void InstanceWidget::removeJob(Job *j) {
 }
 
 void InstanceWidget::addResource(Resource *r) {
-    ResourceHeaderWidget *rhw = new ResourceHeaderWidget(r, resourceHeaders);
+    ResourceHeaderWidget *rhw = new ResourceHeaderWidget(r, instanceController, resourceHeaders);
     rHeaderWidgets.insert(r->id(), rhw);
     resourceHeadersLayout->insertWidget(resourceHeadersLayout->count() - 1, rhw);
 
@@ -221,6 +221,44 @@ void InstanceWidget::removeResource(Resource *r) {
     delete rw;
 
     instance->removeResource(r->id());
+}
+
+int InstanceWidget::getJobIndex(JobHeaderWidget *jhw) {
+    return jobHeadersLayout->indexOf(jhw);
+}
+
+int InstanceWidget::getResourceIndex(ResourceHeaderWidget *rhw) {
+    return resourceHeadersLayout->indexOf(rhw);
+}
+
+void InstanceWidget::relocateJobWidget(int from, int to) {
+    //Index shouldn't be outside of scope.
+    if(from < 0 || to < 0) return;
+    if(from > jobHeadersLayout->count()-2 || to > jobHeadersLayout->count()-2) return;
+
+    JobHeaderWidget *jhw = static_cast<JobHeaderWidget*>(jobHeadersLayout->itemAt(from)->widget());
+    JobWidget *jw = static_cast<JobWidget*>(jobsLayout->itemAt(from)->widget());
+
+    jobHeadersLayout->removeWidget(jhw);
+    jobsLayout->removeWidget(jw);
+    jobHeadersLayout->insertWidget(to, jhw);
+    jobsLayout->insertWidget(to, jw);
+    jw->raise();
+}
+
+void InstanceWidget::relocateResourceWidget(int from, int to) {
+    //Index shouldn't be outside of scope.
+    if(from < 0 || to < 0) return;
+    if(from > resourceHeadersLayout->count()-2 || to > resourceHeadersLayout->count()-2) return;
+
+    ResourceHeaderWidget *rhw = static_cast<ResourceHeaderWidget*>(resourceHeadersLayout->itemAt(from)->widget());
+    ResourceWidget *rw = static_cast<ResourceWidget*>(resourcesLayout->itemAt(from)->widget());
+
+    resourceHeadersLayout->removeWidget(rhw);
+    resourcesLayout->removeWidget(rw);
+    resourceHeadersLayout->insertWidget(to, rhw);
+    resourcesLayout->insertWidget(to, rw);
+    rw->raise();
 }
 
 void InstanceWidget::disconnectActivitiesFromResourceWidgets() {
@@ -375,6 +413,7 @@ void InstanceWidget::updateZoom() {
 void InstanceWidget::updateWidgetsLayout() {
     jobsLayout->update();
     resourcesLayout->update();
+    raise();
 }
 
 InstanceController * InstanceWidget::getInstanceController() {

@@ -3,11 +3,11 @@
     2) Find an interval set I_S which maximizes flex(S,I_S)
 
     earliest starting time  [est] --> t^-
-    latest starting time    [lst] --> t^-
+    latest starting time    [lst] --> t^+
 
     maximize:       the sum of ([lst] - [est]) for each t \in T
     constraints:1)  0 <= [lst] - [est] <= \infty \forall t
-                2)  [lst] - t' <= c \forall (t - t' <= c) \in C
+                2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
                 3)  [lst_0] = 0
                 3)  [est_0] = 0
         (so 3 types of constraints)
@@ -16,100 +16,70 @@
     
 */
 
-#include "ClpSimplex.hpp"
-
-#include <set>
-#include <vector>
-#include <string>
-#include <iostream>
+#include "flexibility.h"
 
 using namespace std;
 
-typedef struct Constraint {
-    // [t1] - [t2] <= [c]
-    int t1; // task id 1
-    int t2; // task id 2
-    int c;  // constant
-} Constraint;
-
-int main () {
-    int n_constraints;
-    cin >> n_constraints; 
-        
-    // TODO: Have to add something to read the first task,
-    //       because we need to know what [lst_0] and [est_0]
-    //       is. 
-
-    // now read [n_constraints] constraints
-    vector< Constraint > constraints;
-
-    map<int, string> taskIdMap; 
-    map<string, int> taskNameMap;
-    
-int counter = 0;
-    for(int i = 0; i < n_constraints; i++) {
-        // [ti] - [tj] <= [c]
-        string ti, tj;
-        int c;
-        cin >> ti >> tj >> c;
-
-        
-        Constraint constr = {ti, tj, c};
-        constraints.push_back(constr);
-    }
-
-    // print the input
-    cout << endl;
-    for(int i = 0; i < n_constraints; i++) {
-        Constraint t = constraints[i];
-        cout << t.t1 << "\t" << t.t2 << "\t" << t.c << endl;
-    }
-    cout << variables.size() << " tasks" << endl;
-    
-    // make a model with [n_cols] variables to optimize
-    // maximize {1, -1, 1, -1, ...}.size = [n_cols]
-    // minimize {-1, 1, -1, 1, ...}.size = [n_cols]
-    // each variable in range [-inf, inf]
-    int n_cols = ((int) variables.size()) * 2;
+pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
+    int n_cols = constraints.getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
+    model.setOptimizationDirection(-1); // maximize instead of min.
     model.resize(0, n_cols);
+    model.setLogLevel(0); // turns off all output of Clp
 
     // set coefficients
     for(int i = 0; i< n_cols; i++) {
         // set coefficients alternating between -1 and 1
-        model.setObjectiveCoefficient(i, (i % 2) * 2.0 - 1.0);
-        model.setColumnLower(i, -DBL_MAX); // -DBL_MAX = -inf
-        model.setColumnUpper(i,  DBL_MAX); //  DBL_MAX = +inf
+        model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
+        model.setColumnLower(i, 0); // -DBL_MAX = -inf
+        model.setColumnUpper(i, DBL_MAX); //  DBL_MAX = +inf
     }
     
     // add constraints: 0 <= [lst] - [est] <= \infty \forall t
-    for(int i = 0; i < n_cols / 2; i++) {
-        vector<int> cols;
-        vector<double> cfc; // coefficients
-        cols.push_back(i * 2);
-        cfc.push_back(1.0);
-        cols.push_back(i * 2 + 1);
-        cfc.push_back(-1.0);
-        model.addRow(2, &cols[0], &cfc[0], 0.0, DBL_MAX);
+    for(int i = 0; i < n_cols; i+=2) {
+        // latest starting time is [i]
+        // earliest starting time is [i+1]
+        int cols[] = {i, i+1};
+        double cfc[] = {1.0, -1.0}; // coefficients
+        model.addRow(2, cols, cfc, 0.0, DBL_MAX);
     }
     
-    // add constraints: [lst] - t' <= c \forall (t - t' <= c) \in C
-    // TODO: model.addRow(n_cols, cols, coefficients, low_b, up_b);
-
-    // TODO: model.initialSolve();
-    
-    // TODO: get solution
-/*  int numberCols = model.numberColumns();
-    const double* sol1 = model.primalColumnSolution();
-*/
-    // TODO: print solution
-    cout << endl << "### SOLUTION ###" << endl;
-/*  cout << "status     = " << model.status() << endl;
-    for(int i = 0; i < numberCols; i++) {
-        cout << "x_" << (i+1) << " = " << sol1[i] << endl;
+    // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
+    for(int i = 0; i < constraints.size(); i++) {
+        // [lst]  = constrain.t1 * 2    
+        // [est'] = constrain.t2 * 2 + 1
+        Constraint constrain = constraints[i];
+        int cols[] = {constrain.t1 * 2, constrain.t2 * 2 + 1};
+        double cfc[] = {1.0, -1.0}; // coefficients
+        model.addRow(2, cols, cfc, -DBL_MAX, constrain.c);
     }
-*/
-    cout << endl;
+    
+    // add constraints: [lst_0] = 0 && [est_0] = 0
+    model.setColumnLower(0, 0.0); 
+    model.setColumnUpper(0, 0.0);    
+    model.setColumnLower(1, 0.0); 
+    model.setColumnUpper(1, 0.0); 
 
-    return 0;
+    // solve the problem
+    model.initialSolve();
+    
+    // get solution
+    int numberCols = model.numberColumns();
+    assert(n_cols == numberCols);
+    const double* sol = model.primalColumnSolution();
+
+    // return solution
+    map<string, double> vars;
+    double flexibility = 0.0;
+    for(int i = 0; i < numberCols; i+=2) {
+        string varname = constraints.getVariableName(i/2);
+        vars[varname + "^+"] = sol[i];
+        vars[varname + "^-"] = sol[i+1];
+        flexibility += sol[i] - sol[i+1];
+    }
+
+    pair<double, map<string, double> > output;
+    output.first = flexibility;
+    output.second = vars;
+    return output;
 }

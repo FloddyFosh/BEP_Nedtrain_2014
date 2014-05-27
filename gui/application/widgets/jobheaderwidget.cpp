@@ -8,15 +8,28 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
     HeaderWidget(parent), _job(j), _expanded(false), controller(controller), compare(comparing)
 {
     nameLabel = new QLabel(_job->name(), this);
+    nameLabel->setContentsMargins(10,3,0,0);
 
     if(!compare) {
         removeButton = new QPushButton(AppIcon("remove.png"),"", this);
-        removeButton->setGeometry(10, 5, 20, 20);
+        removeButton->setGeometry(10, 5, 10, 10);
         removeButton->setFlat(true);
+        removeButton->setFocusPolicy(Qt::NoFocus);
 
         editButton = new QPushButton(AppIcon("edit.png"),"", this);
-        editButton->setGeometry(10, 5, 20, 20);
+        editButton->setGeometry(10, 5, 10, 10);
         editButton->setFlat(true);
+        editButton->setFocusPolicy(Qt::NoFocus);
+
+        downButton = new QPushButton(AppIcon("down.png"),"", this);
+        downButton->setGeometry(10, 5, 10, 10);
+        downButton->setFlat(true);
+        downButton->setFocusPolicy(Qt::NoFocus);
+
+        upButton = new QPushButton(AppIcon("up.png"),"", this);
+        upButton->setGeometry(10, 5, 10, 10);
+        upButton->setFlat(true);
+        upButton->setFocusPolicy(Qt::NoFocus);
 
         expandButton = new QPushButton("+", this);
         expandButton->setCheckable(true);
@@ -25,25 +38,10 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
     }
 
     // make sure sizehint is used as size (at least for height)
-    setContentsMargins(0, 2, 0, 0);
+    setContentsMargins(10, 2, 0, 0);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 
-    QHBoxLayout *layout = new QHBoxLayout();
-    layout->setContentsMargins(10,0,0,0);
-
-    if(!compare) {
-        layout->addWidget(expandButton,0, Qt::AlignTop);
-    }
-
-    layout->addWidget(nameLabel,0, Qt::AlignTop);
-
-    if(!compare) {
-        layout->addStretch();
-        layout->addWidget(editButton,0, Qt::AlignTop);
-        layout->addWidget(removeButton,0, Qt::AlignTop);
-    }
-
-    setLayout(layout);
+    createLayout();
 
     connect(j, SIGNAL(activityAdded(Activity*)), this, SLOT(updateGeometry()));
     connect(j, SIGNAL(activityRemoved()), this, SLOT(updateGeometry()));
@@ -59,7 +57,45 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
         //connect edit and remove button
         connect(removeButton, SIGNAL(clicked()), this, SLOT(removeJob()));
         connect(editButton, SIGNAL(clicked()), this, SLOT(editJob()));
+
+        //connect up and down button
+        connect(upButton, SIGNAL(clicked()), this, SLOT(upJob()));
+        connect(downButton, SIGNAL(clicked()), this, SLOT(downJob()));
     }
+}
+
+QSize JobHeaderWidget::sizeHint() const {
+    int vZoom = 10;
+    int verticalBlocks = 2;
+    if (_expanded) {
+        verticalBlocks += _job->groupCount();
+    }
+    else {
+        verticalBlocks += 1;
+    }
+    return QSize(0, verticalBlocks * vZoom);
+}
+
+void JobHeaderWidget::createLayout() {
+    QHBoxLayout *layout = new QHBoxLayout();
+    layout->setContentsMargins(0,0,0,0);
+    layout->setSpacing(0);
+
+    if(!compare) {
+        layout->addWidget(expandButton,0, Qt::AlignTop|Qt::AlignLeft);
+    }
+
+    layout->addWidget(nameLabel,0, Qt::AlignTop|Qt::AlignLeft);
+
+    if(!compare) {
+        layout->addStretch();
+        layout->addWidget(upButton,0, Qt::AlignTop|Qt::AlignRight);
+        layout->addWidget(downButton,0, Qt::AlignTop|Qt::AlignRight);
+        layout->addWidget(editButton,0, Qt::AlignTop|Qt::AlignRight);
+        layout->addWidget(removeButton,0, Qt::AlignTop|Qt::AlignRight);
+    }
+
+    setLayout(layout);
 }
 
 void JobHeaderWidget::updateGeometry() {
@@ -76,18 +112,6 @@ void JobHeaderWidget::doExpand(bool expanded) {
     updateGeometry();
 }
 
-QSize JobHeaderWidget::sizeHint() const {
-    int vZoom = 10;
-    int verticalBlocks = 2;
-    if (_expanded) {
-        verticalBlocks += _job->groupCount();
-    }
-    else {
-        verticalBlocks += 1;
-    }
-    return QSize(0, verticalBlocks * vZoom);
-}
-
 void JobHeaderWidget::editJob(){
 	JobDialog dialog(_job->instance(), _job, this);
 	dialog.exec();
@@ -101,4 +125,14 @@ void JobHeaderWidget::removeJob() {
     controller->stopDrawingDependencies();
     if(!(_job->hasActivities() && QMessageBox::No == QMessageBox::question(this, tr("Are you sure?"), tr("Are you sure you want to remove this job with its activities?"),QMessageBox::Yes | QMessageBox::No)))
         emit remove(_job);
+}
+
+void JobHeaderWidget::upJob() {
+    int index = controller->getInstanceWidget()->getJobIndex(this);
+    controller->getInstanceWidget()->relocateJobWidget(index,index-1);
+}
+
+void JobHeaderWidget::downJob() {
+    int index = controller->getInstanceWidget()->getJobIndex(this);
+    controller->getInstanceWidget()->relocateJobWidget(index, index+1);
 }

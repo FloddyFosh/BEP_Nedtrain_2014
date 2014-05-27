@@ -18,7 +18,7 @@ EXE = clp
 
 # CHANGEME: Here is the name of all object files corresponding to the source
 #           code that you wrote in order to define the problem statement
-OBJS =  $(DRIVER).o constraints.o
+OBJS =  $(DRIVER).o constraints.o flexibility.o
 
 # CHANGEME: Additional libraries
 ADDLIBS =
@@ -102,36 +102,10 @@ endif
 CYGPATH_W = echo
 
 # Here we list all possible generated objects or executables to delete them
-CLEANFILES = \
-	addBits.o addBits \
-	addColumns.o addColumns \
-	addRows.o addRows \
-	decomp2.o decomp2 \
-	decomp3.o decomp3 \
-	decompose.o decompose \
-	defaults.o defaults \
-	driver2.o driver2 \
-	driver.o driver \
-	driverC.o driverC \
-	dualCuts.o dualCuts \
-	ekk.o ekk \
-	ekk_interface.o ekk_interface \
-	hello.o hello \
-	makeDual.o makeDual \
-	minimum.o minimum \
-	modify.o modify \
-	network.o network \
-	pdco.o pdco \
-	piece.o piece \
-	rowColumn.o rowColumn \
-	sprint2.o sprint2 \
-	sprint.o sprint \
-	testBarrier.o testBarrier \
-	testBasis.o testBasis \
-	testGub2.o testGub2 \
-	testGub.o testGub \
-	testQP.o testQP \
-	useVolume.o useVolume
+CLEANFILES = clp \
+    main.o \
+    flexibility.o \
+    constraints.o \
 
 all: $(EXE)
 

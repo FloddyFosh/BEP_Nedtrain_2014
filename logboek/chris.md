@@ -15,9 +15,12 @@ Datum      | Uren   | Beschrijving
 10-05-2014 | 2		| Lezen van papers, o.a. chaining
 12-05-2014 | 7 + 4  | Hele dag en avond bezig geweest tool tegelijk te laten werken op windows en ubuntu, gelukt!
 13-05-2014 | 8      | Qt van tool upgraden van versie 4.8.6 naar 5.2.1, orientatieverslag en requirementsanalyse verbeteren
-14-05-2014 | 6      | Qt van tool upgraden van versie 4.8.6 naar 5.2.1, gelukt!
+14-05-2014 | 5      | Qt van tool upgraden van versie 4.8.6 naar 5.2.1, gelukt!
 15-05-2014 | 8      | Afspraak met Cees en de gegeven feedback aanpassen in de verslagen, kleine code aanpassingen.
-16-05-2014 | -      | 
-19-05-2014 | -      | 
-20-05-2014 | -      | 
-21-05-2014 | -      | 
+16-05-2014 | 6      | Feedback aanpassingen plan van aanpak, helpen met chaining.
+19-05-2014 | 7      | Libgtest fix, bugfixes.
+20-05-2014 | 7      | Visualisatie bugfixes, SQL database template fix.
+21-05-2014 | 0      | 50 jarige jubileum opa en oma
+22-05-2014 | 7      | Control+scroll en Shift+scroll, tabkruis, andere kleine dingen.
+23-05-2014 | 7      | Job/Resource widget indexpijl knoppen, kleine bugs, clp helpen.
+26-05-2014 | -      |

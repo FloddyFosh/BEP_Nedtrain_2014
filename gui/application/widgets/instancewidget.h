@@ -182,6 +182,10 @@ public:
     void updateTimelineOffset(); ///< determines new start time of the schedule, calculates offsets and repaints widgets
     void zoomIn(); ///< multiplies horizontal zoom factor by 2 and sets this value in all concerned widgets
     void zoomOut(); ///< divides horizontal zoom factor by 2 and sets this value in all concerned widgets
+    int getJobIndex(JobHeaderWidget*); ///< gets the index of the job in the headerwidget
+    int getResourceIndex(ResourceHeaderWidget*); ///< gets the index of the resource in the headerwidget
+    void relocateJobWidget(int, int); ///< switches the jobwidgets in the layout with the given indexes
+    void relocateResourceWidget(int, int); ///< switches the resourcewidgets in the layout with the given indexes
     void updateWidgetsLayout(); ///< schedules a paint event for jobs layout and resources layout
     void enableActivities(); ///< removes blur from activities
     void disableActivitiesBeforeTime(); ///< determine which activities have been completed, and if so, it blurs the activity
