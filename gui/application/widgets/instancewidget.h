@@ -195,6 +195,7 @@ public:
     void disablePrecedenceRemoving(); ///< disables precedence removing and disconnects signals
     void removePeaks(); ///< removes all peaks
     InstanceController * getInstanceController(); //TODO move to another file
+    void focusResourceWidget(int resId);
 
 private slots:
     void addResource(Resource *); ///< connected to the instance's resourceAdded SIGNAL

@@ -116,3 +116,7 @@ void InstanceController::peak(int time, int resource, int capacity) {
     ResourceWidget *rw = getResourceWidgets().value(resource);
     rw->paintPeak(time, capacity);
 }
+
+void InstanceController::focusResource(int resId){
+    instanceWidget->focusResourceWidget(resId);
+}

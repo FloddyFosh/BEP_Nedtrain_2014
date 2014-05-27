@@ -128,6 +128,8 @@ public:
      * @param timeout timeout
      */
     void setStatusMessage(QString message, int timeout = 0);
+
+    void focusResource(int resId);
 private:
     Instance * instance;
     InstanceWidget * instanceWidget;

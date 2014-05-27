@@ -149,16 +149,6 @@ QSlider * Controller::getFramesSlider() {
     return framesSlider;
 }
 
-void Controller::focusResource(int resId){
-    InstanceWidget* iw = getCurrentInstanceWidget();
-    ResourceWidget* rw = iw->getResourceWidgets().value(resId);
-    int rwPosition = iw->getResourceIndex(rw);
-
-    QScrollArea* rsa = iw->getInstanceController()->getResourceScrollArea();
-    QScrollBar* sb = rsa->verticalScrollBar();
-    sb->setSliderPosition();
-}
-
 void Controller::disableHistory(int range) {
     disconnect(getFramesSlider(), SIGNAL(valueChanged(int)), this, SLOT(toFrame(int)));
     getFramesSlider()->setDisabled(true);
