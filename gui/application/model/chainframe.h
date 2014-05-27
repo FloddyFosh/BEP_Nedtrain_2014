@@ -24,7 +24,6 @@ public:
 
     void setUsedProfile(QList<QPoint *> *p);
     void setSelectedProfile(QList<QPoint*>* p);
-    void display(Instance *inst);
     QList<QPoint*>* addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2);
 };
 

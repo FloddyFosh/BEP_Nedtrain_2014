@@ -34,8 +34,6 @@ public:
      * @param g group to be added
      */
     void addGroup(Group * g);
-
-    void display(Instance* inst);
 };
 
 #endif // MODEL_STATE_H

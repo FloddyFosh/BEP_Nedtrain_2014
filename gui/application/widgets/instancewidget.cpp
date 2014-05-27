@@ -266,6 +266,10 @@ OverlayWidget* InstanceWidget::getOverlay() {
     return overlay;
 }
 
+QScrollArea* InstanceWidget::getResourceScrollArea(int resIndex){
+    return resourcesScroller;
+}
+
 void InstanceWidget::toFrameNumber(int frameNummer) {
     if (instance->getMaxFrameNr() == -1) return;
     InstanceWidget::frameNumber = frameNummer;

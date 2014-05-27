@@ -1,6 +1,7 @@
 #include "est_generator.h"
 #include "controller/instancecontroller.h"
 #include "frame.h"
+#include "chain.h"
 
 EST_Generator::EST_Generator(InstanceController * controller) : controller (controller) { }
 
@@ -9,7 +10,10 @@ void EST_Generator::gotoFrame(int frameNr) {
 
     if (!(0 <= frameNr && frameNr <= instance->getMaxFrameNr())) { return; }
     Frame *frame = instance->getFrame(frameNr);
-    frame->display(instance);
+    instance->setGroupPartition(frame->getGroups());
+    if(Chain* c = frame->getChain()){
+        controller->focusResource(c->resourceId());
+    }
 }
 
 QList<Precedence *> EST_Generator::getAdded(int frameNr){

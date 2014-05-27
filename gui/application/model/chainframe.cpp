@@ -38,10 +38,6 @@ void ChainFrame::setSelectedProfile(QList<QPoint*>* p){
     selectedProfile = p;
 }
 
-void ChainFrame::display(Instance* inst) {
-    Frame::display(inst);
-}
-
 QList<QPoint*>* ChainFrame::addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2) {
     if(pl1->empty()) return pl2;
     if(pl2->empty()) return pl1;

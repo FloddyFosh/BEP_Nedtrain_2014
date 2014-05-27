@@ -22,8 +22,3 @@ Chain* Frame::getChain() {
 void Frame::addGroup(Group * g) {
     groups.append(g);
 }
-
-void Frame::display(Instance* inst){
-    inst->setGroupPartition(groups);
-
-}
