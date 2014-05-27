@@ -56,7 +56,7 @@ gtestresults.xml
 
 # Project Files
 gui/application/application
-gui/testsuite/testsuite
+**/testsuite/testsuite
 gui/testsuite/resources/tms
 gui/Makefile
 gui/application/Makefile
@@ -74,6 +74,11 @@ grammar.output
 **/src/solver
 **/clp/clp
 **/solver.exe
+solver/testsuite/Makefile
+solver/testsuite/CMakeCache.txt
+solver/testsuite/CMakeFiles/*
+solver/testsuite/cmake_install.cmake
+
 
 # Editors temporary files 
 *~
