@@ -49,7 +49,7 @@ void Resource::addActToChain(Activity* act, int chainId) {
         Activity* lastAct = chain->getActivities()->last();
         if(Precedence* prec = _instance->precedenceExists(lastAct,act)){
             int maxFrameNr = _instance->getMaxFrameNr();
-            _instance->addPrecedenceFrame(lastAct,act,maxFrameNr);
+            _instance->addPrecedenceFrame(lastAct,act,maxFrameNr+1);
         }
     }
     chain->addActivity(act);

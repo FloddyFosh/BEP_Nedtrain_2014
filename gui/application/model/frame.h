@@ -27,6 +27,7 @@ public:
 
     virtual QList<QPoint*>* getUsedProfile();
     virtual QList<QPoint*>* getSelectedProfile();
+    virtual Chain* getChain();
 
     /**
      * add a group to this frame.
