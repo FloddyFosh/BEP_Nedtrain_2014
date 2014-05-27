@@ -290,9 +290,11 @@ QList<QPoint*> addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2) {
     }
     while(i < pl1->length()) {
         res->append(new QPoint(p1->x, p1->y+p2->y));
+        i++;
     }
     while(j < pl2->length()) {
         res->append(new QPoint(p2->x, p1->y+p2->y));
+        j++;
     }
     return res;
 }
