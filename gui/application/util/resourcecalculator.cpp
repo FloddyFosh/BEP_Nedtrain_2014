@@ -267,7 +267,7 @@ int ResourceCalculator::getMaximumDemand() const {
 	return maxDemand;
 }
 
-QList<QPoint*>* addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2) {
+QList<QPoint*>* ResourceCalculator::addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2) {
     QList<QPoint*>* res = new QList<QPoint*>;
 
     int i, j = 0;

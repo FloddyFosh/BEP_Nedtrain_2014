@@ -248,13 +248,16 @@ void ResourceWidget::paintChainResources(QPainter& painter){
         }
         if(QList<QPoint*>* usedProfile = curFrame->getUsedProfile()){
             if(_resource->id() != curFrame->getChain()->resourceId()) return;
-            painter.setBrush(QColor(255,255,255));
-            painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
-            painter.drawPolygon(calculator->getChainPolygon(usedProfile));
-            painter.setBrush(QColor(0,0,0,120));
+            int rows = calculator->getRowCount();
+            QLinearGradient grad(0, 0, 0, rows);
+            grad.setColorAt(0, QColor(50,50,50));
+            grad.setColorAt(_resource->capacity() / (double) rows, QColor(200,200,200));
+            painter.setBrush(grad);
+            painter.setPen(QPen(QColor("black"), 0, Qt::NoPen));
             painter.drawPolygon(calculator->getChainPolygon(usedProfile));
         }
         QPolygon outline = calculator->getDemandPolygon();
+        painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
         painter.setBrush(Qt::NoBrush);
         painter.drawPolygon(outline);
     }
