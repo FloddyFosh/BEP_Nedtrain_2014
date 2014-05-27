@@ -266,3 +266,33 @@ int ResourceCalculator::getMaximumEet() {
 int ResourceCalculator::getMaximumDemand() const {
 	return maxDemand;
 }
+
+QList<QPoint*> addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2) {
+    QList<QPoint*>* res = new QList<QPoint*>;
+
+    int i, j = 0;
+    while(i < pl1->length() && j < pl2->length()) {
+        QPoint* p1 = pl1->at(i);
+        QPoint* p2 = pl2->at(j);
+        if(p1->x < p2->x) {
+            res->append(new QPoint(p1->x, p1->y+p2->y));
+            i++;
+        }
+        else if(p1->x > p2->x) {
+            res->append(new QPoint(p2->x, p1->y+p2->y));
+            j++;
+        }
+        else {
+            res->append(new QPoint(p1->x+p2->x,p1->y+p2->y));
+            i++;
+            j++;
+        }
+    }
+    while(i < pl1->length()) {
+        res->append(new QPoint(p1->x, p1->y+p2->y));
+    }
+    while(j < pl2->length()) {
+        res->append(new QPoint(p2->x, p1->y+p2->y));
+    }
+    return res;
+}
