@@ -237,6 +237,12 @@ bool Instance::impliedPrecedenceExists(Activity * src, Activity * dst) {
     return reachable.find(dst) != reachable.end();
 }
 
+void Instance::addPrecedenceFrame(Activity* a1, Activity* a2, int frameNumber) {
+    if(Precedence *existing = precedenceExists(a1,a2)) {
+        existing->addFrameNr(frameNumber);
+    }
+}
+
 void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameNumber) {
     if(impliedPrecedenceExists(a2, a1))
         throw InstanceManipulationException(tr("The constraint was not added, because it would create a cycle. A chain of constraints in the opposite direction already exists."));

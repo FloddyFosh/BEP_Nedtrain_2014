@@ -83,7 +83,7 @@ void add_frame() {
     fprintf(stderr, " -1\n");
 }
 
-void print_chains() {
+/*void print_chains() {
     fprintf(stderr, "CHAINS:");
     map< pair<int,int>, list<activity*> >::iterator it;
     for(it=chains.begin();it!=chains.end();it++){
@@ -95,6 +95,20 @@ void print_chains() {
             //<job/train> <activity>
             fprintf(stderr," %d %d",act->i,act->j);
         }
+    }
+    fprintf(stderr," -1\n");
+}*/
+
+void print_chain(int i, int j) {
+    fprintf(stderr, "CHAIN:");
+    pair<int,int> newPair(i,j);
+    list<activity*> chain = chains[newPair];
+    // <resource> <chain> <nrOfActivities>
+    fprintf(stderr," %d %d %d",i,j,len(chain));
+    FOREACH(chain, it){
+        activity* act = *it;
+        //<job/train> <activity>
+        fprintf(stderr," %d %d",act->i,act->j);
     }
     fprintf(stderr," -1\n");
 }
@@ -122,9 +136,8 @@ bool chaining() {
     initializeActivities();
     sort(activities.begin(), activities.end(), compareEST);
 
-    add_frame();
-
     initializeChains();
+    add_frame();
 
     for(int i=0; i<tmsp->n_resources; i++){
         FOREACH(activities, it){
@@ -142,6 +155,14 @@ bool chaining() {
             }
         }
         add_frame();
+        FOREACH(chains, it){
+            pair<int,int> chainId = it->first;
+            if(chainId.first==i && len(it->second)>0){
+                //add_frame();
+                print_chain(chainId.first,chainId.second);
+            }
+        }
     }
+    //print_chains();
     return true;
 }

@@ -61,6 +61,7 @@ util/language.cpp
 model/est_generator.cpp
 model/st_propagator.cpp
 model/frame.cpp
+model/chainframe.cpp
 controller/instancecontroller.cpp
 
 widgets/instancemdisubwindow.cpp

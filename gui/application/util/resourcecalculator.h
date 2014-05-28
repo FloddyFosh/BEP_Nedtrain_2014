@@ -44,6 +44,7 @@ public:
 	QPolygon getResourcePolyline(int width); ///< @return A polygon for the resource profile starting at the height of the resource capacity. The resource profile calculation should have been done.
 	QPolygon getJobPolygon(); ///< @return A polygon for the job profile. The job profile calculation should have been done.
 	QPolygon getExceedPolygon(int width); ///< @return A polygon for the regions where the demand profile exceeds the resource profile
+    QPolygon getChainPolygon(QList<QPoint*>* points);
 
 	QRect selectedResourceRegion(QPoint p); ///< @return A horizontal consecutive region enclosing point p.
 	QPoint getResourceUsageAt(int t); ///< @return The resource usage at time t.

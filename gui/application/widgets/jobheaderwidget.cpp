@@ -14,18 +14,22 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
         removeButton = new QPushButton(AppIcon("remove.png"),"", this);
         removeButton->setGeometry(10, 5, 10, 10);
         removeButton->setFlat(true);
+        removeButton->setFocusPolicy(Qt::NoFocus);
 
         editButton = new QPushButton(AppIcon("edit.png"),"", this);
         editButton->setGeometry(10, 5, 10, 10);
         editButton->setFlat(true);
+        editButton->setFocusPolicy(Qt::NoFocus);
 
         downButton = new QPushButton(AppIcon("down.png"),"", this);
         downButton->setGeometry(10, 5, 10, 10);
         downButton->setFlat(true);
+        downButton->setFocusPolicy(Qt::NoFocus);
 
         upButton = new QPushButton(AppIcon("up.png"),"", this);
         upButton->setGeometry(10, 5, 10, 10);
         upButton->setFlat(true);
+        upButton->setFocusPolicy(Qt::NoFocus);
 
         expandButton = new QPushButton("+", this);
         expandButton->setCheckable(true);

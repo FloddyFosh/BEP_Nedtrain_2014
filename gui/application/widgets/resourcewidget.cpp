@@ -1,4 +1,6 @@
 #include "controller/instancecontroller.h"
+#include "model/frame.h"
+#include "model/chainframe.h"
 
 #include <QPainter>
 #include <cmath>
@@ -99,7 +101,8 @@ void ResourceWidget::resizeEvent(QResizeEvent *) {
 
 void ResourceWidget::updatePixmap() {
     //get horizontal offset iff an instance has been loaded
-    offset = controller->getInstance()->getTimeOffset();
+    Instance* instance = controller->getInstance();
+    offset = instance->getTimeOffset();
 
     // determine size of this widget
     QSize hint = size();
@@ -133,6 +136,9 @@ void ResourceWidget::updatePixmap() {
 
     //3. draw job profile
     paintJobProfile(painter);  //uses scaled painter
+
+    //4. draw resources used by selected chain
+    paintChainResources(painter);
 
     painter.restore(); //restore scaled painter
 
@@ -222,6 +228,38 @@ void ResourceWidget::paintResourceMarks(QPainter& painter){
     foreach(int time, resourceMarks){
         QPoint usage = calculator->getResourceUsageAt(time);
         painter.drawEllipse(QPointF((time+offset)*hZoom(), (double)usage.y()*vScale),4, 4);
+    }
+}
+
+void ResourceWidget::paintChainResources(QPainter& painter){
+    int frameNr = controller->getFrameNumber();
+    Instance* inst = controller->getInstance();
+    if(inst->getMaxFrameNr() != -1){
+        ChainFrame* curFrame = (ChainFrame*) inst->getFrame(frameNr);
+        if(QList<QPoint*>* selectedProfile = curFrame->getSelectedProfile()){
+            if(_resource->id() != curFrame->getChain()->resourceId()) return;
+            int rows = calculator->getRowCount();
+            QLinearGradient grad(0, 0, 0, rows);
+            grad.setColorAt(0, QColor(50,50,255));
+            grad.setColorAt(_resource->capacity() / (double) rows, QColor(200,200,255));
+            painter.setBrush(grad);
+            painter.setPen(QPen(QColor("black"), 0, Qt::NoPen));
+            painter.drawPolygon(calculator->getChainPolygon(selectedProfile));
+        }
+        if(QList<QPoint*>* usedProfile = curFrame->getUsedProfile()){
+            if(_resource->id() != curFrame->getChain()->resourceId()) return;
+            int rows = calculator->getRowCount();
+            QLinearGradient grad(0, 0, 0, rows);
+            grad.setColorAt(0, QColor(50,50,50));
+            grad.setColorAt(_resource->capacity() / (double) rows, QColor(200,200,200));
+            painter.setBrush(grad);
+            painter.setPen(QPen(QColor("black"), 0, Qt::NoPen));
+            painter.drawPolygon(calculator->getChainPolygon(usedProfile));
+        }
+        QPolygon outline = calculator->getDemandPolygon();
+        painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
+        painter.setBrush(Qt::NoBrush);
+        painter.drawPolygon(outline);
     }
 }
 

@@ -304,6 +304,10 @@ OverlayWidget* InstanceWidget::getOverlay() {
     return overlay;
 }
 
+QScrollArea* InstanceWidget::getResourceScrollArea(int resIndex){
+    return resourcesScroller;
+}
+
 void InstanceWidget::toFrameNumber(int frameNummer) {
     if (instance->getMaxFrameNr() == -1) return;
     InstanceWidget::frameNumber = frameNummer;
@@ -511,4 +515,15 @@ void InstanceWidget::enableActivities() {
 
 void InstanceWidget::removePeaks() {
     foreach(ResourceWidget *rw, getResourceWidgets()) rw->removePeak();
+}
+
+void InstanceWidget::focusResourceWidget(int resId) {
+    ResourceHeaderWidget* rh = rHeaderWidgets.value(resId);
+    int rhPosition = getResourceIndex(rh);
+
+    QScrollBar* sb = resourcesScroller->verticalScrollBar();
+    if(resourceHeadersLayout->count() <= 2) return;
+    double size = (double) resourceHeadersLayout->count();
+    double pos = rhPosition / (size-2.0);
+    sb->setSliderPosition(pos * sb->maximum());
 }

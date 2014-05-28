@@ -5,6 +5,9 @@
 #include "solver.h"
 #include "controller/exceptions.h"
 #include "model/frame.h"
+#include "model/instance.h"
+#include "model/chain.h"
+#include "model/chainframe.h"
 
 Solver::Solver(QString name, QString binary, QString arguments, QObject *parent) :
     QObject (parent), name (name), binary (binary), arguments (arguments), instance(0), solved(false), peakResource(-1), mutexJob(-1)
@@ -174,8 +177,8 @@ void Solver::processOutput() {
             emit messageReceived(QString(line.trimmed()));
         } else if (line.startsWith("CLEARSOFTPREC")) {
            instance->clearSoftPrecedences();
-        } else if (line.startsWith("CHAINS")) {
-            processChainsLine(line);
+        } else if (line.startsWith("CHAIN")) {
+            processChainLine(line);
         } else {
             if(line.contains("Instance solved."))
                 setSolved(true);
@@ -216,6 +219,7 @@ void Solver::processStateLine(QByteArray &line) {
     Frame * nextFrame (new Frame);
     processStateGroups(fields, nextFrame);
     replayFrames.append(nextFrame);
+    instance->setFrames(replayFrames);
 }
 
 void Solver::processStateGroups(QList<QByteArray> fields, Frame *frame) {
@@ -265,19 +269,45 @@ void Solver::processMutexLine(QByteArray &line) {
     eatRemainingOutput(fields);
 }
 
-void Solver::processChainsLine(QByteArray &line) {
+void Solver::processChainLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    int res, chain, numActs, ai, aj;
+    int res, prevRes, chain, numActs, ai, aj;
+    prevRes = -1;
+    if(Chain* lastChain = replayFrames.last()->getChain()){
+        prevRes = lastChain->resourceId();
+    }
+    QMap<int,Resource*> resources = instance->getResources();
     res = fields.takeFirst().toInt();
     while(res != -1){
+        Resource* curResource = resources[res];
         chain = fields.takeFirst().toInt();
         numActs = fields.takeFirst().toInt();
         for(int i=0;i<numActs;i++){
             ai = fields.takeFirst().toInt();
             aj = fields.takeFirst().toInt();
+            Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
+            curResource->addActToChain(act,chain);
         }
+
+        Chain* c = curResource->getChains()->value(chain);
+        QList<QPoint*>* usedProfile = new QList<QPoint*>;
+        if(res==prevRes){
+            Frame* lastFrame = replayFrames.last();
+            usedProfile = lastFrame->getSelectedProfile();
+        }
+
+        ChainFrame* nextFrame = new ChainFrame(c,usedProfile);
+        foreach(Group* g, replayFrames.last()->getGroups()){
+            nextFrame->addGroup(g);
+        }
+        replayFrames.append(nextFrame);
+        instance->setFrames(replayFrames);
+
+
+
+        prevRes = res;
         res = fields.takeFirst().toInt();
     }
 }
