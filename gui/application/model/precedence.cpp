@@ -3,9 +3,9 @@
 
 #include <cassert>
 
-Precedence::Precedence(Activity *a1, Activity *a2) : _a1(a1), _a2(a2), hard(true) {}
+Precedence::Precedence(Activity *a1, Activity *a2) : _a1(a1), _a2(a2), hard(true), disabled(false) {}
 
-Precedence::Precedence(Activity *a1, Activity *a2, bool hard) : _a1(a1), _a2(a2), hard(hard) {}
+Precedence::Precedence(Activity *a1, Activity *a2, bool hard) : _a1(a1), _a2(a2), hard(hard), disabled(false) {}
 
 Activity* Precedence::a1() {
     return _a1;
@@ -17,6 +17,18 @@ Activity* Precedence::a2() {
 
 bool Precedence::isHard() {
     return hard;
+}
+
+bool Precedence::isDisabled() {
+    return disabled;
+}
+
+void Precedence::disable() {
+    disabled = true;
+}
+
+void Precedence::enable() {
+    disabled = false;
 }
 
 set<int> Precedence::getFrameNrs() {

@@ -122,7 +122,7 @@ void OverlayWidget::paintIncomingPrecedences(QPainter& painter, ActivityWidget *
         if(!p->isPosted(controller->getInstanceWidget()->getFrameNumber()))
             continue;
         foreach(ActivityWidget* aw, allWidgets){
-            if(aw->activity() == p->a1()) {
+            if(aw->activity() == p->a1() && !p->isDisabled()) {
                 if(p->isHard())
                     painter.setPen(penHard);
                 else
@@ -141,13 +141,12 @@ void OverlayWidget::paintOutgoingPrecedences(QPainter& painter, ActivityWidget *
         if(!p->isPosted(controller->getInstanceWidget()->getFrameNumber()))
             continue;
         foreach(ActivityWidget* aw, allWidgets){
-            if(aw->activity() == p->a2()) {
+            if(aw->activity() == p->a2() && !p->isDisabled()) {
                 if(p->isHard())
                     painter.setPen(penHard);
                 else
                     painter.setPen(penSoft);
                 paintPrecedence(painter, aWidget, aw, true);
-
             }
         }
     }
