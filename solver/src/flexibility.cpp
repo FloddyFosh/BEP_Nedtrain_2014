@@ -87,5 +87,10 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
 }
 
 int flexibility() {
+    Constraints constraints;
+    cout << "tmsp->precedences.size() = "  << tmsp->precedences.size() << endl;
+    // constraints.addConstraint("varA" , "varB" , c); 
+    // pair<double, map<string, double> > output = useClpToSolve(constraints);
+    
 	return 1;
 }
