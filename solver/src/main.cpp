@@ -21,19 +21,19 @@ extern void print_hele_state();
 extern void handle_neg_cyc();
 
 int solve() {
-    debug("Constructing STJN.\n");
+    debug("Constructing STJN.\n", 0);
     timing_start("stjn");
     int stjn_consistent = stjn_construct();
     progress(10);
     timing_stop("stjn");
     if (!stjn_consistent) {
-        debug("Problem inconsistent.\n");
+        debug("Problem inconsistent.\n", 0);
         handle_neg_cyc();
         progress(100);
         return 0;
     }
 
-    debug("Running ESTA+ algorithm.\n");
+    debug("Running ESTA+ algorithm.\n", 0);
     timing_start("esta+");
     if (esta_plus()) {
         progress(50);
@@ -59,7 +59,7 @@ int solve() {
         return 0;
     }
 
-    debug("Constructing flexibility intervals using Linear Programming solver.\n");
+    debug("Constructing flexibility intervals using Linear Programming solver.\n", 0);
     timing_start("LP");
     if(flexibility()){
         progress(90);
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    debug("Parsing.\n");
+    debug("Parsing.\n", 0);
 
     // parser
     timing_start("parsing");
