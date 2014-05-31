@@ -5,9 +5,9 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Include some directories for the Clp and CoinUtils libs
-include_directories(/home/martijn/Downloads/COIN/coin-Clp/include/coin)
-include_directories(home/martijn/Downloads/COIN/coin-Clp/CoinUtils/src)
-link_directories(/home/martijn/Downloads/COIN/coin-Clp/lib)
+include_directories(../../../COIN/coin-Clp/include/coin)
+include_directories(../../../COIN/coin-Clp/CoinUtils/src)
+link_directories(../../../COIN/coin-Clp/lib)
 
 # Add the source files are going to be tested to this list:
 add_executable(testsuite testsuite.cpp 
