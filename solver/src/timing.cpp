@@ -61,10 +61,11 @@ void timing_stop(string name) {
 }
 
 void timing_print_summary() {
-	int i;
+    int i;
+    double tot = find_or_create_timing_info("total")->total;
 	for (i = 0; i < len(timings); i++) {
-		timing_info* ti = ((timing_info*)list_get(timings, i));
-        fprintf(stderr, "%s: %lf\n", ti->name.c_str(), ti->total);
+        timing_info* ti = ((timing_info*)list_get(timings, i));
+        fprintf(stderr, "%s: %lf s (%.1lf%%)\n", ti->name.c_str(), ti->total, 100*ti->total/tot);
 	}
 }
 

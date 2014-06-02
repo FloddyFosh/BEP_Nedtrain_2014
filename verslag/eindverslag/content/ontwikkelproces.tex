@@ -10,13 +10,15 @@ We zijn er tevreden over het verloop van de eerste sprint. Het porten naar Windo
 Het voornaamste doel van de tweede sprint is de COIN-OR LP solver te laten samenwerken met onze applicatie. Daarnaast is er gewerkt aan het laten zien van aparte chains met daarbij welke resources er door deze chain gebruikt worden. 
 
 \subsubsection*{Terugblik}
-In deze sprint hebben we een aantal tegenvallers gehad. Zo hadden we last van een memory leak, wat redelijk veel tijd kostte om op te lossen. Bovendien moest de bestaande architectuur voor het laten zien van chains vrij veel aangepast worden. Een tweede tegenvaller was het updaten van de software op de jenkins-server. Aangezien we de tools hebben geupgrade naar Qt versie 5.x, moet op de server Qt ook worden geupgrade. Dit ging niet meteen de eerste keer goed, waarbij uiteindeijk is overgegaan tot een volledige herinstallatie. Dit heeft als gevolg dat we een deel van de eerste commits missen in de continious integration grafiek.
+In deze sprint hebben we een aantal tegenvallers gehad. Zo hadden we last van een memory leak, wat redelijk veel tijd kostte om op te lossen. Bovendien moest de bestaande architectuur voor het laten zien van chains vrij veel aangepast worden. Een tweede tegenvaller was het updaten van de software op de Jenkins-server. Aangezien we de tools hebben ge\"upgrade naar Qt versie 5.x, moet op de server Qt ook worden ge\"upgrade. Dit ging niet meteen de eerste keer goed, waarbij uiteindelijk is overgegaan tot een volledige herinstallatie. Dit heeft als gevolg dat we een deel van de eerste commits missen in de continuous integration grafiek.
 
 \subsection{Sprint 3}
-In dze sprint gaan we een demo doen bij onze opdrachtgevers. Hiermee kunnen we controleren of wat wij hebben gemaakt de opdrachtgevers ook echt willen, we kunnen dan nog het \'e\'en en ander aanpassen in deze en volgende sprints. 
+In deze sprint gaan we een demo doen bij onze opdrachtgevers. Hiermee kunnen we controleren of wat wij hebben gemaakt de opdrachtgevers ook echt willen, we kunnen dan nog het \'e\'en en ander aanpassen in deze en volgende sprints. 
 
 \subsubsection*{Terugblik}
-Tijdens de demo zijn er nieuwe ide\"en bijgekomen. Ook hebben we afgesproken om de undo/redo-functionaliteit niet te implementeren, aagezien dit veel tijd kost en weinig oplevert. 
+Het is in deze sprint gelukt om per chain te laten zien welke resources er door de activities in deze chain gebruikt worden. Elke chain kan apart op een frame getoond worden, waarbij de resource units die door deze chain gebruikt zijn, blauw gekleurd worden. De resource units die door eerdere chains van deze resource gebruikt zijn, zijn zwart gekleurd. Dit hebben we tijdens de demo laten zien. De feedback die hierover gegeven was, was dat er niet heel makkelijk gezien kan worden welke taken bij een bepaalde resource unit, bijvoorbeeld een monteur, horen. Om dit duidelijker te maken, zou een aparte view gemaakt kunnen worden. Hierin is echter minder makkelijk te zien hoeveel resources er op een bepaald tijdstip gebruikt worden.
+
+De CLP solver is in deze sprint ook veel verder gevorderd. Er bestaat niet meer een aparte binary voor de CLP solver, maar deze is ge\"integreerd in de binary van de chaining solver. Er kan een willekeurige LP instantie als input gegeven worden en deze kan door de solver opgelost worden. Wat nu nog overblijft is het transformeren van een RCPSP instantie naar een LP instantie, zodat deze opgelost kan worden.
 
 \subsection{Sprint 4}
 

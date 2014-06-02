@@ -660,7 +660,7 @@ cleanup:
         FOREACH(peak->activities, it) fprintf(stderr, " %d %d", (*it)->i, (*it)->j);
         fprintf(stderr, " -1\n");
     }
-    puts("DONE!");
+    //puts("DONE!");
     return ret;
 }
 
