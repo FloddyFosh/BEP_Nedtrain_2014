@@ -44,8 +44,8 @@ void classify_conflicts(peak2_t* peak, vector<conflict_t *> * t1, vector<conflic
     int i, j;
     vector<conflict_t *> * list = 0;
 
-    for (i = 0; i < peak->activities.size(); i++) {
-        for (j = i + 1; j < peak->activities.size(); j++) {
+    for (i = 0; (unsigned) i < peak->activities.size(); i++) {
+        for (j = i + 1; (unsigned) j < peak->activities.size(); j++) {
             node_t *act_i = (node_t *) list_get(peak->activities, i);
             node_t *act_j = (node_t *) list_get(peak->activities, j);
 
@@ -91,9 +91,9 @@ conflict_t* select_merge_conflict(peak2_t *peak) {
     int i, j, score=-1;
     node_t *candidate_a, *candidate_b;
 
-    for(i = 0; i < peak->activities.size(); i++) {
+    for(i = 0; (unsigned) i < peak->activities.size(); i++) {
         node_t *act_i = peak->activities[i];
-        for(j = i + 1; j < peak->activities.size(); j++) {
+        for(j = i + 1; (unsigned) j < peak->activities.size(); j++) {
             node_t *act_j = peak->activities[j];
             
             if(act_i->i != act_j->i) continue;
@@ -218,7 +218,7 @@ void find_peaks(int res) {
             peak->resource = res;
             if(oldpeak) {
                 heap_add(peakqueue, peak_score(oldpeak), oldpeak);
-                for(j = 0; j < oldpeak->activities.size(); j++) {
+                for(j = 0; (unsigned) j < oldpeak->activities.size(); j++) {
                     node_t *oldact = oldpeak->activities[j];
                     if(oldact->est + oldact->len > cur) {
                         peak->capacity += Q(oldact->i, oldact->j, res);
@@ -256,14 +256,14 @@ peak2_t *remove_act_from_peaks(node_t *n, int res) {
         peak = (*peakit).second;
         peak->capacity -= Q(n->i, n->j, res);
         j = find(peak->activities.begin(), peak->activities.end(), n) - peak->activities.begin();
-        if(j == peak->activities.size()) {
+        if((unsigned) j == peak->activities.size()) {
             debug("ERROR: current activity not found in this peak!\n");
             debug("Activity (%d,%d) at 0x%x est %d requires %d.\n", n->i, n->j, n, n->est, Q(n->i, n->j, peak->resource));
             if(len(n->group) > 1) {
                 debug("Group of %d activities\n", len(n->group));
             }
             debug("Peak at t=%d on resource %d, capacity %d.\n", peak->time, peak->resource, peak->capacity);
-            for(i = 0; i < peak->activities.size(); i++) {
+            for(i = 0; (unsigned) i < peak->activities.size(); i++) {
                 node_t *act = peak->activities[i];
                 debug("activity %d: (%d,%d) at 0x%x est %d requires %d\n", i, act->i, act->j, act, act->est, Q(act->i, act->j, peak->resource));
             }
@@ -306,7 +306,7 @@ void move_act_to_peak(node_t *n, int res, peak2_t *lastpeak) {
 
         // copy active activities from lastpeak
         // lastpeak should be the peak preceding this new peak
-        for(i = 0; i < lastpeak->activities.size(); i++) {
+        for(i = 0; (unsigned) i < lastpeak->activities.size(); i++) {
             node_t *act = lastpeak->activities[i];
             // Note: if old_est is set we need to use it. Otherwise, act will
             // be moved to some peaks prematurely
@@ -407,7 +407,7 @@ void update_group_peak(node_t *g, node_t *a, node_t *b) {
                 // Re-compute capacity for this peak & remove a and b from list
                 peak->capacity = 0;
                 vector<node_t *> l;
-                for(j = 0; j < peak->activities.size(); j++) {
+                for(j = 0; (unsigned) j < peak->activities.size(); j++) {
                     m = peak->activities[j];
                     if(m == a || m == b) continue;
                     l.push_back(m);
@@ -440,7 +440,7 @@ void update_group_peak(node_t *g, node_t *a, node_t *b) {
                         exit(1);
                     }
                     // Copy active activities from lastpeak
-                    for(j = 0; j < lastpeak->activities.size(); j++) {
+                    for(j = 0; (unsigned) j < lastpeak->activities.size(); j++) {
                         node_t *act = lastpeak->activities[j];
                         if(act->old_est >= 0) {
                             debug("ERROR: assumption failure: why is act->old_est set??\n");
@@ -459,7 +459,7 @@ void update_group_peak(node_t *g, node_t *a, node_t *b) {
             peak->capacity = 0;
             seen_us = 0;
             vector<node_t *> l;
-            for(j = 0; j < peak->activities.size(); j++) {
+            for(j = 0; (unsigned) j < peak->activities.size(); j++) {
                 m = peak->activities[j];
                 // Remove a and b, but only if they're not equal to g
                 if((a != g && m == a) || (b != g && m == b)) {
@@ -569,10 +569,12 @@ int esta_plus() {
                 ret = 0;
                 goto cleanup;
             }
-            if(to->i == conflict->n1->i && to->j == conflict->n1->j)
+            if(to->i == conflict->n1->i && to->j == conflict->n1->j) {
                 output("MRG: %d %d %d %d\n", to->i, to->j, conflict->n2->i, conflict->n2->j);
-            else
+            }
+            else {
                 output("MRG: %d %d %d %d\n", to->i, to->j, conflict->n1->i, conflict->n1->j);
+            }
             update_group_peak(to, conflict->n1, conflict->n2);
             
             print_hele_state();

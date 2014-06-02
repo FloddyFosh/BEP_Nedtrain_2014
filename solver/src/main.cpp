@@ -92,12 +92,15 @@ int main(int argc, char *argv[]) {
                 add_mutexes = 1;
                 break;
             case '?':
-                if(optopt == 'm')
+                if(optopt == 'm') {
                     cdebug("Option -%c requires an argument.\n", optopt);
-                else if(isprint(optopt))
+                }
+                else if(isprint(optopt)) {
                     cdebug("Unknown option `-%c'.\n", optopt);
-                else
+                }
+                else {
                     cdebug("Unknown option character `\\x%x'.\n", optopt);
+                }
                 return 1;
             default:
                 return 1;
@@ -111,7 +114,7 @@ int main(int argc, char *argv[]) {
     int readFromFile = 0;
     if(readFromFile==1){
     // open a file handle to a particular file:
-        char* filepath = "../../instances/demo.instance";
+        const char* filepath = "../../instances/demo.instance";
         FILE *myfile = fopen(filepath, "r");
     	// make sure it's valid:
     	if (!myfile) {
