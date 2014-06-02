@@ -107,10 +107,10 @@ int main(int argc, char *argv[]) {
 
     // parser
     timing_start("parsing");
-    int readFromFile = 0;
+    int readFromFile = 1;
     if(readFromFile==1){
     // open a file handle to a particular file:
-        char* filepath = "../instances/j120/j1201_5.instance";
+        char* filepath = "../../instances/demo.instance";
         FILE *myfile = fopen(filepath, "r");
     	// make sure it's valid:
     	if (!myfile) {

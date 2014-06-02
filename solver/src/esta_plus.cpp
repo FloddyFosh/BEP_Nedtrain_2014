@@ -515,8 +515,8 @@ void handle_neg_cyc() {
         }
         vorige = t;
     }
-    puts("-1");
-    if (wrong) { puts("O.O"); while (1); }
+    fprintf(stderr, "-1");
+    if (wrong) { fprintf(stderr, "O.O"); while (1); }
 }
 
 int esta_plus() {
@@ -636,7 +636,7 @@ cleanup:
                 }
             }
         }
-        if (wrong) puts("SOLUTION WRONG!"), throw 0;
+        if (wrong) fprintf(stderr, "SOLUTION WRONG!"), throw 0;
     }
     else
     {
@@ -660,7 +660,7 @@ cleanup:
         FOREACH(peak->activities, it) fprintf(stderr, " %d %d", (*it)->i, (*it)->j);
         fprintf(stderr, " -1\n");
     }
-    puts("DONE!");
+    fprintf(stderr, "DONE!\n");
     return ret;
 }
 
