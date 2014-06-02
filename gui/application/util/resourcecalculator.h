@@ -52,8 +52,6 @@ public:
 	int getMaximumEet(); ///< @return the earliest end time of the last activity
 	int getMaximumDemand() const; ///< @return The maximum resource usage
 	int getRowCount(); ///< @return The number of rows of this resource (used to paint the resource widget).
-
-    QList<QPoint*>* addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2);
 };
 
 #endif /* RESOURCECALCULATOR_H_ */
