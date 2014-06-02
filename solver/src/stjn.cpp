@@ -282,7 +282,7 @@ int stjn_add_precedence(node_t *from, node_t *to) {
     int inconsistent = 0;
     set_precedence(from, to);
     if(!update_ordering(from, to)) {
-        printf("Cycle detected.\n");
+        debug("Cycle detected.\n");
         return 0;
     }
     if(to->est < from->est + from->len) {
@@ -376,7 +376,7 @@ node_t *stjn_merge(node_t *n1, node_t *n2) {
     // Next, merge a into g
 
     if(!update_ordering(n1, n2) || !update_ordering(n2, n1)) {
-        printf("Cycle detected while merging.\n");
+        debug("Cycle detected while merging.\n");
         puts("o.O unexpected"); throw 0;
         return NULL;
     }
@@ -427,9 +427,10 @@ void print_est_schedule() {
 
     for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j)) {
-            //fprintf(stderr, "G: %x\n", !!acts[i][j]->group.size());
-            fprintf(stderr, "EST: %d %d %d\n", i, j, acts[i][j]->est);
-            //fprintf(stderr, "LST: %d %d %d\n", i, j, acts[i][j]->lst);
+            //printf("G: %x\n", !!acts[i][j]->group.size());
+            //printf("EST: %d %d %d\n", i, j, acts[i][j]->est);
+            //printf("LST: %d %d %d\n", i, j, acts[i][j]->lst);
+            //fflush(stdout);
         }
     }
 }
