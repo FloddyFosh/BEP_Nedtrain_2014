@@ -42,3 +42,15 @@ string Constraints::getVariableName(int id) {
     }
     return ""; // throw exception    
 }
+
+int Constraints::getUpperLimit(int id) {
+    if(variablesName.count(id)) {
+        return upperLimits[id];
+    }
+    return -1; // throw exception    
+}
+
+void Constraints::setUpperLimit(string name, int upperLimit) {
+    int id = addVariable(name);
+    upperLimits[id] = upperLimit;
+}

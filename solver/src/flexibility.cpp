@@ -16,6 +16,8 @@
     
 */
 
+#include <sstream>
+
 #include "tmsp.h"
 #include "chaining.h"
 #include "flexibility.h"
@@ -28,13 +30,14 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     model.setOptimizationDirection(-1); // maximize instead of min.
     model.resize(0, n_cols);
     model.setLogLevel(0); // turns off all output of Clp
-
+    
+    // -DBL_MAX = -inf en DBL_MAX = +inf
     // set coefficients
     for(int i = 0; i< n_cols; i++) {
         // set coefficients alternating between -1 and 1
         model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
-        model.setColumnLower(i, 0); // -DBL_MAX = -inf
-        model.setColumnUpper(i, DBL_MAX); //  DBL_MAX = +inf
+        model.setColumnLower(i, 0);       
+        model.setColumnUpper(i, constraints.getUpperLimit(i/2)); 
     }
     
     // add constraints: 0 <= [lst] - [est] <= \infty \forall t
@@ -88,9 +91,47 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
 
 int flexibility() {
     Constraints constraints;
-    cout << "tmsp->precedences.size() = "  << tmsp->precedences.size() << endl;
-    // constraints.addConstraint("varA" , "varB" , c); 
-    // pair<double, map<string, double> > output = useClpToSolve(constraints);
+    int n_prec = (int) tmsp->precedences.size();
+    cout << "precedences = "  << n_prec << endl;
+
+    // a^+ - b^- <= -d_a
+    for(int i = 0; i < n_prec; i++) {
+        int i1 = P(i)->i1; // a^+
+        int j1 = P(i)->j1; // a^+
+        int i2 = P(i)->i2; // b^-
+        int j2 = P(i)->j2; // b^-
+        stringstream ss1; 
+        stringstream ss2; 
+        ss1 << i1 << '-' << j1;
+        ss2 << i2 << '-' << j2;
+        string var1(ss1.str());
+        string var2(ss2.str());
+        constraints.addConstraint(var1.c_str() , var2.c_str() , -1 * D(i1, j1));
+    }
+
+    // set upper limits to the variables
+    for(int i = 0; i < (int) tmsp->trains.size(); i++) {
+        int due = tmsp->trains[i]->due_date;
+        vector<activity* > activities = tmsp->trains[i]->activities;
+        for(int k = 0; k < (int) activities.size(); k++) {
+            stringstream ss1;
+            ss1 << activities[k]->i << '-' << activities[k]->j;
+            string var1(ss1.str());
+            constraints.setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
+        }
+    }
+
+    pair<double, map<string, double> > output;
+    output = useClpToSolve(constraints);
     
+    cout << endl << "### flexibility (start) ###" << endl;
+    cout << "flexibility = " << output.first << endl;
+    map<string, double>::iterator iter = output.second.begin();
+    while(iter != output.second.end()) {
+        cout << iter->first << " = " << iter->second << endl;
+        iter++;
+    }
+    cout << "### flexibility (end) ###" << endl << endl;
+
 	return 1;
 }

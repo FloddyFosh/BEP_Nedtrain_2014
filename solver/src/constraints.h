@@ -21,6 +21,7 @@ class Constraints {
     private:
         map<string, int> variablesId;
         map<int, string> variablesName;
+        map<int, int> upperLimits;
         vector<Constraint> constraintVector;
 
     public:
@@ -31,6 +32,8 @@ class Constraints {
         Constraint operator [](int i) const;
         string getVariableName(int id);
         int addVariable(string name);
+        int getUpperLimit(int id);
+        void setUpperLimit(string name, int upperLimit);
 };
 
 #endif
