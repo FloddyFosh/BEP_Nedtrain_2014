@@ -91,8 +91,6 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
 
 int flexibility() {
     Constraints constraints;
-    int n_prec = (int) tmsp->precedences.size();
-    cout << "precedences = "  << n_prec << endl;
 
     // a^+ - b^- <= -d_a
     for(int i = 0; i < n_prec; i++) {
