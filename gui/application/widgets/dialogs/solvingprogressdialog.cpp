@@ -11,7 +11,10 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     // create ui
     setWindowTitle(tr("%1 Solver").arg(solver->getName()));
 
-    numSoftPrecedences = instance->getSoftPrecedences().size();
+    numSoftPrecedences = 0;
+    foreach(Precedence* p, instance->getSoftPrecedences()){
+        if(!p->isDisabled()) numSoftPrecedences++;
+    }
 
     statusLabel = new QLabel;
 
@@ -74,7 +77,11 @@ void SolvingProgressDialog::toggleMoreOrLess(bool more) {
 }
 
 void SolvingProgressDialog::solverFinished() {
-    int newConstraints = instance->getSoftPrecedences().size() - numSoftPrecedences;
+    int newConstraints = 0;
+    foreach(Precedence* p, instance->getSoftPrecedences()){
+        if(!p->isDisabled()) newConstraints++;
+    }
+    newConstraints -= numSoftPrecedences;
 
     instance->setUserChanges(false);
     controller->reconnectActivitiesToResourceWidgets();
