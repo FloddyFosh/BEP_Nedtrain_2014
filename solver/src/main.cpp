@@ -141,8 +141,7 @@ int main(int argc, char *argv[]) {
 
     timing_stop("total");
 
-    printf("Instance %ssolved.\n", (solved ? "" : "not "));
-    fflush(stdout);
+    fprintf(stdout, "Instance %ssolved.\n", (solved ? "" : "not "));
 
     timing_print_summary();
 

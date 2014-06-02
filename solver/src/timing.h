@@ -1,7 +1,7 @@
 #ifndef __TIMING_H
 #define __TIMING_H
 
-#define progress(x)	fprintf(stderr, "PROGRESS: %d\n", x)
+#define progress(x)	fprintf(stdout, "PROGRESS: %d\n", x)
 
 typedef struct timing_info {
     string name;

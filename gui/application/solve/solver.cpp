@@ -137,10 +137,9 @@ void Solver::solverFinished(int x, QProcess::ExitStatus state) {
 }
 
 void Solver::solverReadOutput() {
-    QByteArray buffer = process.readAllStandardOutput();
-    QList<QByteArray> lines = buffer.split('\n');
-
-    foreach (QByteArray line, lines) {
+    process.setReadChannel(QProcess::StandardOutput);
+    while (process.canReadLine()) {
+        QByteArray line = process.readLine();
         if (line.startsWith("PROGRESS: ")) {
             processProgressLine(line);
         } else if (line.startsWith("PC: ")) {
@@ -174,10 +173,9 @@ void Solver::solverReadOutput() {
 }
 
 void Solver::solverReadDebug() {
-    QByteArray buffer = process.readAllStandardOutput();
-    QList<QByteArray> lines = buffer.split('\n');
-
-    foreach (QByteArray line, lines) {
+    process.setReadChannel(QProcess::StandardError);
+    while (process.canReadLine()) {
+        QByteArray line = process.readLine();
         emit messageReceived(QString(line.trimmed()));
     }
 }

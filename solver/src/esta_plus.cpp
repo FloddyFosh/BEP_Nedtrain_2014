@@ -504,8 +504,8 @@ void handle_neg_cyc() {
     for (node_t * t (cycle_node); t; t = t->node_succ) {
         pad.push_back(t);
     }
-    printf("CHAIN: ");
-    FOREACH(pad, it) printf("%d %d ", (*it)->i, (*it)->j);
+    fprintf(stdout, "CHAIN: ");
+    FOREACH(pad, it) fprintf(stdout, "%d %d ", (*it)->i, (*it)->j);
     node_t * vorige;
     bool wrong (false);
     FOREACH(pad, it) {
@@ -517,8 +517,7 @@ void handle_neg_cyc() {
         }
         vorige = t;
     }
-    printf("-1");
-    fflush(stdout);
+    fprintf(stdout, "-1\n");
     if (wrong) {
         debug("Something wrong in Chain.\n");
         throw 0;
@@ -545,7 +544,7 @@ int esta_plus() {
     conflict_t *conflict;
 
     print_est_schedule();
-    print_hele_state();//jan
+    print_hele_state();
 
     peakhash = vector<map<int, peak2_t *> > (tmsp->n_resources);
     peakqueue = new_heap();
@@ -571,10 +570,9 @@ int esta_plus() {
                 goto cleanup;
             }
             if(to->i == conflict->n1->i && to->j == conflict->n1->j)
-                printf("MRG: %d %d %d %d\n", to->i, to->j, conflict->n2->i, conflict->n2->j);
+                fprintf(stdout, "MRG: %d %d %d %d\n", to->i, to->j, conflict->n2->i, conflict->n2->j);
             else
-                printf("MRG: %d %d %d %d\n", to->i, to->j, conflict->n1->i, conflict->n1->j);
-            fflush(stdout);
+                fprintf(stdout, "MRG: %d %d %d %d\n", to->i, to->j, conflict->n1->i, conflict->n1->j);
             update_group_peak(to, conflict->n1, conflict->n2);
             
             print_hele_state();
@@ -589,8 +587,7 @@ int esta_plus() {
                 to = conflict->n1;
             }
             debug("Posting constraint (%d,%d) --> (%d,%d) (score %d).\n", from->i, from->j, to->i, to->j, order);
-            printf("PC: %d %d %d %d\n", from->i, from->j, to->i, to->j);
-            fflush(stdout);
+            fprintf(stdout, "PC: %d %d %d %d\n", from->i, from->j, to->i, to->j);
             posted.push_back(make_pair(from, to));
             
             if(!stjn_add_precedence(from, to)) {
@@ -655,30 +652,28 @@ cleanup:
         // print PEAK
         if (add_mutexes and peak->resource >= tmsp->n_resources - tmsp->n_trains)
         {
-            printf("MUTEX: %d %d %d",
+            fprintf(stdout, "MUTEX: %d %d %d",
                 peak->time,
                 peak->resource - (tmsp->n_resources - tmsp->n_trains),
                 peak->capacity);
         }
         else
         {
-            printf("PEAK: %d %d %d",
+            fprintf(stdout, "PEAK: %d %d %d",
                 peak->time,
                 peak->resource,
                 peak->capacity);
         }
         
-        FOREACH(peak->activities, it) printf(" %d %d", (*it)->i, (*it)->j);
-        printf(" -1\n");
-        fflush(stdout);
+        FOREACH(peak->activities, it) fprintf(stdout, " %d %d", (*it)->i, (*it)->j);
+        fprintf(stdout, " -1\n");
     }
-    debug("DONE!\n");
     return ret;
 }
 
 void print_hele_state() {
     int i, j, k;
-    printf("STATE:");
+    fprintf(stdout, "STATE:");
     extern vector<activity *> nodesInVolgordeVanInput;
     // Print merged tasks
     FOREACH(nodesInVolgordeVanInput, it) {
@@ -687,13 +682,12 @@ void print_hele_state() {
         node_t * a = acts[i][j];
         if(len(a->group) >= 1) {
             // <job> <est> <lst> <#acts> [act id]
-            printf(" %d %d %d %d", i, a->est, a->lst + a->flex, len(a->group));
+            fprintf(stdout, " %d %d %d %d", i, a->est, a->lst + a->flex, len(a->group));
             for (k = 0; k < len(a->group); k ++) {
                 activity * child = list_get(a->group, k);
-                printf(" %d %d", child->i, child->j);
+                fprintf(stdout, " %d %d", child->i, child->j);
             }
         }
     }
-    printf(" -1\n");
-    fflush(stdout);
+    fprintf(stdout, " -1\n");
 }

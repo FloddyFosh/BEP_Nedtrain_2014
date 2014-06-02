@@ -446,8 +446,10 @@ void update_group_peak(node_t *g, node_t *a, node_t *b) {
                             debug("ERROR: assumption failure: why is act->old_est set??\n");
                             exit(1);
                         }
-                        if(act->est + act->len > peak->time)
-                                            printf("ADD: i=%d, j=%d\n", act->i, act->j),peak->activities.push_back(act);
+                        if(act->est + act->len > peak->time) {
+							debug("ADD: i=%d, j=%d\n", act->i, act->j);
+							peak->activities.push_back(act);
+						}
                     }
                 } else
                     continue;
@@ -502,8 +504,8 @@ void handle_neg_cyc() {
     for (node_t * t (cycle_node); t; t = t->node_succ) {
         pad.push_back(t);
     }
-    printf("CHAIN: ");
-    FOREACH(pad, it) printf("%d %d ", (*it)->i, (*it)->j);
+    fprintf(stdout, "CHAIN: ");
+    FOREACH(pad, it) fprintf(stdout, "%d %d ", (*it)->i, (*it)->j);
     node_t * vorige;
     bool wrong (false);
     FOREACH(pad, it) {
@@ -515,8 +517,11 @@ void handle_neg_cyc() {
         }
         vorige = t;
     }
-    puts("-1");
-    if (wrong) { puts("O.O"); while (1); }
+    fprintf(stdout, "-1\n");
+    if (wrong) { 
+		debug("Something wrong in chain.\n"); 
+		throw 0; 
+	}
 }
 
 int esta_plus() {
@@ -565,9 +570,9 @@ int esta_plus() {
                 goto cleanup;
             }
             if(to->i == conflict->n1->i && to->j == conflict->n1->j)
-                fprintf(stderr, "MRG: %d %d %d %d\n", to->i, to->j, conflict->n2->i, conflict->n2->j);
+                fprintf(stdout, "MRG: %d %d %d %d\n", to->i, to->j, conflict->n2->i, conflict->n2->j);
             else
-                fprintf(stderr, "MRG: %d %d %d %d\n", to->i, to->j, conflict->n1->i, conflict->n1->j);
+                fprintf(stdout, "MRG: %d %d %d %d\n", to->i, to->j, conflict->n1->i, conflict->n1->j);
             update_group_peak(to, conflict->n1, conflict->n2);
             
             print_hele_state();
@@ -582,7 +587,7 @@ int esta_plus() {
                 to = conflict->n1;
             }
             debug("Posting constraint (%d,%d) --> (%d,%d) (score %d).\n", from->i, from->j, to->i, to->j, order);
-            fprintf(stderr, "PC: %d %d %d %d\n", from->i, from->j, to->i, to->j);
+            fprintf(stdout, "PC: %d %d %d %d\n", from->i, from->j, to->i, to->j);
             posted.push_back(make_pair(from, to));
             
             if(!stjn_add_precedence(from, to)) {
@@ -634,7 +639,10 @@ cleanup:
                 }
             }
         }
-        if (wrong) puts("SOLUTION WRONG!"), throw 0;
+        if (wrong) {
+			debug("SOLUTION WRONG!");
+			throw 0;
+		}
     }
     else
     {
@@ -642,29 +650,29 @@ cleanup:
         // print PEAK
         if (add_mutexes and peak->resource >= tmsp->n_resources - tmsp->n_trains)
         {
-            fprintf(stderr, "MUTEX: %d %d %d",
+            fprintf(stdout, "MUTEX: %d %d %d",
                 peak->time,
                 peak->resource - (tmsp->n_resources - tmsp->n_trains),
                 peak->capacity);
         }
         else
         {
-            fprintf(stderr, "PEAK: %d %d %d",
+            fprintf(stdout, "PEAK: %d %d %d",
                 peak->time,
                 peak->resource,
                 peak->capacity);
         }
         
-        FOREACH(peak->activities, it) fprintf(stderr, " %d %d", (*it)->i, (*it)->j);
-        fprintf(stderr, " -1\n");
+        FOREACH(peak->activities, it) fprintf(stdout, " %d %d", (*it)->i, (*it)->j);
+        fprintf(stdout, " -1\n");
     }
-    puts("DONE!");
+    debug("DONE!\n");
     return ret;
 }
 
 void print_hele_state() {
     int i, j, k;
-    fprintf(stderr, "STATE:");
+    fprintf(stdout, "STATE:");
     extern vector<activity *> nodesInVolgordeVanInput;
     // Print merged tasks
     FOREACH(nodesInVolgordeVanInput, it) {
@@ -673,12 +681,12 @@ void print_hele_state() {
         node_t * a = acts[i][j];
         if(len(a->group) >= 1) {
             // <job> <est> <lst> <#acts> [act id]
-            fprintf(stderr, " %d %d %d %d", i, a->est, a->lst + a->flex, len(a->group));
+            fprintf(stdout, " %d %d %d %d", i, a->est, a->lst + a->flex, len(a->group));
             for (k = 0; k < len(a->group); k ++) {
                 activity * child = list_get(a->group, k);
-                fprintf(stderr, " %d %d", child->i, child->j);
+                fprintf(stdout, " %d %d", child->i, child->j);
             }
         }
     }
-    fprintf(stderr, " -1\n");
+    fprintf(stdout, " -1\n");
 }
