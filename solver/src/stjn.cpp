@@ -427,9 +427,9 @@ void print_est_schedule() {
 
     for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j)) {
-            //fprintf(stdout, "G: %x\n", !!acts[i][j]->group.size());
-            //fprintf(stdout, "EST: %d %d %d\n", i, j, acts[i][j]->est);
-            //fprintf(stdout, "LST: %d %d %d\n", i, j, acts[i][j]->lst);
+            //output("G: %x\n", !!acts[i][j]->group.size());
+            //output("EST: %d %d %d\n", i, j, acts[i][j]->est);
+            //output("LST: %d %d %d\n", i, j, acts[i][j]->lst);
         }
     }
 }
