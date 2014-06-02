@@ -93,9 +93,10 @@ signals:
     void peak(int time, int resource, int capacity); ///< emitted when the solver encountered a peak.
 
 public slots:
-    void processOutput(); ///< internal slot for handling solver output (both stdout and stderr).
     void cancel(); ///< slot for cancelling the solving action, will kill the solver process.
     void solverFinished(int, QProcess::ExitStatus); ///< slot called when solver finishes.
+    void solverReadOutput(); ///< internal slot for handling solver output
+    void solverReadDebug(); ///< internal slot for handling solver debug
 };
 
 #endif // SOLVER_H

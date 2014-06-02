@@ -40,21 +40,21 @@ int solve() {
         timing_stop("esta+");
     } else {
         timing_stop("esta+");
-        printf("Could not find valid schedule.\n");
+        debug("Could not find valid schedule.\n");
         progress(100);
         return 0;
     }
 
     //print_est_schedule();
 
-    printf("Running chaining algorithm.\n");
+    debug("Running chaining algorithm.\n");
     timing_start("chaining");
     if(chaining()){
         progress(75);
         timing_stop("chaining");
     } else {
         timing_stop("chaining");
-        printf("Could not find valid schedule.\n");
+        debug("Could not find valid schedule.\n");
         progress(100);
         return 0;
     }
@@ -66,13 +66,12 @@ int solve() {
         timing_stop("LP");
     } else {
         timing_stop("LP");
-        printf("Could not find valid schedule.\n");
+        debug("Could not find valid schedule.\n");
         progress(100);
         return 0;
     }
 
     progress(100);
-    fflush(stdout);
     return 1;
 }
 
@@ -92,11 +91,11 @@ int main(int argc, char *argv[]) {
                 break;
             case '?':
                 if(optopt == 'm')
-                    fprintf(stderr, "Option -%c requires an argument.\n", optopt);
+                    debug("Option -%c requires an argument.\n", optopt);
                 else if(isprint(optopt))
-                    fprintf(stderr, "Unknown option `-%c'.\n", optopt);
+                    debug("Unknown option `-%c'.\n", optopt);
                 else
-                    fprintf(stderr, "Unknown option character `\\x%x'.\n", optopt);
+                    debug("Unknown option character `\\x%x'.\n", optopt);
                 return 1;
             default:
                 return 1;
@@ -107,7 +106,7 @@ int main(int argc, char *argv[]) {
 
     // parser
     timing_start("parsing");
-    int readFromFile = 1;
+    int readFromFile = 0;
     if(readFromFile==1){
     // open a file handle to a particular file:
         char* filepath = "../../instances/demo.instance";
@@ -124,7 +123,7 @@ int main(int argc, char *argv[]) {
         yyin = stdin;
     }
     if (yyparse() != 0) { // yyparse doet iets met bison grammar
-        fprintf(stderr, "Parsing failed. Aborting!\n");
+        debug("Parsing failed. Aborting!\n");
     }
     timing_stop("parsing");
 
@@ -134,7 +133,7 @@ int main(int argc, char *argv[]) {
 
     // print error summary
     if (error_counter > 0) {
-        fprintf(stderr, "\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
+        debug("\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
         return -1;
     }
 
@@ -142,7 +141,7 @@ int main(int argc, char *argv[]) {
 
     timing_stop("total");
 
-    fprintf(stderr, "Instance %ssolved.\n", (solved ? "" : "not "));
+    fprintf(stdout, "Instance %ssolved.\n", (solved ? "" : "not "));
 
     timing_print_summary();
 
