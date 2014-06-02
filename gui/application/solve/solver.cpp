@@ -157,7 +157,7 @@ int Solver::getMutexJob() {
 }
 
 void Solver::processOutput() {
-    QApplication::processEvents(); // keep event loop going so UI stays responsive
+    //QApplication::processEvents(); // keep event loop going so UI stays responsive
     while (process.canReadLine()) {
         QByteArray line = process.readLine();
         if (line.startsWith("PROGRESS: ")) {
