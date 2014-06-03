@@ -20,19 +20,19 @@ extern void print_hele_state();
 extern void handle_neg_cyc();
 
 int solve() {
-	debug("Constructing STJN.\n");
+	cdebug("Constructing STJN.\n");
 	timing_start("stjn");
 	int stjn_consistent = stjn_construct();
 	progress(10);
 	timing_stop("stjn");
 	if (!stjn_consistent) {
-		debug("Problem inconsistent.\n");
+		cdebug("Problem inconsistent.\n");
 		handle_neg_cyc();
 		progress(100);
 		return 0;
 	}
 
-	debug("Running ESTA+ algorithm.\n");
+	cdebug("Running ESTA+ algorithm.\n");
 	timing_start("esta+");
 	if (esta_plus()) {
 		progress(75);
@@ -125,11 +125,11 @@ int main(int argc, char *argv[]) {
                 break;
             case '?':
                 if(optopt == 'm')
-                    debug("Option -%c requires an argument.\n", optopt);
+                    cdebug("Option -%c requires an argument.\n", optopt);
                 else if(isprint(optopt))
-                    debug("Unknown option `-%c'.\n", optopt);
+                    cdebug("Unknown option `-%c'.\n", optopt);
                 else
-                    debug("Unknown option character `\\x%x'.\n", optopt);
+                    cdebug("Unknown option character `\\x%x'.\n", optopt);
                 return 1;
             default:
                 return 1;
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
 	timing_start("parsing");
 	yyin = stdin;
 	if (yyparse() != 0) {
-		debug("Parsing failed. Aborting!\n");
+		cdebug("Parsing failed. Aborting!\n");
 	}
 	timing_stop("parsing");
 
@@ -152,7 +152,7 @@ int main(int argc, char *argv[]) {
 
 	// print error summary
 	if (error_counter > 0) {
-		debug("\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
+		cdebug("\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
 		return -1;
 	}
 	
@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
 
 	timing_stop("total");
 
-	fprintf(stdout, "Instance %ssolved.\n", (solved ? "" : "not "));
+	output("Instance %ssolved.\n", (solved ? "" : "not "));
 	//print_one_line_summary();
 
 	timing_print_summary();
