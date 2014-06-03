@@ -2,11 +2,11 @@
 
 #include "debug.h"
 
-void _debug(char* format, ...) {
+void debug(string format, ...) {
 	va_list args;
 
 	va_start(args, format);
-	vfprintf(stderr, format, args);
+	vfprintf(stderr, format.c_str(), args);
 	va_end(args);
 }
 

@@ -89,7 +89,7 @@ void SolvingProgressDialog::solverFinished() {
     controller->setupSlider(true);
     controller->toLastFrame();
     
-    log->append("Finished.");
+    log->append("\nFinished.\n");
     if(solver->isSolved()) {
         outcomeLabel->setStyleSheet("QLabel { color : #008800; }");
         outcomeLabel->setText(tr("The instance has been solved successfully.\nThe solver posted %1 precedence constraints.").arg(newConstraints));

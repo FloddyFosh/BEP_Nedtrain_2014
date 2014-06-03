@@ -21,58 +21,59 @@ extern void print_hele_state();
 extern void handle_neg_cyc();
 
 int solve() {
-    debug("Constructing STJN.\n");
-    timing_start("stjn");
+    cdebug("\nConstructing STJN.\n");
+    timing_start("STJN");
     int stjn_consistent = stjn_construct();
     progress(10);
-    timing_stop("stjn");
+    timing_stop("STJN");
     if (!stjn_consistent) {
-        debug("Problem inconsistent.\n");
+        cdebug("Problem inconsistent. Aborting!\n");
         handle_neg_cyc();
         progress(100);
         return 0;
     }
+    cdebug("Constructing STJN Done.\n");
 
-    debug("Running ESTA+ algorithm.\n");
-    timing_start("esta+");
+    cdebug("\nRunning ESTA+ algorithm.\n");
+    timing_start("ESTA+");
     if (esta_plus()) {
         progress(50);
-        timing_stop("esta+");
+        timing_stop("ESTA+");
     } else {
-        timing_stop("esta+");
-        printf("Could not find valid schedule.\n");
+        timing_stop("ESTA+");
+        cdebug("Could not find valid schedule. Aborting!\n");
         progress(100);
         return 0;
     }
+    cdebug("ESTA+ algorithm Done.\n");
 
-    //print_est_schedule();
-
-    printf("Running chaining algorithm.\n");
-    timing_start("chaining");
+    cdebug("\nRunning Chaining algorithm.\n");
+    timing_start("Chaining");
     if(chaining()){
         progress(75);
-        timing_stop("chaining");
+        timing_stop("Chaining");
     } else {
-        timing_stop("chaining");
-        printf("Could not find valid schedule.\n");
+        timing_stop("Chaining");
+        cdebug("Could not find valid schedule. Aborting!\n");
         progress(100);
         return 0;
     }
+    cdebug("Chaining algorithm Done.\n");
 
-    debug("Constructing flexibility intervals using Linear Programming solver.\n");
+    cdebug("\nConstructing flexibility intervals using Linear Programming solver.\n");
     timing_start("LP");
     if(flexibility()){
         progress(90);
         timing_stop("LP");
     } else {
         timing_stop("LP");
-        printf("Could not find valid schedule.\n");
+        cdebug("Could not find valid schedule. Aborting!\n");
         progress(100);
         return 0;
     }
+    cdebug("Constructing flexibility intervals Done.\n");
 
     progress(100);
-    fflush(stdout);
     return 1;
 }
 
@@ -80,7 +81,7 @@ int add_mutexes = 0;
 int main(int argc, char *argv[]) {
     int c;
 
-    timing_start("total");
+    timing_start("Total");
 
     while((c = getopt(argc, argv, "m:x")) != -1) {
         switch(c){
@@ -91,26 +92,29 @@ int main(int argc, char *argv[]) {
                 add_mutexes = 1;
                 break;
             case '?':
-                if(optopt == 'm')
-                    fprintf(stderr, "Option -%c requires an argument.\n", optopt);
-                else if(isprint(optopt))
-                    fprintf(stderr, "Unknown option `-%c'.\n", optopt);
-                else
-                    fprintf(stderr, "Unknown option character `\\x%x'.\n", optopt);
+                if(optopt == 'm') {
+                    cdebug("Option -%c requires an argument.\n", optopt);
+                }
+                else if(isprint(optopt)) {
+                    cdebug("Unknown option `-%c'.\n", optopt);
+                }
+                else {
+                    cdebug("Unknown option character `\\x%x'.\n", optopt);
+                }
                 return 1;
             default:
                 return 1;
         }
     }
 
-    debug("Parsing.\n");
+    cdebug("Parsing Instance.\n");
 
     // parser
-    timing_start("parsing");
-    int readFromFile = 1;
+    timing_start("Parsing");
+    int readFromFile = 0;
     if(readFromFile==1){
     // open a file handle to a particular file:
-        char* filepath = "../../instances/demo.instance";
+        const char* filepath = "../../instances/demo.instance";
         FILE *myfile = fopen(filepath, "r");
     	// make sure it's valid:
     	if (!myfile) {
@@ -124,9 +128,9 @@ int main(int argc, char *argv[]) {
         yyin = stdin;
     }
     if (yyparse() != 0) { // yyparse doet iets met bison grammar
-        fprintf(stderr, "Parsing failed. Aborting!\n");
+        cdebug("Parsing failed. Aborting!\n");
     }
-    timing_stop("parsing");
+    timing_stop("Parsing");
 
     // only one activity per train at any time
     if(add_mutexes)
@@ -134,15 +138,18 @@ int main(int argc, char *argv[]) {
 
     // print error summary
     if (error_counter > 0) {
-        fprintf(stderr, "\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
+        cdebug("\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
         return -1;
     }
 
+    cdebug("Parsing Done.\n");
+
     int solved = solve();
 
-    timing_stop("total");
+    timing_stop("Total");
 
-    fprintf(stderr, "Instance %ssolved.\n", (solved ? "" : "not "));
+    cdebug("\nInstance %ssolved.\n", (solved ? "" : "not "));
+    output("Instance %ssolved.\n", (solved ? "" : "not "));
 
     timing_print_summary();
 

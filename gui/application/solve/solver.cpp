@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QSettings>
 #include <QFile>
+#include <QDebug>
 
 #include "solver.h"
 #include "controller/exceptions.h"
@@ -10,10 +11,7 @@
 #include "model/chainframe.h"
 
 Solver::Solver(QString name, QString binary, QString arguments, QObject *parent) :
-    QObject (parent), name (name), binary (binary), arguments (arguments), instance(0), solved(false), peakResource(-1), mutexJob(-1)
-{
-    process.setProcessChannelMode(QProcess::MergedChannels);
-}
+    QObject (parent), name (name), binary (binary), arguments (arguments), instance(0), solved(false), peakResource(-1), mutexJob(-1) {}
 
 QList<Solver *> Solver::loadAll() {
     QList<Solver *> solvers;
@@ -110,7 +108,8 @@ bool Solver::start(Instance *p) {
     QString s = instance->toString();
     ba.append(s);
 
-    connect(&process, SIGNAL(readyRead()), this, SLOT(processOutput()));
+    connect(&process, SIGNAL(readyReadStandardOutput()), this, SLOT(solverReadOutput()));
+    connect(&process, SIGNAL(readyReadStandardError()), this, SLOT(solverReadDebug()));
     connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(solverFinished(int, QProcess::ExitStatus)));
     process.start(binary, arguments.split(" "));
 
@@ -121,7 +120,8 @@ bool Solver::start(Instance *p) {
 }
 
 void Solver::solverFinished(int x, QProcess::ExitStatus state) {
-    processOutput();
+    solverReadOutput();
+
     // copy last frame
     Frame * lastFrame (new Frame);
     foreach(Group * g, replayFrames.back()->getGroups()) {
@@ -134,6 +134,50 @@ void Solver::solverFinished(int x, QProcess::ExitStatus state) {
     instance->setFrames(replayFrames);
 
     emit finished(x, state);
+}
+
+void Solver::solverReadOutput() {
+    process.setReadChannel(QProcess::StandardOutput);
+    while (process.canReadLine()) {
+        QByteArray line = process.readLine();
+        if (line.startsWith("PROGRESS: ")) {
+            processProgressLine(line);
+        } else if (line.startsWith("PC: ")) {
+            processPrecedenceLine(line);
+        } else if (line.startsWith("STATE: ")) {
+            processStateLine(line);
+        } else if (line.startsWith("PEAK: ")) {
+            processPeakLine(line);
+        } else if (line.startsWith("MUTEX: ")) {
+            processMutexLine(line);
+        } else if (line.startsWith("STATUS: ")) {
+            emit statusReceived(QString(line.trimmed()));
+            emit messageReceived(QString(line.trimmed()));
+        } else if (line.startsWith("CLEARSOFTPREC")) {
+           instance->clearSoftPrecedences();
+        } else if (line.startsWith("CHAIN: ")) {
+            processChainLine(line);
+        } else if(line.startsWith("Instance solved")) {
+                setSolved(true);
+        } else if(line.startsWith("Instance not solved")) {
+                setSolved(false);
+        } else if (line.startsWith("MRG: ") or line.startsWith("EST: ")) {
+            /* ignored for now */
+        } else if (line == "") {
+            continue;
+        } else {
+            qDebug() << "Unknown Solver Output type: " << line;
+        }
+
+    }
+}
+
+void Solver::solverReadDebug() {
+    process.setReadChannel(QProcess::StandardError);
+    while (process.canReadLine()) {
+        QByteArray line = process.readLine();
+        emit messageReceived(QString(line.trimmed()));
+    }
 }
 
 void Solver::cancel() {
@@ -154,39 +198,6 @@ int Solver::getPeakResource() {
 
 int Solver::getMutexJob() {
     return mutexJob;
-}
-
-void Solver::processOutput() {
-    //QApplication::processEvents(); // keep event loop going so UI stays responsive
-    while (process.canReadLine()) {
-        QByteArray line = process.readLine();
-        if (line.startsWith("PROGRESS: ")) {
-            processProgressLine(line);
-        } else if (line.startsWith("PC: ")) {
-            processPrecedenceLine(line);
-        } else if (line.startsWith("MRG: ") or line.startsWith("EST: ")) {
-            /* ignored for now */
-        } else if (line.startsWith("STATE: ")) {
-            processStateLine(line);
-        } else if (line.startsWith("PEAK: ")) {
-            processPeakLine(line);
-        } else if (line.startsWith("MUTEX: ")) {
-            processMutexLine(line);
-        } else if (line.startsWith("STATUS: ")) {
-            emit statusReceived(QString(line.trimmed()));
-            emit messageReceived(QString(line.trimmed()));
-        } else if (line.startsWith("CLEARSOFTPREC")) {
-           instance->clearSoftPrecedences();
-        } else if (line.startsWith("CHAIN")) {
-            processChainLine(line);
-        } else {
-            if(line.contains("Instance solved."))
-                setSolved(true);
-            else if(line.contains("Instance not solved."))
-                setSolved(false);
-            emit messageReceived(QString(line.trimmed()));
-        }
-    }
 }
 
 void Solver::processProgressLine(QByteArray &line) {

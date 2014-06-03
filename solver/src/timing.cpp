@@ -1,6 +1,7 @@
 #include "alles.h"
 
 #include "timing.h"
+#include "debug.h"
 
 vector<timing_info *> timings;
 struct timeval* tv_end = 0;
@@ -62,10 +63,12 @@ void timing_stop(string name) {
 
 void timing_print_summary() {
     int i;
-    double tot = find_or_create_timing_info("total")->total;
+    double tot = find_or_create_timing_info("Total")->total;
+    cdebug("%s %s", "\n", LINE);
 	for (i = 0; i < len(timings); i++) {
         timing_info* ti = ((timing_info*)list_get(timings, i));
-        fprintf(stderr, "%s: %lf s (%.1lf%%)\n", ti->name.c_str(), ti->total, 100*ti->total/tot);
+        cdebug("%s: %lf s (%.1lf%%)\n", ti->name.c_str(), ti->total, 100*ti->total/tot);
 	}
+    cdebug(LINE);
 }
 
