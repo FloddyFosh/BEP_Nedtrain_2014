@@ -59,8 +59,8 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     connect(solver, SIGNAL(messageReceived(QString)), log, SLOT(append(QString)));
     connect(solver, SIGNAL(statusReceived(QString)), statusLabel, SLOT(setText(QString)));
     connect(solver, SIGNAL(progressMade(int)), this, SLOT(setProgress(int)));
-    connect(solver, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(solverFinished(int, QProcess::ExitStatus)));
-    connect(solver, SIGNAL(peak(int,int,int)), controller, SLOT(peak(int,int,int)));
+    connect(solver, SIGNAL(finished(QProcess::ExitStatus)), this, SLOT(solverFinished(QProcess::ExitStatus)));
+    connect(solver, SIGNAL(peak(int,int)), controller, SLOT(peak(int,int)));
 
     // start solving
     QApplication::setOverrideCursor(Qt::BusyCursor);
@@ -76,7 +76,7 @@ void SolvingProgressDialog::toggleMoreOrLess(bool more) {
     }
 }
 
-void SolvingProgressDialog::solverFinished(int x, QProcess::ExitStatus status) {
+void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
     if(status == QProcess::NormalExit) {
         int newConstraints = 0;
         foreach(Precedence* p, instance->getSoftPrecedences()){

@@ -120,6 +120,7 @@ bool Solver::start(Instance *p) {
 }
 
 void Solver::solverFinished(int x, QProcess::ExitStatus state) {
+    (void) x;
     if(state == QProcess::NormalExit) {
         solverReadOutput();
 
@@ -134,8 +135,7 @@ void Solver::solverFinished(int x, QProcess::ExitStatus state) {
         replayFrames.append(lastFrame);
         instance->setFrames(replayFrames);
     }
-
-    emit finished(x, state);
+    emit finished(state);
 }
 
 void Solver::solverReadOutput() {
@@ -266,8 +266,8 @@ void Solver::processPeakLine(QByteArray &line) {
 
     int time = fields.takeFirst().toInt();
     peakResource = fields.takeFirst().toInt();
-    int capacity = fields.takeFirst().toInt();
-    emit peak(time, peakResource, capacity);
+    fields.takeFirst().toInt();
+    emit peak(time, peakResource);
 
     eatRemainingOutput(fields);
 }
