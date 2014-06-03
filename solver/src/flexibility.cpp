@@ -1,19 +1,27 @@
-/*  Find flexibilty of an STP:
-    1) Find an interval set I_S of S
+/*  Find flexibilty of an STP in two steps:
+    1) Find min
     2) Find an interval set I_S which maximizes flex(S,I_S)
 
     earliest starting time  [est] --> t^-
     latest starting time    [lst] --> t^+
 
-    maximize:       the sum of ([lst] - [est]) for each t \in T
-    constraints:1)  0 <= [lst] - [est] <= \infty \forall t
+1)  maximize:       min
+    constraints:1)  0 <= [lst] - [est] - [min] <= \infty \forall t
                 2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
                 3)  [lst_0] = 0
                 3)  [est_0] = 0
         (so 3 types of constraints)
 
+2)  maximize:       the sum of ([lst] - [est]) for each t \in T
+    constraints:1)  [min] <= [lst] - [est] <= \infty \forall t
+                2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
+                3)  [lst_0] = 0
+                3)  [est_0] = 0
+
     Find all [est] and [lst]
     
+    Only difference with the two steps is the objective function
+    and the first constraint.
 */
 
 #include <sstream>
@@ -28,25 +36,26 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     int n_cols = constraints.getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
     model.setOptimizationDirection(-1); // maximize instead of min.
-    model.resize(0, n_cols);
-    model.setLogLevel(0); // turns off all output of Clp
+    model.resize(0, n_cols + 1); // the last variable is [min]
+    // model.setLogLevel(0); // turns off all output of Clp
     
     // -DBL_MAX = -inf en DBL_MAX = +inf
     // set coefficients
     for(int i = 0; i< n_cols; i++) {
         // set coefficients alternating between -1 and 1
-        model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
+        model.setObjectiveCoefficient(i, 0.0);
         model.setColumnLower(i, 0);       
         model.setColumnUpper(i, constraints.getUpperLimit(i/2)); 
     }
+    model.setObjectiveCoefficient(n_cols, 1.0);
     
-    // add constraints: 0 <= [lst] - [est] <= \infty \forall t
+    // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
-        int cols[] = {i, i+1};
-        double cfc[] = {1.0, -1.0}; // coefficients
-        model.addRow(2, cols, cfc, 0.0, DBL_MAX);
+        int cols[] = {i, i+1, n_cols};
+        double cfc[] = {1.0, -1.0, -1.0}; // coefficients
+        model.addRow(3, cols, cfc, 0.0, DBL_MAX);
     }
     
     // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
@@ -65,18 +74,44 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     model.setColumnLower(1, 0.0); 
     model.setColumnUpper(1, 0.0); 
 
-    // solve the problem
+    // solve the problem for step 1
+    cout << "step 1" << endl;
     model.initialSolve();
+    double min = model.objectiveValue();
+    cout << "min = " << min << endl;
+
+    cout << "step 2" << endl;
+    // change the objective functions
+    int* deleteWhich = new int[n_cols];
+    for(int i = 0; i < n_cols; i++) {
+        model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
+        deleteWhich[i] = i;
+    }
+    model.setObjectiveCoefficient(n_cols, 0.0);
+    cout << "hoi" << endl;
+    // change the constraints of type 1
+    // remove constraints of type 1
+    // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
     
+    for(int i = 0; i < n_cols; i+=2) {
+        // latest starting time is [i]
+        // earliest starting time is [i+1]
+        int cols[] = {i, i+1};
+        double cfc[] = {1.0, -1.0}; // coefficients
+        model.addRow(2, cols, cfc, min, DBL_MAX);
+    }
+    model.deleteRows(n_cols, deleteWhich);
+
+    // solve the problem for step 2
+    model.initialSolve();
+
     // get solution
-    int numberCols = model.numberColumns();
-    assert(n_cols == numberCols);
     const double* sol = model.primalColumnSolution();
 
     // return solution
     map<string, double> vars;
     double flexibility = 0.0;
-    for(int i = 0; i < numberCols; i+=2) {
+    for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints.getVariableName(i/2);
         vars[varname + "^+"] = sol[i];
         vars[varname + "^-"] = sol[i+1];
@@ -86,6 +121,8 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     pair<double, map<string, double> > output;
     output.first = flexibility;
     output.second = vars;
+
+    delete deleteWhich;
     return output;
 }
 
@@ -93,7 +130,7 @@ int flexibility() {
     Constraints constraints;
 
     // a^+ - b^- <= -d_a
-    for(int i = 0; i < n_prec; i++) {
+    for(int i = 0; i < (int) tmsp->precedences.size(); i++) {
         int i1 = P(i)->i1; // a^+
         int j1 = P(i)->j1; // a^+
         int i2 = P(i)->i2; // b^-
@@ -130,6 +167,5 @@ int flexibility() {
         iter++;
     }
     cout << "### flexibility (end) ###" << endl << endl;
-
 	return 1;
 }
