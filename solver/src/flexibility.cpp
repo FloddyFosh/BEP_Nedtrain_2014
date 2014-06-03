@@ -42,7 +42,6 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     // -DBL_MAX = -inf en DBL_MAX = +inf
     // set coefficients
     for(int i = 0; i< n_cols; i++) {
-        // set coefficients alternating between -1 and 1
         model.setObjectiveCoefficient(i, 0.0);
         model.setColumnLower(i, 0);       
         model.setColumnUpper(i, constraints.getUpperLimit(i/2)); 
@@ -75,20 +74,20 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     model.setColumnUpper(1, 0.0); 
 
     // solve the problem for step 1
-    cout << "step 1" << endl;
-    model.initialSolve();
-    double min = model.objectiveValue();
+    // model.initialSolve();
+    // double min = model.objectiveValue();
+    double min = 0.0;
     cout << "min = " << min << endl;
 
-    cout << "step 2" << endl;
     // change the objective functions
     int* deleteWhich = new int[n_cols];
     for(int i = 0; i < n_cols; i++) {
+        // set coefficients alternating between -1 and 1
         model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
         deleteWhich[i] = i;
     }
     model.setObjectiveCoefficient(n_cols, 0.0);
-    cout << "hoi" << endl;
+
     // change the constraints of type 1
     // remove constraints of type 1
     // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
