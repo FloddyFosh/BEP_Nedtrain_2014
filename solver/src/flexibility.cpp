@@ -8,15 +8,10 @@
 1)  maximize:       min
     constraints:1)  0 <= [lst] - [est] - [min] <= \infty \forall t
                 2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
-                3)  [lst_0] = 0
-                3)  [est_0] = 0
-        (so 3 types of constraints)
 
 2)  maximize:       the sum of ([lst] - [est]) for each t \in T
     constraints:1)  [min] <= [lst] - [est] <= \infty \forall t
                 2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
-                3)  [lst_0] = 0
-                3)  [est_0] = 0
 
     Find all [est] and [lst]
     
@@ -33,11 +28,12 @@
 using namespace std;
 
 pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
+    cout << endl << "### flexibility (start) ###" << endl;
     int n_cols = constraints.getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
     model.setOptimizationDirection(-1); // maximize instead of min.
     model.resize(0, n_cols + 1); // the last variable is [min]
-    // model.setLogLevel(0); // turns off all output of Clp
+    model.setLogLevel(0); // turns off all output of Clp
     
     // -DBL_MAX = -inf en DBL_MAX = +inf
     // set coefficients
@@ -47,6 +43,8 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
         model.setColumnUpper(i, constraints.getUpperLimit(i/2)); 
     }
     model.setObjectiveCoefficient(n_cols, 1.0);
+    model.setColumnLower(n_cols, 0);
+    model.setColumnUpper(n_cols, DBL_MAX);
     
     // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
@@ -67,31 +65,26 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
         model.addRow(2, cols, cfc, -DBL_MAX, constrain.c);
     }
     
-    // add constraints: [lst_0] = 0 && [est_0] = 0
-    model.setColumnLower(0, 0.0); 
-    model.setColumnUpper(0, 0.0);    
-    model.setColumnLower(1, 0.0); 
-    model.setColumnUpper(1, 0.0); 
-
     // solve the problem for step 1
-    // model.initialSolve();
-    // double min = model.objectiveValue();
-    double min = 0.0;
+    model.initialSolve();
+    double min = model.objectiveValue();
     cout << "min = " << min << endl;
 
     // change the objective functions
-    int* deleteWhich = new int[n_cols];
     for(int i = 0; i < n_cols; i++) {
         // set coefficients alternating between -1 and 1
         model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
-        deleteWhich[i] = i;
     }
     model.setObjectiveCoefficient(n_cols, 0.0);
 
-    // change the constraints of type 1
     // remove constraints of type 1
+    int* deleteWhich = new int[n_cols];
+    for(int i = 0; i < n_cols/2; i++) {
+        deleteWhich[i] = i;
+    }
+    model.deleteRows(n_cols/2, deleteWhich);
+
     // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
-    
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
@@ -99,7 +92,6 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
         double cfc[] = {1.0, -1.0}; // coefficients
         model.addRow(2, cols, cfc, min, DBL_MAX);
     }
-    model.deleteRows(n_cols, deleteWhich);
 
     // solve the problem for step 2
     model.initialSolve();
@@ -158,7 +150,6 @@ int flexibility() {
     pair<double, map<string, double> > output;
     output = useClpToSolve(constraints);
     
-    cout << endl << "### flexibility (start) ###" << endl;
     cout << "flexibility = " << output.first << endl;
     map<string, double>::iterator iter = output.second.begin();
     while(iter != output.second.end()) {
