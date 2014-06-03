@@ -11,8 +11,8 @@ link_directories(../../coin-Clp/lib)
 
 # Add the source files are going to be tested to this list:
 add_executable(testsuite testsuite.cpp 
-    ../src/clp/constraints.cpp
-    ../src/clp/flexibility.cpp)
+    ../src/constraints.cpp
+    ../src/flexibility.cpp)
 
 # Link testsuite with GTest, pthread, Clp en CoinUtils
 target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread Clp CoinUtils)
