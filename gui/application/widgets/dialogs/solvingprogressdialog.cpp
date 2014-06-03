@@ -131,3 +131,9 @@ void SolvingProgressDialog::setProgress(int value) {
     progressBar->setRange(0,100);
     progressBar->setValue(value);
 }
+
+void SolvingProgressDialog::closeEvent(QCloseEvent *ev){
+    solver->cancel();
+    solver->getProcess()->waitForFinished();
+    ev->accept();
+}

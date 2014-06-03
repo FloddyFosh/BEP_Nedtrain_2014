@@ -47,6 +47,9 @@ public:
       */
     explicit SolvingProgressDialog(Solver *solver, InstanceController *controller, QWidget *parent = 0);
 
+protected:
+    void closeEvent(QCloseEvent *); ///< Event that triggers when close button is clicked
+
 public slots:
     void toggleMoreOrLess(bool); ///< show or hide the log area
     void solverFinished(QProcess::ExitStatus); ///< the solver's finished signal is connected to this slot, it changes the cancel button into an ok button and sets the progress to 100%
