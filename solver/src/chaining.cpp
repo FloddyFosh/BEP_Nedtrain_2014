@@ -57,7 +57,6 @@ void pushToChain(activity* act, pair<int,int>* chainId){
         activity* chainEnd = chain->back();
         add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
         output("PC: %d %d %d %d\n", chainEnd->i, chainEnd->j, act->i, act->j);
-
     }
     chain->push_back(act);
 }
