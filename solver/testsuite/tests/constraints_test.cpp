@@ -1,6 +1,6 @@
 #include  <gtest/gtest.h>
 
-#include "../../src/clp/constraints.h"
+#include "../../src/constraints.h"
 
 class ConstraintsTest : public ::testing::Test {
   protected:

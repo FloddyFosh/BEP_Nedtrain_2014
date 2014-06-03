@@ -1,7 +1,7 @@
 #include  <gtest/gtest.h>
 
-#include "../../src/clp/flexibility.h"
-#include "../../src/clp/constraints.h"
+#include "../../src/flexibility.h"
+#include "../../src/constraints.h"
 
 class FlexibilityTest : public ::testing::Test {
   protected:
