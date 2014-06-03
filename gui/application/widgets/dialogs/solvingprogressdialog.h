@@ -49,7 +49,7 @@ public:
 
 public slots:
     void toggleMoreOrLess(bool); ///< show or hide the log area
-    void solverFinished(); ///< the solver's finished signal is connected to this slot, it changes the cancel button into an ok button and sets the progress to 100%
+    void solverFinished(int, QProcess::ExitStatus); ///< the solver's finished signal is connected to this slot, it changes the cancel button into an ok button and sets the progress to 100%
     void setProgress(int); ///< connect to the solver's progressMade signal to update the progress bar
 };
 

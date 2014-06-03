@@ -11,12 +11,11 @@ void cdebug(string format, ...) {
     va_end(args);
 }
 
-void debug(string format, ...) {
+void _debug(string format, ...) {
     va_list args;
 
     va_start(args, format);
-    fprintf(stderr, "%s%s%s%s%s", "[", __FILE__, ":", __func__, "] ");
-    cdebug(format, args);
+    vfprintf(stderr, format.c_str(), args);
     va_end(args);
 }
 

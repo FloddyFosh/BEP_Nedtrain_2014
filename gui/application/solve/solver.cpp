@@ -120,18 +120,20 @@ bool Solver::start(Instance *p) {
 }
 
 void Solver::solverFinished(int x, QProcess::ExitStatus state) {
-    solverReadOutput();
+    if(state == QProcess::NormalExit) {
+        solverReadOutput();
 
-    // copy last frame
-    Frame * lastFrame (new Frame);
-    foreach(Group * g, replayFrames.back()->getGroups()) {
-        Group * g_ (new Group (g->getJob(), g->getEST(), g->getLST(), g->getST()));
-        g_->setLocked(g->isLocked());
-        foreach(Activity * a, g->getActivities()) g_->addActivity(a);
-        lastFrame->addGroup(g_);
+        // copy last frame
+        Frame * lastFrame (new Frame);
+        foreach(Group * g, replayFrames.back()->getGroups()) {
+            Group * g_ (new Group (g->getJob(), g->getEST(), g->getLST(), g->getST()));
+            g_->setLocked(g->isLocked());
+            foreach(Activity * a, g->getActivities()) g_->addActivity(a);
+            lastFrame->addGroup(g_);
+        }
+        replayFrames.append(lastFrame);
+        instance->setFrames(replayFrames);
     }
-    replayFrames.append(lastFrame);
-    instance->setFrames(replayFrames);
 
     emit finished(x, state);
 }
