@@ -1,7 +1,7 @@
 #ifndef __TIMING_H
 #define __TIMING_H
 
-#define progress(x)	output("PROGRESS: %d\n", x)
+#define solverProgress(x)	output("PROGRESS: %d\n", x)
 
 typedef struct timing_info {
     string name;
