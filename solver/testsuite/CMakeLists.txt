@@ -15,4 +15,4 @@ add_executable(testsuite testsuite.cpp
     ../src/clp/flexibility.cpp)
 
 # Link testsuite with GTest, pthread, Clp en CoinUtils
-target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread Clp CoinUtils)
+target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread Clp CoinUtils z)
