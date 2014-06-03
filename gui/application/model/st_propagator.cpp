@@ -18,7 +18,7 @@ ST_Propagator::ST_Propagator(InstanceController * controller, Group * group) : c
         precedences.push_back(p);
     }
     foreach(Precedence * p, instance->getSoftPrecedences()) {
-        precedences.push_back(p);
+        if(!p->isDisabled()) precedences.push_back(p);
     }
     for (vector<Precedence *>::iterator it = precedences.begin(); it != precedences.end(); ++it) {
         Precedence * p = *it;

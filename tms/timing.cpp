@@ -1,13 +1,14 @@
 #include "alles.h"
 
 #include "timing.h"
+#include "debug.h"
 
 vector<timing_info *> timings;
 struct timeval* tv_end = 0;
 
-timing_info* new_timing_info(char* name) {
+timing_info* new_timing_info(string name) {
 	timing_info* ti = new timing_info;
-	ti->name = strdup(name);
+	ti->name = name;
 	ti->start = new timeval;
 	ti->total = 0;
 	return ti;
@@ -20,18 +21,18 @@ void timing_init() {
 }
 
 
-timing_info* find_timing_info(char* name) {
+timing_info* find_timing_info(string name) {
 	int i;
 	for (i = 0; i < len(timings); i++) {
 		timing_info* ti = (timing_info*) list_get(timings, i);
-		if (!strcmp(name, ti->name)) {
+		if (!name.compare(ti->name)) {
 			return ti;
 		}
 	}
 	return 0;
 }
 
-timing_info* find_or_create_timing_info(char* name) {
+timing_info* find_or_create_timing_info(string name) {
 	timing_info* ti = find_timing_info(name);
 	if (!ti) {
 		ti = new_timing_info(name);
@@ -40,13 +41,13 @@ timing_info* find_or_create_timing_info(char* name) {
 	return ti;
 }
 
-void timing_start(char* name) {
+void timing_start(string name) {
 	timing_init();
 	timing_info* ti = find_or_create_timing_info(name);
 	gettimeofday(ti->start, NULL);
 }
 
-void timing_stop(char* name) {
+void timing_stop(string name) {
 	double seconds = 0;
 	gettimeofday(tv_end, NULL);
 	timing_info* ti = find_timing_info(name);
@@ -64,7 +65,7 @@ void timing_print_summary() {
 	int i;
 	for (i = 0; i < len(timings); i++) {
 		timing_info* ti = ((timing_info*)list_get(timings, i));
-		fprintf(stderr, "%s: %lf\n", ti->name, ti->total);
+		debug("%s: %lf\n", ti->name.c_str(), ti->total);
 	}
 }
 

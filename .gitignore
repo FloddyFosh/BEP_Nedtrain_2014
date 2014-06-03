@@ -91,6 +91,39 @@ solver/testsuite/cmake_install.cmake
 */.project
 */.settings
 
+# CLP generated files
+coin-Clp/libtool
+coin-Clp/config.cache
+coin-Clp/bin/
+coin-Clp/lib/
+coin-Clp/share/
+coin-Clp/include/
+coin-Clp/**/.deps/
+coin-Clp/**/.libs/
+coin-Clp/**/Makefile
+coin-Clp/**/*.pc
+coin-Clp/**/stamp-h1
+coin-Clp/**/stamp-h2
+coin-Clp/**/config.status
+coin-Clp/**/doxydoc/*.conf
+coin-Clp/Clp/src/Makefile
+coin-Clp/Clp/src/clp
+coin-Clp/**/config.h
+coin-Clp/Clp/src/config_clp.h
+coin-Clp/CoinUtils/src/config_coinutils.h
+coin-Clp/Osi/src/Osi/config_osi.h
+coin-Clp/Clp/test/*.gz
+coin-Clp/Clp/test/*.lp
+coin-Clp/Clp/test/osiUnitTest
+coin-Clp/doxydoc/
+coin-Clp/Osi/doxydoc/
+coin-Clp/CoinUtils/doxydoc/
+coin-Clp/Clp/examples/*.mps
+coin-Clp/Clp/test/*.mps
+!coin-Clp/CoinUtils/doxydoc/doxygen.conf.in
+!coin-Clp/doxydoc/doxygen.conf.in
+!coin-Clp/Osi/doxydoc/doxygen.conf.in
+
 # Exceptions of ignoring files
 !libgtest_unix32.a
 !libgtest_unix64.a

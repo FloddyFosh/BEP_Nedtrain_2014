@@ -18,6 +18,7 @@ private:
     Activity *_a1; ///< preceeding activity
     Activity *_a2; ///< preceeded activity
     bool hard; ///< whether this precedence is <i>hard</i>, that is, a constraint from the problem (in contrast to <i>soft</i> precedences, which are added by the solver during the solving process).
+    bool disabled;
     set<int> frameNumbers;
 public:
     /**
@@ -61,6 +62,11 @@ public:
      * and not added by the algorithm.
      */
     bool isHard();
+
+    bool isDisabled();
+
+    void disable();
+    void enable();
 
     /**
      * @return The frame numbers for which this constraint will be displayed.

@@ -65,7 +65,7 @@ int solve() {
                 return 1;
 	} else {
 		timing_stop("esta+");
-		printf("Could not find valid schedule.\n");
+		debug("Could not find valid schedule.\n");
 		progress(100);
 		return 0;
 	}
@@ -100,13 +100,13 @@ double robustness() {
 }
 
 void print_one_line_summary() {
-	fprintf(stderr, "%lf ", find_timing_info("parsing")->total);
-	fprintf(stderr, "%lf ", find_or_create_timing_info("esta+")->total);
-	fprintf(stderr, "%lf ", find_or_create_timing_info("chaining")->total);
-	fprintf(stderr, "%d ", leveling_constraints_before_chaining);
-	fprintf(stderr, "%d ", leveling_constraints_after_chaining);
-	fprintf(stderr, "%lf ", robustness());
-	fprintf(stderr, "%d\n", throughput());
+	fprintf(stdout, "%lf ", find_timing_info("parsing")->total);
+	fprintf(stdout, "%lf ", find_or_create_timing_info("esta+")->total);
+	fprintf(stdout, "%lf ", find_or_create_timing_info("chaining")->total);
+	fprintf(stdout, "%d ", leveling_constraints_before_chaining);
+	fprintf(stdout, "%d ", leveling_constraints_after_chaining);
+	fprintf(stdout, "%lf ", robustness());
+	fprintf(stdout, "%d\n", throughput());
 }*/
 
 int add_mutexes = 0;
@@ -125,11 +125,11 @@ int main(int argc, char *argv[]) {
                 break;
             case '?':
                 if(optopt == 'm')
-                    fprintf(stderr, "Option -%c requires an argument.\n", optopt);
+                    debug("Option -%c requires an argument.\n", optopt);
                 else if(isprint(optopt))
-                    fprintf(stderr, "Unknown option `-%c'.\n", optopt);
+                    debug("Unknown option `-%c'.\n", optopt);
                 else
-                    fprintf(stderr, "Unknown option character `\\x%x'.\n", optopt);
+                    debug("Unknown option character `\\x%x'.\n", optopt);
                 return 1;
             default:
                 return 1;
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]) {
 	timing_start("parsing");
 	yyin = stdin;
 	if (yyparse() != 0) {
-		fprintf(stderr, "Parsing failed. Aborting!\n");
+		debug("Parsing failed. Aborting!\n");
 	}
 	timing_stop("parsing");
 
@@ -152,7 +152,7 @@ int main(int argc, char *argv[]) {
 
 	// print error summary
 	if (error_counter > 0) {
-		fprintf(stderr, "\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
+		debug("\n%d error%s\n\n", error_counter, error_counter == 1 ? "" : "s");
 		return -1;
 	}
 	
@@ -160,14 +160,14 @@ int main(int argc, char *argv[]) {
 
 	timing_stop("total");
 
-	fprintf(stderr, "Instance %ssolved.\n", (solved ? "" : "not "));
+	fprintf(stdout, "Instance %ssolved.\n", (solved ? "" : "not "));
 	//print_one_line_summary();
 
 	timing_print_summary();
-	/*fprintf(stderr, "leveling constraints before chaining: %d\n", leveling_constraints_before_chaining);
-	fprintf(stderr, "leveling constraints after chaining: %d\n", leveling_constraints_after_chaining);
-	fprintf(stderr, "robustness: %lf\n", robustness());
-	fprintf(stderr, "throughput: %d\n", throughput());*/
+	/*fprintf(stdout, "leveling constraints before chaining: %d\n", leveling_constraints_before_chaining);
+	fprintf(stdout, "leveling constraints after chaining: %d\n", leveling_constraints_after_chaining);
+	fprintf(stdout, "robustness: %lf\n", robustness());
+	fprintf(stdout, "throughput: %d\n", throughput());*/
 
 	return !solved;
 }

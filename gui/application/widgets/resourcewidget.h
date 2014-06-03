@@ -56,7 +56,7 @@ public:
     void setShadedJob(Job*); ///< sets the specified job in the resource calculator
     void setHZoom(int z); ///< sets horizontal zoom factor
     void setVZoom(int z); ///< sets vertical zoom factor
-    void paintPeak(int t, int c); ///< paints a vertical line, representing a peak
+    void paintPeak(int t); ///< paints a vertical line, representing a peak
     void removePeak(); ///< removes the painted peak
 
 protected:

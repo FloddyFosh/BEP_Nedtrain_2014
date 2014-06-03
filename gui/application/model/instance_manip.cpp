@@ -257,10 +257,15 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
             }
         }
         else {
-            if(!existing->isHard() && !existing->getFrameNrs().count(frameNumber)) {
-                // Soft precedences can be added to multiple frames, because of multiple algorithms.
-                existing->addFrameNr(frameNumber);
-                return;
+            if(!existing->isHard() && (existing->isDisabled() || !existing->getFrameNrs().count(frameNumber))){
+                if(existing->isDisabled()){
+                    existing->enable();
+                }
+                if(!existing->getFrameNrs().count(frameNumber)) {
+                    // Soft precedences can be added to multiple frames, because of multiple algorithms.
+                    existing->addFrameNr(frameNumber);
+                    return;
+                }
             }
             else {
                 throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
@@ -353,11 +358,12 @@ void Instance::addJobMutexes() {
 void Instance::clearSoftPrecedences() {
     setUserChanges(true);
     foreach(Precedence *p, softPrecedences){
-    	 p->a1()->removePrecedence(p);
-    	 p->a2()->removePrecedence(p);
-    	 delete p;
+         p->disable();
+         //p->a1()->removePrecedence(p);
+         //p->a2()->removePrecedence(p);
+         //delete p;
     }
-    softPrecedences.clear();
+    //softPrecedences.clear();
 
     foreach(Job* j, jobs){
     	foreach(Activity* a, j->getActivities())
