@@ -65,7 +65,7 @@ void timing_print_summary() {
 	int i;
 	for (i = 0; i < len(timings); i++) {
 		timing_info* ti = ((timing_info*)list_get(timings, i));
-		debug("%s: %lf\n", ti->name.c_str(), ti->total);
+		cdebug("%s: %lf\n", ti->name.c_str(), ti->total);
 	}
 }
 
