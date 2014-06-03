@@ -54,3 +54,15 @@ void Constraints::setUpperLimit(string name, int upperLimit) {
     int id = addVariable(name);
     upperLimits[id] = upperLimit;
 }
+
+int Constraints::getLowerLimit(int id) {
+    if(variablesName.count(id)) {
+        return lowerLimits[id];
+    }
+    return -1; // throw exception
+}
+
+void Constraints::setLowerLimit(string name, int lowerLimit) {
+    int id = addVariable(name);
+    lowerLimits[id] = lowerLimit;
+}

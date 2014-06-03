@@ -22,6 +22,7 @@ class Constraints {
         map<string, int> variablesId;
         map<int, string> variablesName;
         map<int, int> upperLimits;
+        map<int, int> lowerLimits;
         vector<Constraint> constraintVector;
 
     public:
@@ -34,6 +35,8 @@ class Constraints {
         int addVariable(string name);
         int getUpperLimit(int id);
         void setUpperLimit(string name, int upperLimit);
+        int getLowerLimit(int id);
+        void setLowerLimit(string name, int lowerLimit);
 };
 
 #endif
