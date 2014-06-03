@@ -43,11 +43,10 @@ void Resource::addActToChain(Activity* act, int chainId) {
         Chain* newChain = new Chain(_id,chainId,actVec,this);
         chainsPointer->insert(chainId, newChain);
     }
-    QVector<Precedence*> precs = _instance->getSoftPrecedences();
     Chain* chain = chainsPointer->value(chainId);
     if(!chain->getActivities()->empty()){
         Activity* lastAct = chain->getActivities()->last();
-        if(Precedence* prec = _instance->precedenceExists(lastAct,act)){
+        if(_instance->precedenceExists(lastAct,act)){
             int maxFrameNr = _instance->getMaxFrameNr();
             _instance->addPrecedenceFrame(lastAct,act,maxFrameNr+1);
         }
