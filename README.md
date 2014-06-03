@@ -12,7 +12,6 @@ Onze Jenkins server is te vinden op: [77.163.248.47](http://77.163.248.47)
  - Chaining zodat bij het verslepen van een taak er geen resource conflicts ontstaan.
  - Undo functie, vooral handig is als je per ongeluk bij het slepen van een task de duration aanpast.
  - Nieuwe view voor resources met chains
- - De output op stdout en de debug op stderr.
  - Vergelijken van instanties met verschillende solvers (bijv. chaining met verschillende heuristieken), waarvan de flexibiliteit berekend wordt. Vervolgens kan de meest flexibele oplossing gekozen worden.
  - Default solver na opstarten van de tool (chaining)
  
