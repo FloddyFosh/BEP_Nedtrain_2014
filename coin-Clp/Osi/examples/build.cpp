@@ -13,7 +13,7 @@ main(void)
    OsiSolverInterface *si;
 
    // When we instantiate the object, we need a specific derived class.
-   si = new OSIXXX;
+   si = new OSIXXXhpp;
 
    // Build our own instance from scratch
 

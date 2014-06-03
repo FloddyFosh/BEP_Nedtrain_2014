@@ -2,7 +2,7 @@
 # All Rights Reserved.
 # This file is distributed under the Eclipse Public License.
 
-## $Id: configure.ac 1966 2014-05-17 18:09:35Z stefan $
+## $Id: configure.ac 1961 2014-01-27 03:50:22Z tkr $
 
 # Author:  Andreas Waechter            IBM    2006-04-13
 
@@ -58,7 +58,7 @@ if test $coin_has_coinutils != yes ; then
   AC_MSG_ERROR([Required package CoinUtils not available.])
 fi
 AC_COIN_CHECK_PACKAGE(Glpk,      [coinglpk],  [OsiGlpkLib])
-AC_COIN_CHECK_PACKAGE(SoPlex,    [coinsoplex >= 1.0 coinsoplex <= 1.2],[OsiSpxLib])
+AC_COIN_CHECK_PACKAGE(SoPlex,    [coinsoplex],[OsiSpxLib])
 AC_COIN_CHECK_PACKAGE(Sample,    [coindatasample])
 AC_COIN_CHECK_PACKAGE(Netlib,    [coindatanetlib])
 
