@@ -1,16 +1,16 @@
 /*  Find flexibilty of an STP in two steps:
-    1) Find min
+    1) Find minflex
     2) Find an interval set I_S which maximizes flex(S,I_S)
 
     earliest starting time  [est] --> t^-
     latest starting time    [lst] --> t^+
 
-1)  maximize:       min
-    constraints:1)  0 <= [lst] - [est] - [min] <= \infty \forall t
+1)  maximize:       minflex
+    constraints:1)  0 <= [lst] - [est] - [minflex] <= \infty \forall t
                 2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
 
 2)  maximize:       the sum of ([lst] - [est]) for each t \in T
-    constraints:1)  [min] <= [lst] - [est] <= \infty \forall t
+    constraints:1)  [minflex] <= [lst] - [est] <= \infty \forall t
                 2)  [lst] - [est'] <= c \forall (t - t' <= c) \in C
 
     Find all [est] and [lst]
@@ -27,6 +27,16 @@
 
 using namespace std;
 
+double minflex = 0, flextotaal = 0;
+
+double getMinFlex() { 
+    return minflex;
+}
+
+double getFlexibility() {
+    return flextotaal;
+}
+
 void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
     // -DBL_MAX = -inf en DBL_MAX = +inf
     // set coefficients
@@ -41,7 +51,7 @@ void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
 }
 
 void addType1Constraints(ClpSimplex* model, int n_cols) {
-    // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
+    // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
@@ -72,7 +82,7 @@ void changeObjective(ClpSimplex* model, int n_cols) {
     model->setObjectiveCoefficient(n_cols, 0.0);
 }
 
-void changeType1Constraints(ClpSimplex* model, int n_cols, double min) {
+void changeType1Constraints(ClpSimplex* model, int n_cols) {
     // remove constraints of type 1
     int* deleteWhich = new int[n_cols];
     for(int i = 0; i < n_cols/2; i++) {
@@ -81,21 +91,21 @@ void changeType1Constraints(ClpSimplex* model, int n_cols, double min) {
     model->deleteRows(n_cols/2, deleteWhich);
     delete deleteWhich;
 
-    // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
+    // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
         int cols[] = {i, i+1};
         double cfc[] = {1.0, -1.0}; // coefficients
-        model->addRow(2, cols, cfc, min, DBL_MAX);
+        model->addRow(2, cols, cfc, minflex, DBL_MAX);
     }
 }
 
-pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
+map<string, double> useClpToSolve (Constraints* constraints) {
     int n_cols = constraints->getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
-    model.setOptimizationDirection(-1); // maximize instead of min.
-    model.resize(0, n_cols + 1); // the last variable is [min]
+    model.setOptimizationDirection(-1); // maximize instead of minflex.
+    model.resize(0, n_cols + 1); // the last variable is [minflex]
     model.setLogLevel(0); // turns off all output of Clp
     
     setObjective(&model, n_cols, constraints);
@@ -104,32 +114,25 @@ pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
     
     // solve the problem for step 1
     model.initialSolve();
-    double min = model.objectiveValue();
-    cout << "min = " << min << endl;
+    minflex = model.objectiveValue();
 
     changeObjective(&model, n_cols);
-    changeType1Constraints(&model, n_cols, min);
+    changeType1Constraints(&model, n_cols);
 
     // solve the problem for step 2
     model.initialSolve();
 
     // get solution
     const double* sol = model.primalColumnSolution();
+    flextotaal = model.objectiveValue();
 
     // return solution
-    map<string, double> vars;
-    double flexibility = 0.0;
+    map<string, double> output;   
     for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints->getVariableName(i/2);
-        vars[varname + "^+"] = sol[i];
-        vars[varname + "^-"] = sol[i+1];
-        flexibility += sol[i] - sol[i+1];
+        output[varname + "^+"] = sol[i];
+        output[varname + "^-"] = sol[i+1];
     }
-
-    pair<double, map<string, double> > output;
-    output.first = flexibility;
-    output.second = vars;
-
     return output;
 }
 
@@ -166,26 +169,24 @@ void addLimits(Constraints* constraints) {
     }
 }
 
-void printSolution(pair<double, map<string, double> >* solution) {
-    cout << "flexibility = " << solution->first << endl << endl;
-    map<string, double>::iterator iter = solution->second.begin();
-    while(iter != solution->second.end()) {
+void printSolution(map<string, double>* solution) {
+    cout << endl << "### flexibility (start) ###" << endl;     
+    cout << "minflex = " << minflex << endl;
+    cout << "flexibility = " << flexibility << endl << endl;
+    map<string, double>::iterator iter = solution->begin();
+    while(iter != solution->end()) {
         cout << iter->first << " = " << iter->second << endl;
         iter++;
     }
+    cout << "### flexibility (end) ###" << endl << endl;
 }
 
 int flexibility() {
-    cout << endl << "### flexibility (start) ###" << endl;    
     Constraints constraints;
-
     addConstraints(&constraints);
     addLimits(&constraints);
-    
-    pair<double, map<string, double> > solution;
+    map<string, double> solution;
     solution = useClpToSolve(&constraints);
-
     printSolution(&solution);
-    cout << "### flexibility (end) ###" << endl << endl;
     return 1;
 }

@@ -11,17 +11,20 @@
 #include <string>
 #include <utility>
 
+double getMinFlex();
+double getFlexibility();
+
 void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints);
 void addType1Constraints(ClpSimplex* model, int n_cols);
 void addType2Constraints(ClpSimplex* model, Constraints* constraints);
 void changeObjective(ClpSimplex* model, int n_cols);
 void changeType1Constraints(ClpSimplex* model, int n_cols);
 
-pair<double, map<string, double> > useClpToSolve (Constraints &constraints);
+map<string, double> useClpToSolve (Constraints* constraints);
 
 void addConstraints(Constraints* constraints);
 void addLimits(Constraints* constraints);
-void printSolution(pair<double, map<string, double> >* solution);
+void printSolution(map<string, double>* solution);
 
 int flexibility();
 
