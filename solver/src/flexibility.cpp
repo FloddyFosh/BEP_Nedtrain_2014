@@ -187,5 +187,5 @@ int flexibility() {
 
     printSolution(&solution);
     cout << "### flexibility (end) ###" << endl << endl;
-	return 1;
+    return 1;
 }
