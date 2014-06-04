@@ -27,33 +27,31 @@
 
 using namespace std;
 
-pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
-    int n_cols = constraints->getAmountOfVariables() * 2;    
-    ClpSimplex model; // child of ClpModel
-    model.setOptimizationDirection(-1); // maximize instead of min.
-    model.resize(0, n_cols + 1); // the last variable is [min]
-    model.setLogLevel(0); // turns off all output of Clp
-    
+void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
     // -DBL_MAX = -inf en DBL_MAX = +inf
     // set coefficients
-    for(int i = 0; i< n_cols; i++) {
-        model.setObjectiveCoefficient(i, 0.0);
-        model.setColumnLower(i, constraints->getLowerLimit(i/2));
-        model.setColumnUpper(i, constraints->getUpperLimit(i/2)); 
+    for(int i = 0; i < n_cols; i++) {
+        model->setObjectiveCoefficient(i, 0.0);
+        model->setColumnLower(i, constraints->getLowerLimit(i/2));
+        model->setColumnUpper(i, constraints->getUpperLimit(i/2)); 
     }
-    model.setObjectiveCoefficient(n_cols, 1.0);
-    model.setColumnLower(n_cols, 0);
-    model.setColumnUpper(n_cols, DBL_MAX);
-    
+    model->setObjectiveCoefficient(n_cols, 1.0);
+    model->setColumnLower(n_cols, 0);
+    model->setColumnUpper(n_cols, DBL_MAX);
+}
+
+void addType1Constraints(ClpSimplex* model, int n_cols) {
     // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
         int cols[] = {i, i+1, n_cols};
         double cfc[] = {1.0, -1.0, -1.0}; // coefficients
-        model.addRow(3, cols, cfc, 0.0, DBL_MAX);
+        model->addRow(3, cols, cfc, 0.0, DBL_MAX);
     }
-    
+}
+
+void addType2Constraints(ClpSimplex* model, Constraints* constraints) {
     // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
     for(int i = 0; i < constraints->size(); i++) {
         // [lst]  = constrain.t1 * 2    
@@ -61,27 +59,27 @@ pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
         Constraint constrain = (*constraints)[i];
         int cols[] = {constrain.t1 * 2, constrain.t2 * 2 + 1};
         double cfc[] = {1.0, -1.0}; // coefficients
-        model.addRow(2, cols, cfc, -DBL_MAX, constrain.c);
+        model->addRow(2, cols, cfc, -DBL_MAX, constrain.c);
     }
-    
-    // solve the problem for step 1
-    model.initialSolve();
-    double min = model.objectiveValue();
-    cout << "min = " << min << endl;
+}
 
+void changeObjective(ClpSimplex* model, int n_cols) {
     // change the objective functions
     for(int i = 0; i < n_cols; i++) {
         // set coefficients alternating between -1 and 1
-        model.setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
+        model->setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
     }
-    model.setObjectiveCoefficient(n_cols, 0.0);
+    model->setObjectiveCoefficient(n_cols, 0.0);
+}
 
+void changeType1Constraints(ClpSimplex* model, int n_cols, double min) {
     // remove constraints of type 1
     int* deleteWhich = new int[n_cols];
     for(int i = 0; i < n_cols/2; i++) {
         deleteWhich[i] = i;
     }
-    model.deleteRows(n_cols/2, deleteWhich);
+    model->deleteRows(n_cols/2, deleteWhich);
+    delete deleteWhich;
 
     // add constraints: 0 <= [lst] - [est] - [min] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
@@ -89,8 +87,28 @@ pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
         // earliest starting time is [i+1]
         int cols[] = {i, i+1};
         double cfc[] = {1.0, -1.0}; // coefficients
-        model.addRow(2, cols, cfc, min, DBL_MAX);
+        model->addRow(2, cols, cfc, min, DBL_MAX);
     }
+}
+
+pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
+    int n_cols = constraints->getAmountOfVariables() * 2;    
+    ClpSimplex model; // child of ClpModel
+    model.setOptimizationDirection(-1); // maximize instead of min.
+    model.resize(0, n_cols + 1); // the last variable is [min]
+    model.setLogLevel(0); // turns off all output of Clp
+    
+    setObjective(&model, n_cols, constraints);
+    addType1Constraints(&model, n_cols);
+    addType2Constraints(&model, constraints);
+    
+    // solve the problem for step 1
+    model.initialSolve();
+    double min = model.objectiveValue();
+    cout << "min = " << min << endl;
+
+    changeObjective(&model, n_cols);
+    changeType1Constraints(&model, n_cols, min);
 
     // solve the problem for step 2
     model.initialSolve();
@@ -112,7 +130,6 @@ pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
     output.first = flexibility;
     output.second = vars;
 
-    delete deleteWhich;
     return output;
 }
 
