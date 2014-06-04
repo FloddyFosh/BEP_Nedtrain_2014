@@ -40,5 +40,29 @@ string Constraints::getVariableName(int id) {
     if(variablesName.count(id)) {
         return variablesName[id];
     }
-    return ""; // throw exception    
+    throw NoSuchVariableException(id);   
+}
+
+int Constraints::getUpperLimit(int id) {
+    if(variablesName.count(id)) {
+        return upperLimits[id];
+    }
+    throw NoSuchVariableException(id); 
+}
+
+void Constraints::setUpperLimit(string name, int upperLimit) {
+    int id = addVariable(name);
+    upperLimits[id] = upperLimit;
+}
+
+int Constraints::getLowerLimit(int id) {
+    if(variablesName.count(id)) {
+        return lowerLimits[id];
+    }
+    throw NoSuchVariableException(id);
+}
+
+void Constraints::setLowerLimit(string name, int lowerLimit) {
+    int id = addVariable(name);
+    lowerLimits[id] = lowerLimit;
 }

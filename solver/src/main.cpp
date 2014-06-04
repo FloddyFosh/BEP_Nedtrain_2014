@@ -24,12 +24,12 @@ int solve() {
     cdebug("\nConstructing STJN.\n");
     timing_start("STJN");
     int stjn_consistent = stjn_construct();
-    progress(10);
+    solverProgress(10);
     timing_stop("STJN");
     if (!stjn_consistent) {
         cdebug("Problem inconsistent. Aborting!\n");
         handle_neg_cyc();
-        progress(100);
+        solverProgress(100);
         return 0;
     }
     cdebug("Constructing STJN Done.\n");
@@ -37,12 +37,12 @@ int solve() {
     cdebug("\nRunning ESTA+ algorithm.\n");
     timing_start("ESTA+");
     if (esta_plus()) {
-        progress(50);
+        solverProgress(50);
         timing_stop("ESTA+");
     } else {
         timing_stop("ESTA+");
         cdebug("Could not find valid schedule. Aborting!\n");
-        progress(100);
+        solverProgress(100);
         return 0;
     }
     cdebug("ESTA+ algorithm Done.\n");
@@ -50,12 +50,12 @@ int solve() {
     cdebug("\nRunning Chaining algorithm.\n");
     timing_start("Chaining");
     if(chaining()){
-        progress(75);
+        solverProgress(75);
         timing_stop("Chaining");
     } else {
         timing_stop("Chaining");
         cdebug("Could not find valid schedule. Aborting!\n");
-        progress(100);
+        solverProgress(100);
         return 0;
     }
     cdebug("Chaining algorithm Done.\n");
@@ -63,17 +63,17 @@ int solve() {
     cdebug("\nConstructing flexibility intervals using Linear Programming solver.\n");
     timing_start("LP");
     if(flexibility()){
-        progress(90);
+        solverProgress(90);
         timing_stop("LP");
     } else {
         timing_stop("LP");
         cdebug("Could not find valid schedule. Aborting!\n");
-        progress(100);
+        solverProgress(100);
         return 0;
     }
     cdebug("Constructing flexibility intervals Done.\n");
 
-    progress(100);
+    solverProgress(100);
     return 1;
 }
 

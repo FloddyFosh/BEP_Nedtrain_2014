@@ -10,54 +10,63 @@
 #include "heap.h"
 #include "exceptions.h"
 
-map< pair<int,int>, list<activity*> > chains;
+map<chainId, chain> chains;
 vector< activity* > activities;
 
 void initializeActivities(){
-    FOREACH(tmsp->trains, it){
+    vector<train*> trains = tmsp->trains;
+    FOREACH(trains, it){
         vector<activity*> actVec = (*it)->activities;
         activities.insert(activities.end(), actVec.begin(), actVec.end());
     }
 }
 
-bool compareEST(const activity* a, const activity* b) {
+vector<activity*> getActivities(){
+    return activities;
+}
+
+bool compareEST(const activity* a, const activity* b){
     return (a->est < b->est);
+}
+
+bool operator<(const chainId& a, const chainId& b){
+    return make_pair(a.resource,a.unit) < make_pair(b.resource,b.unit);
 }
 
 void initializeChains(){
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
-            pair<int,int> newPair(r_i, u_j);
-            chains[newPair];
+            chainId newId = {r_i,u_j};
+            chain newChain = {};
+            chains[newId] = newChain;
         }
     }
 }
 
-pair<int,int> selectChain(int tr, int act, int res){
-    map< pair<int,int>, list<activity*> >::iterator it;
+chainId selectChain(int tr, int act, int res){
+    map<chainId, chain>::iterator it;
     for(it=chains.begin();it!=chains.end();it++){
-        pair<int,int> chainId = it->first;
+        chainId id = it->first;
         //inefficient; should only iterate over the correct resource
-        if(chainId.first!=res) continue;
-        list<activity*> curChain = it->second;
+        if(id.resource!=res) continue;
+        list<activity*> curChain = it->second.activities;
         if(curChain.size() == 0){
-            return chainId;
+            return id;
         }
         activity* chainEnd = curChain.back();
         if(A(tr,act)->est >= chainEnd->est + chainEnd->duration + chainEnd->flex){
-            return chainId;
+            return id;
         }
     }
     throw NoChainFoundException();
 }
 
-void pushToChain(activity* act, pair<int,int>* chainId){
-    list<activity*>* chain = &chains[*chainId];
+void pushToChain(activity* act, chainId* id){
+    list<activity*>* chain = &chains[*id].activities;
     if(!chain->empty()){
         activity* chainEnd = chain->back();
         add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
         output("PC: %d %d %d %d\n", chainEnd->i, chainEnd->j, act->i, act->j);
-
     }
     chain->push_back(act);
 }
@@ -86,8 +95,8 @@ void add_frame() {
 
 void print_chain(int i, int j) {
     output("CHAIN:");
-    pair<int,int> newPair(i,j);
-    list<activity*> chain = chains[newPair];
+    chainId id = {i,j};
+    list<activity*> chain = chains[id].activities;
     // <resource> <chain> <nrOfActivities>
     output(" %d %d %d",i,j,len(chain));
     FOREACH(chain, it){
@@ -128,22 +137,22 @@ bool chaining() {
         FOREACH(activities, it){
             activity* act = *it;
             for(int m=0;m<Q(act->i,act->j,i);m++){
-                pair<int,int> chainId;
+                chainId id;
                 try{
-                    chainId = selectChain(act->i,act->j,i);
+                    id = selectChain(act->i,act->j,i);
                 }
                 catch(NoChainFoundException &e){
                     e.showErrorMessage();
                     return false;
                 }
-                pushToChain(act, &chainId);
+                pushToChain(act, &id);
             }
         }
         add_frame();
         FOREACH(chains, it){
-            pair<int,int> chainId = it->first;
-            if(chainId.first==i && len(it->second)>0){
-                print_chain(chainId.first,chainId.second);
+            chainId id = it->first;
+            if(id.resource==i && len(it->second.activities)>0){
+                print_chain(id.resource,id.unit);
             }
         }
     }

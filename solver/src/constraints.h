@@ -1,6 +1,8 @@
 #ifndef CONSTRAINTS_H
 #define CONSTRAINTS_H
 
+#include "exceptions.h" 
+
 #include <map>
 #include <vector>
 #include <string>
@@ -21,6 +23,8 @@ class Constraints {
     private:
         map<string, int> variablesId;
         map<int, string> variablesName;
+        map<int, int> upperLimits;
+        map<int, int> lowerLimits;
         vector<Constraint> constraintVector;
 
     public:
@@ -31,6 +35,10 @@ class Constraints {
         Constraint operator [](int i) const;
         string getVariableName(int id);
         int addVariable(string name);
+        int getUpperLimit(int id);
+        void setUpperLimit(string name, int upperLimit);
+        int getLowerLimit(int id);
+        void setLowerLimit(string name, int lowerLimit);
 };
 
 #endif

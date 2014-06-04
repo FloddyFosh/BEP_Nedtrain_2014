@@ -1,0 +1,17 @@
+R 0 2 "ResourceA"
+R 1 2 "ResourceB"
+
+J 0 100 110 "Train"
+A 0 0 2 "Taak1" 100
+Q 0 0 0 1
+A 0 2 2 "Taak3" 100
+Q 0 2 0 1
+Q 0 2 1 1
+A 0 1 2 "Taak2" 102
+Q 0 1 0 1
+A 0 3 2 "Taak4" 102
+Q 0 3 1 2
+
+
+S 0 0 0 1
+S 0 2 0 3

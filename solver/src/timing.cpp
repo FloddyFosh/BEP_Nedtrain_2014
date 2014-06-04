@@ -20,6 +20,10 @@ void timing_init() {
 	}
 }
 
+void progress(int x) {
+    fprintf(stderr, "PROGRESS: %d\n", x);
+}
+
 
 timing_info* find_timing_info(string name) {
 	int i;

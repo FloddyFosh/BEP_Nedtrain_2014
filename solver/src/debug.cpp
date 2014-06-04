@@ -22,7 +22,9 @@ void _debug(string format, ...) {
 void output(string format, ...){
     va_list args;
     va_start(args,format);
-    vfprintf(stdout,format.c_str(),args);
+    char out[8096];
+    vsprintf(out,format.c_str(),args);
+    cout << out;
     va_end(args);
 }
 
@@ -34,4 +36,3 @@ void printToFile(ofstream file, string format, ...){
     file << out;
     va_end(args);
 }
-
