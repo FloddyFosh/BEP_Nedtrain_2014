@@ -32,3 +32,4 @@ Datum      | Uren   | Beschrijving
 30-05-2014 | 3      | cmake/make verbeteren voor clp en installeren op jenkins server. 
 02-06-2014 | 7      | Aan flexibility.cpp gewerkt en sprintreview.
 03-06-2014 | 7      | LP uitgebreid, flex wordt verspreid over de taken. Stukje verslag over LP.
+04-06-2014 | 6      | Tests schrijven en code refactoren
