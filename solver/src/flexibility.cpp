@@ -130,8 +130,8 @@ map<string, double> useClpToSolve (Constraints* constraints) {
     map<string, double> output;   
     for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints->getVariableName(i/2);
-        output[varname + "^+"] = sol[i];
-        output[varname + "^-"] = sol[i+1];
+        output[varname + " +"] = sol[i];
+        output[varname + " -"] = sol[i+1];
     }
     return output;
 }
@@ -145,8 +145,8 @@ void addConstraints(Constraints* constraints) {
         int j2 = P(i)->j2; // b^-
         stringstream ss1; 
         stringstream ss2; 
-        ss1 << i1 << '-' << j1;
-        ss2 << i2 << '-' << j2;
+        ss1 << i1 << ' ' << j1;
+        ss2 << i2 << ' ' << j2;
         string var1(ss1.str());
         string var2(ss2.str());
         constraints->addConstraint(var1.c_str() , var2.c_str() , -1 * D(i1, j1));
@@ -161,7 +161,7 @@ void addLimits(Constraints* constraints) {
         vector<activity* > activities = tmsp->trains[i]->activities;
         for(int k = 0; k < (int) activities.size(); k++) {
             stringstream ss1;
-            ss1 << activities[k]->i << '-' << activities[k]->j;
+            ss1 << activities[k]->i << ' ' << activities[k]->j;
             string var1(ss1.str());
             constraints->setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
             constraints->setLowerLimit(var1.c_str(), release);
@@ -170,15 +170,14 @@ void addLimits(Constraints* constraints) {
 }
 
 void printSolution(map<string, double>* solution) {
-    cout << endl << "### flexibility (start) ###" << endl;     
-    cout << "minflex = " << minflex << endl;
-    cout << "flexibility = " << flexibility << endl << endl;
+    cout << "FLEX: " << solution->size() << endl;  
+    cout << "minflex " << minflex << endl;
+    cout << "flexibility " << flextotaal << endl;
     map<string, double>::iterator iter = solution->begin();
     while(iter != solution->end()) {
-        cout << iter->first << " = " << iter->second << endl;
+        cout << iter->first << ' ' << iter->second << endl;
         iter++;
     }
-    cout << "### flexibility (end) ###" << endl << endl;
 }
 
 int flexibility() {
