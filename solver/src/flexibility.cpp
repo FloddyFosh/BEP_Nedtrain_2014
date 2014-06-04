@@ -27,9 +27,8 @@
 
 using namespace std;
 
-pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
-    cout << endl << "### flexibility (start) ###" << endl;
-    int n_cols = constraints.getAmountOfVariables() * 2;    
+pair<double, map<string, double> > useClpToSolve (Constraints* constraints) {
+    int n_cols = constraints->getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
     model.setOptimizationDirection(-1); // maximize instead of min.
     model.resize(0, n_cols + 1); // the last variable is [min]
@@ -39,8 +38,8 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     // set coefficients
     for(int i = 0; i< n_cols; i++) {
         model.setObjectiveCoefficient(i, 0.0);
-        model.setColumnLower(i, constraints.getLowerLimit(i/2));
-        model.setColumnUpper(i, constraints.getUpperLimit(i/2)); 
+        model.setColumnLower(i, constraints->getLowerLimit(i/2));
+        model.setColumnUpper(i, constraints->getUpperLimit(i/2)); 
     }
     model.setObjectiveCoefficient(n_cols, 1.0);
     model.setColumnLower(n_cols, 0);
@@ -56,10 +55,10 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     }
     
     // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
-    for(int i = 0; i < constraints.size(); i++) {
+    for(int i = 0; i < constraints->size(); i++) {
         // [lst]  = constrain.t1 * 2    
         // [est'] = constrain.t2 * 2 + 1
-        Constraint constrain = constraints[i];
+        Constraint constrain = (*constraints)[i];
         int cols[] = {constrain.t1 * 2, constrain.t2 * 2 + 1};
         double cfc[] = {1.0, -1.0}; // coefficients
         model.addRow(2, cols, cfc, -DBL_MAX, constrain.c);
@@ -103,7 +102,7 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     map<string, double> vars;
     double flexibility = 0.0;
     for(int i = 0; i < n_cols; i+=2) {
-        string varname = constraints.getVariableName(i/2);
+        string varname = constraints->getVariableName(i/2);
         vars[varname + "^+"] = sol[i];
         vars[varname + "^-"] = sol[i+1];
         flexibility += sol[i] - sol[i+1];
@@ -117,9 +116,7 @@ pair<double, map<string, double> > useClpToSolve (Constraints constraints) {
     return output;
 }
 
-int flexibility() {
-    Constraints constraints;
-
+void addConstraints(Constraints* constraints) {
     // a^+ - b^- <= -d_a
     for(int i = 0; i < (int) tmsp->precedences.size(); i++) {
         int i1 = P(i)->i1; // a^+
@@ -132,9 +129,11 @@ int flexibility() {
         ss2 << i2 << '-' << j2;
         string var1(ss1.str());
         string var2(ss2.str());
-        constraints.addConstraint(var1.c_str() , var2.c_str() , -1 * D(i1, j1));
+        constraints->addConstraint(var1.c_str() , var2.c_str() , -1 * D(i1, j1));
     }
+}
 
+void addLimits(Constraints* constraints) {
     // set upper limits to the variables
     for(int i = 0; i < (int) tmsp->trains.size(); i++) {
         int due = tmsp->trains[i]->due_date;
@@ -144,20 +143,32 @@ int flexibility() {
             stringstream ss1;
             ss1 << activities[k]->i << '-' << activities[k]->j;
             string var1(ss1.str());
-            constraints.setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
-            constraints.setLowerLimit(var1.c_str(), release);
+            constraints->setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
+            constraints->setLowerLimit(var1.c_str(), release);
         }
     }
+}
 
-    pair<double, map<string, double> > output;
-    output = useClpToSolve(constraints);
-    
-    cout << "flexibility = " << output.first << endl;
-    map<string, double>::iterator iter = output.second.begin();
-    while(iter != output.second.end()) {
+void printSolution(pair<double, map<string, double> >* solution) {
+    cout << "flexibility = " << solution->first << endl << endl;
+    map<string, double>::iterator iter = solution->second.begin();
+    while(iter != solution->second.end()) {
         cout << iter->first << " = " << iter->second << endl;
         iter++;
     }
+}
+
+int flexibility() {
+    cout << endl << "### flexibility (start) ###" << endl;    
+    Constraints constraints;
+
+    addConstraints(&constraints);
+    addLimits(&constraints);
+    
+    pair<double, map<string, double> > solution;
+    solution = useClpToSolve(&constraints);
+
+    printSolution(&solution);
     cout << "### flexibility (end) ###" << endl << endl;
 	return 1;
 }
