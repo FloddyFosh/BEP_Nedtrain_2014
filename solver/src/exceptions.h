@@ -14,4 +14,12 @@ class NoChainFoundException {
         void showErrorMessage();
 };
 
+class NoSuchVariableException {
+    private:
+        int id;
+    public:
+        NoSuchVariableException(int id);
+        void showErrorMessage();
+};
+
 #endif

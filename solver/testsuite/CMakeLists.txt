@@ -11,6 +11,7 @@ link_directories(../../coin-Clp/lib)
 
 # Add the source files are going to be tested to this list:
 add_executable(testsuite testsuite.cpp 
+    ../src/exceptions.cpp
     ../src/constraints.cpp
     ../src/flexibility.cpp
     ../src/tmsp.cpp
