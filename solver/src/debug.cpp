@@ -25,7 +25,6 @@ void output(string format, ...){
     char out[8096];
     vsprintf(out,format.c_str(),args);
     cout << out;
-    //vfprintf(stdout,format.c_str(),args);
     va_end(args);
 }
 
@@ -37,4 +36,3 @@ void printToFile(ofstream file, string format, ...){
     file << out;
     va_end(args);
 }
-
