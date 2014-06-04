@@ -62,7 +62,7 @@ TEST_F(ConstraintsTest, GetAmountOfVariables) {
     EXPECT_EQ(5, cstr.getAmountOfVariables());
 }
 
-TEST_F(ConstraintsTest, GetVariableName) {
+TEST_F(ConstraintsTest, GetVariableName_1) {
     cstr.addConstraint("aaa", "bbb", 1);
     EXPECT_EQ("bbb", cstr.getVariableName(1)); 
     cstr.addConstraint("eee", "aaa", 2);
@@ -71,6 +71,12 @@ TEST_F(ConstraintsTest, GetVariableName) {
     cstr.addConstraint("a", "b", 9);
     EXPECT_EQ("a", cstr.getVariableName(3)); 
     EXPECT_EQ("b", cstr.getVariableName(4)); 
+}
+
+TEST_F(ConstraintsTest, GetVariableName_2) {
+    EXPECT_THROW(cstr.getVariableName(0), NoSuchVariableException);
+    EXPECT_THROW(cstr.getVariableName(-1), NoSuchVariableException);
+    EXPECT_THROW(cstr.getVariableName(1), NoSuchVariableException);
 }
 
 TEST_F(ConstraintsTest, AddVariable) {
@@ -88,4 +94,25 @@ TEST_F(ConstraintsTest, AddVariable) {
     EXPECT_EQ("aaa", cstr.getVariableName(2));
     EXPECT_EQ(4, cstr.getAmountOfVariables());
     
+}
+
+TEST_F(ConstraintsTest, LowerLimit_1) {
+    cstr.setLowerLimit("aa", 10);
+    EXPECT_EQ(10, cstr.getLowerLimit(0));
+}
+
+TEST_F(ConstraintsTest, LowerLimit_2) {
+    cstr.setLowerLimit("aa", 10);
+    EXPECT_THROW(cstr.getLowerLimit(1), NoSuchVariableException);
+    EXPECT_THROW(cstr.getLowerLimit(-10), NoSuchVariableException);
+}
+
+TEST_F(ConstraintsTest, UpperLimit_1) {
+    cstr.setUpperLimit("aa", 15);
+    EXPECT_EQ(15, cstr.getUpperLimit(0));
+}
+
+TEST_F(ConstraintsTest, UpperLimit_2) {
+    EXPECT_THROW(cstr.getLowerLimit(0), NoSuchVariableException);
+    EXPECT_THROW(cstr.getLowerLimit(-1), NoSuchVariableException);
 }

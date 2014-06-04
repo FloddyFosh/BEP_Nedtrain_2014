@@ -1,6 +1,8 @@
 #ifndef CONSTRAINTS_H
 #define CONSTRAINTS_H
 
+#include "exceptions.h" 
+
 #include <map>
 #include <vector>
 #include <string>
