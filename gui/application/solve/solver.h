@@ -88,14 +88,15 @@ signals:
     void statusReceived(QString message); ///< emitted when a status message is received from the solver, these are all lines of text starting with "STATUS: "
     void messageReceived(QString message); ///< emitted when any message is received from the solver
     void newEarliestStartTime(int job, int activity, int est); ///< emitted when a new earliest start time (EST) for an activity is received from the solver
-    void finished(int, QProcess::ExitStatus); ///< emitted when the solver process finishes, the exitcode is passed in the signal and can be used to check for success or failure
+    void finished(QProcess::ExitStatus); ///< emitted when the solver process finishes, the exitcode is passed in the signal and can be used to check for success or failure
     void newPrecedenceConstraint(int j1, int a1, int j2, int a2); ///< emitted when a new precedence constraint is posted between activities.
-    void peak(int time, int resource, int capacity); ///< emitted when the solver encountered a peak.
+    void peak(int time, int resource); ///< emitted when the solver encountered a peak.
 
 public slots:
-    void processOutput(); ///< internal slot for handling solver output (both stdout and stderr).
     void cancel(); ///< slot for cancelling the solving action, will kill the solver process.
     void solverFinished(int, QProcess::ExitStatus); ///< slot called when solver finishes.
+    void solverReadOutput(); ///< internal slot for handling solver output
+    void solverReadDebug(); ///< internal slot for handling solver debug
 };
 
 #endif // SOLVER_H

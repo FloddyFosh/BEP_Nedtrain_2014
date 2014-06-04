@@ -1,0 +1,52 @@
+\section{Opgeleverde Producten en Diensten}
+
+\subsection{Windows 7}
+Om de toegankelijkheid van de applicatie te vergroten, is ervoor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
+
+\subsection{Qt 5.2}
+De bestaande applicatie was ontwikkeld in versie 4.8 van het Qt framework, maar om de applicatie zo up-to-date mogelijk te houden, is deze geport naar Qt versie 5.2. Hierdoor hoeft een eventuele groep die de applicatie verder gaat ontwikkelen, niet met een oude versie van het Qt framework te werken. Deze upgrade betekent echter ook dat de applicatie niet meer werkt met Qt 4, maar alleen met versie 5.
+
+\subsection{Chaining}
+
+\subsection{Linear Programming}
+Nu alle constraints zijn toegevoegd door het chaining algoritme aan het model, kan de flexibiliteit van het schema worden geoptimaliseerd. Door de probleeminstantie om te zetten naar een Linear Programming probleem (LP-probleem). Dit probleem kan opgelost worden door een LP-solver. De LP-solver die wordt gebruikt door de NedTrain Planner heet CLP (COIN-OR Linear Programming)\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}}.
+
+De flexibiliteit van een taak $flex = t^+ - t^-$, waarbij $t^+$ de laatste start tijd (l.s.t.) en $t^-$ de eerste start tijd (e.s.t.) van een taak $t$ is. De flexibiliteit van het hele schema wordt gemeten door de som van de flexibiliteit van alle taken $t \in T$ te nemen, zoals in formule \ref{eq:flex} staat. 
+
+\begin{align}
+\label{eq:flex}
+    flex_{totaal} = \sum_{t \in T} (t^+ - t^-)
+\end{align}
+
+Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelijkertijd wordt voldaan aan de constraints $(t - t' \leq c) \in C$. Ook mag de e.s.t. niet na de l.s.t. zijn ($t^- \leq t^+ \Rightarrow 0 \leq t^+ - t^-$). Hieruit volgt het LP-probleem zoals in formule \ref{eq:flexLP} staat.
+
+\begin{align}
+\label{eq:flexLP}
+\begin{aligned}
+        \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
+ \text{subject to:}& \quad 0 \leq t^+ - t^- & \forall t \in T \\
+                   & \quad t^+ - t^- \leq c & \forall (t^+ - t^{'-} \leq c) \in C
+\end{aligned}
+\end{align}
+
+Het nadeel van de formulering in formule \ref{eq:flexLP}, is dat de flexibiliteit  niet netjes verdeelt hoeft te zijn over de taken. Wij hebben gezien dat CLP meestal de flexibiliteit juist heel slecht verdeeld. Met het LP-probleem, zoals in formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit $min$ gemaximaliseerd. Vervolgens wordt met LP-probleem, zoals in formule \ref{eq:flexsecondLP} staat, de totale flexibiliteit gemaximaliseerd. Dit is eigenlijk hetzelfde als in formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
+
+\begin{align}
+\label{eq:flexfirstLP}
+\begin{aligned}
+        \text{max:}& \quad min & \\
+ \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+                   & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
+\end{aligned}
+\end{align}
+
+\begin{align}
+\label{eq:flexsecondLP}
+\begin{aligned}
+        \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
+ \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+                   & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
+\end{aligned}
+\end{align}
+
+Door het toevoegen van de nieuwe constraint $min \leq t^+ - t^-$, kan het zijn dat de totale flexibiliteit $flex_{totaal}$ minder is, dan bij het gebruik van formule \ref{eq:flexLP}, maar nu is de flexibiliteit wel beter verdeeld.

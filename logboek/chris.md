@@ -23,4 +23,9 @@ Datum      | Uren   | Beschrijving
 21-05-2014 | 0      | 50 jarige jubileum opa en oma
 22-05-2014 | 7      | Control+scroll en Shift+scroll, tabkruis, andere kleine dingen.
 23-05-2014 | 7      | Job/Resource widget indexpijl knoppen, kleine bugs, clp helpen.
-26-05-2014 | -      |
+26-05-2014 | 6      | Testcases schrijven en falende testen oplossen, visualisatie bugs opgelost.
+27-05-2014 | 7      | Resourceprofile algoritme bedacht en geschreven, visualisatie.
+28-05-2014 | 6      | Windows crash fixen.
+02-06-2014 | 8      | Het splitsen van stdout/stderr in de communicatie, output layout, crash fixes, warnings wegwerken. 
+03-06-2014 | 7      | Dropbox voor Cees/Bob, static QT library builden, static executable.
+04-06-2014 | 6      | Static solvers maken en debuggen, CLP voor windows installeren en testen.

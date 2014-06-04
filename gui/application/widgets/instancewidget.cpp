@@ -304,7 +304,7 @@ OverlayWidget* InstanceWidget::getOverlay() {
     return overlay;
 }
 
-QScrollArea* InstanceWidget::getResourceScrollArea(int resIndex){
+QScrollArea* InstanceWidget::getResourceScrollArea(){
     return resourcesScroller;
 }
 

@@ -1,11 +1,12 @@
 #include "exceptions.h"
 
 #include <stdio.h>
+#include "debug.h"
 
 NoChainFoundException::NoChainFoundException(){
     msg = "No chain could be found.";
 }
 
 void NoChainFoundException::showErrorMessage() {
-    fprintf(stderr,"%s", msg.c_str());
+    debug("%s\n", msg.c_str());
 }

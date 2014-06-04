@@ -120,7 +120,7 @@ public:
      */
     OverlayWidget* getOverlay();
 
-    QScrollArea* getResourceScrollArea(int resIndex);
+    QScrollArea* getResourceScrollArea();
 
     /**
      * Draws a vertical line for representing a resource decrease,

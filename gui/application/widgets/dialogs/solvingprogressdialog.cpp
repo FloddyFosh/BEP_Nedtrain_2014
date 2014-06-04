@@ -59,8 +59,8 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     connect(solver, SIGNAL(messageReceived(QString)), log, SLOT(append(QString)));
     connect(solver, SIGNAL(statusReceived(QString)), statusLabel, SLOT(setText(QString)));
     connect(solver, SIGNAL(progressMade(int)), this, SLOT(setProgress(int)));
-    connect(solver, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(solverFinished()));
-    connect(solver, SIGNAL(peak(int,int,int)), controller, SLOT(peak(int,int,int)));
+    connect(solver, SIGNAL(finished(QProcess::ExitStatus)), this, SLOT(solverFinished(QProcess::ExitStatus)));
+    connect(solver, SIGNAL(peak(int,int)), controller, SLOT(peak(int,int)));
 
     // start solving
     QApplication::setOverrideCursor(Qt::BusyCursor);
@@ -76,40 +76,50 @@ void SolvingProgressDialog::toggleMoreOrLess(bool more) {
     }
 }
 
-void SolvingProgressDialog::solverFinished() {
-    int newConstraints = 0;
-    foreach(Precedence* p, instance->getSoftPrecedences()){
-        if(!p->isDisabled()) newConstraints++;
-    }
-    newConstraints -= numSoftPrecedences;
+void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
+    if(status == QProcess::NormalExit) {
+        int newConstraints = 0;
+        foreach(Precedence* p, instance->getSoftPrecedences()){
+            if(!p->isDisabled()) newConstraints++;
+        }
+        newConstraints -= numSoftPrecedences;
 
-    instance->setUserChanges(false);
-    controller->reconnectActivitiesToResourceWidgets();
-    controller->repaintResourceWidgets();
-    controller->setupSlider(true);
-    controller->toLastFrame();
-    
-    log->append("Finished.");
-    if(solver->isSolved()) {
-        outcomeLabel->setStyleSheet("QLabel { color : #008800; }");
-        outcomeLabel->setText(tr("The instance has been solved successfully.\nThe solver posted %1 precedence constraints.").arg(newConstraints));
-    } else if(!solver->isSolved()) {
-        QString msg = "";
+        instance->setUserChanges(false);
+        controller->reconnectActivitiesToResourceWidgets();
+        controller->repaintResourceWidgets();
+        controller->setupSlider(true);
+        controller->toLastFrame();
 
-        if(solver->getPeakResource() != -1) {
-            msg = tr("The instance could not be solved, due to a resource peak on\nresource '%1'.").arg(instance->R(solver->getPeakResource())->name());
+        log->append("\nFinished.\n");
+        if(solver->isSolved()) {
+            outcomeLabel->setStyleSheet("QLabel { color : #008800; }");
+            outcomeLabel->setText(tr("The instance has been solved successfully.\nThe solver posted %1 precedence constraints.").arg(newConstraints));
+        } else if(!solver->isSolved()) {
+            QString msg = "";
+
+            if(solver->getPeakResource() != -1) {
+                msg = tr("The instance could not be solved, due to a resource peak on\nresource '%1'.").arg(instance->R(solver->getPeakResource())->name());
+            }
+            else if(solver->getMutexJob() != -1) {
+                msg = tr("The tasks in project '%1' could not be scheduled mutually exclusive.").arg(instance->J(solver->getMutexJob())->name());
+            }
+            else {
+                msg = tr("The instance could not be solved.");
+            }
+
+            outcomeLabel->setStyleSheet("QLabel { color : #ff0000; }");
+            outcomeLabel->setText(msg);
+        } else {
+            outcomeLabel->setText(tr("See 'More...' for more information."));
         }
-        else if(solver->getMutexJob() != -1) {
-            msg = tr("The tasks in project '%1' could not be scheduled mutually exclusive.").arg(instance->J(solver->getMutexJob())->name());
-        }
-        else {
-            msg = tr("The instance could not be solved.");
-        }
+    } else {
+        instance->setUserChanges(true);
+        controller->reconnectActivitiesToResourceWidgets();
+
+        log->append("\nTerminated.\n");
 
         outcomeLabel->setStyleSheet("QLabel { color : #ff0000; }");
-        outcomeLabel->setText(msg);
-    } else {
-        outcomeLabel->setText(tr("See 'More...' for more information."));
+        outcomeLabel->setText(tr("The solver has been terminated. Solution so far has been applied."));
     }
     buttonbox->removeButton(cancelButton);
     buttonbox->addButton(QDialogButtonBox::Ok);
@@ -120,4 +130,10 @@ void SolvingProgressDialog::solverFinished() {
 void SolvingProgressDialog::setProgress(int value) {
     progressBar->setRange(0,100);
     progressBar->setValue(value);
+}
+
+void SolvingProgressDialog::closeEvent(QCloseEvent *ev){
+    solver->cancel();
+    solver->getProcess()->waitForFinished();
+    ev->accept();
 }
