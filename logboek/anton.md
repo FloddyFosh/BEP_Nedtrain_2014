@@ -25,3 +25,8 @@ Datum      | Uren   | Beschrijving
 23-05-2014 | 7      | Fixen memory leak, chains apart weergegeven laten worden
 24-05-2014 | 1      | Bug gefixt met weergeven van aparte chains
 25-05-2014 | 3      | Laten painten van resources die chains gebruiken
+26-05-2014 | 7      | 
+27-05-2014 | 7      |
+28-05-2014 | 7      |
+02-06-2014 | 7      |
+03-06-2014 | 8.5    | Eindverslag, chaining tests, CLP werkend krijgen

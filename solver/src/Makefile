@@ -9,9 +9,9 @@ OBJECTS=$(LSOURCES:.l=.o) $(YSOURCES:.ypp=.tab.o) $(CSOURCES:.cpp=.o)
 # C++ Compiler options
 CXXFLAGS = -std=c++11 -O3 -pipe -DNDEBUG -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long -DCLP_BUILD
 
-EXTRAFLAG = -std=c++11 -Wl,--rpath -Wl,/home/martijn/Downloads/COIN/coin-Clp/lib -O3 -pipe -DNDEBUG -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long   -DCLP_BUILD -DSAMPLEDIR=\"`PKG_CONFIG_PATH=/home/martijn/Downloads/COIN/coin-Clp/lib64/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/lib/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" 
+EXTRAFLAG = -std=c++11 -Wl,--rpath -Wl,../../coin-Clp/lib -O3 -pipe -DNDEBUG -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long   -DCLP_BUILD -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" 
 
-EXTRALIB = `PKG_CONFIG_PATH=/home/martijn/Downloads/COIN/coin-Clp/lib64/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/lib/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/share/pkgconfig: pkg-config --libs clp`
+EXTRALIB = `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --libs clp`
 
 all: solver
 
@@ -24,10 +24,10 @@ solver.release: $(OBJECTS) main.o
 	g++ $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 main.o: main.cpp
-	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=/home/martijn/Downloads/COIN/coin-Clp/lib64/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/lib/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=/home/martijn/Downloads/COIN/coin-Clp/lib64/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/lib/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o main.o `test -f 'main.cpp' || echo './'`main.cpp
+	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o main.o `test -f 'main.cpp' || echo './'`main.cpp
 
 flexibility.o: flexibility.cpp
-	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=/home/martijn/Downloads/COIN/coin-Clp/lib64/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/lib/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=/home/martijn/Downloads/COIN/coin-Clp/lib64/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/lib/pkgconfig:/home/martijn/Downloads/COIN/coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o flexibility.o `test -f 'flexibility.cpp' || echo './'`flexibility.cpp
+	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o flexibility.o `test -f 'flexibility.cpp' || echo './'`flexibility.cpp
 
 %.o: %.cpp
 	g++ -c $(CFLAGS) -o $@ $<
