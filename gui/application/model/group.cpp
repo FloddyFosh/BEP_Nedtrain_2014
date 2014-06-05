@@ -1,8 +1,8 @@
 #include "model/group.h"
 
-Group::Group() : est(-1), lst(-1), st(-1), job(-1), duration(0), locked (false) { }
+Group::Group() : estFlex(0), lstFlex(0), est(-1), lst(-1), st(-1), job(-1), duration(0), locked (false) { }
 
-Group::Group(int j, int est, int lst, int st) : est(est), lst(lst), st(st), job(j), duration(0), locked (false) {}
+Group::Group(int j, int est, int lst, int st) : estFlex(0), lstFlex(0), est(est), lst(lst), st(st), job(j), duration(0), locked (false) {}
 
 QList<Activity*> Group::getActivities() {
     return activities;
@@ -27,6 +27,22 @@ bool Group::hasActivities() {
 
 int Group::size() {
     return activities.size();
+}
+
+int Group::getESTFlex() {
+    return estFlex;
+}
+
+int Group::getLSTFlex() {
+    return lstFlex;
+}
+
+void Group::setESTFlex(int estflex) {
+    estFlex = estflex;
+}
+
+void Group::setLSTFlex(int lstflex) {
+    lstFlex = lstFlex;
 }
 
 void Group::setEST(int s) {

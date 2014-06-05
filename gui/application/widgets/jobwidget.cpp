@@ -135,10 +135,12 @@ void JobWidget::paintEvent(QPaintEvent *e) {
 
         foreach(GroupWidget *groupWidget, groupWidgetList) {
             groupWidget->determineFeasibleInterval(&painter, yOffset);
+            groupWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
         }
         foreach(ActivityWidget *activityWidget, activityWidgets) {
             activityWidget->determineFeasibleInterval(&painter, yOffset);
+            activityWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
         }
     }
@@ -172,6 +174,17 @@ void JobWidget::paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd
 	painter.setPen(QPen (Qt::darkGray, 1, Qt::SolidLine));
 	painter.drawLine(xStart,yStart,xStart,yEnd);
 	painter.drawLine(xEnd,  yStart,xEnd,  yEnd);
+}
+
+void JobWidget::paintFlexibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset) {
+    int yStart = vZoom() * yOffset;
+    int yEnd   = vZoom() * yOffset + height;
+    xEnd -= 2;
+    painter.setPen(QPen (QColor(0,0,255), 1, Qt::SolidLine));
+    painter.drawLine(xStart,(yStart+yEnd)/2,xEnd,(yStart+yEnd)/2);
+    painter.setPen(QPen (QColor(0,0,255), 1, Qt::SolidLine));
+    painter.drawLine(xStart,yStart,xStart,yEnd);
+    painter.drawLine(xEnd,  yStart,xEnd,  yEnd);
 }
 
 void JobWidget::resizeEvent(QResizeEvent *e) {

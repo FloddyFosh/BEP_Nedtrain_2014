@@ -70,6 +70,7 @@ public:
      * @param height Height of the to be painted interval
      */
     void paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset);
+    void paintFlexibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset);
 
     Job const *job() const; ///< return associated job
     QSize sizeHint() const; ///< returns minimumSize()

@@ -79,6 +79,7 @@ public:
     void updateActivityPosition(int offsetY);
 
     void determineFeasibleInterval(QPainter *painter, int offsetY);
+    void paintFlexibilityInterval(QPainter *painter, int offsetY);
 
 protected:
     void mouseMoveEvent(QMouseEvent *); ///< overrided method to receive mouse move events.

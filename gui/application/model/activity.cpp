@@ -54,6 +54,15 @@ int Activity::st() const {
 int Activity::lst() const {
     return _group->getLST() + offsetWithinGroup();
 }
+
+int Activity::estFlex() const {
+    return 0; // TODO: moet nog gedaan worden
+}
+
+int Activity::lstFlex() const {
+    return 2; // TODO: moet nog gedaan worden
+}
+
 int Activity::eet() const {
     return est() + duration();
 }
