@@ -300,7 +300,7 @@ void Solver::processFlexLine(QByteArray &line) {
             fields = line.trimmed().split(' ');
             int act_i = fields.takeFirst().toInt();
             int act_j = fields.takeFirst().toInt();
-            bool est = fields.takeFirst().toInt() == '+';
+            bool est = fields.takeFirst().at(0) == '+';
             double time = fields.takeFirst().toDouble();
             qDebug() << "FLEX --> " << act_i << act_j << est << time;
         } else {
