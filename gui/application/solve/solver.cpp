@@ -280,6 +280,16 @@ void Solver::processFlexLine(QByteArray &line) {
     int ammount = fields.takeFirst().toInt();
     qDebug() << "ammount of flex lines" << ammount;
     
+    /* TODO: estFlex/lstFlex setten mss is dit handig?
+        QList<Group *> groups = instance->getGroups();
+        groups[0]->setESTFlex(0);
+        groups[0]->setLSTFlex(1);
+        groups[0]->getActivities()[0]->id();
+        groups[0]->getActivities()[0]->job()->id();
+        groups[0]->getActivities()[0]->lstFlex();
+        groups[0]->getActivities()[0]->estFlex();
+    */
+
     int minflex;
     int flextotaal;
     if(process.canReadLine()) {
