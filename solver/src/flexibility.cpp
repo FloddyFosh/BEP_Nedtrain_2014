@@ -21,19 +21,21 @@
 
 #include <sstream>
 
+#include "alles.h"
+#include "debug.h"
 #include "tmsp.h"
 #include "chaining.h"
 #include "flexibility.h"
 
 using namespace std;
 
-double minflex = 0, flextotaal = 0;
+int minflex = 0, flextotaal = 0;
 
-double getMinFlex() { 
+int getMinFlex() { 
     return minflex;
 }
 
-double getFlexibility() {
+int getFlexibility() {
     return flextotaal;
 }
 
@@ -101,7 +103,7 @@ void changeType1Constraints(ClpSimplex* model, int n_cols) {
     }
 }
 
-map<string, double> useClpToSolve (Constraints* constraints) {
+map<string, int> useClpToSolve (Constraints* constraints) {
     int n_cols = constraints->getAmountOfVariables() * 2;    
     ClpSimplex model; // child of ClpModel
     model.setOptimizationDirection(-1); // maximize instead of minflex.
@@ -114,7 +116,7 @@ map<string, double> useClpToSolve (Constraints* constraints) {
     
     // solve the problem for step 1
     model.initialSolve();
-    minflex = model.objectiveValue();
+    minflex = (int) model.objectiveValue();
 
     changeObjective(&model, n_cols);
     changeType1Constraints(&model, n_cols);
@@ -124,14 +126,14 @@ map<string, double> useClpToSolve (Constraints* constraints) {
 
     // get solution
     const double* sol = model.primalColumnSolution();
-    flextotaal = model.objectiveValue();
+    flextotaal = (int) model.objectiveValue();
 
     // return solution
-    map<string, double> output;   
+    map<string, int> output;   
     for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints->getVariableName(i/2);
-        output[varname + " +"] = sol[i];
-        output[varname + " -"] = sol[i+1];
+        output[varname + " +"] = (int) sol[i];
+        output[varname + " -"] = (int) sol[i+1];
     }
     return output;
 }
@@ -169,13 +171,13 @@ void addLimits(Constraints* constraints) {
     }
 }
 
-void printSolution(map<string, double>* solution) {
-    cout << "FLEX: " << solution->size() << endl;  
-    cout << "minflex " << minflex << endl;
-    cout << "flexibility " << flextotaal << endl;
-    map<string, double>::iterator iter = solution->begin();
+void printSolution(map<string, int>* solution) {
+    output("FLEX: %d\n", solution->size());
+    output("minflex %d\n", minflex);
+    output("flexibility %d\n", flextotaal);
+    map<string, int>::iterator iter = solution->begin();
     while(iter != solution->end()) {
-        cout << iter->first << ' ' << iter->second << endl;
+        output("%s %d\n", iter->first.c_str(), iter->second);
         iter++;
     }
 }
@@ -184,7 +186,7 @@ int flexibility() {
     Constraints constraints;
     addConstraints(&constraints);
     addLimits(&constraints);
-    map<string, double> solution;
+    map<string, int> solution;
     solution = useClpToSolve(&constraints);
     printSolution(&solution);
     return 1;

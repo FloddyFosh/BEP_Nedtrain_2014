@@ -150,6 +150,8 @@ void Solver::solverReadOutput() {
             processStateLine(line);
         } else if (line.startsWith("PEAK: ")) {
             processPeakLine(line);
+        } else if (line.startsWith("FLEX: ")) {
+            processFlexLine(line);
         } else if (line.startsWith("MUTEX: ")) {
             processMutexLine(line);
         } else if (line.startsWith("STATUS: ")) {
@@ -272,6 +274,41 @@ void Solver::processPeakLine(QByteArray &line) {
     eatRemainingOutput(fields);
 }
 
+void Solver::processFlexLine(QByteArray &line) {
+    QList<QByteArray> fields = line.trimmed().split(' ');
+    fields.takeFirst();
+    int ammount = fields.takeFirst().toInt();
+    qDebug() << "ammount of flex lines" << ammount;
+    
+    int minflex;
+    int flextotaal;
+    if(process.canReadLine()) {
+        line = process.readLine();
+        fields = line.trimmed().split(' ');
+        fields.takeFirst();
+        minflex = fields.takeFirst().toInt();
+    }
+    if(process.canReadLine()) {
+        line = process.readLine();
+        fields = line.trimmed().split(' ');
+        fields.takeFirst(); 
+        flextotaal = fields.takeFirst().toInt();
+    }
+    for(int i=0; i<ammount; i++) {
+        if(process.canReadLine()) {
+            line = process.readLine();   
+            fields = line.trimmed().split(' ');
+            int act_i = fields.takeFirst().toInt();
+            int act_j = fields.takeFirst().toInt();
+            bool est = fields.takeFirst().toInt() == '+';
+            double time = fields.takeFirst().toDouble();
+            qDebug() << "FLEX --> " << act_i << act_j << est << time;
+        } else {
+            qDebug() << "NOT ENOUGH FLEX LINES 3";
+        }
+    }
+}
+
 void Solver::processMutexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
@@ -317,8 +354,6 @@ void Solver::processChainLine(QByteArray &line) {
         }
         replayFrames.append(nextFrame);
         instance->setFrames(replayFrames);
-
-
 
         prevRes = res;
         res = fields.takeFirst().toInt();
