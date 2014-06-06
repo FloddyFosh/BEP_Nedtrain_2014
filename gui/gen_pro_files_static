@@ -65,7 +65,7 @@ if "-cache" in args:
 TARGET = application
 QMAKE_CXX = ccache g++
 #QMAKE_CXXFLAGS += -m32
-QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
+QMAKE_LFLAGS += -static -static-libgcc
 INCLUDEPATH += .
 RESOURCES += Resources.qrc
 """
@@ -74,7 +74,7 @@ else:
 TARGET = application
 QMAKE_CXX = g++
 #QMAKE_CXXFLAGS += -m32
-QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
+QMAKE_LFLAGS += -static -static-libgcc
 INCLUDEPATH += .
 RESOURCES += Resources.qrc
 """

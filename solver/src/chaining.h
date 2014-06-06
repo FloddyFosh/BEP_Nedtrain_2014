@@ -23,7 +23,9 @@ bool compareEST(const activity* a, const activity* b);
 bool operator<(const chainId& a, const chainId& b);
 
 void initializeChains();
-chainId selectChain(int tr, int act, int res);
+chainId selectFirstChain(int tr, int act, int res);
+chainId selectRandomChain(int tr, int act, int res);
+void pushToBestChains(int tr, int act, int res);
 void pushToChain(activity* act, chainId* id);
 
 void add_frame();
