@@ -28,7 +28,6 @@ JobWidget::JobWidget(Job *j, InstanceController *controller, QWidget *parent, bo
 
     connect(_job, SIGNAL(activityRemoved()), this, SLOT(updateGeometry()));
     connect(_job, SIGNAL(jobChanged()), this, SLOT(updateGeometry()));
-    connect(_job, SIGNAL(finished(QProcess::ExitStatus)), this, SLOT(solverFinished(QProcess::ExitStatus)));
 }
 
 Job const *JobWidget::job() const {
@@ -120,25 +119,6 @@ QSize JobWidget::minimumSize() const {
         endTime = max(endTime, g->getST() + g->getDuration());
     }
     return QSize(endTime * hZoom(), verticalBlocks * vZoom());
-}
-
-void JobWidget::solverFinished(QProcess::ExitStatus state) {
-    if(state == QProcess::NormalExit) {
-
-    }
-    QPainter painter(this);
-    if (!comparing && controller->isPaintingFeasibleIntervals() && controller->getInstance()->getMaxFrameNr() != -1) {
-        int yOffset = 1;
-
-        foreach(GroupWidget *groupWidget, groupWidgetList) {
-            groupWidget->paintFlexibilityInterval(&painter, yOffset);
-            if (expanded) yOffset++;
-        }
-        foreach(ActivityWidget *activityWidget, activityWidgets) {
-            activityWidget->paintFlexibilityInterval(&painter, yOffset);
-            if (expanded) yOffset++;
-        }
-    }
 }
 
 void JobWidget::paintEvent(QPaintEvent *e) {

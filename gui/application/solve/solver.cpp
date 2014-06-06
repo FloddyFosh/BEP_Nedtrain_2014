@@ -322,23 +322,22 @@ void Solver::processFlexLine(QByteArray &line) {
 
     // now loop over all activities in the current instance and set est and lst
     QList<Group *> groups = instance->getGroups();
-    for(int i = 0; i < groups.size(); i++) {
-        Group* g = groups[i];
+    foreach(Group* g, groups) {
         QList<Activity *> activities = g->getActivities();
-        for(int k = 0; k < activities.size(); k++) {
-            int act_i = activities[k]->job()->id();
-            int act_j = activities[k]->id();
+        foreach(Activity* a, activities) {
+            int act_i = a->job()->id();
+            int act_j = a->id();
             qDebug() << "act_i = " << act_i << "__ act_j = " << act_j;
 
             QPair<int, int> temp(act_i, act_j);
             g->setESTFlex(estMap[temp]);
             g->setLSTFlex(lstMap[temp]);
 
-            activities[k]->group()->setESTFlex(estMap[temp]);
-            activities[k]->group()->setLSTFlex(lstMap[temp]);
+            a->group()->setESTFlex(estMap[temp]);
+            a->group()->setLSTFlex(lstMap[temp]);
 
-            qDebug() << "est = " << estMap[temp] << " - " << g->getESTFlex() << " " << activities[k]->estFlex();
-            qDebug() << "lst = " << lstMap[temp] << " - " << g->getLSTFlex() << " " << activities[k]->lstFlex();
+            qDebug() << "est = " << estMap[temp] << " - " << g->getESTFlex() << " " << a->estFlex();
+            qDebug() << "lst = " << lstMap[temp] << " - " << g->getLSTFlex() << " " << a->lstFlex();
         }
     }
 }
