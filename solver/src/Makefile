@@ -18,9 +18,13 @@ all: solver
 solver: CFLAGS+=-g -O0 -DDEBUG
 solver: $(OBJECTS) main.o debug.o
 	g++ $(CFLAGS) $(EXTRAFLAG) -o $@ $^ $(LDLIBS) $(EXTRALIB)
-
+	
 solver.release: CFLAGS+=-O5
 solver.release: $(OBJECTS) main.o
+	g++ $(CFLAGS) $(EXTRAFLAG) -o $@ $^ $(LDLIBS) $(EXTRALIB)
+
+solverstatic: CFLAGS+=-static -g -O0 -DNDEBUG
+solverstatic: $(OBJECTS) main.o
 	g++ $(CFLAGS) $(EXTRAFLAG) -o $@ $^ $(LDLIBS) $(EXTRALIB)
 
 main.o: main.cpp

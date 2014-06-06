@@ -40,6 +40,7 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
 
     log = new QTextEdit;
     log->setVisible(false);
+    log->setReadOnly(true);
 
     QVBoxLayout *vbox = new QVBoxLayout;
     vbox->setSizeConstraint(QLayout::SetFixedSize);
