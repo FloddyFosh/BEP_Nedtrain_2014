@@ -132,6 +132,7 @@ void Solver::solverFinished(int x, QProcess::ExitStatus state) {
             foreach(Activity * a, g->getActivities()) g_->addActivity(a);
             lastFrame->addGroup(g_);
         }
+        setFlexGroups(lastFrame->getGroups());
         replayFrames.append(lastFrame);
         instance->setFrames(replayFrames);
     }
@@ -274,6 +275,8 @@ void Solver::processPeakLine(QByteArray &line) {
     eatRemainingOutput(fields);
 }
 
+QMap<QPair<int, int>, int> estMap;
+QMap<QPair<int, int>, int> lstMap;
 void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
@@ -297,8 +300,7 @@ void Solver::processFlexLine(QByteArray &line) {
     qDebug() << "minflex = " << minflex;
     qDebug() << "flextotaal = " << flextotaal;
 
-    QMap<QPair<int, int>, int> estMap;
-    QMap<QPair<int, int>, int> lstMap;
+
     for(int i=0; i<ammount; i++) {
         if(process.canReadLine()) {
             line = process.readLine();   
@@ -319,9 +321,12 @@ void Solver::processFlexLine(QByteArray &line) {
             qDebug() << "NOT ENOUGH FLEX LINES 3";
         }
     }
+}
 
+void Solver::setFlexGroups(QVector<Group *> groups) {
     // now loop over all activities in the current instance and set est and lst
-    QList<Group *> groups = instance->getGroups();
+    if(estMap.size() == 0 || lstMap.size() == 0) return;
+
     foreach(Group* g, groups) {
         QList<Activity *> activities = g->getActivities();
         foreach(Activity* a, activities) {
