@@ -280,18 +280,7 @@ void Solver::processFlexLine(QByteArray &line) {
     int ammount = fields.takeFirst().toInt();
     qDebug() << "ammount of flex lines" << ammount;
     
-    /* TODO: estFlex/lstFlex setten mss is dit handig?
-        QList<Group *> groups = instance->getGroups();
-        groups[0]->setESTFlex(0);
-        groups[0]->setLSTFlex(1);
-        groups[0]->getActivities()[0]->id();
-        groups[0]->getActivities()[0]->job()->id();
-        groups[0]->getActivities()[0]->lstFlex();
-        groups[0]->getActivities()[0]->estFlex();
-    */
-
-    int minflex;
-    int flextotaal;
+    int minflex = -1, flextotaal = -1;
     if(process.canReadLine()) {
         line = process.readLine();
         fields = line.trimmed().split(' ');
@@ -304,17 +293,52 @@ void Solver::processFlexLine(QByteArray &line) {
         fields.takeFirst(); 
         flextotaal = fields.takeFirst().toInt();
     }
+
+    qDebug() << "minflex = " << minflex;
+    qDebug() << "flextotaal = " << flextotaal;
+
+    QMap<QPair<int, int>, int> estMap;
+    QMap<QPair<int, int>, int> lstMap;
     for(int i=0; i<ammount; i++) {
         if(process.canReadLine()) {
             line = process.readLine();   
             fields = line.trimmed().split(' ');
             int act_i = fields.takeFirst().toInt();
             int act_j = fields.takeFirst().toInt();
-            bool est = fields.takeFirst().at(0) == '+';
-            double time = fields.takeFirst().toDouble();
-            qDebug() << "FLEX --> " << act_i << act_j << est << time;
+            bool lst = fields.takeFirst().at(0) == '+';
+            int time = fields.takeFirst().toInt();
+
+            QPair<int, int> temp(act_i, act_j);
+            if(lst) {
+                lstMap[temp] = time;
+            } else {
+                estMap[temp] = time;
+            }
+            qDebug() << "FLEX --> " << act_i << act_j << lst << time;
         } else {
             qDebug() << "NOT ENOUGH FLEX LINES 3";
+        }
+    }
+
+    // now loop over all activities in the current instance and set est and lst
+    QList<Group *> groups = instance->getGroups();
+    for(int i = 0; i < groups.size(); i++) {
+        Group* g = groups[i];
+        QList<Activity *> activities = g->getActivities();
+        for(int k = 0; k < activities.size(); k++) {
+            int act_i = activities[k]->job()->id();
+            int act_j = activities[k]->id();
+            qDebug() << "act_i = " << act_i << "__ act_j = " << act_j;
+
+            QPair<int, int> temp(act_i, act_j);
+            g->setESTFlex(estMap[temp]);
+            g->setLSTFlex(lstMap[temp]);
+
+            activities[k]->group()->setESTFlex(estMap[temp]);
+            activities[k]->group()->setLSTFlex(lstMap[temp]);
+
+            qDebug() << "est = " << estMap[temp] << " - " << g->getESTFlex() << " " << activities[k]->estFlex();
+            qDebug() << "lst = " << lstMap[temp] << " - " << g->getLSTFlex() << " " << activities[k]->lstFlex();
         }
     }
 }

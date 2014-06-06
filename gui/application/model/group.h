@@ -74,12 +74,12 @@ public:
     /**
      * @param estflex
      */
-    void setESTFlex(int estflex);
+    void setESTFlex(int estFlex);
 
     /**
      * @param lstflex
      */
-    void setLSTFlex(int lstflex);
+    void setLSTFlex(int lstFlex);
 
     /**
      * set the group EST to the given value.

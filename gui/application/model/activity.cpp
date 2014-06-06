@@ -3,6 +3,9 @@
 #include <cmath>
 #include <algorithm>
 #include <cassert>
+
+#include <QDebug>
+
 using namespace std;
 
 Activity::Activity(Job *job, int id, QString name, int duration)
@@ -56,11 +59,11 @@ int Activity::lst() const {
 }
 
 int Activity::estFlex() const {
-    return 0; // TODO: moet nog gedaan worden
+    return _group->getESTFlex() + offsetWithinGroup(); // TODO: moet nog gedaan worden
 }
 
 int Activity::lstFlex() const {
-    return 2; // TODO: moet nog gedaan worden
+    return _group->getLSTFlex() + offsetWithinGroup(); // TODO: moet nog gedaan worden
 }
 
 int Activity::eet() const {
