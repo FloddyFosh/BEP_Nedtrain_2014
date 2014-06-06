@@ -18,10 +18,14 @@ all: solver
 solver: CFLAGS+=-g -O0 -DDEBUG
 solver: $(OBJECTS) main.o debug.o
 	g++ $(CFLAGS) $(EXTRAFLAG) -o $@ $^ $(LDLIBS) $(EXTRALIB)
-
+	
 solver.release: CFLAGS+=-O5
 solver.release: $(OBJECTS) main.o
 	g++ $(CFLAGS) -o $@ $^ $(LDLIBS)
+
+solverstatic: CFLAGS+=-static -g -O0 -DNDEBUG
+solverstatic: $(OBJECTS) main.o
+	g++ $(CFLAGS) $(EXTRAFLAG) -o $@ $^ $(LDLIBS) $(EXTRALIB)
 
 main.o: main.cpp
 	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o main.o `test -f 'main.cpp' || echo './'`main.cpp
