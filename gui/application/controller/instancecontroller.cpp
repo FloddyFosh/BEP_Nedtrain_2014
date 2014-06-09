@@ -84,7 +84,7 @@ bool InstanceController::isPaintingFlexibilityIntervals() {
 }
 
 void InstanceController::doPaintFlexibilityIntervals() {
-    // TODO
+    instanceWidget->updateTimelineOffset();
 }
 
 Controller * InstanceController::getParent() { return controller; }
