@@ -195,6 +195,14 @@ void Controller::setPaintingFeasibleIntervals(bool paintFeasibleIntervals) {
     Controller::paintFeasibleIntervals = paintFeasibleIntervals;
 }
 
+bool Controller::isPaintingFlexibilityIntervals() {
+    return paintFlexibilityIntervals;
+}
+
+void Controller::setPaintingFlexibilityIntervals(bool paintFlexibilityIntervals) {
+    Controller::paintFlexibilityIntervals = paintFlexibilityIntervals;
+}
+
 void Controller::doPaintFeasibleIntervals() {
     QAction *action = qobject_cast<QAction *>(sender());
     paintFeasibleIntervals = action->isChecked();

@@ -42,6 +42,9 @@ public:
     
     bool isPaintingFeasibleIntervals(); ///< @return true iff feasible intervals are being painted for activities and groups
     void setPaintingFeasibleIntervals(bool val); ///< @return indicates whether feasible intervals should be painted
+    bool isPaintingFlexibilityIntervals(); ///< @return true iff flexibility intervals are being painted for activities and group
+    void setPaintingFlexibilityIntervals(bool val); ///< @return indicates whether flexibility intervals should be painted
+
     void solve(Solver *); ///< solves the currently visible instance with the given solver
     void duplicateInstance(); ///< clone currently visible instance
 

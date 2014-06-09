@@ -104,7 +104,12 @@ public:
      * activate the painting of feasible intervals.
      */
     void doPaintFeasibleIntervals();
-    
+
+    /**
+     * @return whether the option to paint flexibility intervals is currently set.
+     */
+    bool isPaintingFlexibilityIntervals();
+
     /**
      * activate the painting of flexibility intervals.
      */

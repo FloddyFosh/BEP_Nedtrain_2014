@@ -130,17 +130,21 @@ void JobWidget::paintEvent(QPaintEvent *e) {
     paintGroups();
 
     // draw feasibility intervals
-    if (!comparing && controller->isPaintingFeasibleIntervals() && controller->getInstance()->getMaxFrameNr() != -1) {
+    if (!comparing && controller->getInstance()->getMaxFrameNr() != -1) {
         int yOffset = 1;
 
         foreach(GroupWidget *groupWidget, groupWidgetList) {
-            groupWidget->determineFeasibleInterval(&painter, yOffset);
-            groupWidget->paintFlexibilityInterval(&painter, yOffset);
+            if (controller->isPaintingFeasibleIntervals())
+                groupWidget->determineFeasibleInterval(&painter, yOffset);
+            if (controller->isPaintingFlexibilityIntervals())
+                groupWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
         }
         foreach(ActivityWidget *activityWidget, activityWidgets) {
-            activityWidget->determineFeasibleInterval(&painter, yOffset);
-            activityWidget->paintFlexibilityInterval(&painter, yOffset);
+            if (controller->isPaintingFeasibleIntervals())
+                activityWidget->determineFeasibleInterval(&painter, yOffset);
+            if (controller->isPaintingFlexibilityIntervals())
+                activityWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
         }
     }
