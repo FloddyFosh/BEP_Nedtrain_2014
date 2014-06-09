@@ -337,6 +337,9 @@ void ActivityWidget::determineFeasibleInterval(QPainter *painter, int offsetY) {
 }
 
 void ActivityWidget::paintFlexibilityInterval(QPainter *painter, int offsetY) {
+    // do not paint intervals when not set
+    if(activity()->estFlex() < 0 || activity()->lstFlex() < 0) return;
+
     QSize hint(sizeHint());
     int xStart = parent->hZoom() * (activity()->estFlex());
     int xEnd   = parent->hZoom() * (activity()->lstFlex() + activity()->duration());

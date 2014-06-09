@@ -414,6 +414,10 @@ void MainWindow::createActions() {
     paintFeasibleIntervalsAct->setCheckable(true);
     connect(paintFeasibleIntervalsAct, SIGNAL(triggered()), controller, SLOT(doPaintFeasibleIntervals()));
 
+    paintFlexibilityIntervalsAct = new QAction(tr("Paint flexibilty intervals"), this);
+    paintFlexibilityIntervalsAct->setCheckable(true);
+    connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
+
     /* solve menu */
     configureSolversAction = new QAction(tr("&Configure..."), this);
     configureSolversAction->setStatusTip(tr("Configure available solvers"));
@@ -502,8 +506,8 @@ void MainWindow::createMenus() {
     editMenu->addAction(manageTemplatesAct);
     editMenu->addSeparator();
     editMenu->addAction(paintFeasibleIntervalsAct);
+    editMenu->addAction(paintFlexibilityIntervalsAct);
 
-    //((
     solveButtonMenu = new QMenu();
     solveMenu = menuBar()->addMenu(tr("&Solve"));
     updateSolverActions();
@@ -524,7 +528,7 @@ void MainWindow::createToolbar() {
 	toolbar->addAction(newAct);
 	toolbar->addAction(openAct);
 	toolbar->addAction(saveAct);
-	toolbar->addAction(closeAct);
+    // toolbar->addAction(closeAct);
 	toolbar->addSeparator();
 	toolbar->addAction(newResourceAct);
 	toolbar->addAction(newJobAct);

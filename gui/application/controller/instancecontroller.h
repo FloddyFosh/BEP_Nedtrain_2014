@@ -106,6 +106,11 @@ public:
     void doPaintFeasibleIntervals();
     
     /**
+     * activate the painting of flexibility intervals.
+     */
+    void doPaintFlexibilityIntervals();
+
+    /**
      * @return the global controller
      */
     Controller * getParent();

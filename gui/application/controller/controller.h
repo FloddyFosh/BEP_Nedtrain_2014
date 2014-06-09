@@ -19,6 +19,7 @@ private:
     bool clearSoftPrecedences;
     QSlider * framesSlider;
     bool paintFeasibleIntervals;
+    bool paintFlexibilityIntervals;
     int untitledCounter;
     QString workingDirectory;
     
@@ -64,7 +65,8 @@ public slots:
     
     void toFrame(int frameNr); ///< go to frame frameNr.
     
-    void doPaintFeasibleIntervals(); ///< determines whether feasible intervals intervals should be painted
+    void doPaintFeasibleIntervals(); ///< determines whether feasible intervals should be painted
+    void doFlexibilityIntervals(); ///< determines whether flexibility intervals should be painted.
 };
 
 #endif /* CONTROLLER_H_ */

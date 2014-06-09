@@ -203,6 +203,17 @@ void Controller::doPaintFeasibleIntervals() {
     catch(NoInstanceException const& e) { }
 }
 
+void Controller::doFlexibilityIntervals() {
+    QAction *action = qobject_cast<QAction *>(sender());
+    paintFlexibilityIntervals = action->isChecked();
+
+    try {
+        getCurrentInstanceController()->doPaintFlexibilityIntervals();
+    } catch(NoInstanceException const& e) {
+         // ignore the action when there is no open instance
+    }
+}
+
 void Controller::setStatusMessage(QString message, int timeout) {
     getMainWindow()->statusBar()->showMessage(message, timeout);
 }

@@ -159,8 +159,9 @@ private:
     QAction *recentFileActs[MaxRecentFiles];
 
     // edit menu
-    QAction *newResourceAct, *newJobAct, *newActivityAct, *newPrecedenceAct, *removePrecedenceAct, *clearPrecedencesAct,
-    *autoClearPrecedencesAct, *useHoursAct, *setHoursAct, *manageTemplatesAct, *paintFeasibleIntervalsAct;
+    QAction *newResourceAct, *newJobAct, *newActivityAct, *newPrecedenceAct, *removePrecedenceAct,
+    *clearPrecedencesAct, *autoClearPrecedencesAct, *useHoursAct, *setHoursAct, *manageTemplatesAct,
+    *paintFeasibleIntervalsAct, *paintFlexibilityIntervalsAct;
 
     // solve menu
     QAction *configureSolversAction;
