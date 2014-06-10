@@ -44,13 +44,23 @@
 
 #include <QMessageBox>
 #include <QApplication>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
-    QApplication::setStyle("CleanLooks");
     QApplication app(argc, argv);
+    QApplication::setStyle("CleanLooks");
+    QString fontPath = ":/fonts/fonts/Vera.ttf";
+    int fontId = QFontDatabase::addApplicationFont(fontPath);
+    if (fontId != -1)
+    {
+        QFont font("Vera");
+        font.setPointSize(10);
+        app.setFont(font);
+    }
     app.setOrganizationName("TU Delft");
     app.setApplicationName("Task scheduler");
+
 
     if (!Language::loadDefaultLang(app))
     {

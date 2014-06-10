@@ -29,4 +29,7 @@
         <file>translations/lang_english.qm</file>
         <file>translations/lang_nedtrain.qm</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/Vera.ttf</file>
+    </qresource>
 </RCC>

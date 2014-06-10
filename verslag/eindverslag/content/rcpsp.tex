@@ -1,2 +1,5 @@
-\section{Schedulingsprobleem}
+\section{Probleemanalyse}
 
+Het probleem waar NedTrain mee te maken heeft, staat ook wel bekend als het \emph{Resource Constraint Project Scheduling Problem (RCPSP)}. Zo'n probleem gaat om het inplannen van activiteiten die elk bepaalde resources nodig hebben, zonder dat de maximale capaciteit van de resources geschonden wordt. De instanties van NedTrain bestaan uit projecten $P = \{p_1, \dots , p_n\}$ die uit 1 of meer subactiviteiten bestaan. Deze projecten hebben een starttijd $rs_i$ en een deadline $dl_i$. De subactiviteiten van project $p_i$ mogen pas vanaf $rs_i$ uitgevoerd worden, maar moeten wel uiterlijk op $dl_i$ klaar zijn. De $j^e$ activiteit van project $p_i$ wordt weergegeven als $v_{i,j}$. Deze activiteit heeft een tijdsduur van $d_{i,j}$.
+
+Er zijn drie soorten voorwaarden \emph{(constraints)} waar rekening mee gehouden moet worden bij het oplossen van RCPSP. Dit zijn tijdsconstraints, voorrangsrelaties (precedence constraints) en resource constraints. De tijdsconstraints zijn de hierboven genoemde starttijden en deadlines van de projecten. Een eventuele voorrangsrelatie $v_{i,j} \prec v_{u,v}$ kan bestaan tussen twee activiteiten $v_{i,j}$ en $v_{u,v}$, waardoor activiteit $v_{i,j}$ voltooid moet zijn, voordat activiteit $v_{u,v}$ uitgevoerd mag worden. Tenslotte 

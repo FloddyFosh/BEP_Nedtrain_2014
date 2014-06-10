@@ -30,3 +30,8 @@ Datum      | Uren   | Beschrijving
 28-05-2014 | 7      |
 02-06-2014 | 7      |
 03-06-2014 | 8.5    | Eindverslag, chaining tests, CLP werkend krijgen
+04-06-2014 | 8      |
+05-06-2014 | 7      |
+06-06-2014 | 5.5    |
+07-06-2014 | 1      | Fixen van missing font
+09-06-2014 | 4      | Poging tot static build, nieuwe implementatie selectChain

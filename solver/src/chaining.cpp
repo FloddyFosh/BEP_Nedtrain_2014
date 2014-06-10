@@ -62,6 +62,29 @@ chainId selectFirstChain(int tr, int act, int res){
     throw NoChainFoundException();
 }
 
+chainId selectEarliestChain(int tr, int act, int res){
+    chainId* result = 0;
+    int curEST = INT_MAX;
+    map<chainId, chain>::iterator it;
+    for(it=chains.begin();it!=chains.end();it++){
+        chainId id = it->first;
+        //inefficient; should only iterate over the correct resource
+        if(id.resource!=res) continue;
+        list<activity*> curChain = it->second.activities;
+        if(curChain.size() == 0){
+            return id;
+        }
+        activity* chainEnd = curChain.back();
+        int newEST = chainEnd->est + chainEnd->duration + chainEnd->flex;
+        if(A(tr,act)->est >= newEST && newEST <= curEST){
+            result = &id;
+            curEST = newEST;
+        }
+    }
+    if(result==0) throw NoChainFoundException();
+    return *result;
+}
+
 chainId selectRandomChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
     vector<chainId> possibleChains;
@@ -208,15 +231,15 @@ bool chaining() {
     for(int i=0; i<tmsp->n_resources; i++){
         FOREACH(activities, it){
             activity* act = *it;
-            try{
+            /*try{
                 pushToBestChains(act->i,act->j,i);
             }
             catch(NoChainFoundException &e){
                 e.showErrorMessage();
                 return false;
-            }
+            }*/
 
-            /*for(int m=0;m<Q(act->i,act->j,i);m++){
+            for(int m=0;m<Q(act->i,act->j,i);m++){
                 chainId id;
                 try{
                     id = selectFirstChain(act->i,act->j,i);
@@ -226,7 +249,7 @@ bool chaining() {
                     return false;
                 }
                 pushToChain(act, &id);
-            }*/
+            }
         }
         add_frame();
         FOREACH(chains, it){
