@@ -111,6 +111,7 @@ bool Solver::start(Instance *p) {
     connect(&process, SIGNAL(readyReadStandardOutput()), this, SLOT(solverReadOutput()));
     connect(&process, SIGNAL(readyReadStandardError()), this, SLOT(solverReadDebug()));
     connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(solverFinished(int, QProcess::ExitStatus)));
+
     process.start(binary, arguments.split(" "));
 
     process.write(ba);

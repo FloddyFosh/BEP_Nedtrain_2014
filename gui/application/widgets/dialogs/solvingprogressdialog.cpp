@@ -90,6 +90,7 @@ void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
         controller->repaintResourceWidgets();
         controller->setupSlider(true);
         controller->toLastFrame();
+        controller->getParent()->setFlexTimes();
 
         log->append("\nFinished.\n");
         if(solver->isSolved()) {
