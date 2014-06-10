@@ -1,6 +1,7 @@
 #include "widgets/groupwidget.h"
 #include "widgets/jobwidget.h"
 #include <QPainter>
+#include <QDebug>
 #include <cassert>
 
 GroupWidget::GroupWidget(Group *group, QList<ActivityWidget *> widgets, JobWidget * parent)

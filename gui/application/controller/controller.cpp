@@ -216,6 +216,16 @@ void Controller::doFlexibilityIntervals() {
     paintFlexibilityIntervals = action->isChecked();
 
     try {
+        QList<Group *> groups = getCurrentInstance()->getGroups();
+        if(paintFlexibilityIntervals) {
+            foreach(Group* g, groups) {
+                g->setST(g->getESTFlex());
+            }
+        } else {
+            foreach(Group* g, groups) {
+                g->setST(g->getEST());
+            }
+        }
         getCurrentInstanceController()->doPaintFlexibilityIntervals();
     } catch(NoInstanceException const& e) {
          // ignore the action when there is no open instance
