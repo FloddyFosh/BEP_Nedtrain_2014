@@ -15,6 +15,10 @@ tms: $(OBJECTS) main.o debug.o
 tms.release: CFLAGS+=-O5
 tms.release: $(OBJECTS) main.o
 	g++ $(CFLAGS) -o $@ $^ $(LDLIBS)
+	
+tmsstatic: CFLAGS+=-static -g -O0 -DNDEBUG
+tmsstatic: $(OBJECTS) main.o
+	g++ $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	g++ -c $(CFLAGS) -o $@ $<

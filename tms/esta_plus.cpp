@@ -504,7 +504,6 @@ void handle_neg_cyc() {
     for (node_t * t (cycle_node); t; t = t->node_succ) {
         pad.push_back(t);
     }
-    output("CHAIN: ");
     FOREACH(pad, it) output("%d %d ", (*it)->i, (*it)->j);
     node_t * vorige;
     bool wrong (false);
@@ -517,9 +516,8 @@ void handle_neg_cyc() {
         }
         vorige = t;
     }
-    output("-1\n");
     if (wrong) { 
-		debug("Something wrong in chain.\n"); 
+		debug("Something wrong in handle neg cycle.\n"); 
 		throw 0; 
 	}
 }
