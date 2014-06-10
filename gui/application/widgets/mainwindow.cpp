@@ -58,7 +58,10 @@ void MainWindow::readSettings() {
     controller->setAutoClearPrecedences(clear);
     bool paintFeasibleIntervals = settings.value("paintFeasibleIntervals").toBool();
     paintFeasibleIntervalsAct->setChecked(paintFeasibleIntervals);
+    bool paintFlexibilityIntervals = settings.value("paintFlexibilityIntervals").toBool();
+    paintFlexibilityIntervalsAct->setChecked(paintFlexibilityIntervals);
     controller->setPaintingFeasibleIntervals(paintFeasibleIntervals);
+    controller->setPaintingFlexibilityIntervals(paintFlexibilityIntervals);
     controller->setWorkingDirectory(settings.value("workingDirectory").toString());
 }
 
@@ -66,7 +69,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     while (tabwidget->isInstanceActive()) {
         if (!tabwidget->closeSubWindow()) {
             // gebruiker heeft een niet afgesloten, dus stop.
-            event->ignore(); return;
+            event->ignore();
+            return;
         }
     }
     
@@ -76,6 +80,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     settings.setValue("clearSoftPrecedences", autoClearPrecedencesAct->isChecked());
     settings.setValue("useHoursOnTimeline", useHoursAct->isChecked());
     settings.setValue("paintFeasibleIntervals", paintFeasibleIntervalsAct->isChecked());
+    settings.setValue("paintFlexibilityIntervals", paintFlexibilityIntervalsAct->isChecked());
     settings.setValue("workingDirectory", controller->getWorkingDirectory());
     delete controller;
     QMainWindow::closeEvent(event);

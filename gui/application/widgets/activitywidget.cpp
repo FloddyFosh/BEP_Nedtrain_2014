@@ -2,6 +2,7 @@
 #include <QPainter>
 #include <QMenu>
 #include <QAction>
+#include <QDebug>
 
 #include "dialogs/activitydialog.h"
 #include "dialogs/activityinfodialog.h"
@@ -51,7 +52,7 @@ QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type){
 	return getAdjacentWidgets(type, _activity);
 }
 
-QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type, Activity* a){
+QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type, Activity* a) {
 	QList<ActivityWidget*> adjacentWidgets;
 	QList<Precedence *> precedences = type==InComing ? a->getIncomingPrecedences() : a->getOutgoingPrecedences();
 	foreach(Precedence* p, precedences){
@@ -182,7 +183,6 @@ void ActivityWidget::setFlexibility() {
 
 void ActivityWidget::mouseMoveEvent(QMouseEvent *e){
     if(comparing) return;
-
 	//workaround for showing vertical mouse follower when mouse is on activity widget
 	controller->getInstanceWidget()->setMouseX(pos().x()+e->x());
 	controller->getInstanceWidget()->moveOverlayMouse(getFrontLocation().x(), getFrontLocation().y());

@@ -345,6 +345,8 @@ void Solver::setFlexGroups(QVector<Group *> groups) {
             qDebug() << "lst = " << lstMap[temp] << " - " << g->getLSTFlex() << " " << a->lstFlex();
         }
     }
+    estMap.clear();
+    lstMap.clear();
 }
 
 void Solver::processMutexLine(QByteArray &line) {
