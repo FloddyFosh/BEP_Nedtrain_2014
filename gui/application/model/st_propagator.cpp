@@ -1,6 +1,5 @@
 #include <set>
 #include <algorithm>
-#include <QDebug>
 
 #include "st_propagator.h"
 #include "controller/instancecontroller.h"

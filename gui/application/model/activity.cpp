@@ -4,8 +4,6 @@
 #include <algorithm>
 #include <cassert>
 
-#include <QDebug>
-
 using namespace std;
 
 Activity::Activity(Job *job, int id, QString name, int duration)

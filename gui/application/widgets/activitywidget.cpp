@@ -2,7 +2,6 @@
 #include <QPainter>
 #include <QMenu>
 #include <QAction>
-#include <QDebug>
 
 #include "dialogs/activitydialog.h"
 #include "dialogs/activityinfodialog.h"
