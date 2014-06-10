@@ -77,8 +77,15 @@ void ST_Propagator::changeDurationIfPossible(int newDuration) {
     if (group->getST() + newDuration > lct) return;
     st = savedST;
 
-    if (propagate(newDuration, true) and propagate(newDuration, false)) {
-        applyChanges(newDuration);
+    if(controller->isPaintingFlexibilityIntervals() && group->getLSTFlex() >= 0 && group->getESTFlex() >= 0) {
+        if(newDuration > 0 && st[group] + newDuration <= group->getLSTFlex() + group->getDuration()) {
+            group->setLSTFlex(group->getLSTFlex() - newDuration + group->getDuration());
+            applyChanges(newDuration);
+        }
+    } else {
+        if (propagate(newDuration, true) and propagate(newDuration, false)) {
+            applyChanges(newDuration);
+        }
     }
 }
 
