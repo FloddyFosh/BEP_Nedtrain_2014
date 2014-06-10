@@ -281,46 +281,24 @@ QMap<QPair<int, int>, int> lstMap;
 void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
-    int ammount = fields.takeFirst().toInt();
-    qDebug() << "ammount of flex lines" << ammount;
-    
-    int minflex = -1, flextotaal = -1;
-    if(process.canReadLine()) {
-        line = process.readLine();
-        fields = line.trimmed().split(' ');
-        fields.takeFirst();
-        minflex = fields.takeFirst().toInt();
-    }
-    if(process.canReadLine()) {
-        line = process.readLine();
-        fields = line.trimmed().split(' ');
-        fields.takeFirst(); 
-        flextotaal = fields.takeFirst().toInt();
-    }
 
-    qDebug() << "minflex = " << minflex;
-    qDebug() << "flextotaal = " << flextotaal;
+    int minflex = fields.takeFirst().toInt();
+    int flextotaal = fields.takeFirst().toInt();
 
+    int act_i = fields.takeFirst().toInt();
+    while(act_i != -1){
+        int act_j = fields.takeFirst().toInt();
+        bool lst = fields.takeFirst().at(0) == '+';
+        int time = fields.takeFirst().toInt();
 
-    for(int i=0; i<ammount; i++) {
-        if(process.canReadLine()) {
-            line = process.readLine();   
-            fields = line.trimmed().split(' ');
-            int act_i = fields.takeFirst().toInt();
-            int act_j = fields.takeFirst().toInt();
-            bool lst = fields.takeFirst().at(0) == '+';
-            int time = fields.takeFirst().toInt();
-
-            QPair<int, int> temp(act_i, act_j);
-            if(lst) {
-                lstMap[temp] = time;
-            } else {
-                estMap[temp] = time;
-            }
-            qDebug() << "FLEX --> " << act_i << act_j << lst << time;
+        QPair<int, int> temp(act_i, act_j);
+        if(lst) {
+            lstMap[temp] = time;
         } else {
-            qDebug() << "NOT ENOUGH FLEX LINES 3";
+            estMap[temp] = time;
         }
+
+        act_i = fields.takeFirst().toInt();
     }
 }
 
