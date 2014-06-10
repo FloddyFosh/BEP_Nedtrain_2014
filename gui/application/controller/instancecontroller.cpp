@@ -79,6 +79,14 @@ void InstanceController::doPaintFeasibleIntervals() {
     instanceWidget->updateTimelineOffset();
 }
 
+bool InstanceController::isPaintingFlexibilityIntervals() {
+    return controller->isPaintingFlexibilityIntervals();
+}
+
+void InstanceController::doPaintFlexibilityIntervals() {
+    instanceWidget->updateTimelineOffset();
+}
+
 Controller * InstanceController::getParent() { return controller; }
 
 void InstanceController::shadeActivities(int start, int end, Resource* r) {

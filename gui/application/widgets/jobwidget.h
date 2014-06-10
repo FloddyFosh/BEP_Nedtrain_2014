@@ -1,6 +1,7 @@
 #ifndef JOBWIDGET_H
 #define JOBWIDGET_H
 
+#include <QProcess>
 #include "activitywidget.h"
 #include "groupwidget.h"
 
@@ -70,6 +71,7 @@ public:
      * @param height Height of the to be painted interval
      */
     void paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset);
+    void paintFlexibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset);
 
     Job const *job() const; ///< return associated job
     QSize sizeHint() const; ///< returns minimumSize()
@@ -80,6 +82,7 @@ public:
     int offsetX();
 
 protected:
+    void solverFinished(QProcess::ExitStatus state);
     void paintEvent(QPaintEvent *); ///< do native painting, then add availability interval and mark problem areas and finally draw a bottom border
     void resizeEvent(QResizeEvent *); ///< relayout activity widgets on a resizeEvent (probably caused by a expand/collapse action by the user)
     bool event(QEvent *); ///< do custom layout with doLayout() method when a layout event is received

@@ -58,7 +58,10 @@ void MainWindow::readSettings() {
     controller->setAutoClearPrecedences(clear);
     bool paintFeasibleIntervals = settings.value("paintFeasibleIntervals").toBool();
     paintFeasibleIntervalsAct->setChecked(paintFeasibleIntervals);
+    bool paintFlexibilityIntervals = settings.value("paintFlexibilityIntervals").toBool();
+    paintFlexibilityIntervalsAct->setChecked(paintFlexibilityIntervals);
     controller->setPaintingFeasibleIntervals(paintFeasibleIntervals);
+    controller->setPaintingFlexibilityIntervals(paintFlexibilityIntervals);
     controller->setWorkingDirectory(settings.value("workingDirectory").toString());
 }
 
@@ -66,7 +69,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     while (tabwidget->isInstanceActive()) {
         if (!tabwidget->closeSubWindow()) {
             // gebruiker heeft een niet afgesloten, dus stop.
-            event->ignore(); return;
+            event->ignore();
+            return;
         }
     }
     
@@ -76,6 +80,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     settings.setValue("clearSoftPrecedences", autoClearPrecedencesAct->isChecked());
     settings.setValue("useHoursOnTimeline", useHoursAct->isChecked());
     settings.setValue("paintFeasibleIntervals", paintFeasibleIntervalsAct->isChecked());
+    settings.setValue("paintFlexibilityIntervals", paintFlexibilityIntervalsAct->isChecked());
     settings.setValue("workingDirectory", controller->getWorkingDirectory());
     delete controller;
     QMainWindow::closeEvent(event);
@@ -414,6 +419,10 @@ void MainWindow::createActions() {
     paintFeasibleIntervalsAct->setCheckable(true);
     connect(paintFeasibleIntervalsAct, SIGNAL(triggered()), controller, SLOT(doPaintFeasibleIntervals()));
 
+    paintFlexibilityIntervalsAct = new QAction(tr("Paint flexibilty intervals"), this);
+    paintFlexibilityIntervalsAct->setCheckable(true);
+    connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
+
     /* solve menu */
     configureSolversAction = new QAction(tr("&Configure..."), this);
     configureSolversAction->setStatusTip(tr("Configure available solvers"));
@@ -502,8 +511,8 @@ void MainWindow::createMenus() {
     editMenu->addAction(manageTemplatesAct);
     editMenu->addSeparator();
     editMenu->addAction(paintFeasibleIntervalsAct);
+    editMenu->addAction(paintFlexibilityIntervalsAct);
 
-    //((
     solveButtonMenu = new QMenu();
     solveMenu = menuBar()->addMenu(tr("&Solve"));
     updateSolverActions();
@@ -524,7 +533,7 @@ void MainWindow::createToolbar() {
 	toolbar->addAction(newAct);
 	toolbar->addAction(openAct);
 	toolbar->addAction(saveAct);
-	toolbar->addAction(closeAct);
+    // toolbar->addAction(closeAct);
 	toolbar->addSeparator();
 	toolbar->addAction(newResourceAct);
 	toolbar->addAction(newJobAct);

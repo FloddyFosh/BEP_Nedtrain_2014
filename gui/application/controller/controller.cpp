@@ -1,6 +1,6 @@
 #include <QStatusBar>
 #include <QAction>
-
+#include <QDebug>
 #include "controller/exceptions.h"
 #include "controller/instancecontroller.h"
 #include "widgets/dialogs/solvingprogressdialog.h"
@@ -195,12 +195,41 @@ void Controller::setPaintingFeasibleIntervals(bool paintFeasibleIntervals) {
     Controller::paintFeasibleIntervals = paintFeasibleIntervals;
 }
 
+bool Controller::isPaintingFlexibilityIntervals() {
+    return paintFlexibilityIntervals;
+}
+
+void Controller::setPaintingFlexibilityIntervals(bool paintFlexibilityIntervals) {
+    Controller::paintFlexibilityIntervals = paintFlexibilityIntervals;
+}
+
 void Controller::doPaintFeasibleIntervals() {
     QAction *action = qobject_cast<QAction *>(sender());
     paintFeasibleIntervals = action->isChecked();
 
     try { getCurrentInstanceController()->doPaintFeasibleIntervals(); }
     catch(NoInstanceException const& e) { }
+}
+
+void Controller::setFlexTimes() {
+    if(isPaintingFlexibilityIntervals()) {
+        foreach(Instance * i, getAllInstances()) {
+            foreach(Group* g, i->getGroups()) {
+                g->setST(g->getESTFlex());
+            }
+        }
+    }
+}
+
+void Controller::doFlexibilityIntervals() {
+    QAction *action = qobject_cast<QAction *>(sender());
+    paintFlexibilityIntervals = action->isChecked();
+    setFlexTimes();
+    try {
+        getCurrentInstanceController()->doPaintFlexibilityIntervals();
+    } catch(NoInstanceException const& e) {
+         // ignore the action when there is no open instance
+    }
 }
 
 void Controller::setStatusMessage(QString message, int timeout) {

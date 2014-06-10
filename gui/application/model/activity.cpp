@@ -3,6 +3,7 @@
 #include <cmath>
 #include <algorithm>
 #include <cassert>
+
 using namespace std;
 
 Activity::Activity(Job *job, int id, QString name, int duration)
@@ -54,6 +55,15 @@ int Activity::st() const {
 int Activity::lst() const {
     return _group->getLST() + offsetWithinGroup();
 }
+
+int Activity::estFlex() const {
+    return _group->getESTFlex() + offsetWithinGroup(); // TODO: moet nog gedaan worden
+}
+
+int Activity::lstFlex() const {
+    return _group->getLSTFlex() + offsetWithinGroup(); // TODO: moet nog gedaan worden
+}
+
 int Activity::eet() const {
     return est() + duration();
 }

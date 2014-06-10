@@ -58,6 +58,7 @@ public:
      * @param offsetY the vertical offset, used in expanded mode
      */
     void determineFeasibleInterval(QPainter *painter, int offsetY);
+    void paintFlexibilityInterval(QPainter *painter, int offsetY);
 protected:
     void paintEvent(QPaintEvent *); ///< paints the rectangle around the activities.
     void updateGeometry(); ///< updates the size of the underlying widget.

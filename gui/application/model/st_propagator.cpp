@@ -59,9 +59,15 @@ void ST_Propagator::moveIfPossible(int dt) {
     if (group->isLocked()) return;
     st = savedST;
     st[group] += dt;
-    // to the right
-    if (propagate(group->getDuration(), true) and propagate(group->getDuration(), false)) {
-        applyChanges();
+
+    if(controller->isPaintingFlexibilityIntervals() && group->getLSTFlex() >= 0 && group->getESTFlex() >= 0) {
+        if(st[group] >= group->getESTFlex() && st[group] <= group->getLSTFlex()) {
+            applyChanges();
+        }
+    } else {
+        if (propagate(group->getDuration(), true) and propagate(group->getDuration(), false)) {
+            applyChanges();
+        }
     }
 }
 
@@ -70,9 +76,16 @@ void ST_Propagator::changeDurationIfPossible(int newDuration) {
     int lct (group->getLST() + group->getDuration());
     if (group->getST() + newDuration > lct) return;
     st = savedST;
-    // to the right
-    if (propagate(newDuration, true) and propagate(newDuration, false)) {
-        applyChanges(newDuration);
+
+    if(controller->isPaintingFlexibilityIntervals() && group->getLSTFlex() >= 0 && group->getESTFlex() >= 0) {
+        if(newDuration > 0 && st[group] + newDuration <= group->getLSTFlex() + group->getDuration()) {
+            group->setLSTFlex(group->getLSTFlex() - newDuration + group->getDuration());
+            applyChanges(newDuration);
+        }
+    } else {
+        if (propagate(newDuration, true) and propagate(newDuration, false)) {
+            applyChanges(newDuration);
+        }
     }
 }
 

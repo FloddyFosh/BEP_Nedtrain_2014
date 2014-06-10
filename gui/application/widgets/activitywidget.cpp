@@ -51,7 +51,7 @@ QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type){
 	return getAdjacentWidgets(type, _activity);
 }
 
-QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type, Activity* a){
+QList<ActivityWidget*> ActivityWidget::getAdjacentWidgets(AdjacentWidgets type, Activity* a) {
 	QList<ActivityWidget*> adjacentWidgets;
 	QList<Precedence *> precedences = type==InComing ? a->getIncomingPrecedences() : a->getOutgoingPrecedences();
 	foreach(Precedence* p, precedences){
@@ -182,7 +182,6 @@ void ActivityWidget::setFlexibility() {
 
 void ActivityWidget::mouseMoveEvent(QMouseEvent *e){
     if(comparing) return;
-
 	//workaround for showing vertical mouse follower when mouse is on activity widget
 	controller->getInstanceWidget()->setMouseX(pos().x()+e->x());
 	controller->getInstanceWidget()->moveOverlayMouse(getFrontLocation().x(), getFrontLocation().y());
@@ -334,4 +333,14 @@ void ActivityWidget::determineFeasibleInterval(QPainter *painter, int offsetY) {
     int xStart = parent->hZoom() * (activity()->est() + parent->offsetX());
     int xEnd   = parent->hZoom() * (activity()->lst() + activity()->duration());
     parent->paintFeasibilityInterval(*painter, xStart, xEnd, hint.height()-2, offsetY);
+}
+
+void ActivityWidget::paintFlexibilityInterval(QPainter *painter, int offsetY) {
+    // do not paint intervals when not set
+    if(activity()->estFlex() < 0 || activity()->lstFlex() < 0) return;
+
+    QSize hint(sizeHint());
+    int xStart = parent->hZoom() * (activity()->estFlex());
+    int xEnd   = parent->hZoom() * (activity()->lstFlex() + activity()->duration());
+    parent->paintFlexibilityInterval(*painter, xStart, xEnd, hint.height()-2, offsetY);
 }

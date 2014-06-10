@@ -172,18 +172,19 @@ void addLimits(Constraints* constraints) {
 }
 
 void printSolution(map<string, int>* solution) {
-    output("FLEX: %d\n", solution->size());
-    output("minflex %d\n", minflex);
-    output("flexibility %d\n", flextotaal);
+    output("FLEX: ");
+    output("%d ", minflex);
+    output("%d ", flextotaal);
 
     cdebug("minflex = %d\n", minflex);
     cdebug("flexibility = %d\n", flextotaal);
     map<string, int>::iterator iter = solution->begin();
     while(iter != solution->end()) {
-        output("%s %d\n", iter->first.c_str(), iter->second);
+        output("%s %d ", iter->first.c_str(), iter->second);
         cdebug("[%s] = %d\n", iter->first.c_str(), iter->second);
         iter++;
     }
+	output("-1\n");
 }
 
 int flexibility() {

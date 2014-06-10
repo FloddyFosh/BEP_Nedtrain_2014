@@ -392,7 +392,10 @@ void Instance::clearSoftPrecedences() {
 }
 
 bool Instance::hasSoftPrecedences() {
-    return softPrecedences.size() > 0;
+    foreach(Precedence *p, softPrecedences){
+        if(!p->isDisabled()) return true;
+    }
+    return false;
 }
 
 void Instance::emitChanged() {

@@ -14,6 +14,8 @@ class Group : public QObject {
     QList<Activity*> activities;
     int est;
     int lst;
+    int estFlex;
+    int lstFlex;
     int st;
     int job;
     int duration;
@@ -58,6 +60,26 @@ public:
      * @return number of activities in this group.
      */
     int size();
+
+    /**
+     * @return the group flexibility est.
+     */
+    int getESTFlex();
+
+    /**
+     * @return the group flexibility lst
+     */
+    int getLSTFlex();
+
+    /**
+     * @param estflex
+     */
+    void setESTFlex(int estFlex);
+
+    /**
+     * @param lstflex
+     */
+    void setLSTFlex(int lstFlex);
 
     /**
      * set the group EST to the given value.

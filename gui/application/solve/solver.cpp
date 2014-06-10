@@ -111,6 +111,7 @@ bool Solver::start(Instance *p) {
     connect(&process, SIGNAL(readyReadStandardOutput()), this, SLOT(solverReadOutput()));
     connect(&process, SIGNAL(readyReadStandardError()), this, SLOT(solverReadDebug()));
     connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(solverFinished(int, QProcess::ExitStatus)));
+
     process.start(binary, arguments.split(" "));
 
     process.write(ba);
@@ -132,6 +133,7 @@ void Solver::solverFinished(int x, QProcess::ExitStatus state) {
             foreach(Activity * a, g->getActivities()) g_->addActivity(a);
             lastFrame->addGroup(g_);
         }
+        setFlexGroups(lastFrame->getGroups());
         replayFrames.append(lastFrame);
         instance->setFrames(replayFrames);
     }
@@ -278,39 +280,48 @@ void Solver::processPeakLine(QByteArray &line) {
     eatRemainingOutput(fields);
 }
 
+QMap<QPair<int, int>, int> estMap;
+QMap<QPair<int, int>, int> lstMap;
 void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
-    int ammount = fields.takeFirst().toInt();
-    qDebug() << "ammount of flex lines" << ammount;
-    
-    int minflex;
-    int flextotaal;
-    if(process.canReadLine()) {
-        line = process.readLine();
-        fields = line.trimmed().split(' ');
-        fields.takeFirst();
-        minflex = fields.takeFirst().toInt();
-    }
-    if(process.canReadLine()) {
-        line = process.readLine();
-        fields = line.trimmed().split(' ');
-        fields.takeFirst(); 
-        flextotaal = fields.takeFirst().toInt();
-    }
-    for(int i=0; i<ammount; i++) {
-        if(process.canReadLine()) {
-            line = process.readLine();   
-            fields = line.trimmed().split(' ');
-            int act_i = fields.takeFirst().toInt();
-            int act_j = fields.takeFirst().toInt();
-            bool est = fields.takeFirst().at(0) == '+';
-            double time = fields.takeFirst().toDouble();
-            qDebug() << "FLEX --> " << act_i << act_j << est << time;
+
+    int minflex = fields.takeFirst().toInt();
+    int flextotaal = fields.takeFirst().toInt();
+
+    int act_i = fields.takeFirst().toInt();
+    while(act_i != -1){
+        int act_j = fields.takeFirst().toInt();
+        bool lst = fields.takeFirst().at(0) == '+';
+        int time = fields.takeFirst().toInt();
+
+        QPair<int, int> temp(act_i, act_j);
+        if(lst) {
+            lstMap[temp] = time;
         } else {
-            qDebug() << "NOT ENOUGH FLEX LINES 3";
+            estMap[temp] = time;
+        }
+
+        act_i = fields.takeFirst().toInt();
+    }
+}
+
+void Solver::setFlexGroups(QVector<Group *> groups) {
+    // now loop over all activities in the current instance and set est and lst
+    if(estMap.size() == 0 || lstMap.size() == 0) return;
+
+    foreach(Group* g, groups) {
+        QList<Activity *> activities = g->getActivities();
+        foreach(Activity* a, activities) {
+            int act_i = a->job()->id();
+            int act_j = a->id();
+            QPair<int, int> temp(act_i, act_j);
+            g->setESTFlex(estMap[temp]);
+            g->setLSTFlex(lstMap[temp]);
         }
     }
+    estMap.clear();
+    lstMap.clear();
 }
 
 void Solver::processMutexLine(QByteArray &line) {
