@@ -134,7 +134,7 @@ public:
      * @return the latest starting time of this activity without moving another activity.
      * This value is calculated by the LP-solver.
      */
-    int lstFlex() const;
+    int lftFlex() const;
 
     /**
      * @return the currently set starting time of this activity.

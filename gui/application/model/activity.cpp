@@ -57,11 +57,11 @@ int Activity::lst() const {
 }
 
 int Activity::estFlex() const {
-    return _group->getESTFlex() + offsetWithinGroup(); // TODO: moet nog gedaan worden
+    return _group->getESTFlex() + offsetWithinGroup();
 }
 
-int Activity::lstFlex() const {
-    return _group->getLSTFlex() + offsetWithinGroup(); // TODO: moet nog gedaan worden
+int Activity::lftFlex() const {
+    return _group->getLFTFlex() + offsetWithinGroup();
 }
 
 int Activity::eet() const {

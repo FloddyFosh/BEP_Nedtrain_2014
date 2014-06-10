@@ -39,11 +39,11 @@ void GroupWidget::determineFeasibleInterval(QPainter *painter, int offsetY) {
 
 void GroupWidget::paintFlexibilityInterval(QPainter *painter, int offsetY) {
     // do not paint intervals when not set
-    if(group->getESTFlex() < 0 || group->getLSTFlex() < 0) return;
+    if(group->getESTFlex() < 0 || group->getLFTFlex() < 0) return;
 
     QSize hint (activityWidgets.at(0)->sizeHint());
-    int xStart = parent->hZoom() * (group->getESTFlex());
-    int xEnd   = parent->hZoom() * (group->getLSTFlex() + group->getDuration());
+    int xStart = parent->hZoom() * group->getESTFlex();
+    int xEnd   = parent->hZoom() * group->getLFTFlex();
     parent->paintFlexibilityInterval(*painter, xStart, xEnd, hint.height(), offsetY);
 }
 

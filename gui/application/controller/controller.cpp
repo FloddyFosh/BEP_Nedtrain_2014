@@ -214,8 +214,15 @@ void Controller::doPaintFeasibleIntervals() {
 void Controller::setFlexTimes() {
     if(isPaintingFlexibilityIntervals()) {
         foreach(Instance * i, getAllInstances()) {
-            foreach(Group* g, i->getGroups()) {
+            foreach(Group* g, i->getFrame(i->getMaxFrameNr() - 1)->getGroups()) {
+                if(g->getDuration() > g->getLFTFlex() - g->getESTFlex()) {
+                    qDebug() << "oops";
+                }
+                g->setDuration(qMin(g->getDuration(), g->getLFTFlex() - g->getESTFlex()));
                 g->setST(g->getESTFlex());
+                if(g->getDuration() > g->getLFTFlex() - g->getESTFlex()) {
+                    qDebug() << "nog meer oops";
+                }
             }
         }
     }
