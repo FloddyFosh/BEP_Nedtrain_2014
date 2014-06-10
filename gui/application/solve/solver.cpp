@@ -332,17 +332,9 @@ void Solver::setFlexGroups(QVector<Group *> groups) {
         foreach(Activity* a, activities) {
             int act_i = a->job()->id();
             int act_j = a->id();
-            qDebug() << "act_i = " << act_i << "__ act_j = " << act_j;
-
             QPair<int, int> temp(act_i, act_j);
             g->setESTFlex(estMap[temp]);
             g->setLSTFlex(lstMap[temp]);
-
-            a->group()->setESTFlex(estMap[temp]);
-            a->group()->setLSTFlex(lstMap[temp]);
-
-            qDebug() << "est = " << estMap[temp] << " - " << g->getESTFlex() << " " << a->estFlex();
-            qDebug() << "lst = " << lstMap[temp] << " - " << g->getLSTFlex() << " " << a->lstFlex();
         }
     }
     estMap.clear();
