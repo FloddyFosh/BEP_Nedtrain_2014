@@ -44,9 +44,9 @@ TEST_F(SolverTest, testFailingLoad) {
 TEST_F(SolverTest, testFinished) {
     qRegisterMetaType<QProcess::ExitStatus>("ExitStatus");
     QProcess* solveProcess = s->getProcess();
-    QSignalSpy spyReading(solveProcess, SIGNAL(readyRead()));
+    QSignalSpy spyReading(solveProcess, SIGNAL(readyReadStandardOutput()));
     QSignalSpy spyFinished(solveProcess, SIGNAL(finished(int, QProcess::ExitStatus)));
-    QSignalSpy spySolver(s, SIGNAL(finished(int, QProcess::ExitStatus)));
+    QSignalSpy spySolver(s, SIGNAL(finished(QProcess::ExitStatus)));
 
     EXPECT_NO_THROW({
         s->start(InstanceReader::load(qApp->applicationDirPath()+"/resources/test.instance"));
