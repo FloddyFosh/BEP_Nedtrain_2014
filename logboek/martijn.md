@@ -33,3 +33,8 @@ Datum      | Uren   | Beschrijving
 02-06-2014 | 7      | Aan flexibility.cpp gewerkt en sprintreview.
 03-06-2014 | 7      | LP uitgebreid, flex wordt verspreid over de taken. Stukje verslag over LP.
 04-06-2014 | 6      | Tests schrijven en code refactoren
+05-06-2014 | 7      | 
+06-06-2014 | 7      | 
+09-06-2014 | 5      | Knopje [Paint Flex Intervals] erbij gemaakt met functionaliteit.
+10-06-2014 | 7      | Flexibiliteitsintervallen feature verbeterd, zodat er geen bugs optreden bij het verplaatsen en verkleinen/vergroten van activiteiten.
+11-06-2014 | 7      | Userstories en sprintreview schrijven
