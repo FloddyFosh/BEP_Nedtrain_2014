@@ -317,7 +317,7 @@ void Solver::setFlexGroups(QVector<Group *> groups) {
             int act_j = a->id();
             QPair<int, int> temp(act_i, act_j);
             g->setESTFlex(estMap[temp]);
-            g->setLSTFlex(lstMap[temp]);
+            g->setLFTFlex(lstMap[temp] + g->getDuration());
         }
     }
     estMap.clear();
