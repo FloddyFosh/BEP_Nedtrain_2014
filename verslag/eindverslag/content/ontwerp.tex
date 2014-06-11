@@ -1,1 +1,12 @@
 \section{Ontwerp}
+Als de gebruiker op de knop 'solve' drukt wordt onze solver aangeroepen, deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de tool, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
+
+De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan hebben wij ook niets veranderd. Het chaining algoritme uitgelegt in [??] hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost deze vervolgens op met COIN LP (Clp). 
+
+\newpage
+\begin{figure}[H]
+\centering
+\label{fig:sd}
+\input{../images/sequence-diagram}
+\caption{Sequencediagram} 
+\end{figure}
