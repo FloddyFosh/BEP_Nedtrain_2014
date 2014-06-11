@@ -10,6 +10,8 @@
 #include "data/template_gateway.h"
 #include "data/templatedb.h"
 
+#include "model/frame.h"
+
 Controller::Controller() : colorGenerator(), clearSoftPrecedences(false), untitledCounter (0) {
     TemplateGateway::instance = new TemplateDB();
 }
@@ -216,6 +218,7 @@ void Controller::setFlexTimes() {
         foreach(Instance * i, getAllInstances()) {
             foreach(Group* g, i->getGroups()) {
                 g->setST(g->getESTFlex());
+                g->getActivities()[0]->setDuration(qMin(g->getDuration(), g->getLFTFlex() - g->getESTFlex()));
             }
         }
     }

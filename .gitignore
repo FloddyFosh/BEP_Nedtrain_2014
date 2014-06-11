@@ -32,6 +32,9 @@ Release/
 *.Debug
 *.Release
 
+# Debug directory Ubuntu
+build-nedtrain-Desktop-Debug/
+
 #LaTeX
 *.out
 *.out.ps

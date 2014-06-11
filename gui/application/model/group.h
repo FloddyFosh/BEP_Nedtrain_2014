@@ -15,7 +15,7 @@ class Group : public QObject {
     int est;
     int lst;
     int estFlex;
-    int lstFlex;
+    int lftFlex;
     int st;
     int job;
     int duration;
@@ -69,7 +69,7 @@ public:
     /**
      * @return the group flexibility lst
      */
-    int getLSTFlex();
+    int getLFTFlex();
 
     /**
      * @param estflex
@@ -79,7 +79,7 @@ public:
     /**
      * @param lstflex
      */
-    void setLSTFlex(int lstFlex);
+    void setLFTFlex(int lstFlex);
 
     /**
      * set the group EST to the given value.

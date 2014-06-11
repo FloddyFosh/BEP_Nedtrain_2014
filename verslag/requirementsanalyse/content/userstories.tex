@@ -63,3 +63,37 @@
     \item er is bij een resource $A$ op de knop naar boven gedrukt \emph{en} er is op het scherm boven resource $A$ nog een andere resource $B$, dan worden resource $A$ en $B$ met elkaar gewisseld. Resource $A$ staat nu direct boven resource $B$.
 \endGegeven
 
+\nextUserStory
+\textbf{Als} gebruiker \textbf{wil} ik de flexibiliteit van de oplossing zien op het scherm. De flexibiliteit wordt weergegeven door voor elke taak een flexibiliteitsinterval weer te geven. Dit flexibiliteitsinterval laat zien wanneer een activiteit \emph{mag} beginnen en wanneer het klaar \emph{moet} zijn. Als elke taak binnen het eigen flexibiliteitsinterval gedaan wordt, dan kan elke taak volgens dit schema worden uitgevoerd. Deze flexibiliteitsintervallen worden weergegeven:
+\beginGegeven
+    \item de optie 'Paint flexibility intervals' aangevinkt staat.
+    \item de probleeminstantie is opgelost met een solver dat deze flexibiliteitsintervallen berekend. 
+\endGegeven
+
+\nextUserStory
+\textbf{Als} gebruiker \textbf{wil} ik na het oplossen van een probleeminstantie de duur van een activiteit kunnen aanpassen d.m.v. met de muis op de rechterkant van een activiteit te verslepen. 
+\beginAls
+    \item de optie 'Paint flexibility intervals' staat aangevinkt, dan mag de activiteit niet buiten het flexibiliteitsinterval plaatsvinden. 
+    \item de optie 'Paint flexibility intervals' niet staat aangevinkt, dan mag de activiteit wel buiten het flexibiliteitsinverval en niet buiten het feasible interval plaatsvinden. 
+\endAls
+
+\nextUserStory 
+\textbf{Als} gebruiker \textbf{wil} ik na het oplossen van een probleeminstantie de begintijd van een activiteit kunnen aanpassen door een activiteit te verslepen.
+\beginAls
+    \item de optie 'Paint flexibility intervals' staat aangevinkt, dan mag de activiteit niet buiten het flexibiliteitsinterval plaatsvinden. 
+    \item de optie 'Paint flexibility intervals' niet staat aangevinkt, dan mag de activiteit wel buiten het flexibiliteitsinverval en niet buiten het feasible interval plaatsvinden. 
+\endAls
+
+\nextUserStory
+\textbf{Als} gebruiker \textbf{wil} ik na het oplossen van probleeminstantie de flexibiliteitsintervallen onzichtbaar maken door op een knop te drukken. 
+\beginGegeven
+    \item er worden flexibiliteitsintervallen weergegeven.
+\endGegeven
+
+\nextUserStory
+\textbf{Als} gebruiker \textbf{wil} ik dat activiteiten worden verplaats, zodat het begin van de activiteit op hetzelfde moment is als het begin van het flexibiliteitsinterval. 
+\beginAls
+    \item er op 'solve' geklikt is, waarbij de solver flexibiliteitsintervallen berekend.
+    \item 'Paint flexibility intervals' wordt aangevinkt en de probleeminstantie is al opgelost met een solver dat flexibiliteitsintervallen berekend. 
+\endAls
+
