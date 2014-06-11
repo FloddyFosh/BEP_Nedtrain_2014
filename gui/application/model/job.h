@@ -81,6 +81,7 @@ public:
     QString name() const; ///< returns the job name
     int releaseDate() const; ///< returns the job release date (int), activities can not start before this date/time
     int dueDate() const; ///< returns the job due date (int), all the activities must be completed by this date/time
+    int duration(); ///< returns the job duration time (int).
     Instance *instance() const; ///< returns the instance which this job belongs to
 
     void setName(QString name); ///< name mutator method used from GUI

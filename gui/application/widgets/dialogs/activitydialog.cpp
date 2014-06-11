@@ -20,7 +20,15 @@ ActivityDialog::ActivityDialog(Instance *instance, Activity *a, QWidget *parent)
     nameEdit = new QLineEdit(a->job() ? a->name() : QString());
     durationEdit = new QSpinBox;
     durationEdit->setMinimum(1);
-    durationEdit->setMaximum(1 << 30);
+    if (!a->job()) {
+        durationEdit->setMaximum(((Job *) jobEdit->itemData(jobEdit->currentIndex()).value<void *>())->duration());
+    }
+    else if(a->lftFlex() > 0) {
+        durationEdit->setMaximum(a->lftFlex()-a->st());
+    }
+    else {
+        durationEdit->setMaximum(qMin(a->job()->dueDate() - a->st(), (a->lst()+a->duration()) - a->st() ));
+    }
     durationEdit->setValue(a->job() ? a->duration() : 1);
 
     usingTemplate = false;
@@ -46,6 +54,7 @@ ActivityDialog::ActivityDialog(Instance *instance, Activity *a, QWidget *parent)
     addWidget(requirementsTable);
 
     // signals
+    if(!a->job()) connect(jobEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(jobChanged(int)));
     connect(templateList, SIGNAL(currentIndexChanged(int)), this, SLOT(templateChanged(int)));
     connect(nameEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
     connect(durationEdit, SIGNAL(valueChanged(QString)), this, SLOT(setModified()));
@@ -71,6 +80,10 @@ void ActivityDialog::apply() {
 
         accept();
     }
+}
+
+void ActivityDialog::jobChanged(int index) {
+    durationEdit->setMaximum(((Job *) jobEdit->itemData(index).value<void *>())->duration());
 }
 
 void ActivityDialog::templateChanged(int index) {

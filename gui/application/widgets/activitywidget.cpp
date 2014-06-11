@@ -198,8 +198,10 @@ void ActivityWidget::mouseMoveEvent(QMouseEvent *e){
 	if(changeDuration){
 		int newDuration = round((double)e->x()/(double)parent->hZoom());
 		if(_activity->duration() != newDuration) {
-		    if (!controller->isAtLastFrame())
-			    _activity->setDuration(newDuration);
+            if (!controller->isAtLastFrame()) {
+                if(newDuration <= _activity->job()->duration())
+                    _activity->setDuration(newDuration);
+            }
 			else
 			    stPropagator->changeDurationIfPossible(newDuration);
 		    controller->getInstance()->setUserChanges(true);
