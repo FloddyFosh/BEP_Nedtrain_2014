@@ -14,9 +14,6 @@ typedef struct chain{
     list<activity*> activities;
 } chain;
 
-map<chainId, chain> chains;
-vector< activity* > activities;
-
 void initializeActivities();
 vector<activity*> getActivities();
 bool compareEST(const activity* a, const activity* b);
