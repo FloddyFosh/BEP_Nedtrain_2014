@@ -1,7 +1,7 @@
 #include "exceptions.h"
 
 #include <stdio.h>
-#include "debug.h"
+#include "output.h"
 
 NoChainFoundException::NoChainFoundException() {
     msg = "No chain could be found.";

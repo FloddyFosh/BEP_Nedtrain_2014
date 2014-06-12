@@ -2,7 +2,7 @@
 
 #include "stjn.h"
 #include "tmsp.h"
-#include "debug.h"
+#include "output.h"
 
 node_t * cycle_node; // hier gedefinieerd
 

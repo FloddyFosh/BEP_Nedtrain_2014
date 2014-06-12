@@ -3,7 +3,7 @@
 #include "tmsp.h"
 #include "stjn.h"
 #include "esta_plus.h"
-#include "debug.h"
+#include "output.h"
 #include "heap.h"
 
 void print_hele_state();
