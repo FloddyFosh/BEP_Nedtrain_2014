@@ -22,7 +22,7 @@
 #include <sstream>
 
 #include "alles.h"
-#include "debug.h"
+#include "output.h"
 #include "tmsp.h"
 #include "chaining.h"
 #include "flexibility.h"

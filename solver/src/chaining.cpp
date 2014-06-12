@@ -1,8 +1,11 @@
 #include "chaining.h"
 
 #include "tmsp.h"
-#include "debug.h"
+#include "output.h"
 #include "exceptions.h"
+
+#define useHeuristic true
+#define useRandom true
 
 map<chainId, chain> chains;
 vector< activity* > activities;
@@ -41,7 +44,6 @@ chainId selectFirstChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
     for(it=chains.begin();it!=chains.end();it++){
         chainId id = it->first;
-        //inefficient; should only iterate over the correct resource
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
         if(curChain.size() == 0){
@@ -61,7 +63,6 @@ chainId selectEarliestChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
     for(it=chains.begin();it!=chains.end();it++){
         chainId id = it->first;
-        //inefficient; should only iterate over the correct resource
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
         if(curChain.size() == 0){
@@ -101,14 +102,17 @@ chainId selectRandomChain(int tr, int act, int res){
     throw NoChainFoundException();
 }
 
+//Uses heuristic found in [Generating Robust Partial Order Schedules, Policella 2004]
 void pushToBestChains(int tr, int act, int res){
     activity* curAct = A(tr,act);
     int req = Q(tr,act,res);
     if(!req) return;
-    chainId randomChain = selectFirstChain(tr,act,res);
-    list<activity*> acts = chains[randomChain].activities;
+    chainId selectedChain;
+    if(useRandom) selectedChain = selectRandomChain(tr,act,res);
+    else selectedChain = selectFirstChain(tr,act,res);
+    list<activity*> acts = chains[selectedChain].activities;
     activity* prevAct = acts.back();
-    pushToChain(curAct,&randomChain);
+    pushToChain(curAct,&selectedChain);
     req--;
 
     map<chainId, chain>::iterator it;
@@ -148,7 +152,6 @@ void pushToChain(activity* act, chainId* id){
     if(!chain->empty()){
         activity* chainEnd = chain->back();
         add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
-        output("PC: %d %d %d %d\n", chainEnd->i, chainEnd->j, act->i, act->j);
     }
     chain->push_back(act);
 }
@@ -220,24 +223,28 @@ bool chaining() {
     for(int i=0; i<tmsp->n_resources; i++){
         FOREACH(activities, it){
             activity* act = *it;
-            /*try{
-                pushToBestChains(act->i,act->j,i);
-            }
-            catch(NoChainFoundException &e){
-                e.showErrorMessage();
-                return false;
-            }*/
-
-            for(int m=0;m<Q(act->i,act->j,i);m++){
-                chainId id;
+            if(useHeuristic){
                 try{
-                    id = selectFirstChain(act->i,act->j,i);
+                    pushToBestChains(act->i,act->j,i);
                 }
                 catch(NoChainFoundException &e){
                     e.showErrorMessage();
                     return false;
                 }
-                pushToChain(act, &id);
+            }
+            else{
+                for(int m=0;m<Q(act->i,act->j,i);m++){
+                    chainId id;
+                    try{
+                        if(useRandom) id = selectRandomChain(act->i,act->j,i);
+                        else id = selectFirstChain(act->i,act->j,i);
+                    }
+                    catch(NoChainFoundException &e){
+                        e.showErrorMessage();
+                        return false;
+                    }
+                    pushToChain(act, &id);
+                }
             }
         }
         add_frame();

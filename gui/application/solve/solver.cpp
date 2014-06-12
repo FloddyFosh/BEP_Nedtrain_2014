@@ -280,8 +280,8 @@ void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    /*int minflex =*/ fields.takeFirst().toInt();
-    /*int flextotaal =*/ fields.takeFirst().toInt();
+    fields.takeFirst(); //minflex
+    fields.takeFirst(); //flextotaal
 
     int act_i = fields.takeFirst().toInt();
     while(act_i != -1){
