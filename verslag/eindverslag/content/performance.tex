@@ -1,0 +1,47 @@
+\section{Performance}
+In dit hoofdstuk een analyse van de looptijd van de solver. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
+\begin{itemize}
+    \item 10 resources, met elk 1 resource unit
+    \item 25 projecten, met elk tussen de 4 en de 6 activiteiten
+    \item 912 activiteiten, die elk gebruik maken van tussen de 1 en 5 resources
+
+\end{itemize}
+\begin{table}[H]
+\parbox{.45\linewidth}{
+    \centering
+    \label{tbl:xxl+output}
+    \begin{tabular}{| l | r | r |}
+        \hline
+                    & Looptijd ($s$)& Percentage ($\%$) \\
+        \hline
+        Parsing     & $0.012629$      & $0.0$   \\
+        STJN        & $0.002536$      & $0.0$   \\
+        ESTA$^+$    & $109.642634$    & $99.2$  \\
+        Chaining    & $0.587552$      & $0.5$   \\
+        LP          & $0.313129$      & $0.3$   \\
+        \hline \hline
+        Totaal      & $110.559147$    & $100.0$ \\
+        \hline
+    \end{tabular}
+    \caption{xxl-instance met output}
+}
+\hfill
+\parbox{.45\linewidth}{
+    \centering
+    \label{tbl:xxl+output}
+    \begin{tabular}{| l | r | r |}
+        \hline
+                    & Looptijd ($s$)& Percentage ($\%$) \\
+        \hline
+        Parsing     & $0.012075$      & $0.9$   \\
+        STJN        & $0.002895$      & $0.2$   \\
+        ESTA$^+$    & $1.083015$      & $76.8$  \\
+        Chaining    & $0.034146$      & $2.4$   \\
+        LP          & $0.277762$      & $19.7$  \\
+        \hline \hline
+        Totaal      & $1.410065$      & $100.0$ \\
+        \hline
+    \end{tabular}
+    \caption{xxl-instance zonder output}
+}
+\end{table}
