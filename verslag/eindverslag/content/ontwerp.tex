@@ -26,7 +26,7 @@ In bestaande versie van de NedTrain Planner bestond er al een communicatieprotoc
 \end{itemize}
 De nieuwe communicatieregels zijn nodig om de NedTrain Solver te laten communiceren met de nieuwe solver.
 \begin{itemize}
-    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Waarbij \texttt{<activiteiten>} een lijst is van activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}.
+    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Waarbij \texttt{<activiteiten>} een lijst is van \texttt{\#activiteiten} activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}.
     \item \texttt{CLEARSOFTPREC}: De syntax is \texttt{\textquoteleft CLEARSOFTPREC\textquoteright}.
     \item \texttt{FLEX}: Geeft een lijst van EST's en LST's waarmee de flexibiliteitsintervallen bepaald kunnen worden. De syntax is \texttt{\textquoteleft FLEX: <minflex> <flextotaal> <variabelen> -1\textquoteright}. Waarbij \texttt{-1} het einde van de lijst aangeeft en waarbij \texttt{<variabelen>} een lijst is van EST's en LST's met de syntax \texttt{\textquoteleft <projectID> <taakID> - <tijd>\textquoteright} voor de EST en \texttt{\textquoteleft <projectID> <taakID> + <tijd>\textquoteright} voor de LST.
 \end{itemize}
