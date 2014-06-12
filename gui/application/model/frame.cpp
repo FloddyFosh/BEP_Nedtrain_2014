@@ -1,17 +1,16 @@
 #include "frame.h"
-#include "instance.h"
 
-Frame::Frame() : isChain(false) {}//: usedProfile(0), selectedProfile(0) {}
+Frame::Frame() : isChain(false) {}
 
 QVector<Group *> Frame::getGroups() {
     return groups;
 }
 
-QList<QPoint*>* Frame::getUsedProfile() {
+QList<QPoint*>* Frame::getSelectedProfile() {
     return 0;
 }
 
-QList<QPoint*>* Frame::getSelectedProfile() {
+QList<QPoint*>* Frame::getUsedProfile() {
     return 0;
 }
 

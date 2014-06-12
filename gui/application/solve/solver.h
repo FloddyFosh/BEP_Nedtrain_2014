@@ -24,6 +24,9 @@ class Solver : public QObject
     int mutexJob;
     QVector<Frame *> replayFrames; ///< vector used for generating frames after solving
     QMap<Activity *, bool> wasLocked;
+
+    QMap<QPair<int, int>, int> estMap; ///< vector used for finding flexibility est after solving
+    QMap<QPair<int, int>, int> lstMap; ///< vector used for finding flexibility lst after solving
 public:
     /** Constructor, creates a Solver object that can be used to change settings or to
       * run specific solvers.
@@ -83,7 +86,7 @@ private:
     void processMutexLine(QByteArray &line);  ///< processes a mutex line outputted by the solver.
     void processChainLine(QByteArray &line); ///< processes a line that contains the list of activities of a chain, outputted by the solver.
     void eatRemainingOutput(QList<QByteArray> &fields); ///< processes unused output.
-    void setFlexGroups(QVector<Group *> groups);
+    void setFlexGroups(QVector<Group *> groups); ///< set the flexibility values in the group.
 
 signals:
     void progressMade(int progress); ///< emitted when a progress report is received from the solver, should be between 0 and 100

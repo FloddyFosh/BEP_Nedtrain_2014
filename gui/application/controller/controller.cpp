@@ -1,6 +1,6 @@
 #include <QStatusBar>
 #include <QAction>
-#include <QDebug>
+
 #include "controller/exceptions.h"
 #include "controller/instancecontroller.h"
 #include "widgets/dialogs/solvingprogressdialog.h"
@@ -37,7 +37,7 @@ InstanceWidget* Controller::getCurrentInstanceWidget() {
 }
 
 InstanceController * Controller::getCurrentInstanceController() {
-    return getCurrentInstanceWidget()->getInstanceController(); // TODO dit loopt raar
+    return getCurrentInstanceWidget()->getInstanceController();
 }
 
 Instance* Controller::getCurrentInstance() {

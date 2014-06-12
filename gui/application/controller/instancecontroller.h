@@ -9,6 +9,12 @@
 class InstanceController : public QObject {
     Q_OBJECT
 
+private:
+    Instance * instance;
+    InstanceWidget * instanceWidget;
+    Controller * controller;
+
+    Activity *selectedActivity;
 public:
     /** Constructor. Pass an instance object, the corresponding instance and the global controller.
       * @param instance instance
@@ -138,15 +144,11 @@ public:
      * @param timeout timeout
      */
     void setStatusMessage(QString message, int timeout = 0);
-
+    /**
+     * Set the scrollbars such that the resource is focused in the resourcewidget
+     * @param resId The id of the resource
+     */
     void focusResource(int resId);
-private:
-    Instance * instance;
-    InstanceWidget * instanceWidget;
-    Controller * controller;
-    
-    Activity *selectedActivity;
-
 public slots:
     void peak(int, int); ///< solvers peak signal is connected to this slot, it paints peaks in the resource profile.
 };

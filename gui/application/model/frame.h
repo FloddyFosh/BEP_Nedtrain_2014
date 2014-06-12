@@ -1,10 +1,11 @@
 #ifndef MODEL_STATE_H
 #define MODEL_STATE_H
 
-using namespace std;
+#include <QVector>
 
 #include "activity.h"
-#include "instance.h"
+
+using namespace std;
 
 /**
  * The Frame class stores all groups and all (est, lst) for each group and for each non-grouped activity.
@@ -13,11 +14,11 @@ using namespace std;
 class Frame {
 private:
     QVector<Group *> groups;
-    //QList<QPoint*>* usedProfile;
-    QList<QPoint*>* selectedProfile;
 public:
+    /**
+     * Constructs an empty Frame.
+     */
     Frame();
-    bool isChain;
 
     /**
      * Return groups belonging to this frame.
@@ -25,15 +26,35 @@ public:
      */
     QVector<Group *> getGroups();
 
-    virtual QList<QPoint*>* getUsedProfile();
-    virtual QList<QPoint*>* getSelectedProfile();
-    virtual Chain* getChain();
-
     /**
-     * add a group to this frame.
+     * Add a group to this frame.
      * @param g group to be added
      */
     void addGroup(Group * g);
+
+    /**
+     * Get the sub-profile which is selected in this frame for visualization.
+     * @return A list of Qpoints representing the profile
+     */
+    virtual QList<QPoint*>* getSelectedProfile();
+
+    /**
+     * Get the sub-profile which has been used so far for visualization.
+     * @return A list of Qpoints representing the profile
+     */
+    virtual QList<QPoint*>* getUsedProfile();
+
+    /**
+     * Get the chain which this frame is representing.
+     * @return the chain representing this frame
+     */
+    virtual Chain* getChain();
+
+    /**
+     * Returns if this frame is a ChainFrame.
+     * @return boolean
+     */
+    bool isChain;
 };
 
 #endif // MODEL_STATE_H
