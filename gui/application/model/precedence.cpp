@@ -35,6 +35,10 @@ set<int> Precedence::getFrameNrs() {
     return frameNumbers;
 }
 
+void Precedence::clearFrameNrs() {
+    frameNumbers.clear();
+}
+
 void Precedence::addFrameNr(int frameNr) {
     frameNumbers.insert(frameNr);
 }

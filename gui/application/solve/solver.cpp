@@ -88,19 +88,22 @@ void Solver::save() {
     settings.setValue("arguments", arguments);
 }
 
-bool Solver::start(Instance *p) {
-    instance = p;
-    replayFrames.clear();
-    wasLocked.clear();
+bool Solver::start(Instance *i) {
+    instance = i;
+
+    clearBeforeSolving();
+
     // Save first frame.
     Frame * first_frame (new Frame);
     foreach(Group * g, instance->getGroups()) {
-        first_frame->addGroup(g);
         foreach(Activity * a, g->getActivities()) {
             wasLocked[a] = g->isLocked();
         }
         if (not g->isLocked())
             g->setST(g->getEST());
+
+        g->setESTFlex(-1);
+        g->setLFTFlex(-1);
     }
     replayFrames.append(first_frame);
     
@@ -118,6 +121,24 @@ bool Solver::start(Instance *p) {
     process.closeWriteChannel();
 
     return true;
+}
+
+void Solver::clearBeforeSolving() {
+    replayFrames.clear();
+
+    lstMap.clear();
+    estMap.clear();
+    instance->clearFrames();
+    wasLocked.clear();
+    foreach(Resource* r, instance->getResources().values()) {
+        r->clearChains();
+    }
+    foreach(Precedence* p, instance->getHardPrecedences()) {
+        p->clearFrameNrs();
+    }
+    foreach(Precedence* p, instance->getSoftPrecedences()) {
+        p->clearFrameNrs();
+    }
 }
 
 void Solver::solverFinished(int x, QProcess::ExitStatus state) {

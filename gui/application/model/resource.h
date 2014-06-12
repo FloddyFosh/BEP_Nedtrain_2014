@@ -58,6 +58,11 @@ public:
     QMap<int,Chain*>* getChains();
 
     /**
+     * Clears the saved chains of this resource.
+     */
+    void clearChains();
+
+    /**
      * @param act Activity that will be added to following chain.
      * @param chain Chain that was selected by chaining algorithm.
      */
