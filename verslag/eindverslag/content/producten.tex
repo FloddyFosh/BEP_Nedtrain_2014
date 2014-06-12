@@ -3,18 +3,27 @@
 \subsection{Solver}
 
 \subsubsection*{Chaining}
-
+Het chaining algoritme, dat is ge\"introduceerd in [??], is ge\"implementeerd, waarbij een keuze is tussen drie verschillende methoden voor het selecteren van een chain, namelijk:
+\begin{itemize}
+\item Selecteer de eerst gevonden geschikte chain.
+\item Selecteer een willekeurige geschikte.
+\item Gebruik de heuristiek beschreven in \ref{subsec:probleemoplossing}.
+\end{itemize}
 
 \subsection*{Linear Programming}
-Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toegekende waarde.
+Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
 
 Hoe het toevoegen van rows gebeurt enzo...
 
 \subsection{Interface}
-- weergeven van chains
+Geblaat over interface...
+
+Zodra de solver klaar is met het vinden van een oplossing voor de huidige instantie, wordt deze oplossing als output gegeven en geparsed door de planner. Vervolgens worden in de interface voor elke resource eerst een frame met alle chains van deze resource en toegevoegd en daarna voor al deze chains een aparte frame.
+
 - weergeven van flexibiliteitsintervals
 - verschuiven van taken/resources
 - sluiten van instanties in tabjes (grote knop weg)
+- scrollen
 
 \subsection{Windows 7}
 Om de toegankelijkheid van de applicatie te vergroten, is ervoor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
