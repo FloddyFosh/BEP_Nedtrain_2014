@@ -3,9 +3,7 @@
 #include <stdio.h>
 #include "output.h"
 
-NoChainFoundException::NoChainFoundException() {
-    msg = "No chain could be found.";
-}
+NoChainFoundException::NoChainFoundException() : msg("No chain could be found.") {}
 
 void NoChainFoundException::showErrorMessage() {
     debug("%s\n", msg.c_str());

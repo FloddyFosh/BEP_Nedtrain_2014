@@ -42,11 +42,11 @@ void initializeChains(){
 
 chainId selectFirstChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end();it++){
+    for(it = chains.begin(); it != chains.end(); ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
+        if(curChain.empty()){
             return id;
         }
         activity* chainEnd = curChain.back();
@@ -60,11 +60,11 @@ chainId selectFirstChain(int tr, int act, int res){
 chainId selectRandomChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
     vector<chainId> possibleChains;
-    for(it=chains.begin();it!=chains.end();it++){
+    for(it = chains.begin(); it != chains.end(); ++it){
         chainId id = it->first;
-        if(id.resource!=res) continue;
+        if(id.resource != res) continue;
         list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
+        if(curChain.empty()){
             possibleChains.push_back(id);
             continue;
         }
@@ -95,7 +95,7 @@ void pushToBestChains(int tr, int act, int res){
     //Finds chains k where last(k) == prevAct,
     //because posting to such a chain will not create a new prec constraint
     map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end() && req>0;it++){
+    for(it = chains.begin(); it != chains.end() && req>0; ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -108,7 +108,7 @@ void pushToBestChains(int tr, int act, int res){
     }
 
     //Otherwise, post to other feasible chains
-    for(it=chains.begin();it!=chains.end() && req>0;it++){
+    for(it = chains.begin(); it != chains.end() && req>0; ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -137,11 +137,11 @@ void pushToChain(activity* act, chainId* id){
 }
 
 void add_frame() {
-    int i, j, k;
+    int k;
     output("STATE:");
     FOREACH(activities, it){
         activity* act = *it;
-        i = act->i, j = act->j;
+        int i = act->i, j = act->j;
         activity* a = A(i,j);
         output(" %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));
         output(" %d %d", act->i, act->j);

@@ -2,7 +2,7 @@ CFLAGS=-Wall
 LDLIBS=-LC:/GnuWin32/lib -lfl -lm
 LSOURCES=lex.l
 YSOURCES=grammar.ypp
-CSOURCES=debug.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp token.cpp chaining.cpp exceptions.cpp constraints.cpp flexibility.cpp
+CSOURCES=output.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp token.cpp chaining.cpp exceptions.cpp constraints.cpp flexibility.cpp
 HSOURCES=$(CSOURCES:.cpp=.h) includes.h
 OBJECTS=$(LSOURCES:.l=.o) $(YSOURCES:.ypp=.tab.o) $(CSOURCES:.cpp=.o)
 
@@ -16,7 +16,7 @@ EXTRALIB = `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pk
 all: solver
 
 solver: CFLAGS+=-g -O0 -DDEBUG
-solver: $(OBJECTS) main.o debug.o
+solver: $(OBJECTS) main.o output.o
 	g++ $(CFLAGS) $(EXTRAFLAG) -o $@ $^ $(LDLIBS) $(EXTRALIB)
 	
 solver.release: CFLAGS+=-O5
