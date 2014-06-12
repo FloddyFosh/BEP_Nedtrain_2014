@@ -37,8 +37,6 @@ public:
     void setAutoClearPrecedences(bool); ///< sets a flag which indicates whether added soft precedences should be cleared before solving.
     void setFramesSlider(QSlider *); ///< sets and connects the frame slider
     QSlider * getFramesSlider(); ///< @return the currently active frame slider
-    //void shadeActivities(int, int, Resource*); //
-    //void shadeResources(Job*);
     
     bool isPaintingFeasibleIntervals(); ///< @return true iff feasible intervals are being painted for activities and groups
     void setPaintingFeasibleIntervals(bool val); ///< @return indicates whether feasible intervals should be painted

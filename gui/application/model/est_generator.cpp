@@ -1,4 +1,5 @@
 #include "est_generator.h"
+
 #include "controller/instancecontroller.h"
 #include "frame.h"
 #include "chain.h"

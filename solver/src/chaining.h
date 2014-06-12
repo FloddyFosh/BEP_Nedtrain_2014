@@ -5,9 +5,6 @@
 
 #include "alles.h"
 
-#include "tmsp.h"
-#include "stjn.h"
-
 typedef struct chainId{
     int resource;
     int unit;
@@ -16,6 +13,9 @@ typedef struct chainId{
 typedef struct chain{
     list<activity*> activities;
 } chain;
+
+map<chainId, chain> chains;
+vector< activity* > activities;
 
 void initializeActivities();
 vector<activity*> getActivities();
