@@ -42,11 +42,11 @@ void initializeChains(){
 
 chainId selectFirstChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end();it++){
+    for(it = chains.begin(); it != chains.end(); ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
+        if(curChain.empty()){
             return id;
         }
         activity* chainEnd = curChain.back();
@@ -57,36 +57,14 @@ chainId selectFirstChain(int tr, int act, int res){
     throw NoChainFoundException();
 }
 
-chainId selectEarliestChain(int tr, int act, int res){
-    chainId* result = 0;
-    int curEST = INT_MAX;
-    map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end();it++){
-        chainId id = it->first;
-        if(id.resource!=res) continue;
-        list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
-            return id;
-        }
-        activity* chainEnd = curChain.back();
-        int newEST = chainEnd->est + chainEnd->duration + chainEnd->flex;
-        if(A(tr,act)->est >= newEST && newEST <= curEST){
-            result = &id;
-            curEST = newEST;
-        }
-    }
-    if(result==0) throw NoChainFoundException();
-    return *result;
-}
-
 chainId selectRandomChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
     vector<chainId> possibleChains;
-    for(it=chains.begin();it!=chains.end();it++){
+    for(it = chains.begin(); it != chains.end(); ++it){
         chainId id = it->first;
-        if(id.resource!=res) continue;
+        if(id.resource != res) continue;
         list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
+        if(curChain.empty()){
             possibleChains.push_back(id);
             continue;
         }
@@ -116,7 +94,7 @@ void pushToBestChains(int tr, int act, int res){
     req--;
 
     map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end() && req>0;it++){
+    for(it = chains.begin(); it != chains.end() && req>0; ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -128,7 +106,7 @@ void pushToBestChains(int tr, int act, int res){
         }
     }
 
-    for(it=chains.begin();it!=chains.end() && req>0;it++){
+    for(it = chains.begin(); it != chains.end() && req>0; ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -159,11 +137,11 @@ void pushToChain(activity* act, chainId* id){
 //Creates a frame of the current state of the program to be displayed in the GUI.
 //This frame includes EST, LST of every activity/group and each precedence constraint posted after the previous frame.
 void add_frame() {
-    int i, j, k;
+    int k;
     output("STATE:");
     FOREACH(activities, it){
         activity* act = *it;
-        i = act->i, j = act->j;
+        int i = act->i, j = act->j;
         activity* a = A(i,j);
         output(" %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));
         output(" %d %d", act->i, act->j);
