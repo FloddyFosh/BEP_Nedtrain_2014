@@ -40,7 +40,7 @@ int getFlexibility() {
 }
 
 void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
-    // -DBL_MAX = -inf en DBL_MAX = +inf
+    // -DBL_MAX = -inf and DBL_MAX = +inf
     // set coefficients
     for(int i = 0; i < n_cols; i++) {
         model->setObjectiveCoefficient(i, 0.0);

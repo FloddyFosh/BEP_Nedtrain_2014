@@ -34,7 +34,7 @@ void initializeChains(){
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             chainId newId = {r_i,u_j};
-            chain newChain = {{}};
+            chain newChain = {};
             chains[newId] = newChain;
         }
     }
@@ -55,28 +55,6 @@ chainId selectFirstChain(int tr, int act, int res){
         }
     }
     throw NoChainFoundException();
-}
-
-chainId selectEarliestChain(int tr, int act, int res){
-    chainId* result = 0;
-    int curEST = INT_MAX;
-    map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end();it++){
-        chainId id = it->first;
-        if(id.resource!=res) continue;
-        list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
-            return id;
-        }
-        activity* chainEnd = curChain.back();
-        int newEST = chainEnd->est + chainEnd->duration + chainEnd->flex;
-        if(A(tr,act)->est >= newEST && newEST <= curEST){
-            result = &id;
-            curEST = newEST;
-        }
-    }
-    if(result==0) throw NoChainFoundException();
-    return *result;
 }
 
 chainId selectRandomChain(int tr, int act, int res){
@@ -102,7 +80,6 @@ chainId selectRandomChain(int tr, int act, int res){
     throw NoChainFoundException();
 }
 
-//Uses heuristic found in [Generating Robust Partial Order Schedules, Policella 2004]
 void pushToBestChains(int tr, int act, int res){
     activity* curAct = A(tr,act);
     int req = Q(tr,act,res);
@@ -115,6 +92,8 @@ void pushToBestChains(int tr, int act, int res){
     pushToChain(curAct,&selectedChain);
     req--;
 
+    //Finds chains k where last(k) == prevAct,
+    //because posting to such a chain will not create a new prec constraint
     map<chainId, chain>::iterator it;
     for(it=chains.begin();it!=chains.end() && req>0;it++){
         chainId id = it->first;
@@ -128,6 +107,7 @@ void pushToBestChains(int tr, int act, int res){
         }
     }
 
+    //Otherwise, post to other feasible chains
     for(it=chains.begin();it!=chains.end() && req>0;it++){
         chainId id = it->first;
         if(id.resource!=res) continue;
@@ -156,8 +136,6 @@ void pushToChain(activity* act, chainId* id){
     chain->push_back(act);
 }
 
-//Creates a frame of the current state of the program to be displayed in the GUI.
-//This frame includes EST, LST of every activity/group and each precedence constraint posted after the previous frame.
 void add_frame() {
     int i, j, k;
     output("STATE:");
