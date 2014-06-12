@@ -1,5 +1,5 @@
 #include "alles.h"
-#include "debug.h"
+#include "output.h"
 
 #include <fstream>
 

@@ -39,9 +39,9 @@ public:
     QSlider * getFramesSlider(); ///< @return the currently active frame slider
     
     bool isPaintingFeasibleIntervals(); ///< @return true iff feasible intervals are being painted for activities and groups
-    void setPaintingFeasibleIntervals(bool val); ///< @return indicates whether feasible intervals should be painted
+    void setPaintingFeasibleIntervals(bool val); ///< indicates whether feasible intervals should be painted
     bool isPaintingFlexibilityIntervals(); ///< @return true iff flexibility intervals are being painted for activities and group
-    void setPaintingFlexibilityIntervals(bool val); ///< @return indicates whether flexibility intervals should be painted
+    void setPaintingFlexibilityIntervals(bool val); ///< indicates whether flexibility intervals should be painted
     void setFlexTimes();
 
     void solve(Solver *); ///< solves the currently visible instance with the given solver

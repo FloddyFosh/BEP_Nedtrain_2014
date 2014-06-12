@@ -10,14 +10,118 @@ Een formele definitie van RCPSP kan nu als volgt opgesteld worden:
 Een verzameling projecten $P = \{p_1, \dots ,p_n\}$ met voor elk project $p_a$ een starttijd $rs_a$, een deadline $dl_a$ en een verzameling activiteiten $V_a = \{v_{a,1},\dots ,v_{a,m}\}$ met voor elke activiteit $v_{a,b}$ een tijdsduur $d_{a,b}$. Daarnaast een verzameling van voorrangsrelaties $E \subseteq V \times V = \{(v_{a,b},v_{c,d}) | v_{a,b} \in V_a \wedge v_{c,d} \in V_c \wedge p_a,p_c \in P \}$, een verzameling van $w$ resources $R = \{r_1, \dots ,r_w\}$ met voor elke resource $r_i$ een eindige capaciteit $cap(r_i)$, en voor elke activiteit $v_{a,b} \in \bigcup_{\{p_a \in P\}} V_a$ een hoeveelheid van resource $r_k \in R$ die nodig is, $req(v_{a,b},r_k)$.
 
 \textbf{Vind:}\\
-Een doenlijk schema $S = \{s_1,\dots ,s_m\}$ bestaande uit starttijden $s_{a,b}$ voor elke activiteit $v_{a,b} \in \bigcup_{\{p_a \in P\}} V_a$, zodat $rs_a \leq s_{a,b} \wedge s_{a,b} + d_{a,b} \leq dl_a$, waarbij voor elke voorrangsrelatie $(v_{a,b},v_{c,d}) \in E$ geldt dat $s_{a,b} + d_{a,b} \leq s_{c,d}$. Bovendien mag geen enkele resource capaciteit overschreden worden, wat inhoudt dat $\forall r_i \in R$ en $\forall t \in \mathbb{R}$ geldt dat $\Sigma _{\{v_{a,b} \in \bigcup_{\{p_a \in P\}} V_a | s_{a,b} \leq t \leq s_{a,b} + d_{a,b}\}} req(v_{a,b},r_i) \leq cap(r_i)$.
+Een doenlijk schema $S = \{s_1,\dots ,s_m\}$ bestaande uit starttijden $s_{a,b}$ voor elke activiteit $v_{a,b} \in \bigcup_{\{p_a \in P\}} V_a$, zodat $rs_a \leq s_{a,b} \wedge s_{a,b} + d_{a,b} \leq dl_a$, waarbij voor elke voorrangsrelatie $(v_{a,b},v_{c,d}) \in E$ geldt dat $s_{a,b} + d_{a,b} \leq s_{c,d}$. Bovendien mag op geen enkel tijdstip de capaciteit van een resource overschreden worden, wat inhoudt dat $\forall r_i \in R$ en $\forall t \in \mathbb{R}$ geldt dat $\Sigma _{\{v_{a,b} \in \bigcup_{\{p_a \in P\}} V_a | s_{a,b} \leq t \leq s_{a,b} + d_{a,b}\}} req(v_{a,b},r_i) \leq cap(r_i)$.
 
 \subsection{Flexibiliteit}
 Omdat de huidige software al een oplossing voor het RCPSP kan vinden, is aan ons de taak om deze oplossing flexibeler te maken. Daarvoor moet dus eerst de flexibiliteit van een schema gedefini\"eerd worden. Hiervoor zal de flexibiliteitsmaat van Wilson \emph{et al.} \cite{wilson2013flexibility} gebruikt worden, omdat deze maat er ook rekening mee houdt dat een schema minder flexibel wordt door het toevoegen van voorrangsrelaties. Om deze te berekenen, moet voor elke activiteit $v_{a,b}$ een interval $[l_v,u_v]$ berekend worden, zodat elke activiteit in zijn eigen interval verschoven kan worden, zonder dat daardoor andere activiteiten verplaatst hoeven te worden. Dit houdt dus in dat de verzameling van intervallen $I_S = \{I_v = [l_v,u_v] | v \in \bigcup_{p_a \in P} V_a\}$ voldoet desda voor elke $v \in \bigcup_{p_a \in P} V_a$ en voor elke $t_v \in [l_v,u,v]$, een toewijzijng van starttijd $t_v$ aan activiteit $v$ een consistent schema oplevert.
 
-...
-
 \subsection{Oplossing}
+\label{subsec:probleemoplossing}
 In de bestaande software was al een algoritme ge\"implementeerd dat een doenlijk schema kan vinden door middel van het ESTA$^+$ algoritme \cite{ronaldevers2010}.
 Dit algoritme lost het RCPSP op door het vinden en oplossen van \emph{contention peaks}, plekken in het resource profiel waar er meer resource units gebruikt worden dan er beschikbaar zijn. Deze worden veroorzaakt doordat er te veel activeiten die dezelfde resource gebruiken tegelijk uitgevoerd worden en kunnen opgelost worden door tussen minstens 1 paar van deze activiteiten een voorrangsrelatie toe te voegen. Het $ESTA^+$ algoritme levert als oplossing voor elke activiteit een starttijd, zodat het gehele schema consistent is. Als er met activiteiten geschoven wordt, kan het schema echter nog wel inconsistent worden.
 
+\subsubsection*{Chaining}
+Om onafhankelijke flexibiliteitsintervallen te kunnen bepalen, moeten activiteiten echter vrij verschoven kunnen worden. Hier kan het chaining algoritme voor zorgen. Dit algoritme wijst aan elke resource unit een zogenaamde chain, een gesorteerde lijst van activiteiten, toe. In een chain geldt voor elk paar opeenvolgende activiteiten, $v_{a,b}$ en $v_{c,d}$, dat er een voorrangsrelatie $v_{a,b} \prec v_{c,d}$ bestaat. De output van het chaining algoritme bestaat uit een \emph{Partial Order Schedule (POS)}, wat een schema is waarvoor geldt dat elk schema dat qua tijdsconstraints consistent is, ook consistent is met de resource constraints. Het exact chaining algoritme is weergegeven in Figuur \ref{alg:chaining}.
+
+\begin{algorithm}
+\caption{Chaining \cite{policella2007precedence}}
+\label{alg:chaining}
+\textbf{Input:} A problem P and one of its fixed-times schedules $S$ \\
+\textbf{Output:} A partial order solution $POS^{ch}$
+\begin{algorithmic}[1]
+  \Function{Chaining}{$P, S$}
+    \Let{$POS^{ch}$}{$P$}
+    \State Sort all the activities according to their start times in $S$  
+    \State Initialize all the chains empty
+    \For{\textbf{each} resource $r_j$}
+      \For{\textbf{each} activity $v_i$}
+        \For{$1$ \textbf{to} $req_{ij}$}
+          \Let{$k$}{$SelectChain(v_i,r_j)$}
+          \Let{$v_k$}{$last(k)$}
+          \State{$AddConstraint(POS^{ch},v_k \prec v_i)$}
+          \Let{$last(k)$}{$v_i$}
+        \EndFor
+      \EndFor
+    \EndFor
+    \State{\Return{$POS^{ch}$}}
+  \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+In de functie $SelectChain(v_i,r_j)$ wordt een chain gekozen waar activiteit $v_i$ aan toegevoegd zal worden. Een simpele, voor de hand liggende methode is om een activiteit gelijk aan een chain toe te voegen als er een geschikte chain gevonden is. Een chain is geschikt voor een activiteit $v_i$ als de eindtijd van het laatste element van de chain, $v_k$, eerder is dan de starttijd van $v_i$, dus $s_k + d_k \leq s_i$. Er kan ook voor gekozen worden om een willekeurige chain te selecteren. Hiervoor moeten eerst alle geschikte chains gevonden worden, en wordt er vervolgens uit deze verzameling een willekeurig element gekozen. Tenslotte is er ook in \cite{policella2004generating} een heuristiek voorgesteld die probeert om het aantal voorrangsrelaties tussen activiteiten uit verschillende chains te minimalizeren. Deze heuristiek, weergegeven in \ref{alg:selectchain1}, selecteert voor een activiteit eerst een willekeurige chain $k$  en voegt dan een voorrangsrelatie toe tussen $v_i$ en het laatste element van $k$, $last(k)$. Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst geprobeerd om $v_i$ aan chains toe te voegen die ook $last(k)$ als laatste element hebben, omdat er dan geen nieuwe voorrangsrelatie toegevoegd hoeft te worden. De voorrangsrelatie $v_i \prec last(k)$ bestaat immers al. Hierna komen pas andere chains, die $last(k)$ niet als laatste element hebben, in aanmerking voor activiteit $v_i$.
+
+\begin{algorithm}
+\caption{SelectChain Heuristiek \cite{policella2004generating}}
+\label{alg:selectchain1}
+\textbf{Input:} Een probleeminstantie $P$, een activiteit $v_i$ en een resource $r_j$. \\
+\begin{algorithmic}[1]
+  \Function{SelectChain}{$P, v_i, r_j$}
+    \State Selecteer een willekeurige geschikte chain $k$
+    \State{$AddConstraint(P,v_k \prec v_i)$}
+    \If{$req(v_i,r_j) > 0$}
+    		\Let{$C_k, \overline{C_k}$}{$\emptyset$}
+    		\For{\textbf{each} chain $c$}
+    			\If{$last(c) == last(k)$}
+    				\Let{$C_k$}{$C_k \cup c$}
+    			\Else
+    				\Let{$\overline{C_k}$}{$\overline{C_k} \cup c$}
+    			\EndIf
+    		\EndFor
+    		\For{$req = req(v_i,r_j)-1 \dots 0$}
+    			\If{$C_k \neq \emptyset$}
+    				\Let{$v_k$}{willekeurig element in $C_k$}
+    				\State{$AddConstraint(P,v_k \prec v_i)$}
+    				\Let{$C_k$}{$C_k - v_k$}
+    			\Else
+    				\Let{$v_k$}{willekeurig element in $\overline{C_k}$}
+    				\State{$AddConstraint(P,v_k \prec v_i)$}
+    				\Let{$\overline{C_k}$}{$\overline{C_k} - v_k$}
+    			\EndIf
+    		\EndFor
+    	\EndIf
+  \EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection*{Linear Programming}
+Nu alle constraints door het chaining algoritme aan het model zijn toegevoegd, kan de flexibiliteit van het schema worden geoptimaliseerd, door de probleeminstantie om te zetten naar een Linear Programming probleem (LP-probleem). Dit probleem kan in polynomiale tijd opgelost worden door middel van een LP-solver.
+
+De flexibiliteit van een taak $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd (l.s.t.) en $t^-$ de eerste starttijd (e.s.t.) van een taak $t$ is. De flexibiliteit van het hele schema wordt gemeten door de som van de flexibiliteit van alle taken $t \in T$ te nemen, zoals in formule \ref{eq:flex} is weergegeven. 
+
+\begin{align}
+\label{eq:flex}
+    flex_{totaal} = \sum_{t \in T} (t^+ - t^-)
+\end{align}
+
+Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelijkertijd wordt voldaan aan de constraints $(t - t' \leq c) \in C$. Ook mag de e.s.t. niet na de l.s.t. zijn ($t^- \leq t^+ \Rightarrow 0 \leq t^+ - t^-$). Hieruit volgt het LP-probleem zoals in formule \ref{eq:flexLP} staat.
+
+\begin{align}
+\label{eq:flexLP}
+\begin{aligned}
+        \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
+ \text{subject to:}& \quad 0 \leq t^+ - t^- & \forall t \in T \\
+                   & \quad t^+ - t^- \leq c & \forall (t^+ - t^{'-} \leq c) \in C
+\end{aligned}
+\end{align}
+
+Het nadeel van de formulering in formule \ref{eq:flexLP}, is dat de flexibiliteit  niet netjes verdeeld hoeft te zijn over de taken. Wij hebben gezien dat CLP meestal de flexibiliteit juist heel slecht verdeelt. Met het LP-probleem, zoals in formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit $min$ gemaximaliseerd. Vervolgens wordt met LP-probleem, zoals in formule \ref{eq:flexsecondLP} staat, de totale flexibiliteit gemaximaliseerd. Dit is eigenlijk hetzelfde als in formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
+
+\begin{align}
+\label{eq:flexfirstLP}
+\begin{aligned}
+        \text{max:}& \quad min & \\
+ \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+                   & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
+\end{aligned}
+\end{align}
+
+\begin{align}
+\label{eq:flexsecondLP}
+\begin{aligned}
+        \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
+ \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+                   & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
+\end{aligned}
+\end{align}
+
+Door het toevoegen van de nieuwe constraint $min \leq t^+ - t^-$, kan het zijn dat de totale flexibiliteit $flex_{totaal}$ minder is dan bij het gebruik van formule \ref{eq:flexLP}, maar nu is de flexibiliteit wel beter verdeeld.

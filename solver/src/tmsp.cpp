@@ -1,6 +1,7 @@
 #include "alles.h"
 
 #include "tmsp.h"
+#include "output.h"
 
 vector<activity *> nodesInVolgordeVanInput;
 
@@ -71,9 +72,12 @@ void add_precedence(int i1, int j1, int i2, int j2) {
 	p->j1 = j1;
 
 	p->i2 = i2;
-	p->j2 = j2;
-
-	list_append(tmsp->precedences, p);
+    p->j2 = j2;
+    vector<precedence*>::iterator findIter = find(tmsp->precedences.begin(), tmsp->precedences.end(), p);
+    if(findIter == tmsp->precedences.end()){
+        list_append(tmsp->precedences, p);
+        output("PC: %d %d %d %d\n", i1, j1, i2, j2);
+    }
 }
 
 void add_flex(int i, int j, int duration) {

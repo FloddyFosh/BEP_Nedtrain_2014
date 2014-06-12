@@ -37,4 +37,5 @@ Datum      | Uren   | Beschrijving
 06-06-2014 | 7      | 
 09-06-2014 | 5      | Knopje [Paint Flex Intervals] erbij gemaakt met functionaliteit.
 10-06-2014 | 7      | Flexibiliteitsintervallen feature verbeterd, zodat er geen bugs optreden bij het verplaatsen en verkleinen/vergroten van activiteiten.
-11-06-2014 | 7      | Userstories en sprintreview schrijven
+11-06-2014 | 7      | Userstories, sprintreview en eindverslag schrijven
+12-06-2014 | 7      | Eindverslag en met cppcheck code inspecteren/verbeteren.

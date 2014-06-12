@@ -1,7 +1,7 @@
 #include "alles.h"
 
 #include "timing.h"
-#include "debug.h"
+#include "output.h"
 
 vector<timing_info *> timings;
 struct timeval* tv_end = 0;

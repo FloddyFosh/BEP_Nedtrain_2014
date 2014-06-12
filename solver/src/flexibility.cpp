@@ -22,7 +22,7 @@
 #include <sstream>
 
 #include "alles.h"
-#include "debug.h"
+#include "output.h"
 #include "tmsp.h"
 #include "chaining.h"
 #include "flexibility.h"
@@ -31,16 +31,8 @@ using namespace std;
 
 int minflex = 0, flextotaal = 0;
 
-int getMinFlex() { 
-    return minflex;
-}
-
-int getFlexibility() {
-    return flextotaal;
-}
-
 void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
-    // -DBL_MAX = -inf en DBL_MAX = +inf
+    // -DBL_MAX = -inf and DBL_MAX = +inf
     // set coefficients
     for(int i = 0; i < n_cols; i++) {
         model->setObjectiveCoefficient(i, 0.0);
@@ -91,7 +83,7 @@ void changeType1Constraints(ClpSimplex* model, int n_cols) {
         deleteWhich[i] = i;
     }
     model->deleteRows(n_cols/2, deleteWhich);
-    delete deleteWhich;
+    delete[] deleteWhich;
 
     // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
@@ -182,7 +174,7 @@ void printSolution(map<string, int>* solution) {
     while(iter != solution->end()) {
         output("%s %d ", iter->first.c_str(), iter->second);
         cdebug("[%s] = %d\n", iter->first.c_str(), iter->second);
-        iter++;
+        ++iter;
     }
 	output("-1\n");
 }

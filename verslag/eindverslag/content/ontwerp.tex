@@ -1,7 +1,8 @@
 \section{Ontwerp}
+\subsection{Solver}
 Als de gebruiker op de knop 'solve' drukt wordt onze solver aangeroepen, deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de tool, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
 
-De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan hebben wij ook niets veranderd. Het chaining algoritme uitgelegt in [??] hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost deze vervolgens op met COIN LP (Clp). 
+De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan hebben wij ook niets veranderd. Het chaining algoritme, uitgelegd in [??], hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost deze vervolgens op met COIN LP (Clp). 
 
 \newpage
 \begin{figure}[H]
@@ -10,3 +11,22 @@ De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, 
 \input{../images/sequence-diagram}
 \caption{Sequencediagram} 
 \end{figure}
+
+\newpage
+\subsection{Communicatie}
+In bestaande versie van de NedTrain Planner bestond er al een communicatieprotocol voor communicatie tussen de NedTrain Planner en de bestaande solver. Deze communicatieregels worden ook gebruikt door de nieuwe solver \cite{bep2012nedtrain}.
+\begin{itemize}
+    \item \texttt{PROGRESS}: geeft een indicatie (in procenten) van de voortgang van het solveproces. De syntax is \texttt{\textquoteleft PROGRESS: <percentage>\textquoteright}.
+    \item \texttt{ERROR}: geeft bericht van een interne fout in de solver (een invariant tijdens het solve proces blijkt niet waar te zijn). Dit zou niet mogen optreden.
+    \item Een bericht of de instantie succesvol is opgelost. Dit is een regel \texttt{\textquoteleft Instance solved.\textquoteright} of \texttt{\textquoteleft Instance not solved.\textquoteright}.
+    \item \texttt{PC}: duidt aan dat een precedence constraint gepost wordt. De syntax is als volgt: \texttt{\textquoteleft PC: <i1> <j1> <i2> <j2>\textquoteright}, waarbij \texttt{<i1> <j1>} de voorgaangde taak aanduidt, en \texttt{<i2> <j2>} de opvolgende taak.
+    \item \texttt{STATE}: Geeft een beschrijving van de huidige verzameling groepen (partitie in groepen van de taken) in de solver en de huidige EST en LST van elke groep. De syntax is \texttt{\textquoteleft STATE: <groepen> -1\textquoteright}, waarbij \texttt{-1} als scheidingsteken wordt gebruikt. Het \texttt{<groepen>} blok bevat de specificaties van groepen. Specificatie per groep begint met \texttt{<treinID> <EST> <LST> <\#taken>}. Daarna volgen \texttt{\#taken} taken, aangeduid met \texttt{<projectID>} \\ \texttt{<taakID>}.
+    \item \texttt{PEAK}: Deze regel wordt geprint als het solven niet gelukt is, omdat er aan het einde een contention peak was die niet geresolved kon worden. Het formaat is \texttt{\textquoteleft PEAK:\textquoteright \ <time> <resource> <capacity> <lijst taken en groepen> \textquoteleft -1\textquoteright}. Eerst wordt aangegeven waar de peak zich bevindt en de capaciteit. Elke taak of groep wordt gerepresenteerd met \texttt{<treinID> <taakID>}. Voor groepen geldt dat een van de taken die in de groep zitten wordt gegeven als representant. Vanuit de laatste \texttt{STATE} kan worden afgeleid welke groep bedoeld wordt. Deze peak kan door het planprogramma worden gevisualiseerd.
+    \item \texttt{MUTEX}: Deze regel wordt geprint als het solven niet gelukt is, omdat er niet kon worden voldaan aan de eis dat wederzijdse uitsluiting moet gelden. Het formaat is hetzelfde als bij \texttt{PEAK}.
+\end{itemize}
+De nieuwe communicatieregels zijn nodig om de NedTrain Solver te laten communiceren met de nieuwe solver.
+\begin{itemize}
+    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Waarbij \texttt{<activiteiten>} een lijst is van \texttt{\#activiteiten} activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}. Dit wordt gebruikt om in de GUI de constraints te laten zien die door chaining toegevoegd zijn. Als op deze manier een chain wordt geprint, wordt deze aan het laatste frame toegevoegd.
+    \item \texttt{CLEARSOFTPREC}: Als op een regel enkel \texttt{\textquoteleft CLEARSOFTPREC\textquoteright} geprint wordt, worden alle constraints die niet bij de instantie horen, weggehaald. Dit wordt door het chaining algoritme gebruikt, omdat de constraints van het ESTA$^+$-algoritme niet nodig zijn voor chaining. Door het weghalen hiervan, vermindert dus het totaal aantal constraints.
+    \item \texttt{FLEX}: Geeft een lijst van EST's en LST's waarmee de flexibiliteitsintervallen bepaald kunnen worden. De syntax is \texttt{\textquoteleft FLEX: <minflex> <flextotaal> <variabelen> -1\textquoteright}. Waarbij \texttt{-1} het einde van de lijst aangeeft en waarbij \texttt{<variabelen>} een lijst is van EST's en LST's met de syntax \texttt{\textquoteleft <projectID> <taakID> - <tijd>\textquoteright} voor de EST en \texttt{\textquoteleft <projectID> <taakID> + <tijd>\textquoteright} voor de LST.
+\end{itemize}

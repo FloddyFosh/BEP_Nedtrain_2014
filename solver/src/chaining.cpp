@@ -1,8 +1,11 @@
 #include "chaining.h"
 
 #include "tmsp.h"
-#include "debug.h"
+#include "output.h"
 #include "exceptions.h"
+
+#define useHeuristic true
+#define useRandom true
 
 map<chainId, chain> chains;
 vector< activity* > activities;
@@ -31,7 +34,7 @@ void initializeChains(){
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             chainId newId = {r_i,u_j};
-            chain newChain = {{}};
+            chain newChain = {};
             chains[newId] = newChain;
         }
     }
@@ -39,12 +42,11 @@ void initializeChains(){
 
 chainId selectFirstChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end();it++){
+    for(it = chains.begin(); it != chains.end(); ++it){
         chainId id = it->first;
-        //inefficient; should only iterate over the correct resource
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
+        if(curChain.empty()){
             return id;
         }
         activity* chainEnd = curChain.back();
@@ -55,37 +57,14 @@ chainId selectFirstChain(int tr, int act, int res){
     throw NoChainFoundException();
 }
 
-chainId selectEarliestChain(int tr, int act, int res){
-    chainId* result = 0;
-    int curEST = INT_MAX;
-    map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end();it++){
-        chainId id = it->first;
-        //inefficient; should only iterate over the correct resource
-        if(id.resource!=res) continue;
-        list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
-            return id;
-        }
-        activity* chainEnd = curChain.back();
-        int newEST = chainEnd->est + chainEnd->duration + chainEnd->flex;
-        if(A(tr,act)->est >= newEST && newEST <= curEST){
-            result = &id;
-            curEST = newEST;
-        }
-    }
-    if(result==0) throw NoChainFoundException();
-    return *result;
-}
-
 chainId selectRandomChain(int tr, int act, int res){
     map<chainId, chain>::iterator it;
     vector<chainId> possibleChains;
-    for(it=chains.begin();it!=chains.end();it++){
+    for(it = chains.begin(); it != chains.end(); ++it){
         chainId id = it->first;
-        if(id.resource!=res) continue;
+        if(id.resource != res) continue;
         list<activity*> curChain = it->second.activities;
-        if(curChain.size() == 0){
+        if(curChain.empty()){
             possibleChains.push_back(id);
             continue;
         }
@@ -105,14 +84,18 @@ void pushToBestChains(int tr, int act, int res){
     activity* curAct = A(tr,act);
     int req = Q(tr,act,res);
     if(!req) return;
-    chainId randomChain = selectFirstChain(tr,act,res);
-    list<activity*> acts = chains[randomChain].activities;
+    chainId selectedChain;
+    if(useRandom) selectedChain = selectRandomChain(tr,act,res);
+    else selectedChain = selectFirstChain(tr,act,res);
+    list<activity*> acts = chains[selectedChain].activities;
     activity* prevAct = acts.back();
-    pushToChain(curAct,&randomChain);
+    pushToChain(curAct,&selectedChain);
     req--;
 
+    //Finds chains k where last(k) == prevAct,
+    //because posting to such a chain will not create a new prec constraint
     map<chainId, chain>::iterator it;
-    for(it=chains.begin();it!=chains.end() && req>0;it++){
+    for(it = chains.begin(); it != chains.end() && req>0; ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -124,7 +107,8 @@ void pushToBestChains(int tr, int act, int res){
         }
     }
 
-    for(it=chains.begin();it!=chains.end() && req>0;it++){
+    //Otherwise, post to other feasible chains
+    for(it = chains.begin(); it != chains.end() && req>0; ++it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -148,19 +132,16 @@ void pushToChain(activity* act, chainId* id){
     if(!chain->empty()){
         activity* chainEnd = chain->back();
         add_precedence(chainEnd->i, chainEnd->j, act->i, act->j);
-        output("PC: %d %d %d %d\n", chainEnd->i, chainEnd->j, act->i, act->j);
     }
     chain->push_back(act);
 }
 
-//Creates a frame of the current state of the program to be displayed in the GUI.
-//This frame includes EST, LST of every activity/group and each precedence constraint posted after the previous frame.
 void add_frame() {
-    int i, j, k;
+    int k;
     output("STATE:");
     FOREACH(activities, it){
         activity* act = *it;
-        i = act->i, j = act->j;
+        int i = act->i, j = act->j;
         activity* a = A(i,j);
         output(" %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));
         output(" %d %d", act->i, act->j);
@@ -220,24 +201,28 @@ bool chaining() {
     for(int i=0; i<tmsp->n_resources; i++){
         FOREACH(activities, it){
             activity* act = *it;
-            /*try{
-                pushToBestChains(act->i,act->j,i);
-            }
-            catch(NoChainFoundException &e){
-                e.showErrorMessage();
-                return false;
-            }*/
-
-            for(int m=0;m<Q(act->i,act->j,i);m++){
-                chainId id;
+            if(useHeuristic){
                 try{
-                    id = selectFirstChain(act->i,act->j,i);
+                    pushToBestChains(act->i,act->j,i);
                 }
                 catch(NoChainFoundException &e){
                     e.showErrorMessage();
                     return false;
                 }
-                pushToChain(act, &id);
+            }
+            else{
+                for(int m=0;m<Q(act->i,act->j,i);m++){
+                    chainId id;
+                    try{
+                        if(useRandom) id = selectRandomChain(act->i,act->j,i);
+                        else id = selectFirstChain(act->i,act->j,i);
+                    }
+                    catch(NoChainFoundException &e){
+                        e.showErrorMessage();
+                        return false;
+                    }
+                    pushToChain(act, &id);
+                }
             }
         }
         add_frame();

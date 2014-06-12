@@ -11,7 +11,7 @@
 #include "stjn.h"
 #include "esta_plus.h"
 #include "timing.h"
-#include "debug.h"
+#include "output.h"
 #include "flexibility.h"
 #include "chaining.h"
 
