@@ -31,7 +31,6 @@ template<class T>void pv(T a,T b){FORIT(a,b,it)cout<<*it<<" ";cout<<endl;}
 #include <string.h>
 #include <stdio.h>
 
-#include <stdio.h>
 #include <stdarg.h>
 
 #include <limits.h>

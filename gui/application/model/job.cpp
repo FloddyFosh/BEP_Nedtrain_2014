@@ -67,6 +67,10 @@ int Job::dueDate() const {
     return _due_date;
 }
 
+int Job::duration() {
+    return dueDate()-releaseDate();
+}
+
 Instance *Job::instance() const {
     return _instance;
 }

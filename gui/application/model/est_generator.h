@@ -11,23 +11,25 @@ class InstanceController;
  */
 class EST_Generator
 {
+private:
+    InstanceController * controller;///< the controller of the instance which is managed
 public:
     /**
      * Constructor.
      * @param controller the controller of the instance
      */
     EST_Generator (InstanceController * controller);
+
     /**
      * Updates the instance to a particular frame.
      * @param frameNr the frame number to go to
      */
     void gotoFrame(int frameNr);
+
     /**
      * Returns a list of precedences which were added in the specified frame number.
      * @param frameNr frame number
      */
     QList<Precedence *> getAdded(int frameNr);
-private:
-    InstanceController * controller;///< the controller of the instance which is managed
 };
 #endif // EST_GENERATOR_H

@@ -3,9 +3,6 @@
 
 #include "alles.h"
 
-#include "tmsp.h"
-#include "stjn.h"
-
 extern int leveling_constraints_before_chaining;
 
 typedef struct peak_t {

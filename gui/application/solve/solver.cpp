@@ -163,11 +163,7 @@ void Solver::solverReadOutput() {
            instance->clearSoftPrecedences();
         } else if (line.startsWith("CHAIN: ")) {
             processChainLine(line);
-        }
-        else if(line.startsWith("FLEX: ")) {
-            //processFlexLines(line);
-        }
-        else if(line.startsWith("Instance solved")) {
+        } else if(line.startsWith("Instance solved")) {
                 setSolved(true);
         } else if(line.startsWith("Instance not solved")) {
                 setSolved(false);
@@ -280,15 +276,12 @@ void Solver::processPeakLine(QByteArray &line) {
     eatRemainingOutput(fields);
 }
 
-QMap<QPair<int, int>, int> estMap;
-QMap<QPair<int, int>, int> lstMap;
 void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    int minflex = fields.takeFirst().toInt();
-    int flextotaal = fields.takeFirst().toInt();
-    qDebug() << minflex;
+    fields.takeFirst(); //minflex
+    fields.takeFirst(); //flextotaal
 
     int act_i = fields.takeFirst().toInt();
     while(act_i != -1){

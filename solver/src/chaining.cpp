@@ -1,14 +1,7 @@
-#include <list>
-#include <time.h>
-
 #include "chaining.h"
-#include "alles.h"
 
 #include "tmsp.h"
-#include "stjn.h"
-#include "esta_plus.h"
 #include "output.h"
-#include "heap.h"
 #include "exceptions.h"
 
 #define useHeuristic true
@@ -41,7 +34,7 @@ void initializeChains(){
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             chainId newId = {r_i,u_j};
-            chain newChain = {};
+            chain newChain = {{}};
             chains[newId] = newChain;
         }
     }
@@ -175,7 +168,7 @@ void add_frame() {
         output(" %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));
         output(" %d %d", act->i, act->j);
         if(len(a->groupchilds) >= 1) {
-            // <job> <est> <lst> <#acts> [act id]            
+            // <job> <est> <lst> <#acts> [act id]
             for (k = 0; k < len(a->groupchilds); k ++) {
                 activity * child = list_get(a->groupchilds, k);
                 output(" %d %d", child->i, child->j);
@@ -200,20 +193,20 @@ void print_chain(int i, int j) {
 }
 
 bool chaining() {
-	/* PSEUDOCODE: [Generating Robust Partial Order Schedules, Policella 2004]
-	Input: A problem P and one of its fixed-times schedules S
-	Output: A partial order solution POS
-	1. POS <- P
-	2. Sort all the activities according to their start times in S
-	3. Initialize all chains empty
-	4. for each resource r_j
-	5.		for each activity a_i
-	6.				for 1 to req_i,j
-	7.						k <- SelectChain(a_i,r_j)
-	8.						a_k <- last(k)
-	9.						AddConstraint(POS, a_k < a_i)
-	10.						last(k) <- a_i
-	11. return POS	
+    /* PSEUDOCODE: [Generating Robust Partial Order Schedules, Policella 2004]
+    Input: A problem P and one of its fixed-times schedules S
+    Output: A partial order solution POS
+    1. POS <- P
+    2. Sort all the activities according to their start times in S
+    3. Initialize all chains empty
+    4. for each resource r_j
+    5.		for each activity a_i
+    6.				for 1 to req_i,j
+    7.						k <- SelectChain(a_i,r_j)
+    8.						a_k <- last(k)
+    9.						AddConstraint(POS, a_k < a_i)
+    10.						last(k) <- a_i
+    11. return POS
     */
 
     srand(time(NULL));

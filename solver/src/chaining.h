@@ -5,9 +5,6 @@
 
 #include "alles.h"
 
-#include "tmsp.h"
-#include "stjn.h"
-
 typedef struct chainId{
     int resource;
     int unit;

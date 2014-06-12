@@ -419,7 +419,7 @@ void MainWindow::createActions() {
     paintFeasibleIntervalsAct->setCheckable(true);
     connect(paintFeasibleIntervalsAct, SIGNAL(triggered()), controller, SLOT(doPaintFeasibleIntervals()));
 
-    paintFlexibilityIntervalsAct = new QAction(tr("Paint flexibilty intervals"), this);
+    paintFlexibilityIntervalsAct = new QAction(tr("Paint flexibility intervals"), this);
     paintFlexibilityIntervalsAct->setCheckable(true);
     connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
 

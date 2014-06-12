@@ -41,6 +41,7 @@ public:
 
 private slots:
     void apply(); ///< Applies the changes to the activity object. If the activity object is new, it is added to the job object selected in the job dropdown.
+    void jobChanged(int); ///< Edits the maximum possible qcombobox duration value when job is chosen
     void templateChanged(int); ///< fills in the form fields when a template is chosen
     void setModified(); ///< clears the template field if modifications are done
 };

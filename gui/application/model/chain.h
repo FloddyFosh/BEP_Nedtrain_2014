@@ -2,7 +2,6 @@
 #define CHAIN_H
 
 #include <QVector>
-#include <cassert>
 
 #include "model/activity.h"
 
@@ -16,8 +15,6 @@ private:
 
 public:
     Chain(int resourceId, int chainId, QVector<Activity*> activities, QObject *parent);
-    //Chain(int resourceId, int chainid, QObject* parent);
-    //~Chain();
 
     int resourceId();
     int chainId();

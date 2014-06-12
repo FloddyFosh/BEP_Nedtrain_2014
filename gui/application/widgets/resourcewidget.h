@@ -36,7 +36,7 @@ class ResourceWidget : public QWidget
     void paintJobProfile(QPainter&); ///< adds shade to resource units by selected job
     void paintSelectedRegion(QPainter&); ///< adds shading to selected region
     void paintResourceMarks(QPainter& painter); /// adds resource marks (used for indicating a precedence between the end of a resource decrease and a task)
-    void paintChainResources(QPainter& painter);
+    void paintChainResources(QPainter& painter); /// paint the chain visualization resource profiles
     void paintPeak(QPainter& painter); ///< paints peak
 public:
     /**
