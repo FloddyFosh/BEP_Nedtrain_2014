@@ -14,6 +14,7 @@ De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, 
 
 \newpage
 \subsection{Communicatie}
+In bestaande versie van de NedTrain Planner bestond er al een communicatieprotocol voor communicatie tussen de NedTrain Planner en de bestaande solver. Deze communicatieregels worden ook gebruikt door de nieuwe solver. 
 \begin{itemize}
     \item \texttt{PROGRESS}: geeft een indicatie (in procenten) van de voortgang van het solveproces. De syntax is \texttt{\textquoteleft PROGRESS: <percentage>\textquoteright}.
     \item \texttt{ERROR}: geeft bericht van een interne fout in de solver (een invariant tijdens het solve proces blijkt niet waar te zijn). Dit zou niet mogen optreden.
@@ -23,9 +24,9 @@ De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, 
     \item \texttt{PEAK}: Deze regel wordt geprint als het solven niet gelukt is, omdat er aan het einde een contention peak was die niet geresolved kon worden. Het formaat is \texttt{\textquoteleft PEAK:\textquoteright \ <time> <resource> <capacity> <lijst taken en groepen> \textquoteleft -1\textquoteright}. Eerst wordt aangegeven waar de peak zich bevindt en de capaciteit. Elke taak of groep wordt gerepresenteerd met \texttt{<treinID> <taakID>}. Voor groepen geldt dat een van de taken die in de groep zitten wordt gegeven als representant. Vanuit de laatste \texttt{STATE} kan worden afgeleid welke groep bedoeld wordt. Deze peak kan door het planprogramma worden gevisualiseerd.
     \item \texttt{MUTEX}: Deze regel wordt geprint als het solven niet gelukt is, omdat er niet kon worden voldaan aan de eis dat wederzijdse uitsluiting moet gelden. Het formaat is hetzelfde als bij \texttt{PEAK}.
 \end{itemize}
-
+De nieuwe communicatieregels zijn nodig om de NedTrain Solver te laten communiceren met de nieuwe solver.
 \begin{itemize}
-    \item \texttt{CHAIN}: 
+    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Waarbij \texttt{<activiteiten>} een lijst is van activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}.
     \item \texttt{CLEARSOFTPREC}: De syntax is \texttt{\textquoteleft CLEARSOFTPREC\textquoteright}.
-    \item \texttt{FLEX}: Geeft een lijst van EST's en LST's waarmee de flexibiliteitsintervallen bepaald kunnen worden. De syntax is \texttt{\textquoteleft FLEX:\textquoteright \ <minflex> <flextotaal> <variabelen> \textquoteleft -1\textquoteright}. Waarbij \texttt{-1} het einde van de lijst aangeeft en waarbij \texttt{<variabelen>} een lijst is van EST's en LST's met de syntax \texttt{<projectID> <taakID> \textquoteleft  -\textquoteright \ <tijd>} voor de EST en \texttt{<projectID> <taakID> \textquoteleft +\textquoteright \ <tijd>} voor de LST.
+    \item \texttt{FLEX}: Geeft een lijst van EST's en LST's waarmee de flexibiliteitsintervallen bepaald kunnen worden. De syntax is \texttt{\textquoteleft FLEX: <minflex> <flextotaal> <variabelen> -1\textquoteright}. Waarbij \texttt{-1} het einde van de lijst aangeeft en waarbij \texttt{<variabelen>} een lijst is van EST's en LST's met de syntax \texttt{\textquoteleft <projectID> <taakID> - <tijd>\textquoteright} voor de EST en \texttt{\textquoteleft <projectID> <taakID> + <tijd>\textquoteright} voor de LST.
 \end{itemize}
