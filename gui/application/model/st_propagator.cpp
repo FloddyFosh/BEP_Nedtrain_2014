@@ -74,7 +74,9 @@ void ST_Propagator::moveIfPossible(int dt) {
 void ST_Propagator::changeDurationIfPossible(int newDuration) {
     if (group->isLocked()) return;
     int lct (group->getLST() + group->getDuration());
-    if (group->getST() + newDuration > lct) return;
+    if (group->getST() + newDuration > lct) {
+        return;
+    }
     st = savedST;
 
     if(controller->isPaintingFlexibilityIntervals() && group->getLFTFlex() >= 0 && group->getESTFlex() >= 0) {
