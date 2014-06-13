@@ -19,6 +19,10 @@ void InstanceController::reconnectActivitiesToResourceWidgets() {
     instanceWidget->reconnectActivitiesToResourceWidgets();
 }
 
+void InstanceController::repaintJobWidgets() {
+    instanceWidget->repaintJobWidgets();
+}
+
 void InstanceController::repaintResourceWidgets() {
     instanceWidget->repaintResourceWidgets();
 }

@@ -104,6 +104,8 @@ bool Solver::start(Instance *i) {
 
         g->setESTFlex(-1);
         g->setLFTFlex(-1);
+
+        first_frame->addGroup(g);
     }
     replayFrames.append(first_frame);
     

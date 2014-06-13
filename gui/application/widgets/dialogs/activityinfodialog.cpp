@@ -21,6 +21,12 @@ ActivityInfoDialog::ActivityInfoDialog(Instance *instance, Activity *a, QWidget 
     formlayout->addRow(tr("Earliest start time:"), estLabel);
     QLabel* lstLabel = new QLabel(QString::number(a->lst()));
     formlayout->addRow(tr("Latest start time:"), lstLabel);
+    if(a->estFlex() != -1 && a->lftFlex() != -1) {
+        QLabel* eftLabel = new QLabel(QString::number(a->estFlex()));
+        formlayout->addRow(tr("Earliest flex start time:"), eftLabel);
+        QLabel* lftLabel = new QLabel(QString::number(a->lftFlex()-a->duration()));
+        formlayout->addRow(tr("Latest flex start time:"), lftLabel);
+    }
     QLabel* stLabel = new QLabel(QString::number(a->st()));
     formlayout->addRow(tr("Start time:"), stLabel);
 

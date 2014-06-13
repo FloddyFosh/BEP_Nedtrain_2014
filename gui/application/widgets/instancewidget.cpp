@@ -269,6 +269,12 @@ void InstanceWidget::reconnectActivitiesToResourceWidgets() {
     foreach(ResourceWidget * rw, resourceWidgets) rw->connectActivities();
 }
 
+void InstanceWidget::repaintJobWidgets() {
+    foreach(JobWidget * jw, jobWidgets) {
+        jw->repaint();
+    }
+}
+
 void InstanceWidget::repaintResourceWidgets() {
     foreach(ResourceWidget * rw, resourceWidgets) rw->calculateResourceProfile();
 }
