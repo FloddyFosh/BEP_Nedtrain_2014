@@ -42,6 +42,10 @@ public:
      */
     void reconnectActivitiesToResourceWidgets();
     /**
+     * Repaints the job widgets manually (that is, not by a signal).
+     */
+    void repaintJobWidgets();
+    /**
      * Repaints the resource widgets manually (that is, not by a signal).
      */
     void repaintResourceWidgets();

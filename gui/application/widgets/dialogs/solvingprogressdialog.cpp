@@ -87,6 +87,7 @@ void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
 
         instance->setUserChanges(false);
         controller->reconnectActivitiesToResourceWidgets();
+        controller->repaintJobWidgets();
         controller->repaintResourceWidgets();
         controller->setupSlider(true);
         controller->toLastFrame();
