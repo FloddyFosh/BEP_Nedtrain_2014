@@ -1,4 +1,7 @@
 \section{Performance}
+Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties zal geanalyseerd worden als de flexibiliteit die met verschillende methodes bereikt wordt.
+
+\subsection{Looptijd}
 In dit hoofdstuk een analyse van de looptijd van de solver. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
 \begin{itemize}
     \item 10 resources, met elk 1 resource unit
@@ -67,3 +70,6 @@ In Tabel \ref{tbl:xxl+output} en \ref{tbl:xxl-output} is te zien wat de loop tij
     \caption{xxl-instance en output naar bestand}
     \label{tbl:xxl+outputbestand}
 \end{table}
+
+\subsection{Flexibiliteit}
+TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. Misschien ook nog wat over de verschillende LP modellen.

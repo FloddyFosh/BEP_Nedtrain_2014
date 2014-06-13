@@ -1,14 +1,19 @@
 \section{Opgeleverde Producten en Diensten}
 
+In dit hoofdstuk worden alle nieuwe functionaliteiten, van zowel de interface als de solver, opgesomd. Bovendien zijn er ook diensten geleverd, die niet direct als extra functionaliteit van de solver gezien kunnen worden, die ook genoemd zullen worden.
+
 \subsection{Solver}
+De nieuwe functionaliteit van de solver kan grotendeels worden onderverdeeld in het chaining algoritme en het vinden van flexibiliteitsintervals. Van deze onderdelen zal in deze paragraaf toegelicht worden hoe deze ge\"implementeerd zijn.
 
 \subsubsection*{Chaining}
 Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is ge\"implementeerd, waarbij een keuze is tussen drie verschillende methoden voor het selecteren van een chain, namelijk:
 \begin{itemize}
 \item Selecteer de eerst gevonden geschikte chain.
-\item Selecteer een willekeurige geschikte.
+\item Selecteer een willekeurige geschikte chain.
 \item Gebruik de heuristiek beschreven in \ref{subsubsec:chainingoplossing}.
 \end{itemize}
+
+Uit analyse van de flexibiliteit en het aantal voorrangsrelaties dat door een algoritme toegevoegd wordt, is besloten om de heuristiek te gebruiken. Deze analyse is weergegeven in paragraaf \ref{sec:chaininganalyse}.
 
 \subsection*{Linear Programming}
 Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
@@ -37,8 +42,7 @@ Als een solver geen chains en/of flexibiliteitsintervallen berekent, zullen voor
 
 In het frame dat in Figuur \ref{fig:GUIfinal} zichtbaar is, wordt een chain van activiteiten, behorende bij de resource 'monteurs', in het bovenste deelvenster getoond. Hierin zijn de rode pijlen voorrangsrelaties die al in de instantie aanwezig waren en zijn de zwarte pijlen later toegevoegd tijdens het oplossen van de instantie.
 
-<TODO stukje over weergeven van gebruikte resources>
-%Zodra de solver klaar is met het vinden van een oplossing voor de huidige instantie, wordt deze oplossing als output gegeven en geparsed door de planner. Vervolgens worden in de interface voor elke resource eerst een frame met alle chains van deze resource en toegevoegd en daarna voor al deze chains een aparte frame.
+Zoals eerder genoemd, worden van een resource eerst alle chains tegelijk getoond op een frame, en vervolgens elke chain op een apart frame. Tijdens het \'e\'en voor \'e\'en laten zien van de chains, wordt  het profiel van de gebruikte resources stap voor stap opgebouwd. Op het moment dat er nog geen resources gebruikt worden, is het gehele profiel groen. Bij het tonen van een chain worden alle resource units die door de activiteiten in deze chain gebruikt worden, in het blauw getoond. Dit betekent dus dat deze resource units niet meer door andere activiteiten gebruikt kunnen worden. Deze gebruikte resources zijn dus in daarop volgende frames grijs gekleurd. Zo wordt in elke frame het grijs gekleurde gebied groter, totdat elke resource unit gebruikt is.
 
 \subsubsection*{Flexibiliteitsintervallen}
 Zoals in Figuur \ref{fig:flex-interval} is te zien, is het ook mogelijk om het flexibiliteitsinterval van elke activiteit weer te geven in de interface. Activiteiten kunnen vrij bewegen binnen het flexibiliteitsinterval zonder dat er conflicten ontstaan met andere activiteiten. Als de intervallen worden weergegeven, is het niet mogelijk om de activiteiten buiten het bijbehoorende interval te verplaatsen. Ook is het niet mogelijk activiteiten zodanig langer te maken dat ze buiten hun flexibiliteitsinterval vallen. Die twee ==dingen== zijn niet mogelijk om ervoor te zorgen dat het schema flexibel blijft. Als het weergeven van de flexibiliteitsintervallen wordt uitgezet kunnen de activiteiten wel verplaatst en vergroot worden buiten het flexibiliteitsinterval.
