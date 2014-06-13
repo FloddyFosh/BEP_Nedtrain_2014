@@ -3,10 +3,12 @@
 #include <QDateTimeEdit>
 
 #include "resourcedecreasedialog.h"
+#include "widgets/app_icon.h"
 
 ResourceDecreaseDialog::ResourceDecreaseDialog(Instance *i, Resource* res, QWidget *parent) :
         QDialog(parent), resource(res), instance(i) {
     setWindowTitle(tr("Decrease capacity"));
+    setWindowIcon(AppIcon("icon.png"));
 
     capacityEdit = new QSpinBox;
     capacityEdit->setMinimum(1);
