@@ -174,6 +174,7 @@ public:
 
     void disconnectActivitiesFromResourceWidgets(); ///< disconnects all activity signals from resource widgets
     void reconnectActivitiesToResourceWidgets(); ///< reconnects all activity signals to resources
+    void repaintJobWidgets(); ///< repaints job widgets
     void repaintResourceWidgets(); ///< calculates resource profile and repaints resource widgets
     void removeVerticalLines(); ///< clears all vertical lines and markers in the zoomables
     int getFrameNumber() const; ///< returns frameNumber
