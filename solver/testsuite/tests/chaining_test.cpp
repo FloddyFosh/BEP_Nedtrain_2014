@@ -52,9 +52,9 @@ TEST_F(ChainingTest, InitializeChainsTest) {
     EXPECT_EQ(4,chains.size());
 }
 
-TEST_F(ChainingTest, SelectChainTest){
+TEST_F(ChainingTest, SelectFirstChainTest){
     activity* act1 = A(0,0);
-    chainId id1 = selectChain(act1->i,act1->j,0);
+    chainId id1 = selectFirstChain(act1->i,act1->j,0);
     EXPECT_EQ(0,id1.resource);
     EXPECT_EQ(0,id1.unit);
 
@@ -64,13 +64,13 @@ TEST_F(ChainingTest, SelectChainTest){
     EXPECT_EQ(0,id2.unit);
 }
 
-TEST_F(ChainingTest, SelectChainExceptionTest){
+TEST_F(ChainingTest, SelectFirstChainExceptionTest){
     chainId newId = {1,0};
     chain newChain = {};
     chains[newId] = newChain;
 
     activity* a1 = A(0,0);
-    chainId id1 = selectChain(a1->i,a1->j,1);
+    chainId id1 = selectFirstChain(a1->i,a1->j,1);
     chains[id1].activities.push_back(a1);
     activity* a2 = A(1,0);
     EXPECT_THROW(selectChain(a2->i,a2->j,1),NoChainFoundException);
