@@ -9,7 +9,6 @@ Onze Jenkins server is te vinden op: [77.163.248.47](http://77.163.248.47)
  - logboek - [Anton](https://bitbucket.org/abouter/bep_nedtrain_2014/src/master/logboek/anton.md) | [Chris](https://bitbucket.org/abouter/bep_nedtrain_2014/src/master/logboek/chris.md) | [Martijn](https://bitbucket.org/abouter/bep_nedtrain_2014/src/master/logboek/martijn.md)
 
 ## Features TODO
- - Chaining zodat bij het verslepen van een taak er geen resource conflicts ontstaan.
  - Undo functie, vooral handig is als je per ongeluk bij het slepen van een task de duration aanpast.
  - Nieuwe view voor resources met chains
  - Vergelijken van instanties met verschillende solvers (bijv. chaining met verschillende heuristieken), waarvan de flexibiliteit berekend wordt. Vervolgens kan de meest flexibele oplossing gekozen worden.
