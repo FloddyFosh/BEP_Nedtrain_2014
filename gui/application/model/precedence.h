@@ -73,6 +73,10 @@ public:
      */
     set<int> getFrameNrs();
     /**
+     * Clears the frame numbers for which this constraint will be displayed.
+     */
+    void clearFrameNrs();
+    /**
      * Adds this constraint to a frame.
      */
     void addFrameNr(int frameNr);

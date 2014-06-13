@@ -2,7 +2,7 @@
 \subsection{Solver}
 Als de gebruiker op de knop 'solve' drukt wordt onze solver aangeroepen, deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de tool, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
 
-De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan hebben wij ook niets veranderd. Het chaining algoritme uitgelegt in [??] hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost deze vervolgens op met COIN LP (Clp). 
+De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan hebben wij ook niets veranderd. Het chaining algoritme, uitgelegd in [??], hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost deze vervolgens op met COIN LP (Clp). 
 
 \newpage
 \begin{figure}[H]
@@ -14,7 +14,7 @@ De solver bestaat grofweg uit drie componenten namelijk het ESTA$^+$ algoritme, 
 
 \newpage
 \subsection{Communicatie}
-In bestaande versie van de NedTrain Planner bestond er al een communicatieprotocol voor communicatie tussen de NedTrain Planner en de bestaande solver. Deze communicatieregels worden ook gebruikt door de nieuwe solver. 
+In bestaande versie van de NedTrain Planner bestond er al een communicatieprotocol voor communicatie tussen de NedTrain Planner en de bestaande solver. Deze communicatieregels worden ook gebruikt door de nieuwe solver \cite{bep2012nedtrain}.
 \begin{itemize}
     \item \texttt{PROGRESS}: geeft een indicatie (in procenten) van de voortgang van het solveproces. De syntax is \texttt{\textquoteleft PROGRESS: <percentage>\textquoteright}.
     \item \texttt{ERROR}: geeft bericht van een interne fout in de solver (een invariant tijdens het solve proces blijkt niet waar te zijn). Dit zou niet mogen optreden.
@@ -26,7 +26,7 @@ In bestaande versie van de NedTrain Planner bestond er al een communicatieprotoc
 \end{itemize}
 De nieuwe communicatieregels zijn nodig om de NedTrain Solver te laten communiceren met de nieuwe solver.
 \begin{itemize}
-    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Waarbij \texttt{<activiteiten>} een lijst is van \texttt{\#activiteiten} activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}.
-    \item \texttt{CLEARSOFTPREC}: De syntax is \texttt{\textquoteleft CLEARSOFTPREC\textquoteright}.
+    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Waarbij \texttt{<activiteiten>} een lijst is van \texttt{\#activiteiten} activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}. Dit wordt gebruikt om in de GUI de constraints te laten zien die door chaining toegevoegd zijn. Als op deze manier een chain wordt geprint, wordt deze aan het laatste frame toegevoegd.
+    \item \texttt{CLEARSOFTPREC}: Als op een regel enkel \texttt{\textquoteleft CLEARSOFTPREC\textquoteright} geprint wordt, worden alle constraints die niet bij de instantie horen, weggehaald. Dit wordt door het chaining algoritme gebruikt, omdat de constraints van het ESTA$^+$-algoritme niet nodig zijn voor chaining. Door het weghalen hiervan, vermindert dus het totaal aantal constraints.
     \item \texttt{FLEX}: Geeft een lijst van EST's en LST's waarmee de flexibiliteitsintervallen bepaald kunnen worden. De syntax is \texttt{\textquoteleft FLEX: <minflex> <flextotaal> <variabelen> -1\textquoteright}. Waarbij \texttt{-1} het einde van de lijst aangeeft en waarbij \texttt{<variabelen>} een lijst is van EST's en LST's met de syntax \texttt{\textquoteleft <projectID> <taakID> - <tijd>\textquoteright} voor de EST en \texttt{\textquoteleft <projectID> <taakID> + <tijd>\textquoteright} voor de LST.
 \end{itemize}

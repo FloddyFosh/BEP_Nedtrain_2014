@@ -2,7 +2,6 @@
 #define __TMSP_H
 
 #include "alles.h"
-//#include "stn.h"
 
 struct tmsp_t; struct resource; struct train; struct activity; struct requirement; struct precedence;
 
