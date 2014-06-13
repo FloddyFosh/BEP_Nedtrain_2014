@@ -1,15 +1,13 @@
 \section*{Samenvatting}
 
-Onze opdrachtgever is NedTrain, onderdeel van de Nederlandse Spoorwegen. Het probleem waarmee NedTrain te maken heeft staat ook wel bekend als het \emph{Resource Constraint Project Scheduling Problem}. Hierbij wordt er naar een oplossing gezocht zodat er een (flexibel) schema is om bijvoorbeeld treinen te repareren. Voor het repareren van treinen is tijd en zijn resources nodig, dit maakt het probleem moeilijk. 
+Onze opdrachtgever is NedTrain, onderdeel van de Nederlandse Spoorwegen. Het probleem waarmee NedTrain te maken heeft, staat ook wel bekend als het \emph{Resource Constraint Project Scheduling Problem}. Hierbij wordt er naar een (flexibel) schema gezocht, om bijvoorbeeld treinen te repareren. Doordat elke trein binnen een bepaalde tijd gerepareerd moet worden en er ook rekening gehouden moet worden met de beschikbare resources, is dit probleem zo moeilijk om op te lossen.
 
-De software van NedTrain bestaat uit een interface genaamd de NedTrain Planner en een solver. 
+De bestaande software van NedTrain bestaat uit een interface, genaamd de NedTrain Planner, en een solver. Hierop hebben wij een aantal aanpassingen gedaan aan de interface. Zo is het nu mogelijk om flexibiliteitsintervallen te zien, staat het sluitknopje op de tab zelf in plaats van in de toolbar en is het mogelijk om activiteiten en resources van plaats te verwisselen. Bovendien is er een aantal bugs verholpen dat de vorige groep heeft achtergelaten. 
 
-Wij hebben een aantal aanpassingen gedaan aan de interface. Zo is het nu mogelijk om flexibiliteitsintervallen te zien. Staat het sluitknopje op de tab zelf in plaats van in de toolbar. En is het mogelijk op activiteiten en resources van plaats te verwisselen. Zijn er een hoop bugs verholpen die de vorige groep heeft achtergelaten. 
+De nieuwe solver maakt gebruik van het chaining algoritme en de \emph{COIN Linear Programming} library. Het chaining algoritme is nodig om te zorgen dat bij het verplaatsen van activiteiten het schema consistent is qua resources. De COIN LP library is nodig om flexibiliteitsintervallen te kunnen berekenen, die vervolgens worden weergegeven in de interface. 
 
-De nieuwe solver maakt gebruik van het chaining algoritme en de \emph{COIN Linear Programming} library. Het chaining algoritme is nodig om te zorgen dat bij het verplaatsen van activiteiten het schema consistent is qua resources. De COIN LP library is nodig om flexibiliteitsintervallen te kunnen berekenen, die worden vervolgens weergegeven in de interface. 
+Tijdens dit project hebben we gebruik gemaakt van scrum en zes wekelijkse sprints. Als versiebeheersysteem gebruikten wij Git op een private repository gehost door \href{http://bitbucket.com}{Bitbucket.com}, wat erg prettig heeft gewerkt. Als continuous integration systeem hebben een server met daarop Jenkins, maar dit was helaas geen succes. De codekwaliteit is gemeten door de Software Improvement Group, die vervolgens feedback heeft gegeven over verschillende aspecten van de code. 
 
-Tijdens dit project hebben we gebruik gemaakt van scrum en vijf wekelijkse sprints. Als versiebeheersysteem gebruikten wij Git op een private repository gehost door \href{http://bitbucket.com}{Bitbucket.com}, wat er prettig heeft gewerkt. Als contious integration systeem hebben een server met daarop Jenkins, maar dit was geen succes. De codekwaliteit is gemeten door de Software Improvement Group. 
+We hebben een viertal aanbevelingen voor personen die de NedTrain Planner gaan doorontwikkelen. We bevelen aan om een undo-functionaliteit te maken, de communicatie tussen interface en solver sneller te maken, de code kwaliteit te verbeteren en visueel te maken welke resource unit wanneer nodig is. 
 
-We hebben een viertal aanbevelingen voor mensen die de NedTrain Planner gaan doorontwikkelen. We bevelen aan om een undo-functionaliteit te maken, de communicatie tussen interface en solver sneller te maken, de code kwaliteit te verbeteren en visueel maken welke resource unit wanneer nodig is. 
-
-conclusie
+TODO: conclusie
