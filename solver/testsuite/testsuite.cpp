@@ -1,7 +1,7 @@
 #include  <gtest/gtest.h>
 
 // Include test cases that need to be run
-//#include "tests/chaining_test.cpp"
+#include "tests/chaining_test.cpp"
 #include "tests/constraints_test.cpp"
 #include "tests/flexibility_test.cpp"
 

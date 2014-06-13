@@ -31,6 +31,14 @@ using namespace std;
 
 int minflex = 0, flextotaal = 0;
 
+int getFlexibility(){
+    return flextotaal;
+}
+
+int getMinFlex(){
+    return minflex;
+}
+
 void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
     // -DBL_MAX = -inf and DBL_MAX = +inf
     // set coefficients
@@ -165,11 +173,11 @@ void addLimits(Constraints* constraints) {
 
 void printSolution(map<string, int>* solution) {
     output("FLEX: ");
-    output("%d ", minflex);
-    output("%d ", flextotaal);
+    output("%d ", getMinFlex());
+    output("%d ", getFlexibility());
 
-    cdebug("minflex = %d\n", minflex);
-    cdebug("flexibility = %d\n", flextotaal);
+    cdebug("minflex = %d\n", getMinFlex());
+    cdebug("flexibility = %d\n", getFlexibility());
     map<string, int>::iterator iter = solution->begin();
     while(iter != solution->end()) {
         output("%s %d ", iter->first.c_str(), iter->second);

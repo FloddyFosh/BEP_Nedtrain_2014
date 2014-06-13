@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../widgets/dialogs/aboutdialog.cpp" line="22"/>
-        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2012</source>
+        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
         <translation></translation>
     </message>
 </context>
@@ -27,53 +27,53 @@
         <translation>Edit Task</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="28"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="36"/>
         <source>(none)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="33"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="41"/>
         <source>&amp;Job:</source>
         <translation>&amp;Project:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="34"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="42"/>
         <source>&amp;Template:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="35"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="43"/>
         <source>&amp;Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="38"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="46"/>
         <source>&amp;Duration in minutes:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="40"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="48"/>
         <source>&amp;Duration:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="59"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="68"/>
         <source>Invalid input</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="59"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="68"/>
         <source>Please fill in a name.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="88"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="100"/>
         <source>Not all resources from this template are available in the instance. Please add the following resources to this instance:
 </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activitydialog.cpp" line="90"/>
+        <location filename="../widgets/dialogs/activitydialog.cpp" line="102"/>
         <source>Incomplete resources</source>
         <translation></translation>
     </message>
@@ -111,17 +111,27 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="25"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="26"/>
+        <source>Earliest flex start time:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="28"/>
+        <source>Latest flex start time:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="31"/>
         <source>Start time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="32"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="38"/>
         <source>Edit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="33"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="39"/>
         <source>Close</source>
         <translation></translation>
     </message>
@@ -129,82 +139,82 @@
 <context>
     <name>ActivityWidget</name>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="249"/>
+        <location filename="../widgets/activitywidget.cpp" line="248"/>
         <source>&amp;Properties</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="253"/>
+        <location filename="../widgets/activitywidget.cpp" line="252"/>
         <source>&amp;Edit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="257"/>
+        <location filename="../widgets/activitywidget.cpp" line="256"/>
         <source>&amp;Remove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="250"/>
+        <location filename="../widgets/activitywidget.cpp" line="249"/>
         <source>Show info about activity %1</source>
         <translation>Show info about task %1</translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="254"/>
+        <location filename="../widgets/activitywidget.cpp" line="253"/>
         <source>Edit activity %1</source>
         <translation>Edit task %1</translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="258"/>
+        <location filename="../widgets/activitywidget.cpp" line="257"/>
         <source>Remove activity %1</source>
         <translation>Remove task %1</translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="261"/>
+        <location filename="../widgets/activitywidget.cpp" line="260"/>
         <source>&amp;Show dependencies</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="262"/>
+        <location filename="../widgets/activitywidget.cpp" line="261"/>
         <source>Show dependencies of %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="267"/>
+        <location filename="../widgets/activitywidget.cpp" line="266"/>
         <source>&amp;Lock position</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="268"/>
+        <location filename="../widgets/activitywidget.cpp" line="267"/>
         <source>Lock %1 at this position</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="282"/>
+        <location filename="../widgets/activitywidget.cpp" line="281"/>
         <source>&amp;Move left</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="283"/>
+        <location filename="../widgets/activitywidget.cpp" line="282"/>
         <source>Move the activity to the left.</source>
         <translation>Move the task to the left.</translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="289"/>
+        <location filename="../widgets/activitywidget.cpp" line="288"/>
         <source>&amp;Move right</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="290"/>
+        <location filename="../widgets/activitywidget.cpp" line="289"/>
         <source>Move the activity to the right.</source>
         <translation>Move the task to the right.</translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="295"/>
+        <location filename="../widgets/activitywidget.cpp" line="294"/>
         <source>&amp;Set flexibility (current: %1)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="296"/>
+        <location filename="../widgets/activitywidget.cpp" line="295"/>
         <source>Set the flexibility of %1</source>
         <translation></translation>
     </message>
@@ -212,28 +222,28 @@
 <context>
     <name>CompareDialog</name>
     <message>
-        <location filename="../widgets/dialogs/comparedialog.cpp" line="10"/>
+        <location filename="../widgets/dialogs/comparedialog.cpp" line="8"/>
         <source>Compare instances</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/comparedialog.cpp" line="20"/>
+        <location filename="../widgets/dialogs/comparedialog.cpp" line="18"/>
         <source>Select two instances to compare.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/comparedialog.cpp" line="16"/>
-        <location filename="../widgets/dialogs/comparedialog.cpp" line="17"/>
+        <location filename="../widgets/dialogs/comparedialog.cpp" line="14"/>
+        <location filename="../widgets/dialogs/comparedialog.cpp" line="15"/>
         <source>untitled</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/comparedialog.cpp" line="21"/>
+        <location filename="../widgets/dialogs/comparedialog.cpp" line="19"/>
         <source>Instance 1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/comparedialog.cpp" line="22"/>
+        <location filename="../widgets/dialogs/comparedialog.cpp" line="20"/>
         <source>Instance 2</source>
         <translation></translation>
     </message>
@@ -267,7 +277,7 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../controller/controller.cpp" line="157"/>
+        <location filename="../controller/controller.cpp" line="158"/>
         <source>%1 of %2</source>
         <translation></translation>
     </message>
@@ -359,12 +369,17 @@ time units are reserved, in case an activity overruns its time.</source>
 <context>
     <name>Instance</name>
     <message>
-        <location filename="../model/instance_manip.cpp" line="242"/>
+        <location filename="../model/instance_manip.cpp" line="248"/>
         <source>The constraint was not added, because it would create a cycle. A chain of constraints in the opposite direction already exists.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../model/instance_manip.cpp" line="247"/>
+        <location filename="../model/instance_manip.cpp" line="256"/>
+        <source>Adding of the hard precedence constraint ignored, because it was already present.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../model/instance_manip.cpp" line="271"/>
         <source>Adding of precedence constraint ignored, because it was already present.</source>
         <translation></translation>
     </message>
@@ -372,28 +387,28 @@ time units are reserved, in case an activity overruns its time.</source>
 <context>
     <name>InstanceMdiSubWindow</name>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="52"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="42"/>
         <source>Instance not saved</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="52"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="42"/>
         <source>Do you want to save the instance before closing?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="86"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="75"/>
         <source>Task scheduler</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="81"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="70"/>
         <source>File saved</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="87"/>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="89"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="76"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="78"/>
         <source>Cannot save file %1.</source>
         <translation></translation>
     </message>
@@ -421,7 +436,7 @@ time units are reserved, in case an activity overruns its time.</source>
 <context>
     <name>InstanceWidget</name>
     <message>
-        <location filename="../widgets/instancewidget.cpp" line="275"/>
+        <location filename="../widgets/instancewidget.cpp" line="341"/>
         <source>%1 of %2</source>
         <translation></translation>
     </message>
@@ -439,53 +454,53 @@ time units are reserved, in case an activity overruns its time.</source>
         <translation>Edit Project</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="46"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="47"/>
         <source>&amp;Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="48"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="49"/>
         <source>&amp;Release day:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="49"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="50"/>
         <source>&amp;Release time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="50"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="51"/>
         <source>&amp;Due day:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="51"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="52"/>
         <source>&amp;Due time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="53"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="54"/>
         <source>&amp;Release date:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="54"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="55"/>
         <source>&amp;Due date:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="75"/>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="77"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="76"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="78"/>
         <source>Invalid input</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="75"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="76"/>
         <source>Please fill in a name.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="77"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="78"/>
         <source>The due date should be after the release date.
 Please correct your input.</source>
         <translation></translation>
@@ -494,12 +509,12 @@ Please correct your input.</source>
 <context>
     <name>JobHeaderWidget</name>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="101"/>
+        <location filename="../widgets/jobheaderwidget.cpp" line="126"/>
         <source>Are you sure?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="101"/>
+        <location filename="../widgets/jobheaderwidget.cpp" line="126"/>
         <source>Are you sure you want to remove this job with its activities?</source>
         <translation>Are you sure you want to remove this project with its tasks?</translation>
     </message>
@@ -507,12 +522,12 @@ Please correct your input.</source>
 <context>
     <name>JobWidget</name>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="272"/>
+        <location filename="../widgets/jobwidget.cpp" line="286"/>
         <source>The program encountered a failure. Please restart.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="234"/>
+        <location filename="../widgets/jobwidget.cpp" line="248"/>
         <source>Show resource usage</source>
         <translation></translation>
     </message>
@@ -553,332 +568,337 @@ Please correct your input.</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="41"/>
-        <location filename="../widgets/mainwindow.cpp" line="262"/>
+        <location filename="../widgets/mainwindow.cpp" line="40"/>
+        <location filename="../widgets/mainwindow.cpp" line="266"/>
         <source>Task scheduler</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="91"/>
+        <location filename="../widgets/mainwindow.cpp" line="95"/>
         <source>New instance loaded</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="126"/>
+        <location filename="../widgets/mainwindow.cpp" line="130"/>
         <source>No instance active, cannot add job.</source>
         <translation>No instance active, cannot add project.</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="142"/>
-        <location filename="../widgets/mainwindow.cpp" line="159"/>
+        <location filename="../widgets/mainwindow.cpp" line="146"/>
+        <location filename="../widgets/mainwindow.cpp" line="163"/>
         <source>No instance active, cannot add activity.</source>
         <translation>No instance active, cannot add task.</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="133"/>
+        <location filename="../widgets/mainwindow.cpp" line="137"/>
         <source>Cannot add activity</source>
         <translation>Cannot add task</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="95"/>
+        <location filename="../widgets/mainwindow.cpp" line="99"/>
         <source>Open instance from file</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="133"/>
+        <location filename="../widgets/mainwindow.cpp" line="137"/>
         <source>Add a job first</source>
         <translation>Add a project first</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="134"/>
+        <location filename="../widgets/mainwindow.cpp" line="138"/>
         <source>Add a job first.</source>
         <translation>Add a project first.</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="259"/>
+        <location filename="../widgets/mainwindow.cpp" line="263"/>
         <source>File loaded</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="263"/>
+        <location filename="../widgets/mainwindow.cpp" line="267"/>
         <source>Cannot read file %1:
 File not found, not readable or parsing error.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="265"/>
+        <location filename="../widgets/mainwindow.cpp" line="269"/>
         <source>Cannot read file %1: File not found, not readable or parsing error.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="214"/>
-        <location filename="../widgets/mainwindow.cpp" line="300"/>
+        <location filename="../widgets/mainwindow.cpp" line="218"/>
+        <location filename="../widgets/mainwindow.cpp" line="304"/>
         <source>&amp;%1 %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="116"/>
+        <location filename="../widgets/mainwindow.cpp" line="120"/>
         <source>No instance active, cannot add resource.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="154"/>
+        <location filename="../widgets/mainwindow.cpp" line="158"/>
         <source>Click on two tasks to add a precedence constraint between them.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="171"/>
+        <location filename="../widgets/mainwindow.cpp" line="175"/>
         <source>Click on two tasks to remove a precedence constraint between them.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="176"/>
+        <location filename="../widgets/mainwindow.cpp" line="180"/>
         <source>No instance active, cannot remove activity.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="221"/>
-        <location filename="../widgets/mainwindow.cpp" line="237"/>
+        <location filename="../widgets/mainwindow.cpp" line="225"/>
+        <location filename="../widgets/mainwindow.cpp" line="241"/>
         <source>Solve with </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="239"/>
+        <location filename="../widgets/mainwindow.cpp" line="243"/>
         <source>Set options and solve with </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="248"/>
+        <location filename="../widgets/mainwindow.cpp" line="252"/>
         <source>No instance active, cannot manage templates.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="315"/>
+        <location filename="../widgets/mainwindow.cpp" line="319"/>
         <source>&amp;New Instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="317"/>
+        <location filename="../widgets/mainwindow.cpp" line="321"/>
         <source>Create a new instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="321"/>
+        <location filename="../widgets/mainwindow.cpp" line="325"/>
         <source>&amp;Open Instance...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="323"/>
+        <location filename="../widgets/mainwindow.cpp" line="327"/>
         <source>Open an existing instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="327"/>
+        <location filename="../widgets/mainwindow.cpp" line="331"/>
         <source>&amp;Import Instance...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="328"/>
+        <location filename="../widgets/mainwindow.cpp" line="332"/>
         <source>Import an existing instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="332"/>
+        <location filename="../widgets/mainwindow.cpp" line="336"/>
         <source>&amp;Save Instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="334"/>
+        <location filename="../widgets/mainwindow.cpp" line="338"/>
         <source>Save the current instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="339"/>
+        <location filename="../widgets/mainwindow.cpp" line="343"/>
         <source>&amp;Save Instance As...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="341"/>
+        <location filename="../widgets/mainwindow.cpp" line="345"/>
         <source>Save the current instance under a new name</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="345"/>
+        <location filename="../widgets/mainwindow.cpp" line="349"/>
         <source>&amp;Close Instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="346"/>
+        <location filename="../widgets/mainwindow.cpp" line="350"/>
         <source>Close the current instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="358"/>
+        <location filename="../widgets/mainwindow.cpp" line="362"/>
         <source>E&amp;xit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="360"/>
+        <location filename="../widgets/mainwindow.cpp" line="364"/>
         <source>Exit the application</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="364"/>
+        <location filename="../widgets/mainwindow.cpp" line="368"/>
         <source>New &amp;Resource...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="365"/>
+        <location filename="../widgets/mainwindow.cpp" line="369"/>
         <source>Add a new resource to the current instance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="370"/>
+        <location filename="../widgets/mainwindow.cpp" line="374"/>
         <source>New &amp;Job...</source>
         <translation>New &amp;Project...</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="371"/>
+        <location filename="../widgets/mainwindow.cpp" line="375"/>
         <source>Add a new job to the current instance</source>
         <translation>Add a new project to the current instance</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="376"/>
+        <location filename="../widgets/mainwindow.cpp" line="380"/>
         <source>New &amp;Activity...</source>
         <translation>New &amp;Task...</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="377"/>
+        <location filename="../widgets/mainwindow.cpp" line="381"/>
         <source>Add a new activity to the current instance</source>
         <translation>Add a new task to the current instance</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="382"/>
+        <location filename="../widgets/mainwindow.cpp" line="386"/>
         <source>Add precedence &amp;constraint</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="389"/>
+        <location filename="../widgets/mainwindow.cpp" line="393"/>
         <source>Remove precedence &amp;constraint</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="395"/>
+        <location filename="../widgets/mainwindow.cpp" line="399"/>
         <source>Clear generated constraints</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="399"/>
+        <location filename="../widgets/mainwindow.cpp" line="403"/>
         <source>Automatically clear generated constraints before solving</source>
         <translation>Clear generated constraints before solving</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="403"/>
+        <location filename="../widgets/mainwindow.cpp" line="407"/>
         <source>Show hours on timeline</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="409"/>
+        <location filename="../widgets/mainwindow.cpp" line="413"/>
         <source>&amp;Manage templates...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="410"/>
+        <location filename="../widgets/mainwindow.cpp" line="414"/>
         <source>Add or remove activity templates</source>
         <translation>Add or remove task templates</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="414"/>
+        <location filename="../widgets/mainwindow.cpp" line="418"/>
         <source>Paint feasible intervals</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="419"/>
+        <location filename="../widgets/mainwindow.cpp" line="427"/>
         <source>&amp;Configure...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="420"/>
+        <location filename="../widgets/mainwindow.cpp" line="428"/>
         <source>Configure available solvers</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="423"/>
+        <location filename="../widgets/mainwindow.cpp" line="422"/>
+        <source>Paint flexibility intervals</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="431"/>
         <source>Solve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="429"/>
+        <location filename="../widgets/mainwindow.cpp" line="437"/>
         <source>Set options and solve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="434"/>
+        <location filename="../widgets/mainwindow.cpp" line="442"/>
         <source>&amp;About...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="439"/>
+        <location filename="../widgets/mainwindow.cpp" line="447"/>
         <source>Zoo&amp;m in</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="440"/>
+        <location filename="../widgets/mainwindow.cpp" line="448"/>
         <source>Zoom o&amp;ut</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="449"/>
+        <location filename="../widgets/mainwindow.cpp" line="457"/>
         <source>Compare</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="455"/>
+        <location filename="../widgets/mainwindow.cpp" line="463"/>
         <source>Rewind</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="456"/>
+        <location filename="../widgets/mainwindow.cpp" line="464"/>
         <source>Forward</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="476"/>
+        <location filename="../widgets/mainwindow.cpp" line="484"/>
         <source>&amp;File</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="491"/>
+        <location filename="../widgets/mainwindow.cpp" line="499"/>
         <source>&amp;Edit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="509"/>
+        <location filename="../widgets/mainwindow.cpp" line="517"/>
         <source>&amp;Solve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="512"/>
+        <location filename="../widgets/mainwindow.cpp" line="520"/>
         <source>&amp;Language</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="516"/>
+        <location filename="../widgets/mainwindow.cpp" line="524"/>
         <source>&amp;Help</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="547"/>
+        <location filename="../widgets/mainwindow.cpp" line="555"/>
         <source>%1 of %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="587"/>
+        <location filename="../widgets/mainwindow.cpp" line="595"/>
         <source>Language changed</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="587"/>
+        <location filename="../widgets/mainwindow.cpp" line="595"/>
         <source>Language changed. Restart application to view in chosen language.</source>
         <translation></translation>
     </message>
@@ -922,12 +942,12 @@ File not found, not readable or parsing error.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="120"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="121"/>
         <source>Really remove template?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="120"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="121"/>
         <source>Are you sure you want to remove this template?</source>
         <translation></translation>
     </message>
@@ -1030,53 +1050,53 @@ File not found, not readable or parsing error.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="23"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="24"/>
         <source>&amp;Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="24"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="25"/>
         <source>&amp;Capacity:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="42"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="43"/>
         <source>Add</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="43"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="44"/>
         <source>Remove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="49"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="50"/>
         <source>Decreased resource capacity:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="71"/>
         <location filename="../widgets/dialogs/resourcedialog.cpp" line="72"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="73"/>
         <source>day</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="112"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="113"/>
         <source>Invalid input</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="112"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="113"/>
         <source>Please fill in a name.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="114"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="115"/>
         <source>A resource with the same name does exist already.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedialog.cpp" line="114"/>
+        <location filename="../widgets/dialogs/resourcedialog.cpp" line="115"/>
         <source>Resource exists already</source>
         <translation></translation>
     </message>
@@ -1084,12 +1104,12 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>ResourceHeaderWidget</name>
     <message>
-        <location filename="../widgets/resourceheaderwidget.cpp" line="71"/>
+        <location filename="../widgets/resourceheaderwidget.cpp" line="90"/>
         <source>Cannot remove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/resourceheaderwidget.cpp" line="71"/>
+        <location filename="../widgets/resourceheaderwidget.cpp" line="90"/>
         <source>This resource is required by activities and cannot be removed.</source>
         <translation>This resource is required by tasks and cannot be removed.</translation>
     </message>
@@ -1188,58 +1208,63 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>SolvingProgressDialog</name>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="13"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="12"/>
         <source>%1 Solver</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="20"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="22"/>
         <source>Status:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="30"/>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="72"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="32"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="75"/>
         <source>More...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="72"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="75"/>
         <source>Less...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="89"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="99"/>
         <source>The instance has been solved successfully.
 The solver posted %1 precedence constraints.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="94"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="104"/>
         <source>The instance could not be solved, due to a resource peak on
 resource &apos;%1&apos;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="97"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="107"/>
         <source>The tasks in project &apos;%1&apos; could not be scheduled mutually exclusive.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="100"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="110"/>
         <source>The instance could not be solved.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="106"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="116"/>
         <source>See &apos;More...&apos; for more information.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="125"/>
+        <source>The solver has been terminated. Solution so far has been applied.</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>Timeline</name>
     <message>
-        <location filename="../widgets/timeline.cpp" line="42"/>
+        <location filename="../widgets/timeline.cpp" line="41"/>
         <source>%0</source>
         <translation></translation>
     </message>
