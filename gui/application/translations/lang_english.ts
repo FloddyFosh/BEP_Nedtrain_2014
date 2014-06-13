@@ -10,7 +10,16 @@
     </message>
     <message>
         <location filename="../widgets/dialogs/aboutdialog.cpp" line="22"/>
-        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2012</source>
+        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research \
+            project for Delft University of Technology and NedTrain. This version \
+            was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;\
+            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt; \
+            E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt; \
+            &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt; \
+            C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt; \
+            &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt; \
+            Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;"
+            "&amp;copy; 2014</source>
         <translation></translation>
     </message>
 </context>
@@ -800,6 +809,11 @@ File not found, not readable or parsing error.</source>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="420"/>
         <source>Configure available solvers</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="422"/>
+        <source>Paint flexibility intervals</source>
         <translation></translation>
     </message>
     <message>

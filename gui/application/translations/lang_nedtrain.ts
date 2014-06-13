@@ -10,8 +10,21 @@
     </message>
     <message>
         <location filename="../widgets/dialogs/aboutdialog.cpp" line="22"/>
-        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2012</source>
-        <translation>De &lt;strong&gt;NedTrain planner&lt;/strong&gt; is ontwikkeld in het kader van een onderzoeksproject voor de Technische Universiteit Delft en NedTrain. Deze versie is gebaseerd op eerder werk van Ronald Evers (2010).&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;Ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;E. Ammerlaan, J. Elffers, E. Walraven en W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Onder begeleiding van:&lt;/strong&gt;&lt;br /&gt;Prof. dr. C. Witteveen, ir. M. Wilson en ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2012</translation>
+        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research \
+            project for Delft University of Technology and NedTrain. This version \
+            was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;\
+            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt; \
+            E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt; \
+            &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt; \
+            C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt; \
+            &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt; \
+            Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;"
+            "&amp;copy; 2014</source>
+        <translation>De &lt;strong&gt;NedTrain planner&lt;/strong&gt; is ontwikkeld in het kader van een onderzoeksproject voor de Technische Universiteit Delft en NedTrain. Deze versie is gebaseerd op eerder werk van Ronald Evers (2010).&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;E. Ammerlaan, J. Elffers, E. Walraven en W. Wisse.&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Verder ontwikkeld door:&lt;/strong&gt;C. Bakker, A. Bouter en M. den Hoedt.&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Onder begeleiding van:&lt;/strong&gt;&lt;br /&gt;Prof. dr. C. Witteveen, ir. M. Wilson en ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;
+&amp;copy; 2014</translation>
     </message>
 </context>
 <context>
@@ -809,6 +822,11 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
         <location filename="../widgets/mainwindow.cpp" line="420"/>
         <source>Configure available solvers</source>
         <translation>Bestaande solvers configureren</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="422"/>
+        <source>Paint flexibility intervals</source>
+        <translation>Flexibiliteitsintervallen tekenen</translation>
     </message>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="429"/>
