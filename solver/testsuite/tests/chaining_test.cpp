@@ -57,6 +57,7 @@ TEST_F(ChainingTest, InitializeChainsTest) {
 }
 
 TEST_F(ChainingTest, SelectFirstChainTest){
+    initializeChains();
     activity* act1 = A(0,0);
     chainId id1 = selectFirstChain(act1->i,act1->j,0);
     EXPECT_EQ(0,id1.resource);
@@ -69,6 +70,7 @@ TEST_F(ChainingTest, SelectFirstChainTest){
 }
 
 TEST_F(ChainingTest, SelectFirstChainExceptionTest){
+    initializeChains();
     chainId newId = {1,0};
     chain newChain = {};
     chains[newId] = newChain;
@@ -80,7 +82,35 @@ TEST_F(ChainingTest, SelectFirstChainExceptionTest){
     EXPECT_THROW(selectFirstChain(a2->i,a2->j,1),NoChainFoundException);
 }
 
+TEST_F(ChainingTest, SelectRandomChainTest){
+    initializeChains();
+    activity* act1 = A(0,0);
+    chainId id1 = selectRandomChain(act1->i,act1->j,0);
+    EXPECT_EQ(0,id1.resource);
+    EXPECT_GE(2,id1.unit);
+    EXPECT_LE(0,id1.unit);
+
+    activity* act2 = A(0,1);
+    chainId id2 = selectRandomChain(act2->i,act2->j,1);
+    EXPECT_EQ(1,id2.resource);
+    EXPECT_EQ(0,id2.unit);
+}
+
+TEST_F(ChainingTest, SelectRandomChainExceptionTest){
+    initializeChains();
+    chainId newId = {1,0};
+    chain newChain = {};
+    chains[newId] = newChain;
+
+    activity* a1 = A(0,0);
+    chainId id1 = selectRandomChain(a1->i,a1->j,1);
+    chains[id1].activities.push_back(a1);
+    activity* a2 = A(1,0);
+    EXPECT_THROW(selectRandomChain(a2->i,a2->j,1),NoChainFoundException);
+}
+
 TEST_F(ChainingTest, PushToChainTest){
+    initializeChains();
     chainId id1 = {0,0};
     chainId id2 = {1,0};
     pushToChain(A(0,0),&id1);
@@ -91,6 +121,18 @@ TEST_F(ChainingTest, PushToChainTest){
     EXPECT_EQ(0,prec->i2);
     EXPECT_EQ(0,prec->j1);
     EXPECT_EQ(1,prec->j2);
+}
+
+TEST_F(ChainingTest, PushToBestChainTest){
+    initializeChains();
+    pushToBestChains(0,0,0);
+    int count = 0;
+    map<chainId, chain>::iterator it;
+    for(it = chains.begin(); it != chains.end(); ++it){
+        chain c = it->second;
+        count += (int) c.activities.size();
+    }
+    EXPECT_EQ(2,count);
 }
 
 TEST_F(ChainingTest, PrintChainTest){

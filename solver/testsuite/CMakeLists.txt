@@ -16,7 +16,15 @@ add_executable(testsuite testsuite.cpp
     ../src/flexibility.cpp
     ../src/tmsp.cpp
     ../src/exceptions.cpp
-    ../src/output.cpp)
+    ../src/output.cpp
+    ../src/solve.cpp
+    ../src/token.cpp
+    ../src/timing.cpp
+    ../src/stjn.cpp
+    ../src/esta_plus.cpp
+    ../src/grammar.tab.cpp
+    ../src/lex.cpp
+    ../src/heap.cpp)
 
 # Link testsuite with GTest, pthread, Clp en CoinUtils
-target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread Clp CoinUtils z)
+target_link_libraries(testsuite ${GTEST_LIBRARIES} pthread Clp CoinUtils z fl)

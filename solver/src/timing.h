@@ -1,6 +1,8 @@
 #ifndef __TIMING_H
 #define __TIMING_H
 
+#include "alles.h"
+
 #define solverProgress(x)	output("PROGRESS: %d\n", x)
 
 typedef struct timing_info {

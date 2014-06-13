@@ -21,7 +21,7 @@ typedef struct peak2_t {
 	vector<node_t *> activities;
 } peak2_t;
 
-int esta_plus();
+int esta_plus(int merge_bandwidth, int add_mutexes);
 
 /* Returns true iff a2's earliest possible run is running at a1.start.earliest. */
 #define P_ik(i1,j1,i2,j2)	((i1 == i2 && j1 == j2) || \

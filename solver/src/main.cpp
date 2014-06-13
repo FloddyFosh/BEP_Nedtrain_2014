@@ -7,79 +7,15 @@
 #include "token.h"
 #include "grammar.tab.hpp"
 
-#include "tmsp.h"
-#include "stjn.h"
-#include "esta_plus.h"
 #include "timing.h"
 #include "output.h"
-#include "flexibility.h"
-#include "chaining.h"
+#include "solve.h"
+#include "tmsp.h"
 
-int merge_bandwidth = -1;
-
-extern void print_hele_state();
-extern void handle_neg_cyc();
-
-int solve() {
-    cdebug("\nConstructing STJN.\n");
-    timing_start("STJN");
-    int stjn_consistent = stjn_construct();
-    solverProgress(10);
-    timing_stop("STJN");
-    if (!stjn_consistent) {
-        cdebug("Problem inconsistent. Aborting!\n");
-        handle_neg_cyc();
-        solverProgress(100);
-        return 0;
-    }
-    cdebug("Constructing STJN Done.\n");
-
-    cdebug("\nRunning ESTA+ algorithm.\n");
-    timing_start("ESTA+");
-    if (esta_plus()) {
-        solverProgress(50);
-        timing_stop("ESTA+");
-    } else {
-        timing_stop("ESTA+");
-        cdebug("Could not find valid schedule. Aborting!\n");
-        solverProgress(100);
-        return 0;
-    }
-    cdebug("ESTA+ algorithm Done.\n");
-
-    cdebug("\nRunning Chaining algorithm.\n");
-    timing_start("Chaining");
-    if(chaining()){
-        solverProgress(75);
-        timing_stop("Chaining");
-    } else {
-        timing_stop("Chaining");
-        cdebug("Could not find valid schedule. Aborting!\n");
-        solverProgress(100);
-        return 0;
-    }
-    cdebug("Chaining algorithm Done.\n");
-
-    cdebug("\nConstructing flexibility intervals using Linear Programming solver.\n");
-    timing_start("LP");
-    if(flexibility()){
-        solverProgress(90);
-        timing_stop("LP");
-    } else {
-        timing_stop("LP");
-        cdebug("Could not find valid schedule. Aborting!\n");
-        solverProgress(100);
-        return 0;
-    }
-    cdebug("Constructing flexibility intervals Done.\n");
-
-    solverProgress(100);
-    return 1;
-}
-
-int add_mutexes = 0;
 int main(int argc, char *argv[]) {
     int c;
+    int merge_bandwidth = -1;
+    int add_mutexes = 0;
 
     timing_start("Total");
 
@@ -144,7 +80,7 @@ int main(int argc, char *argv[]) {
 
     cdebug("Parsing Done.\n");
 
-    int solved = solve();
+    int solved = solve(merge_bandwidth, add_mutexes);
 
     timing_stop("Total");
 

@@ -8,8 +8,8 @@
 
 void print_hele_state();
 
-extern int merge_bandwidth;
 int leveling_constraints_before_chaining;
+extern int merge_bandwidth;
 vector<map<int, peak2_t *> > peakhash;
 Heap *peakqueue;
 
@@ -513,7 +513,7 @@ void handle_neg_cyc() {
     }
 }
 
-int esta_plus() {
+int esta_plus(int merge_bw, int add_mutexes) {
     /* Earliest Start Time Algorithm:
      *
      * 1. create STN
@@ -527,6 +527,7 @@ int esta_plus() {
      * 9.   postConstraint(pc)
      * 10.end loop
      */
+    merge_bandwidth = merge_bw;
     int ret=1, order;
     node_t *from, *to;
     peak2_t *peak;
@@ -639,7 +640,6 @@ cleanup:
     }
     else
     {
-        extern int add_mutexes;
         // print PEAK
         if (add_mutexes and peak->resource >= tmsp->n_resources - tmsp->n_trains)
         {

@@ -2,7 +2,7 @@ CFLAGS=-Wall
 LDLIBS=-LC:/GnuWin32/lib -lfl -lm
 LSOURCES=lex.l
 YSOURCES=grammar.ypp
-CSOURCES=output.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp token.cpp chaining.cpp exceptions.cpp constraints.cpp flexibility.cpp
+CSOURCES=output.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp token.cpp chaining.cpp exceptions.cpp constraints.cpp flexibility.cpp solve.cpp
 HSOURCES=$(CSOURCES:.cpp=.h) includes.h
 OBJECTS=$(LSOURCES:.l=.o) $(YSOURCES:.ypp=.tab.o) $(CSOURCES:.cpp=.o)
 
@@ -29,6 +29,9 @@ solverstatic: $(OBJECTS) main.o
 
 main.o: main.cpp
 	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o main.o `test -f 'main.cpp' || echo './'`main.cpp
+
+solve.o: solve.cpp
+	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o solve.o `test -f 'solve.cpp' || echo './'`solve.cpp
 
 flexibility.o: flexibility.cpp
 	g++ $(CXXFLAGS) -DSAMPLEDIR=\"`PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --variable=datadir coindatasample`\" `PKG_CONFIG_PATH=../../coin-Clp/lib64/pkgconfig:../../coin-Clp/lib/pkgconfig:../../coin-Clp/share/pkgconfig: pkg-config --cflags clp`  -c -o flexibility.o `test -f 'flexibility.cpp' || echo './'`flexibility.cpp

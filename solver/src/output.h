@@ -1,6 +1,8 @@
 #ifndef __DEBUG_H
 #define __DEBUG_H
 
+#include "alles.h"
+
 #define LINE "------------------------------------------------\n"
 void cdebug(string format, ...);
 void _debug(string format, ...);
