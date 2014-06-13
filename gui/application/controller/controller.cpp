@@ -217,8 +217,10 @@ void Controller::setFlexTimes() {
     if(isPaintingFlexibilityIntervals()) {
         foreach(Instance * i, getAllInstances()) {
             foreach(Group* g, i->getGroups()) {
-                g->setST(g->getESTFlex());
-                g->getActivities()[0]->setDuration(qMin(g->getDuration(), g->getLFTFlex() - g->getESTFlex()));
+                if(!g->isLocked()) {
+                    g->setST(g->getESTFlex());
+                    g->getActivities()[0]->setDuration(qMin(g->getDuration(), g->getLFTFlex() - g->getESTFlex()));
+                }
             }
         }
     }
