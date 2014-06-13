@@ -1,1 +1,8 @@
 \section{Discussie en Aanbevelingen}
+De vorige bacheloreindprojectgroep beveelde een undo-functionaliteit aan \cite{bep2012nedtrain}. Ook wij zien zeker het voordeel van een undo-functionaliteit in, omdat bij het gebruik wel eens iets per ongeluk verwijderd of veranderd wordt. Aangezien de NedTrain Planner nu meer wordt gebruikt voor onderzoek en educatie wordt de focus gelegd op andere belangrijke features. Als deze tool gebruikt gaat worden door de planners van NedTrain is een undo-functionaliteit een musthave. 
+
+We hebben onderzocht hoe deze feature gemaakt zou kunnen worden. Een voordeel is dat Qt een Undo Framework heeft, maar om dit te kunnen gebruiken moet er veel aan de code veranderd worden. Dan komen we meteen bij ons volgende aanbeveling.
+
+De tweede aanbevling is de code kwaliteit verbeteren. 
+
+Ten derde is kan het goed zijn om de communicatie te verbeteren. De grootste snelheidswinst is nu te behalen in de communicatie tussen de NedTrain Planner en de solver. Er kan worden gekeken naar de uitvoer van de solver tijdelijk naar een bestand te schrijven en deze daarna in te lezen door de NedTrain Planner. Ook kan de hoeveel informatie dat wordt verstuurd van de solver naar de NedTrain Planner worden gereduceerd. De frames die worden getoond door de interface worden \'e\'en voor\'e\'en verstuurd vanaf de solver. Door steeds het verschil door te geven valt een relatief grote snelheidswinst te behalen.
