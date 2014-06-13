@@ -36,6 +36,10 @@ QMap<int, Chain*>* Resource::getChains() {
     return &chains;
 }
 
+void Resource::clearChains() {
+    chains.clear();
+}
+
 void Resource::addActToChain(Activity* act, int chainId) {
     QMap<int,Chain*>* chainsPointer = getChains();
     if(!chainsPointer->contains(chainId)){

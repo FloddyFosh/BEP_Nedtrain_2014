@@ -148,6 +148,11 @@ public:
      */
     void setFrames(QVector<Frame *> frames);
 
+    /**
+     * Clears the frames for replaying.
+     */
+    void clearFrames();
+
     /** Add a resource to the instance, used by the parser.
      * @param i resource index
      * @param capacity capacity (C(i)) of new resource (R(i))

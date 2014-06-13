@@ -101,6 +101,10 @@ void Instance::setFrames(QVector<Frame *> frames) {
     replayFrames = frames;
 }
 
+void Instance::clearFrames() {
+    replayFrames.clear();
+}
+
 QMap<int, Resource *> Instance::getResources() { return resources; }
 QMap<int, Job *> Instance::getJobs() { return jobs; }
 QVector<Precedence *> Instance::getHardPrecedences() { return precedences; }

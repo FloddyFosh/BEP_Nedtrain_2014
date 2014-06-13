@@ -77,6 +77,7 @@ public:
     int getMutexJob(); ///< returns the id of the job where the mutual exclusive requirement could not be satisfied, if solving failed.
 
 private:
+    void clearBeforeSolving(); ///< Clear all (possible earlier solved) data.
     void processProgressLine(QByteArray &line); ///< processes a progress line outputted by the solver.
     void processPrecedenceLine(QByteArray &line); ///< processes a precedence line outputted by the solver.
     void processStateLine(QByteArray &line);  ///< processes a state line outputted by the solver.
