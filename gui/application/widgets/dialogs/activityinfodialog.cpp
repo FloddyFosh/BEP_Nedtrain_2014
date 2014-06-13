@@ -1,5 +1,6 @@
 #include "activityinfodialog.h"
 #include "activitydialog.h"
+#include "widgets/app_icon.h"
 
 #include <QLabel>
 #include <QPushButton>
@@ -8,6 +9,7 @@ ActivityInfoDialog::ActivityInfoDialog(Instance *instance, Activity *a, QWidget 
     QDialog(parent), a(a)
 {
     setWindowTitle(tr("Activity info"));
+    setWindowIcon(AppIcon("icon.png"));
     QFormLayout *formlayout = new QFormLayout;
 
     //labels

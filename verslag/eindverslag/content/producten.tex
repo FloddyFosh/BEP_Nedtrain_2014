@@ -13,10 +13,10 @@ Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chai
 \subsection*{Linear Programming}
 Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
 
-Hoe het toevoegen van rows gebeurt enzo...
+De documentatie van Clp is helaas niet heel erg uitgebreid, maar het is desondanks toch gelukt om het LP-probleem door Clp te laten oplossen. Er wordt gebruik gemaakt van een model dat een instance is van de \texttt{ClpSimplex} klasse. Wij hebben zelf nog een \texttt{Constraints} klasse gemaakt om alle elke variabele een nummer te geven. De variabelen $t^+_0, t^-_0, \ldots, t^+_n$ en $t^-_n$ krijgen respectievelijk de nummers $0, 1, \ldots, 2 \cdot n$ en $2 \cdot n + 1$. Aan het model moet voor elke variabele een onder- en bovengrens worden gesteld. Er moet een objective functie worden opgegeven en ingesteld dat deze gemaximaliseerd moet worden. Vervolgens kan er aan het model constraints worden toegevoegd. Door een solve methode aan te roepen op het model kan er vervolgens met behulp van de variabele nummers de toegekende waarde van de variabele uit het model worden opgevraagd. 
 
 \subsection{Interface}
-De grootste veranderingen aan de interface zijn het weergeven van de chains en de flexibiliteitsintervallen. Deze worden als volgt in de interface weergegeven:
+Er zijn grote en kleine veranderingen aan de interface toegebracht. Kleine veranderingen zijn onder andere bugfixes voor bugs die zijn achtergelaten door de vorige groep, die aan de NedTrain Planner heeft gewerkt. De grootste veranderingen aan de interface zijn het weergeven van de chains en de flexibiliteitsintervallen. Deze worden als volgt in de interface weergegeven:
 
 \begin{figure}[H]
 \centering
@@ -60,4 +60,4 @@ Nog een feature die voor een verbeterd gebruiksgemak moet zorgen zijn de knopjes
 Om de toegankelijkheid van de applicatie te vergroten, is ervoor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
 
 \subsection{Upgrade naar Qt 5.2}
-De bestaande applicatie was ontwikkeld in versie 4.8 van het Qt framework, maar om de applicatie zo up-to-date mogelijk te houden, is deze geport naar Qt versie 5.2. Hierdoor hoeft een eventuele groep die de applicatie verder gaat ontwikkelen, niet met een oude versie van het Qt framework te werken. Deze upgrade betekent echter ook dat de applicatie niet meer werkt met Qt 4, maar alleen met versie 5.
+De bestaande applicatie was ontwikkeld in versie 4.8 van het Qt framework, maar om de applicatie zo up-to-date mogelijk te houden, is deze geport naar Qt versie 5.2. Hierdoor hoeft een eventuele groep, die de applicatie verder gaat ontwikkelen, niet met een oude versie van het Qt framework te werken. Deze upgrade betekent echter ook dat de applicatie niet meer werkt met Qt 4, maar alleen met versie 5.

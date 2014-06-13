@@ -1,5 +1,7 @@
 #include "widgets/dialogs/formdialog.h"
 
+#include "widgets/app_icon.h"
+
 FormDialog::FormDialog(QWidget *parent) : QDialog(parent) {
     formLayout = new QFormLayout;
     verticalLayout = new QVBoxLayout;
@@ -9,6 +11,7 @@ FormDialog::FormDialog(QWidget *parent) : QDialog(parent) {
 }
 
 void FormDialog::setUpLayout() {
+    setWindowIcon(AppIcon("icon.png"));
     verticalLayout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(apply()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));

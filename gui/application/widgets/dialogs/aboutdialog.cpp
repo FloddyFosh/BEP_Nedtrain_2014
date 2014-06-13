@@ -1,4 +1,5 @@
 #include "widgets/dialogs/aboutdialog.h"
+#include "widgets/app_icon.h"
 
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
@@ -10,6 +11,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent)
 {
     setWindowTitle(tr("About Task scheduler"));
+    setWindowIcon(AppIcon("icon.png"));
     setFixedWidth(600);
     setFixedHeight(280);
 

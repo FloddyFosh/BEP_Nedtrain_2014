@@ -1,5 +1,6 @@
 #include "solvingprogressdialog.h"
 #include "controller/instancecontroller.h"
+#include "widgets/app_icon.h"
 
 #include <QBoxLayout>
 #include <QLayout>
@@ -10,6 +11,7 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
 {
     // create ui
     setWindowTitle(tr("%1 Solver").arg(solver->getName()));
+    setWindowIcon(AppIcon("icon.png"));
 
     numSoftPrecedences = 0;
     foreach(Precedence* p, instance->getSoftPrecedences()){

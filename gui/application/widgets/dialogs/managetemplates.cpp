@@ -1,5 +1,6 @@
 #include "managetemplates.h"
 #include "data/template_gateway.h"
+#include "widgets/app_icon.h"
 
 #include <QMessageBox>
 #include <QFormLayout>
@@ -10,6 +11,7 @@ ManageTemplatesDialog::ManageTemplatesDialog(Instance *inst, QWidget *parent) :
     ListFormDialog(parent), instance(inst)
 {
     setWindowTitle(tr("Manage templates"));
+    setWindowIcon(AppIcon("icon.png"));
 
     nameEdit = new QLineEdit;
     durationEdit = new QSpinBox;
