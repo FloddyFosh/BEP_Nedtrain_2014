@@ -39,3 +39,4 @@ Datum      | Uren   | Beschrijving
 10-06-2014 | 7      | Flexibiliteitsintervallen feature verbeterd, zodat er geen bugs optreden bij het verplaatsen en verkleinen/vergroten van activiteiten.
 11-06-2014 | 7      | Userstories, sprintreview en eindverslag schrijven
 12-06-2014 | 7      | Eindverslag en met cppcheck code inspecteren/verbeteren.
+13-06-2013 | 7      | Code opsturen naar SIG en eindverslag maken en draft ervan opsturen.
