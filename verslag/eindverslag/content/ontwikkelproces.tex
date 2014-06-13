@@ -42,4 +42,16 @@ Wij hebben continuous integration willen toepassen door gebruik te maken van een
 
 \subsection{Software Improvement Group}
 
+Aan het eind van sprint 5 is al onze code opgestuurd naar de Software Improvement Group, die op de code feedback en een beoordeling van 1 tot 5 sterren zal geven. De code wordt op de volgende onderdelen beoordeeld \cite{sigmanual}:
+\begin{itemize}
+\item \textbf{Volume} - Hoe meer regels code een applicatie bevat, hoe moeilijker het wordt om deze te onderhouden.
+\item \textbf{Duplication} - Het kopi\"eren van code moet zo veel mogelijk vermeden worden.
+\item \textbf{Unit size} - Het grootste deel van de applicatie moet bestaan uit units van maximaal 20 regels.
+\item \textbf{Unit complexity} - De cyclomatische complexiteit, gemeten d.m.v. het \emph{McCabe complexity number}, moet voor het grootste deel van de code niet hoger zijn dan 5.
+\item \textbf{Unit interfacing} - Het meegeven van meer dan 2 parameters moet zo veel mogelijk vermeden worden.
+\item \textbf{Module coupling} - Het sterk gekoppeld zijn van verschillende groepen units moet vermeden worden, omdat dit de software moeilijker te onderhouden maakt.
+\item \textbf{Component balance} - Alle componenten moeten ongeveer even groot zijn. Dit onderdeel wordt beoordeeld d.m.v. de \emph{adjusted Gini coefficient}.
+\item \textbf{Component independence} - Er moet gestreefd worden naar zo veel mogelijk componenten die niet aangeroepen worden door componenten van andere modules. Alleen interface klassen zouden de communicatie tussen verschillende modules moeten regelen.
+\end{itemize}
 
+Op vrijdag 13 juni is de code opgestuurd, dus hierop is nog geen feedback ontvangen.
