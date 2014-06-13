@@ -1,33 +1,45 @@
 \section{Ontwikkelproces}
-
-\subsection{Sprint 1}
+\subsection{Ontwikkelmethode}
+\subsubsection{Sprint 1}
 Het doel van de eerste sprint was om chaining te implementeren. Tijdens de onderzoeksfase hebben we gezien dat het beschikbaar maken voor Windows 7, waarschijnlijk goed te doen is in de tijd die we daarvoor hebben. Het beschikbaar maken voor Windows 7, was daarom ook een doel in de eerste sprint. 
 
-\subsubsection*{Terugblik}
+\textbf{Terugblik} \\
 We zijn er tevreden over het verloop van de eerste sprint. Het porten naar Windows 7 liep met een paar kleine tegenvallers redelijk vlot. Naast het poorten naar Windows 7 is het ook in deze sprint gelukt om de versie van Qt te upgraden naar versie 5.2.1. De basis van ons chaining algoritme werkt, maar de samenwerking tussen GUI en Solver loopt nog niet zoals gewenst. Er is zelf ook al een begin gemaakt aan de LP Solver, een doel dat voor de twee sprint geplant stond. 
 
-\subsection{Sprint 2}
+\subsubsection{Sprint 2}
 Het voornaamste doel van de tweede sprint is de COIN-OR LP solver te laten samenwerken met onze applicatie. Daarnaast is er gewerkt aan het laten zien van aparte chains met daarbij welke resources er door deze chain gebruikt worden. 
 
-\subsubsection*{Terugblik}
+\textbf{Terugblik} \\
 In deze sprint hebben we een aantal tegenvallers gehad. Zo hadden we last van een memory leak, wat redelijk veel tijd kostte om op te lossen. Bovendien moest de bestaande architectuur voor het laten zien van chains vrij veel aangepast worden. Een tweede tegenvaller was het updaten van de software op de Jenkins-server. Aangezien we de tools hebben ge\"upgrade naar Qt versie 5.x, moet op de server Qt ook worden ge\"upgraded. Dit ging niet meteen de eerste keer goed, waarbij uiteindelijk is overgegaan tot een volledige herinstallatie. Dit heeft als gevolg dat we een deel van de eerste commits missen in de continuous integration grafiek.
 
-\subsection{Sprint 3}
+\subsubsection{Sprint 3}
 In deze sprint gaan we een demo doen bij onze opdrachtgevers. Hiermee kunnen we controleren of wat wij hebben gemaakt de opdrachtgevers ook echt willen, we kunnen dan nog het \'e\'en en ander aanpassen in deze en volgende sprints. 
 
-\subsubsection*{Terugblik}
+\textbf{Terugblik} \\
 Het is in deze sprint gelukt om per chain te laten zien welke resources er door de activities in deze chain gebruikt worden. Elke chain kan apart op een frame getoond worden, waarbij de resource units die door deze chain gebruikt zijn, blauw gekleurd worden. De resource units die door eerdere chains van deze resource gebruikt zijn, zijn zwart gekleurd. Dit hebben we tijdens de demo laten zien. De feedback die hierover gegeven was, was dat er niet heel makkelijk gezien kan worden welke taken bij een bepaalde resource unit, bijvoorbeeld een monteur, horen. Om dit duidelijker te maken, zou een aparte view gemaakt kunnen worden. Hierin is echter minder makkelijk te zien hoeveel resources er op een bepaald tijdstip gebruikt worden.
 
 De CLP solver is in deze sprint ook veel verder gevorderd. Er bestaat niet meer een aparte binary voor de CLP solver, maar deze is ge\"integreerd in de binary van de chaining solver. Er kan een willekeurige LP instantie als input gegeven worden en deze kan door de solver opgelost worden. Wat nu nog overblijft is het transformeren van een RCPSP instantie naar een LP instantie, zodat deze opgelost kan worden.
 
-\subsection{Sprint 4}
+\subsubsection{Sprint 4}
 In deze sprint hebben we als doel om de flexibiliteitsintervallen, die worden berekend m.b.v. de LP-solver, door te geven aan de gebruikersinterface. Ook is het belangrijk om dit op een goede manier weer te geven, zodat de gebruiker deze informatie op een juiste manier kan interpreteren. We willen de huidige versie van NedTrain Planner beschikbaar maken voor onze klant(en) ???. We willen de tool zo compileren, dat de klant het gemakkelijk kan  installeren.
 
-\subsubsection*{Terugblik}
+\textbf{Terugblik} \\
 Het is ons gelukt om in deze sprint de flexibiliteitsintervallen weer tegeven op het scherm, maar de gebruiker kan dit nog niet aan en uitzetten. Het verder doorontwikkelen van de features rondom de flexibiliteitsintervallen krijgt een hoge prioriteit in de volgende sprint. De NedTrain Planner kan nu zeer gemakkelijk ge\"installeerd worden op Windows 7, maar voor computers met Linux werkt dit helaas nog niet. 
 
-\subsection{Sprint 5}
+\subsubsection{Sprint 5}
 In deze sprint is het belangrijk de feature van het weergeven van de flexibiliteit af te maken en te testen. Aan het einde van deze sprint moet de code worden opgestuurd naar SIG en moet er een eerste versie van het eindverslag af zijn. 
 
-\subsubsection*{Terugblik}
+\textbf{Terugblik} \\
+De terugblik van sprint 5.
+
+\subsection{Hulpmiddelen}
+\subsubsection{Versiebeheer}
+\label{subsec:versiebeheer}
+Als versiebeheersysteem is voor dit project een Git repository gebruikt op de website \href{http://bitbucket.com}{Bitbucket.com}. Hiervoor hadden wij gekozen, omdat wij het meest bekend zijn met Git. Toch hebben wij nog veel bijgeleerd en gaat het gebruik ons steeds makkelijker af. Het is ons gelukt om altijd een werkende master branch te hebben. Dit heeft als grote voordeel dat er op elk moment tijdens het ontwikkelproces een demo gehouden kan worden. Ook is dit belangrijk om de tests op de contious intregration server te laten slagen. Doordat de tool moet blijven werken op zowel Windows 7 als Linux, werden nieuwe features relatief laat aan de master branch toegevoegd. Vaak ontwikkelde we een nieuwe feature op een computer met Ubuntu en gingen pas als het af is de problemen op Windows 7 verhelpen.
+
+\subsubsection{Contious Integration}
+Wij hebben contious integration willen toepassen door gebruik te maken van een Jenkins server. Deze server werd door onszelf beheerd en stond fysiek bij \'e\'en van de projectleden thuis. Het heeft erg veel tijd gekost om alle software, die nodig is voor het compileren van dit project, te installeren. Zoals vermeld staat in sectie '\nameref{subsec:versiebeheer}', hebben we relatief laat nieuwe features toegevoegd aan de master branch. Dit heeft als gevolg dat de master branch weinig veranderd en het daardoor weinig zin heeft om elke dag te builden. Ook zijn er problemen ontstaan bij het upgraden naar Qt versie 5. Het upgraden van de software op de server ging gepaard met veel problemen en er is uiteindelijk overgegaan tot herinstallatie van de server. In sprint 5 zijn er wederom problemen ontstaan toen de server een keer opnieuw werd opgestart, hierdoor zijn wij de build geschiedenis kwijtgeraakt. Al met al heeft het toepassen van contious integration veel tijd gekost en weinig opgeleverd. 
+
+\subsection{Software Improvement Group}
+
 
