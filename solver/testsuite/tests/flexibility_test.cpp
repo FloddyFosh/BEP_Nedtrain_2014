@@ -29,7 +29,7 @@ TEST_F(FlexibilityTest, Test_1) {
 
     useClpToSolve(&cstr);
     EXPECT_EQ(29, getFlexibility());
-    EXPECT_EQ(2, getMinFlex());    
+    EXPECT_EQ(2, getMinFlex());
 }
 
 TEST_F(FlexibilityTest, Test_2) {

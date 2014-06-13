@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
     // parser
     timing_start("Parsing");
     int readFromFile = 0;
-    if(readFromFile==1){
+    if(readFromFile){
     // open a file handle to a particular file:
         const char* filepath = "../../instances/demo.instance";
         FILE *myfile = fopen(filepath, "r");

@@ -11,8 +11,8 @@
 #include <string>
 #include <utility>
 
-int getMinFlex();
 int getFlexibility();
+int getMinFlex();
 
 void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints);
 void addType1Constraints(ClpSimplex* model, int n_cols);
