@@ -35,3 +35,6 @@ Datum      | Uren   | Beschrijving
 06-06-2014 | 5.5    |
 07-06-2014 | 1      | Fixen van missing font
 09-06-2014 | 4      | Poging tot static build, nieuwe implementatie selectChain
+10-06-2014 | 7.5    | 
+11-06-2014 | 7.5    | 
+12-06-2014 | 9.5    | Eindverslag
