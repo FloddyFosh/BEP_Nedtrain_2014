@@ -1,5 +1,5 @@
 # BEP NedTrain 2014
-Onze Jenkins server is te vinden op: [77.163.248.47](http://77.163.248.47)
+Onze Jenkins server was te vinden op internet.... :(
 
 ## Mappen
  - instances - de aangeleverd instances die geladen kunnen worden in de tool
