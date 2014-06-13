@@ -31,7 +31,7 @@ Dit algoritme lost het RCPSP op door het vinden en oplossen van \emph{contention
 
 \subsubsection{Chaining}
 \label{subsubsec:chainingoplossing}
-Om onafhankelijke flexibiliteitsintervallen te kunnen bepalen, moeten activiteiten echter vrij verschoven kunnen worden, zonder dat hierdoor het schema inconsistent wordt. Hier kan het chaining algoritme voor zorgen. Dit algoritme wijst aan elke resource unit een zogenaamde chain, een gesorteerde lijst van activiteiten, toe. In een chain geldt voor elk paar opeenvolgende activiteiten, $v_{a,b}$ en $v_{c,d}$, dat er een voorrangsrelatie $v_{a,b} \prec v_{c,d}$ bestaat. De output van het chaining algoritme bestaat uit een \emph{Partial Order Schedule (POS)}, wat een schema is waarvoor geldt dat elk schema dat qua tijdsconstraints consistent is, ook consistent is met de resource constraints. Het exact chaining algoritme is weergegeven in Algoritme \ref{alg:chaining}.
+Om onafhankelijke flexibiliteitsintervallen te kunnen bepalen, moeten activiteiten echter vrij verschoven kunnen worden, zonder dat hierdoor het schema inconsistent wordt. Hier kan het chaining algoritme voor zorgen. Dit algoritme wijst aan elke resource unit een zogenaamde chain, een gesorteerde lijst van activiteiten, toe. In een chain geldt voor elk paar opeenvolgende activiteiten, $v_{a,b}$ en $v_{c,d}$, dat er een voorrangsrelatie $v_{a,b} \prec v_{c,d}$ bestaat. De output van het chaining algoritme bestaat uit een \emph{Partial Order Schedule (POS)}, wat een schema is waarvoor geldt dat elk schema dat qua tijdsconstraints consistent is, ook consistent is met de resource constraints. Het exacte chaining algoritme is weergegeven in Algoritme \ref{alg:chaining}.
 
 \begin{algorithm}
 \caption{Chaining \cite{policella2007precedence}}
@@ -92,6 +92,8 @@ In de functie $SelectChain(v_i,r_j)$ wordt een chain gekozen waar activiteit $v_
   \EndFunction
 \end{algorithmic}
 \end{algorithm}
+
+TODO: Het uitwerken van een voorbeeld van chaining.
 
 \subsubsection{Linear Programming}
 \label{subsubsec:flexoplossing}
