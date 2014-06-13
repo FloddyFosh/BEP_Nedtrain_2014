@@ -252,7 +252,7 @@ peak2_t *remove_act_from_peaks(node_t *n, int res) {
         peak->capacity -= Q(n->i, n->j, res);
         int j = find(peak->activities.begin(), peak->activities.end(), n) - peak->activities.begin();
         if((unsigned) j == peak->activities.size()) {
-            debug("ERROR: current activity not found in this peak!\n");
+            debug("ERROR: current activity not found in this peak!\n", 0);
             debug("Activity (%d,%d) at 0x%x est %d requires %d.\n", n->i, n->j, n, n->est, Q(n->i, n->j, peak->resource));
             if(len(n->group) > 1) {
                 debug("Group of %d activities\n", len(n->group));
@@ -427,14 +427,14 @@ void update_group_peak(node_t *g, node_t *a, node_t *b) {
                     peak->resource = res;
 
                     if(!lastpeak) {
-                        debug("ERROR: assumption failure: lastpeak is not set.\n");
+                        debug("ERROR: assumption failure: lastpeak is not set.\n", 0);
                         exit(1);
                     }
                     // Copy active activities from lastpeak
                     for(int j = 0; (unsigned) j < lastpeak->activities.size(); j++) {
                         node_t *act = lastpeak->activities[j];
                         if(act->old_est >= 0) {
-                            debug("ERROR: assumption failure: why is act->old_est set??\n");
+                            debug("ERROR: assumption failure: why is act->old_est set??\n", 0);
                             exit(1);
                         }
                         if(act->est + act->len > peak->time) {
@@ -463,7 +463,7 @@ void update_group_peak(node_t *g, node_t *a, node_t *b) {
             peak->activities = l;
             // If g is not equal to a or b it is newly created, so it must be added
             if(!seen_us) {
-                debug("Adding new group to this peak.\n");
+                debug("Adding new group to this peak.\n", 0);
                 peak->activities.push_back(g);
                 peak->capacity += Q(g->i, g->j, res);
             }
@@ -508,7 +508,7 @@ void handle_neg_cyc() {
         vorige = t;
     }
     if (wrong) {
-        debug("Something wrong in handle neg cycle.\n");
+        debug("Something wrong in handle neg cycle.\n", 0);
         throw 0;
     }
 }
@@ -546,15 +546,15 @@ int esta_plus() {
     while((peak = (peak2_t *) heap_remove(peakqueue)) != NULL) {
         debug("Processing peak: t=%d res=%d cap=%d n_act=%d\n", peak->time, peak->resource, peak->capacity, peak->activities.size());
         if(peak->capacity <= C(peak->resource)) {
-            debug("Peak is lower than resource capacity, continuing!\n");
+            debug("Peak is lower than resource capacity, continuing!\n", 0);
             continue;
         }
-        debug("Capacity of peak exceeds resource, flattening.\n");
+        debug("Capacity of peak exceeds resource, flattening.\n", 0);
 
         if(merge_bandwidth >= 0 && (conflict = select_merge_conflict(peak)) != NULL) {
             debug("Conflict (%d,%d) <--> (%d,%d) selected for merging.\n", conflict->n1->i, conflict->n1->j, conflict->n2->i, conflict->n2->j);
             if((to = stjn_merge(conflict->n1, conflict->n2)) == NULL) {
-                debug("STN inconsistent!\n");
+                debug("STN inconsistent!\n", 0);
                 ret = 0;
                 goto cleanup;
             }
@@ -584,7 +584,7 @@ int esta_plus() {
             if(!stjn_add_precedence(from, to)) {
                 while (1); // mag nooit gebeuren
                 
-                debug("STN inconsistent!\n");
+                debug("STN inconsistent!\n", 0);
                 ret = 0;
                 goto cleanup;
             }
@@ -592,13 +592,13 @@ int esta_plus() {
             
             print_hele_state();
         } else {
-            debug("Unresolvable peak!\n");
+            debug("Unresolvable peak!\n", 0);
             ret = 0;
             goto cleanup;
         }
 
         if(peak->capacity > C(peak->resource)) {
-            debug("Peak capacity still exceeds resource capacity, re-inserting peak into queue.\n");
+            debug("Peak capacity still exceeds resource capacity, re-inserting peak into queue.\n", 0);
             heap_add(peakqueue, peak_score(peak), peak);
         }
     }
@@ -633,7 +633,7 @@ cleanup:
             }
         }
         if (wrong) {
-            debug("SOLUTION WRONG!");
+            debug("SOLUTION WRONG!", 0);
             throw 0;
         }
     }

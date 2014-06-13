@@ -282,7 +282,7 @@ int stjn_add_precedence(node_t *from, node_t *to) {
     int inconsistent = 0;
     set_precedence(from, to);
     if(!update_ordering(from, to)) {
-        debug("Cycle detected.\n");
+        debug("Cycle detected.\n", 0);
         return 0;
     }
     if(to->est < from->est + from->len) {
@@ -376,7 +376,7 @@ node_t *stjn_merge(node_t *n1, node_t *n2) {
     // Next, merge a into g
 
     if(!update_ordering(n1, n2) || !update_ordering(n2, n1)) {
-        debug("Cycle detected while merging.\n");
+        debug("Cycle detected while merging.\n", 0);
         puts("o.O unexpected"); throw 0;
         return NULL;
     }
