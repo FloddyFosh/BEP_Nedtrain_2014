@@ -155,7 +155,7 @@ void JobWidget::paintEvent(QPaintEvent *e) {
 
 void JobWidget::paintAvailability(QPainter &painter) {
     painter.save();
-    QRect available(hZoom() * (_job->releaseDate()+offsetX()), 0, hZoom() * (_job->dueDate() - _job->releaseDate()), height());
+    QRect available(hZoom() * (_job->releaseDate()+offsetX()), 0, hZoom() * (_job->dueDate() - _job->releaseDate()) + 1, height());
     painter.fillRect(available, QColor::fromHsvF(.3, 1, 1, .2));
     painter.restore();
 }
@@ -172,7 +172,6 @@ void JobWidget::paintGroups() {
 void JobWidget::paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset){
 	int yStart = vZoom() * yOffset;
 	int yEnd   = vZoom() * yOffset + height;
-	xEnd -= 2;
 	painter.setPen(QPen (QColor(170,215,170), 1, Qt::SolidLine));
 	painter.drawLine(xStart,(yStart+yEnd)/2,xEnd,(yStart+yEnd)/2);
 	painter.setPen(QPen (Qt::darkGray, 1, Qt::SolidLine));
@@ -183,7 +182,6 @@ void JobWidget::paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd
 void JobWidget::paintFlexibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset) {
     int yStart = vZoom() * yOffset;
     int yEnd   = vZoom() * yOffset + height;
-    xEnd -= 2;
     painter.setPen(QPen (QColor(0,0,255), 1, Qt::SolidLine));
     painter.drawLine(xStart,(yStart+yEnd)/2,xEnd,(yStart+yEnd)/2);
     painter.setPen(QPen (QColor(0,0,255), 1, Qt::SolidLine));
