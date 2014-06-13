@@ -16,18 +16,22 @@ class ChainingTest : public ::testing::Test {
         sbuf = cout.rdbuf();
         cout.rdbuf(buffer.rdbuf());
 
-        add_resource(0,3,"engineers");
-        add_resource(1,1,"cleaners");
+        string eng,cl,t0,t1,a00,a01,a10;
+        eng = "engineers", cl = "cleaners";
+        add_resource(0,3,&eng[0]);
+        add_resource(1,1,&cl[0]);
 
-        add_train(0,5,25,"t0");
-        add_activity(0,0,10,"act0,0",5,12);
+        t0 = "t0", a00 = "act0,0", a01 = "act0,1";
+        add_train(0,5,25,&t0[0]);
+        add_activity(0,0,10,&a00[0],5,12);
         add_requirement(0,0,0,2);
         add_requirement(0,0,1,1);
-        add_activity(0,1,3,"act0,1",6,8);
+        add_activity(0,1,3,&a01[0],6,8);
         add_requirement(0,1,0,1);
 
-        add_train(1,0,30,"t1");
-        add_activity(1,0,12,"act1,0",0,23);
+        t1 = "t1", a10 = "act1,0";
+        add_train(1,0,30,&t1[0]);
+        add_activity(1,0,12,&a10[0],0,23);
         add_requirement(1,0,1,1);
     }
     virtual void TearDown() {
@@ -59,7 +63,7 @@ TEST_F(ChainingTest, SelectFirstChainTest){
     EXPECT_EQ(0,id1.unit);
 
     activity* act2 = A(0,1);
-    chainId id2 = selectChain(act2->i,act2->j,1);
+    chainId id2 = selectFirstChain(act2->i,act2->j,1);
     EXPECT_EQ(1,id2.resource);
     EXPECT_EQ(0,id2.unit);
 }
@@ -73,7 +77,7 @@ TEST_F(ChainingTest, SelectFirstChainExceptionTest){
     chainId id1 = selectFirstChain(a1->i,a1->j,1);
     chains[id1].activities.push_back(a1);
     activity* a2 = A(1,0);
-    EXPECT_THROW(selectChain(a2->i,a2->j,1),NoChainFoundException);
+    EXPECT_THROW(selectFirstChain(a2->i,a2->j,1),NoChainFoundException);
 }
 
 TEST_F(ChainingTest, PushToChainTest){
