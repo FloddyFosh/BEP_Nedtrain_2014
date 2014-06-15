@@ -123,7 +123,12 @@ void JobHeaderWidget::editJob(){
 
 void JobHeaderWidget::removeJob() {
     controller->stopDrawingDependencies();
-    if(!(_job->hasActivities() && QMessageBox::No == QMessageBox::question(this, tr("Are you sure?"), tr("Are you sure you want to remove this job with its activities?"),QMessageBox::Yes | QMessageBox::No)))
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("Are you sure?"));
+    msgBox.setWindowIcon(AppIcon("icon.png"));
+    msgBox.setText("Are you sure you want to remove this job with its activities?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    if(!(_job->hasActivities() && QMessageBox::No == msgBox.exec()))
         emit remove(_job);
 }
 

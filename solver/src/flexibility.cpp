@@ -158,15 +158,17 @@ void addConstraints(Constraints* constraints) {
 void addLimits(Constraints* constraints) {
     // set upper limits to the variables
     for(int i = 0; i < (int) tmsp->trains.size(); i++) {
-        int due = tmsp->trains[i]->due_date;
-        int release = tmsp->trains[i]->release_date;
-        vector<activity* > activities = tmsp->trains[i]->activities;
-        for(int k = 0; k < (int) activities.size(); k++) {
-            stringstream ss1;
-            ss1 << activities[k]->i << ' ' << activities[k]->j;
-            string var1(ss1.str());
-            constraints->setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
-            constraints->setLowerLimit(var1.c_str(), release);
+        if(tmsp->trains[i] != NULL) {
+            int due = tmsp->trains[i]->due_date;
+            int release = tmsp->trains[i]->release_date;
+            vector<activity* > activities = tmsp->trains[i]->activities;
+            for(int k = 0; k < (int) activities.size(); k++) {
+                stringstream ss1;
+                ss1 << activities[k]->i << ' ' << activities[k]->j;
+                string var1(ss1.str());
+                constraints->setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
+                constraints->setLowerLimit(var1.c_str(), release);
+            }
         }
     }
 }
