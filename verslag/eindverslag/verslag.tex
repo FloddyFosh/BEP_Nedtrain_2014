@@ -12,28 +12,34 @@
 \begin{titlepage}
 \center
 \textsc{Technische Universiteit Delft}\\[0.2cm]
-\textsc{\Huge Bachelor Thesis}\\[1.5cm]
+\textsc{\Huge Bachelorproject}\\[1.5cm]
 \HRule \\[0.4cm]
 {\Huge \bfseries NedTrain Planner}\\[0.5cm]
 {\LARGE \bfseries Construeren van Flexibele Roosters}\\[0.4cm]
 \HRule \\[1.5cm]
 
 \begin{large}
-\begin{minipage}{0.3\textwidth}
-\begin{flushleft}
-\textit{ \bfseries Auteurs:}\\
-\textsc{C. Bakker}\\
-\textsc{A. Bouter}\\
-\textsc{M. den Hoedt}\\
-\end{flushleft}
-\end{minipage}
-\begin{minipage}{0.6\textwidth}
-\begin{flushright}
-\textit{ \bfseries Commissie:}\\
-\textsc{M.A. Larson} {\normalsize (Vak Co\"ordinator)}\\
-\textsc{Prof. Dr. C. Witteveen} {\normalsize (TU Delft Coach)}\\
-\textsc{Ir. B. Huisman} {\normalsize (NedTrain)}\\
-\end{flushright}
+\raggedright
+\textbf{Auteurs:}\\[0.1cm]
+\begin{minipage}{\textwidth}
+\flushleft
+C. Bakker \\
+A. Bouter \\
+M. den Hoedt \\
+\end{minipage}\\[1cm]
+\raggedright
+\textbf{Commissie:}\\[0.1cm]
+\begin{minipage}{0.5\textwidth}
+\flushleft
+M.A. Larson \\
+Prof. Dr. C. Witteveen \\
+Ir. B. Huisman \\
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\flushright
+Vak Co\"ordinator \\
+TU Delft Coach \\
+NedTrain \\
 \end{minipage}
 \end{large}
 
@@ -66,6 +72,7 @@
 \input{content/samenvatting}
 \newpage
 \pagestyle{fancy}
+\fancyhead[L]{}
 \input{content/inleiding}
 \newpage
 \input{content/probleemstelling}
@@ -84,11 +91,12 @@
 \newpage
 \input{content/conclusie}
 
-
 \newpage
 \addcontentsline{toc}{section}{Referenties}
 \bibliographystyle{abbrv}
 \bibliography{../references}
+
+\fancyhead{}
 
 \newpage
 \input{content/appendix.tex}

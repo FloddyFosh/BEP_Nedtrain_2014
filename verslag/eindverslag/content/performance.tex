@@ -9,7 +9,7 @@ In dit hoofdstuk een analyse van de looptijd van de solver. Bij deze analyse del
     \item 912 activiteiten, die elk gebruik maken van tussen de 1 en 5 resources
 \end{itemize}
 
-In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+outputbestand} is te zien wat de looptijden zijn van de onderdelen van de solver met en zonder printen van output. De solver stuurt de output naar \texttt{stdout} Als er wel output wordt geprint duurt het oplossen van de 'xxl-instance' ongeveer $110$ seconden en als er geen output wordt geprint duurt het oplossen ongeveer $1,4$ seconden. Ook valt op dat als alle output niet naar \texttt{stdout}, maar naar een bestand wordt gestuurd de totale looptijd iets meer dan $4$ seconden duurt. Er valt dus veel snelheidswinst te behalen door het printen te optimaliseren. Een andere optie is om slimmer om te gaan met wat er wel en niet wordt geprint, want dat kan ook al veel tijd schelen. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner. Daarom is printen naar een tijdelijk bestand in plaats van \texttt{stdout} mogelijk een goed alternatief om voor een versnelling te kunnen zorgen. 
+In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+outputbestand} is te zien wat de looptijden zijn van de onderdelen van de solver met en zonder printen van output. Deze waarden komen van een getrimd gemiddelde van 20 metingen. De solver stuurt de output naar \texttt{stdout} Als er wel output wordt geprint duurt het oplossen van de 'xxl-instance' iets minder dan $110$ seconden en als er geen output wordt geprint duurt het oplossen ongeveer $1,4$ seconden. Ook valt op dat als alle output niet naar \texttt{stdout}, maar naar een bestand wordt gestuurd de totale looptijd iets minder dan $4$ seconden duurt. Er valt dus veel snelheidswinst te behalen door het printen te optimaliseren. Een andere optie is om slimmer om te gaan met wat er wel en niet wordt geprint, want dat kan ook al veel tijd schelen. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner. Daarom is printen naar een tijdelijk bestand in plaats van \texttt{stdout} mogelijk een goed alternatief om voor een versnelling te kunnen zorgen. 
 
 \begin{table}[H]
 \parbox{.45\linewidth}{
@@ -18,13 +18,13 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
         \hline
                     & Looptijd ($s$)  & Percentage ($\%$) \\
         \hline
-        Parsing     & $0.012629$      & $0.0$   \\
-        STJN        & $0.002536$      & $0.0$   \\
-        ESTA$^+$    & $109.642634$    & $99.2$  \\
-        Chaining    & $0.587552$      & $0.5$   \\
-        LP          & $0.313129$      & $0.3$   \\
+        Parsing     & $0.010927$      & $0.0$   \\
+        STJN        & $0.002788$      & $0.0$   \\
+        ESTA$^+$    & $108.299420$    & $99.2$  \\
+        Chaining    & $0.565354$      & $0.5$   \\
+        LP          & $0.319607$      & $0.3$   \\
         \hline \hline
-        Totaal      & $110.559147$    & $100.0$ \\
+        Totaal      & $109.198681$    & $100.0$ \\
         \hline
     \end{tabular}
     \caption{xxl-instance met output}
@@ -37,13 +37,13 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
         \hline
                     & Looptijd ($s$)& Percentage ($\%$) \\
         \hline
-        Parsing     & $0.012075$      & $0.9$   \\
-        STJN        & $0.002895$      & $0.2$   \\
-        ESTA$^+$    & $1.083015$      & $76.8$  \\
-        Chaining    & $0.034146$      & $2.4$   \\
-        LP          & $0.277762$      & $19.7$  \\
+        Parsing     & $0.010247$      & $0.7$   \\
+        STJN        & $0.002798$      & $0.2$   \\
+        ESTA$^+$    & $1.092032$      & $76.5$  \\
+        Chaining    & $0.037414$      & $2.6$   \\
+        LP          & $0.283970$      & $19.9$  \\
         \hline \hline
-        Totaal      & $1.410065$      & $100.0$ \\
+        Totaal      & $1.426638$      & $100.0$ \\
         \hline
     \end{tabular}
     \caption{xxl-instance zonder output}
@@ -58,13 +58,13 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
                     & Looptijd ($s$)& Percentage ($\%$) \\
         \hline
         
-        Parsing     & $0.007783$    & $0.2$     \\
-        STJN        & $0.003500$    & $0.1$     \\
-        ESTA$^+$    & $3.740969$    & $90.1$    \\
-        Chaining    & $0.103087$    & $2.5$     \\
-        LP          & $0.297459$    & $7.2$     \\
+        Parsing     & $0.009044$    & $0.2$     \\
+        STJN        & $0.002736$    & $0.1$     \\
+        ESTA$^+$    & $3.362071$    & $88.0$    \\
+        Chaining    & $0.159881$    & $4.2$     \\
+        LP          & $0.288064$    & $7.5$     \\
         \hline \hline
-        Totaal      & $4.153080$    & $100.0$   \\
+        Totaal      & $3.822129$    & $100.0$   \\
         \hline
     \end{tabular}
     \caption{xxl-instance en output naar bestand}
