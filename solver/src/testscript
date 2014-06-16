@@ -1,0 +1,24 @@
+echo "home_made1.instance"
+cat ../../instances/home_made1.instance | ./solver 2> output
+echo ""
+echo "home_made2.instance"
+cat ../../instances/home_made2.instance | ./solver 2> output
+echo ""
+echo "demo.instance"
+cat ../../instances/demo.instance | ./solver 2> output
+echo ""
+echo "small.instance"
+cat ../../instances/small.instance | ./solver 2> output
+echo ""
+echo "j3045_2.instance"
+cat ../../instances/j30/j3045_2.instance | ./solver 2> output
+echo ""
+echo "j3045_6.instance"
+cat ../../instances/j30/j3045_6.instance | ./solver 2> output
+echo ""
+echo "j309_2.instance"
+cat ../../instances/j30/j309_2.instance | ./solver 2> output
+echo ""
+echo "xxl.instance"
+cat ../../instances/xxl.instance | ./solver 2> output
+echo ""

@@ -66,3 +66,15 @@ void Constraints::setLowerLimit(string name, int lowerLimit) {
     int id = addVariable(name);
     lowerLimits[id] = lowerLimit;
 }
+
+bool Constraints::getLocked(int id) {
+    if(locks.count(id)) {
+        return locks[id];
+    }
+    throw NoSuchVariableException(id);
+}
+
+void Constraints::setLocked(string name, bool locked) {
+    int id = addVariable(name);
+    locks[id] = locked;
+}
