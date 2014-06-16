@@ -7,7 +7,7 @@ void cdebug(string format, ...) {
     va_list args;
 
     va_start(args, format);
-    // vfprintf(stderr, format.c_str(), args);
+    vfprintf(stderr, format.c_str(), args);
     va_end(args);
 }
 
@@ -24,7 +24,7 @@ void output(string format, ...){
     va_start(args,format);
     char out[8096];
     vsprintf(out,format.c_str(),args);
-    // cout << out;
+    cout << out;
     va_end(args);
 }
 
