@@ -13,8 +13,10 @@ vector< activity* > activities;
 void initializeActivities(){
     vector<train*> trains = tmsp->trains;
     FOREACH(trains, it){
-        vector<activity*> actVec = (*it)->activities;
-        activities.insert(activities.end(), actVec.begin(), actVec.end());
+        if(*it != NULL) {
+            vector<activity*> actVec = (*it)->activities;
+            activities.insert(activities.end(), actVec.begin(), actVec.end());
+        }
     }
 }
 

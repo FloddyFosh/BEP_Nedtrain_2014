@@ -210,8 +210,9 @@ void Instance::addPrecedence(unsigned int i1, unsigned int j1, unsigned int i2, 
     }
     if (!A(jobId1, j1))
         throw InstanceManipulationException(QString("Precedence a(%1,%2) before a(%3,%4) ignored because activity %2 does not exist.").arg(jobId1).arg(j1).arg(jobId2).arg(j2));
-    if (!J(jobId2))
-        throw InstanceManipulationException(QString("Precedence a(%1,%2) before a(%3,%4) ignored because job %3 does not exist.").arg(jobId1).arg(j1).arg(jobId2).arg(j2));
+    if (!J(jobId2)) {
+            throw InstanceManipulationException(QString("Precedence a(%1,%2) before a(%3,%4) ignored because job %3 does not exist.").arg(jobId1).arg(j1).arg(jobId2).arg(j2));
+    }
     if (!A(jobId2, j2))
         throw InstanceManipulationException(QString("Precedence a(%1,%2) before a(%3,%4) ignored because activity %4 does not exist.").arg(jobId1).arg(j1).arg(jobId2).arg(j2));
     addPrecedence(A(jobId1, j1), A(jobId2, j2), hard, frameNummer);
