@@ -26,7 +26,7 @@ public:
     explicit ActivityInfoDialog(Instance *i, Activity *a, QWidget *parent = 0);
 
 private slots:
-	void editActivity(); ///< shows the dialog
+    void editActivity(); ///< shows the edit activity dialog
 };
 
 #endif // ACTIVITYINFODIALOG_H

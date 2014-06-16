@@ -77,6 +77,13 @@ public:
       */
     int findAvailableActivityId();
 
+    /**
+     * Returns the amount of capacity of a given resource required by all activities in this job.
+     * @param resource resource in question
+     * @return required amount
+     */
+    int getRequiredAmount(Resource *resource);
+
     int id() const; ///< returns the job id
     QString name() const; ///< returns the job name
     int releaseDate() const; ///< returns the job release date (int), activities can not start before this date/time

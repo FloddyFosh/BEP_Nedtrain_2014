@@ -16,6 +16,7 @@ class RequirementsTable : public QTableWidget {
     Instance *instance;
     Activity *activity;
     ActivityTemplate *activityTemplate;
+    Job *job;
 
     QMap<Resource *, QSpinBox *> spinners;
     QWidget *editor;
@@ -31,10 +32,18 @@ public:
 
     /**
      * Creates a table.
+     * @param j The job that is shown.
+     * @param instance The instance that contains the resources.
+     */
+    RequirementsTable(Job *j, Instance *instance);
+
+    /**
+     * Creates a table.
      * @param instance The instance that contains the resources.
      */
     RequirementsTable(Instance *instance);
     void setActivityTemplate(ActivityTemplate *a);
+    void setJob(Job *j);
 
     /**
      * Fills in the table with the requirements

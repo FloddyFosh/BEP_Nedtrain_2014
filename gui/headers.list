@@ -16,6 +16,7 @@ widgets/app_icon.h
 widgets/timeline.h
 widgets/groupwidget.h
 widgets/dialogs/jobdialog.h
+widgets/dialogs/jobinfodialog.h
 widgets/dialogs/solvingprogressdialog.h
 widgets/dialogs/aboutdialog.h
 widgets/dialogs/listformdialog.h

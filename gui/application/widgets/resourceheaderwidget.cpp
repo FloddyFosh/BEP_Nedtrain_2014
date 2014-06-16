@@ -86,8 +86,15 @@ void ResourceHeaderWidget::changeAmount(int value) {
 }
 
 void ResourceHeaderWidget::removeResource() {
-    if(_resource->hasActivities())
-        QMessageBox::warning(this, tr("Cannot remove"), tr("This resource is required by activities and cannot be removed."),QMessageBox::Ok);
+    if(_resource->hasActivities()) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Cannot remove"));
+        msgBox.setWindowIcon(AppIcon("icon.png"));
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setText( tr("This resource is required by activities and cannot be removed."));
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
     else
         emit remove(_resource);
 }

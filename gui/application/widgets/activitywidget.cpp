@@ -245,7 +245,7 @@ void ActivityWidget::contextMenuEvent(QContextMenuEvent *event) {
     if (comparing) return;
 
     QMenu myMenu;
-    infoAct = new QAction(tr("&Properties"), this);
+    infoAct = new QAction(tr("&Activity Info"), this);
     infoAct->setStatusTip(tr("Show info about activity %1").arg(_activity->name()));
     connect(infoAct, SIGNAL(triggered()), this, SLOT(showActivityInfoDialog()));
 
