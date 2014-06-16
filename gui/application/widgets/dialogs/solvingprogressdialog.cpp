@@ -106,7 +106,7 @@ void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
                 msg = tr("The instance could not be solved, due to a resource peak on\nresource '%1'.").arg(instance->R(solver->getPeakResource())->name());
             }
             else if(solver->getMutexJob() != -1) {
-                msg = tr("The tasks in project '%1' could not be scheduled mutually exclusive.").arg(instance->J(solver->getMutexJob())->name());
+                msg = tr("The activities in job '%1' could not be scheduled mutually exclusive.").arg(instance->J(solver->getMutexJob())->name());
             }
             else {
                 msg = tr("The instance could not be solved.");

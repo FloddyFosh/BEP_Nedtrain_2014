@@ -37,7 +37,7 @@ MainWindow::MainWindow(Controller *controller)
     createToolbar();
     statusBar();
     setWindowIcon(AppIcon("icon.png"));
-    setWindowTitle(tr("Task scheduler"));
+    setWindowTitle(tr("Activity scheduler"));
     setButtonState();
     installEventFilter(this);
     
@@ -155,7 +155,7 @@ void MainWindow::newPrecedence() {
             controller->getCurrentInstanceWidget()->disablePrecedenceAdding();
         else {
             controller->getCurrentInstanceWidget()->enablePrecedenceAdding();
-            controller->getMainWindow()->statusBar()->showMessage(tr("Click on two tasks to add a precedence constraint between them."),3000);
+            controller->getMainWindow()->statusBar()->showMessage(tr("Click on two activities to add a precedence constraint between them."),3000);
         }
     }
     catch(NoInstanceException const& e) {
@@ -172,7 +172,7 @@ void MainWindow::removePrecedence() {
             controller->getCurrentInstanceWidget()->disablePrecedenceRemoving();
         else {
             controller->getCurrentInstanceWidget()->enablePrecedenceRemoving();
-            controller->getMainWindow()->statusBar()->showMessage(tr("Click on two tasks to remove a precedence constraint between them."),3000);
+            controller->getMainWindow()->statusBar()->showMessage(tr("Click on two activities to remove a precedence constraint between them."),3000);
         }
     }
     catch(NoInstanceException const& e) {
@@ -263,7 +263,7 @@ void MainWindow::loadFile(const QString &fileName) {
         statusBar()->showMessage(tr("File loaded"), 2000);
         rememberRecentFile(fileName);
     } else {
-        QMessageBox::warning(this, tr("Task scheduler"),
+        QMessageBox::warning(this, tr("Activity scheduler"),
                              tr("Cannot read file %1:\nFile not found, not readable or parsing error.")
                              .arg(fileName));
         statusBar()->showMessage(tr("Cannot read file %1: File not found, not readable or parsing error.").arg(fileName), 2000);

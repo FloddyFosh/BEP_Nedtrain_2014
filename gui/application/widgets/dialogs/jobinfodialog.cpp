@@ -61,7 +61,7 @@ JobInfoDialog::JobInfoDialog(Instance *instance, Job *j, QWidget *parent) :
         formlayout->addRow(tr("Total Job Flexibility:"), totalFlexLabel);
 
         QLabel* minFlexLabel = new QLabel(QString::number(minflex));
-        formlayout->addRow(tr("Minimal Task Flexibility:"), minFlexLabel);
+        formlayout->addRow(tr("Minimal Activity Flexibility:"), minFlexLabel);
     }
 
     //table

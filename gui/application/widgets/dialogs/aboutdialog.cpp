@@ -10,7 +10,7 @@
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent)
 {
-    setWindowTitle(tr("About Task scheduler"));
+    setWindowTitle(tr("About Activity scheduler"));
     setWindowIcon(AppIcon("icon.png"));
     setFixedWidth(600);
     setFixedHeight(280);
@@ -21,7 +21,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     text->setReadOnly(true);
     text->setStyleSheet("QTextEdit { border: 0; background: white }");
     text->setCursor(Qt::ArrowCursor);
-    text->setHtml(tr("<strong>Task scheduler</strong> has been developed as part of a research \
+    text->setHtml(tr("<strong>Activity scheduler</strong> has been developed as part of a research \
             project for Delft University of Technology and NedTrain. This version \
             was based on earlier work by Ronald Evers (2010). <br /><br />\
             <strong>Developed by:</strong><br /> \

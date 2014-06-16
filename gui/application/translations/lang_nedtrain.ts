@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_NL">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../widgets/dialogs/aboutdialog.cpp" line="12"/>
         <source>About Task scheduler</source>
+        <translation type="vanished">Over NedTrain planner</translation>
+    </message>
+    <message>
+        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
+        <translation type="vanished">De &lt;strong&gt;NedTrain planner&lt;/strong&gt; is ontwikkeld in het kader van een onderzoeksproject voor de Technische Universiteit Delft en NedTrain. Deze versie is gebaseerd op eerder werk van Ronald Evers (2010).&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;E. Ammerlaan, J. Elffers, E. Walraven en W. Wisse.&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Verder ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;C. Bakker, A. Bouter en M. den Hoedt.&lt;br /&gt;&lt;br /&gt;
+&lt;strong&gt;Onder begeleiding van:&lt;/strong&gt;&lt;br /&gt;Prof. dr. C. Witteveen, ir. M. Wilson en ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;
+&amp;copy; 2014</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/aboutdialog.cpp" line="13"/>
+        <source>About Activity scheduler</source>
         <translation>Over NedTrain planner</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/aboutdialog.cpp" line="22"/>
-        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
+        <location filename="../widgets/dialogs/aboutdialog.cpp" line="24"/>
+        <source>&lt;strong&gt;Activity scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
         <translation>De &lt;strong&gt;NedTrain planner&lt;/strong&gt; is ontwikkeld in het kader van een onderzoeksproject voor de Technische Universiteit Delft en NedTrain. Deze versie is gebaseerd op eerder werk van Ronald Evers (2010).&lt;br /&gt;&lt;br /&gt;
 &lt;strong&gt;Ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;E. Ammerlaan, J. Elffers, E. Walraven en W. Wisse.&lt;br /&gt;&lt;br /&gt;
 &lt;strong&gt;Verder ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;C. Bakker, A. Bouter en M. den Hoedt.&lt;br /&gt;&lt;br /&gt;
@@ -85,57 +97,57 @@
 <context>
     <name>ActivityInfoDialog</name>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="10"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="11"/>
         <source>Activity info</source>
         <translation>Taakinformatie</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="15"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="17"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="17"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="19"/>
         <source>Job:</source>
         <translation>Trein:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="19"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="21"/>
         <source>Duration:</source>
         <translation>Looptijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="21"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="23"/>
         <source>Earliest start time:</source>
         <translation>Vroegste starttijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="23"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="25"/>
         <source>Latest start time:</source>
         <translation>Laatste starttijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="26"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="28"/>
         <source>Earliest flex start time:</source>
         <translation>Vroegste flex starttijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="28"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="30"/>
         <source>Latest flex start time:</source>
         <translation>Laatste flex starttijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="31"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="33"/>
         <source>Start time:</source>
         <translation>Start tijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="38"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="40"/>
         <source>Edit</source>
         <translation>Bewerken</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="39"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="41"/>
         <source>Close</source>
         <translation>Sluiten</translation>
     </message>
@@ -143,9 +155,8 @@
 <context>
     <name>ActivityWidget</name>
     <message>
-        <location filename="../widgets/activitywidget.cpp" line="248"/>
         <source>&amp;Properties</source>
-        <translation>&amp;Eigenschappen</translation>
+        <translation type="vanished">&amp;Eigenschappen</translation>
     </message>
     <message>
         <location filename="../widgets/activitywidget.cpp" line="252"/>
@@ -161,6 +172,11 @@
         <location filename="../widgets/activitywidget.cpp" line="249"/>
         <source>Show info about activity %1</source>
         <translation>Informatie tonen over taak %1</translation>
+    </message>
+    <message>
+        <location filename="../widgets/activitywidget.cpp" line="248"/>
+        <source>&amp;Activity Info</source>
+        <translation>&amp;Taak Info</translation>
     </message>
     <message>
         <location filename="../widgets/activitywidget.cpp" line="253"/>
@@ -352,8 +368,12 @@ op te geven, voor het geval dat een taak zijn tijd overschrijdt.</translation>
         <location filename="../widgets/dialogs/importdialog.cpp" line="59"/>
         <location filename="../widgets/dialogs/importdialog.cpp" line="82"/>
         <location filename="../widgets/dialogs/importdialog.cpp" line="86"/>
-        <source>Task scheduler</source>
+        <source>Activity scheduler</source>
         <translation>NedTrain planner</translation>
+    </message>
+    <message>
+        <source>Task scheduler</source>
+        <translation type="vanished">NedTrain planner</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/importdialog.cpp" line="59"/>
@@ -374,17 +394,17 @@ op te geven, voor het geval dat een taak zijn tijd overschrijdt.</translation>
 <context>
     <name>Instance</name>
     <message>
-        <location filename="../model/instance_manip.cpp" line="248"/>
+        <location filename="../model/instance_manip.cpp" line="249"/>
         <source>The constraint was not added, because it would create a cycle. A chain of constraints in the opposite direction already exists.</source>
         <translation>De voorrangsrelatie is niet toegevoegd, omdat dit een cycle zou maken. Er bestaat al een keten van constraints in de omgekeerde richting.</translation>
     </message>
     <message>
-        <location filename="../model/instance_manip.cpp" line="256"/>
+        <location filename="../model/instance_manip.cpp" line="257"/>
         <source>Adding of the hard precedence constraint ignored, because it was already present.</source>
         <translation>De precedence constraint is niet toegevoegd, omdat hij al aanwezig is.</translation>
     </message>
     <message>
-        <location filename="../model/instance_manip.cpp" line="271"/>
+        <location filename="../model/instance_manip.cpp" line="272"/>
         <source>Adding of precedence constraint ignored, because it was already present.</source>
         <translation>De precedence constraint is niet toegevoegd, omdat hij al aanwezig is.</translation>
     </message>
@@ -392,28 +412,32 @@ op te geven, voor het geval dat een taak zijn tijd overschrijdt.</translation>
 <context>
     <name>InstanceMdiSubWindow</name>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="42"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="44"/>
         <source>Instance not saved</source>
         <translation>Instantie niet opgeslagen</translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="42"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="47"/>
         <source>Do you want to save the instance before closing?</source>
         <translation>Wilt u de instantie opslaan, voordat hij gesloten wordt?</translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="75"/>
         <source>Task scheduler</source>
-        <translation>NedTrain planner</translation>
+        <translation type="vanished">NedTrain planner</translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="70"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="78"/>
         <source>File saved</source>
         <translation>Bestand opgeslagen</translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="76"/>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="78"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="83"/>
+        <source>Activity scheduler</source>
+        <translation>NedTrain planner</translation>
+    </message>
+    <message>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="84"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="86"/>
         <source>Cannot save file %1.</source>
         <translation>Kan bestand %1 niet opslaan.</translation>
     </message>
@@ -454,58 +478,58 @@ op te geven, voor het geval dat een taak zijn tijd overschrijdt.</translation>
         <translation>Nieuwe trein</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="13"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="14"/>
         <source>Edit Job</source>
         <translation>Trein bewerken</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="47"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="54"/>
         <source>&amp;Name:</source>
         <translation>&amp;Naam:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="49"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="56"/>
         <source>&amp;Release day:</source>
         <translation>&amp;Datum van vrijgeven:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="50"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="57"/>
         <source>&amp;Release time:</source>
         <translation>&amp;Tijd van vrijgeven:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="51"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="58"/>
         <source>&amp;Due day:</source>
         <translation>D&amp;atum van deadline:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="52"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="59"/>
         <source>&amp;Due time:</source>
         <translation>T&amp;ijd van deadline:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="54"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="61"/>
         <source>&amp;Release date:</source>
         <translation>&amp;Datum vrijgeven:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="55"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="62"/>
         <source>&amp;Due date:</source>
         <translation>&amp;Datum van deadline:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="76"/>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="78"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="83"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="85"/>
         <source>Invalid input</source>
         <translation>Ongeldige invoer</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="76"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="83"/>
         <source>Please fill in a name.</source>
         <translation>Vul a.u.b. een naam in.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="78"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="85"/>
         <source>The due date should be after the release date.
 Please correct your input.</source>
         <translation>De deadline moet na de datum van vrijgeven zijn. \nCorrigeer uw invoer.</translation>
@@ -514,25 +538,97 @@ Please correct your input.</source>
 <context>
     <name>JobHeaderWidget</name>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="126"/>
+        <location filename="../widgets/jobheaderwidget.cpp" line="127"/>
         <source>Are you sure?</source>
         <translation>Weet u het zeker?</translation>
     </message>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="126"/>
         <source>Are you sure you want to remove this job with its activities?</source>
-        <translation>Weet u zeker dat u deze trein met zijn taken wilt verwijderen?</translation>
+        <translation type="vanished">Weet u zeker dat u deze trein met zijn taken wilt verwijderen?</translation>
+    </message>
+</context>
+<context>
+    <name>JobInfoDialog</name>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="13"/>
+        <source>Job info</source>
+        <translation>Trein info</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="19"/>
+        <source>Name:</source>
+        <translation>Naam:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="23"/>
+        <source>Release Day:</source>
+        <translation>Datum van vrijgeven:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="26"/>
+        <source>Release Time:</source>
+        <translation>Tijd van vrijgeven:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="29"/>
+        <source>Due Day:</source>
+        <translation>Datum van deadline:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="32"/>
+        <source>Due Time:</source>
+        <translation>Tijd van deadline:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="36"/>
+        <source>Release Date:</source>
+        <translation>Datum vrijgeven:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="39"/>
+        <source>Due Date:</source>
+        <translation>Datum deadline:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="43"/>
+        <source>Activities:</source>
+        <translation>Taken:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="61"/>
+        <source>Total Job Flexibility:</source>
+        <translation>Totale Trein Flexibiliteit:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="64"/>
+        <source>Minimal Activity Flexibility:</source>
+        <translation>Minimale Taak Flexibiliteit:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="72"/>
+        <source>Edit</source>
+        <translation>Bewerken</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="73"/>
+        <source>Close</source>
+        <translation>Sluiten</translation>
     </message>
 </context>
 <context>
     <name>JobWidget</name>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="286"/>
+        <location filename="../widgets/jobwidget.cpp" line="250"/>
+        <source>Job Info</source>
+        <translation>Trein Info</translation>
+    </message>
+    <message>
+        <location filename="../widgets/jobwidget.cpp" line="298"/>
         <source>The program encountered a failure. Please restart.</source>
         <translation>Het programma is tegen een fout aangelopen. Herstart de applicatie a.u.b.</translation>
     </message>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="248"/>
+        <location filename="../widgets/jobwidget.cpp" line="253"/>
         <source>Show resource usage</source>
         <translation>Resource-verbruik tonen</translation>
     </message>
@@ -573,10 +669,8 @@ Please correct your input.</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="40"/>
-        <location filename="../widgets/mainwindow.cpp" line="266"/>
         <source>Task scheduler</source>
-        <translation>NedTrain planner</translation>
+        <translation type="vanished">NedTrain planner</translation>
     </message>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="95"/>
@@ -658,14 +752,12 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
         <translation>&amp;%1 %2</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="158"/>
         <source>Click on two tasks to add a precedence constraint between them.</source>
-        <translation>Klik op twee taken om er een voorrangsrelatie tussen te plaatsen.</translation>
+        <translation type="vanished">Klik op twee taken om er een voorrangsrelatie tussen te plaatsen.</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="175"/>
         <source>Click on two tasks to remove a precedence constraint between them.</source>
-        <translation>Klik op twee taken om de voorrangsrelatie ertussen te verwijderen.</translation>
+        <translation type="vanished">Klik op twee taken om de voorrangsrelatie ertussen te verwijderen.</translation>
     </message>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="180"/>
@@ -835,6 +927,22 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
         <translation>Flexibiliteitsintervallen tekenen</translation>
     </message>
     <message>
+        <location filename="../widgets/mainwindow.cpp" line="40"/>
+        <location filename="../widgets/mainwindow.cpp" line="266"/>
+        <source>Activity scheduler</source>
+        <translation>Nedtrain planner</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="158"/>
+        <source>Click on two activities to add a precedence constraint between them.</source>
+        <translation>Klik op twee taken om er een voorrangsrelatie tussen te plaatsen.</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="175"/>
+        <source>Click on two activities to remove a precedence constraint between them.</source>
+        <translation>Klik op twee taken om de voorrangsrelatie ertussen te verwijderen.</translation>
+    </message>
+    <message>
         <location filename="../widgets/mainwindow.cpp" line="437"/>
         <source>Set options and solve</source>
         <translation>Opties instellen en plannen</translation>
@@ -913,48 +1021,48 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
 <context>
     <name>ManageTemplatesDialog</name>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="12"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="13"/>
         <source>Manage templates</source>
         <translation>Sjablonen beheren</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="20"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="22"/>
         <source>&amp;Name:</source>
         <translation>&amp;Naam:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="21"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="23"/>
         <source>&amp;Duration:</source>
         <translation>&amp;Looptijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="58"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="60"/>
         <source>Unsaved changes</source>
         <translation>Onopgeslagen wijzigingen</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="58"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="60"/>
         <source>You have unsaved changes. Do you want to save them?</source>
         <translation>U heeft onopgeslagen wijzigingen. Wilt u deze opslaan?</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="78"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="80"/>
         <source>The current template cannot be edited. Open an instance with the following resources or add them to the current instance:
 </source>
         <translation>De huidige sjabloon kan niet bewerkt worden. Open een instantie met de volgende resources of voeg deze toe aan de huidige instantie:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="80"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="82"/>
         <source>Incomplete resources</source>
         <translation>Onvolledige resources</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="121"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="123"/>
         <source>Really remove template?</source>
         <translation>Sjabloon echt verwijderen?</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="121"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="123"/>
         <source>Are you sure you want to remove this template?</source>
         <translation>Weet u zeker dat u dit sjabloon wilt verwijderen?</translation>
     </message>
@@ -990,12 +1098,18 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
 <context>
     <name>RequirementsTable</name>
     <message>
-        <location filename="../widgets/requirementstable.cpp" line="30"/>
+        <location filename="../widgets/requirementstable.cpp" line="42"/>
+        <location filename="../widgets/requirementstable.cpp" line="44"/>
         <source>Resource</source>
         <translation>Resource</translation>
     </message>
     <message>
-        <location filename="../widgets/requirementstable.cpp" line="30"/>
+        <location filename="../widgets/requirementstable.cpp" line="42"/>
+        <source>Minimal needed</source>
+        <translation>Minimaal nodig</translation>
+    </message>
+    <message>
+        <location filename="../widgets/requirementstable.cpp" line="44"/>
         <source>Amount</source>
         <translation>Hoeveelheid</translation>
     </message>
@@ -1003,43 +1117,43 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
 <context>
     <name>ResourceDecreaseDialog</name>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="9"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="10"/>
         <source>Decrease capacity</source>
         <translation>Capaciteit verlagen</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="33"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="35"/>
         <source>From - day:</source>
         <translation>Van -dag:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="34"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="36"/>
         <source>From - time:</source>
         <translation>Van -tijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="35"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="37"/>
         <source>Till - day:</source>
         <translation>Tot - dag:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="36"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="38"/>
         <source>Till - time:</source>
         <translation>Tot - tijd:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="48"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="50"/>
         <source>From:</source>
         <translation>Van:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="49"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="51"/>
         <source>Till:</source>
         <translation>Tot:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="37"/>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="50"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="39"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="52"/>
         <source>Decrease by:</source>
         <translation>Verlagen met:</translation>
     </message>
@@ -1111,12 +1225,12 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
 <context>
     <name>ResourceHeaderWidget</name>
     <message>
-        <location filename="../widgets/resourceheaderwidget.cpp" line="90"/>
+        <location filename="../widgets/resourceheaderwidget.cpp" line="91"/>
         <source>Cannot remove</source>
         <translation>Kan niet verwijderen</translation>
     </message>
     <message>
-        <location filename="../widgets/resourceheaderwidget.cpp" line="90"/>
+        <location filename="../widgets/resourceheaderwidget.cpp" line="94"/>
         <source>This resource is required by activities and cannot be removed.</source>
         <translation>Er zijn taken die deze resource nodig hebben, waardoor de resource niet kan worden verwijderd.</translation>
     </message>
@@ -1157,57 +1271,57 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
 <context>
     <name>SolverConfigDialog</name>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="13"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="14"/>
         <source>Configure Solvers</source>
         <translation>Solvers configureren</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="17"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="19"/>
         <source>&amp;Browse...</source>
         <translation>&amp;Bladeren...</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="26"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="28"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="27"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="29"/>
         <source>Binary:</source>
         <translation>Programma:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="28"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="30"/>
         <source>Arguments:</source>
         <translation>Argumenten:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="62"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="64"/>
         <source>Unsaved changes</source>
         <translation>Onopgeslagen wijzigingen</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="62"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="64"/>
         <source>You have unsaved changes. Do you want to save them?</source>
         <translation>U heeft onopgeslagen wijzigingen. Wilt u deze opslaan?</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="102"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="104"/>
         <source>Select solver binary</source>
         <translation>Selecteer solver-programma</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="118"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="120"/>
         <source>(new)</source>
         <translation>(nieuw)</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="127"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="129"/>
         <source>Really remove solver?</source>
         <translation>Solver echt verwijderen?</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="127"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="129"/>
         <source>Are you sure you want to remove this solver?</source>
         <translation>Weet u zeker dat u deze solver wilt verwijderen?</translation>
     </message>
@@ -1215,57 +1329,62 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
 <context>
     <name>SolvingProgressDialog</name>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="12"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="13"/>
         <source>%1 Solver</source>
         <translation>%1 Solver</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="22"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="24"/>
         <source>Status:</source>
         <translation>Voortgang:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="32"/>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="75"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="34"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="77"/>
         <source>More...</source>
         <translation>Meer...</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="75"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="77"/>
         <source>Less...</source>
         <translation>Minder...</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="99"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="101"/>
         <source>The instance has been solved successfully.
 The solver posted %1 precedence constraints.</source>
         <translation>De instantie is met succes opgelost. De solver heeft %1 voorrangsrelaties toegevoegd.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="104"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="106"/>
         <source>The instance could not be solved, due to a resource peak on
 resource &apos;%1&apos;.</source>
         <translation>De instantie kon niet worden opgelost, vanwege een piek in het
 resourceprofiel bij resource &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="107"/>
-        <source>The tasks in project &apos;%1&apos; could not be scheduled mutually exclusive.</source>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="109"/>
+        <source>The activities in job &apos;%1&apos; could not be scheduled mutually exclusive.</source>
         <translation>De taken in project &apos;%1&apos; konden niet worden geroosterd met
 wederzijdse uitsluiting.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="110"/>
+        <source>The tasks in project &apos;%1&apos; could not be scheduled mutually exclusive.</source>
+        <translation type="vanished">De taken in project &apos;%1&apos; konden niet worden geroosterd met
+wederzijdse uitsluiting.</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="112"/>
         <source>The instance could not be solved.</source>
         <translation>De instantie kon niet worden opgelost.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="116"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="118"/>
         <source>See &apos;More...&apos; for more information.</source>
         <translation>Zie &apos;Meer...&apos; voor meer informatie.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="125"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="127"/>
         <source>The solver has been terminated. Solution so far has been applied.</source>
         <translation>De instantie kon niet worden opgelost. Oplossing gedeeltelijk toegepast.</translation>
     </message>

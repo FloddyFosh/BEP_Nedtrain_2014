@@ -80,7 +80,7 @@ bool InstanceMdiSubWindow::saveFile(const QString &fileName) {
         updateFileName(fileName);
         setWindowModified(false);
     } else {
-        QMessageBox::warning(this, tr("Task scheduler"),
+        QMessageBox::warning(this, tr("Activity scheduler"),
                              tr("Cannot save file %1.")
                              .arg(fileName));
         controller->setStatusMessage(tr("Cannot save file %1.").arg(fileName), 2000);
