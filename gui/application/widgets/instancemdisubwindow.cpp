@@ -6,6 +6,7 @@
 #include "model/instance.h"
 #include "instancemdisubwindow.h"
 #include "data/instance_reader.h"
+#include "app_icon.h"
 
 #include "controller/instancecontroller.h"
 
@@ -39,7 +40,14 @@ void InstanceMdiSubWindow::closeEvent(QCloseEvent * closeEvent) {
     		return;
     	}
 
-        int ans = QMessageBox::question(this, tr("Instance not saved"), tr("Do you want to save the instance before closing?"), QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, QMessageBox::Save);
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(tr("Instance not saved"));
+        msgBox.setWindowIcon(AppIcon("icon.png"));
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setText(tr("Do you want to save the instance before closing?"));
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ans = msgBox.exec();
 
         if (ans == QMessageBox::Save) {
             if (!save()) {

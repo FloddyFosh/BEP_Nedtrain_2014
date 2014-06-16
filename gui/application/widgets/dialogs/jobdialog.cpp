@@ -5,13 +5,20 @@
 #include <QDateTimeEdit>
 
 JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
-    FormDialog(parent), i(i), j(j)
+    FormDialog(parent), i(i), j(j), maxActVal(0)
 {
     if (!j) {
         setWindowTitle(tr("New Job"));
+        maxActVal = 1 << 30;
     } else {
         setWindowTitle(tr("Edit Job"));
+        foreach(Activity *a, j->getActivities().values()) {
+            if(a->st()+a->duration() > maxActVal) {
+                maxActVal = a->st()+a->duration();
+            }
+        }
     }
+
     nameEdit = new QLineEdit(j ? j->name() : QString());
     nameEdit->setMaxLength(40);
 
@@ -30,7 +37,7 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
         dueDateTimeEdit->setDisplayFormat("h:mm");
 
         dueDayEdit = new QSpinBox;
-        dueDayEdit->setMinimum(1);
+        dueDayEdit->setMinimum(maxActVal);
         dueDayEdit->setMaximum(1 << 30);
         if(j) dueDayEdit->setValue(j->dueDate()/(60*24)+1);
     }else {
@@ -39,7 +46,7 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
         releaseDateEdit->setMaximum(1 << 30);
         releaseDateEdit->setValue(j ? j->releaseDate() : 0);
         dueDateEdit = new QSpinBox;
-        dueDateEdit->setMinimum(0);
+        dueDateEdit->setMinimum(maxActVal);
         dueDateEdit->setMaximum(1 << 30);
         dueDateEdit->setValue(j ? j->dueDate() : 1);
     }

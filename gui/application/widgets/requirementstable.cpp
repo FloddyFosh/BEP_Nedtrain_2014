@@ -4,19 +4,30 @@
 #include <QHeaderView>
 
 RequirementsTable::RequirementsTable(Activity *a, Instance* instance)
-    : QTableWidget(instance->getResources().size(), 2), instance(instance), activity(a), activityTemplate(0)
+    : QTableWidget(instance->getResources().size(), 2), instance(instance), activity(a), activityTemplate(0), job(0)
+{
+    init();
+}
+
+RequirementsTable::RequirementsTable(Job *j, Instance* instance)
+    : QTableWidget(instance->getResources().size(), 2), instance(instance), activity(0), activityTemplate(0), job(j)
 {
     init();
 }
 
 RequirementsTable::RequirementsTable(Instance* instance)
-    : QTableWidget(instance->getResources().size(), 2), instance(instance), activity(0), activityTemplate(0)
+    : QTableWidget(instance->getResources().size(), 2), instance(instance), activity(0), activityTemplate(0), job(0)
 {
     init();
 }
 
 void RequirementsTable::setActivityTemplate(ActivityTemplate* a) {
     activityTemplate = a;
+    fillIn();
+}
+
+void RequirementsTable::setJob(Job *j) {
+    job = j;
     fillIn();
 }
 
@@ -27,7 +38,10 @@ void RequirementsTable::init() {
     setSelectionMode(QAbstractItemView::NoSelection);
 
     QStringList labels;
-    labels << tr("Resource") << tr("Amount");
+    if(job)
+        labels << tr("Resource") << tr("Minimal needed");
+    else
+        labels << tr("Resource") << tr("Amount");
     setHorizontalHeaderLabels(labels);
 }
 
@@ -70,8 +84,12 @@ void RequirementsTable::importTemplate(ActivityTemplate *import) {
 int RequirementsTable::getRequiredAmount(Resource *r) {
     if(activity)
         return activity->getRequiredAmount(r);
-    else
+    else if(activityTemplate)
         return activityTemplate->getRequiredAmount(r->name());
+    else if(job) {
+        return job->getRequiredAmount(r);
+    }
+    else return 0;
 }
 
 void RequirementsTable::clearSpinners() {

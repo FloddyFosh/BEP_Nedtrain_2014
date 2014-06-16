@@ -51,6 +51,15 @@ int Job::findAvailableActivityId() {
     return i;
 }
 
+int Job::getRequiredAmount(Resource *r) {
+    int amount = 0;
+    foreach(Activity *a, getActivities().values()) {
+        if(a->getRequiredAmount(r) > amount)
+            amount = a->getRequiredAmount(r);
+    }
+    return amount;
+}
+
 int Job::id() const {
     return _id;
 }
