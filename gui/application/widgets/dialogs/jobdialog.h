@@ -31,6 +31,8 @@ class JobDialog : public FormDialog
     QSpinBox *releaseDayEdit;
     QSpinBox *dueDayEdit;
 
+    int maxActVal;
+
 public:
     /** Constructor. Pass an instance object and a job that belongs to this instance
       * or an instance object and a NULL pointer.

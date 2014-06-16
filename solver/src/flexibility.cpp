@@ -45,21 +45,29 @@ void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
     for(int i = 0; i < n_cols; i++) {
         model->setObjectiveCoefficient(i, 0.0);
         model->setColumnLower(i, constraints->getLowerLimit(i/2));
-        model->setColumnUpper(i, constraints->getUpperLimit(i/2)); 
+        model->setColumnUpper(i, constraints->getUpperLimit(i/2));
     }
     model->setObjectiveCoefficient(n_cols, 1.0);
     model->setColumnLower(n_cols, 0);
     model->setColumnUpper(n_cols, DBL_MAX);
 }
 
-void addType1Constraints(ClpSimplex* model, int n_cols) {
+void addType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols) {
     // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
-        int cols[] = {i, i+1, n_cols};
-        double cfc[] = {1.0, -1.0, -1.0}; // coefficients
-        model->addRow(3, cols, cfc, 0.0, DBL_MAX);
+
+        if(constraints->getLocked(i/2)) {
+            int cols[] = {i, i+1};
+            double cfc[] = {1.0, -1.0}; // coefficients
+            model->addRow(2, cols, cfc, 0.0, DBL_MAX);
+
+        } else {
+            int cols[] = {i, i+1, n_cols};
+            double cfc[] = {1.0, -1.0, -1.0}; 
+            model->addRow(3, cols, cfc, 0.0, DBL_MAX);
+        }
     }
 }
 
@@ -84,7 +92,7 @@ void changeObjective(ClpSimplex* model, int n_cols) {
     model->setObjectiveCoefficient(n_cols, 0.0);
 }
 
-void changeType1Constraints(ClpSimplex* model, int n_cols) {
+void changeType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols) {
     // remove constraints of type 1
     int* deleteWhich = new int[n_cols];
     for(int i = 0; i < n_cols/2; i++) {
@@ -99,7 +107,12 @@ void changeType1Constraints(ClpSimplex* model, int n_cols) {
         // earliest starting time is [i+1]
         int cols[] = {i, i+1};
         double cfc[] = {1.0, -1.0}; // coefficients
-        model->addRow(2, cols, cfc, minflex, DBL_MAX);
+
+        if(constraints->getLocked(i/2)) {
+            model->addRow(2, cols, cfc, 0, 0);
+        } else {
+            model->addRow(2, cols, cfc, minflex, DBL_MAX);
+       }
     }
 }
 
@@ -111,7 +124,7 @@ map<string, int> useClpToSolve (Constraints* constraints) {
     model.setLogLevel(0); // turns off all output of Clp
     
     setObjective(&model, n_cols, constraints);
-    addType1Constraints(&model, n_cols);
+    addType1Constraints(&model, constraints, n_cols);
     addType2Constraints(&model, constraints);
     
     // solve the problem for step 1
@@ -119,7 +132,7 @@ map<string, int> useClpToSolve (Constraints* constraints) {
     minflex = (int) model.objectiveValue();
 
     changeObjective(&model, n_cols);
-    changeType1Constraints(&model, n_cols);
+    changeType1Constraints(&model, constraints, n_cols);
 
     // solve the problem for step 2
     model.initialSolve();
@@ -165,19 +178,45 @@ void addLimits(Constraints* constraints) {
             for(int k = 0; k < (int) activities.size(); k++) {
                 stringstream ss1;
                 ss1 << activities[k]->i << ' ' << activities[k]->j;
-                string var1(ss1.str());
-                constraints->setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
-                constraints->setLowerLimit(var1.c_str(), release);
+                string var(ss1.str());
+
+                if(activities[k]->est == activities[k]->lst) {
+                    constraints->setUpperLimit(var.c_str(), activities[k]->est);
+                    constraints->setLowerLimit(var.c_str(), activities[k]->lst);
+                } else {
+                    constraints->setUpperLimit(var.c_str(), due - D(activities[k]->i, activities[k]->j));
+                    constraints->setLowerLimit(var.c_str(), release);
+                }
+
+                constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
+                if(activities[k]->est == activities[k]->lst) {
+                    cdebug("HETZELFDE\n");
+                }
             }
         }
     }
+}
+
+void printMSE(map<string, int>* solution) {
+    double mse = 0.0;
+    double mean = ((double) getFlexibility()) / (double) solution->size() * 2;
+    map<string, int>::iterator iter = solution->begin();
+    while(iter != solution->end()) {
+        double lst = (double) iter->second;        
+        ++iter;
+        double est = (double) iter->second;
+        ++iter;
+        mse += (lst - est - mean) * (lst - est - mean);
+    }
+    cout << "MSE = " << mse << endl;
+    cdebug("MSE = %f \n", mse);
 }
 
 void printSolution(map<string, int>* solution) {
     output("FLEX: ");
     output("%d ", getMinFlex());
     output("%d ", getFlexibility());
-
+    //cout << "minflex = " << minflex << endl;
     cdebug("minflex = %d\n", getMinFlex());
     cdebug("flexibility = %d\n", getFlexibility());
     map<string, int>::iterator iter = solution->begin();
@@ -196,5 +235,6 @@ int flexibility() {
     map<string, int> solution;
     solution = useClpToSolve(&constraints);
     printSolution(&solution);
+    printMSE(&solution);
     return 1;
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_GB">
+<TS version="2.1" language="en_GB">
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../widgets/dialogs/aboutdialog.cpp" line="12"/>
-        <source>About Task scheduler</source>
-        <translation></translation>
+        <location filename="../widgets/dialogs/aboutdialog.cpp" line="13"/>
+        <source>About Activity scheduler</source>
+        <translation>About Task scheduler</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/aboutdialog.cpp" line="22"/>
-        <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
-        <translation></translation>
+        <location filename="../widgets/dialogs/aboutdialog.cpp" line="24"/>
+        <source>&lt;strong&gt;Activity scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
+        <translation>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</translation>
     </message>
 </context>
 <context>
@@ -81,68 +81,63 @@
 <context>
     <name>ActivityInfoDialog</name>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="10"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="11"/>
         <source>Activity info</source>
         <translation>Task info</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="15"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="17"/>
         <source>Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="17"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="19"/>
         <source>Job:</source>
         <translation>Project:</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="19"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="21"/>
         <source>Duration:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="21"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="23"/>
         <source>Earliest start time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="23"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="25"/>
         <source>Latest start time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="26"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="28"/>
         <source>Earliest flex start time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="28"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="30"/>
         <source>Latest flex start time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="31"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="33"/>
         <source>Start time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="38"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="40"/>
         <source>Edit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="39"/>
+        <location filename="../widgets/dialogs/activityinfodialog.cpp" line="41"/>
         <source>Close</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>ActivityWidget</name>
-    <message>
-        <location filename="../widgets/activitywidget.cpp" line="248"/>
-        <source>&amp;Properties</source>
-        <translation></translation>
-    </message>
     <message>
         <location filename="../widgets/activitywidget.cpp" line="252"/>
         <source>&amp;Edit</source>
@@ -157,6 +152,11 @@
         <location filename="../widgets/activitywidget.cpp" line="249"/>
         <source>Show info about activity %1</source>
         <translation>Show info about task %1</translation>
+    </message>
+    <message>
+        <location filename="../widgets/activitywidget.cpp" line="248"/>
+        <source>&amp;Activity Info</source>
+        <translation>&amp;Task Info</translation>
     </message>
     <message>
         <location filename="../widgets/activitywidget.cpp" line="253"/>
@@ -261,12 +261,12 @@
     <message>
         <location filename="../model/comparison.cpp" line="6"/>
         <source>The instances do not have the same jobs.</source>
-        <translation></translation>
+        <translation>The instances do not have the same projects.</translation>
     </message>
     <message>
         <location filename="../model/comparison.cpp" line="8"/>
         <source>The instances do not have the same activities.</source>
-        <translation></translation>
+        <translation>The instances do not have the same tasks.</translation>
     </message>
     <message>
         <location filename="../model/comparison.cpp" line="10"/>
@@ -298,7 +298,8 @@
         <location filename="../widgets/dialogs/flexibilitydialog.cpp" line="14"/>
         <source>You can add flexibility to this activity by specifying how many additional                   
 time units are reserved, in case an activity overruns its time.</source>
-        <translation></translation>
+        <translation>You can add flexibility to this task by specifying how many additional                   
+time units are reserved, in case a task overruns its time.</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/flexibilitydialog.cpp" line="16"/>
@@ -347,8 +348,8 @@ time units are reserved, in case an activity overruns its time.</source>
         <location filename="../widgets/dialogs/importdialog.cpp" line="59"/>
         <location filename="../widgets/dialogs/importdialog.cpp" line="82"/>
         <location filename="../widgets/dialogs/importdialog.cpp" line="86"/>
-        <source>Task scheduler</source>
-        <translation></translation>
+        <source>Activity scheduler</source>
+        <translation>Task scheduler</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/importdialog.cpp" line="59"/>
@@ -369,17 +370,17 @@ time units are reserved, in case an activity overruns its time.</source>
 <context>
     <name>Instance</name>
     <message>
-        <location filename="../model/instance_manip.cpp" line="248"/>
+        <location filename="../model/instance_manip.cpp" line="249"/>
         <source>The constraint was not added, because it would create a cycle. A chain of constraints in the opposite direction already exists.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../model/instance_manip.cpp" line="256"/>
+        <location filename="../model/instance_manip.cpp" line="257"/>
         <source>Adding of the hard precedence constraint ignored, because it was already present.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../model/instance_manip.cpp" line="271"/>
+        <location filename="../model/instance_manip.cpp" line="272"/>
         <source>Adding of precedence constraint ignored, because it was already present.</source>
         <translation></translation>
     </message>
@@ -387,28 +388,28 @@ time units are reserved, in case an activity overruns its time.</source>
 <context>
     <name>InstanceMdiSubWindow</name>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="42"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="44"/>
         <source>Instance not saved</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="42"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="47"/>
         <source>Do you want to save the instance before closing?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="75"/>
-        <source>Task scheduler</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="70"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="78"/>
         <source>File saved</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="76"/>
-        <location filename="../widgets/instancemdisubwindow.cpp" line="78"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="83"/>
+        <source>Activity scheduler</source>
+        <translation>Task scheduler</translation>
+    </message>
+    <message>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="84"/>
+        <location filename="../widgets/instancemdisubwindow.cpp" line="86"/>
         <source>Cannot save file %1.</source>
         <translation></translation>
     </message>
@@ -449,58 +450,58 @@ time units are reserved, in case an activity overruns its time.</source>
         <translation>New Project</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="13"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="14"/>
         <source>Edit Job</source>
         <translation>Edit Project</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="47"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="54"/>
         <source>&amp;Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="49"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="56"/>
         <source>&amp;Release day:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="50"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="57"/>
         <source>&amp;Release time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="51"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="58"/>
         <source>&amp;Due day:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="52"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="59"/>
         <source>&amp;Due time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="54"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="61"/>
         <source>&amp;Release date:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="55"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="62"/>
         <source>&amp;Due date:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="76"/>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="78"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="83"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="85"/>
         <source>Invalid input</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="76"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="83"/>
         <source>Please fill in a name.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/jobdialog.cpp" line="78"/>
+        <location filename="../widgets/dialogs/jobdialog.cpp" line="85"/>
         <source>The due date should be after the release date.
 Please correct your input.</source>
         <translation></translation>
@@ -509,25 +510,97 @@ Please correct your input.</source>
 <context>
     <name>JobHeaderWidget</name>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="126"/>
+        <location filename="../widgets/jobheaderwidget.cpp" line="127"/>
         <source>Are you sure?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="126"/>
         <source>Are you sure you want to remove this job with its activities?</source>
-        <translation>Are you sure you want to remove this project with its tasks?</translation>
+        <translation type="vanished">Are you sure you want to remove this project with its tasks?</translation>
+    </message>
+</context>
+<context>
+    <name>JobInfoDialog</name>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="13"/>
+        <source>Job info</source>
+        <translation>Project info</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="19"/>
+        <source>Name:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="23"/>
+        <source>Release Day:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="26"/>
+        <source>Release Time:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="29"/>
+        <source>Due Day:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="32"/>
+        <source>Due Time:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="36"/>
+        <source>Release Date:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="39"/>
+        <source>Due Date:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="43"/>
+        <source>Activities:</source>
+        <translation>Tasks:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="61"/>
+        <source>Total Job Flexibility:</source>
+        <translation>Total Project Flexibility:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="64"/>
+        <source>Minimal Activity Flexibility:</source>
+        <translation>Minimal Task Flexibility:</translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="72"/>
+        <source>Edit</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/dialogs/jobinfodialog.cpp" line="73"/>
+        <source>Close</source>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>JobWidget</name>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="286"/>
+        <location filename="../widgets/jobwidget.cpp" line="250"/>
+        <source>Job Info</source>
+        <translation>Project Info</translation>
+    </message>
+    <message>
+        <location filename="../widgets/jobwidget.cpp" line="298"/>
         <source>The program encountered a failure. Please restart.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="248"/>
+        <location filename="../widgets/jobwidget.cpp" line="253"/>
         <source>Show resource usage</source>
         <translation></translation>
     </message>
@@ -567,12 +640,6 @@ Please correct your input.</source>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <location filename="../widgets/mainwindow.cpp" line="40"/>
-        <location filename="../widgets/mainwindow.cpp" line="266"/>
-        <source>Task scheduler</source>
-        <translation></translation>
-    </message>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="95"/>
         <source>New instance loaded</source>
@@ -634,16 +701,6 @@ File not found, not readable or parsing error.</source>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="120"/>
         <source>No instance active, cannot add resource.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../widgets/mainwindow.cpp" line="158"/>
-        <source>Click on two tasks to add a precedence constraint between them.</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../widgets/mainwindow.cpp" line="175"/>
-        <source>Click on two tasks to remove a precedence constraint between them.</source>
         <translation></translation>
     </message>
     <message>
@@ -823,6 +880,22 @@ File not found, not readable or parsing error.</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../widgets/mainwindow.cpp" line="40"/>
+        <location filename="../widgets/mainwindow.cpp" line="266"/>
+        <source>Activity scheduler</source>
+        <translation>Task scheduler</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="158"/>
+        <source>Click on two activities to add a precedence constraint between them.</source>
+        <translation>Click on two tasks to add a precedence constraint between them.</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="175"/>
+        <source>Click on two activities to remove a precedence constraint between them.</source>
+        <translation>Click on two tasks to remove a precedence constraint between them.</translation>
+    </message>
+    <message>
         <location filename="../widgets/mainwindow.cpp" line="431"/>
         <source>Solve</source>
         <translation></translation>
@@ -906,48 +979,48 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>ManageTemplatesDialog</name>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="12"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="13"/>
         <source>Manage templates</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="20"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="22"/>
         <source>&amp;Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="21"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="23"/>
         <source>&amp;Duration:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="58"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="60"/>
         <source>Unsaved changes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="58"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="60"/>
         <source>You have unsaved changes. Do you want to save them?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="78"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="80"/>
         <source>The current template cannot be edited. Open an instance with the following resources or add them to the current instance:
 </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="80"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="82"/>
         <source>Incomplete resources</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="121"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="123"/>
         <source>Really remove template?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/managetemplates.cpp" line="121"/>
+        <location filename="../widgets/dialogs/managetemplates.cpp" line="123"/>
         <source>Are you sure you want to remove this template?</source>
         <translation></translation>
     </message>
@@ -983,12 +1056,18 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>RequirementsTable</name>
     <message>
-        <location filename="../widgets/requirementstable.cpp" line="30"/>
+        <location filename="../widgets/requirementstable.cpp" line="42"/>
+        <location filename="../widgets/requirementstable.cpp" line="44"/>
         <source>Resource</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/requirementstable.cpp" line="30"/>
+        <location filename="../widgets/requirementstable.cpp" line="42"/>
+        <source>Minimal needed</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/requirementstable.cpp" line="44"/>
         <source>Amount</source>
         <translation></translation>
     </message>
@@ -996,43 +1075,43 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>ResourceDecreaseDialog</name>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="9"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="10"/>
         <source>Decrease capacity</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="33"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="35"/>
         <source>From - day:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="34"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="36"/>
         <source>From - time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="35"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="37"/>
         <source>Till - day:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="36"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="38"/>
         <source>Till - time:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="48"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="50"/>
         <source>From:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="49"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="51"/>
         <source>Till:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="37"/>
-        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="50"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="39"/>
+        <location filename="../widgets/dialogs/resourcedecreasedialog.cpp" line="52"/>
         <source>Decrease by:</source>
         <translation></translation>
     </message>
@@ -1104,12 +1183,12 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>ResourceHeaderWidget</name>
     <message>
-        <location filename="../widgets/resourceheaderwidget.cpp" line="90"/>
+        <location filename="../widgets/resourceheaderwidget.cpp" line="91"/>
         <source>Cannot remove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/resourceheaderwidget.cpp" line="90"/>
+        <location filename="../widgets/resourceheaderwidget.cpp" line="94"/>
         <source>This resource is required by activities and cannot be removed.</source>
         <translation>This resource is required by tasks and cannot be removed.</translation>
     </message>
@@ -1150,57 +1229,57 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>SolverConfigDialog</name>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="13"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="14"/>
         <source>Configure Solvers</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="17"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="19"/>
         <source>&amp;Browse...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="26"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="28"/>
         <source>Name:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="27"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="29"/>
         <source>Binary:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="28"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="30"/>
         <source>Arguments:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="62"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="64"/>
         <source>Unsaved changes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="62"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="64"/>
         <source>You have unsaved changes. Do you want to save them?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="102"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="104"/>
         <source>Select solver binary</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="118"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="120"/>
         <source>(new)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="127"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="129"/>
         <source>Really remove solver?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="127"/>
+        <location filename="../widgets/dialogs/solverconfigdialog.cpp" line="129"/>
         <source>Are you sure you want to remove this solver?</source>
         <translation></translation>
     </message>
@@ -1208,55 +1287,55 @@ File not found, not readable or parsing error.</source>
 <context>
     <name>SolvingProgressDialog</name>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="12"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="13"/>
         <source>%1 Solver</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="22"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="24"/>
         <source>Status:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="32"/>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="75"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="34"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="77"/>
         <source>More...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="75"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="77"/>
         <source>Less...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="99"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="101"/>
         <source>The instance has been solved successfully.
 The solver posted %1 precedence constraints.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="104"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="106"/>
         <source>The instance could not be solved, due to a resource peak on
 resource &apos;%1&apos;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="107"/>
-        <source>The tasks in project &apos;%1&apos; could not be scheduled mutually exclusive.</source>
-        <translation></translation>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="109"/>
+        <source>The activities in job &apos;%1&apos; could not be scheduled mutually exclusive.</source>
+        <translation>The tasks in project &apos;%1&apos; could not be scheduled mutually exclusive.</translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="110"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="112"/>
         <source>The instance could not be solved.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="116"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="118"/>
         <source>See &apos;More...&apos; for more information.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="125"/>
+        <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="127"/>
         <source>The solver has been terminated. Solution so far has been applied.</source>
         <translation></translation>
     </message>

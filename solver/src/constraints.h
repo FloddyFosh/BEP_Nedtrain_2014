@@ -25,6 +25,7 @@ class Constraints {
         map<int, string> variablesName;
         map<int, int> upperLimits;
         map<int, int> lowerLimits;
+        map<int, bool> locks;
         vector<Constraint> constraintVector;
 
     public:
@@ -39,6 +40,8 @@ class Constraints {
         void setUpperLimit(string name, int upperLimit);
         int getLowerLimit(int id);
         void setLowerLimit(string name, int lowerLimit);
+        bool getLocked(int id);
+        void setLocked(string name, bool locked);
 };
 
 #endif

@@ -99,6 +99,7 @@ public slots:
     virtual void doLayout(); ///< updates the geometry of all the child (activity) widgets
     void doExpand(bool); ///< sets the expanded flag and calls updateGeometry()
     void updateGeometry(); ///< exposes native updateGeometry() as a slot
+    void showJobInfoDialog(); ///< slot to show the job info dialog
     void showResourceUsage(); ///< shades the resource usage of this job widget
     void addGroup(Group *group); ///< add group to the job widget
     void removeGroup(Group *group); ///< remove the specified group from the jobwidget.

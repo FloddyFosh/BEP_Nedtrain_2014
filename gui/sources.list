@@ -36,6 +36,7 @@ data/dbc.cpp
 solve/solver.cpp
 widgets/timeline.cpp
 widgets/dialogs/jobdialog.cpp
+widgets/dialogs/jobinfodialog.cpp
 widgets/dialogs/solvingprogressdialog.cpp
 widgets/dialogs/managetemplates.cpp
 widgets/dialogs/resourcedecreasedialog.cpp
@@ -63,5 +64,4 @@ model/st_propagator.cpp
 model/frame.cpp
 model/chainframe.cpp
 controller/instancecontroller.cpp
-
 widgets/instancemdisubwindow.cpp

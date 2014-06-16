@@ -1,5 +1,6 @@
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
+#include "dialogs/jobinfodialog.h"
 
 #include <QPainter>
 #include <QMenu>
@@ -245,8 +246,14 @@ QList<ActivityWidget*> JobWidget::getActivityWidgets() {
 void JobWidget::contextMenuEvent(QContextMenuEvent *event){
     if(comparing) return;
     QMenu menu(this);
+
+    QAction* showJobInfoDialog = new QAction(tr("Job Info"), this);
+    connect(showJobInfoDialog, SIGNAL(triggered()), this, SLOT(showJobInfoDialog()));
+
     QAction* showResourceUsage = new QAction(tr("Show resource usage"), this);
     connect(showResourceUsage, SIGNAL(triggered()), this, SLOT(showResourceUsage()));
+
+    menu.addAction(showJobInfoDialog);
     menu.addAction(showResourceUsage);
     menu.exec(event->globalPos());
 }
@@ -256,6 +263,11 @@ void JobWidget::mousePressEvent(QMouseEvent *event) {
 
     if (event->button() == Qt::LeftButton)
         controller->stopDrawingDependencies();
+}
+
+void JobWidget::showJobInfoDialog(){
+    JobInfoDialog dialog(_job->instance(), _job, this);
+    dialog.exec();
 }
 
 void JobWidget::showResourceUsage(){

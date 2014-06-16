@@ -56,7 +56,7 @@ void ImportDialog::browse() {
 
 void ImportDialog::apply() {
     if(fileEdit->text().isEmpty()) {
-        QMessageBox::warning(this, tr("Task scheduler"), tr("No instance selected."));
+        QMessageBox::warning(this, tr("Activity scheduler"), tr("No instance selected."));
     }
     else {
         try{
@@ -79,11 +79,11 @@ void ImportDialog::apply() {
             QApplication::restoreOverrideCursor();
 
             if(!success) {
-                QMessageBox::warning(this, tr("Task scheduler"), tr("Instance import failed."));
+                QMessageBox::warning(this, tr("Activity scheduler"), tr("Instance import failed."));
             }
         }
         catch(NoInstanceException const& e) {
-            QMessageBox::warning(this, tr("Task scheduler"), tr("Cannot import the instance because there is no instance currently loaded."));
+            QMessageBox::warning(this, tr("Activity scheduler"), tr("Cannot import the instance because there is no instance currently loaded."));
         }
     }
     accept();
