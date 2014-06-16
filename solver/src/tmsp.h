@@ -50,13 +50,14 @@ typedef struct requirement {
 
 typedef struct precedence {
 	int i1, j1, i2, j2;
+    bool isHard;
 } precedence;
 
 void add_resource(int, int, char *);
 void add_train(int, int, int, char *);
 void add_activity(int, int, int, char *, int est = -1, int lst = -1);
 void add_requirement(int, int, int, int);
-void add_precedence(int, int, int, int);
+void add_precedence(int, int, int, int, bool isHard);
 void add_train_mutexes();
 void add_flex(int, int, int);
 void add_groupchild(int, int, int, int);

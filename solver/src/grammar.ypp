@@ -43,9 +43,9 @@ declaration		:
 				| 'A' T_INT T_INT T_INT T_STRING T_INT T_INT T_INT	{ add_activity(   ttoi($2), ttoi($3), ttoi($4), $5->text, ttoi($7), ttoi($8)); }
 				| 'D' T_INT T_INT T_INT T_STRING	{ add_train(      ttoi($2), ttoi($3), ttoi($4), $5->text); }
 				| 'Q' T_INT T_INT T_INT T_INT		{ add_requirement(ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
-				| 'S' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
-				| 'P' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
-				| 'p' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
+                | 'S' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5), false); }
+                | 'P' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5), true); }
+                | 'p' T_INT T_INT T_INT T_INT		{ add_precedence( ttoi($2), ttoi($3), ttoi($4), ttoi($5), true); }
 				| 'F' T_INT T_INT T_INT     		{ add_flex(       ttoi($2), ttoi($3), ttoi($4)); }
 				| 'G' T_INT T_INT T_INT T_INT		{ add_groupchild( ttoi($2), ttoi($3), ttoi($4), ttoi($5)); }
 				;

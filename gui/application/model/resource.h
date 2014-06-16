@@ -53,9 +53,9 @@ public:
     QVector<Requirement*> getRequirements();
 
     /**
-     * @return A QMap that maps the resource units of this resource to a list of activities (chain).
+     * @return The chain object associated with chainId
      */
-    QMap<int,Chain*>* getChains();
+    Chain* getChain(int chainId);
 
     /**
      * Clears the saved chains of this resource.

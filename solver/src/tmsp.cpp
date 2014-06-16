@@ -65,7 +65,7 @@ void add_requirement(int i, int j, int k, int q) {
 	list_append(R(k)->requirements, req);   // save in 'normal' list in the resource
 }
 
-void add_precedence(int i1, int j1, int i2, int j2) {
+void add_precedence(int i1, int j1, int i2, int j2, bool isHard) {
 	precedence* p = new precedence;
 
 	p->i1 = i1;
@@ -73,6 +73,7 @@ void add_precedence(int i1, int j1, int i2, int j2) {
 
 	p->i2 = i2;
     p->j2 = j2;
+    p->isHard = isHard;
     vector<precedence*>::iterator findIter = find(tmsp->precedences.begin(), tmsp->precedences.end(), p);
     if(findIter == tmsp->precedences.end()){
         list_append(tmsp->precedences, p);

@@ -362,6 +362,7 @@ void Solver::processChainLine(QByteArray &line) {
     }
     QMap<int,Resource*> resources = instance->getResources();
     res = fields.takeFirst().toInt();
+    ResourceDecrease* dec = NULL;
     while(res != -1){
         Resource* curResource = resources[res];
         chain = fields.takeFirst().toInt();
@@ -369,11 +370,25 @@ void Solver::processChainLine(QByteArray &line) {
         for(int i=0;i<numActs;i++){
             ai = fields.takeFirst().toInt();
             aj = fields.takeFirst().toInt();
-            Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
-            curResource->addActToChain(act,chain);
+            dec = curResource->getDecrease(ai);
+            Chain* chainObj = curResource->getChain(chain);
+            if(dec){
+                if(chainObj->getActivities()->empty()) continue;
+                Group* g = chainObj->getActivities()->last()->group();
+                g->setLST(min(g->getLST(),dec->getFrom()-g->getDuration()));
+            }
+            else{
+                Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
+                if(dec){
+                    Group* g = act->group();
+                    g->setEST(max(g->getEST(),dec->getTill()));
+                    dec = NULL;
+                }
+                curResource->addActToChain(act,chain);
+            }
         }
 
-        Chain* c = curResource->getChains()->value(chain);
+        Chain* c = curResource->getChain(chain);
         QList<QPoint*>* usedProfile = new QList<QPoint*>;
         if(res==prevRes){
             Frame* lastFrame = replayFrames.last();
