@@ -57,9 +57,16 @@ void addType1Constraints(ClpSimplex* model, int n_cols) {
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
         // earliest starting time is [i+1]
+
+        // if(!constraints.getLocked(i/2)) {
         int cols[] = {i, i+1, n_cols};
         double cfc[] = {1.0, -1.0, -1.0}; // coefficients
-        model->addRow(3, cols, cfc, 0.0, DBL_MAX);
+        model->addRow(3, cols, cfc, 0.0, DBL_MAX);s
+        // } else { 
+        // int cols[] = {i, i+1};
+        // double cfc[] = {1.0, -1.0};
+        // model->addRow(2, cols, cfc, 0.0, DBL_MAX);
+        // }
     }
 }
 
@@ -99,7 +106,12 @@ void changeType1Constraints(ClpSimplex* model, int n_cols) {
         // earliest starting time is [i+1]
         int cols[] = {i, i+1};
         double cfc[] = {1.0, -1.0}; // coefficients
+
+        // if(!constraints.getLocked(i/2)) {
         model->addRow(2, cols, cfc, minflex, DBL_MAX);
+        // } else {
+        model->addRow(2, cols, cfc, 0, DBL_MAX);
+        // }
     }
 }
 
@@ -168,6 +180,7 @@ void addLimits(Constraints* constraints) {
                 string var1(ss1.str());
                 constraints->setUpperLimit(var1.c_str(), due - D(activities[k]->i, activities[k]->j));
                 constraints->setLowerLimit(var1.c_str(), release);
+                // constraints->setLocked(true);
             }
         }
     }
