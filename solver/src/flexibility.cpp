@@ -184,7 +184,7 @@ void addLimits(Constraints* constraints) {
                     constraints->setUpperLimit(var.c_str(), activities[k]->est);
                     constraints->setLowerLimit(var.c_str(), activities[k]->lst);
                 } else {
-                    constraints->setUpperLimit(var.c_str(), due - D(activities[k]->i, activities[k]->j));
+                    constraints->setUpperLimit(var.c_str(), due - activities[k]->duration);
                     constraints->setLowerLimit(var.c_str(), release);
                 }
 

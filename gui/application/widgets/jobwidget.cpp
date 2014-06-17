@@ -137,13 +137,21 @@ void JobWidget::paintEvent(QPaintEvent *e) {
         foreach(GroupWidget *groupWidget, groupWidgetList) {
             if (controller->isPaintingFeasibleIntervals())
                 groupWidget->determineFeasibleInterval(&painter, yOffset);
-            if (controller->isPaintingFlexibilityIntervals())
-                groupWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
         }
         foreach(ActivityWidget *activityWidget, activityWidgets) {
             if (controller->isPaintingFeasibleIntervals())
                 activityWidget->determineFeasibleInterval(&painter, yOffset);
+            if (expanded) yOffset++;
+        }
+
+        yOffset = 1;
+        foreach(GroupWidget *groupWidget, groupWidgetList) {
+            if (controller->isPaintingFlexibilityIntervals())
+                groupWidget->paintFlexibilityInterval(&painter, yOffset);
+            if (expanded) yOffset++;
+        }
+        foreach(ActivityWidget *activityWidget, activityWidgets) {
             if (controller->isPaintingFlexibilityIntervals())
                 activityWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
@@ -171,8 +179,8 @@ void JobWidget::paintGroups() {
 }
 
 void JobWidget::paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset){
-	int yStart = vZoom() * yOffset;
-	int yEnd   = vZoom() * yOffset + height;
+    int yStart = vZoom() * yOffset;
+    int yEnd   = vZoom() * yOffset + height;
 	painter.setPen(QPen (QColor(170,215,170), 1, Qt::SolidLine));
 	painter.drawLine(xStart,(yStart+yEnd)/2,xEnd,(yStart+yEnd)/2);
 	painter.setPen(QPen (Qt::darkGray, 1, Qt::SolidLine));
