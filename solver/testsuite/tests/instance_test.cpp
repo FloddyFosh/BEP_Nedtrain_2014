@@ -41,6 +41,8 @@ class InstanceTest : public ::testing::Test {
 };
 
 TEST_F(InstanceTest, SmallInstance) {
+    ADD_FAILURE();
+    return; // TODO
     parseFile("../../instances/small.instance");
     solve(0,0);
 

@@ -124,6 +124,8 @@ TEST_F(ChainingTest, PushToChainTest){
 }
 
 TEST_F(ChainingTest, PushToBestChainTest){
+    ADD_FAILURE();
+    return; // FIXME
     initializeChains();
     pushToBestChains(0,0,0);
     int count = 0;

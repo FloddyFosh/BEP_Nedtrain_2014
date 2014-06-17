@@ -16,6 +16,7 @@ TEST_F(FlexibilityTest, Test_1) {
     cstr.addConstraint("B", "A", -5);
     cstr.addConstraint("B", "C", -5);
     cstr.addConstraint("D", "C", -10);
+
     cstr.setUpperLimit("A", 15);
     cstr.setLowerLimit("A", 0);
     cstr.setUpperLimit("B", 15);
@@ -27,7 +28,14 @@ TEST_F(FlexibilityTest, Test_1) {
     cstr.setUpperLimit("E", 10);
     cstr.setLowerLimit("E", 0);
 
+    cstr.setLocked("A", false);
+    cstr.setLocked("B", false);
+    cstr.setLocked("C", false);
+    cstr.setLocked("D", false);
+    cstr.setLocked("E", false);
+
     useClpToSolve(&cstr);
+
     EXPECT_EQ(29, getFlexibility());
     EXPECT_EQ(2, getMinFlex());
 }
@@ -36,6 +44,7 @@ TEST_F(FlexibilityTest, Test_2) {
     cstr.addConstraint("A", "B", -2);
     cstr.addConstraint("A", "B", -2);
     cstr.addConstraint("F", "G", -2);    
+
     cstr.setUpperLimit("A", 108);
     cstr.setLowerLimit("A", 100);
     cstr.setUpperLimit("B", 108);
@@ -45,7 +54,13 @@ TEST_F(FlexibilityTest, Test_2) {
     cstr.setUpperLimit("G", 108);
     cstr.setLowerLimit("G", 100);
 
+    cstr.setLocked("A", false);
+    cstr.setLocked("B", false);    
+    cstr.setLocked("F", false);
+    cstr.setLocked("G", false);
+
     useClpToSolve(&cstr);
+
     EXPECT_EQ(12, getFlexibility());
     EXPECT_EQ(3, getMinFlex());
 }
