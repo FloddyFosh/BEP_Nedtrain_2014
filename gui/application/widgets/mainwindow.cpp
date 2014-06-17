@@ -384,6 +384,7 @@ void MainWindow::createActions() {
     connect(newActivityAct, SIGNAL(triggered()), this, SLOT(newActivity()));
 
     newPrecedenceAct = new QAction(tr("Add precedence &constraint"), this);
+    newPrecedenceAct->setStatusTip(tr("Add a precedence constraint to the current instance"));
     newPrecedenceAct->setIcon(AppIcon("add_constraint.png"));
     newPrecedenceAct->setCheckable(true);
     disableIfInstanceEmpty(newPrecedenceAct);
@@ -391,20 +392,24 @@ void MainWindow::createActions() {
     connect(this, SIGNAL(keyPressEvent(QKeyEvent *)), this, SLOT(disablePrecedenceAdding(QKeyEvent *)));
 
     removePrecedenceAct = new QAction(tr("Remove precedence &constraint"), this);
+    removePrecedenceAct->setStatusTip(tr("Remove precedence &constraint"));
     removePrecedenceAct->setIcon(AppIcon("remove_constraint.png"));
     removePrecedenceAct->setCheckable(true);
     disableIfInstanceEmpty(removePrecedenceAct);
     connect(removePrecedenceAct, SIGNAL(triggered()), this, SLOT(removePrecedence()));
 
     clearPrecedencesAct = new QAction(tr("Clear generated constraints"), this);
+    clearPrecedencesAct->setStatusTip(tr("Clear all solver generated constraints of the current instance"));
     disableIfInstanceEmpty(clearPrecedencesAct);
     connect(clearPrecedencesAct, SIGNAL(triggered()), this, SLOT(clearPrecedences()));
 
     autoClearPrecedencesAct = new QAction(tr("Automatically clear generated constraints before solving"), this);
+    autoClearPrecedencesAct->setStatusTip(tr("Automatically clear generated constraints before solving"));
     autoClearPrecedencesAct->setCheckable(true);
     connect(autoClearPrecedencesAct, SIGNAL(triggered()), controller, SLOT(autoClearPrecedences()));
 
     useHoursAct = new QAction(tr("Show hours on timeline"), this);
+    useHoursAct->setStatusTip(tr("Show hours on timeline"));
     useHoursAct->setCheckable(true);
     useHoursAct->setChecked(false);
     disableIfInstanceEmpty(useHoursAct);
@@ -416,10 +421,12 @@ void MainWindow::createActions() {
     connect(manageTemplatesAct, SIGNAL(triggered()), this, SLOT(manageTemplates()));
 
     paintFeasibleIntervalsAct = new QAction(tr("Paint feasible intervals"), this);
+    paintFeasibleIntervalsAct->setStatusTip(tr("Paint the feasible interval for each activity"));
     paintFeasibleIntervalsAct->setCheckable(true);
     connect(paintFeasibleIntervalsAct, SIGNAL(triggered()), controller, SLOT(doPaintFeasibleIntervals()));
 
     paintFlexibilityIntervalsAct = new QAction(tr("Paint flexibility intervals"), this);
+    paintFlexibilityIntervalsAct->setStatusTip(tr("Paint the flexible interval for each activity"));
     paintFlexibilityIntervalsAct->setCheckable(true);
     connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
 
@@ -429,12 +436,14 @@ void MainWindow::createActions() {
     connect(configureSolversAction, SIGNAL(triggered()), this, SLOT(configureSolvers()));
     
     solveLastAction = new QAction(tr("Solve"), this);
+    solveLastAction->setStatusTip(tr("Solve the current instance"));
     solveLastAction->setIcon(AppIcon("solve.png"));
 
     disableIfInstanceEmpty(solveLastAction);
     connect(solveLastAction, SIGNAL(triggered()), controller, SLOT(solve()));
 
     solveWithParamsAction = new QAction(tr("Set options and solve"), this);
+    solveWithParamsAction->setStatusTip(tr("Set options and solve the current instance"));
     solveWithParamsAction->setIcon(AppIcon("solve-params.png"));
     disableIfInstanceEmpty(solveWithParamsAction);
     connect(solveWithParamsAction, SIGNAL(triggered()), controller, SLOT(solveWithOptions()));

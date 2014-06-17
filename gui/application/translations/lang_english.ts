@@ -830,52 +830,75 @@ File not found, not readable or parsing error.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="393"/>
+        <location filename="../widgets/mainwindow.cpp" line="387"/>
+        <source>Add a precedence constraint to the current instance</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="394"/>
+        <location filename="../widgets/mainwindow.cpp" line="395"/>
         <source>Remove precedence &amp;constraint</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="399"/>
+        <location filename="../widgets/mainwindow.cpp" line="401"/>
         <source>Clear generated constraints</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="403"/>
+        <location filename="../widgets/mainwindow.cpp" line="402"/>
+        <source>Clear all solver generated constraints of the current instance</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="406"/>
+        <location filename="../widgets/mainwindow.cpp" line="407"/>
         <source>Automatically clear generated constraints before solving</source>
         <translation>Clear generated constraints before solving</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="407"/>
+        <location filename="../widgets/mainwindow.cpp" line="411"/>
+        <location filename="../widgets/mainwindow.cpp" line="412"/>
         <source>Show hours on timeline</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="413"/>
+        <location filename="../widgets/mainwindow.cpp" line="418"/>
         <source>&amp;Manage templates...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="414"/>
+        <location filename="../widgets/mainwindow.cpp" line="419"/>
         <source>Add or remove activity templates</source>
         <translation>Add or remove task templates</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="418"/>
+        <location filename="../widgets/mainwindow.cpp" line="423"/>
         <source>Paint feasible intervals</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="427"/>
+        <location filename="../widgets/mainwindow.cpp" line="424"/>
+        <source>Paint the feasible interval for each activity</source>
+        <translation>Paint the feasible interval for each task</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="429"/>
+        <source>Paint the flexible interval for each activity</source>
+        <translation>Paint the flexible interval for each task</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="434"/>
         <source>&amp;Configure...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="428"/>
+        <location filename="../widgets/mainwindow.cpp" line="435"/>
         <source>Configure available solvers</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="422"/>
+        <location filename="../widgets/mainwindow.cpp" line="428"/>
         <source>Paint flexibility intervals</source>
         <translation></translation>
     </message>
@@ -896,82 +919,92 @@ File not found, not readable or parsing error.</source>
         <translation>Click on two tasks to remove a precedence constraint between them.</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="431"/>
+        <location filename="../widgets/mainwindow.cpp" line="438"/>
         <source>Solve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="437"/>
+        <location filename="../widgets/mainwindow.cpp" line="439"/>
+        <source>Solve the current instance</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="445"/>
         <source>Set options and solve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="442"/>
+        <location filename="../widgets/mainwindow.cpp" line="446"/>
+        <source>Set options and solve the current instance</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="451"/>
         <source>&amp;About...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="447"/>
+        <location filename="../widgets/mainwindow.cpp" line="456"/>
         <source>Zoo&amp;m in</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="448"/>
+        <location filename="../widgets/mainwindow.cpp" line="457"/>
         <source>Zoom o&amp;ut</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="457"/>
+        <location filename="../widgets/mainwindow.cpp" line="466"/>
         <source>Compare</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="463"/>
+        <location filename="../widgets/mainwindow.cpp" line="472"/>
         <source>Rewind</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="464"/>
+        <location filename="../widgets/mainwindow.cpp" line="473"/>
         <source>Forward</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="484"/>
+        <location filename="../widgets/mainwindow.cpp" line="493"/>
         <source>&amp;File</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="499"/>
+        <location filename="../widgets/mainwindow.cpp" line="508"/>
         <source>&amp;Edit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="517"/>
+        <location filename="../widgets/mainwindow.cpp" line="526"/>
         <source>&amp;Solve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="520"/>
+        <location filename="../widgets/mainwindow.cpp" line="529"/>
         <source>&amp;Language</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="524"/>
+        <location filename="../widgets/mainwindow.cpp" line="533"/>
         <source>&amp;Help</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="555"/>
+        <location filename="../widgets/mainwindow.cpp" line="564"/>
         <source>%1 of %2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="595"/>
+        <location filename="../widgets/mainwindow.cpp" line="604"/>
         <source>Language changed</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="595"/>
+        <location filename="../widgets/mainwindow.cpp" line="604"/>
         <source>Language changed. Restart application to view in chosen language.</source>
         <translation></translation>
     </message>

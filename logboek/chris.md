@@ -29,3 +29,11 @@ Datum      | Uren   | Beschrijving
 02-06-2014 | 8      | Het splitsen van stdout/stderr in de communicatie, output layout, crash fixes, warnings wegwerken. 
 03-06-2014 | 7      | Dropbox voor Cees/Bob, static QT library builden, static executable.
 04-06-2014 | 6      | Static solvers maken en debuggen, CLP voor windows installeren en testen.
+05-06-2014 | 7      | Het aanpassen van makefiles en het static builden van ubuntu executable, geholpen met chaining, CLP voor windows.
+06-06-2014 | 7      | Nog meer static builden, crash fix.
+10-06-2014 | 7      | Chaining crash fix, chaining voor windows werkend krijgen, test failures gefixt.
+11-06-2014 | 7      | Flexible en Feasible intervallen beter laten werken, meer crash en bug fixes.
+12-06-2014 | 7      | Code verschonen voor SIG, ervoor zorgen dat er 2x na elkaar gesolved kan worden.
+13-06-2014 | 9      | SIG code opsturen, eindverslag, crash fix, het tekenen van intervallen verbeterd, flexible info toegevoegd bij activiteiten, dubbele solve verbeteren.
+15-06-2014 | 3		| Eindverslag verbeteringen, fixen van crash bij verwijderen activiteit.
+16-06-2014 | 7      | Informatie van jobs in een nieuwe dialog zien, language files.

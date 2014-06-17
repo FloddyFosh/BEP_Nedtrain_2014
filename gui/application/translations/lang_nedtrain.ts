@@ -312,7 +312,7 @@
     <message>
         <location filename="../widgets/dialogs/flexibilitydialog.cpp" line="10"/>
         <source> time units</source>
-        <translation>tijdseenheden</translation>
+        <translation> tijdseenheden</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/flexibilitydialog.cpp" line="14"/>
@@ -678,12 +678,13 @@ Please correct your input.</source>
         <translation>Nieuwe instantie geladen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="407"/>
+        <location filename="../widgets/mainwindow.cpp" line="411"/>
+        <location filename="../widgets/mainwindow.cpp" line="412"/>
         <source>Show hours on timeline</source>
         <translation>Uren op de tijdlijn tonen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="431"/>
+        <location filename="../widgets/mainwindow.cpp" line="438"/>
         <source>Solve</source>
         <translation>Oplossen</translation>
     </message>
@@ -881,48 +882,70 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
         <translation>Nieuwe &amp;voorrangsrelatie</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="393"/>
+        <location filename="../widgets/mainwindow.cpp" line="387"/>
+        <source>Add a precedence constraint to the current instance</source>
+        <translation>Voeg een nieuwe voorrangsrelatie toe aan de instantie</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="394"/>
+        <location filename="../widgets/mainwindow.cpp" line="395"/>
         <source>Remove precedence &amp;constraint</source>
         <translation>V&amp;oorrangsrelatie verwijderen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="399"/>
+        <location filename="../widgets/mainwindow.cpp" line="401"/>
         <source>Clear generated constraints</source>
         <translation>Verwijder de gegenereerde constraints</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="403"/>
+        <location filename="../widgets/mainwindow.cpp" line="402"/>
+        <source>Clear all solver generated constraints of the current instance</source>
+        <translation>Verwijder alle door de solver gegenereerde constraints van de huidige instantie</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="406"/>
+        <location filename="../widgets/mainwindow.cpp" line="407"/>
         <source>Automatically clear generated constraints before solving</source>
         <translation>Verwijder gegenereerde constraints bij het opnieuw plannen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="413"/>
+        <location filename="../widgets/mainwindow.cpp" line="418"/>
         <source>&amp;Manage templates...</source>
         <translation>&amp;Sjablonen &amp;beheren...</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="414"/>
+        <location filename="../widgets/mainwindow.cpp" line="419"/>
         <source>Add or remove activity templates</source>
         <translation>Sjablonen voor taken toevoegen of verwijderen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="418"/>
+        <location filename="../widgets/mainwindow.cpp" line="423"/>
         <source>Paint feasible intervals</source>
         <translation>Toegelaten intervallen tekenen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="427"/>
+        <location filename="../widgets/mainwindow.cpp" line="424"/>
+        <source>Paint the feasible interval for each activity</source>
+        <translation>Teken de toegelaten intervallen voor elke taak</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="429"/>
+        <source>Paint the flexible interval for each activity</source>
+        <translation>Teken de flexible intervallen voor elke taak</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="434"/>
         <source>&amp;Configure...</source>
         <translatorcomment>&amp;Configureren...</translatorcomment>
         <translation>&amp;Configureren...</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="428"/>
+        <location filename="../widgets/mainwindow.cpp" line="435"/>
         <source>Configure available solvers</source>
         <translation>Bestaande solvers configureren</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="422"/>
+        <location filename="../widgets/mainwindow.cpp" line="428"/>
         <source>Paint flexibility intervals</source>
         <translation>Flexibiliteitsintervallen tekenen</translation>
     </message>
@@ -943,77 +966,87 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
         <translation>Klik op twee taken om de voorrangsrelatie ertussen te verwijderen.</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="437"/>
-        <source>Set options and solve</source>
-        <translation>Opties instellen en plannen</translation>
+        <location filename="../widgets/mainwindow.cpp" line="439"/>
+        <source>Solve the current instance</source>
+        <translation>Los de huidige instantie op</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="442"/>
+        <location filename="../widgets/mainwindow.cpp" line="445"/>
+        <source>Set options and solve</source>
+        <translation>Opties instellen en oplossen</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="446"/>
+        <source>Set options and solve the current instance</source>
+        <translation>Opties instellen en de huidige instantie oplossen</translation>
+    </message>
+    <message>
+        <location filename="../widgets/mainwindow.cpp" line="451"/>
         <source>&amp;About...</source>
         <translation>&amp;Over...</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="447"/>
+        <location filename="../widgets/mainwindow.cpp" line="456"/>
         <source>Zoo&amp;m in</source>
         <translation>&amp;Inzoomen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="448"/>
+        <location filename="../widgets/mainwindow.cpp" line="457"/>
         <source>Zoom o&amp;ut</source>
         <translation>&amp;Uitzoomen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="457"/>
+        <location filename="../widgets/mainwindow.cpp" line="466"/>
         <source>Compare</source>
         <translation>Vergelijken</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="463"/>
+        <location filename="../widgets/mainwindow.cpp" line="472"/>
         <source>Rewind</source>
         <translation>Terugspoelen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="464"/>
+        <location filename="../widgets/mainwindow.cpp" line="473"/>
         <source>Forward</source>
         <translation>Vooruitspoelen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="484"/>
+        <location filename="../widgets/mainwindow.cpp" line="493"/>
         <source>&amp;File</source>
         <translation>&amp;Bestand</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="499"/>
+        <location filename="../widgets/mainwindow.cpp" line="508"/>
         <source>&amp;Edit</source>
         <translation>&amp;Bewerken</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="517"/>
+        <location filename="../widgets/mainwindow.cpp" line="526"/>
         <source>&amp;Solve</source>
         <translation>&amp;Plannen</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="520"/>
+        <location filename="../widgets/mainwindow.cpp" line="529"/>
         <source>&amp;Language</source>
         <translation>&amp;Taal</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="524"/>
+        <location filename="../widgets/mainwindow.cpp" line="533"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="555"/>
+        <location filename="../widgets/mainwindow.cpp" line="564"/>
         <source>%1 of %2</source>
         <translation>%1 van %2</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="595"/>
+        <location filename="../widgets/mainwindow.cpp" line="604"/>
         <source>Language changed</source>
         <translation>Taal gewijzigd</translation>
     </message>
     <message>
-        <location filename="../widgets/mainwindow.cpp" line="595"/>
+        <location filename="../widgets/mainwindow.cpp" line="604"/>
         <source>Language changed. Restart application to view in chosen language.</source>
         <translation>Taal gewijzigd. Herstart het programma om het in de gekozen taal te bekijken.</translation>
     </message>

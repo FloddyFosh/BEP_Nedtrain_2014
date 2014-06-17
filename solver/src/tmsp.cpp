@@ -74,11 +74,12 @@ void add_precedence(int i1, int j1, int i2, int j2, bool isHard) {
 	p->i2 = i2;
     p->j2 = j2;
     p->isHard = isHard;
-    vector<precedence*>::iterator findIter = find(tmsp->precedences.begin(), tmsp->precedences.end(), p);
-    if(findIter == tmsp->precedences.end()){
-        list_append(tmsp->precedences, p);
-        output("PC: %d %d %d %d\n", i1, j1, i2, j2);
+    FOREACH(tmsp->precedences, it){
+        precedence* p2 = *it;
+        if(p->i1==p2->i1 && p->i2==p2->i2 && p->j1==p2->j1 && p->j2==p2->j2) return;
     }
+    list_append(tmsp->precedences, p);
+    output("PC: %d %d %d %d\n", i1, j1, i2, j2);
 }
 
 void add_flex(int i, int j, int duration) {
@@ -101,3 +102,10 @@ void add_train_mutexes() {
 		}
 	}
 }		
+
+void update_starttimes(int i1, int j1, int i2, int j2){
+    activity* a1 = A(i1,j1);
+    activity* a2 = A(i2,j2);
+    a1->lst = min(a1->lst, a2->lst - a1->duration);
+    a2->est = max(a2->est, a1->est + a1->duration);
+}

@@ -116,8 +116,8 @@ bool InstanceWidget::eventFilter(QObject *o, QEvent *e) {
         QWheelEvent *wheelEvent = static_cast<QWheelEvent *>(e);
         if(wheelEvent->modifiers().testFlag(Qt::ControlModifier)) {
             //Control button held down
-            if(wheelEvent->delta() > 0) controller->zoomIn();
-            else controller->zoomOut();
+            if(wheelEvent->delta() > 0) controller->zoomOut();
+            else controller->zoomIn();
             wheelEvent->accept();
             return true;
         }
