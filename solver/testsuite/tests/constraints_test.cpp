@@ -126,9 +126,22 @@ TEST_F(ConstraintsTest, UpperLimit_2) {
 }
 
 TEST_F(ConstraintsTest, Locked_1) {
-    ADD_FAILURE();
+    cstr.setLocked("A", true);
+    EXPECT_EQ(true, cstr.getLocked(0));
 }
 
 TEST_F(ConstraintsTest, Locked_2) {
-    ADD_FAILURE();
+    cstr.setLocked("B", false);
+    EXPECT_EQ(false, cstr.getLocked(0));
+}
+
+TEST_F(ConstraintsTest, Locked_3) {
+    cstr.setLocked("A", true);
+    cstr.setLocked("B", false);
+    EXPECT_THROW(cstr.getLocked(2), NoSuchVariableException);
+}
+
+TEST_F(ConstraintsTest, Locked_4) {
+    EXPECT_THROW(cstr.getLocked(0), NoSuchVariableException);
+    EXPECT_THROW(cstr.getLocked(-1), NoSuchVariableException);
 }
