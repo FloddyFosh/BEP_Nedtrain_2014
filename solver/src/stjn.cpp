@@ -35,12 +35,10 @@ void chkLST()
     if (wrong) throw 0;
 }
 
-void stjn_calculate_est();
-int stjn_calculate_lst();
-
 stjn_t *stjn;
 node_t ***acts;
 vector<node_t *> ordinv;
+map<activity *, node_t *> activity_to_node;
 
 void set_precedence(node_t *n, node_t *m) {
     n->next.append(m);
@@ -54,7 +52,6 @@ int stjn_construct() {
     acts = (node_t ***) calloc(tmsp->n_trains, sizeof(node_t **));
     ordinv.clear();
 
-    map<activity *, node_t *> activity_to_node;
     for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
         acts[i] = (node_t **) calloc(N(i), sizeof(node_t *));
         for(j = 0; j < N(i); j++) if (A(i,j)) {
@@ -247,8 +244,10 @@ int stjn_update_est(node_t *n) {
                 m->node_pred = n;
                 if(m->est > m->lst) inconsistent = 1, cycle_node = m;
                 h.insert(m);
+                update_tmsp(m);
             }
         }
+        update_tmsp(n);
     }
     chkEST();
     return inconsistent;
@@ -269,11 +268,13 @@ int stjn_update_lst(node_t *n) {
                 m->node_succ = n;
                 if(m->est > m->lst) inconsistent = 1, cycle_node = m;
                 h.insert(m);
+                update_tmsp(m);
             }
         }
+        update_tmsp(n);
     }
     assert(!inconsistent); // ...
-    chkLST();
+    chkLST(); 
     return inconsistent;
 }
 
@@ -296,7 +297,6 @@ int stjn_add_precedence(node_t *from, node_t *to) {
         from->node_succ = to;
         inconsistent |= stjn_update_lst(from);
     }
-
     return !inconsistent;
 }
 
@@ -427,11 +427,16 @@ void print_est_schedule() {
 
     for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j)) {
-            //output("G: %x\n", !!acts[i][j]->group.size());
-            //output("EST: %d %d %d\n", i, j, acts[i][j]->est);
-            //output("LST: %d %d %d\n", i, j, acts[i][j]->lst);
+            output("G: %x\n", !!acts[i][j]->group.size());
+            output("EST: %d %d %d\n", i, j, acts[i][j]->est);
+            output("LST: %d %d %d\n", i, j, acts[i][j]->lst);
         }
     }
+}
+
+void update_tmsp(node_t* n){
+    A(n->i,n->j)->est = n->est;
+    A(n->i,n->j)->lst = n->lst;
 }
 
 ostream & operator<< (ostream & o, node_t * node)

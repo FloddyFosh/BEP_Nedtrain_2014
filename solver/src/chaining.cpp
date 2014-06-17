@@ -3,6 +3,7 @@
 #include "tmsp.h"
 #include "output.h"
 #include "exceptions.h"
+#include "stjn.h"
 
 #define useHeuristic false
 #define useRandom false
@@ -161,6 +162,7 @@ void pushToChain(activity* act, chainId* id){
     if(!chain->empty()){
         activity* chainEnd = chain->back();
         add_precedence(chainEnd->i, chainEnd->j, act->i, act->j, false);
+        stjn_add_precedence(activity_to_node[chainEnd],activity_to_node[act]);
     }
     chain->push_back(act);
 }
@@ -170,6 +172,8 @@ void add_frame() {
     output("STATE:");
     FOREACH(activities, it){
         activity* act = *it;
+        //stjn_update_est(activity_to_node[act]);
+        //stjn_update_lst(activity_to_node[act]);
         int i = act->i, j = act->j;
         activity* a = A(i,j);
         output(" %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));

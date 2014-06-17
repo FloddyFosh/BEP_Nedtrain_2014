@@ -30,12 +30,20 @@ struct orderGT { bool operator()(node_t * x, node_t * y) const { return x->order
 extern node_t * cycle_node; // deze wordt geset door de calc/update (est,lst) routines om aan te geven bij welke node EST>LST het eerst gebeurde. dan kun je twee kanten op tracen om het totale conflict te achterhalen. definitie in stjn.cpp
 
 extern node_t ***acts;
+extern map<activity *, node_t *> activity_to_node;
 
 int stjn_add_precedence(node_t *from, node_t *to);
 node_t *stjn_merge_init(node_t *parent, node_t *child);
 node_t *stjn_merge(node_t *n, node_t *m);
 int stjn_construct();
 void print_est_schedule();
+
+void stjn_calculate_est();
+int stjn_calculate_lst();
+int stjn_update_lst(node_t *n);
+int stjn_update_est(node_t *n);
+
+void update_tmsp(node_t* n);
 
 #define BEFORE(a, b)   (b->lst >= (a->est + a->len))
 #define SLACK(a, b)     (b->lst - a->est - a->len)

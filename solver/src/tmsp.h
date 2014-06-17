@@ -62,6 +62,8 @@ void add_train_mutexes();
 void add_flex(int, int, int);
 void add_groupchild(int, int, int, int);
 
+void update_starttimes(int i1, int j1, int i2, int j2);
+
 extern tmsp_t* tmsp;
 
 // resources
