@@ -137,13 +137,21 @@ void JobWidget::paintEvent(QPaintEvent *e) {
         foreach(GroupWidget *groupWidget, groupWidgetList) {
             if (controller->isPaintingFeasibleIntervals())
                 groupWidget->determineFeasibleInterval(&painter, yOffset);
-            if (controller->isPaintingFlexibilityIntervals())
-                groupWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
         }
         foreach(ActivityWidget *activityWidget, activityWidgets) {
             if (controller->isPaintingFeasibleIntervals())
                 activityWidget->determineFeasibleInterval(&painter, yOffset);
+            if (expanded) yOffset++;
+        }
+
+        yOffset = 1;
+        foreach(GroupWidget *groupWidget, groupWidgetList) {
+            if (controller->isPaintingFlexibilityIntervals())
+                groupWidget->paintFlexibilityInterval(&painter, yOffset);
+            if (expanded) yOffset++;
+        }
+        foreach(ActivityWidget *activityWidget, activityWidgets) {
             if (controller->isPaintingFlexibilityIntervals())
                 activityWidget->paintFlexibilityInterval(&painter, yOffset);
             if (expanded) yOffset++;
