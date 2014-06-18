@@ -344,8 +344,8 @@ void InstanceWidget::toFrameNumber(int frameNr) {
     foreach(int i, frame->getAffectedResIds()) {
         instanceController->highlightResource(i, true);
     }
-    if(frame->getAffectedResIds().size() == 1) {
-        //instanceController->focusResource(frame->getAffectedResIds().first());
+    if(Chain* c = frame->getChain()) {
+        instanceController->focusResource(c->resourceId());
     }
 }
 
@@ -522,7 +522,7 @@ bool InstanceWidget::hasAddedFirstPrecedencePoint() {
 
 void InstanceWidget::disableActivitiesBeforeTime(int t) {
     foreach(ActivityWidget* aw, getActivityWidgets()) {
-        if (aw->activity()->eet() <= t)
+        if (aw->activity()->st()+aw->activity()->duration() <= t)
             aw->setBlur(true);
         else
             aw->setBlur(false);
