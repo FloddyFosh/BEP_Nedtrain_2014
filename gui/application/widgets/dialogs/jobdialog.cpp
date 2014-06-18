@@ -9,7 +9,6 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
 {
     if (!j) {
         setWindowTitle(tr("New Job"));
-        maxActVal = 1 << 30;
     } else {
         setWindowTitle(tr("Edit Job"));
         foreach(Activity *a, j->getActivities().values()) {
