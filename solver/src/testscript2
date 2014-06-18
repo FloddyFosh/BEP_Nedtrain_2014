@@ -1,0 +1,6 @@
+> flexOut
+for f in ../../instances/j30/* ../../instances/j60/* ../../instances/j90/* ../../instances/j120/*
+do
+    echo $f
+    cat $f | ./solver >> flexOut
+done
