@@ -37,7 +37,7 @@ int getFlexibility(){
     return flextotaal;
 }
 
-void setObjective(ClpInterior* model, int n_cols, Constraints* constraints) {
+void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
     // -COIN_DBL_MAX = -inf and COIN_DBL_MAX = +inf
     for(int i = 0; i < n_cols; i++) {
         model->setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
@@ -47,7 +47,7 @@ void setObjective(ClpInterior* model, int n_cols, Constraints* constraints) {
     }
 }
 
-void addType1Constraints(ClpInterior* model, Constraints* constraints, int n_cols) {
+void addType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols) {
     // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
@@ -63,7 +63,7 @@ void addType1Constraints(ClpInterior* model, Constraints* constraints, int n_col
     }
 }
 
-void addType2Constraints(ClpInterior* model, Constraints* constraints) {
+void addType2Constraints(ClpSimplex* model, Constraints* constraints) {
     // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
     for(int i = 0; i < constraints->size(); i++) {
         // [lst]  = constrain.t1 * 2    
@@ -77,7 +77,7 @@ void addType2Constraints(ClpInterior* model, Constraints* constraints) {
 
 map<string, int> useClpToSolve (Constraints* constraints) {
     int n_cols = constraints->getAmountOfVariables() * 2;    
-    ClpInterior model; // child of ClpInterior
+    ClpSimplex model; // child of ClpSimplex
     model.setOptimizationDirection(-1); // maximize instead of minimize.
     model.resize(0, n_cols); 
     model.setLogLevel(0); // turns off all output of Clp
@@ -87,7 +87,7 @@ map<string, int> useClpToSolve (Constraints* constraints) {
     addType2Constraints(&model, constraints);
     
     // solve the problem for step 1
-    model.primalDual();
+    model.primal();
 
     // get solution
     const double* sol = model.primalColumnSolution();

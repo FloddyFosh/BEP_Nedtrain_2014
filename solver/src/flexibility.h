@@ -1,7 +1,7 @@
 #ifndef FLEXIBILITY_H
 #define FLEXIBILITY_H
 
-#include "ClpInterior.hpp"
+#include "ClpSimplex.hpp"
 #include "constraints.h"
 
 #include <assert.h>  
