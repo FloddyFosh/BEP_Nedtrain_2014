@@ -124,7 +124,7 @@ void Activity::setName(QString name) {
 }
 
 void Activity::setDuration(int duration) {
-    if (duration > 0) {
+    if (duration > 0 && _duration != duration) {
         _duration = duration;
         emit activityChanged();
     }

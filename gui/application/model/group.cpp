@@ -54,11 +54,10 @@ int Group::getEST() {
 }
 
 void Group::setST(int s) {
-	if(s<0)
-		return;
-
-    st = s;
-    foreach(Activity* a, activities) a->setChanged();
+    if(s>=0 && st != s) {
+        st = s;
+        foreach(Activity* a, activities) a->setChanged();
+    }
 }
 
 int Group::getST() {
