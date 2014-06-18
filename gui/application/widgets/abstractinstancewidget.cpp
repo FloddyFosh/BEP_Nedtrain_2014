@@ -59,20 +59,34 @@ void AbstractInstanceWidget::connectZoomables(Zoomable *a, Zoomable *b) {
 }
 
 void AbstractInstanceWidget::createHeaders(OtsSplitter *parentSplitter, QWidget *headers, QVBoxLayout *layout, QScrollArea *scroller) {
+    QVBoxLayout *headerLayout = new QVBoxLayout;
+    QWidget *headerWidget = new QWidget;
+    headerWidget->setLayout(headerLayout);
+    headerLayout->setMargin(0);
+    headerLayout->setSpacing(0);
+    headerWidget->setMaximumWidth(400);
+    headerWidget->setContentsMargins(0, 9, 0, 0);
+
+    QLabel* title = new QLabel("<b>Resources</b>");
+    title->setAlignment(Qt::AlignHCenter | Qt::AlignBaseline);
+    title->setMargin(0);
+    title->setIndent(0);
+    headerLayout->addWidget(title);
+    headerLayout->addWidget(scroller);
+
     scroller->setWidget(headers);
     scroller->setWidgetResizable(true);
     scroller->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scroller->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    scroller->setMaximumWidth(400);
 
     headers->setLayout(layout);
-    headers->setContentsMargins(0, 25, 0, 0);
+    //headers->setContentsMargins(0, 25, 0, 0);
     headers->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     layout->setMargin(0);
     layout->setSpacing(0);
 
-    parentSplitter->addWidget(scroller);
+    parentSplitter->addWidget(headerWidget);
 }
 
 void AbstractInstanceWidget::createViewer(
