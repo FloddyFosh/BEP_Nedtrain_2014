@@ -2,6 +2,8 @@
 Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties zal geanalyseerd worden als de flexibiliteit die met verschillende methodes bereikt wordt.
 
 \subsection{Looptijd}
+TODO: Looptijd van interior point en update bestaande tabellen want blijkbaar stond debug aan.
+
 In dit hoofdstuk een analyse van de looptijd van de solver. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
 \begin{itemize}
     \item 10 resources, met elk 1 resource unit
@@ -87,5 +89,22 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 
 Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft.
 
-interior 1 vs interior 2 = 0 - 3 - 2037
+\begin{tabular}{| l | r | r | r |}
+    \hline
+        & $<$ & $=$ & $>$ \\
+    \hline
+    interior 1 vs interior 2 & 0 & 3 & 2037 \\
+    simplex 1 vs simplex 2 & 1 & 1 & 2038 \\ 
+    simplex 1 vs interior 1 & 215 & 19 & 1806 \\
+    simplex 2 vs interior 2 & 219 & 7 & 1814 \\
+    \hline
+\end{tabular}
+
+Dus:
+\begin{enumerate}
+    \item interior 2
+    \item interior 1
+    \item simplex 2
+    \item simplex 1
+\end{enumerate}
 
