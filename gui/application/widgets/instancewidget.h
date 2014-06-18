@@ -46,9 +46,12 @@ class InstanceWidget : public AbstractInstanceWidget
     OverlayWidget *overlay;
 
     // resource splitter left (list)
-    QScrollArea *resourceHeaderScroller;
-        QWidget *resourceHeaders;
-            QVBoxLayout *resourceHeadersLayout;
+    QWidget *resourceHeaderWidget;
+        QVBoxLayout *resourceHeaderLayout;
+            QLabel *resourceWidgetTitle;
+            QScrollArea *resourceHeaderScroller;
+                QWidget *resourceHeaders;
+                    QVBoxLayout *resourceHeadersLayout;
 
     // resource splitter right (schedule visualization)
     QWidget *resourcesViewer;

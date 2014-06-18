@@ -145,6 +145,9 @@ void InstanceWidget::setMouseX(int x) {
 }
 
 void InstanceWidget::createResourceSplitter() {
+    resourceHeaderWidget = new QWidget;
+    resourceHeaderLayout = new QVBoxLayout;
+    resourceWidgetTitle = new QLabel(tr("<b>Resources</b>"));
     resourceHeaderScroller = new QScrollArea;
     resourceHeaders = new QWidget;
     resourceHeadersLayout = new QVBoxLayout;
@@ -155,7 +158,7 @@ void InstanceWidget::createResourceSplitter() {
     resourceTimelineScroller = new QScrollArea;
     resourceTimeline = new Timeline(instanceController, this, false, false);
 
-    createHeaders(resourceSplitter, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
+    createHeaders(resourceSplitter, resourceHeaderWidget, resourceHeaderLayout, resourceWidgetTitle, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
     createViewer(resourceSplitter, resourcesViewer, resourcesScroller, resourcesZoomable, resourcesLayout, resourceTimeline, resourceTimelineScroller);
 
     //resourceHeadersLayout->setSpacing(10);
