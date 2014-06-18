@@ -179,8 +179,8 @@ void JobWidget::paintGroups() {
 }
 
 void JobWidget::paintFeasibilityInterval(QPainter &painter, int xStart, int xEnd, int height, int yOffset){
-	int yStart = vZoom() * yOffset;
-	int yEnd   = vZoom() * yOffset + height;
+    int yStart = vZoom() * yOffset;
+    int yEnd   = vZoom() * yOffset + height;
 	painter.setPen(QPen (QColor(170,215,170), 1, Qt::SolidLine));
 	painter.drawLine(xStart,(yStart+yEnd)/2,xEnd,(yStart+yEnd)/2);
 	painter.setPen(QPen (Qt::darkGray, 1, Qt::SolidLine));

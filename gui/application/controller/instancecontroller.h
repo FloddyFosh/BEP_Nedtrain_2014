@@ -153,6 +153,19 @@ public:
      * @param resId The id of the resource
      */
     void focusResource(int resId);
+    /**
+     * Highlight the text of the resource in the resourceheaderwidget
+     * @param resId The id of the resource
+     * @param doHighLight highlight if true, else remove highlight
+     */
+    void highlightResource(int resId, bool doHighLight);
+    /**
+     * Highlight the text of the job in the jobheaderwidget
+     * @param resId The id of the job
+     * @param doHighLight highlight if true, else remove highlight
+     */
+    void highlightJob(int jobId, bool doHighLight);
+
 public slots:
     void peak(int, int); ///< solvers peak signal is connected to this slot, it paints peaks in the resource profile.
 };

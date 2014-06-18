@@ -26,6 +26,8 @@ class ResourceHeaderWidget : public HeaderWidget
     FilteredSpinBox *spinBox;
     QPushButton *removeButton, *editButton, *upButton, *downButton;
 
+    bool highLighted;
+
     void createLayout();
 
 public:
@@ -38,6 +40,7 @@ public:
     explicit ResourceHeaderWidget(Resource *r, InstanceController *controller, QWidget *parent = 0);
 
     QSize sizeHint() const; ///< returns fixed size, 8 vZoom units high and 0 pixels wide, vertical dimension is set to be fixed while horizontal dimension grows to the available space
+    void highlight(bool doHighLight); ///< sets or removes the highligh on the namelabel
 
 private slots:
     void changeAmount(int value); ///< changes resource amount and emits resourceAmountChanged signal

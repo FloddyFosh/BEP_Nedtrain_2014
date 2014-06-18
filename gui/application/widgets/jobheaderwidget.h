@@ -25,6 +25,8 @@ class JobHeaderWidget : public HeaderWidget
     QPushButton *expandButton, *removeButton, *editButton, *upButton, *downButton;
     QLabel *nameLabel;
 
+    bool highLighted;
+
     void createLayout();
 
 public:
@@ -37,6 +39,7 @@ public:
     explicit JobHeaderWidget(Job *job, InstanceController *controller, QWidget *parent = 0, bool compare = true);
 
     QSize sizeHint() const; ///< gives the widget size depending on the current hZoom, vZoom and expanded state
+    void highlight(bool doHighLight); ///< sets or removes the highligh on the namelabel
 
 signals:
     void expanded(bool); ///< emitted when the expanded state changes (button is pressed or depressed)
