@@ -189,9 +189,6 @@ void addLimits(Constraints* constraints) {
                 }
 
                 constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
-                if(activities[k]->est == activities[k]->lst) {
-                    cdebug("HETZELFDE\n");
-                }
             }
         }
     }
