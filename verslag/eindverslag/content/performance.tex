@@ -73,3 +73,16 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
 
 \subsection{Flexibiliteit}
 TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. Misschien ook nog wat over de verschillende LP modellen.
+
+De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de 'mean squared error' van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}.
+
+\begin{align}
+\label{eq:mse}
+\begin{aligned}
+    flex_{gem} =& \sum_{t \in T} \frac{t^+ - t^-}{|T|}      & \text{met } |T| \text{ het aantal elementen in } T\\
+    MSE(flex) =& \sum_{t \in T} (flex_t - flex_{gem})^2     & \\
+               =& \sum_{t \in T} (t^+ - t^- - flex_{gem})^2 & \\
+\end{aligned}
+\end{align}
+
+
