@@ -156,8 +156,8 @@ void InstanceWidget::createResourceSplitter() {
     createHeaders(resourceSplitter, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
     createViewer(resourceSplitter, resourcesViewer, resourcesScroller, resourcesZoomable, resourcesLayout, resourceTimeline, resourceTimelineScroller);
 
-    resourceHeadersLayout->setSpacing(10);
-    resourcesLayout->setSpacing(10);
+    //resourceHeadersLayout->setSpacing(10);
+    //resourcesLayout->setSpacing(10);
 }
 
 void InstanceWidget::addJob(Job *j) {
@@ -532,4 +532,12 @@ void InstanceWidget::focusResourceWidget(int resId) {
     double size = (double) resourceHeadersLayout->count();
     double pos = rhPosition / (size-2.0);
     sb->setSliderPosition(pos * sb->maximum());
+}
+
+void InstanceWidget::highlightResource(int resId, bool hl) {
+    rHeaderWidgets.value(resId)->highlight(hl);
+}
+
+void InstanceWidget::highlightJob(int jobId, bool hl) {
+    jobHeaderWidgets.value(jobId)->highlight(hl);
 }
