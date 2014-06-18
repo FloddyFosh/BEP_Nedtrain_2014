@@ -5,6 +5,8 @@
 
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
+#include "model/frame.h"
+#include "model/chain.h"
 
 InstanceWidget::InstanceWidget(Instance * instance, Controller *controller, QWidget *parent) :
     AbstractInstanceWidget(instance, Qt::Vertical, parent), controller (controller), frameNumber(0)
@@ -143,6 +145,9 @@ void InstanceWidget::setMouseX(int x) {
 }
 
 void InstanceWidget::createResourceSplitter() {
+    resourceHeaderWidget = new QWidget;
+    resourceHeaderLayout = new QVBoxLayout;
+    resourceWidgetTitle = new QLabel(tr("<b>Resources</b>"));
     resourceHeaderScroller = new QScrollArea;
     resourceHeaders = new QWidget;
     resourceHeadersLayout = new QVBoxLayout;
@@ -153,7 +158,7 @@ void InstanceWidget::createResourceSplitter() {
     resourceTimelineScroller = new QScrollArea;
     resourceTimeline = new Timeline(instanceController, this, false, false);
 
-    createHeaders(resourceSplitter, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
+    createHeaders(resourceSplitter, resourceHeaderWidget, resourceHeaderLayout, resourceWidgetTitle, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
     createViewer(resourceSplitter, resourcesViewer, resourcesScroller, resourcesZoomable, resourcesLayout, resourceTimeline, resourceTimelineScroller);
 
     //resourceHeadersLayout->setSpacing(10);
@@ -314,17 +319,37 @@ QScrollArea* InstanceWidget::getResourceScrollArea(){
     return resourcesScroller;
 }
 
-void InstanceWidget::toFrameNumber(int frameNummer) {
+void InstanceWidget::toFrameNumber(int frameNr) {
     if (instance->getMaxFrameNr() == -1) return;
-    InstanceWidget::frameNumber = frameNummer;
+    frameNumber = frameNr;
+
     setupButtons();
     instanceController->stopDrawingDependencies();
     disconnectActivitiesFromResourceWidgets();
-    estGen->gotoFrame(frameNummer);
+    estGen->gotoFrame(frameNr);
     reconnectActivitiesToResourceWidgets();
     repaintResourceWidgets();
-    QList<Precedence *> precedences_added (estGen->getAdded(frameNummer));
+
+    QList<Precedence *> precedences_added (estGen->getAdded(frameNr));
     controller->startPaintingFramePrecedences(precedences_added);
+
+    foreach(int i, instance->getJobs().keys()) {
+        instanceController->highlightJob(i, false);
+    }
+    foreach(int i, instance->getResources().keys()) {
+        instanceController->highlightResource(i, false);
+    }
+
+    Frame* frame = instance->getFrame(frameNr);
+    foreach(int i, frame->getAffectedJobIds()) {
+        instanceController->highlightJob(i, true);
+    }
+    foreach(int i, frame->getAffectedResIds()) {
+        instanceController->highlightResource(i, true);
+    }
+    if(Chain* c = frame->getChain()) {
+        instanceController->focusResource(c->resourceId());
+    }
 }
 
 void InstanceWidget::toLastFrame() {
@@ -500,7 +525,7 @@ bool InstanceWidget::hasAddedFirstPrecedencePoint() {
 
 void InstanceWidget::disableActivitiesBeforeTime(int t) {
     foreach(ActivityWidget* aw, getActivityWidgets()) {
-        if (aw->activity()->eet() <= t)
+        if (aw->activity()->st()+aw->activity()->duration() <= t)
             aw->setBlur(true);
         else
             aw->setBlur(false);

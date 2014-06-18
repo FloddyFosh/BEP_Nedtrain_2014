@@ -18,7 +18,7 @@ private:
     QList<QPoint*>* usedProfile;
 public:
     /**
-     * Constructs an empty Frame.
+     * Constructs a ChainFrame.
      */
     ChainFrame(Chain* c, QList<QPoint*>* prev);
 

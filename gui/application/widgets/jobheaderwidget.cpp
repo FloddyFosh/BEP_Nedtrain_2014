@@ -151,9 +151,11 @@ void JobHeaderWidget::highlight(bool hl) {
         pal.setColor(backgroundRole(), QColor(255, 247, 160));
         setPalette(pal);
         nameLabel->setText("<b>" + _job->name() + "</b>");
+        highLighted = true;
     }
     else if(highLighted) {
         setPalette(QPalette());
         nameLabel->setText(_job->name());
+        highLighted = false;
     }
 }

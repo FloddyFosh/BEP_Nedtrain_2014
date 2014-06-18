@@ -21,6 +21,9 @@ void AbstractInstanceWidget::connectViewerSignals() {
 }
 
 void AbstractInstanceWidget::createJobSplitter(OtsSplitter *jobSplitter) {
+    jobHeaderWidget = new QWidget;
+    jobHeaderLayout = new QVBoxLayout;
+    jobWidgetTitle = new QLabel(tr("<b>Jobs</b>"));
     jobHeaderScroller = new QScrollArea;
     jobHeaders = new QWidget;
     jobHeadersLayout = new QVBoxLayout;
@@ -34,7 +37,7 @@ void AbstractInstanceWidget::createJobSplitter(OtsSplitter *jobSplitter) {
     else
         jobTimeline = new Timeline (0, 0, true, false);
 
-    createHeaders(jobSplitter, jobHeaders, jobHeadersLayout, jobHeaderScroller);
+    createHeaders(jobSplitter, jobHeaderWidget, jobHeaderLayout, jobWidgetTitle, jobHeaders, jobHeadersLayout, jobHeaderScroller);
     createViewer(jobSplitter, jobsViewer, jobsScroller, jobsZoomable, jobsLayout, jobTimeline, jobTimelineScroller);
 }
 
@@ -58,21 +61,39 @@ void AbstractInstanceWidget::connectZoomables(Zoomable *a, Zoomable *b) {
     connect(b, SIGNAL(hZoomChanged(int)), a, SLOT(setHZoom(int)));
 }
 
-void AbstractInstanceWidget::createHeaders(OtsSplitter *parentSplitter, QWidget *headers, QVBoxLayout *layout, QScrollArea *scroller) {
+void AbstractInstanceWidget::createHeaders(
+        OtsSplitter *parentSplitter,
+        QWidget *headerWidget,
+        QVBoxLayout *headerLayout,
+        QLabel *title,
+        QWidget *headers,
+        QVBoxLayout *layout,
+        QScrollArea *scroller)
+{
+    headerWidget->setLayout(headerLayout);
+
+    title->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+    headerLayout->addWidget(title);
+    headerLayout->addWidget(scroller);
+
     scroller->setWidget(headers);
     scroller->setWidgetResizable(true);
     scroller->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scroller->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    scroller->setMaximumWidth(400);
 
     headers->setLayout(layout);
-    headers->setContentsMargins(0, 25, 0, 0);
     headers->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
+    title->setMargin(0);
+    title->setIndent(0);
     layout->setMargin(0);
     layout->setSpacing(0);
+    headerLayout->setMargin(0);
+    headerLayout->setSpacing(0);
+    headerWidget->setMaximumWidth(400);
+    headerWidget->setContentsMargins(0, 9, 0, 0);
 
-    parentSplitter->addWidget(scroller);
+    parentSplitter->addWidget(headerWidget);
 }
 
 void AbstractInstanceWidget::createViewer(

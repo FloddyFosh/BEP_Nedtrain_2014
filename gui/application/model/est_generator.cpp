@@ -12,17 +12,6 @@ void EST_Generator::gotoFrame(int frameNr) {
     if (!(0 <= frameNr && frameNr <= instance->getMaxFrameNr())) { return; }
     Frame *frame = instance->getFrame(frameNr);
     instance->setGroupPartition(frame->getGroups());
-    foreach(int i, instance->getResources().keys()) {
-        controller->highlightResource(i, false);
-    }
-    foreach(int i, instance->getJobs().keys()) {
-        controller->highlightJob(i, false);
-    }
-
-    if(Chain* c = frame->getChain()){
-        controller->focusResource(c->resourceId());
-        controller->highlightResource(c->resourceId(), true);
-    }
 }
 
 QList<Precedence *> EST_Generator::getAdded(int frameNr){
