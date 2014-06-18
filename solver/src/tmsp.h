@@ -74,13 +74,13 @@ extern tmsp_t* tmsp;
 #define P(i)		((precedence*)list_get(tmsp->precedences, i))
 
 // treinen
-#define T(i)		((train*)list_get(tmsp->trains, i))
+// #define T(i)		((train*)list_get(tmsp->trains, i))
 #define RD(i)		(T(i)->release_date)
 #define DD(i)		(T(i)->due_date)
 #define N(i)		(T(i)->n_activities)
 
 // activiteiten
-#define A(i,j)		((activity*)list_get(T(i)->activities, j))
+#define A(i,j)		((activity*)list_get(((train*)list_get(tmsp->trains, i))->activities, j))
 #define D(i,j)		(A(i,j)->duration)
 #define EST(i,j)	(-W(AS(i,j), Z))
 #define EET(i,j)	(-W(AE(i,j), Z))

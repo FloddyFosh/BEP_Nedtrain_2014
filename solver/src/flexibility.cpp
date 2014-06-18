@@ -27,6 +27,8 @@
 #include "chaining.h"
 #include "flexibility.h"
 
+#define epsilon 0.001
+
 using namespace std;
 
 int minflex = 0, flextotaal = 0;
@@ -39,7 +41,7 @@ int getMinFlex(){
     return minflex;
 }
 
-void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
+void setObjective(ClpInterior* model, int n_cols, Constraints* constraints) {
     // -DBL_MAX = -inf and DBL_MAX = +inf
     // set coefficients
     for(int i = 0; i < n_cols; i++) {
@@ -52,7 +54,7 @@ void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
     model->setColumnUpper(n_cols, DBL_MAX);
 }
 
-void addType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols) {
+void addType1Constraints(ClpInterior* model, Constraints* constraints, int n_cols) {
     // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
@@ -71,7 +73,7 @@ void addType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols
     }
 }
 
-void addType2Constraints(ClpSimplex* model, Constraints* constraints) {
+void addType2Constraints(ClpInterior* model, Constraints* constraints) {
     // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
     for(int i = 0; i < constraints->size(); i++) {
         // [lst]  = constrain.t1 * 2    
@@ -83,7 +85,7 @@ void addType2Constraints(ClpSimplex* model, Constraints* constraints) {
     }
 }
 
-void changeObjective(ClpSimplex* model, int n_cols) {
+void changeObjective(ClpInterior* model, int n_cols) {
     // change the objective functions
     for(int i = 0; i < n_cols; i++) {
         // set coefficients alternating between -1 and 1
@@ -92,7 +94,7 @@ void changeObjective(ClpSimplex* model, int n_cols) {
     model->setObjectiveCoefficient(n_cols, 0.0);
 }
 
-void changeType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols) {
+void changeType1Constraints(ClpInterior* model, Constraints* constraints, int n_cols) {
     // remove constraints of type 1
     int* deleteWhich = new int[n_cols];
     for(int i = 0; i < n_cols/2; i++) {
@@ -118,7 +120,7 @@ void changeType1Constraints(ClpSimplex* model, Constraints* constraints, int n_c
 
 map<string, int> useClpToSolve (Constraints* constraints) {
     int n_cols = constraints->getAmountOfVariables() * 2;    
-    ClpSimplex model; // child of ClpModel
+    ClpInterior model; // child of ClpModel
     model.setOptimizationDirection(-1); // maximize instead of minflex.
     model.resize(0, n_cols + 1); // the last variable is [minflex]
     model.setLogLevel(0); // turns off all output of Clp
@@ -128,25 +130,25 @@ map<string, int> useClpToSolve (Constraints* constraints) {
     addType2Constraints(&model, constraints);
     
     // solve the problem for step 1
-    model.initialSolve();
-    minflex = (int) model.objectiveValue();
+    model.primalDual();
+    minflex = (int) (model.objectiveValue() + epsilon);
 
     changeObjective(&model, n_cols);
     changeType1Constraints(&model, constraints, n_cols);
 
     // solve the problem for step 2
-    model.initialSolve();
+    model.primalDual();
 
     // get solution
     const double* sol = model.primalColumnSolution();
-    flextotaal = (int) model.objectiveValue();
+    flextotaal = (int) (model.objectiveValue() + epsilon);
 
     // return solution
     map<string, int> output;   
     for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints->getVariableName(i/2);
-        output[varname + " +"] = (int) sol[i];
-        output[varname + " -"] = (int) sol[i+1];
+        output[varname + " +"] = (int) (sol[i] + epsilon);
+        output[varname + " -"] = (int) (sol[i+1] + epsilon);
     }
     return output;
 }
@@ -189,9 +191,6 @@ void addLimits(Constraints* constraints) {
                 }
 
                 constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
-                if(activities[k]->est == activities[k]->lst) {
-                    cdebug("HETZELFDE\n");
-                }
             }
         }
     }
