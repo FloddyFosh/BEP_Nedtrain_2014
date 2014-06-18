@@ -27,6 +27,8 @@
 #include "chaining.h"
 #include "flexibility.h"
 
+#define epsilon 0.001
+
 using namespace std;
 
 int flextotaal = 0;
@@ -35,16 +37,17 @@ int getFlexibility(){
     return flextotaal;
 }
 
-void setObjective(ClpSimplex* model, int n_cols, Constraints* constraints) {
-    // -DBL_MAX = -inf and DBL_MAX = +inf
+void setObjective(ClpInterior* model, int n_cols, Constraints* constraints) {
+    // -COIN_DBL_MAX = -inf and COIN_DBL_MAX = +inf
     for(int i = 0; i < n_cols; i++) {
         model->setObjectiveCoefficient(i, ((i + 1) % 2) * 2.0 - 1.0);
         model->setColumnLower(i, constraints->getLowerLimit(i/2));
         model->setColumnUpper(i, constraints->getUpperLimit(i/2));
+        model->setInteger(i);
     }
 }
 
-void addType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols) {
+void addType1Constraints(ClpInterior* model, Constraints* constraints, int n_cols) {
     // add constraints: 0 <= [lst] - [est] - [minflex] <= \infty \forall t
     for(int i = 0; i < n_cols; i+=2) {
         // latest starting time is [i]
@@ -55,12 +58,12 @@ void addType1Constraints(ClpSimplex* model, Constraints* constraints, int n_cols
         if(constraints->getLocked(i/2)) {
             model->addRow(2, cols, cfc, 0, 0);
         } else {
-            model->addRow(2, cols, cfc, 0, DBL_MAX);
+            model->addRow(2, cols, cfc, 0, COIN_DBL_MAX);
        }
     }
 }
 
-void addType2Constraints(ClpSimplex* model, Constraints* constraints) {
+void addType2Constraints(ClpInterior* model, Constraints* constraints) {
     // add constraints: [lst] - [est'] <= c \forall (t - t' <= c) \in C
     for(int i = 0; i < constraints->size(); i++) {
         // [lst]  = constrain.t1 * 2    
@@ -68,15 +71,14 @@ void addType2Constraints(ClpSimplex* model, Constraints* constraints) {
         Constraint constrain = (*constraints)[i];
         int cols[] = {constrain.t1 * 2, constrain.t2 * 2 + 1};
         double cfc[] = {1.0, -1.0}; // coefficients
-        model->addRow(2, cols, cfc, -DBL_MAX, constrain.c);
+        model->addRow(2, cols, cfc, -COIN_DBL_MAX, constrain.c);
     }
 }
 
 map<string, int> useClpToSolve (Constraints* constraints) {
     int n_cols = constraints->getAmountOfVariables() * 2;    
-    ClpSimplex model; // child of ClpModel
+    ClpInterior model; // child of ClpInterior
     model.setOptimizationDirection(-1); // maximize instead of minimize.
-    
     model.resize(0, n_cols); 
     model.setLogLevel(0); // turns off all output of Clp
     
@@ -85,18 +87,18 @@ map<string, int> useClpToSolve (Constraints* constraints) {
     addType2Constraints(&model, constraints);
     
     // solve the problem for step 1
-    model.initialSolve();
+    model.primalDual();
 
     // get solution
     const double* sol = model.primalColumnSolution();
-    flextotaal = (int) model.objectiveValue();
+    flextotaal = (int) (model.objectiveValue() + epsilon);
 
     // return solution
     map<string, int> output;   
     for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints->getVariableName(i/2);
-        output[varname + " +"] = (int) sol[i];
-        output[varname + " -"] = (int) sol[i+1];
+        output[varname + " +"] = (int) (sol[i] + epsilon);
+        output[varname + " -"] = (int) (sol[i+1] + epsilon);
     }
     return output;
 }
