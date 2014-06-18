@@ -5,6 +5,8 @@
 
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
+#include "model/frame.h"
+#include "model/chain.h"
 
 InstanceWidget::InstanceWidget(Instance * instance, Controller *controller, QWidget *parent) :
     AbstractInstanceWidget(instance, Qt::Vertical, parent), controller (controller), frameNumber(0)
@@ -314,17 +316,37 @@ QScrollArea* InstanceWidget::getResourceScrollArea(){
     return resourcesScroller;
 }
 
-void InstanceWidget::toFrameNumber(int frameNummer) {
+void InstanceWidget::toFrameNumber(int frameNr) {
     if (instance->getMaxFrameNr() == -1) return;
-    InstanceWidget::frameNumber = frameNummer;
+    frameNumber = frameNr;
+
     setupButtons();
     instanceController->stopDrawingDependencies();
     disconnectActivitiesFromResourceWidgets();
-    estGen->gotoFrame(frameNummer);
+    estGen->gotoFrame(frameNr);
     reconnectActivitiesToResourceWidgets();
     repaintResourceWidgets();
-    QList<Precedence *> precedences_added (estGen->getAdded(frameNummer));
+
+    QList<Precedence *> precedences_added (estGen->getAdded(frameNr));
     controller->startPaintingFramePrecedences(precedences_added);
+
+    foreach(int i, instance->getJobs().keys()) {
+        instanceController->highlightJob(i, false);
+    }
+    foreach(int i, instance->getResources().keys()) {
+        instanceController->highlightResource(i, false);
+    }
+
+    Frame* frame = instance->getFrame(frameNr);
+    foreach(int i, frame->getAffectedJobIds()) {
+        instanceController->highlightJob(i, true);
+    }
+    foreach(int i, frame->getAffectedResIds()) {
+        instanceController->highlightResource(i, true);
+    }
+    if(frame->getAffectedResIds().size() == 1) {
+        //instanceController->focusResource(frame->getAffectedResIds().first());
+    }
 }
 
 void InstanceWidget::toLastFrame() {

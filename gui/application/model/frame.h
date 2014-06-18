@@ -14,6 +14,8 @@ using namespace std;
 class Frame {
 private:
     QVector<Group *> groups;
+    QVector<int> affectedResIds;
+    QVector<int> affectedJobIds;
 public:
     /**
      * Constructs an empty Frame.
@@ -27,10 +29,39 @@ public:
     QVector<Group *> getGroups();
 
     /**
+     * Return Resource Ids that were affected in this frame.
+     * @return A vector of Resource Ids.
+     */
+    QVector<int> getAffectedResIds();
+
+    /**
+     * Return Job Ids that were affected in this frame.
+     * @return A vector of Job Ids.
+     */
+    QVector<int> getAffectedJobIds();
+
+    /**
      * Add a group to this frame.
      * @param g group to be added
      */
     void addGroup(Group * g);
+
+    /**
+     * Add an affected resource.
+     * @param resId Id of the resource
+     */
+    void addAffResourceId(int resId);
+
+    /**
+     * Add an affected job.
+     * @param jobId Id of the job
+     */
+    void addAffJobId(int jobId);
+
+    /**
+     * Clears the affected vectors
+     */
+    void clearAffected();
 
     /**
      * Get the sub-profile which is selected in this frame for visualization.

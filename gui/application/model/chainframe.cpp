@@ -5,6 +5,7 @@ ChainFrame::ChainFrame(Chain* c, QList<QPoint*>* prev) : Frame(), chain(c), used
 }
 
 void ChainFrame::initialize(){
+    addAffResourceId(chain->resourceId());
     selectedProfile = new QList<QPoint*>;
     selectedProfile->append(new QPoint(0,0));
     QVector<Activity*>* activities = chain->getActivities();
