@@ -2,16 +2,16 @@
 Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties zal geanalyseerd worden als de flexibiliteit die met verschillende methodes bereikt wordt.
 
 \subsection{Looptijd}
-TODO: Looptijd van interior point en update bestaande tabellen want blijkbaar stond debug aan.
-
-In dit hoofdstuk een analyse van de looptijd van de solver. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
+In dit hoofdstuk een analyse van de looptijd van de solver. Aangezien de opdrachtgever dit nog vooral gebruikt voor onderzoek en educatie zullen de probleeminstanties niet zo erg groot zijn. Daarom is looptijd minder belangrijk. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen van input, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
 \begin{itemize}
     \item 10 resources, met elk 1 resource unit
     \item 180 projecten, met elk tussen de 4 en de 6 activiteiten
     \item 912 activiteiten, die elk gebruik maken van tussen de 1 en 5 resources
 \end{itemize}
 
-In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+outputbestand} is te zien wat de looptijden zijn van de onderdelen van de solver met en zonder printen van output. Deze waarden komen van een getrimd gemiddelde van 20 metingen. De solver stuurt de output naar \texttt{stdout} Als er wel output wordt geprint duurt het oplossen van de 'xxl-instance' iets minder dan $110$ seconden en als er geen output wordt geprint duurt het oplossen ongeveer $1,4$ seconden. Ook valt op dat als alle output niet naar \texttt{stdout}, maar naar een bestand wordt gestuurd de totale looptijd iets minder dan $4$ seconden duurt. Er valt dus veel snelheidswinst te behalen door het printen te optimaliseren. Een andere optie is om slimmer om te gaan met wat er wel en niet wordt geprint, want dat kan ook al veel tijd schelen. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner. Daarom is printen naar een tijdelijk bestand in plaats van \texttt{stdout} mogelijk een goed alternatief om voor een versnelling te kunnen zorgen. 
+In de Tabellen \ref{tbl:xxl+output} en \ref{tbl:xxl-output} is de duur van de verschillende onderdelen van de solver te vinden. De totale looptijd van de solver zou nog lager kunnen door de hoeveel informatie dat naar \texttt{stdout} wordt gestuurd te verlagen. Dit zou dan niet meer dan 10 seconden kunnen opleveren voor de xxl-instantie. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner.
+
+Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, heeft het grootste aandeel in de totale looptijd. In de huidige solver wordt de Interior Point methode gebruikt voor het oplossen van LP-problemen, deze is minder dan snel dan de Simplex methode. Uit metingen is gebleken dat de Simplex methode nagenoeg geen tijd kost, dus dit zou een grote snelheidswinst kunnen opleveren. De consequenties van het gebruik van de Simplex methode wordt besproken in Sectie \ref{subsec:flexibiliteit} \nameref{subsec:flexibiliteit}.
 
 \begin{table}[H]
 \parbox{.45\linewidth}{
@@ -20,13 +20,13 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
         \hline
                     & Looptijd ($s$)  & Percentage ($\%$) \\
         \hline
-        Parsing     & $0.010927$      & $0.0$   \\
-        STJN        & $0.002788$      & $0.0$   \\
-        ESTA$^+$    & $108.299420$    & $99.2$  \\
-        Chaining    & $0.565354$      & $0.5$   \\
-        LP          & $0.319607$      & $0.3$   \\
+        Parsing     &  $0.132556$     & $0,3$   \\
+        STJN        &  $0.003002$     & $0,0$   \\
+        ESTA$^+$    & $11.447062$     & $23,3$  \\
+        Chaining    &  $1.109195$     & $2,3$   \\
+        LP          & $36.464763$     & $74,2$  \\
         \hline \hline
-        Totaal      & $109.198681$    & $100.0$ \\
+        Totaal      & $49.156718$     & $100,0$ \\
         \hline
     \end{tabular}
     \caption{xxl-instance met output}
@@ -39,13 +39,13 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
         \hline
                     & Looptijd ($s$)& Percentage ($\%$) \\
         \hline
-        Parsing     & $0.010247$      & $0.7$   \\
-        STJN        & $0.002798$      & $0.2$   \\
-        ESTA$^+$    & $1.092032$      & $76.5$  \\
-        Chaining    & $0.037414$      & $2.6$   \\
-        LP          & $0.283970$      & $19.9$  \\
+        Parsing     &  $0.009821$      &  $0,0$  \\
+        STJN        &  $0.002505$      &  $0,0$  \\
+        ESTA$^+$    &  $1.533199$      &  $3,9$  \\
+        Chaining    &  $0.843122$      &  $2,6$  \\
+        LP          & $36.445771$      & $93,8$  \\
         \hline \hline
-        Totaal      & $1.426638$      & $100.0$ \\
+        Totaal      & $38.834843$      & $100,0$ \\
         \hline
     \end{tabular}
     \caption{xxl-instance zonder output}
@@ -53,27 +53,9 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
 }
 \end{table}
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{| l | r | r|}
-        \hline
-                    & Looptijd ($s$)& Percentage ($\%$) \\
-        \hline
-        
-        Parsing     & $0.009044$    & $0.2$     \\
-        STJN        & $0.002736$    & $0.1$     \\
-        ESTA$^+$    & $3.362071$    & $88.0$    \\
-        Chaining    & $0.159881$    & $4.2$     \\
-        LP          & $0.288064$    & $7.5$     \\
-        \hline \hline
-        Totaal      & $3.822129$    & $100.0$   \\
-        \hline
-    \end{tabular}
-    \caption{xxl-instance en output naar bestand}
-    \label{tbl:xxl+outputbestand}
-\end{table}
 
 \subsection{Flexibiliteit}
+\label{subsec:flexibiliteit}
 De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is hoe beter de flexibiliteit is verdeeld over de activiteiten.
 
 \begin{align}
@@ -85,10 +67,9 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} en \ref{tbl:performanceflextot} worden telkens twee methoden vergeleken en aangegen in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Waarbij de Interior Point methode wordt afgekort tot IP en de Simplex methode wordt afgekort tot S. Met subscript $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met subscript $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} en \ref{tbl:performanceflextot} worden telkens twee methoden vergeleken en aangegen in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Waarbij de Interior Point methode wordt afgekort tot IP en de Simplex methode wordt afgekort tot S. Met methode $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met methode $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
 
 \begin{table}[H]
-\parbox{.45\linewidth}{
     \centering
     \begin{tabular}{| c | r | r | r | r |}
         \hline
@@ -102,26 +83,11 @@ Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste v
     \end{tabular}
     \caption{Vergelijking verdeling flexibiliteit}
     \label{tbl:performanceflexver}
-}
-\hfill
-\parbox{.45\linewidth}{
-    \centering
-    \begin{tabular}{| c | r | r | r | r |}
-        \hline
-            & \midden{IP$_1$} & \midden{IP$_2$} & \midden{S$_1$} & \midden{S$_2$} \\
-        \hline
-        IP$_1$ & \midden{$\times$} & $-$ & $-$ & $-$ \\
-        IP$_2$ & $-$ & \midden{$\times$} & $-$ & $-$ \\ 
-        S$_1$  & $-$ & $-$ & \midden{$\times$} & $-$ \\
-        S$_2$  & $-$ & $-$ & $-$ & \midden{$\times$} \\
-        \hline
-    \end{tabular}
-    \caption{Vergelijking totale flexibiliteit}
-    \label{tbl:performanceflextot}
-}
 \end{table}
 
 Met behulp van Tabel \ref{tbl:performanceflexver} waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse} kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Dus IP$_2$ heeft de beste verdeling van flexibiliteit, daarna komen van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
+
+De totale flexibiliteit is ook een belangrijk aspect waarmee de prestatie van de solver gemeten kan worden. En de opdrachtgever vindt het belangrijk dat de totale flexibiliteit niet lijdt onder de verdeling van de flexibiliteit. Aangezien de totale flexibiliteit van methode $1$ bij elke probleeminstantie groter of gelijk aan de totale flexibiliteit van methode $2$ is, kiezen wij voor methode $1$ in combinatie met Interior Point methode (IP$_1$). We hebben dan niet de beste verdeling van flexibiliteit, maar wel grootste totale flexibiliteit.
 
 \subsection{Chaining}
 TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. 

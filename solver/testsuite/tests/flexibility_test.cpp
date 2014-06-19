@@ -11,6 +11,16 @@ class FlexibilityTest : public ::testing::Test {
 };
 
 TEST_F(FlexibilityTest, Test_1) {
+    cstr.setUpperLimit("a", 42);
+    cstr.setLowerLimit("a", 0);
+    cstr.setLocked("a", false);
+
+    useClpToSolve(&cstr);
+
+    EXPECT_EQ(42, getFlexibility());
+}
+
+TEST_F(FlexibilityTest, Test_2) {
     cstr.addConstraint("D", "A", -10);
     cstr.addConstraint("D", "C", -10);
     cstr.addConstraint("B", "A", -5);
@@ -37,10 +47,9 @@ TEST_F(FlexibilityTest, Test_1) {
     useClpToSolve(&cstr);
 
     EXPECT_EQ(29, getFlexibility());
-    EXPECT_EQ(2, getMinFlex());
 }
 
-TEST_F(FlexibilityTest, Test_2) {
+TEST_F(FlexibilityTest, Test_3) {
     cstr.addConstraint("A", "B", -2);
     cstr.addConstraint("A", "B", -2);
     cstr.addConstraint("F", "G", -2);    
@@ -62,5 +71,4 @@ TEST_F(FlexibilityTest, Test_2) {
     useClpToSolve(&cstr);
 
     EXPECT_EQ(12, getFlexibility());
-    EXPECT_EQ(3, getMinFlex());
 }
