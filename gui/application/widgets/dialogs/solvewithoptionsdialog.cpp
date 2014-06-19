@@ -8,6 +8,7 @@ SolveWithOptionsDialog::SolveWithOptionsDialog(Solver *solver, Controller *contr
     originalArgs = solver->getArguments();
 
     QLabel *solverName = new QLabel(solver->getName());
+    solverName->setTextFormat(Qt::PlainText);
     newTab = new QCheckBox(tr("Solve to new &tab"), this);
     mutex = new QCheckBox(tr("&Mutual exclusion"), this);
     grouping = new QCheckBox(tr("&Grouping"), this);

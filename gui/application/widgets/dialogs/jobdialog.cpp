@@ -28,7 +28,7 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
 
         releaseDayEdit = new QSpinBox;
         releaseDayEdit->setMinimum(1);
-        releaseDayEdit->setMaximum(1 << 30);
+        releaseDayEdit->setMaximum(INT_MAX);
         if(j) releaseDayEdit->setValue(j->releaseDate()/(60*24)+1);
 
         dueDateTimeEdit = new QDateTimeEdit;
@@ -37,16 +37,16 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
 
         dueDayEdit = new QSpinBox;
         dueDayEdit->setMinimum(maxActVal);
-        dueDayEdit->setMaximum(1 << 30);
-        if(j) dueDayEdit->setValue(j->dueDate()/(60*24)+1);
+        dueDayEdit->setMaximum(INT_MAX);
+        if(j) dueDayEdit->setValue(j->dueDate()/((60*24)+1));
     }else {
         releaseDateEdit = new QSpinBox;
         releaseDateEdit->setMinimum(0);
-        releaseDateEdit->setMaximum(1 << 30);
+        releaseDateEdit->setMaximum(INT_MAX);
         releaseDateEdit->setValue(j ? j->releaseDate() : 0);
         dueDateEdit = new QSpinBox;
         dueDateEdit->setMinimum(maxActVal);
-        dueDateEdit->setMaximum(1 << 30);
+        dueDateEdit->setMaximum(INT_MAX);
         dueDateEdit->setValue(j ? j->dueDate() : 1);
     }
 

@@ -1,6 +1,7 @@
 #include <QFormLayout>
 #include <QDialogButtonBox>
 #include <QDateTimeEdit>
+#include <QMessageBox>
 
 #include "resourcedecreasedialog.h"
 #include "widgets/app_icon.h"
@@ -26,11 +27,11 @@ ResourceDecreaseDialog::ResourceDecreaseDialog(Instance *i, Resource* res, QWidg
 
         fromDayEdit = new QSpinBox;
         fromDayEdit->setMinimum(1);
-        fromDayEdit->setMaximum(1 << 30);
+        fromDayEdit->setMaximum(INT_MAX);
 
         toDayEdit = new QSpinBox;
         toDayEdit->setMinimum(1);
-        toDayEdit->setMaximum(1 << 30);
+        toDayEdit->setMaximum(INT_MAX);
 
         formlayout->addRow(tr("From - day:"), fromDayEdit);
         formlayout->addRow(tr("From - time:"), fromDateTimeEdit);
@@ -81,10 +82,15 @@ void ResourceDecreaseDialog::apply() {
         till = tillEdit->value();
     }
 
-    int cap = capacityEdit->value();
-    instance->addDummyJob(resource, from, till, cap);
-    emit decreaseAdded();
+    if(till < from) {
+        QMessageBox::information(this, tr("Invalid input"), tr("The till date should be after the from date.\nPlease correct your input."));
+    }
+    else {
+        int cap = capacityEdit->value();
+        instance->addDummyJob(resource, from, till, cap);
+        emit decreaseAdded();
 
-    resource->instance()->setUserChanges(true);
-    accept();
+        resource->instance()->setUserChanges(true);
+        accept();
+    }
 }

@@ -23,7 +23,7 @@ ImportDialog::ImportDialog(MainWindow *parent, InstanceController *c) :
 
         timeEdit = new QSpinBox;
         timeEdit->setMinimum(0);
-        timeEdit->setMaximum(1 << 30);
+        timeEdit->setMaximum(INT_MAX);
         timeEdit->setValue(1);
 
         addFormField(tr("Import day:"), timeEdit);
@@ -31,7 +31,7 @@ ImportDialog::ImportDialog(MainWindow *parent, InstanceController *c) :
     } else {
         timeEdit = new QSpinBox;
         timeEdit->setMinimum(0);
-        timeEdit->setMaximum(1 << 30);
+        timeEdit->setMaximum(INT_MAX);
         timeEdit->setValue(0);
 
         addFormField(tr("Import at time:"), timeEdit);

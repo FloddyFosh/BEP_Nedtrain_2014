@@ -392,7 +392,7 @@ void MainWindow::createActions() {
     connect(this, SIGNAL(keyPressEvent(QKeyEvent *)), this, SLOT(disablePrecedenceAdding(QKeyEvent *)));
 
     removePrecedenceAct = new QAction(tr("Remove precedence &constraint"), this);
-    removePrecedenceAct->setStatusTip(tr("Remove precedence &constraint"));
+    removePrecedenceAct->setStatusTip(tr("Remove precedence constraint"));
     removePrecedenceAct->setIcon(AppIcon("remove_constraint.png"));
     removePrecedenceAct->setCheckable(true);
     disableIfInstanceEmpty(removePrecedenceAct);

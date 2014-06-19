@@ -18,7 +18,7 @@ ResourceDialog::ResourceDialog(Instance *i, Resource *r, QWidget *parent) :
     nameEdit->setMaxLength(40);
     capacityEdit = new QSpinBox;
     capacityEdit->setMinimum(1);
-    capacityEdit->setMaximum(1 << 30);
+    capacityEdit->setMaximum(99);
     capacityEdit->setValue(r ? r->capacity() : 1);
 
     addFormField(tr("&Name:"), nameEdit);
