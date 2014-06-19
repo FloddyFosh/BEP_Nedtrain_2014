@@ -56,6 +56,9 @@ class Instance : public QObject
     QString fileName; ///< if this instance was loaded from or saved to a file, this contains the filename
 
     QVector<Frame *> replayFrames; ///< vector containing all frames shown in the gui
+
+    int prevTotalFlexibility; ///< The previous flexibility of the instance, useful for comparing new solutions.
+    int totalFlexibility;   ///< The total flexibility of the current instance, calculated by the solver.
     
 public:
     /** @return Constructor, initializes vectors. */
@@ -412,6 +415,24 @@ public:
      * @param name The complete path to the file which contains this instance.
      */
     void setFileName(QString name);
+
+    /**
+     * Sets the total flexibility of this instance.
+     * @param flex The total flexibility.
+     */
+    void setTotalFlex(int flex);
+
+    /**
+     * Gets the total flexibility of this instance.
+     * @return integer representing the total flexibility.
+     */
+    int getTotalFlex();
+
+    /**
+     * Gets the previous flexibility of this instance.
+     * @return integer representing the previous flexibility.
+     */
+    int getPrevFlex();
 
 /* convenience functions */
 

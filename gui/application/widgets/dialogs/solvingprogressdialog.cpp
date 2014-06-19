@@ -98,7 +98,12 @@ void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
         log->append("\nFinished.\n");
         if(solver->isSolved()) {
             outcomeLabel->setStyleSheet("QLabel { color : #008800; }");
-            outcomeLabel->setText(tr("The instance has been solved successfully.\nThe solver posted %1 precedence constraints.").arg(newConstraints));
+            if(instance->getPrevFlex() == -1) {
+                outcomeLabel->setText(tr("The instance has been solved successfully.\n\nThe solver posted %1 precedence constraints.").arg(newConstraints));
+            }
+            else {
+
+            }
         } else if(!solver->isSolved()) {
             QString msg = "";
 
