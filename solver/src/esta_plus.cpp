@@ -533,7 +533,7 @@ int esta_plus(int merge_bw, int add_mutexes) {
     peak2_t *peak;
     conflict_t *conflict;
 
-    print_est_schedule();
+    //print_est_schedule();
     print_hele_state();
 
     peakhash = vector<map<int, peak2_t *> > (tmsp->n_resources);

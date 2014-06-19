@@ -190,7 +190,7 @@ void addLimits(Constraints* constraints) {
 
                 constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
                 if(activities[k]->est == activities[k]->lst) {
-                    cdebug("HETZELFDE\n");
+                    debug("HETZELFDE\n", 0);
                 }
             }
         }
@@ -208,21 +208,19 @@ void printMSE(map<string, int>* solution) {
         ++iter;
         mse += (lst - est - mean) * (lst - est - mean);
     }
-    cout << "MSE = " << mse << endl;
-    cdebug("MSE = %f \n", mse);
+    cdebug("Mean Square Error: %f \n", mse);
 }
 
 void printSolution(map<string, int>* solution) {
     output("FLEX: ");
     output("%d ", getMinFlex());
     output("%d ", getFlexibility());
-    //cout << "minflex = " << minflex << endl;
-    cdebug("minflex = %d\n", getMinFlex());
-    cdebug("flexibility = %d\n", getFlexibility());
+    cdebug("Minimal Instance Flexibility: %d\n", getMinFlex());
+    cdebug("Total Instance Flexibility: %d\n", getFlexibility());
     map<string, int>::iterator iter = solution->begin();
     while(iter != solution->end()) {
         output("%s %d ", iter->first.c_str(), iter->second);
-        cdebug("[%s] = %d\n", iter->first.c_str(), iter->second);
+        debug("[%s] = %d\n", iter->first.c_str(), iter->second);
         ++iter;
     }
 	output("-1\n");
@@ -234,7 +232,9 @@ int flexibility() {
     addLimits(&constraints);
     map<string, int> solution;
     solution = useClpToSolve(&constraints);
+    cdebug(LINE, 0);
     printSolution(&solution);
     printMSE(&solution);
+    cdebug(LINE, 0);
     return 1;
 }
