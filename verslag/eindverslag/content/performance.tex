@@ -74,8 +74,6 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
 \end{table}
 
 \subsection{Flexibiliteit}
-TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. Misschien ook nog wat over de verschillende LP modellen.
-
 De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is hoe beter de flexibiliteit is verdeeld over de activiteiten.
 
 \begin{align}
@@ -87,24 +85,43 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft.
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} en \ref{tbl:performanceflextot} worden telkens twee methoden vergeleken en aangegen in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Waarbij de Interior Point methode wordt afgekort tot IP en de Simplex methode wordt afgekort tot S. Met subscript $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met subscript $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
 
-\begin{tabular}{| l | r | r | r |}
-    \hline
-        & $<$ & $=$ & $>$ \\
-    \hline
-    interior 1 vs interior 2 & 0 & 3 & 2037 \\
-    simplex 1 vs simplex 2 & 1 & 1 & 2038 \\ 
-    simplex 1 vs interior 1 & 215 & 19 & 1806 \\
-    simplex 2 vs interior 2 & 219 & 7 & 1814 \\
-    \hline
-\end{tabular}
+\begin{table}[H]
+\parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{| c | r | r | r | r |}
+        \hline
+            & \midden{IP$_1$} & \midden{IP$_2$} & \midden{S$_1$} & \midden{S$_2$} \\
+        \hline
+        IP$_1$ & \midden{$\times$} & $0,0$ & $88,5$ & $0,5$ \\
+        IP$_2$ & $99,9$ & \midden{$\times$} & $100,0$ & $88,9$ \\ 
+        S$_1$  & $10,5$ & $0,0$ & \midden{$\times$} & $0,1$ \\
+        S$_2$  & $99,4$ & $10,7$ & $99,9$ & \midden{$\times$} \\
+        \hline
+    \end{tabular}
+    \caption{Vergelijking verdeling flexibiliteit}
+    \label{tbl:performanceflexver}
+}
+\hfill
+\parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{| c | r | r | r | r |}
+        \hline
+            & \midden{IP$_1$} & \midden{IP$_2$} & \midden{S$_1$} & \midden{S$_2$} \\
+        \hline
+        IP$_1$ & \midden{$\times$} & $-$ & $-$ & $-$ \\
+        IP$_2$ & $-$ & \midden{$\times$} & $-$ & $-$ \\ 
+        S$_1$  & $-$ & $-$ & \midden{$\times$} & $-$ \\
+        S$_2$  & $-$ & $-$ & $-$ & \midden{$\times$} \\
+        \hline
+    \end{tabular}
+    \caption{Vergelijking totale flexibiliteit}
+    \label{tbl:performanceflextot}
+}
+\end{table}
 
-Dus:
-\begin{enumerate}
-    \item interior 2
-    \item interior 1
-    \item simplex 2
-    \item simplex 1
-\end{enumerate}
+Met behulp van Tabel \ref{tbl:performanceflexver} waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse} kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Dus IP$_2$ heeft de beste verdeling van flexibiliteit, daarna komen van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
 
+\subsection{Chaining}
+TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. 

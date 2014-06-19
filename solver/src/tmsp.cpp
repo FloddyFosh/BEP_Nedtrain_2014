@@ -50,9 +50,9 @@ void add_activity(int i, int j, int duration, char* name, int est, int lst) {
 
 	activity* a = new activity (i, j, duration, strdup(name), est, lst);
     nodesInVolgordeVanInput.push_back(a);
-    vector<activity *> & acts (T(i)->activities);
+    vector<activity *> & acts (Tr(i)->activities);
     if (j >= len(acts)) acts.resize(j + 1, NULL);
-	list_set(T(i)->activities, j, a);
+	list_set(Tr(i)->activities, j, a);
     N(i) = len(acts);
 }
 
@@ -95,8 +95,8 @@ void add_train_mutexes() {
 
 	r = tmsp->n_resources;
 
-	for (i = 0; i < tmsp->n_trains; i++, r++) if (T(i)) {
-		add_resource(r, 1, strdup(T(i)->name));
+	for (i = 0; i < tmsp->n_trains; i++, r++) if (Tr(i)) {
+		add_resource(r, 1, strdup(Tr(i)->name));
 		for (j = 0; j < N(i); j++) if (A(i,j)) {
 			add_requirement(i, j, r, 1);
 		}

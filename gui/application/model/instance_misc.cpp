@@ -18,6 +18,8 @@ Instance::Instance(QObject *parent) :
 
     importOffset = 0;
     importing = false;
+
+    totalFlexibility = -1;
 }
 
 Instance::~Instance() {
@@ -103,6 +105,19 @@ void Instance::setFrames(QVector<Frame *> frames) {
 
 void Instance::clearFrames() {
     replayFrames.clear();
+}
+
+void Instance::setTotalFlex(int flex) {
+    prevTotalFlexibility = totalFlexibility;
+    totalFlexibility = flex;
+}
+
+int Instance::getTotalFlex() {
+    return totalFlexibility;
+}
+
+int Instance::getPrevFlex() {
+    return prevTotalFlexibility;
 }
 
 QMap<int, Resource *> Instance::getResources() { return resources; }

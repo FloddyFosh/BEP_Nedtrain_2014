@@ -44,9 +44,9 @@ void initializeChains(){
 }
 
 bool isFeasibleConstraint(activity* act1, activity* act2){
-    int curEst = act1->est == -1 ? T(act1->i)->release_date : act1->est;
+    int curEst = act1->est == -1 ? Tr(act1->i)->release_date : act1->est;
     int prevLft = act2->est + act2->duration + act2->flex;
-    if(act2->est == -1) prevLft = T(act2->i)->due_date;
+    if(act2->est == -1) prevLft = Tr(act2->i)->due_date;
     return curEst >= prevLft;
 }
 
