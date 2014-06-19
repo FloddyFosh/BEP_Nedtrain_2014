@@ -85,17 +85,19 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft. In Tabel \ref{tbl:performanceflex} worden telkens twee methoden vergeleken. 
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft. In Tabel \ref{tbl:performanceflex} worden telkens twee methoden vergeleken. Waarbij de Interior Point methode wordt afgekort tot IP en de Simplex methode wordt afgekort tot S. 
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{ r || r r r r }
-            & \rot{interior 1} & \rot{interior 2} & \rot{simplex 1} & \rot{simplex 2} \\
-        \hhline{=||====}
-        interior 1 & $-$ & $0,0$ & $88,5$ & $-$ \\
-        interior 2 & $99,9$ & $-$ & $-$ & $88,9$ \\ 
-        simplex 1  & $10,5$ & $-$ & $-$ & $0,1$ \\
-        simplex 2  & $-$ & $10,7$ & $99,9$ & $-$ \\
+    \begin{tabular}{| r | r | r | r | r |}
+        \hline
+            & IP 1 & IP 2 & S 1 & S 2 \\
+        \hline
+        IP 1 & $-$ & $0,0$ & $88,5$ & $-$ \\
+        IP 2 & $99,9$ & $-$ & $-$ & $88,9$ \\ 
+        S 1  & $10,5$ & $-$ & $-$ & $0,1$ \\
+        S 2  & $-$ & $10,7$ & $99,9$ & $-$ \\
+        \hline
     \end{tabular}
     \caption{Vergelijking van de 4 verschillende methoden}
     \label{tbl:performanceflex}
