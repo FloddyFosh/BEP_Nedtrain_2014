@@ -29,6 +29,7 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     progressBar->setFixedWidth(500);
 
     outcomeLabel = new QLabel;
+    infoLabel = new QLabel;
 
     // more or less button
     moreButton = new QPushButton(tr("More..."));
@@ -49,6 +50,7 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     vbox->addLayout(hbox);
     vbox->addWidget(progressBar);
     vbox->addWidget(outcomeLabel);
+    vbox->addWidget(infoLabel);
     vbox->addWidget(log);
     vbox->addWidget(buttonbox);
 
@@ -97,13 +99,44 @@ void SolvingProgressDialog::solverFinished(QProcess::ExitStatus status) {
 
         log->append("\nFinished.\n");
         if(solver->isSolved()) {
+            infoLabel->setTextFormat(Qt::RichText);
             outcomeLabel->setStyleSheet("QLabel { color : #008800; }");
-            if(instance->getPrevFlex() == -1) {
-                outcomeLabel->setText(tr("The instance has been solved successfully.\n\nThe solver posted %1 precedence constraints.").arg(newConstraints));
-            }
-            else {
+            outcomeLabel->setText(tr("The instance has been solved successfully.\n"));
 
+            QString temp1 = tr("<font color=#008800>The solver was able to get rid of %1 precedence constraints.</font>");
+            QString temp2 = tr("<font color=%1>The solver posted %2 precedence constraints.</font>");
+            QString temp3 = tr("<br><font color=%1>The total flexibility of this solution is %2.");
+            QString temp4 = tr("<font color=%1> (Previously: %2)</font>");
+
+            QString resInfo;
+
+            if(newConstraints < 0)
+                resInfo.append(temp1.arg(QString::number(-newConstraints)));
+            else {
+                if (newConstraints == 0)
+                    resInfo.append(temp2.arg("#008800", "0"));
+                else if(numSoftPrecedences == 0)
+                    resInfo.append(temp2.arg("#008800", QString::number(newConstraints)));
+                else
+                    resInfo.append(temp2.arg("#ff0000", QString::number(newConstraints)));
             }
+
+            if(instance->getTotalFlex() > -1) {
+                if(instance->getPrevFlex() > -1) {
+                    if(instance->getTotalFlex() < instance->getPrevFlex()) {
+                        resInfo.append(temp3.arg("#ff0000",QString::number(instance->getTotalFlex())));
+                        resInfo.append(temp4.arg("#ff0000",QString::number(instance->getPrevFlex())));
+                    }
+                    else {
+                        resInfo.append(temp3.arg("#008800",QString::number(instance->getTotalFlex())));
+                        resInfo.append(temp4.arg("#008800",QString::number(instance->getPrevFlex())));
+                    }
+                }
+                else {
+                    resInfo.append(temp3.arg("#008800", QString::number(instance->getTotalFlex())));
+                }
+            }
+            infoLabel->setText(resInfo);
         } else if(!solver->isSolved()) {
             QString msg = "";
 
