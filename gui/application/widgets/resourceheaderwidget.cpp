@@ -7,7 +7,7 @@
 #include <QMessageBox>
 
 ResourceHeaderWidget::ResourceHeaderWidget(Resource *r, InstanceController *controller, QWidget *parent) :
-    HeaderWidget(parent), _resource(r), controller(controller)
+    HeaderWidget(parent), _resource(r), controller(controller), highLighted(false)
 {
     nameLabel = new QLabel(_resource->name(), this);
     nameLabel->setGeometry(35, 0, 300, 30);
@@ -115,4 +115,19 @@ void ResourceHeaderWidget::upResource() {
 void ResourceHeaderWidget::downResource() {
     int index = controller->getInstanceWidget()->getResourceIndex(this);
     controller->getInstanceWidget()->relocateResourceWidget(index, index+1);
+}
+
+void ResourceHeaderWidget::highlight(bool hl) {
+    if(hl && !highLighted) {
+        QPalette pal = palette();
+        pal.setColor(backgroundRole(), QColor(255, 247, 160));
+        setPalette(pal);
+        nameLabel->setText("<b>" + _resource->name() + "</b>");
+        highLighted = true;
+    }
+    else if(highLighted) {
+        setPalette(QPalette());
+        nameLabel->setText(_resource->name());
+        highLighted = false;
+    }
 }

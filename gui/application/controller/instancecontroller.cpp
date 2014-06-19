@@ -132,3 +132,11 @@ void InstanceController::peak(int time, int resource) {
 void InstanceController::focusResource(int resId){
     instanceWidget->focusResourceWidget(resId);
 }
+
+void InstanceController::highlightResource(int resId, bool hl) {
+    instanceWidget->highlightResource(resId, hl);
+}
+
+void InstanceController::highlightJob(int jobId, bool hl) {
+    instanceWidget->highlightJob(jobId, hl);
+}

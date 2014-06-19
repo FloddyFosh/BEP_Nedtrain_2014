@@ -46,9 +46,12 @@ class InstanceWidget : public AbstractInstanceWidget
     OverlayWidget *overlay;
 
     // resource splitter left (list)
-    QScrollArea *resourceHeaderScroller;
-        QWidget *resourceHeaders;
-            QVBoxLayout *resourceHeadersLayout;
+    QWidget *resourceHeaderWidget;
+        QVBoxLayout *resourceHeaderLayout;
+            QLabel *resourceWidgetTitle;
+            QScrollArea *resourceHeaderScroller;
+                QWidget *resourceHeaders;
+                    QVBoxLayout *resourceHeadersLayout;
 
     // resource splitter right (schedule visualization)
     QWidget *resourcesViewer;
@@ -196,7 +199,9 @@ public:
     void disablePrecedenceRemoving(); ///< disables precedence removing and disconnects signals
     void removePeaks(); ///< removes all peaks
     InstanceController * getInstanceController(); //TODO move to another file
-    void focusResourceWidget(int resId);
+    void focusResourceWidget(int resId); ///< focus the resource widget by setting the scrollbars
+    void highlightResource(int resId, bool doHighLight); ///< highlight the text of the Resourceheaderwidget if true
+    void highlightJob(int jobId, bool doHighLight); ///< highlight the text of the Jobheaderwidget if true
 
 private slots:
     void addResource(Resource *); ///< connected to the instance's resourceAdded SIGNAL

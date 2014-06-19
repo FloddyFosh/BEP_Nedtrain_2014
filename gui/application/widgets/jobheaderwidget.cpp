@@ -5,7 +5,7 @@
 #include <QMessageBox>
 
 JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget *parent, bool comparing) :
-    HeaderWidget(parent), _job(j), _expanded(false), controller(controller), compare(comparing)
+    HeaderWidget(parent), _job(j), _expanded(false), controller(controller), compare(comparing), highLighted(false)
 {
     nameLabel = new QLabel(_job->name(), this);
     nameLabel->setContentsMargins(10,3,0,0);
@@ -40,6 +40,9 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
     // make sure sizehint is used as size (at least for height)
     setContentsMargins(10, 2, 0, 0);
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+    setBackgroundRole(QPalette::Background);
+    setAutoFillBackground(true);
 
     createLayout();
 
@@ -140,4 +143,19 @@ void JobHeaderWidget::upJob() {
 void JobHeaderWidget::downJob() {
     int index = controller->getInstanceWidget()->getJobIndex(this);
     controller->getInstanceWidget()->relocateJobWidget(index, index+1);
+}
+
+void JobHeaderWidget::highlight(bool hl) {
+    if(hl && !highLighted) {
+        QPalette pal = palette();
+        pal.setColor(backgroundRole(), QColor(255, 247, 160));
+        setPalette(pal);
+        nameLabel->setText("<b>" + _job->name() + "</b>");
+        highLighted = true;
+    }
+    else if(highLighted) {
+        setPalette(QPalette());
+        nameLabel->setText(_job->name());
+        highLighted = false;
+    }
 }

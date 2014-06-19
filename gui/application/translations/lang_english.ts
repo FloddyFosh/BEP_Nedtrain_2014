@@ -15,6 +15,14 @@
     </message>
 </context>
 <context>
+    <name>AbstractInstanceWidget</name>
+    <message>
+        <location filename="../widgets/abstractinstancewidget.cpp" line="26"/>
+        <source>&lt;b&gt;Jobs&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Projects&lt;/b&gt;</translation>
+    </message>
+</context>
+<context>
     <name>ActivityDialog</name>
     <message>
         <location filename="../widgets/dialogs/activitydialog.cpp" line="11"/>
@@ -437,7 +445,12 @@ time units are reserved, in case a task overruns its time.</translation>
 <context>
     <name>InstanceWidget</name>
     <message>
-        <location filename="../widgets/instancewidget.cpp" line="341"/>
+        <location filename="../widgets/instancewidget.cpp" line="150"/>
+        <source>&lt;b&gt;Resources&lt;/b&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/instancewidget.cpp" line="366"/>
         <source>%1 of %2</source>
         <translation></translation>
     </message>
@@ -510,7 +523,7 @@ Please correct your input.</source>
 <context>
     <name>JobHeaderWidget</name>
     <message>
-        <location filename="../widgets/jobheaderwidget.cpp" line="127"/>
+        <location filename="../widgets/jobheaderwidget.cpp" line="130"/>
         <source>Are you sure?</source>
         <translation></translation>
     </message>
@@ -590,17 +603,17 @@ Please correct your input.</source>
 <context>
     <name>JobWidget</name>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="250"/>
+        <location filename="../widgets/jobwidget.cpp" line="258"/>
         <source>Job Info</source>
         <translation>Project Info</translation>
     </message>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="298"/>
+        <location filename="../widgets/jobwidget.cpp" line="306"/>
         <source>The program encountered a failure. Please restart.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/jobwidget.cpp" line="253"/>
+        <location filename="../widgets/jobwidget.cpp" line="261"/>
         <source>Show resource usage</source>
         <translation></translation>
     </message>

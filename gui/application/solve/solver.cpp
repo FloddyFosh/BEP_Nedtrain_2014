@@ -258,6 +258,17 @@ void Solver::processStateLine(QByteArray &line) {
     fields.takeFirst();
     Frame * nextFrame (new Frame);
     processStateGroups(fields, nextFrame);
+    foreach(Precedence * p, instance->getSoftPrecedences()) {
+        if (!p->isHard() && p->getFrameNrs().count(replayFrames.size())) {
+            nextFrame->addAffJobId(p->a1()->job()->id());
+            nextFrame->addAffJobId(p->a2()->job()->id());
+            foreach(int id, p->a1()->getRequirements().keys()) {
+                if(p->a2()->getRequirements().contains(id)) {
+                    nextFrame->addAffResourceId(id);
+                }
+            }
+        }
+    }
     replayFrames.append(nextFrame);
     instance->setFrames(replayFrames);
 }
@@ -303,7 +314,6 @@ void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    fields.takeFirst(); //minflex
     fields.takeFirst(); //flextotaal
 
     int act_i = fields.takeFirst().toInt();
@@ -356,10 +366,6 @@ void Solver::processChainLine(QByteArray &line) {
     fields.takeFirst();
 
     int res, prevRes, chain, numActs, ai, aj;
-    prevRes = -1;
-    if(Chain* lastChain = replayFrames.last()->getChain()){
-        prevRes = lastChain->resourceId();
-    }
     QMap<int,Resource*> resources = instance->getResources();
     res = fields.takeFirst().toInt();
     ResourceDecrease* dec = NULL;
@@ -390,6 +396,13 @@ void Solver::processChainLine(QByteArray &line) {
 
         Chain* c = curResource->getChain(chain);
         QList<QPoint*>* usedProfile = new QList<QPoint*>;
+        prevRes = -1;
+        if(Chain* lastChain = replayFrames.last()->getChain()){
+            prevRes = lastChain->resourceId();
+        } else {
+            replayFrames.last()->clearAffected();
+            replayFrames.last()->addAffResourceId(res);
+        }
         if(res==prevRes){
             Frame* lastFrame = replayFrames.last();
             usedProfile = lastFrame->getSelectedProfile();

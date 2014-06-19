@@ -2,6 +2,8 @@
 Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties zal geanalyseerd worden als de flexibiliteit die met verschillende methodes bereikt wordt.
 
 \subsection{Looptijd}
+TODO: Looptijd van interior point en update bestaande tabellen want blijkbaar stond debug aan.
+
 In dit hoofdstuk een analyse van de looptijd van de solver. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
 \begin{itemize}
     \item 10 resources, met elk 1 resource unit
@@ -72,4 +74,54 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
 \end{table}
 
 \subsection{Flexibiliteit}
-TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. Misschien ook nog wat over de verschillende LP modellen.
+De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is hoe beter de flexibiliteit is verdeeld over de activiteiten.
+
+\begin{align}
+\label{eq:mse}
+\begin{aligned}
+    flex_{gem} =& \sum_{t \in T} \frac{t^+ - t^-}{|T|}      & \text{met } |T| \text{ het aantal elementen in } T\\
+    MSE(flex) =& \sum_{t \in T} (flex_t - flex_{gem})^2     & \\
+               =& \sum_{t \in T} (t^+ - t^- - flex_{gem})^2 & \\
+\end{aligned}
+\end{align}
+
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} en \ref{tbl:performanceflextot} worden telkens twee methoden vergeleken en aangegen in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Waarbij de Interior Point methode wordt afgekort tot IP en de Simplex methode wordt afgekort tot S. Met subscript $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met subscript $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
+
+\begin{table}[H]
+\parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{| c | r | r | r | r |}
+        \hline
+            & \midden{IP$_1$} & \midden{IP$_2$} & \midden{S$_1$} & \midden{S$_2$} \\
+        \hline
+        IP$_1$ & \midden{$\times$} & $0,0$ & $88,5$ & $0,5$ \\
+        IP$_2$ & $99,9$ & \midden{$\times$} & $100,0$ & $88,9$ \\ 
+        S$_1$  & $10,5$ & $0,0$ & \midden{$\times$} & $0,1$ \\
+        S$_2$  & $99,4$ & $10,7$ & $99,9$ & \midden{$\times$} \\
+        \hline
+    \end{tabular}
+    \caption{Vergelijking verdeling flexibiliteit}
+    \label{tbl:performanceflexver}
+}
+\hfill
+\parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{| c | r | r | r | r |}
+        \hline
+            & \midden{IP$_1$} & \midden{IP$_2$} & \midden{S$_1$} & \midden{S$_2$} \\
+        \hline
+        IP$_1$ & \midden{$\times$} & $-$ & $-$ & $-$ \\
+        IP$_2$ & $-$ & \midden{$\times$} & $-$ & $-$ \\ 
+        S$_1$  & $-$ & $-$ & \midden{$\times$} & $-$ \\
+        S$_2$  & $-$ & $-$ & $-$ & \midden{$\times$} \\
+        \hline
+    \end{tabular}
+    \caption{Vergelijking totale flexibiliteit}
+    \label{tbl:performanceflextot}
+}
+\end{table}
+
+Met behulp van Tabel \ref{tbl:performanceflexver} waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse} kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Dus IP$_2$ heeft de beste verdeling van flexibiliteit, daarna komen van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
+
+\subsection{Chaining}
+TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. 
