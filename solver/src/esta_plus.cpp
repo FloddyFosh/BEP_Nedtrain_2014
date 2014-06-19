@@ -611,7 +611,7 @@ cleanup:
     {
         bool wrong (false);
         // verify the EST schedule.
-        for (int i = 0; i < tmsp->n_trains; i ++) if (T(i)) {
+        for (int i = 0; i < tmsp->n_trains; i ++) if (Tr(i)) {
             for (int j = 0; j < N(i); j ++) if (A(i, j)) {
                 node_t * act (acts[i][j]);
                 A(i,j)->est = acts[i][j]->est;

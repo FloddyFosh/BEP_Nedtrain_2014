@@ -314,7 +314,6 @@ void Solver::processFlexLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    fields.takeFirst(); //minflex
     instance->setTotalFlex(fields.takeFirst().toInt()); //flextotaal
 
     int act_i = fields.takeFirst().toInt();
