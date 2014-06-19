@@ -80,12 +80,6 @@ public:
      * @return the chain representing this frame
      */
     virtual Chain* getChain();
-
-    /**
-     * Returns if this frame is a ChainFrame.
-     * @return boolean
-     */
-    bool isChain;
 };
 
 #endif // MODEL_STATE_H

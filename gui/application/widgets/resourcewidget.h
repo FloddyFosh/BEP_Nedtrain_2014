@@ -37,7 +37,9 @@ class ResourceWidget : public QWidget
     void paintSelectedRegion(QPainter&); ///< adds shading to selected region
     void paintResourceMarks(QPainter& painter); /// adds resource marks (used for indicating a precedence between the end of a resource decrease and a task)
     void paintChainResources(QPainter& painter); /// paint the chain visualization resource profiles
+    void paintChainMatrix(QPainter &painter); /// paint the view where chains are displayed in the resource view
     void paintPeak(QPainter& painter); ///< paints peak
+    bool viewingResourceMatrix(); /// true iff the resource matrix view is currently being displayed
 public:
     /**
      * Sets up UI: connect signals and calculate profile.

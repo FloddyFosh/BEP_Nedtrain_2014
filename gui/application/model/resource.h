@@ -58,6 +58,11 @@ public:
     Chain* getChain(int chainId);
 
     /**
+     * @return The map that contains all chain objects
+     */
+    QMap<int,Chain*> getChains();
+
+    /**
      * Clears the saved chains of this resource.
      */
     void clearChains();

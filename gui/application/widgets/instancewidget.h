@@ -202,7 +202,6 @@ public:
     void focusResourceWidget(int resId); ///< focus the resource widget by setting the scrollbars
     void highlightResource(int resId, bool doHighLight); ///< highlight the text of the Resourceheaderwidget if true
     void highlightJob(int jobId, bool doHighLight); ///< highlight the text of the Jobheaderwidget if true
-
 private slots:
     void addResource(Resource *); ///< connected to the instance's resourceAdded SIGNAL
     void removeJob(Job *); ///< connected to the job header widget's remove SIGNAL

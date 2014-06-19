@@ -94,15 +94,7 @@ void InstanceController::doPaintFlexibilityIntervals() {
 Controller * InstanceController::getParent() { return controller; }
 
 void InstanceController::shadeActivities(int start, int end, Resource* r) {
-    //clear shade of all resource widgets
-    foreach(ResourceWidget* rw, getResourceWidgets()){
-        if(rw->getResource() != r)
-            rw->removeShade();
-    }
-    // clear shades of all activity widgets
-    foreach(ActivityWidget* aw, getActivityWidgets()){
-        aw->setShade(false);
-    }
+    clearShades(r);
     // paint shade on activity widgets
     if(end != -1){
         foreach(ActivityWidget* aw, getActivityWidgets()){
@@ -113,9 +105,31 @@ void InstanceController::shadeActivities(int start, int end, Resource* r) {
     }
 }
 
+void InstanceController::shadeActivity(Activity* act, Resource* r){
+    clearShades(r);
+    foreach(ActivityWidget* aw, getActivityWidgets()){
+        if(aw->activity() == act){
+            aw->setShade(true);
+            return;
+        }
+    }
+}
+
 void InstanceController::shadeResources(Job* j) {
     foreach(ResourceWidget* rw, getResourceWidgets()){
         rw->setShadedJob(j);
+    }
+}
+
+void InstanceController::clearShades(Resource* r){
+    //clear shade of all resource widgets
+    foreach(ResourceWidget* rw, getResourceWidgets()){
+        if(rw->getResource() != r)
+            rw->removeShade();
+    }
+    // clear shades of all activity widgets
+    foreach(ActivityWidget* aw, getActivityWidgets()){
+        aw->setShade(false);
     }
 }
 
@@ -139,4 +153,8 @@ void InstanceController::highlightResource(int resId, bool hl) {
 
 void InstanceController::highlightJob(int jobId, bool hl) {
     instanceWidget->highlightJob(jobId, hl);
+}
+
+bool InstanceController::matrixViewEnabled(){
+    return true;
 }
