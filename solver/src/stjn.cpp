@@ -8,7 +8,7 @@ node_t * cycle_node; // hier gedefinieerd
 
 void chkEST()
 {
-    REP(i, tmsp->n_trains) if (T(i)) REP(j, N(i)) if (A(i,j) and len(acts[i][j]->group))
+    REP(i, tmsp->n_trains) if (Tr(i)) REP(j, N(i)) if (A(i,j) and len(acts[i][j]->group))
     {
         node_t * t (acts[i][j]);
         assert(t->est >= RD(i));
@@ -18,7 +18,7 @@ void chkEST()
 void chkLST()
 {
     bool wrong (0);
-    REP(i, tmsp->n_trains) if (T(i)) REP(j, N(i)) if (A(i,j) and len(acts[i][j]->group))
+    REP(i, tmsp->n_trains) if (Tr(i)) REP(j, N(i)) if (A(i,j) and len(acts[i][j]->group))
     {
         node_t * t (acts[i][j]);
         assert(t->lst + t->len <= DD(i));
@@ -52,7 +52,7 @@ int stjn_construct() {
     acts = (node_t ***) calloc(tmsp->n_trains, sizeof(node_t **));
     ordinv.clear();
 
-    for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+    for(i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
         acts[i] = (node_t **) calloc(N(i), sizeof(node_t *));
         for(j = 0; j < N(i); j++) if (A(i,j)) {
             A(i,j)->requirements.resize(tmsp->n_resources);
@@ -75,7 +75,7 @@ int stjn_construct() {
         }
     }
 
-    for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+    for(i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j) and len(A(i,j)->groupchilds)) {
             node_t * parent (acts[i][j]);
             FOREACH(A(i,j)->groupchilds, it)
@@ -87,7 +87,7 @@ int stjn_construct() {
         }
     }
 
-    for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+    for(i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j) and len(acts[i][j]->group)) {
             acts[i][j]->est = A(i,j)->est != -1 ? A(i,j)->est : RD(i);
             acts[i][j]->node_pred = NULL;
@@ -112,7 +112,7 @@ void stjn_calculate_est() {
     int order=0;
     deque<node_t *> q;
 
-    for (int i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+    for (int i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
         for (int j = 0; j < N(i); j++) if (A(i,j)) {
             if (acts[i][j]->prev.empty())
                 q.push_back(acts[i][j]);
@@ -144,7 +144,7 @@ int stjn_calculate_lst() {
     int inconsistent=0;
     deque<node_t *> q;
 
-    for (int i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+    for (int i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
         for (int j = 0; j < N(i); j++) if (A(i,j)) {
             if(len(acts[i][j]->next) == 0)
                 q.push_back(acts[i][j]);
@@ -425,7 +425,7 @@ node_t *stjn_merge(node_t *n1, node_t *n2) {
 void print_est_schedule() {
     int i, j;
 
-    for(i = 0; i < tmsp->n_trains; i++) if (T(i)) {
+    for(i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
         for(j = 0; j < N(i); j++) if (A(i,j)) {
             output("G: %x\n", !!acts[i][j]->group.size());
             output("EST: %d %d %d\n", i, j, acts[i][j]->est);
