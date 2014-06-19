@@ -39,3 +39,5 @@ Datum      | Uren   | Beschrijving
 11-06-2014 | 7.5    | 
 12-06-2014 | 9.5    | Eindverslag
 13-06-2014 | 11     | Eindverslag, eindverslag, eindverslag en ook nog een paar tests
+16-06-2014 | 8      | Verlagen van resource op interval, fixen bug met locken
+17-06-2014 |        |
