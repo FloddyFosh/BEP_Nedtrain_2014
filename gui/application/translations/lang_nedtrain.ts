@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.0" language="nl_NL">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>About Task scheduler</source>
-        <translation type="vanished">Over NedTrain planner</translation>
+        <translation>Over NedTrain planner</translation>
     </message>
     <message>
         <source>&lt;strong&gt;Task scheduler&lt;/strong&gt; has been developed as part of a research             project for Delft University of Technology and NedTrain. This version             was based on earlier work by Ronald Evers (2010). &lt;br /&gt;&lt;br /&gt;            &lt;strong&gt;Developed by:&lt;/strong&gt;&lt;br /&gt;             E. Ammerlaan, J. Elffers, E. Walraven and W. Wisse.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Continued by:&lt;/strong&gt;&lt;br /&gt;             C. Bakker, A. Bouter and M. den Hoedt.&lt;br /&gt;&lt;br /&gt;             &lt;strong&gt;Supervised by:&lt;/strong&gt;&lt;br /&gt;             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;&amp;copy; 2014</source>
-        <translation type="vanished">De &lt;strong&gt;NedTrain planner&lt;/strong&gt; is ontwikkeld in het kader van een onderzoeksproject voor de Technische Universiteit Delft en NedTrain. Deze versie is gebaseerd op eerder werk van Ronald Evers (2010).&lt;br /&gt;&lt;br /&gt;
+        <translation>De &lt;strong&gt;NedTrain planner&lt;/strong&gt; is ontwikkeld in het kader van een onderzoeksproject voor de Technische Universiteit Delft en NedTrain. Deze versie is gebaseerd op eerder werk van Ronald Evers (2010).&lt;br /&gt;&lt;br /&gt;
 &lt;strong&gt;Ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;E. Ammerlaan, J. Elffers, E. Walraven en W. Wisse.&lt;br /&gt;&lt;br /&gt;
 &lt;strong&gt;Verder ontwikkeld door:&lt;/strong&gt;&lt;br /&gt;C. Bakker, A. Bouter en M. den Hoedt.&lt;br /&gt;&lt;br /&gt;
 &lt;strong&gt;Onder begeleiding van:&lt;/strong&gt;&lt;br /&gt;Prof. dr. C. Witteveen, ir. M. Wilson en ir. B. Huisman.&lt;br /&gt;&lt;br /&gt;
@@ -164,7 +164,7 @@
     <name>ActivityWidget</name>
     <message>
         <source>&amp;Properties</source>
-        <translation type="vanished">&amp;Eigenschappen</translation>
+        <translation>&amp;Eigenschappen</translation>
     </message>
     <message>
         <location filename="../widgets/activitywidget.cpp" line="252"/>
@@ -381,7 +381,7 @@ op te geven, voor het geval dat een taak zijn tijd overschrijdt.</translation>
     </message>
     <message>
         <source>Task scheduler</source>
-        <translation type="vanished">NedTrain planner</translation>
+        <translation>NedTrain planner</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/importdialog.cpp" line="59"/>
@@ -431,7 +431,7 @@ op te geven, voor het geval dat een taak zijn tijd overschrijdt.</translation>
     </message>
     <message>
         <source>Task scheduler</source>
-        <translation type="vanished">NedTrain planner</translation>
+        <translation>NedTrain planner</translation>
     </message>
     <message>
         <location filename="../widgets/instancemdisubwindow.cpp" line="78"/>
@@ -557,7 +557,7 @@ Please correct your input.</source>
     </message>
     <message>
         <source>Are you sure you want to remove this job with its activities?</source>
-        <translation type="vanished">Weet u zeker dat u deze trein met zijn taken wilt verwijderen?</translation>
+        <translation>Weet u zeker dat u deze trein met zijn taken wilt verwijderen?</translation>
     </message>
 </context>
 <context>
@@ -683,7 +683,7 @@ Please correct your input.</source>
     <name>MainWindow</name>
     <message>
         <source>Task scheduler</source>
-        <translation type="vanished">NedTrain planner</translation>
+        <translation>NedTrain planner</translation>
     </message>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="95"/>
@@ -767,11 +767,11 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
     </message>
     <message>
         <source>Click on two tasks to add a precedence constraint between them.</source>
-        <translation type="vanished">Klik op twee taken om er een voorrangsrelatie tussen te plaatsen.</translation>
+        <translation>Klik op twee taken om er een voorrangsrelatie tussen te plaatsen.</translation>
     </message>
     <message>
         <source>Click on two tasks to remove a precedence constraint between them.</source>
-        <translation type="vanished">Klik op twee taken om de voorrangsrelatie ertussen te verwijderen.</translation>
+        <translation>Klik op twee taken om de voorrangsrelatie ertussen te verwijderen.</translation>
     </message>
     <message>
         <location filename="../widgets/mainwindow.cpp" line="180"/>
@@ -1399,7 +1399,8 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
         <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="101"/>
         <source>The instance has been solved successfully.
 The solver posted %1 precedence constraints.</source>
-        <translation>De instantie is met succes opgelost. De solver heeft %1 voorrangsrelaties toegevoegd.</translation>
+        <translation>De instantie is met succes opgelost.
+De solver heeft %1 voorrangsrelaties toegevoegd.</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/solvingprogressdialog.cpp" line="106"/>
@@ -1416,7 +1417,7 @@ wederzijdse uitsluiting.</translation>
     </message>
     <message>
         <source>The tasks in project &apos;%1&apos; could not be scheduled mutually exclusive.</source>
-        <translation type="vanished">De taken in project &apos;%1&apos; konden niet worden geroosterd met
+        <translation>De taken in project &apos;%1&apos; konden niet worden geroosterd met
 wederzijdse uitsluiting.</translation>
     </message>
     <message>
