@@ -41,3 +41,6 @@ Datum      | Uren   | Beschrijving
 12-06-2014 | 7      | Eindverslag en met cppcheck code inspecteren/verbeteren.
 13-06-2014 | 9      | Code opsturen naar SIG en eindverslag maken en draft ervan opsturen.
 16-06-2014 | 7      | Flexibiliteit werkt nu ook als er taken worden gelocked. Verslag bijgewerk titelpagina + tabellen performance. 
+17-06-2014 | 7      | Demo
+18-06-2014 | 8      | Implementeren en vergelijken van Interior Point en Simplex methode. 
+19-06-2014 | 7      | Verslag
