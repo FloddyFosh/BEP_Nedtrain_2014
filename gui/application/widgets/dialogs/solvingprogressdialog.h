@@ -34,6 +34,8 @@ class SolvingProgressDialog : public QDialog
     QLabel *statusLabel;
     QProgressBar *progressBar;
     QLabel *outcomeLabel;
+    QLabel *infoLabel;
+    QLabel *flexLabel;
     QTextEdit *log;
 
     int numSoftPrecedences;
