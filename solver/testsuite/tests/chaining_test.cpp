@@ -109,7 +109,9 @@ TEST_F(ChainingTest, SelectRandomChainExceptionTest){
     EXPECT_THROW(selectRandomChain(a2->i,a2->j,1),NoChainFoundException);
 }
 
-TEST_F(ChainingTest, PushToChainTest){
+TEST_F(ChainingTest, PushToChainTest) {
+    ADD_FAILURE();
+    return; // FIXME
     initializeChains();
     chainId id1 = {0,0};
     chainId id2 = {1,0};
@@ -124,8 +126,6 @@ TEST_F(ChainingTest, PushToChainTest){
 }
 
 TEST_F(ChainingTest, PushToBestChainTest){
-    ADD_FAILURE();
-    return; // FIXME
     initializeChains();
     pushToBestChains(0,0,0);
     int count = 0;
