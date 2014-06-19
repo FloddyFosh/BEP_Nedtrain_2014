@@ -1,4 +1,4 @@
-file1 = open('flex - simplex_2', 'r')
+file1 = open('flex - simplex_1', 'r')
 file2 = open('flex - interior_2', 'r')
 aantal1 = 0
 gelijk = 0
@@ -12,6 +12,6 @@ for line in file1 :
     else :
         aantal2 += 1
 
-print aantal1
-print gelijk
-print aantal2
+print (aantal1/2040.0*100)
+print (gelijk/2040.0*100)
+print (aantal2/2040.0*100)

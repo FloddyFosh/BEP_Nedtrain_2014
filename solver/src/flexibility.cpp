@@ -197,20 +197,6 @@ void addLimits(Constraints* constraints) {
     }
 }
 
-void printMSE(map<string, int>* solution) {
-    double mse = 0.0;
-    double mean = ((double) getFlexibility()) / (double) solution->size() * 2;
-    map<string, int>::iterator iter = solution->begin();
-    while(iter != solution->end()) {
-        double lst = (double) iter->second;        
-        ++iter;
-        double est = (double) iter->second;
-        ++iter;
-        mse += (lst - est - mean) * (lst - est - mean);
-    }
-    cdebug("Mean Square Error: %f \n", mse);
-}
-
 void printSolution(map<string, int>* solution) {
     output("FLEX: ");
     output("%d ", getMinFlex());
@@ -234,7 +220,6 @@ int flexibility() {
     solution = useClpToSolve(&constraints);
     cdebug(LINE, 0);
     printSolution(&solution);
-    printMSE(&solution);
     cdebug(LINE, 0);
     return 1;
 }
