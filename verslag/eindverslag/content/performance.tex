@@ -74,8 +74,6 @@ In de Tabellen \ref{tbl:xxl+output}, \ref{tbl:xxl-output} en \ref{tbl:xxl+output
 \end{table}
 
 \subsection{Flexibiliteit}
-TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. Misschien ook nog wat over de verschillende LP modellen.
-
 De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is hoe beter de flexibiliteit is verdeeld over de activiteiten.
 
 \begin{align}
@@ -87,18 +85,21 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft.
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft. In Tabel \ref{tbl:performanceflex} worden telkens twee methoden vergeleken. 
 
-\begin{tabular}{| l | r | r | r |}
-    \hline
-        & $<$ & $=$ & $>$ \\
-    \hline
-    interior 1 vs interior 2 & 0 & 3 & 2037 \\
-    simplex 1 vs simplex 2 & 1 & 1 & 2038 \\ 
-    simplex 1 vs interior 1 & 215 & 19 & 1806 \\
-    simplex 2 vs interior 2 & 219 & 7 & 1814 \\
-    \hline
-\end{tabular}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ r || r r r r }
+            & \rot{interior 1} & \rot{interior 2} & \rot{simplex 1} & \rot{simplex 2} \\
+        \hhline{=||====}
+        interior 1 & $-$ & $0,0$ & $88,5$ & $-$ \\
+        interior 2 & $99,9$ & $-$ & $-$ & $88,9$ \\ 
+        simplex 1  & $10,5$ & $-$ & $-$ & $0,1$ \\
+        simplex 2  & $-$ & $10,7$ & $99,9$ & $-$ \\
+    \end{tabular}
+    \caption{Vergelijking van de 4 verschillende methoden}
+    \label{tbl:performanceflex}
+\end{table}
 
 Dus:
 \begin{enumerate}
@@ -108,3 +109,5 @@ Dus:
     \item simplex 1
 \end{enumerate}
 
+\subsection{Chaining}
+TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. 

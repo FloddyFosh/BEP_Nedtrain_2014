@@ -41,3 +41,12 @@
 
 \def\beginAls{\begin{itemize} [label=\emph{ - Als}, itemindent=0.5em, labelsep=0.3em]}
 \def\endAls{\end{itemize}}
+
+\usepackage{hhline}
+\usepackage{adjustbox}
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{R{45}{1em}}}
