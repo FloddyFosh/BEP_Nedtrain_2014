@@ -14,6 +14,7 @@
 #include "../../src/token.h"
 #include "../../src/grammar.tab.hpp"
 
+
 #define useRandom false
 
 class InstanceTest : public ::testing::Test {
@@ -30,11 +31,13 @@ class InstanceTest : public ::testing::Test {
       }
 
       virtual void SetUp() {
+          tmsp = new tmsp_t;
           //Redirect stdout to buffer
           sbuf = cout.rdbuf();
           cout.rdbuf(buffer.rdbuf());
       }
       virtual void TearDown() {
+          delete tmsp;
           //Redirect stdout back to itself
           cout.rdbuf(sbuf);
       }
@@ -42,12 +45,13 @@ class InstanceTest : public ::testing::Test {
 
 TEST_F(InstanceTest, SmallInstance) {
     ADD_FAILURE();
-    return; // TODO
+    return;
+    // TODO
     parseFile("../../instances/small.instance");
     solve(0,0);
-
     ifstream in("tests/ExpectedSolutions/small.txt", ios::in | ios::binary);
     std::string s((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+    cdebug("3\n");
     size_t index = 0;
     while (true) {
          index = s.find("\\n", index);
