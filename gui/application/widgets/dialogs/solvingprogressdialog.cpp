@@ -10,6 +10,7 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     QDialog(parent), solver (solver), controller (controller), instance (controller->getInstance())
 {
     // create ui
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("%1 Solver").arg(solver->getName()));
     setWindowIcon(AppIcon("icon.png"));
 

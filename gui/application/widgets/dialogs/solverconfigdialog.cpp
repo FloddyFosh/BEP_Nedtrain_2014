@@ -12,7 +12,6 @@ SolverConfigDialog::SolverConfigDialog(Controller * controller, QWidget *parent)
     ListFormDialog(parent), current(0), controller (controller)
 {
     setWindowTitle(tr("Configure Solvers"));
-    setWindowIcon(AppIcon("icon.png"));
 
     nameEdit = new QLineEdit;
     binaryEdit = new QLineEdit;

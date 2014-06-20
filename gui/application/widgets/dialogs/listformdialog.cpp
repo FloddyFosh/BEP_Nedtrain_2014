@@ -5,6 +5,9 @@
 #include <QPushButton>
 
 ListFormDialog::ListFormDialog(QWidget *parent) : QDialog(parent) {
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    setWindowIcon(AppIcon("icon.png"));
+
     modified = false;
 
     formList = new QListWidget(this);

@@ -67,10 +67,10 @@ bool Instance::hasUserChanges() {
 }
 
 void Instance::setUserChanges(bool changes) {
-    if(changes)
-        emit isModified(true);
     userChanges = changes;
     emit userChange();
+    if(changes)
+        emit isModified(true);
 }
 
 int Instance::earliestReleaseDate() const {
