@@ -24,7 +24,6 @@ add_executable(testsuite testsuite.cpp
     ../src/exceptions.cpp
     ../src/output.cpp
     ../src/solve.cpp
-    ../src/token.cpp
     ../src/timing.cpp
     ../src/stjn.cpp
     ../src/esta_plus.cpp
