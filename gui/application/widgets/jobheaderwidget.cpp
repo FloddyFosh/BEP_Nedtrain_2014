@@ -8,6 +8,7 @@ JobHeaderWidget::JobHeaderWidget(Job *j, InstanceController *controller, QWidget
     HeaderWidget(parent), _job(j), _expanded(false), controller(controller), compare(comparing), highLighted(false)
 {
     nameLabel = new QLabel(_job->name(), this);
+    nameLabel->setTextFormat(Qt::PlainText);
     nameLabel->setContentsMargins(10,3,0,0);
 
     if(!compare) {
@@ -117,8 +118,8 @@ void JobHeaderWidget::doExpand(bool expanded) {
 
 void JobHeaderWidget::editJob(){
 	JobDialog dialog(_job->instance(), _job, this);
-	dialog.exec();
-	nameLabel->setText(_job->name());
+    dialog.exec();
+    nameLabel->setText(_job->name());
 	_job->instance()->updateStartTime();
 	controller->getJobWidgets().value(_job->id())->updateGeometry();
 	controller->getInstanceWidget()->updateWidgetsLayout();
@@ -150,12 +151,12 @@ void JobHeaderWidget::highlight(bool hl) {
         QPalette pal = palette();
         pal.setColor(backgroundRole(), QColor(255, 247, 160));
         setPalette(pal);
-        nameLabel->setText("<b>" + _job->name() + "</b>");
+        nameLabel->setStyleSheet("QLabel{font: bold}");
         highLighted = true;
     }
     else if(highLighted) {
         setPalette(QPalette());
-        nameLabel->setText(_job->name());
+        nameLabel->setStyleSheet("");
         highLighted = false;
     }
 }

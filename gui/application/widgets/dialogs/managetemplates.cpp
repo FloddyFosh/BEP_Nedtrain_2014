@@ -16,7 +16,7 @@ ManageTemplatesDialog::ManageTemplatesDialog(Instance *inst, QWidget *parent) :
     nameEdit = new QLineEdit;
     durationEdit = new QSpinBox;
     durationEdit->setMinimum(1);
-    durationEdit->setMaximum(1 << 30);
+    durationEdit->setMaximum(INT_MAX);
 
     QFormLayout *form = new QFormLayout;
     form->addRow(tr("&Name:"), nameEdit);

@@ -16,6 +16,7 @@ JobInfoDialog::JobInfoDialog(Instance *instance, Job *j, QWidget *parent) :
 
     //labels
     QLabel* nameLabel = new QLabel(j->name());
+    nameLabel->setTextFormat(Qt::PlainText);
     formlayout->addRow(tr("Name:"), nameLabel);
 
     if(instance->hoursOnTimeline()) {
@@ -42,7 +43,7 @@ JobInfoDialog::JobInfoDialog(Instance *instance, Job *j, QWidget *parent) :
     QLabel* actAmountLabel = new QLabel(QString::number(j->getActivities().size()));
     formlayout->addRow(tr("Activities:"), actAmountLabel);
 
-    int totalflex = 0, minflex = 1 << 30;
+    int totalflex = 0, minflex = INT_MAX;
     foreach(Activity *a, j->getActivities().values()) {
         if(a->estFlex() == -1 || a->lftFlex() == -1) {
             totalflex = -1;

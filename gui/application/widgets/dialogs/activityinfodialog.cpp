@@ -14,8 +14,10 @@ ActivityInfoDialog::ActivityInfoDialog(Instance *instance, Activity *a, QWidget 
 
     //labels
     QLabel* nameLabel = new QLabel(a->name());
+    nameLabel->setTextFormat(Qt::PlainText);
     formlayout->addRow(tr("Name:"), nameLabel);
 	QLabel* jobLabel = new QLabel(a->job()->name());
+    jobLabel->setTextFormat(Qt::PlainText);
     formlayout->addRow(tr("Job:"), jobLabel);
     QLabel* durationLabel = new QLabel(QString::number(a->duration()));
     formlayout->addRow(tr("Duration:"), durationLabel);

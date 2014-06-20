@@ -10,6 +10,7 @@ ResourceHeaderWidget::ResourceHeaderWidget(Resource *r, InstanceController *cont
     HeaderWidget(parent), _resource(r), controller(controller), highLighted(false)
 {
     nameLabel = new QLabel(_resource->name(), this);
+    nameLabel->setTextFormat(Qt::PlainText);
     nameLabel->setGeometry(35, 0, 300, 30);
 
     spinBox = new FilteredSpinBox(this);
@@ -122,12 +123,12 @@ void ResourceHeaderWidget::highlight(bool hl) {
         QPalette pal = palette();
         pal.setColor(backgroundRole(), QColor(255, 247, 160));
         setPalette(pal);
-        nameLabel->setText("<b>" + _resource->name() + "</b>");
+        nameLabel->setStyleSheet("QLabel{font: bold}");
         highLighted = true;
     }
     else if(highLighted) {
         setPalette(QPalette());
-        nameLabel->setText(_resource->name());
+        nameLabel->setStyleSheet("");
         highLighted = false;
     }
 }

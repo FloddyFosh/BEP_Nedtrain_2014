@@ -1,4 +1,5 @@
 #include "widgets/comparewindow.h"
+#include "app_icon.h"
 
 #include <QSettings>
 
@@ -6,6 +7,7 @@ CompareWindow::CompareWindow(Comparison *c) : comparison(c) {
     view = new OtsSplitter(Qt::Vertical, this);
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Compare instances"));
+    setWindowIcon(AppIcon("icon.png"));
     setCentralWidget(view);
 
     initLayout();
