@@ -2,6 +2,7 @@
 #define RESOURCECALCULATOR_H_
 
 #include "model/resource.h"
+#include "model/chain.h"
 #include <QPolygon>
 
 class ResourceCalculator {
@@ -45,6 +46,8 @@ public:
 	QPolygon getJobPolygon(); ///< @return A polygon for the job profile. The job profile calculation should have been done.
 	QPolygon getExceedPolygon(int width); ///< @return A polygon for the regions where the demand profile exceeds the resource profile
     QPolygon getChainPolygon(QList<QPoint*>* points);
+    QVector<QPolygon> calculateChainMatrixPolygons(Chain* ch);
+    Activity* selectedActivity(QPoint selected);
 
 	QRect selectedResourceRegion(QPoint p); ///< @return A horizontal consecutive region enclosing point p.
 	QPoint getResourceUsageAt(int t); ///< @return The resource usage at time t.

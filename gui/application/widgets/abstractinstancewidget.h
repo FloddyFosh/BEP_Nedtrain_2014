@@ -23,10 +23,12 @@ protected:
     // job splitter left (list)
     QWidget *jobHeaderWidget;
         QVBoxLayout *jobHeaderLayout;
-            QLabel *jobWidgetTitle;
-            QScrollArea *jobHeaderScroller;
-                QWidget *jobHeaders;
-                    QVBoxLayout *jobHeadersLayout;
+            QWidget *jobWidgetTitleBar;
+                QHBoxLayout *jobWidgetTitleBarLayout;
+                    QLabel *jobWidgetTitle;
+                    QScrollArea *jobHeaderScroller;
+                        QWidget *jobHeaders;
+                            QVBoxLayout *jobHeadersLayout;
 
     // job splitter right (schedule visualization)
     QWidget *jobsViewer;
@@ -48,7 +50,7 @@ protected:
 
     void connectViewerSignals();
 
-    void createHeaders(OtsSplitter *parentSplitter, QWidget *headerWidget, QVBoxLayout *headerLayout, QLabel *title, QWidget *headers, QVBoxLayout *headersLayout, QScrollArea *headerScroller);
+    void createHeaders(OtsSplitter *parentSplitter, QWidget *headerWidget, QVBoxLayout *headerLayout, QWidget *titleBar, QWidget *headers, QVBoxLayout *headersLayout, QScrollArea *headerScroller);
     void createViewer(OtsSplitter *parentSplitter, QWidget *viewer, QScrollArea *scroller, Zoomable *zoomable, QVBoxLayout *layout, Timeline* timeline, QScrollArea* timelineScroller);
 
     /**

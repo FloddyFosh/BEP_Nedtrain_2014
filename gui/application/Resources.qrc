@@ -24,6 +24,7 @@
         <file>icons/zoom_out.png</file>
         <file>icons/down.png</file>
         <file>icons/up.png</file>
+        <file>icons/resourceView.png</file>
     </qresource>
     <qresource prefix="/translations">
         <file>translations/lang_english.qm</file>

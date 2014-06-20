@@ -64,12 +64,6 @@ public:
      * @return result of the profiles added (piled up)
      */
     QList<QPoint*>* addProfiles(QList<QPoint*>* pl1, QList<QPoint*>* pl2);
-
-    /**
-     * Returns if this frame is a ChainFrame.
-     * @return boolean
-     */
-    bool isChain;
 };
 
 #endif // CHAINFRAME_H

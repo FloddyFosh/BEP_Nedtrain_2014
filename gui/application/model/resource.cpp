@@ -33,12 +33,12 @@ QVector<Requirement*> Resource::getRequirements() {
 }
 
 Chain* Resource::getChain(int chainId) {
-    if(!chains.contains(chainId)){
-        QVector<Activity*> actVec;
-        Chain* newChain = new Chain(_id,chainId,actVec,this);
-        chains.insert(chainId, newChain);
-    }
+    if(!chains.contains(chainId)) return 0;
     return chains.value(chainId);
+}
+
+QMap<int,Chain*> Resource::getChains(){
+    return chains;
 }
 
 void Resource::clearChains() {
@@ -46,6 +46,11 @@ void Resource::clearChains() {
 }
 
 void Resource::addActToChain(Activity* act, int chainId) {
+    if(!chains.contains(chainId)){
+        QVector<Activity*> actVec;
+        Chain* newChain = new Chain(_id,chainId,actVec,this);
+        chains.insert(chainId, newChain);
+    }
     Chain* chain = getChain(chainId);
     if(!chain->getActivities()->empty()){
         Activity* lastAct = chain->getActivities()->last();

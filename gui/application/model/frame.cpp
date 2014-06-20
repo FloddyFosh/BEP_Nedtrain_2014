@@ -1,6 +1,6 @@
 #include "frame.h"
 
-Frame::Frame() : isChain(false) {}
+Frame::Frame() {}
 
 QVector<Group *> Frame::getGroups() {
     return groups;

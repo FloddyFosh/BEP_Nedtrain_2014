@@ -108,6 +108,32 @@ QPolygon ResourceCalculator::getChainPolygon(QList<QPoint*>* points){
     return polygon;
 }
 
+QVector<QPolygon> ResourceCalculator::calculateChainMatrixPolygons(Chain* ch){
+    QVector<QPolygon> polyList;
+    QVector<Activity*>* activities = ch->getActivities();
+    foreach(Activity* a, *activities){
+        if(!a) continue;
+        QPolygon poly;
+        poly.append(QPoint(a->st(),ch->chainId()));
+        poly.append(QPoint(a->st(),ch->chainId()+1));
+        poly.append(QPoint(a->st()+a->duration(),ch->chainId()+1));
+        poly.append(QPoint(a->st()+a->duration(),ch->chainId()));
+        polyList.append(poly);
+    }
+    return polyList;
+}
+
+Activity* ResourceCalculator::selectedActivity(QPoint selected){
+    Chain* ch = _resource->getChain(selected.y()-1);
+    if(!ch) return 0;
+    QVector<Activity*> activities = *ch->getActivities();
+    foreach(Activity* act, activities){
+        if(act->st() <= selected.x() && act->st()+act->duration() >= selected.x())
+            return act;
+    }
+    return 0;
+}
+
 int ResourceCalculator::getRowCount() {
 	return max(maxDemand, _resource->capacity()) + 2;
 }

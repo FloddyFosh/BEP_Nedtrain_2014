@@ -137,11 +137,24 @@ public:
      * @param r resource
      */
     void shadeActivities(int start, int end, Resource* r);
+
+    /**
+     * Shades the selected activity
+     * @param act selected activity
+     */
+    void shadeActivity(Activity* act, Resource *r);
+
     /**
      * for the given job, shades the parts of the resources in the resource profile used by activities in this job.
      * @param j job
      */
     void shadeResources(Job* j);
+
+    /**
+     * Removes shades from all resource and activity widgets
+     */
+    void clearShades(Resource *r);
+
     /**
      * sets the status bar message to the given string
      * @param message message

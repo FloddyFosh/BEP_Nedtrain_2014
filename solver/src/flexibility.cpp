@@ -128,6 +128,7 @@ void addLimits(Constraints* constraints) {
             int release = tmsp->trains[i]->release_date;
             vector<activity* > activities = tmsp->trains[i]->activities;
             for(int k = 0; k < (int) activities.size(); k++) {
+                if(!activities[k]) continue;
                 stringstream ss1;
                 ss1 << activities[k]->i << ' ' << activities[k]->j;
                 string var(ss1.str());

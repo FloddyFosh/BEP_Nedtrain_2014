@@ -6,7 +6,7 @@
 #include <cmath>
 
 ResourceWidget::ResourceWidget(Resource *r, InstanceController *c, QWidget *parent) :
-    QWidget(parent), _resource(r), controller(c)
+    QWidget(parent), _resource(r), controller(c), matrixViewEnabled(false)
 {
     offset=0;
     selected = QPoint(-1,-1); //dont select any part of the resource
@@ -27,6 +27,7 @@ ResourceWidget::ResourceWidget(Resource *r, InstanceController *c, QWidget *pare
     // connect signals
     connect(_resource, SIGNAL(resourceChanged()), this, SLOT(calculateResourceProfile()));
     connect(_resource, SIGNAL(activityAdded(Activity*)), this, SLOT(newActivity(Activity*)));
+    connect(controller->getInstanceWidget(), SIGNAL(viewButtonTriggered(bool)), this, SLOT(setMatrixViewEnabled(bool)));
     
     connectActivities();
 
@@ -69,25 +70,41 @@ QSize ResourceWidget::minimumSize() const {
 
 void ResourceWidget::calculateResourceProfile() {
     calculator->calculate(); // calculates all the profiles
-
     calculator->getExceedPolygon(size().width()/hZoom());
 
-
-    //determine which part is selected
     if(selected != QPoint(-1,-1)){
-        QRect selectedRect = calculator->selectedResourceRegion(selected);
-        int start = selectedRect.x();
-        int end = selectedRect.x()+selectedRect.width();
-        if(start!=-1 && end !=-1){
-            int rows = calculator->getRowCount();
-            double factor = size().height()/rows;
-            pattern = QRect(QPoint((start+offset)*hZoom(), selected.y()*factor), QPoint((end+offset)*hZoom(),(selected.y()-1)*factor));
-            controller->shadeActivities(start,end,_resource);
+        if(viewingResourceMatrix()){
+            Activity* act = calculator->selectedActivity(selected);
+            if(act){
+                int rows = calculator->getRowCount();
+                double factor = size().height()/rows+0.5;
+                QPoint bottomLeft = QPoint((act->st()+offset)*hZoom(), selected.y()*factor);
+                QPoint topRight = QPoint((act->st()+act->duration()+offset)*hZoom(),(selected.y()-1)*factor);
+                pattern = QRect(bottomLeft, topRight);
+                controller->shadeActivity(act, _resource);
+            }
+            else{
+                pattern = QRect(-1,-1,-1,-1);
+                selected = QPoint(-1,-1);
+                controller->shadeActivities(-1,-1,_resource);
+            }
         }
         else{
-            pattern = QRect(-1,-1,-1,-1);
-            selected = QPoint(-1,-1);
-            controller->shadeActivities(-1,-1,_resource);
+            //determine which part is selected
+            QRect selectedRect = calculator->selectedResourceRegion(selected);
+            int start = selectedRect.x();
+            int end = selectedRect.x()+selectedRect.width();
+            if(start!=-1 && end !=-1){
+                int rows = calculator->getRowCount();
+                double factor = size().height()/rows;
+                pattern = QRect(QPoint((start+offset)*hZoom(), selected.y()*factor), QPoint((end+offset)*hZoom(),(selected.y()-1)*factor));
+                controller->shadeActivities(start,end,_resource);
+            }
+            else{
+                pattern = QRect(-1,-1,-1,-1);
+                selected = QPoint(-1,-1);
+                controller->shadeActivities(-1,-1,_resource);
+            }
         }
     }
 
@@ -128,24 +145,29 @@ void ResourceWidget::updatePixmap() {
     painter.scale(hZoom(), hint.height() / (double) rows);
     painter.translate(offset,0);
 
-    //1. draw demand profile
-    paintDemandProfile(painter); // uses scaled painter
+    if(viewingResourceMatrix()){
+        paintChainMatrix(painter);
+    }
+    else{
+        //1. draw demand profile
+        paintDemandProfile(painter); // uses scaled painter
 
-    //2. draw resource profile
-    paintResourceProfile(painter); //uses scaled painter
+        //2. draw resource profile
+        paintResourceProfile(painter); //uses scaled painter
 
-    //3. draw job profile
-    paintJobProfile(painter);  //uses scaled painter
+        //3. draw job profile
+        paintJobProfile(painter);  //uses scaled painter
 
-    //4. draw resources used by selected chain
-    paintChainResources(painter);
+        //4. draw resources used by selected chain
+        paintChainResources(painter);
+    }
 
     painter.restore(); //restore scaled painter
 
-    //4. draw selected region
+    //5. draw selected region
     paintSelectedRegion(painter); //does not use scaled painter
 
-    //5. draw resource marks
+    //6. draw resource marks
     paintResourceMarks(painter); //does not use scaled painter
 
     paintPeak(painter); //does not use scaled painter
@@ -176,8 +198,6 @@ void ResourceWidget::paintDemandProfile(QPainter &painter){
         // setup painter style
         painter.setBrush(usedCapacityGradient);
         painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
-
-
 
         // draw demand profile
         painter.drawPolygon(polygon);
@@ -263,6 +283,67 @@ void ResourceWidget::paintChainResources(QPainter& painter){
     }
 }
 
+void ResourceWidget::paintChainMatrix(QPainter &painter){
+    Instance* instance = controller->getInstance();
+    if(instance->getMaxFrameNr() == -1) return;
+    ChainFrame* fr = (ChainFrame*) instance->getFrame(controller->getFrameNumber());
+
+    int rows = calculator->getRowCount();
+    painter.setPen(QPen(QColor("black"), 0, Qt::DotLine));
+    for(int i=1;i<rows-1;i++){
+        painter.drawLine(QPoint(0,i),QPoint(size().width()/hZoom()-offset,i));
+    }
+
+    QLinearGradient grad(0, 0, 0, rows);
+    if(fr->getChain() && _resource->id() == fr->getChain()->resourceId()){
+        grad.setColorAt(0, QColor(50,50,50));
+        grad.setColorAt(_resource->capacity() / (double) rows, QColor(200,200,200));
+    }
+    else{
+        grad.setColorAt(0, Qt::green);
+        grad.setColorAt(_resource->capacity() / (double) rows, Qt::yellow);
+    }
+    painter.setBrush(grad);
+    painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
+
+    foreach(Chain* ch, _resource->getChains().values()){
+        if(fr->getChain() && ch->chainId() == fr->getChain()->chainId()
+                && _resource->id() == fr->getChain()->resourceId()){
+            grad.setColorAt(0, QColor(50,50,255));
+            grad.setColorAt(_resource->capacity() / (double) rows, QColor(200,200,255));
+            painter.setBrush(grad);
+        }
+        if(ch->chainId()+1 > _resource->capacity()){
+            painter.setBrush(Qt::red);
+        }
+        QVector<QPolygon> activities = calculator->calculateChainMatrixPolygons(ch);
+        foreach(QPolygon p, activities){
+            painter.drawPolygon(p);
+        }
+        if(fr->getChain() && ch->chainId() == fr->getChain()->chainId()){
+            grad.setColorAt(0, Qt::green);
+            grad.setColorAt(_resource->capacity() / (double) rows, Qt::yellow);
+            painter.setBrush(grad);
+        }
+    }
+}
+
+void ResourceWidget::setMatrixViewEnabled(bool toggled){
+    matrixViewEnabled = toggled;
+    calculateResourceProfile();
+}
+
+bool ResourceWidget::viewingResourceMatrix(){
+    Instance* instance = controller->getInstance();
+    if(instance->getMaxFrameNr() == -1) return false;
+    ChainFrame* chfr = (ChainFrame*) instance->getFrame(controller->getFrameNumber());
+    bool isChainOverview = false;
+    if(controller->getFrameNumber()+1 <= instance->getMaxFrameNr())
+        isChainOverview = instance->getFrame(controller->getFrameNumber()+1)->getChain();
+    bool isAtLastFrame = controller->getFrameNumber() == instance->getMaxFrameNr();
+    return (matrixViewEnabled && (chfr->getChain() || isChainOverview || isAtLastFrame));
+}
+
 void ResourceWidget::paintEvent(QPaintEvent *e) {
     QWidget::paintEvent(e);
     QPainter painter(this);
@@ -299,9 +380,11 @@ void ResourceWidget::mousePressEvent(QMouseEvent *event){
 
 void ResourceWidget::setHZoom(int z) {
     _hZoom = z;
+    calculateResourceProfile();
 }
 void ResourceWidget::setVZoom(int z) {
     _vZoom = z;
+    calculateResourceProfile();
 }
 
 int ResourceWidget::hZoom() const {

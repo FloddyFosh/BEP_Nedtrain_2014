@@ -48,7 +48,10 @@ class InstanceWidget : public AbstractInstanceWidget
     // resource splitter left (list)
     QWidget *resourceHeaderWidget;
         QVBoxLayout *resourceHeaderLayout;
-            QLabel *resourceWidgetTitle;
+            QWidget *resourceWidgetTitleBar;
+                QHBoxLayout *resourceWidgetTitleBarLayout;
+                    QLabel *resourceWidgetTitle;
+                    QPushButton *resourceWidgetViewButton;
             QScrollArea *resourceHeaderScroller;
                 QWidget *resourceHeaders;
                     QVBoxLayout *resourceHeadersLayout;
@@ -202,18 +205,18 @@ public:
     void focusResourceWidget(int resId); ///< focus the resource widget by setting the scrollbars
     void highlightResource(int resId, bool doHighLight); ///< highlight the text of the Resourceheaderwidget if true
     void highlightJob(int jobId, bool doHighLight); ///< highlight the text of the Jobheaderwidget if true
-
 private slots:
     void addResource(Resource *); ///< connected to the instance's resourceAdded SIGNAL
     void removeJob(Job *); ///< connected to the job header widget's remove SIGNAL
     void removeResource(Resource *); ///< connected to resource header's remove SIGNAL
     void resizeOverlay(const QSize); ///< resizes the overlay
-
 public slots:
     void moveOverlayMouse(int,int); ///< slot to update the position of the mouse pointer in the overlay
     void addPrecedencePoint(ActivityWidget *aw); ///< selects a precedence point and remembers the widget, or adds a precedence
     void removePrecedencePoint(ActivityWidget *aw); ///< selects a precedence point and remembers the widget, or removes a precedence
-
+    void viewButtonTriggeredSlot(bool triggered); ///< changes resource view to matrix mode
+signals:
+    void viewButtonTriggered(bool triggered); ///< changes resource view to matrix mode
 };
 
 #endif

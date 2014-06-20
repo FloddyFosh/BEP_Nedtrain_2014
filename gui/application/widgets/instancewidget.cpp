@@ -7,6 +7,7 @@
 #include "controller/exceptions.h"
 #include "model/frame.h"
 #include "model/chain.h"
+#include "widgets/app_icon.h"
 
 InstanceWidget::InstanceWidget(Instance * instance, Controller *controller, QWidget *parent) :
     AbstractInstanceWidget(instance, Qt::Vertical, parent), controller (controller), frameNumber(0)
@@ -147,7 +148,10 @@ void InstanceWidget::setMouseX(int x) {
 void InstanceWidget::createResourceSplitter() {
     resourceHeaderWidget = new QWidget;
     resourceHeaderLayout = new QVBoxLayout;
+    resourceWidgetTitleBar = new QWidget;
+    resourceWidgetTitleBarLayout = new QHBoxLayout;
     resourceWidgetTitle = new QLabel(tr("<b>Resources</b>"));
+    resourceWidgetViewButton = new QPushButton();
     resourceHeaderScroller = new QScrollArea;
     resourceHeaders = new QWidget;
     resourceHeadersLayout = new QVBoxLayout;
@@ -158,11 +162,22 @@ void InstanceWidget::createResourceSplitter() {
     resourceTimelineScroller = new QScrollArea;
     resourceTimeline = new Timeline(instanceController, this, false, false);
 
-    createHeaders(resourceSplitter, resourceHeaderWidget, resourceHeaderLayout, resourceWidgetTitle, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
+    resourceWidgetTitleBar->setLayout(resourceWidgetTitleBarLayout);
+    resourceWidgetTitleBarLayout->addSpacing(25);
+    resourceWidgetTitleBarLayout->addWidget(resourceWidgetTitle);
+    resourceWidgetTitleBarLayout->addWidget(resourceWidgetViewButton,0,Qt::AlignVCenter);
+    resourceWidgetTitle->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    resourceWidgetTitle->setMargin(0);
+    resourceWidgetTitle->setIndent(0);
+    resourceWidgetViewButton->setMaximumSize(QSize(25,25));
+    resourceWidgetViewButton->setCheckable(true);
+    resourceWidgetViewButton->setIcon(AppIcon("resourceView.png"));
+    resourceWidgetViewButton->setIconSize(QSize(15,15));
+
+    createHeaders(resourceSplitter, resourceHeaderWidget, resourceHeaderLayout, resourceWidgetTitleBar, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
     createViewer(resourceSplitter, resourcesViewer, resourcesScroller, resourcesZoomable, resourcesLayout, resourceTimeline, resourceTimelineScroller);
 
-    //resourceHeadersLayout->setSpacing(10);
-    //resourcesLayout->setSpacing(10);
+    connect(resourceWidgetViewButton,SIGNAL(toggled(bool)),this,SLOT(viewButtonTriggeredSlot(bool)));
 }
 
 void InstanceWidget::addJob(Job *j) {
@@ -565,4 +580,8 @@ void InstanceWidget::highlightResource(int resId, bool hl) {
 
 void InstanceWidget::highlightJob(int jobId, bool hl) {
     jobHeaderWidgets.value(jobId)->highlight(hl);
+}
+
+void InstanceWidget::viewButtonTriggeredSlot(bool toggled){
+    emit viewButtonTriggered(toggled);
 }
