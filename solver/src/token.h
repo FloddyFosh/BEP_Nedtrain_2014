@@ -6,8 +6,6 @@ typedef struct Token {
 	char *text;
 } Token;
 
-void print_token(Token *t);
-
 int yylex(void);
 int yyparse(void);
 
