@@ -13,10 +13,12 @@ vector< activity* > activities;
 
 void initializeActivities(){
     vector<train*> trains = tmsp->trains;
-    FOREACH(trains, it){
-        if(*it != NULL) {
-            vector<activity*> actVec = (*it)->activities;
-            activities.insert(activities.end(), actVec.begin(), actVec.end());
+    FOREACH(trains, trit){
+        if(*trit) {
+            vector<activity*> actVec = (*trit)->activities;
+            FOREACH(actVec, actit){
+                if(*actit) activities.push_back(*actit);
+            }
         }
     }
 }
@@ -231,6 +233,7 @@ bool chaining() {
     tmsp->precedences = newPrecedences;
 
     initializeActivities();
+    vector<activity*> acts = activities;
     sort(activities.begin(), activities.end(), compareEST);
 
     initializeChains();
