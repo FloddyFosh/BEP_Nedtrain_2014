@@ -1,0 +1,3 @@
+#!/bin/sh
+gcovr -r . -e 'grammar|lex|testsuite' --html --html-details -o solver.html
+firefox solver.html

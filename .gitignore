@@ -81,7 +81,7 @@ solver/testsuite/Makefile
 solver/testsuite/CMakeCache.txt
 solver/testsuite/CMakeFiles/*
 solver/testsuite/cmake_install.cmake
-
+solver/solver*html
 
 # Editors temporary files 
 *~
