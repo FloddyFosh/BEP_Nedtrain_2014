@@ -9,6 +9,7 @@ include_directories(../../coin-Clp/include/coin)
 include_directories(../../coin-Clp/CoinUtils/src)
 link_directories(../../coin-Clp/lib)
 
+# Test coverage analyse
 SET(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
 SET(GCC_COVERAGE_LINK_FLAGS    "-lgcov")
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
