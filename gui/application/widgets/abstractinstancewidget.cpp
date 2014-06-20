@@ -23,6 +23,8 @@ void AbstractInstanceWidget::connectViewerSignals() {
 void AbstractInstanceWidget::createJobSplitter(OtsSplitter *jobSplitter) {
     jobHeaderWidget = new QWidget;
     jobHeaderLayout = new QVBoxLayout;
+    jobWidgetTitleBar = new QWidget;
+    jobWidgetTitleBarLayout = new QHBoxLayout;
     jobWidgetTitle = new QLabel(tr("<b>Jobs</b>"));
     jobHeaderScroller = new QScrollArea;
     jobHeaders = new QWidget;
@@ -37,7 +39,15 @@ void AbstractInstanceWidget::createJobSplitter(OtsSplitter *jobSplitter) {
     else
         jobTimeline = new Timeline (0, 0, true, false);
 
-    createHeaders(jobSplitter, jobHeaderWidget, jobHeaderLayout, jobWidgetTitle, jobHeaders, jobHeadersLayout, jobHeaderScroller);
+    jobWidgetTitleBar->setLayout(jobWidgetTitleBarLayout);
+    jobWidgetTitleBarLayout->addSpacing(25);
+    jobWidgetTitleBarLayout->addWidget(jobWidgetTitle);
+    jobWidgetTitleBarLayout->addSpacing(25);
+    jobWidgetTitle->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    jobWidgetTitle->setMargin(0);
+    jobWidgetTitle->setIndent(0);
+
+    createHeaders(jobSplitter, jobHeaderWidget, jobHeaderLayout, jobWidgetTitleBar, jobHeaders, jobHeadersLayout, jobHeaderScroller);
     createViewer(jobSplitter, jobsViewer, jobsScroller, jobsZoomable, jobsLayout, jobTimeline, jobTimelineScroller);
 }
 
@@ -65,15 +75,14 @@ void AbstractInstanceWidget::createHeaders(
         OtsSplitter *parentSplitter,
         QWidget *headerWidget,
         QVBoxLayout *headerLayout,
-        QLabel *title,
+        QWidget *titleBar,
         QWidget *headers,
         QVBoxLayout *layout,
         QScrollArea *scroller)
 {
     headerWidget->setLayout(headerLayout);
-
-    title->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
-    headerLayout->addWidget(title);
+    headerWidget->setMinimumWidth(150);
+    headerLayout->addWidget(titleBar);
     headerLayout->addWidget(scroller);
 
     scroller->setWidget(headers);
@@ -84,14 +93,15 @@ void AbstractInstanceWidget::createHeaders(
     headers->setLayout(layout);
     headers->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-    title->setMargin(0);
-    title->setIndent(0);
     layout->setMargin(0);
     layout->setSpacing(0);
     headerLayout->setMargin(0);
     headerLayout->setSpacing(0);
+    titleBar->layout()->setMargin(0);
+    titleBar->layout()->setSpacing(0);
+    titleBar->setMinimumHeight(25);
     headerWidget->setMaximumWidth(400);
-    headerWidget->setContentsMargins(0, 9, 0, 0);
+    headerWidget->setContentsMargins(0, 0, 0, 0);
 
     parentSplitter->addWidget(headerWidget);
 }
@@ -107,6 +117,7 @@ void AbstractInstanceWidget::createViewer(
 {
     QVBoxLayout *viewerLayout = new QVBoxLayout;
     viewer->setLayout(viewerLayout);
+    viewer->setMinimumWidth(30);
     viewerLayout->addWidget(timelineScroller);
     timelineScroller->setWidget(timeline);
     viewerLayout->addWidget(scroller);

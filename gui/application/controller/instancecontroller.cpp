@@ -154,7 +154,3 @@ void InstanceController::highlightResource(int resId, bool hl) {
 void InstanceController::highlightJob(int jobId, bool hl) {
     instanceWidget->highlightJob(jobId, hl);
 }
-
-bool InstanceController::matrixViewEnabled(){
-    return true;
-}

@@ -6,7 +6,7 @@
 #include <cmath>
 
 ResourceWidget::ResourceWidget(Resource *r, InstanceController *c, QWidget *parent) :
-    QWidget(parent), _resource(r), controller(c)
+    QWidget(parent), _resource(r), controller(c), matrixViewEnabled(false)
 {
     offset=0;
     selected = QPoint(-1,-1); //dont select any part of the resource
@@ -27,6 +27,7 @@ ResourceWidget::ResourceWidget(Resource *r, InstanceController *c, QWidget *pare
     // connect signals
     connect(_resource, SIGNAL(resourceChanged()), this, SLOT(calculateResourceProfile()));
     connect(_resource, SIGNAL(activityAdded(Activity*)), this, SLOT(newActivity(Activity*)));
+    connect(controller->getInstanceWidget(), SIGNAL(viewButtonTriggered(bool)), this, SLOT(setMatrixViewEnabled(bool)));
     
     connectActivities();
 
@@ -68,7 +69,6 @@ QSize ResourceWidget::minimumSize() const {
 }
 
 void ResourceWidget::calculateResourceProfile() {
-    Instance* instance = controller->getInstance();
     calculator->calculate(); // calculates all the profiles
     calculator->getExceedPolygon(size().width()/hZoom());
 
@@ -78,8 +78,8 @@ void ResourceWidget::calculateResourceProfile() {
             if(act){
                 int rows = calculator->getRowCount();
                 double factor = size().height()/rows+0.5;
-                QPoint bottomLeft = QPoint((act->est()+offset)*hZoom(), selected.y()*factor);
-                QPoint topRight = QPoint((act->eet()+offset)*hZoom(),(selected.y()-1)*factor);
+                QPoint bottomLeft = QPoint((act->st()+offset)*hZoom(), selected.y()*factor);
+                QPoint topRight = QPoint((act->st()+act->duration()+offset)*hZoom(),(selected.y()-1)*factor);
                 pattern = QRect(bottomLeft, topRight);
                 controller->shadeActivity(act, _resource);
             }
@@ -328,15 +328,20 @@ void ResourceWidget::paintChainMatrix(QPainter &painter){
     }
 }
 
+void ResourceWidget::setMatrixViewEnabled(bool toggled){
+    matrixViewEnabled = toggled;
+    calculateResourceProfile();
+}
+
 bool ResourceWidget::viewingResourceMatrix(){
-    bool matrixView = controller->matrixViewEnabled();
     Instance* instance = controller->getInstance();
     if(instance->getMaxFrameNr() == -1) return false;
     ChainFrame* chfr = (ChainFrame*) instance->getFrame(controller->getFrameNumber());
     bool isChainOverview = false;
     if(controller->getFrameNumber()+1 <= instance->getMaxFrameNr())
         isChainOverview = instance->getFrame(controller->getFrameNumber()+1)->getChain();
-    return (matrixView && (chfr->getChain() || isChainOverview));
+    bool isAtLastFrame = controller->getFrameNumber() == instance->getMaxFrameNr();
+    return (matrixViewEnabled && (chfr->getChain() || isChainOverview || isAtLastFrame));
 }
 
 void ResourceWidget::paintEvent(QPaintEvent *e) {

@@ -179,11 +179,6 @@ public:
      */
     void highlightJob(int jobId, bool doHighLight);
 
-    /**
-     * @return true iff the alternative resource view is enabled
-     */
-    bool matrixViewEnabled();
-
 public slots:
     void peak(int, int); ///< solvers peak signal is connected to this slot, it paints peaks in the resource profile.
 };

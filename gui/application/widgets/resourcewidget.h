@@ -26,6 +26,7 @@ class ResourceWidget : public QWidget
     int _hZoom;
     int _vZoom;
     int peak;
+    bool matrixViewEnabled;
 
     int hZoom() const; ///< returns current horizontal zoom factor
     int vZoom() const; ///< returns current vertical zoom factor
@@ -39,6 +40,7 @@ class ResourceWidget : public QWidget
     void paintChainResources(QPainter& painter); /// paint the chain visualization resource profiles
     void paintChainMatrix(QPainter &painter); /// paint the view where chains are displayed in the resource view
     void paintPeak(QPainter& painter); ///< paints peak
+
     bool viewingResourceMatrix(); /// true iff the resource matrix view is currently being displayed
 public:
     /**
@@ -69,6 +71,7 @@ protected:
 public slots:
     void calculateResourceProfile(); ///< generates a list of timepoint values where the resource demand changes, so if the list is [ (t1, demand1), (t2, demand2) ] then the demand is equal to demand1 from t1 to t2 and changes to demand2 at t2, this list is used to describe the polygon that is drawn onto the widget
     void newActivity(Activity *); ///< connects the signals of the new activity so that this widget properly updates when the activity changes
+    void setMatrixViewEnabled(bool toggled);
 };
 
 #endif // RESOURCEWIDGET_H
