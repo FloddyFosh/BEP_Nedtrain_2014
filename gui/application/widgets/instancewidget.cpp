@@ -173,6 +173,7 @@ void InstanceWidget::createResourceSplitter() {
     resourceWidgetViewButton->setCheckable(true);
     resourceWidgetViewButton->setIcon(AppIcon("resourceView.png"));
     resourceWidgetViewButton->setIconSize(QSize(15,15));
+    resourceWidgetViewButton->setStatusTip(tr("Toggle the resource matrix view"));
 
     createHeaders(resourceSplitter, resourceHeaderWidget, resourceHeaderLayout, resourceWidgetTitleBar, resourceHeaders, resourceHeadersLayout, resourceHeaderScroller);
     createViewer(resourceSplitter, resourcesViewer, resourcesScroller, resourcesZoomable, resourcesLayout, resourceTimeline, resourceTimelineScroller);

@@ -10,6 +10,7 @@
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent)
 {
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("About Activity scheduler"));
     setWindowIcon(AppIcon("icon.png"));
     setFixedWidth(600);

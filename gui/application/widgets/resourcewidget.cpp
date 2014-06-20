@@ -341,7 +341,8 @@ bool ResourceWidget::viewingResourceMatrix(){
     if(controller->getFrameNumber()+1 <= instance->getMaxFrameNr())
         isChainOverview = instance->getFrame(controller->getFrameNumber()+1)->getChain();
     bool isAtLastFrame = controller->getFrameNumber() == instance->getMaxFrameNr();
-    return (matrixViewEnabled && (chfr->getChain() || isChainOverview || isAtLastFrame));
+    bool frameEnabled = controller->getParent()->getFramesSlider()->isEnabled();
+    return (matrixViewEnabled && frameEnabled && (chfr->getChain() || isChainOverview || isAtLastFrame));
 }
 
 void ResourceWidget::paintEvent(QPaintEvent *e) {

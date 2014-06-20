@@ -8,6 +8,7 @@
 ActivityInfoDialog::ActivityInfoDialog(Instance *instance, Activity *a, QWidget *parent) :
     QDialog(parent), a(a)
 {
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Activity info"));
     setWindowIcon(AppIcon("icon.png"));
     QFormLayout *formlayout = new QFormLayout;

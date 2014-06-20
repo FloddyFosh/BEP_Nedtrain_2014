@@ -11,7 +11,6 @@ ManageTemplatesDialog::ManageTemplatesDialog(Instance *inst, QWidget *parent) :
     ListFormDialog(parent), instance(inst)
 {
     setWindowTitle(tr("Manage templates"));
-    setWindowIcon(AppIcon("icon.png"));
 
     nameEdit = new QLineEdit;
     durationEdit = new QSpinBox;

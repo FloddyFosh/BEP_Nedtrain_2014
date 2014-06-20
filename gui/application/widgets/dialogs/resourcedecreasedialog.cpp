@@ -8,6 +8,7 @@
 
 ResourceDecreaseDialog::ResourceDecreaseDialog(Instance *i, Resource* res, QWidget *parent) :
         QDialog(parent), resource(res), instance(i) {
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Decrease capacity"));
     setWindowIcon(AppIcon("icon.png"));
 

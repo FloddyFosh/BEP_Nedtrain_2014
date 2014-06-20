@@ -10,6 +10,7 @@
 JobInfoDialog::JobInfoDialog(Instance *instance, Job *j, QWidget *parent) :
     QDialog(parent), j(j)
 {
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Job info"));
     setWindowIcon(AppIcon("icon.png"));
     QFormLayout *formlayout = new QFormLayout;

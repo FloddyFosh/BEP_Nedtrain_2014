@@ -459,6 +459,8 @@ void MainWindow::createActions() {
     disableIfInstanceEmpty(zoomOutAct);
     zoomInAct->setIcon(AppIcon("zoom_in.png"));
     zoomOutAct->setIcon(AppIcon("zoom_out.png"));
+    zoomInAct->setStatusTip(tr("Zoom in the instance"));
+    zoomOutAct->setStatusTip(tr("Zoom in the instance"));
     connect(zoomInAct, SIGNAL(triggered()), controller, SLOT(zoomIn()));
     connect(zoomOutAct, SIGNAL(triggered()), controller, SLOT(zoomOut()));
 
@@ -466,6 +468,7 @@ void MainWindow::createActions() {
     compareAct = new QAction(tr("Compare"), this);
     disableIfInstanceEmpty(compareAct);
     compareAct->setIcon(AppIcon("compare.png"));
+    compareAct->setStatusTip(tr("Compare two instances"));
     connect(compareAct, SIGNAL(triggered()), this, SLOT(compareInstances()));
 
     /* replay buttons */
@@ -473,6 +476,8 @@ void MainWindow::createActions() {
     frameRightAct = new QAction(tr("Forward"), this);
     frameLeftAct->setIcon(AppIcon("go-previous.png"));
     frameRightAct->setIcon(AppIcon("go-next.png"));
+    frameLeftAct->setStatusTip(tr("Previous frame"));
+    frameRightAct->setStatusTip(tr("Next frame"));
     frameLeftAct->setDisabled(true);
     frameRightAct->setDisabled(true);
     connect(frameLeftAct, SIGNAL(triggered()), controller, SLOT(rewind()));

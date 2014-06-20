@@ -11,6 +11,7 @@ FormDialog::FormDialog(QWidget *parent) : QDialog(parent) {
 }
 
 void FormDialog::setUpLayout() {
+    setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowIcon(AppIcon("icon.png"));
     verticalLayout->addWidget(buttonBox);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(apply()));
