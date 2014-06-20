@@ -158,6 +158,7 @@ void Controller::disableHistory(int range) {
     getMainWindow()->frameLabel->setText(tr("%1 of %2").arg(0).arg(0));
     getMainWindow()->frameLeftAct->setDisabled(true);
     getMainWindow()->frameRightAct->setDisabled(true);
+    getCurrentInstance()->clearFrames();
     connect(getFramesSlider(), SIGNAL(valueChanged(int)), this, SLOT(toFrame(int)));
 }
 
