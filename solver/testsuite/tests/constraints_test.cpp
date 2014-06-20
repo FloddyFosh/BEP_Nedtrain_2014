@@ -121,8 +121,8 @@ TEST_F(ConstraintsTest, UpperLimit_1) {
 }
 
 TEST_F(ConstraintsTest, UpperLimit_2) {
-    EXPECT_THROW(cstr.getLowerLimit(0), NoSuchVariableException);
-    EXPECT_THROW(cstr.getLowerLimit(-1), NoSuchVariableException);
+    EXPECT_THROW(cstr.getUpperLimit(0), NoSuchVariableException);
+    EXPECT_THROW(cstr.getUpperLimit(-1), NoSuchVariableException);
 }
 
 TEST_F(ConstraintsTest, Locked_1) {

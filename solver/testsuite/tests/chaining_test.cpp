@@ -12,6 +12,7 @@ class ChainingTest : public ::testing::Test {
     std::streambuf *sbuf;
 
     virtual void SetUp() {
+        tmsp = new tmsp_t;
         //Redirect stdout to buffer
         sbuf = cout.rdbuf();
         cout.rdbuf(buffer.rdbuf());
@@ -37,6 +38,7 @@ class ChainingTest : public ::testing::Test {
     virtual void TearDown() {
         //Redirect stdout back to itself
         std::cout.rdbuf(sbuf);
+        delete tmsp;
     }
 };
 
@@ -45,7 +47,7 @@ TEST_F(ChainingTest, InitializeActivitiesTest) {
     EXPECT_EQ(3,getActivities().size());
 }
 
-TEST_F(ChainingTest, SortActivitiesTest){
+TEST_F(ChainingTest, SortActivitiesTest) {
     sort(activities.begin(), activities.end(), compareEST);
     EXPECT_LE(activities[0]->est,activities[1]->est);
     EXPECT_LE(activities[1]->est,activities[2]->est);
@@ -56,7 +58,7 @@ TEST_F(ChainingTest, InitializeChainsTest) {
     EXPECT_EQ(4,chains.size());
 }
 
-TEST_F(ChainingTest, SelectFirstChainTest){
+TEST_F(ChainingTest, SelectFirstChainTest) {
     initializeChains();
     activity* act1 = A(0,0);
     chainId id1 = selectFirstChain(act1->i,act1->j,0);
@@ -69,7 +71,7 @@ TEST_F(ChainingTest, SelectFirstChainTest){
     EXPECT_EQ(0,id2.unit);
 }
 
-TEST_F(ChainingTest, SelectFirstChainExceptionTest){
+TEST_F(ChainingTest, SelectFirstChainExceptionTest) {
     initializeChains();
     chainId newId = {1,0};
     chain newChain = {};
@@ -82,7 +84,7 @@ TEST_F(ChainingTest, SelectFirstChainExceptionTest){
     EXPECT_THROW(selectFirstChain(a2->i,a2->j,1),NoChainFoundException);
 }
 
-TEST_F(ChainingTest, SelectRandomChainTest){
+TEST_F(ChainingTest, SelectRandomChainTest) {
     initializeChains();
     activity* act1 = A(0,0);
     chainId id1 = selectRandomChain(act1->i,act1->j,0);
@@ -96,7 +98,7 @@ TEST_F(ChainingTest, SelectRandomChainTest){
     EXPECT_EQ(0,id2.unit);
 }
 
-TEST_F(ChainingTest, SelectRandomChainExceptionTest){
+TEST_F(ChainingTest, SelectRandomChainExceptionTest) {
     initializeChains();
     chainId newId = {1,0};
     chain newChain = {};
@@ -125,19 +127,21 @@ TEST_F(ChainingTest, PushToChainTest) {
     EXPECT_EQ(1,prec->j2);
 }
 
-TEST_F(ChainingTest, PushToBestChainTest){
+TEST_F(ChainingTest, PushToBestChainTest) {
+    ADD_FAILURE();
+    return; // FIXME
     initializeChains();
     pushToBestChains(0,0,0);
     int count = 0;
     map<chainId, chain>::iterator it;
-    for(it = chains.begin(); it != chains.end(); ++it){
+    for(it = chains.begin(); it != chains.end(); ++it) {
         chain c = it->second;
         count += (int) c.activities.size();
     }
     EXPECT_EQ(2,count);
 }
 
-TEST_F(ChainingTest, PrintChainTest){
+TEST_F(ChainingTest, PrintChainTest) {
     initializeChains();
     chainId id = {0,0};
     chains[id].activities.push_back(A(0,0));
@@ -146,7 +150,7 @@ TEST_F(ChainingTest, PrintChainTest){
     EXPECT_EQ("CHAIN: 0 0 2 0 0 0 1 -1\n",buffer.str());
 }
 
-TEST_F(ChainingTest, AddFrameTest){
+TEST_F(ChainingTest, AddFrameTest) {
     add_frame();
     EXPECT_EQ("STATE: 1 0 23 1 1 0 0 5 12 1 0 0 0 6 8 1 0 1 -1\n",buffer.str());
 }
