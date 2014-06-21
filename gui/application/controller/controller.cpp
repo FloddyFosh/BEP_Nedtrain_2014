@@ -215,14 +215,23 @@ void Controller::doPaintFeasibleIntervals() {
 
 void Controller::setFlexTimes() {
     if(isPaintingFlexibilityIntervals()) {
+        foreach(ResourceWidget* rw, getCurrentInstanceController()->getResourceWidgets()) {
+            rw->disconnectActivities();
+        }
         foreach(Instance * i, getAllInstances()) {
             foreach(Group* g, i->getGroups()) {
                 if(!g->isLocked()) {
                     g->setST(g->getESTFlex());
                     g->getActivities()[0]->setDuration(qMin(g->getDuration(), g->getLFTFlex() - g->getESTFlex()));
+
                 }
             }
         }
+        foreach(ResourceWidget* rw, getCurrentInstanceController()->getResourceWidgets()) {
+            rw->connectActivities();
+            rw->calculateResourceProfile();
+        }
+
     }
 }
 
