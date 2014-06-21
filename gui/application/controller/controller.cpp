@@ -229,7 +229,9 @@ void Controller::setFlexTimes() {
         }
         foreach(ResourceWidget* rw, getCurrentInstanceController()->getResourceWidgets()) {
             rw->connectActivities();
+            rw->calculateResourceProfile();
         }
+
     }
 }
 
