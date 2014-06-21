@@ -2,7 +2,7 @@ CFLAGS=-Wall
 LDLIBS=-LC:/GnuWin32/lib -lfl -lm
 LSOURCES=lex.l
 YSOURCES=grammar.ypp
-CSOURCES=output.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp token.cpp chaining.cpp exceptions.cpp constraints.cpp flexibility.cpp solve.cpp
+CSOURCES=output.cpp esta_plus.cpp heap.cpp main.cpp stjn.cpp timing.cpp tmsp.cpp chaining.cpp exceptions.cpp constraints.cpp flexibility.cpp solve.cpp
 HSOURCES=$(CSOURCES:.cpp=.h) includes.h
 OBJECTS=$(LSOURCES:.l=.o) $(YSOURCES:.ypp=.tab.o) $(CSOURCES:.cpp=.o)
 
