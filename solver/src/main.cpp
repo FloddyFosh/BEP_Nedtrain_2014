@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
     int readFromFile = 0;
     if(readFromFile){
     // open a file handle to a particular file:
-        const char* filepath = "../../instances/demo.instance";
+        const char* filepath = "../../instances/small.instance";
         FILE *myfile = fopen(filepath, "r");
     	// make sure it's valid:
     	if (!myfile) {

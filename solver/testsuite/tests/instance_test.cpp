@@ -31,7 +31,7 @@ class InstanceTest : public ::testing::Test {
       }
 
       virtual void SetUp() {
-          tmsp = new tmsp_t;
+          clear_tmsp();
           //Redirect stdout to buffer
           sbuf = cout.rdbuf();
           cout.rdbuf(buffer.rdbuf());
@@ -44,20 +44,10 @@ class InstanceTest : public ::testing::Test {
 };
 
 TEST_F(InstanceTest, SmallInstance) {
-    ADD_FAILURE();
-    return;
-    // TODO
     parseFile("../../instances/small.instance");
+    tmsp_t* b = tmsp;
     solve(0,0);
     ifstream in("tests/ExpectedSolutions/small.txt", ios::in | ios::binary);
-    std::string s((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
-    cdebug("3\n");
-    size_t index = 0;
-    while (true) {
-         index = s.find("\\n", index);
-         if (index == string::npos) break;
-         s.replace(index, 2, "\n");
-         index += 2;
-    }
+    string s((istreambuf_iterator<char>(in)), istreambuf_iterator<char>());
     ASSERT_EQ(s,buffer.str());
 }

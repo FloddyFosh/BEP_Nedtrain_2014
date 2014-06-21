@@ -23,7 +23,7 @@ class ChainingTest : public ::testing::Test {
         add_resource(1,1,&cl[0]);
 
         t0 = "t0", a00 = "act0,0", a01 = "act0,1";
-        add_train(0,5,25,&t0[0]);
+        add_train(0,5,22,&t0[0]);
         add_activity(0,0,10,&a00[0],5,12);
         add_requirement(0,0,0,2);
         add_requirement(0,0,1,1);
@@ -31,7 +31,7 @@ class ChainingTest : public ::testing::Test {
         add_requirement(0,1,0,1);
 
         t1 = "t1", a10 = "act1,0";
-        add_train(1,0,30,&t1[0]);
+        add_train(1,0,35,&t1[0]);
         add_activity(1,0,12,&a10[0],0,23);
         add_requirement(1,0,1,1);
     }
@@ -59,6 +59,7 @@ TEST_F(ChainingTest, InitializeChainsTest) {
 }
 
 TEST_F(ChainingTest, SelectFirstChainTest) {
+    initializeActivities();
     initializeChains();
     activity* act1 = A(0,0);
     chainId id1 = selectFirstChain(act1->i,act1->j,0);
@@ -72,6 +73,7 @@ TEST_F(ChainingTest, SelectFirstChainTest) {
 }
 
 TEST_F(ChainingTest, SelectFirstChainExceptionTest) {
+    initializeActivities();
     initializeChains();
     chainId newId = {1,0};
     chain newChain = {};
@@ -85,6 +87,7 @@ TEST_F(ChainingTest, SelectFirstChainExceptionTest) {
 }
 
 TEST_F(ChainingTest, SelectRandomChainTest) {
+    initializeActivities();
     initializeChains();
     activity* act1 = A(0,0);
     chainId id1 = selectRandomChain(act1->i,act1->j,0);
@@ -99,6 +102,7 @@ TEST_F(ChainingTest, SelectRandomChainTest) {
 }
 
 TEST_F(ChainingTest, SelectRandomChainExceptionTest) {
+    initializeActivities();
     initializeChains();
     chainId newId = {1,0};
     chain newChain = {};
@@ -112,9 +116,9 @@ TEST_F(ChainingTest, SelectRandomChainExceptionTest) {
 }
 
 TEST_F(ChainingTest, PushToChainTest) {
-    ADD_FAILURE();
-    return; // FIXME
+    initializeActivities();
     initializeChains();
+    stjn_construct();
     chainId id1 = {0,0};
     chainId id2 = {1,0};
     pushToChain(A(0,0),&id1);
@@ -128,8 +132,7 @@ TEST_F(ChainingTest, PushToChainTest) {
 }
 
 TEST_F(ChainingTest, PushToBestChainTest) {
-    ADD_FAILURE();
-    return; // FIXME
+    initializeActivities();
     initializeChains();
     pushToBestChains(0,0,0);
     int count = 0;
@@ -142,6 +145,7 @@ TEST_F(ChainingTest, PushToBestChainTest) {
 }
 
 TEST_F(ChainingTest, PrintChainTest) {
+    initializeActivities();
     initializeChains();
     chainId id = {0,0};
     chains[id].activities.push_back(A(0,0));
@@ -151,6 +155,9 @@ TEST_F(ChainingTest, PrintChainTest) {
 }
 
 TEST_F(ChainingTest, AddFrameTest) {
+    initializeActivities();
+    initializeChains();
     add_frame();
-    EXPECT_EQ("STATE: 1 0 23 1 1 0 0 5 12 1 0 0 0 6 8 1 0 1 -1\n",buffer.str());
+    string exp = "STATE: 0 5 12 1 0 0 0 6 8 1 0 1 1 0 23 1 1 0 -1\n";
+    EXPECT_EQ(exp,buffer.str());
 }
