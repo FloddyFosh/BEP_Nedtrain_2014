@@ -132,6 +132,14 @@ void Solver::clearBeforeSolving() {
     estMap.clear();
     instance->clearFrames();
     wasLocked.clear();
+    foreach(Job* j, instance->getJobs()) {
+        foreach(Group* g, j->getGroups()) {
+            if(!g->isLocked()) {
+                g->setEST(j->releaseDate());
+                g->setLST(j->dueDate()-g->getDuration());
+            }
+        }
+    }
     foreach(Resource* r, instance->getResources().values()) {
         r->clearChains();
     }

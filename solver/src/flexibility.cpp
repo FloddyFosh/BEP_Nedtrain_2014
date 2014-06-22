@@ -133,13 +133,9 @@ void addLimits(Constraints* constraints) {
                 ss1 << activities[k]->i << ' ' << activities[k]->j;
                 string var(ss1.str());
 
-                if(activities[k]->est == activities[k]->lst) {
-                    constraints->setUpperLimit(var.c_str(), activities[k]->est);
-                    constraints->setLowerLimit(var.c_str(), activities[k]->lst);
-                } else {
-                    constraints->setUpperLimit(var.c_str(), due - activities[k]->duration);
-                    constraints->setLowerLimit(var.c_str(), release);
-                }
+
+                constraints->setUpperLimit(var.c_str(), activities[k]->lst+activities[k]->flex);
+                constraints->setLowerLimit(var.c_str(), activities[k]->est);
 
                 constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
             }
@@ -155,7 +151,7 @@ void printSolution(map<string, int>* solution) {
     map<string, int>::iterator iter = solution->begin();
     while(iter != solution->end()) {
         output("%s %d ", iter->first.c_str(), iter->second);
-        debug("[%s] = %d\n", iter->first.c_str(), iter->second);
+        cdebug("[%s] = %d\n", iter->first.c_str(), iter->second);
         ++iter;
     }
 	output("-1\n");

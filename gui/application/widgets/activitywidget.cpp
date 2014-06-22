@@ -145,6 +145,7 @@ void ActivityWidget::removeWidget(){
 void ActivityWidget::lock(bool locked) {
     controller->getInstance()->activityGroup(_activity)->setLocked(locked);
     controller->getInstance()->setUserChanges(true);
+    _activity->setFlex(0);
 }
 
 void ActivityWidget::showDependencies(){
@@ -294,6 +295,7 @@ void ActivityWidget::contextMenuEvent(QContextMenuEvent *event) {
         flexibilityAct = new QAction(tr("&Set flexibility (current: %1)").arg(_activity->getFlex()), this);
         flexibilityAct->setStatusTip(tr("Set the flexibility of %1").arg(_activity->name()));
         connect(flexibilityAct, SIGNAL(triggered()), this, SLOT(setFlexibility()));
+        flexibilityAct->setDisabled(_activity->group()->isLocked());
         myMenu.addAction(flexibilityAct);
     }
 

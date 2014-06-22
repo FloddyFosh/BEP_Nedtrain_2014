@@ -8,7 +8,7 @@ FlexibilityDialog::FlexibilityDialog(InstanceController *controller, Activity *a
     setWindowTitle(tr("Set flexibility"));
     flexibility = new QSpinBox;
     flexibility->setSuffix(tr(" time units"));
-    flexibility->setMaximum(activity->job()->dueDate() - activity->job()->releaseDate() - activity->duration() - 1);
+    flexibility->setMaximum(activity->job()->dueDate() - activity->job()->releaseDate() - activity->duration());
     flexibility->setValue(activity->getFlex());
 
     addFormField(new QLabel(tr("You can add flexibility to this activity by specifying how many additional"
