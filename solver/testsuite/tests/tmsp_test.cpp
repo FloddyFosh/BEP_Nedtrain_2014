@@ -4,6 +4,8 @@
 
 class TMSPTest : public ::testing::Test {
     protected:
+    stringstream buffer;
+    streambuf* sbuf;
 
     void addTestAct(int i, int j) {
         // add train
@@ -17,10 +19,17 @@ class TMSPTest : public ::testing::Test {
 
     virtual void SetUp() {
         tmsp = new tmsp_t;
+        clear_tmsp();
+
+        // redirect output to buffer
+        sbuf = cout.rdbuf();
+        cout.rdbuf(buffer.rdbuf());
     }
 
     virtual void TearDown() {
         delete tmsp;
+        //Redirect stdout back to itself
+        cout.rdbuf(sbuf);
     }    
 };
 
@@ -49,12 +58,43 @@ TEST_F(TMSPTest, AddActivity) {
     EXPECT_EQ(string("act1"), string(a->name));
 }
 
-TEST_F(TMSPTest, AddResource) {
-    ADD_FAILURE(); // TODO
+TEST_F(TMSPTest, AddResource_1) {
+    EXPECT_EQ(0, tmsp->n_resources);
+    char* resourcename = (char *) "resource1";
+    add_resource(0, 10, resourcename);
+    EXPECT_EQ(1, tmsp->n_resources);
+    EXPECT_EQ(10, R(0)->capacity);
+    EXPECT_EQ(string("resource1"), string(R(0)->name));
+}
+
+TEST_F(TMSPTest, AddResource_2) {
+    EXPECT_EQ(0, tmsp->n_resources);
+    char* resourcename = (char *) "resource1";
+    add_resource(0, 0, resourcename);
+    EXPECT_EQ(1, tmsp->n_resources);
+    add_resource(0, 5, resourcename);
+    EXPECT_EQ(1, tmsp->n_resources);
+    add_resource(1, 4, resourcename);
+    EXPECT_EQ(2, tmsp->n_resources);
 }
 
 TEST_F(TMSPTest, AddRequirement) {
-    ADD_FAILURE(); // TODO
+    addTestAct(0, 1);
+    char* resourcename = (char *) "resource1";
+    add_resource(0, 10, resourcename);
+    add_requirement(0, 1, 0, 5);
+
+    requirement* req = A(0, 1)->requirements[0];
+    EXPECT_EQ(0, req->i);
+    EXPECT_EQ(1, req->j);
+    EXPECT_EQ(0, req->k);
+    EXPECT_EQ(5, req->amount);
+
+    req = R(0)->requirements[0];
+    EXPECT_EQ(0, req->i);
+    EXPECT_EQ(1, req->j);
+    EXPECT_EQ(0, req->k);
+    EXPECT_EQ(5, req->amount);
 }
 
 TEST_F(TMSPTest, AddPrecedence_1) {
