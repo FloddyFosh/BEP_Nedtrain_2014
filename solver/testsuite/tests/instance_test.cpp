@@ -14,7 +14,6 @@
 #include "../../src/token.h"
 #include "../../src/grammar.tab.hpp"
 
-
 #define useRandom false
 
 class InstanceTest : public ::testing::Test {

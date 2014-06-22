@@ -12,7 +12,6 @@ void clear_tmsp(){
     tmsp->n_resources = 0;
     tmsp->n_trains = 0;
     tmsp->n_activities = 0;
-    tmsp_t* b = tmsp;
     tmsp->precedences.clear();
     tmsp->trains.clear();
     tmsp->resources.clear();

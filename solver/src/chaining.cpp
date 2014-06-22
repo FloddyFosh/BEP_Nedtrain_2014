@@ -5,8 +5,8 @@
 #include "exceptions.h"
 #include "stjn.h"
 
-#define useHeuristic false
-#define useRandom false
+#define useHeuristic true
+#define useRandom true
 
 map<chainId, chain> chains;
 vector< activity* > activities;
@@ -55,8 +55,7 @@ bool isFeasibleConstraint(activity* act1, activity* act2){
 }
 
 chainId selectFirstChain(int tr, int act, int res){
-    map<chainId, chain>::iterator it;
-    for(it = chains.begin(); it != chains.end(); ++it){
+    FOREACH(chains,it){
         chainId id = it->first;
         if(id.resource!=res) continue;
         list<activity*> curChain = it->second.activities;
@@ -97,11 +96,14 @@ chainId selectRandomChain(int tr, int act, int res){
 chainId selectBestChain(int tr, int act, int res){
     vector<chainId> possibleChains;
     FOREACH(chains, chit){
+        if(chit->first.resource != res) continue;
         list<activity*> actVec = chit->second.activities;
-        activity* lastAct = *actVec.end();
+        if(actVec.empty()) continue;
+        activity* lastAct = actVec.back();
         FOREACH(tmsp->precedences, prit){
             precedence* prec = *prit;
-            if(prec->i2 == lastAct->i && prec->j2 == lastAct->j){
+            if(prec->i1 == lastAct->i && prec->j1 == lastAct->j
+                    && prec->i2 == tr && prec->j2 == act) {
                 possibleChains.push_back(chit->first);
                 break;
             }
@@ -119,7 +121,6 @@ void pushToBestChains(int tr, int act, int res){
     int req = Q(tr,act,res);
     if(!req) return;
     chainId selectedChain;
-    //if(useRandom) selectedChain = selectRandomChain(tr,act,res);
     selectedChain = selectBestChain(tr,act,res);
     list<activity*> acts = chains[selectedChain].activities;
     activity* prevAct = acts.back();
@@ -233,6 +234,7 @@ bool chaining() {
         if((*it)->isHard) newPrecedences.push_back(*it);
     }
     tmsp->precedences = newPrecedences;
+    int numHardPrecs = len(newPrecedences);
 
     initializeActivities();
     sort(activities.begin(), activities.end(), compareEST);
@@ -275,5 +277,6 @@ bool chaining() {
             }
         }
     }
+    //fprintf(stderr,"Precedences posted: %d\n",len(tmsp->precedences)-numHardPrecs);
     return true;
 }
