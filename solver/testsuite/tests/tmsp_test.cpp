@@ -142,8 +142,21 @@ TEST_F(TMSPTest, AddGroupChild) {
 }
 
 TEST_F(TMSPTest, AddTrainMutexes) {
-    // add_train_mutexes();
-    ADD_FAILURE(); // TODO
+    add_train(0, 0, 20, (char *) "trein1");
+    add_activity(0, 0, 3, (char *) "act1");
+    add_activity(0, 1, 3, (char *) "act2");
+    add_activity(0, 2, 3, (char *) "act3");
+    
+    add_train_mutexes();
+    EXPECT_EQ(1, R(0)->capacity);
+    EXPECT_EQ(string("trein1"), string(R(0)->name));
+
+    requirement* req = A(0, 0)->requirements[0];
+    EXPECT_EQ(1 , req->amount);
+    req = A(0, 1)->requirements[0];
+    EXPECT_EQ(1 , req->amount);
+    req = A(0, 2)->requirements[0];
+    EXPECT_EQ(1 , req->amount);
 }
 
 TEST_F(TMSPTest, UpdateStartTimes) {
