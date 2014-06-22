@@ -12,6 +12,7 @@ map<chainId, chain> chains;
 vector< activity* > activities;
 
 void initializeActivities(){
+    activities.clear();
     vector<train*> trains = tmsp->trains;
     FOREACH(trains, trit){
         if(*trit) {
@@ -36,6 +37,7 @@ bool operator<(const chainId& a, const chainId& b){
 }
 
 void initializeChains(){
+    chains.clear();
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             chainId newId = {r_i,u_j};
@@ -233,7 +235,6 @@ bool chaining() {
     tmsp->precedences = newPrecedences;
 
     initializeActivities();
-    vector<activity*> acts = activities;
     sort(activities.begin(), activities.end(), compareEST);
 
     initializeChains();

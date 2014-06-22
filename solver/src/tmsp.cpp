@@ -7,13 +7,25 @@ vector<activity *> nodesInVolgordeVanInput;
 
 tmsp_t* tmsp;
 
+void clear_tmsp(){
+    tmsp = new tmsp_t;
+    tmsp->n_resources = 0;
+    tmsp->n_trains = 0;
+    tmsp->n_activities = 0;
+    tmsp_t* b = tmsp;
+    tmsp->precedences.clear();
+    tmsp->trains.clear();
+    tmsp->resources.clear();
+    nodesInVolgordeVanInput.clear();
+}
+
 void tmsp_init() {
 	if (!tmsp) {
 		tmsp = new tmsp_t;
 
 		tmsp->n_resources = 0;
 		tmsp->n_trains = 0;
-		tmsp->n_activities = 0;
+        tmsp->n_activities = 0;
 	}
 }
 
@@ -54,6 +66,7 @@ void add_activity(int i, int j, int duration, char* name, int est, int lst) {
     if (j >= len(acts)) acts.resize(j + 1, NULL);
 	list_set(Tr(i)->activities, j, a);
     N(i) = len(acts);
+    tmsp->n_activities++;
 }
 
 void add_requirement(int i, int j, int k, int q) {

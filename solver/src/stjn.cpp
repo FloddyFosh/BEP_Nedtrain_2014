@@ -52,9 +52,9 @@ int stjn_construct() {
     acts = (node_t ***) calloc(tmsp->n_trains, sizeof(node_t **));
     ordinv.clear();
 
-    for(i = 0; i < tmsp->n_trains; i++) if (Tr(i)) {
+    for(i = 0; i < len(tmsp->trains); i++) if (Tr(i)) {
         acts[i] = (node_t **) calloc(N(i), sizeof(node_t *));
-        for(j = 0; j < N(i); j++) if (A(i,j)) {
+        for(j = 0; j < len(Tr(i)->activities); j++) if (A(i,j)) {
             A(i,j)->requirements.resize(tmsp->n_resources);
             acts[i][j] = new node_t;
             acts[i][j]->len = D(i,j);
