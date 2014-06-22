@@ -20,7 +20,9 @@
 class InstanceTest : public ::testing::Test {
   protected:    
       ostringstream buffer;
-      streambuf *sbuf;
+      ostringstream ebuffer;
+      streambuf* sbuf;
+      streambuf* ebuf;
 
       void parseFile(const char* filepath){
           FILE *myfile = fopen(filepath, "r");
@@ -32,14 +34,19 @@ class InstanceTest : public ::testing::Test {
 
       virtual void SetUp() {
           clear_tmsp();
+
           //Redirect stdout to buffer
           sbuf = cout.rdbuf();
+          ebuf = cerr.rdbuf();
           cout.rdbuf(buffer.rdbuf());
+          cerr.rdbuf(ebuffer.rdbuf());
       }
       virtual void TearDown() {
           delete tmsp;
+
           //Redirect stdout back to itself
           cout.rdbuf(sbuf);
+          cerr.rdbuf(ebuf);
       }
 };
 
