@@ -88,7 +88,11 @@ void add_precedence(int i1, int j1, int i2, int j2, bool isHard) {
     p->isHard = isHard;
     FOREACH(tmsp->precedences, it){
         precedence* p2 = *it;
-        if(p->i1==p2->i1 && p->i2==p2->i2 && p->j1==p2->j1 && p->j2==p2->j2) return;
+        if(p->i1 == p2->i1 && p->i2 == p2->i2 && 
+           p->j1 == p2->j1 && p->j2 == p2->j2) { 
+            delete p; 
+            return;
+        }
     }
     list_append(tmsp->precedences, p);
     output("PC: %d %d %d %d\n", i1, j1, i2, j2);
