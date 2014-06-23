@@ -1,0 +1,7 @@
+> randomJ120
+for f in ../../instances/j120/*
+do
+    echo $f >> randomJ120
+    cat $f | ./solver 2>> randomJ120
+    echo "" >> randomJ120
+done
