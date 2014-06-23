@@ -8,7 +8,6 @@ void cdebug(string format, ...) {
 
     va_start(args, format);
     vfprintf(stderr, format.c_str(), args);
-    // cerr << "cdebug" << endl;
     va_end(args);
 }
 
