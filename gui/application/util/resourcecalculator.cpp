@@ -1,5 +1,11 @@
 #include "resourcecalculator.h"
 
+#include "model/instance.h"
+#include "model/requirement.h"
+#include "model/chain.h"
+
+#include <QtGlobal>
+
 ResourceCalculator::ResourceCalculator(Resource* r) : _resource(r) {
 	maxEet=0;
 	maxDemand=0;
@@ -135,7 +141,7 @@ Activity* ResourceCalculator::selectedActivity(QPoint selected){
 }
 
 int ResourceCalculator::getRowCount() {
-	return max(maxDemand, _resource->capacity()) + 2;
+    return qMax(maxDemand, _resource->capacity()) + 2;
 }
 
 QPoint ResourceCalculator::getResourceUsageAt(int time) {
@@ -188,7 +194,7 @@ void ResourceCalculator::calcDemandProfile() {
 	maxDemand = demandProfile.size() > 0 ? demandProfile[0].y() : 0;
 	for (int i = 1; i < demandProfile.size(); ++i) {
 		demandProfile[i].setY(demandProfile[i - 1].y() + demandProfile[i].y());
-		maxDemand = max(maxDemand, demandProfile[i].y());
+        maxDemand = qMax(maxDemand, demandProfile[i].y());
 	}
 
 	this->demandProfile = demandProfile;

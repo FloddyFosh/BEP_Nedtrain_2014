@@ -18,11 +18,15 @@ class SolveWithOptionsDialog : public FormDialog {
     Q_OBJECT
 
     Solver *solver;
+    QLabel *solverName;
     Controller *controller;
     QLineEdit *arguments;
     QCheckBox *newTab, *mutex, *grouping;
     QSpinBox *threshold;
     QString originalArgs;
+
+    void createLayout();
+    void createSignals();
 
 public:
     /**

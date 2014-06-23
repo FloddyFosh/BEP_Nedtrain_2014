@@ -15,8 +15,15 @@ ResourceDialog::ResourceDialog(Instance *i, Resource *r, QWidget *parent) :
         setWindowTitle(tr("New Resource"));
 
     nameEdit = new QLineEdit(r ? r->name() : QString());
-    nameEdit->setMaxLength(40);
     capacityEdit = new QSpinBox;
+
+    createLayout(r);
+    setUpLayout();
+}
+
+void ResourceDialog::createLayout(Resource *r) {
+    nameEdit->setMaxLength(40);
+
     capacityEdit->setMinimum(1);
     capacityEdit->setMaximum(99);
     capacityEdit->setValue(r ? r->capacity() : 1);
@@ -25,9 +32,7 @@ ResourceDialog::ResourceDialog(Instance *i, Resource *r, QWidget *parent) :
     addFormField(tr("&Capacity:"), capacityEdit);
 
     if(r)
-    	addLayout(getDecreaseLayout());
-
-    setUpLayout();
+        addLayout(getDecreaseLayout());
 }
 
 QVBoxLayout* ResourceDialog::getDecreaseLayout(){

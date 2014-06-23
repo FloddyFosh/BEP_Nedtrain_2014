@@ -3,7 +3,6 @@
 
 #include <QColor>
 #include <QMap>
-using namespace std;
 
 /** Generate esthetically pleasing color set by varying only hue. This assumes we do not
  *  know before-hand how many colors we need. A singleton pattern is used.

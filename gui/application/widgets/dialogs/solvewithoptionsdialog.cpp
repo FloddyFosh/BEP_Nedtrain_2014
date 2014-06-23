@@ -7,21 +7,29 @@ SolveWithOptionsDialog::SolveWithOptionsDialog(Solver *solver, Controller *contr
     setWindowTitle(tr("Set options and solve with ") + solver->getName());
     originalArgs = solver->getArguments();
 
-    QLabel *solverName = new QLabel(solver->getName());
-    solverName->setTextFormat(Qt::PlainText);
+    solverName = new QLabel(solver->getName());
     newTab = new QCheckBox(tr("Solve to new &tab"), this);
     mutex = new QCheckBox(tr("&Mutual exclusion"), this);
     grouping = new QCheckBox(tr("&Grouping"), this);
     threshold = new QSpinBox(this);
+
+    createLayout();
+    createSignals();
+    setUpLayout();
+    loadArguments();
+}
+
+void SolveWithOptionsDialog::createLayout() {
+    solverName->setTextFormat(Qt::PlainText);
     addFormField(tr("Chosen solver:"), solverName);
     addFormField(mutex);
     addFormField(grouping);
     addFormField(tr("&Threshold:"), threshold);
     addFormField(newTab);
+}
 
-    setUpLayout();
+void SolveWithOptionsDialog::createSignals() {
     connect(grouping, SIGNAL(stateChanged(int)), this, SLOT(updateGrouping()));
-    loadArguments();
 }
 
 void SolveWithOptionsDialog::apply() {

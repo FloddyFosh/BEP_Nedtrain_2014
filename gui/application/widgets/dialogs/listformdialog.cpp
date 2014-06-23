@@ -11,16 +11,20 @@ ListFormDialog::ListFormDialog(QWidget *parent) : QDialog(parent) {
     modified = false;
 
     formList = new QListWidget(this);
-
     applyButton = new QPushButton(tr("&Apply"));
-    applyButton->setDefault(true);
-
     addButton = new QPushButton(tr("&Add"));
     removeButton = new QPushButton(tr("&Remove"));
+    addRemoveBox = new QHBoxLayout;
+
+    createLayout();
+}
+
+void ListFormDialog::createLayout() {
+    applyButton->setDefault(true);
+
     addButton->setIcon(AppIcon("list-add.png"));
     removeButton->setIcon(AppIcon("list-remove.png"));
 
-    addRemoveBox = new QHBoxLayout;
     addRemoveBox->addWidget(addButton);
     addRemoveBox->addWidget(removeButton);
 }

@@ -1,10 +1,15 @@
 #ifndef REQUIREMENTSTABLE_H_
 #define REQUIREMENTSTABLE_H_
 
+#include <QMap>
 #include <QTableWidget>
 #include <QSpinBox>
 
-#include "model/activitytemplate.h"
+class Activity;
+class Instance;
+class Job;
+class Resource;
+class ActivityTemplate;
 
 /**
  * A RequirementsTable is used for display or editing

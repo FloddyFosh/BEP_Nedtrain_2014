@@ -1,4 +1,6 @@
 #include "data/instance_reader.h"
+
+#include "model/instance.h"
 #include "util/token.h"
 
 #include <QFile>

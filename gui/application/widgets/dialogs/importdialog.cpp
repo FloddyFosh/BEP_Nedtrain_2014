@@ -1,4 +1,6 @@
 #include "importdialog.h"
+
+#include "controller/controller.h"
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
 #include "data/instance_reader.h"
@@ -16,12 +18,19 @@ ImportDialog::ImportDialog(MainWindow *parent, InstanceController *c) :
 
     fileEdit = new QLineEdit;
     browseButton = new QPushButton(tr("&Browse..."));
+    timeEditHour = new QDateTimeEdit;
+    timeEdit = new QSpinBox;
+    binaryLayout = new QHBoxLayout;
 
+    createLayout();
+    createSignals();
+    setUpLayout();
+}
+
+void ImportDialog::createLayout() {
     if(controller->getInstance()->hoursOnTimeline()) {
-        timeEditHour = new QDateTimeEdit;
         timeEditHour->setDisplayFormat("h:mm");
 
-        timeEdit = new QSpinBox;
         timeEdit->setMinimum(0);
         timeEdit->setMaximum(INT_MAX);
         timeEdit->setValue(1);
@@ -29,7 +38,6 @@ ImportDialog::ImportDialog(MainWindow *parent, InstanceController *c) :
         addFormField(tr("Import day:"), timeEdit);
         addFormField(tr("Import time:"), timeEditHour);
     } else {
-        timeEdit = new QSpinBox;
         timeEdit->setMinimum(0);
         timeEdit->setMaximum(INT_MAX);
         timeEdit->setValue(0);
@@ -37,12 +45,12 @@ ImportDialog::ImportDialog(MainWindow *parent, InstanceController *c) :
         addFormField(tr("Import at time:"), timeEdit);
     }
 
-    QHBoxLayout *binaryLayout = new QHBoxLayout;
     binaryLayout->addWidget(fileEdit);
     binaryLayout->addWidget(browseButton);
     addFormField(tr("File:"), binaryLayout);
+}
 
-    setUpLayout();
+void ImportDialog::createSignals() {
     connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
 }
 

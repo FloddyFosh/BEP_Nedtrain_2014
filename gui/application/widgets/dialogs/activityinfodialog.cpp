@@ -11,54 +11,62 @@ ActivityInfoDialog::ActivityInfoDialog(Instance *instance, Activity *a, QWidget 
     setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Activity info"));
     setWindowIcon(AppIcon("icon.png"));
-    QFormLayout *formlayout = new QFormLayout;
 
+    formlayout = new QFormLayout;
+    nameLabel = new QLabel(a->name());
+    jobLabel = new QLabel(a->job()->name());
+    durationLabel = new QLabel(QString::number(a->duration()));
+    estLabel = new QLabel(QString::number(a->est()));
+    lstLabel = new QLabel(QString::number(a->lst()));
+    stLabel = new QLabel(QString::number(a->st()));
+    requirementsTable = new RequirementsTable(a, instance);
+    editButton = new QPushButton(tr("Edit"),this);
+    closeButton = new QPushButton(tr("Close"),this);
+    buttonBox = new QDialogButtonBox(Qt::Horizontal);
+    boxlayout = new QVBoxLayout;
+
+    createLayout();
+    createSignals();
+	setLayout(boxlayout);
+}
+
+void ActivityInfoDialog::createLayout() {
     //labels
-    QLabel* nameLabel = new QLabel(a->name());
     nameLabel->setTextFormat(Qt::PlainText);
     formlayout->addRow(tr("Name:"), nameLabel);
-	QLabel* jobLabel = new QLabel(a->job()->name());
     jobLabel->setTextFormat(Qt::PlainText);
     formlayout->addRow(tr("Job:"), jobLabel);
-    QLabel* durationLabel = new QLabel(QString::number(a->duration()));
     formlayout->addRow(tr("Duration:"), durationLabel);
-    QLabel* estLabel = new QLabel(QString::number(a->est()));
     formlayout->addRow(tr("Earliest start time:"), estLabel);
-    QLabel* lstLabel = new QLabel(QString::number(a->lst()));
     formlayout->addRow(tr("Latest start time:"), lstLabel);
+
     if(a->estFlex() != -1 && a->lftFlex() != -1) {
         QLabel* eftLabel = new QLabel(QString::number(a->estFlex()));
         formlayout->addRow(tr("Earliest flex start time:"), eftLabel);
         QLabel* lftLabel = new QLabel(QString::number(a->lftFlex()-a->duration()));
         formlayout->addRow(tr("Latest flex start time:"), lftLabel);
     }
-    QLabel* stLabel = new QLabel(QString::number(a->st()));
+
     formlayout->addRow(tr("Start time:"), stLabel);
 
     //table
-    RequirementsTable *requirementsTable = new RequirementsTable(a, instance);
     requirementsTable->fillIn();
 
-	//buttons
-	QPushButton* editButton = new QPushButton(tr("Edit"),this);
-	QPushButton* closeButton = new QPushButton(tr("Close"),this);
-	closeButton->setDefault(true);
+    //buttons
+    closeButton->setDefault(true);
 
-	QDialogButtonBox* buttonBox = new QDialogButtonBox(Qt::Horizontal);
-	buttonBox->addButton(editButton, QDialogButtonBox::ActionRole);
-	buttonBox->addButton(closeButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(editButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(closeButton, QDialogButtonBox::ActionRole);
 
-	// top layout
-	QVBoxLayout *boxlayout = new QVBoxLayout;
-	boxlayout->addLayout(formlayout);
-	boxlayout->addWidget(requirementsTable);
-	boxlayout->addWidget(buttonBox);
+    //top layout
+    boxlayout->addLayout(formlayout);
+    boxlayout->addWidget(requirementsTable);
+    boxlayout->addWidget(buttonBox);
+}
 
-	// signals
-	connect(editButton, SIGNAL(clicked()), this, SLOT(editActivity()));
-	connect(closeButton, SIGNAL(clicked()), this, SLOT(accept()));
-
-	setLayout(boxlayout);
+void ActivityInfoDialog::createSignals() {
+    connect(editButton, SIGNAL(clicked()), this, SLOT(editActivity()));
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(accept()));
 }
 
 void ActivityInfoDialog::editActivity(){

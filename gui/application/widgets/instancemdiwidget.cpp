@@ -1,11 +1,14 @@
+#include "instancemdiwidget.h"
+
+#include "mainwindow.h"
+#include "instancemdisubwindow.h"
+#include "widgets/app_icon.h"
+#include "controller/controller.h"
+#include "controller/instancecontroller.h"
+
 #include <QFileInfo>
 #include <QMdiSubWindow>
 #include <QMessageBox>
-
-#include "widgets/app_icon.h"
-#include "controller/instancecontroller.h"
-
-#include "instancemdisubwindow.h"
 
 InstanceMdiWidget::InstanceMdiWidget(Controller *controller, QSlider * framesSlider, QWidget *parent) :
     QMdiArea(parent), controller(controller), framesSlider (framesSlider)

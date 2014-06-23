@@ -1,11 +1,13 @@
 #include "activitydialog.h"
+
+#include "model/instance.h"
 #include "data/template_gateway.h"
 
 #include <QMessageBox>
 #include <QLineEdit>
 
 ActivityDialog::ActivityDialog(Instance *instance, Activity *a, QWidget *parent) :
-    FormDialog(parent), a(a), instance(instance)
+    FormDialog(parent), a(a), instance(instance), usingTemplate(false)
 {
     if (!a->job()) {
         setWindowTitle(tr("New Activity"));
@@ -17,8 +19,18 @@ ActivityDialog::ActivityDialog(Instance *instance, Activity *a, QWidget *parent)
     } else {
         setWindowTitle(tr("Edit Activity"));
     }
+
     nameEdit = new QLineEdit(a->job() ? a->name() : QString());
     durationEdit = new QSpinBox;
+    templateList = new QComboBox;
+    requirementsTable = new RequirementsTable(a, instance);
+
+    createLayout();
+    createSignals();
+    setUpLayout();
+}
+
+void ActivityDialog::createLayout() {
     durationEdit->setMinimum(1);
     if (!a->job()) {
         durationEdit->setMaximum(((Job *) jobEdit->itemData(jobEdit->currentIndex()).value<void *>())->duration());
@@ -31,8 +43,6 @@ ActivityDialog::ActivityDialog(Instance *instance, Activity *a, QWidget *parent)
     }
     durationEdit->setValue(a->job() ? a->duration() : 1);
 
-    usingTemplate = false;
-    templateList = new QComboBox;
     templateList->addItem(tr("(none)"), QVariant());
     foreach (ActivityTemplate *a, TemplateGateway::getAll())
         templateList->addItem(a->getName(), qVariantFromValue((void *) a));
@@ -48,18 +58,16 @@ ActivityDialog::ActivityDialog(Instance *instance, Activity *a, QWidget *parent)
         addFormField(tr("&Duration:"), durationEdit);
 
     // requirements table
-    requirementsTable = new RequirementsTable(a, instance);
     requirementsTable->setEditableBy(this);
     requirementsTable->fillIn();
     addWidget(requirementsTable);
+}
 
-    // signals
+void ActivityDialog::createSignals() {
     if(!a->job()) connect(jobEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(jobChanged(int)));
     connect(templateList, SIGNAL(currentIndexChanged(int)), this, SLOT(templateChanged(int)));
     connect(nameEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
     connect(durationEdit, SIGNAL(valueChanged(QString)), this, SLOT(setModified()));
-
-    setUpLayout();
 }
 
 void ActivityDialog::apply() {

@@ -1,7 +1,10 @@
 #ifndef COMPARISON_H_
 #define COMPARISON_H_
 
-#include "model/instance.h"
+#include <QObject>
+
+class Activity;
+class Instance;
 
 /**
  * This class provides methods to compare two instances, based on the start

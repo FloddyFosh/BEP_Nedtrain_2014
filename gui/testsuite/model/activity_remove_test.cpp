@@ -1,6 +1,9 @@
 #include  <gtest/gtest.h>
+
+#include "model/instance.h"
 #include "model/activity.h"
 #include "model/job.h"
+#include "model/requirement.h"
 
 TEST(ActivityRemoveTest, removeFromJob) {
     Instance *instance = new Instance();

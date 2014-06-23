@@ -1,9 +1,10 @@
 #ifndef EST_GENERATOR_H
 #define EST_GENERATOR_H
-class InstanceController;
 
 #include <QList>
-#include "model/precedence.h"
+
+class InstanceController;
+class Precedence;
 
 /**
  * EST generator class.

@@ -1,5 +1,6 @@
 #include "model/job.h"
-using namespace std;
+
+#include "model/instance.h"
 
 Job::Job(Instance *instance, int id, QString name, int release_date, int due_date)
     : _id(id), _name(name), _release_date(release_date), _due_date(due_date), _instance(instance)

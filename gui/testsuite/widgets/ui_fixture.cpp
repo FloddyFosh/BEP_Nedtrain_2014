@@ -1,6 +1,9 @@
 #include  <gtest/gtest.h>
+
 #include "controller/controller.h"
 #include "controller/instancecontroller.h"
+#include "widgets/mainwindow.h"
+
 #include <QMdiSubWindow>
 
 class UITest: public ::testing::Test {

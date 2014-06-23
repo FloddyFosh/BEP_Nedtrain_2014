@@ -1,7 +1,7 @@
 #include "model/precedence.h"
-#include "model/activity.h"
 
-#include <cassert>
+#include "model/activity.h"
+#include "model/job.h"
 
 Precedence::Precedence(Activity *a1, Activity *a2) : _a1(a1), _a2(a2), hard(true), disabled(false) {}
 
@@ -31,7 +31,7 @@ void Precedence::enable() {
     disabled = false;
 }
 
-set<int> Precedence::getFrameNrs() {
+QSet<int> Precedence::getFrameNrs() {
     return frameNumbers;
 }
 

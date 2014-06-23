@@ -1,4 +1,5 @@
 #include "managetemplates.h"
+
 #include "data/template_gateway.h"
 #include "widgets/app_icon.h"
 
@@ -14,27 +15,33 @@ ManageTemplatesDialog::ManageTemplatesDialog(Instance *inst, QWidget *parent) :
 
     nameEdit = new QLineEdit;
     durationEdit = new QSpinBox;
+    form = new QFormLayout;
+    requirementsTable = new RequirementsTable(instance);
+    rightLayout = new QVBoxLayout;
+
+    createLayout();
+    createSignals();
+    setUpLayout();
+    initTemplates();
+}
+
+void ManageTemplatesDialog::createLayout() {
     durationEdit->setMinimum(1);
     durationEdit->setMaximum(INT_MAX);
 
-    QFormLayout *form = new QFormLayout;
     form->addRow(tr("&Name:"), nameEdit);
     form->addRow(tr("&Duration:"), durationEdit);
 
-    // requirements table
-    requirementsTable = new RequirementsTable(instance);
     requirementsTable->setEditableBy(this);
 
-    QVBoxLayout *rightLayout = new QVBoxLayout;
     rightLayout->addLayout(form);
     rightLayout->addWidget(requirementsTable);
     setRightPanelLayout(rightLayout);
+}
 
+void ManageTemplatesDialog::createSignals() {
     connect(nameEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
     connect(durationEdit, SIGNAL(valueChanged(QString)), this, SLOT(setModified()));
-
-    setUpLayout();
-    initTemplates();
 }
 
 void ManageTemplatesDialog::initTemplates() {

@@ -1,7 +1,19 @@
 #ifndef INSTANCECONTROLLER_H_
 #define INSTANCECONTROLLER_H_
 
-#include "controller/controller.h"
+#include <QMap>
+#include <QList>
+#include <QColor>
+
+class Activity;
+class Controller;
+class Instance;
+class Job;
+class Resource;
+class ActivityWidget;
+class InstanceWidget;
+class JobWidget;
+class ResourceWidget;
 
 /**
  * Controller class for any specific instance. Handles requests from widgets corresponding to this instance.

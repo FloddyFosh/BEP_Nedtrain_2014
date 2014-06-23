@@ -1,7 +1,7 @@
 #ifndef TAAL_H
 #define TAAL_H
 
-#include<QApplication>
+#include <QApplication>
 
 /**
  * This class represents a language file and provides static functions to

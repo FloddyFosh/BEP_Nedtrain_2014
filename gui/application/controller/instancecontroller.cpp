@@ -1,4 +1,7 @@
-#include "controller/instancecontroller.h"
+#include "instancecontroller.h"
+
+#include "widgets/instancewidget.h"
+#include "controller.h"
 
 InstanceController::InstanceController(Instance * instance, InstanceWidget * instanceWidget, Controller * controller)
 : instance (instance), instanceWidget (instanceWidget), controller (controller) { }

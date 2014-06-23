@@ -1,3 +1,7 @@
+#include "jobwidget.h"
+
+#include "mainwindow.h"
+#include "controller/controller.h"
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
 #include "dialogs/jobinfodialog.h"

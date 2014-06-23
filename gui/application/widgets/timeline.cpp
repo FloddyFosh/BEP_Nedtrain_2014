@@ -1,6 +1,11 @@
+#include "timeline.h"
+
+#include "model/instance.h"
 #include "controller/instancecontroller.h"
+#include "widgets/instancewidget.h"
 
 #include <QPainter>
+#include <QMouseEvent>
 
 Timeline::Timeline(InstanceController * controller, QWidget *parent, bool compare, bool jobsDoneClick) :
     Zoomable(controller,parent), controller (controller), comparing(compare), _jobsDoneClick(jobsDoneClick)

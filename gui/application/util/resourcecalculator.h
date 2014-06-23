@@ -1,9 +1,16 @@
 #ifndef RESOURCECALCULATOR_H_
 #define RESOURCECALCULATOR_H_
 
-#include "model/resource.h"
-#include "model/chain.h"
+#include <QList>
+#include <QMap>
+#include <QPoint>
 #include <QPolygon>
+#include <QtGlobal>
+
+class Activity;
+class Chain;
+class Job;
+class Resource;
 
 class ResourceCalculator {
 

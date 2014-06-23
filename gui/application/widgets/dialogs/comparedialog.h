@@ -10,6 +10,8 @@ class CompareDialog : public FormDialog
     Q_OBJECT
     Controller *controller;
     QComboBox *first, *second;
+
+    void createLayout();
 public:
     explicit CompareDialog(Controller *c, QWidget *parent = 0);
 

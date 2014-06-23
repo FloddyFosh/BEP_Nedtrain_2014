@@ -45,7 +45,7 @@
 
 #include "widgets/instancemdiwidget.h"
 
-#include<QActionGroup>
+#include <QActionGroup>
 
 QT_BEGIN_NAMESPACE
 class QAction;
