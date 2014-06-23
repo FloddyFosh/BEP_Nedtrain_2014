@@ -234,7 +234,6 @@ bool chaining() {
         if((*it)->isHard) newPrecedences.push_back(*it);
     }
     tmsp->precedences = newPrecedences;
-    int numHardPrecs = len(newPrecedences);
 
     initializeActivities();
     sort(activities.begin(), activities.end(), compareEST);
