@@ -31,18 +31,20 @@ Dit algoritme lost het RCPSP op door het vinden en oplossen van \emph{contention
 
 \subsubsection{Chaining}
 \label{subsubsec:chainingoplossing}
-Om onafhankelijke flexibiliteitsintervallen te kunnen bepalen, moeten activiteiten echter vrij verschoven kunnen worden, zonder dat hierdoor het schema inconsistent wordt. Hier kan het chaining algoritme voor zorgen. Dit algoritme wijst aan elke resource unit een zogenaamde chain, een gesorteerde lijst van activiteiten, toe. In een chain geldt voor elk paar opeenvolgende activiteiten, $v_{a,b}$ en $v_{c,d}$, dat er een voorrangsrelatie $v_{a,b} \prec v_{c,d}$ bestaat. De output van het chaining algoritme bestaat uit een \emph{Partial Order Schedule (POS)}, wat een schema is waarvoor geldt dat elk schema dat qua tijdsconstraints consistent is, ook consistent is met de resource constraints. Het exacte chaining algoritme is weergegeven in Algoritme \ref{alg:chaining}.
+Om onafhankelijke flexibiliteitsintervallen te kunnen bepalen, moeten activiteiten echter vrij verschoven kunnen worden, zonder dat hierdoor het schema inconsistent wordt. Hier kan het chaining algoritme voor zorgen. Dit algoritme wijst aan elke resource unit een zogenaamde chain, een gesorteerde lijst van activiteiten, toe. In een chain geldt voor elk paar opeenvolgende activiteiten, $v_{a,b}$ en $v_{c,d}$, dat er een voorrangsrelatie $v_{a,b} \prec v_{c,d}$ bestaat. Hierdoor kunnen twee activiteiten uit dezelfde chain nooit tegelijk uitgevoerd worden. Bovendien wordt een activiteit die meerdere resource units nodig heeft, voor elke resource unit aan een aparte chain toegevoegd. Als een bepaalde activiteit dus bijvoorbeeld drie resource units nodig heeft, is deze activiteit dus aanwezig in precies drie verschillende chains. Op deze manier kan het aantal benodigde resource units nooit groter zijn dan de capaciteit, omdat twee activiteiten uit dezelfde chain nooit tegelijk uitgevoerd kunnen worden en het aantal chains van een resource gelijk is aan de capaciteit daarvan.
+
+De output van het chaining algoritme bestaat uit een zogenaamd \emph{Partial Order Schedule (POS)}, wat een schema is waarvoor geldt dat elk schema dat qua tijdsconstraints consistent is, ook consistent is met de resource constraints. Het exacte chaining algoritme is weergegeven in Algoritme \ref{alg:chaining}.
 
 \begin{algorithm}
 \caption{Chaining \cite{policella2007precedence}}
 \label{alg:chaining}
-\textbf{Input:} A problem P and one of its fixed-times schedules $S$ \\
-\textbf{Output:} A partial order solution $POS^{ch}$
+\textbf{Input:} Een probleem P en daarvan een (fixed-time) oplossing $S$ \\
+\textbf{Output:} Een Partial Order Schedule $POS^{ch}$
 \begin{algorithmic}[1]
   \Function{Chaining}{$P, S$}
     \Let{$POS^{ch}$}{$P$}
-    \State Sort all the activities according to their start times in $S$  
-    \State Initialize all the chains empty
+    \State Sorteer alle activiteiten op hun starttijd in $S$  
+    \State Initialiseer alle chains leeg
     \For{\textbf{each} resource $r_j$}
       \For{\textbf{each} activity $v_i$}
         \For{$1$ \textbf{to} $req_{ij}$}
@@ -58,34 +60,35 @@ Om onafhankelijke flexibiliteitsintervallen te kunnen bepalen, moeten activiteit
 \end{algorithmic}
 \end{algorithm}
 
-In de functie $SelectChain(v_i,r_j)$ wordt een chain gekozen waar activiteit $v_i$ aan toegevoegd zal worden. Een simpele, voor de hand liggende methode is om een activiteit gelijk aan een chain toe te voegen als er een geschikte chain gevonden is. Een chain is geschikt voor een activiteit $v_i$ als de eindtijd van het laatste element van de chain, $v_k$, eerder is dan de starttijd van $v_i$, dus $s_k + d_k \leq s_i$. Er kan ook voor gekozen worden om een willekeurige chain te selecteren. Hiervoor moeten eerst alle geschikte chains gevonden worden, en wordt er vervolgens uit deze verzameling een willekeurig element gekozen. Tenslotte is er ook in \cite{policella2004generating} een heuristiek voorgesteld die probeert om het aantal voorrangsrelaties tussen activiteiten uit verschillende chains te minimaliseren. Deze heuristiek, weergegeven in \ref{alg:selectchain1}, selecteert voor een activiteit eerst een willekeurige chain $k$  en voegt dan een voorrangsrelatie toe tussen $v_i$ en het laatste element van $k$, $last(k)$. Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst geprobeerd om $v_i$ aan chains toe te voegen die ook $last(k)$ als laatste element hebben, omdat er dan geen nieuwe voorrangsrelatie toegevoegd hoeft te worden. De voorrangsrelatie $v_i \prec last(k)$ bestaat immers al. Hierna komen pas andere chains, die $last(k)$ niet als laatste element hebben, in aanmerking voor activiteit $v_i$.
+De functie $AddConstraint(P,v_k \prec v_i)$ zorgt ervoor dat er de voorrangsrelatie $v_k \prec v_i$ aan probleem toegevoegd wordt en updatet vervolgens de starttijden van de betrokken activiteiten. In de functie $SelectChain(v_i,r_j)$ wordt een chain gekozen waar activiteit $v_i$ aan toegevoegd zal worden. Een simpele, voor de hand liggende methode is om een activiteit gelijk aan een chain toe te voegen als er een geschikte chain gevonden is. Een chain is geschikt voor een activiteit $v_i$ als de eindtijd van het laatste element van de chain, $v_k$, eerder is dan de starttijd van $v_i$, dus $s_k + d_k \leq s_i$. Er kan ook voor gekozen worden om een willekeurige chain te selecteren. Hiervoor moeten eerst alle geschikte chains gevonden worden, en wordt er vervolgens uit deze verzameling een willekeurig element gekozen. Tenslotte is er ook in \cite{policella2004generating} een heuristiek voorgesteld die probeert om het aantal voorrangsrelaties tussen activiteiten uit verschillende chains te minimaliseren. Deze heuristiek, weergegeven in \ref{alg:selectchain1}, probeert eerst een chain $k$ te vinden waarvoor geldt dat er al een voorrangsrelatie $last(k) \prec v_i$ bestaat. Als er zo een chain bestaat, wordt de voorrangsrelatie $last(k) \prec v_i$ toegevoegd en anders wordt een willekeurige chain gekozen waaraan $v_i$ toe wordt gevoegd.
+
+Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst geprobeerd om $v_i$ aan chains toe te voegen die ook $last(k)$ als laatste element hebben, omdat er dan geen nieuwe voorrangsrelatie toegevoegd hoeft te worden. De voorrangsrelatie $v_i \prec last(k)$ bestaat immers al. Hierna komen pas andere chains, die $last(k)$ niet als laatste element hebben, in aanmerking voor activiteit $v_i$.
 
 \begin{algorithm}
 \caption{SelectChain Heuristiek \cite{policella2004generating}}
 \label{alg:selectchain1}
-\textbf{Input:} Een probleeminstantie $P$, een activiteit $v_i$ en een resource $r_j$. \\
+\textbf{Input:} Een probleeminstantie $P$, een verzameling voorrangsrelaties $E$, een activiteit $v_i$ en een resource $r_j$.
 \begin{algorithmic}[1]
   \Function{SelectChain}{$P, v_i, r_j$}
-    \State Selecteer een willekeurige geschikte chain $k$
+  	\Let{$C_a$}{$\{$chain $c | last(c) \in E\}$}
+  	\If{$C_a \neq \emptyset$}
+  		\Let{$k$}{een willekeurige chain uit $C_a$}
+  	\Else
+  		\Let{$k$}{een willekeurige geschikte chain}
+  	\EndIf
     \State{$AddConstraint(P,v_k \prec v_i)$}
     \If{$req(v_i,r_j) > 0$}
-    		\Let{$C_k, \overline{C_k}$}{$\emptyset$}
-    		\For{\textbf{each} chain $c$}
-    			\If{$last(c) == last(k)$}
-    				\Let{$C_k$}{$C_k \cup c$}
-    			\Else
-    				\Let{$\overline{C_k}$}{$\overline{C_k} \cup c$}
-    			\EndIf
-    		\EndFor
+    		\Let{$C_k$}{$\{$chain $c | last(c) == last(k)\}$}
+    		\Let{$\overline{C_k}$}{$\{$chain $c | last(c) \neq last(k)\}$}
     		\For{$req = req(v_i,r_j)-1 \dots 0$}
     			\If{$C_k \neq \emptyset$}
-    				\Let{$v_k$}{willekeurig element in $C_k$}
-    				\State{$AddConstraint(P,v_k \prec v_i)$}
-    				\Let{$C_k$}{$C_k - v_k$}
+    				\Let{$c_k$}{willekeurig element in $C_k$}
+    				\State{$AddConstraint(P,last(c_k) \prec v_i)$}
+    				\Let{$C_k$}{$C_k - c_k$}
     			\Else
-    				\Let{$v_k$}{willekeurig element in $\overline{C_k}$}
-    				\State{$AddConstraint(P,v_k \prec v_i)$}
-    				\Let{$\overline{C_k}$}{$\overline{C_k} - v_k$}
+    				\Let{$c_k$}{willekeurig element in $\overline{C_k}$}
+    				\State{$AddConstraint(P,last(c_k) \prec v_i)$}
+    				\Let{$\overline{C_k}$}{$\overline{C_k} - c_k$}
     			\EndIf
     		\EndFor
     	\EndIf
@@ -93,6 +96,7 @@ In de functie $SelectChain(v_i,r_j)$ wordt een chain gekozen waar activiteit $v_
 \end{algorithmic}
 \end{algorithm}
 
+Om het chaining algoritme duidelijker te maken, zal nu een relatief kleine voorbeeldinstantie uitgewerkt worden. Deze instantie bestaat uit...
 TODO: Het uitwerken van een voorbeeld van chaining.
 
 \subsubsection{Linear Programming}
