@@ -4,12 +4,13 @@
 #include <QObject>
 #include <QSlider>
 
+#include "util/randomcolorgenerator.h"
+
 class Instance;
 class InstanceWidget;
 class InstanceController;
 class MainWindow;
 class Precedence;
-class RandomColorGenerator;
 class Solver;
 
 class Controller : public QObject {
@@ -20,7 +21,7 @@ public:
 
 private:
     MainWindow *mainWindow;
-    RandomColorGenerator *colorGenerator;
+    RandomColorGenerator colorGenerator;
     bool clearSoftPrecedences;
     QSlider *framesSlider;
     bool paintFeasibleIntervals;

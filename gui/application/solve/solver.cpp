@@ -372,10 +372,11 @@ void Solver::processChainLine(QByteArray &line) {
     QList<QByteArray> fields = line.trimmed().split(' ');
     fields.takeFirst();
 
-    int res, prevRes, chain, numActs, ai, aj;
+    int res, chain, numActs, ai, aj;
     QMap<int,Resource*> resources = instance->getResources();
     res = fields.takeFirst().toInt();
     ResourceDecrease* dec = NULL;
+    ResourceDecrease* prevdec = NULL;
     while(res != -1){
         Resource* curResource = resources[res];
         chain = fields.takeFirst().toInt();
@@ -389,42 +390,45 @@ void Solver::processChainLine(QByteArray &line) {
                 if(chainObj->getActivities()->empty()) continue;
                 Group* g = chainObj->getActivities()->last()->group();
                 g->setLST(qMin(g->getLST(),dec->getFrom()-g->getDuration()));
-            }
+                prevdec = dec;
+            }  
             else{
                 Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
-                if(dec){
+                if(prevdec){
                     Group* g = act->group();
-                    g->setEST(qMax(g->getEST(),dec->getTill()));
-                    dec = NULL;
+                    g->setEST(qMax(g->getEST(),prevdec->getTill()));
+                    prevdec = NULL;
                 }
                 curResource->addActToChain(act,chain);
             }
         }
 
-        Chain* c = curResource->getChain(chain);
-        QList<QPoint*>* usedProfile = new QList<QPoint*>;
-        prevRes = -1;
-        if(Chain* lastChain = replayFrames.last()->getChain()){
-            prevRes = lastChain->resourceId();
-        } else {
-            replayFrames.last()->clearAffected();
-            replayFrames.last()->addAffResourceId(res);
-        }
-        if(res==prevRes){
-            Frame* lastFrame = replayFrames.last();
-            usedProfile = lastFrame->getSelectedProfile();
-        }
+        createChainFrame(curResource->getChain(chain), res);
 
-        ChainFrame* nextFrame = new ChainFrame(c,usedProfile);
-        foreach(Group* g, replayFrames.last()->getGroups()){
-            nextFrame->addGroup(g);
-        }
-        replayFrames.append(nextFrame);
-        instance->setFrames(replayFrames);
-
-        prevRes = res;
         res = fields.takeFirst().toInt();
     }
+}
+
+void Solver::createChainFrame(Chain* c, int res) {
+    QList<QPoint*>* usedProfile = new QList<QPoint*>;
+    int prevRes = -1;
+    if(Chain* lastChain = replayFrames.last()->getChain()){
+        prevRes = lastChain->resourceId();
+    } else {
+        replayFrames.last()->clearAffected();
+        replayFrames.last()->addAffResourceId(res);
+    }
+    if(res==prevRes){
+        Frame* lastFrame = replayFrames.last();
+        usedProfile = lastFrame->getSelectedProfile();
+    }
+
+    ChainFrame* nextFrame = new ChainFrame(c,usedProfile);
+    foreach(Group* g, replayFrames.last()->getGroups()){
+        nextFrame->addGroup(g);
+    }
+    replayFrames.append(nextFrame);
+    instance->setFrames(replayFrames);
 }
 
 void Solver::eatRemainingOutput(QList<QByteArray> &fields) {

@@ -7,6 +7,8 @@
 #include "model/frame.h"
 #include "model/chainframe.h"
 #include "model/requirement.h"
+#include "util/resourcecalculator.h"
+#include "activitywidget.h"
 
 #include <QPainter>
 #include <cmath>
@@ -30,14 +32,16 @@ ResourceWidget::ResourceWidget(Resource *r, InstanceController *c, QWidget *pare
     // dont draw background because then we would not see the vertical mouse follower guide line ruler thing
     setAutoFillBackground(false);
 
-    // connect signals
-    connect(_resource, SIGNAL(resourceChanged()), this, SLOT(calculateResourceProfile()));
-    connect(_resource, SIGNAL(activityAdded(Activity*)), this, SLOT(newActivity(Activity*)));
-    connect(controller->getInstanceWidget(), SIGNAL(viewButtonTriggered(bool)), this, SLOT(setMatrixViewEnabled(bool)));
-    
+    connectSignals();
     connectActivities();
 
     calculateResourceProfile();
+}
+
+void ResourceWidget::connectSignals() {
+    connect(_resource, SIGNAL(resourceChanged()), this, SLOT(calculateResourceProfile()));
+    connect(_resource, SIGNAL(activityAdded(Activity*)), this, SLOT(newActivity(Activity*)));
+    connect(controller->getInstanceWidget(), SIGNAL(viewButtonTriggered(bool)), this, SLOT(setMatrixViewEnabled(bool)));
 }
 
 void ResourceWidget::connectActivities() {

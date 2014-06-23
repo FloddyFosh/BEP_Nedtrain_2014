@@ -60,7 +60,7 @@ void Controller::startPaintingFramePrecedences(QList<Precedence *> precedences) 
 }
 
 QColor Controller::getColorFor(QString tag) {
-    return colorGenerator->colorFor(tag);
+    return colorGenerator.colorFor(tag);
 }
 
 void Controller::autoClearPrecedences() {

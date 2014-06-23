@@ -4,6 +4,8 @@
 #include "widgets/dialogs/listformdialog.h"
 #include "solve/solver.h"
 
+#include <QFormLayout>
+
 class Controller;
 
 /**
@@ -22,10 +24,16 @@ class SolverConfigDialog : public ListFormDialog
     QLineEdit *binaryEdit;
     QPushButton *browseButton;
     QLineEdit *argumentsEdit;
+    QHBoxLayout *binaryLayout;
+    QVBoxLayout *rightLayout;
+    QFormLayout *form;
 
     Solver *current;
     
     Controller * controller;
+
+    void createLayout();
+    void createSignals();
 
     /**
      * Loads solvers into dialog.

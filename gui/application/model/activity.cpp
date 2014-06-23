@@ -163,7 +163,6 @@ Requirement* Activity::setRequiredAmount(Resource *r, int amount) {
 }
 
 void Activity::removeRequiredAmounts() {
-    requirements.clear();
     foreach(Requirement * req, getRequirements())
         req->resource()->removeActivity(req);
 }

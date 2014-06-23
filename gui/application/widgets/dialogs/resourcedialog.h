@@ -29,6 +29,8 @@ class ResourceDialog : public FormDialog
     QListWidget* decreaseList;
     QVBoxLayout* getDecreaseLayout();
 
+    void createLayout(Resource *r);
+
 public:
     /**
      * Constructor. Pass an instance object and a job that belongs to this instance

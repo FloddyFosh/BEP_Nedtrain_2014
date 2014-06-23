@@ -28,6 +28,10 @@ ActivityWidget::ActivityWidget(Activity *a, InstanceController *controller, JobW
     diff = false;
     color = Qt::gray;
 
+    createSignals(a);
+}
+
+void ActivityWidget::createSignals(Activity *a) {
     connect(a, SIGNAL(activityChanged()), this, SLOT(updateGeometry()));
     connect(a, SIGNAL(activityChanged()), this, SLOT(updateToolTip()));
     connect(this, SIGNAL(activitySelected(ActivityWidget *)), this, SLOT(showDependencies()));

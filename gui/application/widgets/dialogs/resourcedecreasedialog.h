@@ -4,8 +4,10 @@
 #include <QDialog>
 #include <QLineEdit>
 #include <QSpinBox>
+#include <QFormLayout>
+#include <QDialogButtonBox>
 
-#include "../../model/instance.h"
+#include "model/instance.h"
 
 /**
  * Dialog for creating or editing resources. Pass a NULL pointer for the resource object
@@ -16,18 +18,24 @@
 class ResourceDecreaseDialog : public QDialog
 {
     Q_OBJECT
-    Resource *resource;
-    Instance *instance;
 
-public:
-    ResourceDecreaseDialog(Instance*, Resource*, QWidget*);
-
-private:
+    QFormLayout *formlayout;
     QSpinBox *capacityEdit, *fromEdit, *tillEdit;
     QDateTimeEdit *fromDateTimeEdit;
     QDateTimeEdit *toDateTimeEdit;
     QSpinBox *fromDayEdit;
     QSpinBox *toDayEdit;
+    QDialogButtonBox *buttonbox;
+    QVBoxLayout* boxlayout;
+
+    Resource *resource;
+    Instance *instance;
+
+    void createLayout(Instance *instance, Resource *res);
+    void createSignals();
+
+public:
+    ResourceDecreaseDialog(Instance*, Resource*, QWidget*);
 
 private slots:
     /**

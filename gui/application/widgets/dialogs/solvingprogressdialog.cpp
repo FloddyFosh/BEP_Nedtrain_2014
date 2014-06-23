@@ -13,44 +13,49 @@
 SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController *controller, QWidget *parent) :
     QDialog(parent), solver (solver), controller (controller), instance (controller->getInstance())
 {
-    // create ui
     setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("%1 Solver").arg(solver->getName()));
     setWindowIcon(AppIcon("icon.png"));
 
+    statusLabel = new QLabel;
+    hbox = new QHBoxLayout;
+    progressBar = new QProgressBar;
+    outcomeLabel = new QLabel;
+    infoLabel = new QLabel;
+    moreButton = new QPushButton(tr("More..."));
+    buttonbox = new QDialogButtonBox;
+    log = new QTextEdit;
+    vbox = new QVBoxLayout;
+
+    createLayout();
+    createSignals();
+
+    // start solving
     numSoftPrecedences = 0;
     foreach(Precedence* p, instance->getSoftPrecedences()){
         if(!p->isDisabled()) numSoftPrecedences++;
     }
 
-    statusLabel = new QLabel;
+    QApplication::setOverrideCursor(Qt::BusyCursor);
+    controller->disconnectActivitiesFromResourceWidgets();
+    solver->start(instance);
+}
 
-    QHBoxLayout *hbox = new QHBoxLayout;
+void SolvingProgressDialog::createLayout() {
     hbox->addWidget(new QLabel(tr("Status:")));
     hbox->addWidget(statusLabel, 1);
 
-    progressBar = new QProgressBar;
     progressBar->setRange(0, 0);
     progressBar->setFixedWidth(500);
 
-    outcomeLabel = new QLabel;
-    infoLabel = new QLabel;
-
-    // more or less button
-    moreButton = new QPushButton(tr("More..."));
     moreButton->setCheckable(true);
     moreButton->setDefault(true);
-
-    // buttons layout
-    buttonbox = new QDialogButtonBox;
     cancelButton = buttonbox->addButton(QDialogButtonBox::Cancel);
     buttonbox->addButton(moreButton, QDialogButtonBox::ActionRole);
 
-    log = new QTextEdit;
     log->setVisible(false);
     log->setReadOnly(true);
 
-    QVBoxLayout *vbox = new QVBoxLayout;
     vbox->setSizeConstraint(QLayout::SetFixedSize);
     vbox->addLayout(hbox);
     vbox->addWidget(progressBar);
@@ -60,8 +65,9 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     vbox->addWidget(buttonbox);
 
     setLayout(vbox);
+}
 
-    // connect signals
+void SolvingProgressDialog::createSignals() {
     connect(buttonbox, SIGNAL(rejected()), solver, SLOT(cancel()));
     connect(buttonbox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(moreButton, SIGNAL(toggled(bool)), this, SLOT(toggleMoreOrLess(bool)));
@@ -71,11 +77,6 @@ SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController 
     connect(solver, SIGNAL(progressMade(int)), this, SLOT(setProgress(int)));
     connect(solver, SIGNAL(finished(QProcess::ExitStatus)), this, SLOT(solverFinished(QProcess::ExitStatus)));
     connect(solver, SIGNAL(peak(int,int)), controller, SLOT(peak(int,int)));
-
-    // start solving
-    QApplication::setOverrideCursor(Qt::BusyCursor);
-    controller->disconnectActivitiesFromResourceWidgets();
-    solver->start(instance);
 }
 
 void SolvingProgressDialog::toggleMoreOrLess(bool more) {
