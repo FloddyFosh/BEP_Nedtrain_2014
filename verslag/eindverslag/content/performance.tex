@@ -56,7 +56,7 @@ Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, hee
 
 \subsection{Flexibiliteit}
 \label{subsec:flexibiliteit}
-De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is hoe beter de flexibiliteit is verdeeld over de activiteiten.
+De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is, hoe beter de flexibiliteit is verdeeld over de activiteiten.
 
 \begin{align}
 \label{eq:mse}
@@ -67,7 +67,7 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} worden telkens twee methoden vergeleken in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Waarbij de Interior Point methode wordt afgekort tot IP en de Simplex methode wordt afgekort tot S. Met methode $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met methode $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} worden telkens twee methoden vergeleken in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Hierbij wordt de Interior Point methode afgekort tot IP en de Simplex methode tot S. Met methode $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met methode $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
 
 \begin{table}[H]
     \centering
@@ -87,7 +87,40 @@ Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste v
 
 Met behulp van Tabel \ref{tbl:performanceflexver} waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse} kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Dus IP$_2$ heeft de beste verdeling van flexibiliteit, daarna komen van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
 
-De totale flexibiliteit is ook een belangrijk aspect waarmee de prestatie van de solver gemeten kan worden. En de opdrachtgever vindt het belangrijk dat de totale flexibiliteit niet lijdt onder de verdeling van de flexibiliteit. Aangezien de totale flexibiliteit van methode $1$ bij elke probleeminstantie groter of gelijk aan de totale flexibiliteit van methode $2$ is, kiezen wij voor methode $1$ in combinatie met Interior Point methode (IP$_1$). We hebben dan niet de beste verdeling van flexibiliteit, maar wel grootste totale flexibiliteit.
+De totale flexibiliteit is ook een belangrijk aspect waarmee de prestatie van de solver gemeten kan worden. Bovendien vindt de opdrachtgever het belangrijk dat de totale flexibiliteit niet lijdt onder de verdeling hiervan. Aangezien de totale flexibiliteit van methode $1$ bij elke probleeminstantie groter of gelijk aan de totale flexibiliteit van methode $2$ is, kiezen wij voor methode $1$ in combinatie met Interior Point methode (IP$_1$). Hiermee wordt niet de beste verdeling van flexibiliteit bereikt, maar wel grootste totale flexibiliteit.
 
 \subsection{Chaining}
-TODO: Hier komt nog een analyse van de verschillende methodes van chaining om een chain te selecteren. 
+Een belangrijk deel van het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is de methode $SelectChain(v_i,r_j)$. Voor deze methode zijn ook in paragraaf \ref{subsubsec:chainingoplossing} drie verschillende oplossingen genoemd: het kiezen van een willekeurige chain, het kiezen van de eerste geschikte chain en het gebruiken van de heuristiek beschreven in paragraaf \ref{subsubsec:chainingoplossing}. Deze drie methoden zullen nu vergeleken worden op het gebied van de flexibiliteit en het aantal toegevoegde voorrangsrelaties. Het is daarbij het best om het aantal voorrangsrelaties te minimaliseren en de flexibiliteit te maximaliseren.
+
+Er is gebruik gemaakt van vier verschillende verzamelingen instanties: J30, J60, J90 en J120. Deze instanties bevatten respectievelijk 30, 60, 90 en 120 projecten met in totaal 64, 124, 184 en 244 taken. De resultaten van deze analyse zijn te zien in Tabel \ref{tab:selectChainAnalyse}, waarbij cellen onder V het gemiddeld aantal toegevoegde voorrangsrelaties bevatten en cellen onder F de gemiddelde flexibiliteit.
+
+\begin{table}[H]
+\label{tab:selectChainAnalyse}
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{l|l|l|l|l|l|l|l|l|}
+\cline{2-9} & \multicolumn{2}{c|}{J30} & \multicolumn{2}{c|}{J60} & \multicolumn{2}{c|}{J90} & \multicolumn{2}{c|}{J120} \\ \cline{2-9} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} \\ \hline
+\multicolumn{1}{|l|}{Willekeurige chain} & 92,2 & 527,5 & 257,4 & 1829,5 & 453,1 & 3744,7 & 585,4 & 4002,4 \\ \hline
+\multicolumn{1}{|l|}{Eerste chain} & 47,5 & 543,2 & 119,8 & 1898,3 & 208,7 & 3789,6 & 300,2 & 4051,6 \\ \hline
+\multicolumn{1}{|l|}{Heuristiek} & 47,6 & 542,8 & 120,0 & 1900,2 & 199,1 & 3894,0 & 300,4 & 4211,4 \\ \hline
+\end{tabular}
+\caption{Resultaten van de analyse van de drie verschillende $SelectChain$ methoden.}
+\end{table}
+
+Het is duidelijk te zien dat het kiezen van een willekeurige chain slechter is dan de twee andere methoden, omdat hierbij voor elke verzameling instanties het aantal voorrangsrelaties groter is en de flexibiliteit kleiner. Om de resterende twee methoden te vergelijken, wordt er gekeken naar de procentuele verbetering ten opzichte van het kiezen van een willekeurige chain. De resultaten hiervan zijn weergegeven in Tabel \ref{tab:selectChainProcenten}.
+
+\begin{table}[H]
+\label{tab:selectChainProcenten}
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{l|l|l|l|l|l|l|l|l|}
+\cline{2-9} & \multicolumn{2}{c|}{J30} & \multicolumn{2}{c|}{J60} & \multicolumn{2}{c|}{J90} & \multicolumn{2}{c|}{J120} \\ \cline{2-9} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} \\ \hline
+\multicolumn{1}{|l|}{Eerste chain} &
+48.5 & 3.0 & 53.5 & 3.8 & 53.9 & 1.2 & 48.7 & 1.2 \\ \hline
+\multicolumn{1}{|l|}{Heuristiek} &
+48.4 & 2.9 & 53.4 & 3.9 & 56.1 & 4.0 & 48.7 & 5.2 \\ \hline
+\end{tabular}
+\caption{Procentuele verbetering van de bovenstaande methoden ten opzichte van het selecteren van een willekeurige chain.}
+\end{table}
+
+Het blijkt uit Tabel \ref{tab:selectChainProcenten} dat de 'Eerste chain'-methode en de heuristiek voor kleine instanties, J30 en J60, nauwelijks in resultaat verschillen. Het verschil tussen beide methoden is voor deze instanties maar $\pm 0.1\%$ ten opzichte van de 'Willekeurige chain'-methode. Bij grotere instanties, J90 en J120, zijn de verschillen echter wel merkbaar.
