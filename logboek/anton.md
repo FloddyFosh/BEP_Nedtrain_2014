@@ -40,4 +40,9 @@ Datum      | Uren   | Beschrijving
 12-06-2014 | 9.5    | Eindverslag
 13-06-2014 | 11     | Eindverslag, eindverslag, eindverslag en ook nog een paar tests
 16-06-2014 | 8      | Verlagen van resource op interval, fixen bug met locken
-17-06-2014 |        |
+17-06-2014 | 7.5    |
+18-06-2014 | 8      |
+19-06-2014 | 8      | Nieuwe resource view
+20-06-2014 | 7.5    | Nieuwe resource view
+21-06-2014 | 3.5    | Fixen van chaining en instance tests
+22-06-2014 | 6      | Fixen van selectChain heuristiek en segfault, verder aan verslag

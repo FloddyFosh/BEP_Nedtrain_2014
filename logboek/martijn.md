@@ -44,3 +44,5 @@ Datum      | Uren   | Beschrijving
 17-06-2014 | 7      | Demo
 18-06-2014 | 8      | Implementeren en vergelijken van Interior Point en Simplex methode. 
 19-06-2014 | 7      | Verslag
+20-06-2014 | 7      | Tests en verslag
+22-06-2014 | 4      | Tests en verslag
