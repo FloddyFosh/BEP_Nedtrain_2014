@@ -38,7 +38,9 @@ We hebben deze sprint veel tijd moeten besteden aan het verslag, maar we hebben 
 Aan het begin van deze sprint gaan we weer een demo doen, zodat de klant kan zien waar het product nu staat. 
 
 \textbf{Terugblik} \\
-TODO: 
+Na de demo hebben wij besloten om nog \'e\'en laatste feature te implementeren. Dit is de rooster feature, die de werking van het chaining algoritme duidelijk maaakt. Verder hebben we een aantal bugs verholpen en het verslag afgemaakt. 
+
+TODO: Sprint 6
 
 \subsection{Hulpmiddelen}
 \subsubsection{Versiebeheer}
@@ -53,7 +55,33 @@ Het project had, voordat wij dit hebben uitgebreid, al een flinke hoeveelheid te
 
 Alle tests die zijn gemaakt maken gebruiken van het Google Test framework. Dit was erg prettig in gebruik en het uitbreiden van de testsuite ging redelijk eenvoudig. We hebben er voor gekozen om voor de solver een apparte testsuite te maken en deze niet te integreren met de bestaande testsuite voor de interface. Dit heeft als voordeel dat de testsuites net als de interface en solver zelf appart gebruikt kunnen worden. 
 
-Om te zien of onze testsuite uitgebreid genoeg is hebben we de \emph{Code Coverage Tool} \texttt{gcovr} gebruikt. Deze tool geeft per bestand hoeveel regels code er is uitgevoerd door de testsuite. 
+Om te zien of onze testsuite uitgebreid genoeg is hebben we de \emph{Code Coverage Tool} \texttt{gcovr} gebruikt. Deze tool geeft per bestand aan hoeveel regels code en branches er zijn uitgevoerd door de testsuite. De resultaten van de analyse van deze tool zijn te vinden in Tabel \ref{tbl:covr-solver}. Het percentage branches dat wordt getest door de testsuite met een gemiddelde van $56,1\%$ te laag. Het percentage van regels code dat wordt getest door de testsuite is met een gemiddelde van $76,\%$ wel redelijk.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | r | r |}
+        \hline
+        Bestand & \midden{Regels} & \midden{Branches} \\
+        \hline
+        \texttt{chaining.cpp}    & $87,2\%$   & $58,1\%$ \\ 
+        \texttt{constraints.cpp} & $100,0\%$  & $56,6\%$ \\
+        \texttt{esta\_plus.cpp}  & $69,3\%$   & $56,0\%$ \\
+        \texttt{exceptions.cpp}  & $62,5\%$   & $50,0\%$ \\
+        \texttt{flexibility.cpp} & $99,0\%$   & $53,2\%$ \\
+        \texttt{heap.cpp}        & $54,7\%$   & $58,3\%$ \\
+        \texttt{output.cpp}      & $68,8\%$   & $50,0\%$ \\
+        \texttt{solve.cpp}       & $65,2\%$   & $50,0\%$ \\
+        \texttt{stjn.cpp}        & $68,9\%$   & $57,8\%$ \\
+        \texttt{timing.cpp}      & $79,6\%$   & $63,6\%$ \\
+        \texttt{tmsp.cpp}        & $95,5\%$   & $55,9\%$ \\
+        \hline
+        \hline
+        Gemiddelde               & $76,8\%$   & $56,1\%$ \\
+        \hline
+    \end{tabular}
+    \caption{Code coverage van Solver}
+    \label{tbl:covr-solver}
+\end{table}
 
 \subsubsection{Qt}
 TODO: Qt
@@ -72,7 +100,7 @@ Aan het eind van sprint 5 is al onze code opgestuurd naar de Software Improvemen
 \item \textbf{Component independence} - Er moet gestreefd worden naar zo veel mogelijk componenten die niet aangeroepen worden door componenten van andere modules. Alleen interface klassen zouden de communicatie tussen verschillende modules moeten regelen.
 \end{itemize}
 
-Van de code die op vrijdag 13 juni is opgestuurd, is het het volgende commentaar op ontvangen.
+Van de code die op vrijdag 13 juni is opgestuurd, is het volgende commentaar op ontvangen.
 
 \begin{tabular}{p{0.5cm} | p{\textwidth - 2cm} |}
 \cline{2-2}
