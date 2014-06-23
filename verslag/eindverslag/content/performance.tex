@@ -11,7 +11,7 @@ In dit hoofdstuk een analyse van de looptijd van de solver. Aangezien de opdrach
 
 In de Tabellen \ref{tbl:xxl+output} en \ref{tbl:xxl-output} is de duur van de verschillende onderdelen van de solver te vinden. De totale looptijd van de solver zou nog lager kunnen door de hoeveel informatie dat naar \texttt{stdout} wordt gestuurd te verlagen. Dit zou dan niet meer dan 10 seconden kunnen opleveren voor de xxl-instantie. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner.
 
-Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, heeft het grootste aandeel in de totale looptijd. In de huidige solver wordt de Interior Point methode gebruikt voor het oplossen van LP-problemen, deze is minder dan snel dan de Simplex methode. Uit metingen is gebleken dat de Simplex methode nagenoeg geen tijd kost, dus dit zou een grote snelheidswinst kunnen opleveren. De consequenties van het gebruik van de Simplex methode wordt besproken in Sectie \ref{subsec:flexibiliteit} \nameref{subsec:flexibiliteit}.
+Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, heeft het grootste aandeel in de totale looptijd. In de huidige solver wordt de Interior Point methode gebruikt voor het oplossen van LP-problemen, deze is minder dan snel dan de Simplex methode. Uit metingen is gebleken dat de Simplex methode nagenoeg geen tijd kost, dus dit zou een grote snelheidswinst kunnen opleveren. De consequenties van het gebruik van de Simplex methode worden besproken in paragraaf \ref{subsec:flexibiliteit} \nameref{subsec:flexibiliteit}.
 
 \begin{table}[H]
 \parbox{.45\linewidth}{
@@ -20,13 +20,13 @@ Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, hee
         \hline
                     & Looptijd ($s$)  & Percentage ($\%$) \\
         \hline
-        Parsing     &  $0.132556$     & $0,3$   \\
-        STJN        &  $0.003002$     & $0,0$   \\
-        ESTA$^+$    & $11.447062$     & $23,3$  \\
-        Chaining    &  $1.109195$     & $2,3$   \\
-        LP          & $36.464763$     & $74,2$  \\
+        Parsing     &  $0,132556$     & $0,3$   \\
+        STJN        &  $0,003002$     & $0,0$   \\
+        ESTA$^+$    & $11,447062$     & $23,3$  \\
+        Chaining    &  $1,109195$     & $2,3$   \\
+        LP          & $36,464763$     & $74,2$  \\
         \hline \hline
-        Totaal      & $49.156718$     & $100,0$ \\
+        Totaal      & $49,156718$     & $100,0$ \\
         \hline
     \end{tabular}
     \caption{xxl-instance met output}
@@ -39,13 +39,13 @@ Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, hee
         \hline
                     & Looptijd ($s$)& Percentage ($\%$) \\
         \hline
-        Parsing     &  $0.009821$      &  $0,0$  \\
-        STJN        &  $0.002505$      &  $0,0$  \\
-        ESTA$^+$    &  $1.533199$      &  $3,9$  \\
-        Chaining    &  $0.843122$      &  $2,6$  \\
-        LP          & $36.445771$      & $93,8$  \\
+        Parsing     &  $0,009821$      &  $0,0$  \\
+        STJN        &  $0,002505$      &  $0,0$  \\
+        ESTA$^+$    &  $1,533199$      &  $3,9$  \\
+        Chaining    &  $0,843122$      &  $2,6$  \\
+        LP          & $36,445771$      & $93,8$  \\
         \hline \hline
-        Totaal      & $38.834843$      & $100,0$ \\
+        Totaal      & $38,834843$      & $100,0$ \\
         \hline
     \end{tabular}
     \caption{xxl-instance zonder output}
@@ -53,8 +53,49 @@ Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, hee
 }
 \end{table}
 
-
 \subsection{Flexibiliteit}
+Om ervoor te zorgen dat de schema's die door de solver berekend worden zo flexibel mogelijk zijn, worden er verschillende methoden geanalyseerd voor de onderdelen van het proces dat de solver doorloopt. De nieuwe onderdelen hiervan zijn het chaining algoritme en het berekenen van flexibiliteitsintervallen, dus deze zullen in deze paragraaf geanalyseerd worden. 
+
+\subsubsection{Chaining}
+\label{subsubsec:chaininganalyse}
+Een belangrijk deel van het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is de methode $SelectChain(v_i,r_j)$. Voor deze methode zijn ook in paragraaf \ref{subsubsec:chainingoplossing} drie verschillende oplossingen genoemd: het kiezen van een willekeurige chain, het kiezen van de eerste geschikte chain en het gebruiken van de heuristiek beschreven in paragraaf \ref{subsubsec:chainingoplossing}. Deze drie methoden zullen nu vergeleken worden op het gebied van de flexibiliteit en het aantal toegevoegde voorrangsrelaties. Het is daarbij het best om het aantal voorrangsrelaties te minimaliseren en de flexibiliteit te maximaliseren.
+
+Er is gebruik gemaakt van vier verschillende verzamelingen instanties: 480 J30-instanties, 480 J60-instanties, 480 J90-instanties en 600 J120-instanties. Deze instanties bevatten respectievelijk 30, 60, 90 en 120 projecten met in totaal 64, 124, 184 en 244 taken. De resultaten van deze analyse zijn te zien in Tabel \ref{tab:selectChainAnalyse}, waarbij cellen onder V het gemiddeld aantal toegevoegde voorrangsrelaties bevatten en cellen onder F de gemiddelde flexibiliteit.
+
+\begin{table}[H]
+\label{tab:selectChainAnalyse}
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{l|l|l|l|l|l|l|l|l|}
+\cline{2-9} & \multicolumn{2}{c|}{J30} & \multicolumn{2}{c|}{J60} & \multicolumn{2}{c|}{J90} & \multicolumn{2}{c|}{J120} \\ \cline{2-9} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} \\ \hline
+\multicolumn{1}{|l|}{Willekeurige chain} & 92,2 & 527,5 & 257,4 & 1829,5 & 453,1 & 3744,7 & 585,4 & 4002,4 \\ \hline
+\multicolumn{1}{|l|}{Eerste chain} & 47,5 & 543,2 & 119,8 & 1898,3 & 208,7 & 3789,6 & 300,2 & 4051,6 \\ \hline
+\multicolumn{1}{|l|}{Heuristiek} & 47,6 & 542,8 & 120,0 & 1900,2 & 199,1 & 3894,0 & 300,4 & 4211,4 \\ \hline
+\end{tabular}
+\caption{Resultaten van de analyse van de drie verschillende $SelectChain$ methoden.}
+\end{table}
+
+Het is duidelijk te zien dat het kiezen van een willekeurige chain slechter is dan de twee andere methoden, omdat hierbij voor elke verzameling instanties het aantal voorrangsrelaties groter is en de flexibiliteit kleiner. Om de resterende twee methoden te vergelijken, wordt er gekeken naar de procentuele verbetering ten opzichte van het kiezen van een willekeurige chain. De resultaten hiervan zijn weergegeven in Tabel \ref{tab:selectChainProcenten}.
+
+\begin{table}[H]
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{l|l|l|l|l|l|l|l|l|}
+\cline{2-9} & \multicolumn{2}{c|}{J30} & \multicolumn{2}{c|}{J60} & \multicolumn{2}{c|}{J90} & \multicolumn{2}{c|}{J120} \\ \cline{2-9} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} \\ \hline
+\multicolumn{1}{|l|}{Eerste chain} &
+48,5 $\%$ & 3,0 $\%$ & 53,5 $\%$ & 3,8 $\%$ & 53,9 $\%$ & 1,2 $\%$ & 48,7 $\%$ & 1,2 $\%$ \\ \hline
+\multicolumn{1}{|l|}{Heuristiek} &
+48,4 $\%$ & 2,9 $\%$ & 53,4 $\%$ & 3,9 $\%$ & 56,1 $\%$ & 4,0 $\%$ & 48,7 $\%$ & 5,2 $\%$ \\ \hline
+\end{tabular}
+\caption{Procentuele verbetering van de bovenstaande methoden ten opzichte van het selecteren van een willekeurige chain.}
+\label{tab:selectChainProcenten}
+\end{table}
+
+Het blijkt uit Tabel \ref{tab:selectChainProcenten} dat de 'Eerste chain'-methode en de heuristiek voor kleine instanties, J30 en J60, nauwelijks in resultaat verschillen. Het verschil tussen beide methoden is voor deze instanties maar $\pm 0.1\%$ ten opzichte van de 'Willekeurige chain'-methode. Bij grotere instanties, J90 en J120, wordt er echter wel een duidelijk verschil in de flexibiliteit merkbaar. Hierbij is de flexibiliteit van de heuristiek bij J90-instanties gemiddeld 2.8$\%$ en bij J120- instanties 4.0$\%$ beter. Het aantal voorrangsrelaties dat toegevoegd wordt, is bij de J120-instanties echter wel praktisch gelijk.
+
+Hoewel het verschil tussen de 'Eerste chain'-methode en de heuristiek erg klein is, wordt de flexibiliteit van de heuristische methode wel groter naarmate de grootte van de instantie toeneemt. Aangezien NedTrain veel te maken heeft met instanties die zeker zo groot zijn als de J20-instanties, is dit dus een positieve eigenschap van de heuristiek. Er is uiteindelijk dus voor gekozen om deze heuristiek te gebruiken, maar ook de andere methoden zijn ge\"implementeerd en hierop kan gemakkelijk overgeschakeld worden door een simpele aanpassing in de source code.
+
+\subsubsection{Linear Programming}
 \label{subsec:flexibiliteit}
 De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is, hoe beter de flexibiliteit is verdeeld over de activiteiten.
 
@@ -88,39 +129,3 @@ Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste v
 Met behulp van Tabel \ref{tbl:performanceflexver} waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse} kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Dus IP$_2$ heeft de beste verdeling van flexibiliteit, daarna komen van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
 
 De totale flexibiliteit is ook een belangrijk aspect waarmee de prestatie van de solver gemeten kan worden. Bovendien vindt de opdrachtgever het belangrijk dat de totale flexibiliteit niet lijdt onder de verdeling hiervan. Aangezien de totale flexibiliteit van methode $1$ bij elke probleeminstantie groter of gelijk aan de totale flexibiliteit van methode $2$ is, kiezen wij voor methode $1$ in combinatie met Interior Point methode (IP$_1$). Hiermee wordt niet de beste verdeling van flexibiliteit bereikt, maar wel grootste totale flexibiliteit.
-
-\subsection{Chaining}
-Een belangrijk deel van het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is de methode $SelectChain(v_i,r_j)$. Voor deze methode zijn ook in paragraaf \ref{subsubsec:chainingoplossing} drie verschillende oplossingen genoemd: het kiezen van een willekeurige chain, het kiezen van de eerste geschikte chain en het gebruiken van de heuristiek beschreven in paragraaf \ref{subsubsec:chainingoplossing}. Deze drie methoden zullen nu vergeleken worden op het gebied van de flexibiliteit en het aantal toegevoegde voorrangsrelaties. Het is daarbij het best om het aantal voorrangsrelaties te minimaliseren en de flexibiliteit te maximaliseren.
-
-Er is gebruik gemaakt van vier verschillende verzamelingen instanties: J30, J60, J90 en J120. Deze instanties bevatten respectievelijk 30, 60, 90 en 120 projecten met in totaal 64, 124, 184 en 244 taken. De resultaten van deze analyse zijn te zien in Tabel \ref{tab:selectChainAnalyse}, waarbij cellen onder V het gemiddeld aantal toegevoegde voorrangsrelaties bevatten en cellen onder F de gemiddelde flexibiliteit.
-
-\begin{table}[H]
-\label{tab:selectChainAnalyse}
-\centering
-\def\arraystretch{1.5}
-\begin{tabular}{l|l|l|l|l|l|l|l|l|}
-\cline{2-9} & \multicolumn{2}{c|}{J30} & \multicolumn{2}{c|}{J60} & \multicolumn{2}{c|}{J90} & \multicolumn{2}{c|}{J120} \\ \cline{2-9} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} \\ \hline
-\multicolumn{1}{|l|}{Willekeurige chain} & 92,2 & 527,5 & 257,4 & 1829,5 & 453,1 & 3744,7 & 585,4 & 4002,4 \\ \hline
-\multicolumn{1}{|l|}{Eerste chain} & 47,5 & 543,2 & 119,8 & 1898,3 & 208,7 & 3789,6 & 300,2 & 4051,6 \\ \hline
-\multicolumn{1}{|l|}{Heuristiek} & 47,6 & 542,8 & 120,0 & 1900,2 & 199,1 & 3894,0 & 300,4 & 4211,4 \\ \hline
-\end{tabular}
-\caption{Resultaten van de analyse van de drie verschillende $SelectChain$ methoden.}
-\end{table}
-
-Het is duidelijk te zien dat het kiezen van een willekeurige chain slechter is dan de twee andere methoden, omdat hierbij voor elke verzameling instanties het aantal voorrangsrelaties groter is en de flexibiliteit kleiner. Om de resterende twee methoden te vergelijken, wordt er gekeken naar de procentuele verbetering ten opzichte van het kiezen van een willekeurige chain. De resultaten hiervan zijn weergegeven in Tabel \ref{tab:selectChainProcenten}.
-
-\begin{table}[H]
-\label{tab:selectChainProcenten}
-\centering
-\def\arraystretch{1.5}
-\begin{tabular}{l|l|l|l|l|l|l|l|l|}
-\cline{2-9} & \multicolumn{2}{c|}{J30} & \multicolumn{2}{c|}{J60} & \multicolumn{2}{c|}{J90} & \multicolumn{2}{c|}{J120} \\ \cline{2-9} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} & \midden{V} & \midden{F} \\ \hline
-\multicolumn{1}{|l|}{Eerste chain} &
-48,5 $\%$ & 3,0 $\%$ & 53,5 $\%$ & 3,8 $\%$ & 53,9 $\%$ & 1,2 $\%$ & 48,7 $\%$ & 1,2 $\%$ \\ \hline
-\multicolumn{1}{|l|}{Heuristiek} &
-48,4 $\%$ & 2,9 $\%$ & 53,4 $\%$ & 3,9 $\%$ & 56,1 $\%$ & 4,0 $\%$ & 48,7 $\%$ & 5,2 $\%$ \\ \hline
-\end{tabular}
-\caption{Procentuele verbetering van de bovenstaande methoden ten opzichte van het selecteren van een willekeurige chain.}
-\end{table}
-
-Het blijkt uit Tabel \ref{tab:selectChainProcenten} dat de 'Eerste chain'-methode en de heuristiek voor kleine instanties, J30 en J60, nauwelijks in resultaat verschillen. Het verschil tussen beide methoden is voor deze instanties maar $\pm 0.1\%$ ten opzichte van de 'Willekeurige chain'-methode. Bij grotere instanties, J90 en J120, wordt er echter wel een duidelijk verschil in de flexibiliteit merkbaar. Hierbij is de flexibiliteit van de heuristiek bij J90 instanties gemiddeld $2.8\%$ en bij J120 instanties $4.0\%$ beter. Het aantal voorrangsrelaties dat 
