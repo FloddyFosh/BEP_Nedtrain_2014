@@ -177,8 +177,6 @@ void add_frame() {
     output("STATE:");
     FOREACH(activities, it){
         activity* act = *it;
-        //stjn_update_est(activity_to_node[act]);
-        //stjn_update_lst(activity_to_node[act]);
         int i = act->i, j = act->j;
         activity* a = A(i,j);
         output(" %d %d %d %d", i, a->est, a->lst + a->flex, (len(a->groupchilds)+1));
@@ -234,7 +232,6 @@ bool chaining() {
         if((*it)->isHard) newPrecedences.push_back(*it);
     }
     tmsp->precedences = newPrecedences;
-    int numHardPrecs = len(newPrecedences);
 
     initializeActivities();
     sort(activities.begin(), activities.end(), compareEST);
@@ -277,6 +274,5 @@ bool chaining() {
             }
         }
     }
-    //fprintf(stderr,"Precedences posted: %d\n",len(tmsp->precedences)-numHardPrecs);
     return true;
 }
