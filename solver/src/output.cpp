@@ -5,9 +5,10 @@
 
 void cdebug(string format, ...) {
     va_list args;
-
     va_start(args, format);
-    vfprintf(stderr, format.c_str(), args);
+    char err[8096];
+    vsprintf(err, format.c_str(), args);
+    cerr << err;
     va_end(args);
 }
 
