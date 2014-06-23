@@ -1,4 +1,7 @@
-#include "widgets/requirementstable.h"
+#include "requirementstable.h"
+
+#include "model/instance.h"
+#include "model/activitytemplate.h"
 
 #include <QLabel>
 #include <QHeaderView>

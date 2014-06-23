@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-
+#include "widgets/mainwindow.h"
 #include "controller/controller.h"
 #include "util/language.h"
 

@@ -1,4 +1,6 @@
 #include "resourceheaderwidget.h"
+
+#include "instancewidget.h"
 #include "dialogs/resourcedialog.h"
 #include "dialogs/scrollfilter.h"
 #include "widgets/app_icon.h"
@@ -10,30 +12,41 @@ ResourceHeaderWidget::ResourceHeaderWidget(Resource *r, InstanceController *cont
     HeaderWidget(parent), _resource(r), controller(controller), highLighted(false)
 {
     nameLabel = new QLabel(_resource->name(), this);
+    spinBox = new FilteredSpinBox(this);
+    removeButton = new QPushButton(AppIcon("remove.png"),"", this);
+    editButton = new QPushButton(AppIcon("edit.png"),"", this);
+    downButton = new QPushButton(AppIcon("down.png"),"", this);
+    upButton = new QPushButton(AppIcon("up.png"),"", this);
+
+    createLayout();
+    createSignals();
+}
+
+QSize ResourceHeaderWidget::sizeHint() const {
+    int vZoom = 10;
+    return QSize(0, 8 * vZoom);
+}
+
+void ResourceHeaderWidget::createLayout() {
     nameLabel->setTextFormat(Qt::PlainText);
     nameLabel->setGeometry(35, 0, 300, 30);
 
-    spinBox = new FilteredSpinBox(this);
     spinBox->setGeometry(35, 100, 20, 30);
     spinBox->setValue(_resource->capacity());
     spinBox->setFocusPolicy(Qt::StrongFocus);
 
-    removeButton = new QPushButton(AppIcon("remove.png"),"", this);
     removeButton->setGeometry(10, 5, 10, 10);
     removeButton->setFlat(true);
     removeButton->setFocusPolicy(Qt::NoFocus);
 
-    editButton = new QPushButton(AppIcon("edit.png"),"", this);
     editButton->setGeometry(10, 5, 10, 10);
     editButton->setFlat(true);
     editButton->setFocusPolicy(Qt::NoFocus);
 
-    downButton = new QPushButton(AppIcon("down.png"),"", this);
     downButton->setGeometry(10, 5, 10, 10);
     downButton->setFlat(true);
     downButton->setFocusPolicy(Qt::NoFocus);
 
-    upButton = new QPushButton(AppIcon("up.png"),"", this);
     upButton->setGeometry(10, 5, 10, 10);
     upButton->setFlat(true);
     upButton->setFocusPolicy(Qt::NoFocus);
@@ -47,26 +60,6 @@ ResourceHeaderWidget::ResourceHeaderWidget(Resource *r, InstanceController *cont
     setBackgroundRole(QPalette::Background);
     setAutoFillBackground(true);
 
-    createLayout();
-
-    //connect spinbox signal
-    connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(changeAmount(int)));
-
-    //connect edit and remove button
-    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeResource()));
-    connect(editButton, SIGNAL(clicked()), this, SLOT(editResource()));
-
-    //connect up and down button
-    connect(upButton, SIGNAL(clicked()), this, SLOT(upResource()));
-    connect(downButton, SIGNAL(clicked()), this, SLOT(downResource()));
-}
-
-QSize ResourceHeaderWidget::sizeHint() const {
-    int vZoom = 10;
-    return QSize(0, 8 * vZoom);
-}
-
-void ResourceHeaderWidget::createLayout() {
     QHBoxLayout *layout = new QHBoxLayout();
     layout->setSpacing(0);
     layout->setContentsMargins(10,5,0,0);
@@ -78,6 +71,19 @@ void ResourceHeaderWidget::createLayout() {
     layout->addWidget(editButton, 0, Qt::AlignTop|Qt::AlignRight);
     layout->addWidget(removeButton, 0, Qt::AlignTop|Qt::AlignRight);
     setLayout(layout);
+}
+
+void ResourceHeaderWidget::createSignals() {
+    //connect spinbox signal
+    connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(changeAmount(int)));
+
+    //connect edit and remove button
+    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeResource()));
+    connect(editButton, SIGNAL(clicked()), this, SLOT(editResource()));
+
+    //connect up and down button
+    connect(upButton, SIGNAL(clicked()), this, SLOT(upResource()));
+    connect(downButton, SIGNAL(clicked()), this, SLOT(downResource()));
 }
 
 void ResourceHeaderWidget::changeAmount(int value) {

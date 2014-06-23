@@ -16,6 +16,8 @@ class ListFormDialog : public QDialog {
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLayout *rightPanel;
+
+    void createLayout();
 public:
     explicit ListFormDialog(QWidget *parent = 0);
 protected:

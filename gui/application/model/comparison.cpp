@@ -1,4 +1,6 @@
 #include "model/comparison.h"
+
+#include "model/instance.h"
 #include "controller/exceptions.h"
 
 Comparison::Comparison(Instance *first, Instance *second) : first(first), second(second) {

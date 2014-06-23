@@ -1,7 +1,10 @@
 #ifndef GROUP_H_
 #define GROUP_H_
 
-#include "model/activity.h"
+#include <QList>
+#include <QObject>
+
+class Activity;
 
 /**
  * Group class. A group represents an collection of Activity objects from the same Job, with a common EST and LST.

@@ -6,6 +6,8 @@
 #include <QProgressBar>
 #include <QLabel>
 #include <QTextEdit>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "solve/solver.h"
 
@@ -28,6 +30,8 @@ class SolvingProgressDialog : public QDialog
     InstanceController * controller;
     Instance *instance;
 
+    QHBoxLayout *hbox;
+    QVBoxLayout *vbox;
     QDialogButtonBox *buttonbox;
     QPushButton *cancelButton, *moreButton;
 
@@ -39,6 +43,9 @@ class SolvingProgressDialog : public QDialog
     QTextEdit *log;
 
     int numSoftPrecedences;
+
+    void createLayout();
+    void createSignals();
 
 public:
     /** Creates the dialog and starts the solver on the given instance.

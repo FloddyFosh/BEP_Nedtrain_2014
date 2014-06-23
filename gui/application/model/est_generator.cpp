@@ -1,8 +1,9 @@
 #include "est_generator.h"
 
 #include "controller/instancecontroller.h"
+#include "model/precedence.h"
+#include "instance.h"
 #include "frame.h"
-#include "chain.h"
 
 EST_Generator::EST_Generator(InstanceController * controller) : controller (controller) { }
 
@@ -18,10 +19,10 @@ QList<Precedence *> EST_Generator::getAdded(int frameNr){
 	Instance *instance = controller->getInstance();
     QList<Precedence *> constraints;
     foreach(Precedence * p, instance->getSoftPrecedences()) {
-        if (!p->isHard() && p->getFrameNrs().count(frameNr)) constraints.append(p);
+        if (!p->isHard() && p->getFrameNrs().contains(frameNr)) constraints.append(p);
     }
     foreach(Precedence * p, instance->getHardPrecedences()) {
-        if (p->isHard() && p->getFrameNrs().count(frameNr)) constraints.append(p);
+        if (p->isHard() && p->getFrameNrs().contains(frameNr)) constraints.append(p);
     }
     return constraints;
 }

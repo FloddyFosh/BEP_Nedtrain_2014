@@ -32,6 +32,7 @@ class JobDialog : public FormDialog
     QSpinBox *dueDayEdit;
 
     int maxActVal;
+    void createLayout();
 
 public:
     /** Constructor. Pass an instance object and a job that belongs to this instance

@@ -1,6 +1,6 @@
-#include <cstdlib> // for RAND_MAX
+#include "randomcolorgenerator.h"
 
-#include "util/randomcolorgenerator.h"
+#include <cstdlib> // for RAND_MAX
 
 RandomColorGenerator::RandomColorGenerator(double s, double v) :
     _s(s), _v(v)

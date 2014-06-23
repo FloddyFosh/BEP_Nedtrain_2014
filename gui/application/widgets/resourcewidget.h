@@ -1,10 +1,16 @@
 #ifndef RESOURCEWIDGET_H
 #define RESOURCEWIDGET_H
 
-#include "util/resourcecalculator.h"
-#include "activitywidget.h"
+#include <QPixmap>
+#include <QList>
+#include <QWidget>
+#include <QObject>
 
+class Activity;
 class InstanceController;
+class Job;
+class ResourceCalculator;
+class Resource;
 
 /** Shows the demand profile of this resource as a polygon. One big polygon is used for
   * the entire profile. The polygon is drawn using a green-to-yellow-to-red gradient to
@@ -27,6 +33,8 @@ class ResourceWidget : public QWidget
     int _vZoom;
     int peak;
     bool matrixViewEnabled;
+
+    void connectSignals();
 
     int hZoom() const; ///< returns current horizontal zoom factor
     int vZoom() const; ///< returns current vertical zoom factor

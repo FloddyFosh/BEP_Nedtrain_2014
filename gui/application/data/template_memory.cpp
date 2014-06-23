@@ -13,11 +13,11 @@ void TemplateInMemory::update(ActivityTemplate *activity) {
 
 void TemplateInMemory::remove(ActivityTemplate *activity) {
     templates.remove(activity->getID());
-};
+}
 
 void TemplateInMemory::remove(int id) {
     templates.remove(id);
-};
+}
 
 ActivityTemplate* TemplateInMemory::get(int id) {
 	return templates[id];

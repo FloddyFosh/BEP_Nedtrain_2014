@@ -13,35 +13,43 @@ JobInfoDialog::JobInfoDialog(Instance *instance, Job *j, QWidget *parent) :
     setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Job info"));
     setWindowIcon(AppIcon("icon.png"));
-    QFormLayout *formlayout = new QFormLayout;
 
+    formlayout = new QFormLayout;
+    nameLabel = new QLabel(j->name());
+    releaseDayLabel = new QLabel(QString::number(j->releaseDate()/(60*24)+1));
+    releaseDateTimeLabel = new QLabel(QTime(0,0,0).addSecs(j->releaseDate()*60).toString("h:mm"));
+    dueDayLabel = new QLabel(QString::number(j->dueDate()/(60*24)+1));
+    dueDateTimeLabel = new QLabel(QTime(0,0,0).addSecs(j->dueDate()*60).toString("h:mm"));
+    releaseDateLabel = new QLabel(QString::number(j->releaseDate()));
+    dueDateLabel = new QLabel(QString::number(j->dueDate()));
+    actAmountLabel = new QLabel(QString::number(j->getActivities().size()));
+    requirementsTable = new RequirementsTable(j, instance);
+    editButton = new QPushButton(tr("Edit"),this);
+    closeButton = new QPushButton(tr("Close"),this);
+    buttonBox = new QDialogButtonBox(Qt::Horizontal);
+    boxlayout = new QVBoxLayout;
+
+    createLayout(instance);
+    createSignals();
+    setLayout(boxlayout);
+}
+
+void JobInfoDialog::createLayout(Instance *instance) {
     //labels
-    QLabel* nameLabel = new QLabel(j->name());
     nameLabel->setTextFormat(Qt::PlainText);
     formlayout->addRow(tr("Name:"), nameLabel);
 
     if(instance->hoursOnTimeline()) {
-        QLabel* releaseDayLabel = new QLabel(QString::number(j->releaseDate()/(60*24)+1));
         formlayout->addRow(tr("Release Day:"), releaseDayLabel);
-
-        QLabel* releaseDateTimeLabel = new QLabel(QTime(0,0,0).addSecs(j->releaseDate()*60).toString("h:mm"));
         formlayout->addRow(tr("Release Time:"), releaseDateTimeLabel);
-
-        QLabel* dueDayLabel = new QLabel(QString::number(j->dueDate()/(60*24)+1));
         formlayout->addRow(tr("Due Day:"), dueDayLabel);
-
-        QLabel* dueDateTimeLabel = new QLabel(QTime(0,0,0).addSecs(j->dueDate()*60).toString("h:mm"));
         formlayout->addRow(tr("Due Time:"), dueDateTimeLabel);
     }
     else {
-        QLabel* releaseDateLabel = new QLabel(QString::number(j->releaseDate()));
         formlayout->addRow(tr("Release Date:"), releaseDateLabel);
-
-        QLabel* dueDateLabel = new QLabel(QString::number(j->dueDate()));
         formlayout->addRow(tr("Due Date:"), dueDateLabel);
     }
 
-    QLabel* actAmountLabel = new QLabel(QString::number(j->getActivities().size()));
     formlayout->addRow(tr("Activities:"), actAmountLabel);
 
     int totalflex = 0, minflex = INT_MAX;
@@ -59,37 +67,30 @@ JobInfoDialog::JobInfoDialog(Instance *instance, Job *j, QWidget *parent) :
     }
 
     if(totalflex >= 0 && minflex >= 0) {
-        QLabel* totalFlexLabel = new QLabel(QString::number(totalflex));
+        totalFlexLabel = new QLabel(QString::number(totalflex));
+        minFlexLabel = new QLabel(QString::number(minflex));
         formlayout->addRow(tr("Total Job Flexibility:"), totalFlexLabel);
-
-        QLabel* minFlexLabel = new QLabel(QString::number(minflex));
         formlayout->addRow(tr("Minimal Activity Flexibility:"), minFlexLabel);
     }
 
     //table
-    RequirementsTable *requirementsTable = new RequirementsTable(j, instance);
     requirementsTable->fillIn();
 
     //buttons
-    QPushButton* editButton = new QPushButton(tr("Edit"),this);
-    QPushButton* closeButton = new QPushButton(tr("Close"),this);
     closeButton->setDefault(true);
 
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(Qt::Horizontal);
     buttonBox->addButton(editButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(closeButton, QDialogButtonBox::ActionRole);
 
     // top layout
-    QVBoxLayout *boxlayout = new QVBoxLayout;
     boxlayout->addLayout(formlayout);
     boxlayout->addWidget(requirementsTable);
     boxlayout->addWidget(buttonBox);
+}
 
-    // signals
+void JobInfoDialog::createSignals() {
     connect(editButton, SIGNAL(clicked()), this, SLOT(editJob()));
     connect(closeButton, SIGNAL(clicked()), this, SLOT(accept()));
-
-    setLayout(boxlayout);
 }
 
 void JobInfoDialog::editJob(){

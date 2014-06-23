@@ -1,7 +1,6 @@
-#include <set>
-#include <algorithm>
-
 #include "st_propagator.h"
+
+#include "instance.h"
 #include "controller/instancecontroller.h"
 
 ST_Propagator::ST_Propagator(InstanceController * controller, Group * group) : controller (controller), group (group)

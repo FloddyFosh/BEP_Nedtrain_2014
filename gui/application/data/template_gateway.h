@@ -3,6 +3,8 @@
 
 #include "data/i_template_gateway.h"
 
+class ActivityTemplate;
+
 /**
  * This class implements the ITemplateGateway and maintains activity templates
  * in the database. Saving, updating and removing of templates in the application

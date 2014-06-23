@@ -29,6 +29,8 @@ class ActivityWidget : public QWidget
 
     QPoint getLocation(int offsetX); ///< returns the location of the widget, with an offset for the x coordinate
     ST_Propagator * stPropagator;
+
+    void createSignals(Activity *a);
 public:
 
     enum AdjacentWidgets{InComing, OutGoing};

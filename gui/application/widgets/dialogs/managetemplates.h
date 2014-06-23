@@ -4,6 +4,7 @@
 #include "widgets/dialogs/listformdialog.h"
 #include "widgets/requirementstable.h"
 
+#include <QFormLayout>
 
 /**
  * Dialog to create and edit templates. State of UI elements is maintained by slots.
@@ -15,6 +16,8 @@ class ManageTemplatesDialog : public ListFormDialog
 
     QListWidget *templateList;
 
+    QFormLayout *form;
+    QVBoxLayout *rightLayout;
     QLineEdit *nameEdit;
     QSpinBox *durationEdit;
     RequirementsTable *requirementsTable;
@@ -24,6 +27,9 @@ class ManageTemplatesDialog : public ListFormDialog
 
     Instance *instance;
     ActivityTemplate *selectedTemplate;
+
+    void createLayout();
+    void createSignals();
 
     /**
      * Loads all templates from database into the dialog.

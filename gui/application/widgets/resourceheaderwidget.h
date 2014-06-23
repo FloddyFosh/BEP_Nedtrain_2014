@@ -29,6 +29,7 @@ class ResourceHeaderWidget : public HeaderWidget
     bool highLighted;
 
     void createLayout();
+    void createSignals();
 
 public:
     /**

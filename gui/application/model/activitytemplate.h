@@ -1,7 +1,11 @@
 #ifndef ACTIVITYTEMPLATE_H_
 #define ACTIVITYTEMPLATE_H_
 
-#include "instance.h"
+#include <QObject>
+#include <QString>
+#include <QMap>
+
+class Instance;
 
 /**
  * An activity template is a predefined activity with associated duration and

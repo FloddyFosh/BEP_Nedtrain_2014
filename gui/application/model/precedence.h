@@ -2,9 +2,7 @@
 #define PRECEDENCE_H_
 
 #include <QString>
-#include <set>
-
-using namespace std;
+#include <QSet>
 
 class Activity;
 
@@ -19,7 +17,7 @@ private:
     Activity *_a2; ///< preceeded activity
     bool hard; ///< whether this precedence is <i>hard</i>, that is, a constraint from the problem (in contrast to <i>soft</i> precedences, which are added by the solver during the solving process).
     bool disabled;
-    set<int> frameNumbers;
+    QSet<int> frameNumbers;
 public:
     /**
      * Constructs a hard precedence from two activities.
@@ -71,7 +69,7 @@ public:
     /**
      * @return The frame numbers for which this constraint will be displayed.
      */
-    set<int> getFrameNrs();
+    QSet<int> getFrameNrs();
     /**
      * Clears the frame numbers for which this constraint will be displayed.
      */

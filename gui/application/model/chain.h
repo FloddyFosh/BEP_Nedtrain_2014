@@ -2,8 +2,9 @@
 #define CHAIN_H
 
 #include <QVector>
+#include <QObject>
 
-#include "model/activity.h"
+class Activity;
 
 class Chain : public QObject
 {

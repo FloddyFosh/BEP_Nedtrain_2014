@@ -1,4 +1,5 @@
 #include "arrow.h"
+
 #include <cmath>
 
 Arrow::Arrow(){

@@ -1,10 +1,16 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
-#include "model/resourcedecrease.h"
-#include "model/instance.h"
+#include <QObject>
+#include <QString>
+#include <QMap>
+#include <QVector>
 
+class Activity;
 class Chain;
+class Instance;
+class Requirement;
+class ResourceDecrease;
 
 /** Resource definition. A resource has a constant capacity, a name and a list
  * of requirements. The requirements supply a list of activities that need to

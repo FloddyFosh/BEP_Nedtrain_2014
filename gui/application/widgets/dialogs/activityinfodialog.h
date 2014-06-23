@@ -2,10 +2,14 @@
 #define ACTIVITYINFODIALOG_H
 
 #include <QDialog>
+#include <QLabel>
+#include <QFormLayout>
+#include <QDialogButtonBox>
 
 #include "model/instance.h"
 
 class Activity;
+class RequirementsTable;
 
 /**
  * Dialog for showing information about an activity
@@ -15,6 +19,22 @@ class ActivityInfoDialog : public QDialog
     Q_OBJECT
 
     Activity *a;
+
+    QFormLayout *formlayout;
+    QLabel* nameLabel;
+    QLabel* jobLabel;
+    QLabel* durationLabel;
+    QLabel* estLabel;
+    QLabel* lstLabel;
+    QLabel* stLabel;
+    RequirementsTable *requirementsTable;
+    QPushButton* editButton;
+    QPushButton* closeButton;
+    QDialogButtonBox* buttonBox;
+    QVBoxLayout *boxlayout;
+
+    void createLayout();
+    void createSignals();
 
 public:
     /**

@@ -19,32 +19,38 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
     }
 
     nameEdit = new QLineEdit(j ? j->name() : QString());
+    releaseDateTimeEdit = new QDateTimeEdit;
+    releaseDayEdit = new QSpinBox;
+    dueDateTimeEdit = new QDateTimeEdit;
+    dueDayEdit = new QSpinBox;
+    releaseDateEdit = new QSpinBox;
+    dueDateEdit = new QSpinBox;
+
+    createLayout();
+    setUpLayout();
+}
+
+void JobDialog::createLayout() {
     nameEdit->setMaxLength(40);
 
     if(i->hoursOnTimeline()) {
-        releaseDateTimeEdit = new QDateTimeEdit;
         if(j) releaseDateTimeEdit->setTime(QTime(0,0,0).addSecs(j->releaseDate()*60));
         releaseDateTimeEdit->setDisplayFormat("h:mm");
 
-        releaseDayEdit = new QSpinBox;
         releaseDayEdit->setMinimum(1);
         releaseDayEdit->setMaximum(INT_MAX);
         if(j) releaseDayEdit->setValue(j->releaseDate()/(60*24)+1);
 
-        dueDateTimeEdit = new QDateTimeEdit;
         if(j) dueDateTimeEdit->setTime(QTime(0,0,0).addSecs(j->dueDate()*60));
         dueDateTimeEdit->setDisplayFormat("h:mm");
 
-        dueDayEdit = new QSpinBox;
         dueDayEdit->setMinimum(maxActVal);
         dueDayEdit->setMaximum(INT_MAX);
         if(j) dueDayEdit->setValue(j->dueDate()/((60*24)+1));
     }else {
-        releaseDateEdit = new QSpinBox;
         releaseDateEdit->setMinimum(0);
         releaseDateEdit->setMaximum(INT_MAX);
         releaseDateEdit->setValue(j ? j->releaseDate() : 0);
-        dueDateEdit = new QSpinBox;
         dueDateEdit->setMinimum(maxActVal);
         dueDateEdit->setMaximum(INT_MAX);
         dueDateEdit->setValue(j ? j->dueDate() : 1);
@@ -60,7 +66,6 @@ JobDialog::JobDialog(Instance *i, Job *j, QWidget *parent) :
         addFormField(tr("&Release date:"), releaseDateEdit);
         addFormField(tr("&Due date:"), dueDateEdit);
     }
-    setUpLayout();
 }
 
 void JobDialog::apply() {

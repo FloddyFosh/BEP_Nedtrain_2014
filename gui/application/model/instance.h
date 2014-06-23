@@ -8,22 +8,13 @@
 #include <QList>
 #include <QTime>
 
-class Group;
-class ResourceDecrease;
-class Instance;
-class Resource;
-class Job;
-class Activity;
-class Requirement;
-class Frame;
-
 #include "model/resourcedecrease.h"
 #include "model/group.h"
 #include "model/resource.h"
-#include "model/requirement.h"
 #include "model/job.h"
 #include "model/activity.h"
 #include "model/precedence.h"
+#include "model/frame.h"
 
 /** Root instance struct. Holds references to jobs, precedences and resources.
   */

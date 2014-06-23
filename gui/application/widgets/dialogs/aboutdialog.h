@@ -2,6 +2,10 @@
 #define ABOUTDIALOG_H_
 
 #include <QDialog>
+#include <QDialogButtonBox>
+#include <QHBoxLayout>
+#include <QTextEdit>
+#include <QLabel>
 
 /**
  * Dialog with information about the application and authors.
@@ -9,6 +13,15 @@
 class AboutDialog : public QDialog
 {
     Q_OBJECT
+
+    QDialogButtonBox *buttonbox;
+    QTextEdit *text;
+    QLabel *logo;
+    QHBoxLayout *horizontal;
+    QVBoxLayout *vertical;
+
+    void createLayout();
+    void createSignals();
 
 public:
     /**

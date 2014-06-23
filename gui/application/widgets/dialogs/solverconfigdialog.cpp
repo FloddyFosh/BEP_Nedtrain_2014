@@ -17,26 +17,32 @@ SolverConfigDialog::SolverConfigDialog(Controller * controller, QWidget *parent)
     binaryEdit = new QLineEdit;
     browseButton = new QPushButton(tr("&Browse..."));
     argumentsEdit = new QLineEdit;
+    binaryLayout = new QHBoxLayout;
+    rightLayout = new QVBoxLayout;
+    form = new QFormLayout;
 
-    QHBoxLayout *binaryLayout = new QHBoxLayout;
+
+    createSignals();
+    setUpLayout();
+    initSolvers();
+}
+
+void SolverConfigDialog::createLayout() {
     binaryLayout->addWidget(binaryEdit);
     binaryLayout->addWidget(browseButton);
 
-    QVBoxLayout *rightLayout = new QVBoxLayout;
-    QFormLayout *form = new QFormLayout;
     form->addRow(tr("Name:"), nameEdit);
     form->addRow(tr("Binary:"), binaryLayout);
     form->addRow(tr("Arguments:"), argumentsEdit);
     rightLayout->addLayout(form);
     setRightPanelLayout(rightLayout);
+}
 
+void SolverConfigDialog::createSignals() {
     connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
     connect(nameEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
     connect(binaryEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
     connect(argumentsEdit, SIGNAL(textChanged(QString)), this, SLOT(setModified()));
-
-    setUpLayout();
-    initSolvers();
 }
 
 void SolverConfigDialog::initSolvers() {

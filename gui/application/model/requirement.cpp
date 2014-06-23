@@ -1,7 +1,11 @@
-#include "model/instance.h"
+#include "requirement.h"
+
+#include "resource.h"
+#include "activity.h"
+#include "job.h"
 
 Requirement::Requirement(Activity *a, Resource *r, int amount)
-    : _activity(a), _resource(r), _amount(amount) { };
+    : _activity(a), _resource(r), _amount(amount) { }
 
 Activity* Requirement::activity() {
     return _activity;

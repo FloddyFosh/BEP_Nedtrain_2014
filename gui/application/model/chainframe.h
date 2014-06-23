@@ -4,8 +4,8 @@
 #include <QPoint>
 
 #include "frame.h"
-#include "activity.h"
-#include "chain.h"
+
+class Chain;
 
 /**
  * The Chainframe class is an extension of the frame class and

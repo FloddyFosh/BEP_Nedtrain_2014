@@ -13,24 +13,33 @@ ResourceDecreaseDialog::ResourceDecreaseDialog(Instance *i, Resource* res, QWidg
     setWindowIcon(AppIcon("icon.png"));
 
     capacityEdit = new QSpinBox;
+    formlayout = new QFormLayout;
+    fromDateTimeEdit = new QDateTimeEdit;
+    toDateTimeEdit = new QDateTimeEdit;
+    fromDayEdit = new QSpinBox;
+    toDayEdit = new QSpinBox;
+    fromEdit = new QSpinBox;
+    tillEdit = new QSpinBox;
+    buttonbox = new QDialogButtonBox(
+            QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    boxlayout = new QVBoxLayout;
+
+    createLayout(instance, res);
+    createSignals();
+}
+
+void ResourceDecreaseDialog::createLayout(Instance *instance, Resource *res) {
     capacityEdit->setMinimum(1);
     capacityEdit->setMaximum(res->capacity());
     capacityEdit->setValue(1);
 
-    QFormLayout *formlayout = new QFormLayout;
-
     if(instance->hoursOnTimeline()){
-        fromDateTimeEdit = new QDateTimeEdit;
         fromDateTimeEdit->setDisplayFormat("h:mm");
-
-        toDateTimeEdit = new QDateTimeEdit;
         toDateTimeEdit->setDisplayFormat("h:mm");
 
-        fromDayEdit = new QSpinBox;
         fromDayEdit->setMinimum(1);
         fromDayEdit->setMaximum(INT_MAX);
 
-        toDayEdit = new QSpinBox;
         toDayEdit->setMinimum(1);
         toDayEdit->setMaximum(INT_MAX);
 
@@ -41,11 +50,9 @@ ResourceDecreaseDialog::ResourceDecreaseDialog(Instance *i, Resource* res, QWidg
         formlayout->addRow(tr("Decrease by:"), capacityEdit);
     }
     else{
-        fromEdit = new QSpinBox;
         fromEdit->setRange(0, INT_MAX);
         fromEdit->setValue(0);
 
-        tillEdit = new QSpinBox;
         tillEdit->setRange(1, INT_MAX);
         tillEdit->setValue(1);
 
@@ -54,18 +61,15 @@ ResourceDecreaseDialog::ResourceDecreaseDialog(Instance *i, Resource* res, QWidg
         formlayout->addRow(tr("Decrease by:"), capacityEdit);
     }
 
-    QDialogButtonBox *buttonbox = new QDialogButtonBox(
-            QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-
-    QVBoxLayout *boxlayout = new QVBoxLayout;
     boxlayout->addLayout(formlayout);
     boxlayout->addWidget(buttonbox);
 
     setLayout(boxlayout);
+}
 
+void ResourceDecreaseDialog::createSignals() {
     connect(buttonbox, SIGNAL(accepted()), this, SLOT(apply()));
     connect(buttonbox, SIGNAL(rejected()), this, SLOT(reject()));
-
 }
 
 void ResourceDecreaseDialog::apply() {

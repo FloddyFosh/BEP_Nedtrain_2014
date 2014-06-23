@@ -1,7 +1,9 @@
 #ifndef INSTANCEREADER_H_
 #define INSTANCEREADER_H_
 
-#include "model/instance.h"
+#include <QString>
+
+class Instance;
 
 class InstanceReader {
 public:

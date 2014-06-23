@@ -20,6 +20,10 @@ class ImportDialog : public FormDialog
     QPushButton *browseButton;
     QSpinBox *timeEdit;
     QDateTimeEdit *timeEditHour;
+    QHBoxLayout *binaryLayout;
+
+    void createLayout();
+    void createSignals();
 public:
     /**
      * Constructor, initializes the ui

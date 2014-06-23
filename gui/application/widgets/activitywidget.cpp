@@ -1,12 +1,16 @@
-#include <cmath>
-#include <QPainter>
-#include <QMenu>
-#include <QAction>
+#include "activitywidget.h"
 
+#include "jobwidget.h"
+#include "instancewidget.h"
 #include "dialogs/activitydialog.h"
 #include "dialogs/activityinfodialog.h"
 #include "dialogs/flexibilitydialog.h"
 #include "controller/instancecontroller.h"
+
+#include <cmath>
+#include <QPainter>
+#include <QMenu>
+#include <QAction>
 
 ActivityWidget::ActivityWidget(Activity *a, InstanceController *controller, JobWidget *parent, bool compare) : QWidget(parent),
     _activity(a), parent(parent), controller(controller), comparing(compare), stPropagator (NULL)
@@ -24,6 +28,10 @@ ActivityWidget::ActivityWidget(Activity *a, InstanceController *controller, JobW
     diff = false;
     color = Qt::gray;
 
+    createSignals(a);
+}
+
+void ActivityWidget::createSignals(Activity *a) {
     connect(a, SIGNAL(activityChanged()), this, SLOT(updateGeometry()));
     connect(a, SIGNAL(activityChanged()), this, SLOT(updateToolTip()));
     connect(this, SIGNAL(activitySelected(ActivityWidget *)), this, SLOT(showDependencies()));

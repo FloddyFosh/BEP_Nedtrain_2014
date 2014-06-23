@@ -1,8 +1,8 @@
+#include "controller/exceptions.h"
+
 #include <QMessageBox>
 #include <QStatusBar>
 #include <QDebug>
-
-#include"controller/exceptions.h"
 
 NoInstanceException::NoInstanceException() {
 }

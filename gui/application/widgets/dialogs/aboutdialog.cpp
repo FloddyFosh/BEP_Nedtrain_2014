@@ -1,11 +1,6 @@
-#include "widgets/dialogs/aboutdialog.h"
-#include "widgets/app_icon.h"
+#include "aboutdialog.h"
 
-#include <QDialogButtonBox>
-#include <QHBoxLayout>
-#include <QTextEdit>
-#include <QLabel>
-#include <QApplication>
+#include "widgets/app_icon.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent)
@@ -16,9 +11,17 @@ AboutDialog::AboutDialog(QWidget *parent) :
     setFixedWidth(600);
     setFixedHeight(280);
 
-    QDialogButtonBox *buttonbox = new QDialogButtonBox(QDialogButtonBox::Close);
+    buttonbox = new QDialogButtonBox(QDialogButtonBox::Close);
+    text = new QTextEdit;
+    logo = new QLabel;
+    horizontal = new QHBoxLayout;
+    vertical = new QVBoxLayout;
 
-    QTextEdit *text = new QTextEdit;
+    createLayout();
+    createSignals();
+}
+
+void AboutDialog::createLayout() {
     text->setReadOnly(true);
     text->setStyleSheet("QTextEdit { border: 0; background: white }");
     text->setCursor(Qt::ArrowCursor);
@@ -33,11 +36,9 @@ AboutDialog::AboutDialog(QWidget *parent) :
             Prof. dr. C. Witteveen, ir. M. Wilson and ir. B. Huisman.<br /><br />"
             "&copy; 2014")
     );
-    QLabel *logo = new QLabel;
+
     logo->setPixmap(QPixmap(qApp->applicationDirPath()+"/icons/about_logos.jpg"));
 
-    QHBoxLayout *horizontal = new QHBoxLayout;
-    QVBoxLayout *vertical = new QVBoxLayout;
     horizontal->addWidget(logo, 0, Qt::AlignTop);
     horizontal->addSpacing(20);
     horizontal->addWidget(text);
@@ -46,5 +47,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     setStyleSheet("QDialog { background: white }");
     setLayout(vertical);
+}
+
+void AboutDialog::createSignals() {
     connect(buttonbox, SIGNAL(rejected()), this, SLOT(close()));
 }
