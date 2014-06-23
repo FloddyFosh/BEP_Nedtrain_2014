@@ -35,12 +35,10 @@ In deze sprint is het belangrijk de feature van het weergeven van de flexibilite
 We hebben deze sprint veel tijd moeten besteden aan het verslag, maar we hebben gelukkig ook tijd kunnen besteden aan het verder door ontwikkelen van de NedTrain Planner. In deze sprint hebben we de code kwaliteit verbeterd en bugs ontdekt de vorige groep heeft achter gelaten. Deze bugs hebben we ook meteen weten te verhelpen.
 
 \subsubsection{Sprint 6}
-Aan het begin van deze sprint gaan we weer een demo doen, zodat de klant kan zien waar het product nu staat. 
+Aan het begin van deze sprint gaan we weer een demo doen, zodat de klant kan zien waar het product nu staat. Bij grote instanties loopt de interface vast bij het tekenen van de flexibiliteitsintervallen, we moeten proberen dit effeci\"enter te doen.
 
 \textbf{Terugblik} \\
-Na de demo hebben wij besloten om nog \'e\'en laatste feature te implementeren. Dit is de rooster feature, die de werking van het chaining algoritme duidelijk maaakt. Verder hebben we een aantal bugs verholpen en het verslag afgemaakt. 
-
-TODO: Sprint 6
+Na de demo hebben wij besloten om nog \'e\'en laatste feature te implementeren, omdat dit voor de opdrachtgever een vrij hoge prioriteit had. Dit is de rooster feature, die de werking van het chaining algoritme duidelijk maaakt. De interface loopt niet meer vast als er bij grote instanties flexibiliteitsintervallen getekend moeten worden. Verder hebben we een aantal bugs verholpen en het verslag afgemaakt. 
 
 \subsection{Hulpmiddelen}
 Zoals beschreven in het Plan van Aanpak en het Ori\"entatieverslag hebben we voor een aantal hulpmiddelen gekozen of moeten gebruiken. In deze sectie wordt onze ervaring van het gebruik van deze hulpmiddelen besproken, maar ook een aantal resultaten daarvan. 
@@ -63,22 +61,22 @@ Om te zien of onze testsuite uitgebreid genoeg is hebben we de \emph{Code Covera
     \centering
     \begin{tabular}{| l | r | r |}
         \hline
-        Bestand & \midden{Regels} & \midden{Branches} \\
+        Bestand & \midden{Regels $(\%)$} & \midden{Branches $(\%)$} \\
         \hline
-        \texttt{chaining.cpp}    & $87,2\%$   & $58,1\%$ \\ 
-        \texttt{constraints.cpp} & $100,0\%$  & $56,6\%$ \\
-        \texttt{esta\_plus.cpp}  & $69,3\%$   & $56,0\%$ \\
-        \texttt{exceptions.cpp}  & $62,5\%$   & $50,0\%$ \\
-        \texttt{flexibility.cpp} & $99,0\%$   & $53,2\%$ \\
-        \texttt{heap.cpp}        & $54,7\%$   & $58,3\%$ \\
-        \texttt{output.cpp}      & $68,8\%$   & $50,0\%$ \\
-        \texttt{solve.cpp}       & $65,2\%$   & $50,0\%$ \\
-        \texttt{stjn.cpp}        & $68,9\%$   & $57,8\%$ \\
-        \texttt{timing.cpp}      & $79,6\%$   & $63,6\%$ \\
-        \texttt{tmsp.cpp}        & $95,5\%$   & $55,9\%$ \\
+        \texttt{chaining.cpp}    & $87,2$   & $58,1$ \\ 
+        \texttt{constraints.cpp} & $100,0$  & $56,6$ \\
+        \texttt{esta\_plus.cpp}  & $69,3$   & $56,0$ \\
+        \texttt{exceptions.cpp}  & $62,5$   & $50,0$ \\
+        \texttt{flexibility.cpp} & $99,0$   & $53,2$ \\
+        \texttt{heap.cpp}        & $54,7$   & $58,3$ \\
+        \texttt{output.cpp}      & $68,8$   & $50,0$ \\
+        \texttt{solve.cpp}       & $65,2$   & $50,0$ \\
+        \texttt{stjn.cpp}        & $68,9$   & $57,8$ \\
+        \texttt{timing.cpp}      & $79,6$   & $63,6$ \\
+        \texttt{tmsp.cpp}        & $95,5$   & $55,9$ \\
         \hline
         \hline
-        Gemiddelde               & $76,8\%$   & $56,1\%$ \\
+        Gemiddelde               & $76,8$   & $56,1$ \\
         \hline
     \end{tabular}
     \caption{Code coverage van Solver}
