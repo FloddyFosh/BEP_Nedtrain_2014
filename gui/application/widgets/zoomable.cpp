@@ -1,7 +1,11 @@
+#include "zoomable.h"
+
 #include "controller/instancecontroller.h"
+#include "model/instance.h"
 
 #include <QPainter>
 #include <QEvent>
+#include <QResizeEvent>
 
 using namespace std;
 

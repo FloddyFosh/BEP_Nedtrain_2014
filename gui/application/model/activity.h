@@ -1,15 +1,16 @@
 #ifndef ACTIVITY_H
 #define ACTIVITY_H
 
-#include "model/instance.h"
-#include "model/precedence.h"
+#include <QObject>
+#include <QMap>
 
-using namespace std;
-
-class Job;
-class Requirement;
-class Interval;
 class Group;
+class Interval;
+class Job;
+class Precedence;
+class Requirement;
+class Resource;
+class ResourceDecrease;
 
 /**
  * An activity is a unit of work that must be completed on a specific job.
@@ -29,7 +30,7 @@ class Activity : public QObject {
     QList<Precedence *> outgoingPrecedences;
     QList<ResourceDecrease *> decreasePrecedences;
 
-    QMap<int, Requirement*> requirements;
+    QMap<int, Requirement *> requirements;
     
     Group * _group;
 public:
@@ -70,13 +71,6 @@ public:
     QMap<int, Requirement*> getRequirements();
 
     /**
-     * Returns the amount of capacity of a given resource required by this activity.
-     * @param resource resource in question
-     * @return required amount
-     */
-    int getRequiredAmount(Resource *resource);
-
-    /**
      * Update the amount required by this activity of a given resource. The requirement
      * is also synced with the Resource, which also keeps track of the requirements.
      * @param resource the resource in question
@@ -84,6 +78,18 @@ public:
      * @returns a pointer to the generated Requirement object, or 0 if amount was 0
      */
     Requirement* setRequiredAmount(Resource *, int amount);
+
+    /**
+     * Returns the amount of capacity of a given resource required by this activity.
+     * @param resource resource in question
+     * @return required amount
+     */
+    int getRequiredAmount(Resource *resource);
+
+    /**
+     * Remove the amounts required by this activity of all resources.
+     */
+    void removeRequiredAmounts();
 
     /**
      * The possible overlap interval is found (based on est and lst from this and the other activity) and returned.
@@ -102,12 +108,6 @@ public:
      */
     QString name() const;
 
-private:
-    /**
-     * @return sum of durations of activities in this group at positions before this activity.
-     */
-    int offsetWithinGroup() const;
-public:
     /**
      * @return the earliest starting time of this activity.
 	 */
@@ -256,6 +256,13 @@ public:
      * forces the activityChanged signal to be emitted.
      */
     void setChanged();
+
+private:
+    /**
+     * @return sum of durations of activities in this group at positions before this activity.
+     */
+    int offsetWithinGroup() const;
+
 signals:
     void activityChanged(); ///< signal to signify that a UI update may be needed
     void precedenceAdded(Precedence *); ///< emitted when a precedence is added

@@ -1,3 +1,7 @@
+#include "jobheaderwidget.h"
+
+#include "jobwidget.h"
+#include "instancewidget.h"
 #include "dialogs/jobdialog.h"
 #include "widgets/app_icon.h"
 #include "controller/instancecontroller.h"

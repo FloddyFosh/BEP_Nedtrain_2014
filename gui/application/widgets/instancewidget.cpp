@@ -1,13 +1,18 @@
-#include <QScrollBar>
-#include <QBoxLayout>
-#include <QLayout>
-#include <QAction>
+#include "instancewidget.h"
 
+#include "mainwindow.h"
+#include "jobwidget.h"
+#include "controller/controller.h"
 #include "controller/instancecontroller.h"
 #include "controller/exceptions.h"
 #include "model/frame.h"
 #include "model/chain.h"
 #include "widgets/app_icon.h"
+
+#include <QScrollBar>
+#include <QBoxLayout>
+#include <QLayout>
+#include <QAction>
 
 InstanceWidget::InstanceWidget(Instance * instance, Controller *controller, QWidget *parent) :
     AbstractInstanceWidget(instance, Qt::Vertical, parent), controller (controller), frameNumber(0)

@@ -1,5 +1,8 @@
 #include "chainframe.h"
 
+#include "activity.h"
+#include "chain.h"
+
 ChainFrame::ChainFrame(Chain* c, QList<QPoint*>* prev) : Frame(), chain(c), usedProfile(prev) {
     initialize();
 }

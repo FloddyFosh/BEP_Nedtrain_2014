@@ -1,4 +1,5 @@
 #include "template_gateway.h"
+
 #include "template_memory.h"
 
 ITemplateGateway* TemplateGateway::instance = new TemplateInMemory();
@@ -17,11 +18,11 @@ void TemplateGateway::remove(ActivityTemplate *activity) {
 
 void TemplateGateway::remove(int id) {
 	instance->remove(id);
-};
+}
 
 ActivityTemplate* TemplateGateway::get(int id) {
     return instance->get(id);
-};
+}
 
 QList<ActivityTemplate *> TemplateGateway::getAll() {
 	return instance->getAll();

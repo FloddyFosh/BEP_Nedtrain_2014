@@ -1,6 +1,12 @@
+#include "resourcewidget.h"
+
+#include "instancewidget.h"
+#include "controller/controller.h"
 #include "controller/instancecontroller.h"
+#include "model/chain.h"
 #include "model/frame.h"
 #include "model/chainframe.h"
+#include "model/requirement.h"
 
 #include <QPainter>
 #include <cmath>

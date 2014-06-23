@@ -1,5 +1,10 @@
+#include "overlaywidget.h"
+
 #include <QPainter>
+#include "model/instance.h"
+#include "widgets/instancewidget.h"
 #include "controller/instancecontroller.h"
+#include "controller/controller.h"
 
 OverlayWidget::OverlayWidget(InstanceController *controller, QWidget* parent) :
     QWidget(parent), widget(0), controller(controller)

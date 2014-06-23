@@ -1,10 +1,14 @@
 #include "solvingprogressdialog.h"
+
+#include "controller/controller.h"
 #include "controller/instancecontroller.h"
 #include "widgets/app_icon.h"
 
 #include <QBoxLayout>
 #include <QLayout>
 #include <QApplication>
+#include <QPushButton>
+#include <QCloseEvent>
 
 SolvingProgressDialog::SolvingProgressDialog(Solver *solver, InstanceController *controller, QWidget *parent) :
     QDialog(parent), solver (solver), controller (controller), instance (controller->getInstance())

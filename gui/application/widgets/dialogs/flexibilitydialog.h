@@ -15,6 +15,8 @@ class FlexibilityDialog : public FormDialog
     Activity *activity;
     QSpinBox *flexibility;
 
+    void createLayout();
+
 public:
     /** Constructor.
       * @param activity The activity whose flexibility is edited.

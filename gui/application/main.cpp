@@ -38,9 +38,13 @@
 **
 ****************************************************************************/
 
-
+#include "widgets/mainwindow.h"
 #include "controller/controller.h"
+
 #include "util/language.h"
+//#include "widgets/mainwindow.h"
+//#include "util/randomcolorgenerator.h"
+//#include "solve/solver.h"
 
 #include <QMessageBox>
 #include <QApplication>

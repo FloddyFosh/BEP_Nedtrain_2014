@@ -1,10 +1,11 @@
-#include "model/instance.h"
+#include "activity.h"
+
+#include "instance.h"
+#include "requirement.h"
 #include "controller/exceptions.h"
+
 #include <cmath>
 #include <algorithm>
-#include <cassert>
-
-using namespace std;
 
 Activity::Activity(Job *job, int id, QString name, int duration)
     : _id(id), _name(name), _duration(duration), _job(job), flex(0)
@@ -161,6 +162,12 @@ Requirement* Activity::setRequiredAmount(Resource *r, int amount) {
     return req;
 }
 
+void Activity::removeRequiredAmounts() {
+    requirements.clear();
+    foreach(Requirement * req, getRequirements())
+        req->resource()->removeActivity(req);
+}
+
 bool Activity::operator <(const Activity &other) const {
     return est() == other.est() ? eet() < other.eet() : est() < other.est();
 }
@@ -192,8 +199,8 @@ Interval Activity::overlap(Activity *other) {
         // no overlap
         i.start = i.end = 0;
     } else {
-        i.start = max(est(), other->est());
-        i.end = min(eet(), other->eet());
+        i.start = qMax(est(), other->est());
+        i.end = qMin(eet(), other->eet());
     }
     return i;
 }

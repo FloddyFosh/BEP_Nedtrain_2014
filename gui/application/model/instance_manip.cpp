@@ -1,4 +1,5 @@
 #include "model/instance.h"
+
 #include "controller/exceptions.h"
 
 #include <cassert>
@@ -131,9 +132,7 @@ void Instance::addActivity(unsigned int i, unsigned int j, int est, int lst, uns
 		    est = J(jobId)->releaseDate();
 		    lst = J(jobId)->dueDate() - duration;
 		}
-		else {
-		    locked = true;
-		}
+        else locked = true;
 		if ( st == -1) st = est;
 		Activity * a (new Activity(J(jobId), j, name, duration));
 		addActivity(a, est, lst, st, locked);
@@ -221,8 +220,8 @@ void Instance::addPrecedence(unsigned int i1, unsigned int j1, unsigned int i2, 
 
 bool Instance::impliedPrecedenceExists(Activity * src, Activity * dst) {
     // depth first search
-    set<Activity *> reachable;
-    vector<Activity *> queue;
+    QSet<Activity *> reachable;
+    QVector<Activity *> queue;
     reachable.insert(src);
     queue.push_back(src);
     while (!queue.empty()) {
@@ -253,24 +252,20 @@ void Instance::addPrecedence(Activity * a1, Activity * a2, bool hard, int frameN
                 // Remove soft precedence, so that a hard precedence is added.
                 removePrecedence(existing);
             }
-            else {
-                throw InstanceManipulationException(tr("Adding of the hard precedence constraint ignored, because it was already present."));
-            }
+            else throw InstanceManipulationException(tr("Adding of the hard precedence constraint ignored, because it was already present."));
         }
         else {
-            if(!existing->isHard() && (existing->isDisabled() || !existing->getFrameNrs().count(frameNumber))){
+            if(!existing->isHard() && (existing->isDisabled() || !existing->getFrameNrs().contains(frameNumber))){
                 if(existing->isDisabled()){
                     existing->enable();
                 }
-                if(!existing->getFrameNrs().count(frameNumber)) {
+                if(!existing->getFrameNrs().contains(frameNumber)) {
                     // Soft precedences can be added to multiple frames, because of multiple algorithms.
                     existing->addFrameNr(frameNumber);
                     return;
                 }
             }
-            else {
-                throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
-            }
+            else throw InstanceManipulationException(tr("Adding of precedence constraint ignored, because it was already present."));
         }
     }
 
@@ -360,11 +355,7 @@ void Instance::clearSoftPrecedences() {
     setUserChanges(true);
     foreach(Precedence *p, softPrecedences){
          p->disable();
-         //p->a1()->removePrecedence(p);
-         //p->a2()->removePrecedence(p);
-         //delete p;
     }
-    //softPrecedences.clear();
 
     foreach(Job* j, jobs){
     	foreach(Activity* a, j->getActivities())
@@ -406,9 +397,9 @@ void Instance::emitChanged() {
 void Instance::removePrecedence(Precedence * p) {
     Activity * a1 (p->a1()), * a2 (p->a2());
     if(p->isHard())
-        precedences.erase(find(precedences.begin(), precedences.end(), p));
+        precedences.erase( std::find(precedences.begin(), precedences.end(), p));
     else
-        softPrecedences.erase(find(softPrecedences.begin(), softPrecedences.end(), p));
+        softPrecedences.erase( std::find(softPrecedences.begin(), softPrecedences.end(), p));
     a1->removePrecedence(p);
     a2->removePrecedence(p);
     delete p;
@@ -446,10 +437,7 @@ void Instance::removePrecedences(Activity *a) {
 void Instance::removeActivity(Activity *a) {
     setUserChanges(true);
     removePrecedences(a);
-
-    foreach(Requirement * req, a->getRequirements())
-        req->resource()->removeActivity(req);
-
+    a->removeRequiredAmounts();
     a->job()->removeActivity(a);
     removeActivityFromGroup(a);
 
@@ -470,7 +458,7 @@ void Instance::updateStartTime(){
     int start = INT_MAX;
 
     if(jobs.size() > 0){
-        foreach(Job *j, jobs) start = min(start, j->releaseDate());
+        foreach(Job *j, jobs) start = qMin(start, j->releaseDate());
     }else{
         start = 0;
     }

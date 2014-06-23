@@ -29,6 +29,8 @@ class ActivityDialog : public FormDialog
     RequirementsTable *requirementsTable;
     QComboBox *templateList;
 
+    void createLayout();
+    void createSignals();
     bool usingTemplate;
 
 public:

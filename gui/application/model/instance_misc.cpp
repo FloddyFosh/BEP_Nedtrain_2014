@@ -39,29 +39,6 @@ void Instance::setFileName(QString name) {
     fileName = name;
 }
 
-QString Instance::toString() const {
-    QString result;
-    foreach(Resource *r, resources)
-        result += r->toString() + "\n";
-
-    result += "\n";
-
-    foreach(Job * j, jobs)
-        result += j->toString() + "\n\n";
-
-    foreach(Precedence *p, precedences)
-        result += p->toString() + "\n";
-
-    foreach(Precedence *p, softPrecedences)
-        result += p->toString() + "\n";
-
-    foreach(Resource *r, resources)
-    	foreach(ResourceDecrease* d, r->getDecreases())
-    		result += d->toString() + "\n";
-    
-    return result;
-}
-
 bool Instance::hasUserChanges() {
     return userChanges;
 }
@@ -77,14 +54,14 @@ int Instance::earliestReleaseDate() const {
     if (!jobs.size()) return 0;
     QList<int> dates;
     foreach(Job * j, jobs) dates.append(j->releaseDate());
-    return *min_element(dates.begin(), dates.end());
+    return *std::min_element(dates.begin(), dates.end());
 }
 
 int Instance::latestDueDate() const {
     if (!jobs.size()) return 0;
     QList<int> dates;
     foreach(Job * j, jobs) dates.append(j->dueDate());
-    return *max_element(dates.begin(), dates.end());
+    return *std::max_element(dates.begin(), dates.end());
 }
 
 int Instance::duration() const {
@@ -118,6 +95,29 @@ int Instance::getTotalFlex() {
 
 int Instance::getPrevFlex() {
     return prevTotalFlexibility;
+}
+
+QString Instance::toString() const {
+    QString result;
+    foreach(Resource *r, resources)
+        result += r->toString() + "\n";
+
+    result += "\n";
+
+    foreach(Job * j, jobs)
+        result += j->toString() + "\n\n";
+
+    foreach(Precedence *p, precedences)
+        result += p->toString() + "\n";
+
+    foreach(Precedence *p, softPrecedences)
+        result += p->toString() + "\n";
+
+    foreach(Resource *r, resources)
+        foreach(ResourceDecrease* d, r->getDecreases())
+            result += d->toString() + "\n";
+
+    return result;
 }
 
 QMap<int, Resource *> Instance::getResources() { return resources; }

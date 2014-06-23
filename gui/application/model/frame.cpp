@@ -1,5 +1,7 @@
 #include "frame.h"
 
+#include "chain.h"
+
 Frame::Frame() {}
 
 QVector<Group *> Frame::getGroups() {

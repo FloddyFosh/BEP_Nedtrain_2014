@@ -15,7 +15,6 @@ Solver::Solver(QString name, QString binary, QString arguments, QObject *parent)
 
 QList<Solver *> Solver::loadAll() {
     QList<Solver *> solvers;
-
     QSettings settings;
 
     settings.beginGroup("solvers");
@@ -267,7 +266,7 @@ void Solver::processStateLine(QByteArray &line) {
     Frame * nextFrame (new Frame);
     processStateGroups(fields, nextFrame);
     foreach(Precedence * p, instance->getSoftPrecedences()) {
-        if (!p->isHard() && p->getFrameNrs().count(replayFrames.size())) {
+        if (!p->isHard() && p->getFrameNrs().contains(replayFrames.size())) {
             nextFrame->addAffJobId(p->a1()->job()->id());
             nextFrame->addAffJobId(p->a2()->job()->id());
             foreach(int id, p->a1()->getRequirements().keys()) {
@@ -389,13 +388,13 @@ void Solver::processChainLine(QByteArray &line) {
             if(dec){
                 if(chainObj->getActivities()->empty()) continue;
                 Group* g = chainObj->getActivities()->last()->group();
-                g->setLST(min(g->getLST(),dec->getFrom()-g->getDuration()));
+                g->setLST(qMin(g->getLST(),dec->getFrom()-g->getDuration()));
             }
             else{
                 Activity* act = instance->getJobs()[ai]->getActivities().value(aj);
                 if(dec){
                     Group* g = act->group();
-                    g->setEST(max(g->getEST(),dec->getTill()));
+                    g->setEST(qMax(g->getEST(),dec->getTill()));
                     dec = NULL;
                 }
                 curResource->addActToChain(act,chain);

@@ -1,4 +1,5 @@
 #include "managetemplates.h"
+
 #include "data/template_gateway.h"
 #include "widgets/app_icon.h"
 

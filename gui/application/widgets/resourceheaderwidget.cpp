@@ -1,4 +1,6 @@
 #include "resourceheaderwidget.h"
+
+#include "instancewidget.h"
 #include "dialogs/resourcedialog.h"
 #include "dialogs/scrollfilter.h"
 #include "widgets/app_icon.h"

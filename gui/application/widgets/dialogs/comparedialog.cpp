@@ -1,4 +1,6 @@
 #include "comparedialog.h"
+
+#include "widgets/mainwindow.h"
 #include "widgets/comparewindow.h"
 #include "controller/exceptions.h"
 
@@ -10,15 +12,19 @@ CompareDialog::CompareDialog(Controller *controller, QWidget *parent) :
 	first = new QComboBox();
 	second = new QComboBox();
 
-	foreach (Instance *i, controller->getAllInstances()) {
-		first->addItem(i->getFileName()=="" ? tr("untitled") : i->getFileName(), qVariantFromValue((void *) i));
-	    second->addItem(i->getFileName()=="" ? tr("untitled") : i->getFileName(), qVariantFromValue((void *) i));
-	}
+    createLayout();
+	setUpLayout();
+}
+
+void CompareDialog::createLayout() {
+    foreach (Instance *i, controller->getAllInstances()) {
+        first->addItem(i->getFileName()=="" ? tr("untitled") : i->getFileName(), qVariantFromValue((void *) i));
+        second->addItem(i->getFileName()=="" ? tr("untitled") : i->getFileName(), qVariantFromValue((void *) i));
+    }
 
     addFormField(new QLabel(tr("Select two instances to compare."), this));
-	addFormField(tr("Instance 1"), first);
-	addFormField(tr("Instance 2"), second);
-	setUpLayout();
+    addFormField(tr("Instance 1"), first);
+    addFormField(tr("Instance 2"), second);
 }
 
 void CompareDialog::apply() {

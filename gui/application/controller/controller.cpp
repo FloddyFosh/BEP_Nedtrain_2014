@@ -1,3 +1,5 @@
+#include "controller.h"
+
 #include <QStatusBar>
 #include <QAction>
 
@@ -6,9 +8,11 @@
 #include "widgets/dialogs/solvingprogressdialog.h"
 #include "widgets/dialogs/solvewithoptionsdialog.h"
 #include "widgets/dialogs/aboutdialog.h"
+#include "widgets/mainwindow.h"
 #include "data/instance_reader.h"
 #include "data/template_gateway.h"
 #include "data/templatedb.h"
+#include "util/randomcolorgenerator.h"
 
 #include "model/frame.h"
 
@@ -56,7 +60,7 @@ void Controller::startPaintingFramePrecedences(QList<Precedence *> precedences) 
 }
 
 QColor Controller::getColorFor(QString tag) {
-    return colorGenerator.colorFor(tag);
+    return colorGenerator->colorFor(tag);
 }
 
 void Controller::autoClearPrecedences() {

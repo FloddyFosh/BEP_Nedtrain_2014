@@ -1,10 +1,15 @@
 #ifndef JOB_H
 #define JOB_H
 
-#include "model/instance.h"
+#include <QObject>
+#include <QString>
+#include <QList>
+#include <QMap>
 
 class Instance;
 class Activity;
+class Group;
+class Resource;
 
 /** Data container for integer start-end (time) interval.
   */

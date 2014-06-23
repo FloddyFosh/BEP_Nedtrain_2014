@@ -1,4 +1,8 @@
-#include "model/group.h"
+#include "group.h"
+
+#include "instance.h"
+#include "activity.h"
+#include "job.h"
 
 Group::Group() : est(-1), lst(-1), estFlex(-1), lftFlex(-1), st(-1), job(-1), duration(0), locked (false) { }
 
@@ -92,7 +96,7 @@ void Group::setDuration(int duration) {
 void Group::moveLeft(Activity *ma) {
     for (int i = 1; i < activities.size(); i++) {
         if (activities[i] == ma) {
-            swap(activities[i - 1], activities[i]);
+            std::swap(activities[i - 1], activities[i]);
             break;
         }
     }
@@ -102,7 +106,7 @@ void Group::moveLeft(Activity *ma) {
 void Group::moveRight(Activity *ma) {
     for (int i = 0; i + 1 < activities.size(); i++) {
         if (activities[i] == ma) {
-            swap(activities[i], activities[i + 1]);
+            std::swap(activities[i], activities[i + 1]);
             break;
         }
     }

@@ -1,5 +1,7 @@
 #include "resourcedecrease.h"
+
 #include "controller/exceptions.h"
+#include "model/resource.h"
 
 ResourceDecrease::ResourceDecrease(int start, int end, int amount, int id, QObject *) :
 	start(start), end(end), amount(amount), id(id)
@@ -24,6 +26,7 @@ int ResourceDecrease::getResourceId(){
 	else
 		throw InstanceManipulationException("No resource was set in resource decrease");
 }
+
 void ResourceDecrease::setAmount(int a){
 	amount = a;
 }

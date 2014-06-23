@@ -1,13 +1,15 @@
-#include "model/instance.h"
-#include "model/chain.h"
 #include "resource.h"
 
-Resource::Resource(Instance *instance, int id, QString name, int capacity, QObject *parent) :
-    QObject(parent), _instance(instance), _id(id), _name(name), _capacity(capacity)
-{ }
+#include "instance.h"
+#include "chain.h"
+#include "requirement.h"
+#include "resourcedecrease.h"
 
-Resource::Resource(QString n) : _instance(0), _id(-1), _name(n), _capacity(0)
-{}
+Resource::Resource(Instance *instance, int id, QString name, int capacity, QObject *parent) :
+    QObject(parent), _instance(instance), _id(id), _name(name), _capacity(capacity) { }
+
+Resource::Resource(QString n) :
+    _instance(0), _id(-1), _name(n), _capacity(0) {}
 
 int Resource::id() { return _id; }
 Instance* Resource::instance() { return _instance; }

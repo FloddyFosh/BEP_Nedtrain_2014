@@ -1,12 +1,16 @@
-#include <cmath>
-#include <QPainter>
-#include <QMenu>
-#include <QAction>
+#include "activitywidget.h"
 
+#include "jobwidget.h"
+#include "instancewidget.h"
 #include "dialogs/activitydialog.h"
 #include "dialogs/activityinfodialog.h"
 #include "dialogs/flexibilitydialog.h"
 #include "controller/instancecontroller.h"
+
+#include <cmath>
+#include <QPainter>
+#include <QMenu>
+#include <QAction>
 
 ActivityWidget::ActivityWidget(Activity *a, InstanceController *controller, JobWidget *parent, bool compare) : QWidget(parent),
     _activity(a), parent(parent), controller(controller), comparing(compare), stPropagator (NULL)

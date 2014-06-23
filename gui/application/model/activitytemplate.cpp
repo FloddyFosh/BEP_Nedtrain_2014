@@ -1,5 +1,7 @@
 #include "activitytemplate.h"
 
+#include "instance.h"
+
 ActivityTemplate::ActivityTemplate(QString n, int d) : id(-1), name(n), duration(d){}
 
 ActivityTemplate::ActivityTemplate(int i, QString n, int d) : id(i), name(n), duration(d){}

@@ -1,11 +1,16 @@
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
-#include "widgets/mainwindow.h"
-#include "util/randomcolorgenerator.h"
-#include "solve/solver.h"
+#include <QObject>
+#include <QSlider>
 
+class Instance;
+class InstanceWidget;
 class InstanceController;
+class MainWindow;
+class Precedence;
+class RandomColorGenerator;
+class Solver;
 
 class Controller : public QObject {
     Q_OBJECT
@@ -15,9 +20,9 @@ public:
 
 private:
     MainWindow *mainWindow;
-    RandomColorGenerator colorGenerator;
+    RandomColorGenerator *colorGenerator;
     bool clearSoftPrecedences;
-    QSlider * framesSlider;
+    QSlider *framesSlider;
     bool paintFeasibleIntervals;
     bool paintFlexibilityIntervals;
     int untitledCounter;

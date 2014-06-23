@@ -2,10 +2,10 @@
 #define MODEL_STATE_H
 
 #include <QVector>
+#include <QPoint>
 
-#include "activity.h"
-
-using namespace std;
+class Chain;
+class Group;
 
 /**
  * The Frame class stores all groups and all (est, lst) for each group and for each non-grouped activity.

@@ -9,6 +9,7 @@
 #include "app_icon.h"
 
 #include "controller/instancecontroller.h"
+#include "controller/controller.h"
 
 InstanceMdiSubWindow::InstanceMdiSubWindow(InstanceController *controller, QWidget *parent)
 : QMdiSubWindow (parent), controller (controller) { }

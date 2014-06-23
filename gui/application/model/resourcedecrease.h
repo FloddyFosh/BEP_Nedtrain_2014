@@ -1,10 +1,10 @@
 #ifndef RESOURCEDECREASE_H_
 #define RESOURCEDECREASE_H_
 
-#include "model/resource.h"
-#include "model/activity.h"
-#include "model/job.h"
-#include "model/instance.h"
+#include <QString>
+#include <QObject>
+
+class Resource;
 
 /**
  * A ResourceDecrease is a temporary decrease of the capacity of a resource, on a
@@ -15,7 +15,7 @@ class ResourceDecrease : public QObject{
 	Q_OBJECT
 
     Resource* resource;
-    int start,end, amount, id;
+    int start, end, amount, id;
 public:
     /**
      * Constructor for a resource decrease object. The corresponding Resource cannot be set via the constructor because of the format in which instances are saved.
