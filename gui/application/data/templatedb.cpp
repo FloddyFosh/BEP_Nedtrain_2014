@@ -1,7 +1,8 @@
+#include "templatedb.h"
+
 #include <QDebug>
 #include <QSqlError>
 #include <iostream>
-#include "data/templatedb.h"
 
 TemplateDB::TemplateDB() {
     db = new dbc();

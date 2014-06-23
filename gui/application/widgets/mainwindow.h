@@ -140,6 +140,7 @@ private:
     // ui init
     void createActions(); ///< setup the actions for the menu and the toolbar
     void createMenus(); ///< setup menu
+    void createSignals(); ///< create signals
     void createToolbar(); ///< setup toolbar
     void setupCentralWidget(); ///< setup MDI widget
 

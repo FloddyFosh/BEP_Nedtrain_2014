@@ -14,8 +14,7 @@ class Instance;
 class Comparison : public QObject {
     Q_OBJECT
 
-    Instance *first;
-    Instance *second;
+    Instance *first, *second;
 
 public:
     /**

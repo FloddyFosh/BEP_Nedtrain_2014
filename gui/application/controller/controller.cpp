@@ -12,7 +12,6 @@
 #include "data/instance_reader.h"
 #include "data/template_gateway.h"
 #include "data/templatedb.h"
-#include "util/randomcolorgenerator.h"
 
 #include "model/frame.h"
 

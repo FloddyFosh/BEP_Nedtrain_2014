@@ -21,12 +21,12 @@ class ResourceWidget;
 class InstanceController : public QObject {
     Q_OBJECT
 
-private:
     Instance * instance;
     InstanceWidget * instanceWidget;
     Controller * controller;
 
     Activity *selectedActivity;
+
 public:
     /** Constructor. Pass an instance object, the corresponding instance and the global controller.
       * @param instance instance

@@ -320,37 +320,31 @@ void MainWindow::createActions() {
     newAct->setShortcuts(QKeySequence::New);
     newAct->setStatusTip(tr("Create a new instance"));
     newAct->setIcon(AppIcon("new.png"));
-    connect(newAct, SIGNAL(triggered()), this, SLOT(newInstance()));
 
     openAct = new QAction(tr("&Open Instance..."), this);
     openAct->setShortcuts(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing instance"));
     openAct->setIcon(AppIcon("open.png"));
-    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
 
     importAct = new QAction(tr("&Import Instance..."), this);
     importAct->setStatusTip(tr("Import an existing instance"));
     disableIfInstanceEmpty(importAct);
-    connect(importAct, SIGNAL(triggered()), this, SLOT(importInstance()));
 
     saveAct = new QAction(tr("&Save Instance"), this);
     saveAct->setShortcuts(QKeySequence::Save);
     saveAct->setStatusTip(tr("Save the current instance"));
     saveAct->setIcon(AppIcon("save.png"));
     disableIfInstanceEmpty(saveAct);
-    connect(saveAct, SIGNAL(triggered()), tabwidget, SLOT(currentInstanceSave()));
 
     saveAsAct = new QAction(tr("&Save Instance As..."), this);
     saveAsAct->setShortcuts(QKeySequence::SaveAs);
     saveAsAct->setStatusTip(tr("Save the current instance under a new name"));
     disableIfInstanceEmpty(saveAsAct);
-    connect(saveAsAct, SIGNAL(triggered()), tabwidget, SLOT(currentInstanceSaveAs()));
 
     closeAct = new QAction(tr("&Close Instance"), this);
     closeAct->setStatusTip(tr("Close the current instance"));
     closeAct->setIcon(AppIcon("close.png"));
     disableIfInstanceEmpty(closeAct);
-    connect(closeAct, SIGNAL(triggered()), tabwidget, SLOT(closeSubWindow()));
 
     for (int i = 0; i < MaxRecentFiles; ++i) {
         recentFileActs[i] = new QAction(this);
@@ -362,95 +356,78 @@ void MainWindow::createActions() {
     exitAct = new QAction(tr("E&xit"), this);
     exitAct->setShortcuts(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
-    connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 
     /* edit menu */
     newResourceAct = new QAction(tr("New &Resource..."), this);
     newResourceAct->setStatusTip(tr("Add a new resource to the current instance"));
     newResourceAct->setIcon(AppIcon("add_resource_profile.png"));
     disableIfInstanceEmpty(newResourceAct);
-    connect(newResourceAct, SIGNAL(triggered()), this, SLOT(newResource()));
 
     newJobAct = new QAction(tr("New &Job..."), this);
     newJobAct->setStatusTip(tr("Add a new job to the current instance"));
     newJobAct->setIcon(AppIcon("add_project.png"));
     disableIfInstanceEmpty(newJobAct);
-    connect(newJobAct, SIGNAL(triggered()), this, SLOT(newJob()));
 
     newActivityAct = new QAction(tr("New &Activity..."), this);
     newActivityAct->setStatusTip(tr("Add a new activity to the current instance"));
     newActivityAct->setIcon(AppIcon("add_task.png"));
     disableIfInstanceEmpty(newActivityAct);
-    connect(newActivityAct, SIGNAL(triggered()), this, SLOT(newActivity()));
 
     newPrecedenceAct = new QAction(tr("Add precedence &constraint"), this);
     newPrecedenceAct->setStatusTip(tr("Add a precedence constraint to the current instance"));
     newPrecedenceAct->setIcon(AppIcon("add_constraint.png"));
     newPrecedenceAct->setCheckable(true);
     disableIfInstanceEmpty(newPrecedenceAct);
-    connect(newPrecedenceAct, SIGNAL(triggered()), this, SLOT(newPrecedence()));
-    connect(this, SIGNAL(keyPressEvent(QKeyEvent *)), this, SLOT(disablePrecedenceAdding(QKeyEvent *)));
 
     removePrecedenceAct = new QAction(tr("Remove precedence &constraint"), this);
     removePrecedenceAct->setStatusTip(tr("Remove precedence constraint"));
     removePrecedenceAct->setIcon(AppIcon("remove_constraint.png"));
     removePrecedenceAct->setCheckable(true);
     disableIfInstanceEmpty(removePrecedenceAct);
-    connect(removePrecedenceAct, SIGNAL(triggered()), this, SLOT(removePrecedence()));
 
     clearPrecedencesAct = new QAction(tr("Clear generated constraints"), this);
     clearPrecedencesAct->setStatusTip(tr("Clear all solver generated constraints of the current instance"));
     disableIfInstanceEmpty(clearPrecedencesAct);
-    connect(clearPrecedencesAct, SIGNAL(triggered()), this, SLOT(clearPrecedences()));
 
     autoClearPrecedencesAct = new QAction(tr("Automatically clear generated constraints before solving"), this);
     autoClearPrecedencesAct->setStatusTip(tr("Automatically clear generated constraints before solving"));
     autoClearPrecedencesAct->setCheckable(true);
-    connect(autoClearPrecedencesAct, SIGNAL(triggered()), controller, SLOT(autoClearPrecedences()));
 
     useHoursAct = new QAction(tr("Show hours on timeline"), this);
     useHoursAct->setStatusTip(tr("Show hours on timeline"));
     useHoursAct->setCheckable(true);
     useHoursAct->setChecked(false);
     disableIfInstanceEmpty(useHoursAct);
-    connect(useHoursAct, SIGNAL(triggered()), this, SLOT(hoursTimelineChanged()));
 
     manageTemplatesAct = new QAction(tr("&Manage templates..."), this);
     manageTemplatesAct->setStatusTip(tr("Add or remove activity templates"));
     disableIfInstanceEmpty(manageTemplatesAct);
-    connect(manageTemplatesAct, SIGNAL(triggered()), this, SLOT(manageTemplates()));
 
     paintFeasibleIntervalsAct = new QAction(tr("Paint feasible intervals"), this);
     paintFeasibleIntervalsAct->setStatusTip(tr("Paint the feasible interval for each activity"));
     paintFeasibleIntervalsAct->setCheckable(true);
-    connect(paintFeasibleIntervalsAct, SIGNAL(triggered()), controller, SLOT(doPaintFeasibleIntervals()));
 
     paintFlexibilityIntervalsAct = new QAction(tr("Paint flexibility intervals"), this);
     paintFlexibilityIntervalsAct->setStatusTip(tr("Paint the flexible interval for each activity"));
     paintFlexibilityIntervalsAct->setCheckable(true);
-    connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
 
     /* solve menu */
     configureSolversAction = new QAction(tr("&Configure..."), this);
     configureSolversAction->setStatusTip(tr("Configure available solvers"));
-    connect(configureSolversAction, SIGNAL(triggered()), this, SLOT(configureSolvers()));
     
     solveLastAction = new QAction(tr("Solve"), this);
     solveLastAction->setStatusTip(tr("Solve the current instance"));
     solveLastAction->setIcon(AppIcon("solve.png"));
 
     disableIfInstanceEmpty(solveLastAction);
-    connect(solveLastAction, SIGNAL(triggered()), controller, SLOT(solve()));
 
     solveWithParamsAction = new QAction(tr("Set options and solve"), this);
     solveWithParamsAction->setStatusTip(tr("Set options and solve the current instance"));
     solveWithParamsAction->setIcon(AppIcon("solve-params.png"));
     disableIfInstanceEmpty(solveWithParamsAction);
-    connect(solveWithParamsAction, SIGNAL(triggered()), controller, SLOT(solveWithOptions()));
 
     aboutAct = new QAction(tr("&About..."), this);
     aboutAct->setShortcuts(QKeySequence::HelpContents);
-    connect(aboutAct, SIGNAL(triggered()), controller, SLOT(showAbout()));
 
     /* zoom in and out */
     zoomInAct = new QAction(tr("Zoo&m in"), this);
@@ -461,15 +438,12 @@ void MainWindow::createActions() {
     zoomOutAct->setIcon(AppIcon("zoom_out.png"));
     zoomInAct->setStatusTip(tr("Zoom in the instance"));
     zoomOutAct->setStatusTip(tr("Zoom in the instance"));
-    connect(zoomInAct, SIGNAL(triggered()), controller, SLOT(zoomIn()));
-    connect(zoomOutAct, SIGNAL(triggered()), controller, SLOT(zoomOut()));
 
     /* compare */
     compareAct = new QAction(tr("Compare"), this);
     disableIfInstanceEmpty(compareAct);
     compareAct->setIcon(AppIcon("compare.png"));
     compareAct->setStatusTip(tr("Compare two instances"));
-    connect(compareAct, SIGNAL(triggered()), this, SLOT(compareInstances()));
 
     /* replay buttons */
     frameLeftAct = new QAction(tr("Rewind"), this);
@@ -480,8 +454,9 @@ void MainWindow::createActions() {
     frameRightAct->setStatusTip(tr("Next frame"));
     frameLeftAct->setDisabled(true);
     frameRightAct->setDisabled(true);
-    connect(frameLeftAct, SIGNAL(triggered()), controller, SLOT(rewind()));
-    connect(frameRightAct, SIGNAL(triggered()), controller, SLOT(forward()));
+
+    /* Create Signals */
+    createSignals();
 
     /* language menu */
     Language * t; foreach(t, Language::loadAll()) {
@@ -492,6 +467,48 @@ void MainWindow::createActions() {
         connect(langAction, SIGNAL(triggered()), t, SLOT(setDefaultLang()));
         connect(langAction, SIGNAL(triggered()), this, SLOT(langUpdated()));
     }
+}
+
+void MainWindow::createSignals() {
+    connect(newAct, SIGNAL(triggered()), this, SLOT(newInstance()));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+    connect(importAct, SIGNAL(triggered()), this, SLOT(importInstance()));
+
+    connect(saveAct, SIGNAL(triggered()), tabwidget, SLOT(currentInstanceSave()));
+    connect(saveAsAct, SIGNAL(triggered()), tabwidget, SLOT(currentInstanceSaveAs()));
+
+    connect(newResourceAct, SIGNAL(triggered()), this, SLOT(newResource()));
+    connect(closeAct, SIGNAL(triggered()), tabwidget, SLOT(closeSubWindow()));
+    connect(newJobAct, SIGNAL(triggered()), this, SLOT(newJob()));
+    connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+    connect(newActivityAct, SIGNAL(triggered()), this, SLOT(newActivity()));
+    connect(newPrecedenceAct, SIGNAL(triggered()), this, SLOT(newPrecedence()));
+    connect(this, SIGNAL(keyPressEvent(QKeyEvent *)), this, SLOT(disablePrecedenceAdding(QKeyEvent *)));
+
+    connect(removePrecedenceAct, SIGNAL(triggered()), this, SLOT(removePrecedence()));
+    connect(clearPrecedencesAct, SIGNAL(triggered()), this, SLOT(clearPrecedences()));
+    connect(autoClearPrecedencesAct, SIGNAL(triggered()), controller, SLOT(autoClearPrecedences()));
+
+    connect(useHoursAct, SIGNAL(triggered()), this, SLOT(hoursTimelineChanged()));
+    connect(manageTemplatesAct, SIGNAL(triggered()), this, SLOT(manageTemplates()));
+
+    connect(paintFeasibleIntervalsAct, SIGNAL(triggered()), controller, SLOT(doPaintFeasibleIntervals()));
+    connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
+
+    connect(configureSolversAction, SIGNAL(triggered()), this, SLOT(configureSolvers()));
+    connect(configureSolversAction, SIGNAL(triggered()), this, SLOT(configureSolvers()));
+    connect(solveLastAction, SIGNAL(triggered()), controller, SLOT(solve()));
+    connect(solveWithParamsAction, SIGNAL(triggered()), controller, SLOT(solveWithOptions()));
+
+    connect(aboutAct, SIGNAL(triggered()), controller, SLOT(showAbout()));
+
+    connect(zoomInAct, SIGNAL(triggered()), controller, SLOT(zoomIn()));
+    connect(zoomOutAct, SIGNAL(triggered()), controller, SLOT(zoomOut()));
+
+    connect(compareAct, SIGNAL(triggered()), this, SLOT(compareInstances()));
+
+    connect(frameLeftAct, SIGNAL(triggered()), controller, SLOT(rewind()));
+    connect(frameRightAct, SIGNAL(triggered()), controller, SLOT(forward()));
 }
 
 void MainWindow::createMenus() {

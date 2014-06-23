@@ -14,10 +14,10 @@ class Instance;
 class ActivityTemplate : public QObject {
     Q_OBJECT
 
-    int id; ///< id of the activity template
+    int id, duration; ///< id of the activity template
     QString name; ///< name of the activity
-    int duration; ///< duration of the activity
     QMap<QString, int> requirements; ///< set of resources and demand required by activity.
+
 public:
     /**
      * Constructor to make an activity template that already exists in db.

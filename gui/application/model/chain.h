@@ -8,7 +8,6 @@ class Activity;
 
 class Chain : public QObject
 {
-private:
     Q_OBJECT
 
     int _resourceId, _chainId;

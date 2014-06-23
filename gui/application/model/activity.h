@@ -21,13 +21,10 @@ class ResourceDecrease;
 class Activity : public QObject {
     Q_OBJECT
 
-    int _id;
+    int _id, _duration, flex;
     QString _name;
-    int _duration;
     Job *_job;
-    int flex;
-    QList<Precedence *> incomingPrecedences;
-    QList<Precedence *> outgoingPrecedences;
+    QList<Precedence *> incomingPrecedences, outgoingPrecedences;
     QList<ResourceDecrease *> decreasePrecedences;
 
     QMap<int, Requirement *> requirements;

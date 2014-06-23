@@ -12,8 +12,9 @@ class Precedence;
  */
 class EST_Generator
 {
-private:
+
     InstanceController * controller;///< the controller of the instance which is managed
+
 public:
     /**
      * Constructor.

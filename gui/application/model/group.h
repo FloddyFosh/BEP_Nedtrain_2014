@@ -15,14 +15,13 @@ class Group : public QObject {
     Q_OBJECT
 
     QList<Activity*> activities;
-    int est;
-    int lst;
-    int estFlex;
-    int lftFlex;
+    int est, lst;
+    int estFlex, lftFlex;
     int st;
     int job;
     int duration;
     bool locked;
+
 public:
     /**
      * Constructs an empty group object with EST = LST = -1.

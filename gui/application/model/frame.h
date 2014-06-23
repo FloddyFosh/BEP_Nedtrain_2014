@@ -12,10 +12,10 @@ class Group;
  * After each precedence posted by the solver, and each grouping operation by the solver, a new Frame is remembered.
  */
 class Frame {
-private:
+
     QVector<Group *> groups;
-    QVector<int> affectedResIds;
-    QVector<int> affectedJobIds;
+    QVector<int> affectedResIds, affectedJobIds;
+
 public:
     /**
      * Constructs an empty Frame.

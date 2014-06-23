@@ -10,6 +10,7 @@
 class dbc
 {
     QString connectionName;
+
 public:
     /**
      * Constructs a dbc object. Initializes SQLite and database.
