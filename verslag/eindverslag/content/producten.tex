@@ -5,7 +5,7 @@ In dit hoofdstuk worden alle nieuwe functionaliteiten, van zowel de interface al
 \subsection{Solver}
 De nieuwe functionaliteit van de solver kan grotendeels worden onderverdeeld in het chaining algoritme en het vinden van flexibiliteitsintervals. Van deze onderdelen zal in deze paragraaf toegelicht worden hoe deze ge\"implementeerd zijn.
 
-\subsubsection*{Chaining}
+\subsubsection{Chaining}
 Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is ge\"implementeerd, waarbij een keuze is tussen drie verschillende methoden voor het selecteren van een chain, namelijk:
 \begin{itemize}
 \item Selecteer de eerst gevonden geschikte chain.
@@ -13,9 +13,9 @@ Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chai
 \item Gebruik de heuristiek beschreven in \ref{subsubsec:chainingoplossing}.
 \end{itemize}
 
-Uit analyse van de flexibiliteit en het aantal voorrangsrelaties dat door een algoritme toegevoegd wordt, is besloten om de heuristiek te gebruiken. Deze analyse is weergegeven in paragraaf \ref{sec:chaininganalyse}.
+Uit analyse van de flexibiliteit en het aantal voorrangsrelaties dat door een algoritme toegevoegd wordt, is besloten om de heuristiek te gebruiken. Deze analyse is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
 
-\subsection*{Linear Programming}
+\subsubsection{Linear Programming}
 Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
 
 De documentatie van CLP is helaas niet heel erg uitgebreid, maar het is desondanks toch gelukt om het LP-probleem door CLP te laten oplossen. Er wordt gebruik gemaakt van een model dat een instance is van de \texttt{ClpSimplex} of de \texttt{ClpInterior} klasse. Deze twee klassen zijn beide een 'child' klasse van \texttt{ClpModel}. Het grote verschil tussen \texttt{ClpSimplex} en \texttt{ClpInterior} is de wijze van oplossen, deze gebruiken respectievelijk de 'Simplex' en de 'Interior Point' methode. Wij hebben zelf nog een \texttt{Constraints} klasse gemaakt om elke variabele een nummer te geven. De variabelen $t^+_0, t^-_0, \ldots, t^+_n$ en $t^-_n$ krijgen respectievelijk de nummers $0, 1, \ldots, 2 \cdot n$ en $2 \cdot n + 1$. Aan het model moet voor elke variabele een onder- en bovengrens worden gesteld. Er moet een objective functie worden opgegeven en ingesteld dat deze gemaximaliseerd moet worden. Vervolgens kan er aan het model constraints worden toegevoegd. Door een solve methode aan te roepen op het model kan er vervolgens met behulp van de variabele nummers de toegekende waarde van de variabele uit het model worden opgevraagd. 

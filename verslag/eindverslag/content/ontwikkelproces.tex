@@ -1,4 +1,6 @@
 \section{Ontwikkelproces}
+Dit hoofdstuk beschrijft op welke manier wij de software hebben ontwikkeld en met welke hulpmiddelen. Als laatste wordt ook het commentaar dat wij van de Software Improvement Group hebben ontvangen. 
+
 \subsection{Ontwikkelmethode}
 Tijdens de ontwikkeling van de NedTrain Planner en de solvers is er zoveel mogelijk gebruik gemaakt van de scrum principes. Meestal waren features aan het eind van een sprint geschikt voor een mogelijke demo, maar zaten er nog wel een aantal bugs in. Het meest voorkomende probleem was dat een feature aan het einde van de sprint nog niet werkte op een Windows computer.
 
@@ -6,7 +8,7 @@ Tijdens de ontwikkeling van de NedTrain Planner en de solvers is er zoveel mogel
 Het doel van de eerste sprint was om het chaining algoritme te implementeren. Tijdens de onderzoeksfase hebben we gezien dat het beschikbaar maken voor Windows 7 waarschijnlijk goed te doen is in de tijd die daarvoor beschikbaar was. Het porten van de NedTrain Planner naar Windows 7 was daarom ook een doel in de eerste sprint. 
 
 \textbf{Terugblik} \\
-We zijn er tevreden over het verloop van de eerste sprint. Het porten naar Windows 7 liep met een paar kleine tegenvallers redelijk vlot. Naast het porten naar Windows 7 is het ook in deze sprint gelukt om de versie van Qt te upgraden naar versie 5.2.1. De basis van ons chaining algoritme werkt, maar de samenwerking tussen GUI en Solver loopt nog niet zoals gewenst. Er is zelf ook al een begin gemaakt aan de LP Solver, een doel dat voor de tweede sprint gepland stond. 
+We zijn er tevreden over het verloop van de eerste sprint. Het porten naar Windows 7 liep met een paar kleine tegenvallers redelijk vlot. Naast het porten naar Windows 7 is het ook in deze sprint gelukt om de versie van Qt te upgraden naar versie 5.2.1. De basis van ons chaining algoritme werkt, maar de samenwerking tussen GUI en Solver loopt nog niet zoals gewenst. Er is zelfs ook al een begin gemaakt aan de LP Solver, een doel dat voor de tweede sprint gepland stond. 
 
 \subsubsection{Sprint 2}
 Het voornaamste doel van de tweede sprint is de COIN-OR LP solver te laten samenwerken met onze applicatie. Daarnaast is er gewerkt aan het laten zien van aparte chains met daarbij welke resources er door deze chain gebruikt worden. 
@@ -55,7 +57,7 @@ Het project had, voordat wij dit hebben uitgebreid, al een flinke hoeveelheid te
 
 Alle tests die zijn gemaakt maken gebruiken van het Google Test framework. Dit was erg prettig in gebruik en het uitbreiden van de testsuite ging redelijk eenvoudig. We hebben er voor gekozen om voor de solver een apparte testsuite te maken en deze niet te integreren met de bestaande testsuite voor de interface. Dit heeft als voordeel dat de testsuites net als de interface en solver zelf appart gebruikt kunnen worden. Voor de solver hebben we $42$ tests gemaakt. 
 
-Om te zien of onze testsuite uitgebreid genoeg is hebben we de \emph{Code Coverage Tool} \texttt{gcovr} gebruikt. Deze tool geeft per bestand aan hoeveel regels code en branches er zijn uitgevoerd door de testsuite. Deze tool heeft ons gestimuleerd om meer testcases te schrijven, om daarmee een hogere dekking te bereiken. De resultaten van de analyse van deze tool zijn te vinden in Tabel \ref{tbl:covr-solver}. Het percentage branches dat wordt getest door de testsuite met een gemiddelde van $56,1\%$ te laag. Het percentage van regels code dat wordt getest door de testsuite is met een gemiddelde van $76,\%$ wel redelijk.
+Om te zien of onze testsuite uitgebreid genoeg is, hebben we de \emph{Code Coverage Tool} \texttt{gcovr} gebruikt. Deze tool geeft per bestand aan hoeveel regels code en branches er zijn uitgevoerd door de testsuite. Deze tool heeft ons gestimuleerd om meer testcases te schrijven, om daarmee een hogere dekking te bereiken. De resultaten van de analyse van deze tool zijn te vinden in Tabel \ref{tbl:covr-solver}. Het percentage branches dat wordt getest door de testsuite met een gemiddelde van $56,1\%$ te laag. Het percentage van regels code dat wordt getest door de testsuite is met een gemiddelde van $76,8\%$ wel redelijk.
 
 \begin{table}[H]
     \centering
