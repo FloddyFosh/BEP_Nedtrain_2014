@@ -496,7 +496,6 @@ void MainWindow::createSignals() {
     connect(paintFlexibilityIntervalsAct, SIGNAL(triggered()), controller, SLOT(doFlexibilityIntervals()));
 
     connect(configureSolversAction, SIGNAL(triggered()), this, SLOT(configureSolvers()));
-    connect(configureSolversAction, SIGNAL(triggered()), this, SLOT(configureSolvers()));
     connect(solveLastAction, SIGNAL(triggered()), controller, SLOT(solve()));
     connect(solveWithParamsAction, SIGNAL(triggered()), controller, SLOT(solveWithOptions()));
 

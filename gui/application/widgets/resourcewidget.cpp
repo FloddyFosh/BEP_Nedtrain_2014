@@ -155,35 +155,22 @@ void ResourceWidget::updatePixmap() {
     painter.scale(hZoom(), hint.height() / (double) rows);
     painter.translate(offset,0);
 
-    if(viewingResourceMatrix()){
+    if(viewingResourceMatrix())
         paintChainMatrix(painter);
-    }
-    else{
-        //1. draw demand profile
-        paintDemandProfile(painter); // uses scaled painter
-
-        //2. draw resource profile
-        paintResourceProfile(painter); //uses scaled painter
-
-        //3. draw job profile
-        paintJobProfile(painter);  //uses scaled painter
-
-        //4. draw resources used by selected chain
-        paintChainResources(painter);
-    }
+    else
+        paintProfile(painter);
 
     painter.restore(); //restore scaled painter
 
-    //5. draw selected region
+    // draw selected region
     paintSelectedRegion(painter); //does not use scaled painter
 
-    //6. draw resource marks
+    // draw resource marks
     paintResourceMarks(painter); //does not use scaled painter
 
     paintPeak(painter); //does not use scaled painter
 
     painter.restore();
-
 
     // draw bottom-border
     painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
@@ -192,6 +179,20 @@ void ResourceWidget::updatePixmap() {
 
     // schedule paintEvent
     update();
+}
+
+void ResourceWidget::paintProfile(QPainter &painter) {
+    // draw demand profile
+    paintDemandProfile(painter); // uses scaled painter
+
+    // draw resource profile
+    paintResourceProfile(painter); //uses scaled painter
+
+    // draw job profile
+    paintJobProfile(painter);  //uses scaled painter
+
+    // draw resources used by selected chain
+    paintChainResources(painter);
 }
 
 void ResourceWidget::paintDemandProfile(QPainter &painter){
@@ -226,15 +227,14 @@ void ResourceWidget::paintResourceProfile(QPainter &painter){
         painter.setBrush(Qt::red);
         painter.setPen(Qt::NoPen);
         painter.drawPolygon(exceed);
-
         painter.setBrush(Qt::NoBrush);
         painter.setPen(QPen(QColor("black"), 0, Qt::SolidLine));
         painter.drawPolygon(calculator->getDemandPolygon());
     }
 }
+
 void ResourceWidget::paintJobProfile(QPainter &painter){
     QPolygon polygon = calculator->getJobPolygon();
-    //polygon.translate(offset,0);
 
     if(!polygon.isEmpty()){
         painter.setBrush(QColor(0,0,0,120));

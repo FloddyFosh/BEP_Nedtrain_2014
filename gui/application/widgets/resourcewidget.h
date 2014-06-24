@@ -40,6 +40,7 @@ class ResourceWidget : public QWidget
     int vZoom() const; ///< returns current vertical zoom factor
     QSize sizeHint() const; ///< returns minimumSize()
     QSize minimumSize() const; ///< returns an appropriate minimum size based on the latest earliest end time (of all jobs using this resource)
+    void paintProfile(QPainter&); ///< paints the nonmatrix profile
     void paintDemandProfile(QPainter&); ///< paints the demand profile (gradient)
     void paintResourceProfile(QPainter&); ///< paints the resource profile (line around demand profile)
     void paintJobProfile(QPainter&); ///< adds shade to resource units by selected job
