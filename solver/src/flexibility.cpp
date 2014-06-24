@@ -148,7 +148,7 @@ void printSolution(map<string, int>* solution) {
     map<string, int>::iterator iter = solution->begin();
     while(iter != solution->end()) {
         output("%s %d ", iter->first.c_str(), iter->second);
-        cdebug("[%s] = %d\n", iter->first.c_str(), iter->second);
+        debug("[%s] = %d\n", iter->first.c_str(), iter->second);
         ++iter;
     }
 	output("-1\n");
@@ -160,8 +160,8 @@ int flexibility() {
     addLimits(&constraints);
     map<string, int> solution;
     solution = useClpToSolve(&constraints);
-    cdebug(LINE, 0);
+    debug(LINE, 0);
     printSolution(&solution);
-    cdebug(LINE, 0);
+    debug(LINE, 0);
     return 1;
 }
