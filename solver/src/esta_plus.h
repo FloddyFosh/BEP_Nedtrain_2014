@@ -22,6 +22,8 @@ typedef struct peak2_t {
 } peak2_t;
 
 int esta_plus(int merge_bandwidth, int add_mutexes);
+int cleanup(peak2_t *peak, int ret, int add_mutexes);
+void print_hele_state();
 
 /* Returns true iff a2's earliest possible run is running at a1.start.earliest. */
 #define P_ik(i1,j1,i2,j2)	((i1 == i2 && j1 == j2) || \

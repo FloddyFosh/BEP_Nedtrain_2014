@@ -6,8 +6,6 @@
 #include "output.h"
 #include "heap.h"
 
-void print_hele_state();
-
 int leveling_constraints_before_chaining;
 extern int merge_bandwidth;
 vector<map<int, peak2_t *> > peakhash;
@@ -556,8 +554,7 @@ int esta_plus(int merge_bw, int add_mutexes) {
             debug("Conflict (%d,%d) <--> (%d,%d) selected for merging.\n", conflict->n1->i, conflict->n1->j, conflict->n2->i, conflict->n2->j);
             if((to = stjn_merge(conflict->n1, conflict->n2)) == NULL) {
                 debug("STN inconsistent!\n", 0);
-                ret = 0;
-                goto cleanup;
+                return cleanup(peak, 0, merge_bandwidth);
             }
             if(to->i == conflict->n1->i && to->j == conflict->n1->j) {
                 output("MRG: %d %d %d %d\n", to->i, to->j, conflict->n2->i, conflict->n2->j);
@@ -586,16 +583,14 @@ int esta_plus(int merge_bw, int add_mutexes) {
                 while (1); // mag nooit gebeuren
                 
                 debug("STN inconsistent!\n", 0);
-                ret = 0;
-                goto cleanup;
+                return cleanup(peak, 0, add_mutexes);
             }
             update_peaks(to);
             
             print_hele_state();
         } else {
             debug("Unresolvable peak!\n", 0);
-            ret = 0;
-            goto cleanup;
+            return cleanup(peak, 0, add_mutexes);
         }
 
         if(peak->capacity > C(peak->resource)) {
@@ -603,8 +598,10 @@ int esta_plus(int merge_bw, int add_mutexes) {
             heap_add(peakqueue, peak_score(peak), peak);
         }
     }
+    return cleanup(peak, ret, add_mutexes);
+}
 
-cleanup:
+int cleanup(peak2_t *peak, int ret, int add_mutexes) {
     peakhash.clear();
     delete_heap(peakqueue);
     if (ret)
@@ -619,7 +616,7 @@ cleanup:
                 if (!act->group.empty()) {
                     if (act->est < RD(i)) wrong = 1;
                     if (act->est + act->len > DD(i)) wrong = 1;
-                    
+
                     FOREACH(act->prev, it) {
                         node_t * actPred (*it);
                         if (actPred->group.empty()) wrong = 1;
@@ -655,7 +652,7 @@ cleanup:
                 peak->resource,
                 peak->capacity);
         }
-        
+
         FOREACH(peak->activities, it) output(" %d %d", (*it)->i, (*it)->j);
         output(" -1\n");
     }
