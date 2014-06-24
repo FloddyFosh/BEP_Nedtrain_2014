@@ -4,93 +4,80 @@
 #include "model/activity.h"
 #include "model/chain.h"
 
-TEST(AddProfilesTest, BothEmpty) {
-    QVector<Activity*> vec;
-    Chain* ch = new Chain(0,0,vec,NULL);
-    ChainFrame* chfr = new ChainFrame(ch,new QList<QPoint*>());
-    QList<QPoint*>* lista = new QList<QPoint*>();
-    QList<QPoint*>* listb = new QList<QPoint*>();
-    QList<QPoint*>* result = chfr->addProfiles(lista,listb);
-    ASSERT_TRUE(result->empty());
+class AddProfilesTest : public ::testing::Test {
+    protected:
+      QVector<Activity*> vec;
+      Chain* ch;
+      ChainFrame* chfr;
+      QList<QPoint*>* lista;
+      QList<QPoint*>* listb;
+
+      virtual void SetUp() {
+          ch = new Chain(0, 0, vec, NULL);
+          chfr = new ChainFrame(ch, new QList<QPoint*>());
+          lista = new QList<QPoint*>();
+          listb = new QList<QPoint*>();
+      }
+
+      virtual void TearDown() {
+        delete ch;
+      }
+};
+
+TEST_F(AddProfilesTest, BothEmpty) {
+    QList<QPoint*>* result = chfr->addProfiles(lista, listb);
+    EXPECT_TRUE(result->empty());
 }
 
-TEST(AddProfilesTest, OneEmpty) {
-    QVector<Activity*> vec;
-    Chain* ch = new Chain(0,0,vec,NULL);
-    ChainFrame* chfr = new ChainFrame(ch,new QList<QPoint*>());
-    QList<QPoint*>* lista = new QList<QPoint*>();
-    QList<QPoint*>* listb = new QList<QPoint*>();
-    listb->append(new QPoint(0,0));
-    listb->append(new QPoint(0,1));
-    listb->append(new QPoint(3,1));
-    listb->append(new QPoint(3,0));
-    QList<QPoint*>* result = chfr->addProfiles(lista,listb);
-    ASSERT_EQ(listb,result);
+TEST_F(AddProfilesTest, OneEmpty) {
+    listb->append(new QPoint(0, 0));
+    listb->append(new QPoint(0, 1));
+    listb->append(new QPoint(3, 1));
+    listb->append(new QPoint(3, 0));
+    QList<QPoint*>* result = chfr->addProfiles(lista, listb);
+    EXPECT_EQ(listb, result);
 }
 
-TEST(AddProfilesTest, Easy) {
-    QVector<Activity*> vec;
-    Chain* ch = new Chain(0,0,vec,NULL);
-    ChainFrame* chfr = new ChainFrame(ch,new QList<QPoint*>());
-    QList<QPoint*>* lista = new QList<QPoint*>();
-    QList<QPoint*>* listb = new QList<QPoint*>();
-    listb->append(new QPoint(0,0));
-    listb->append(new QPoint(0,2));
-    listb->append(new QPoint(1,2));
-    listb->append(new QPoint(1,1));
-    listb->append(new QPoint(2,1));
-    listb->append(new QPoint(2,0));
+TEST_F(AddProfilesTest, Easy) {
+    int x[6] = {0, 0, 1, 1, 2, 2};
+    int y[6] = {0, 2, 2, 1, 1, 0};
+    for (int i = 0; i < 6; i++) {
+        lista->append(new QPoint(x[i], y[i]));
+        listb->append(new QPoint(x[i], y[i]));
+    }
 
-    lista->append(new QPoint(0,0));
-    lista->append(new QPoint(0,2));
-    lista->append(new QPoint(1,2));
-    lista->append(new QPoint(1,1));
-    lista->append(new QPoint(2,1));
-    lista->append(new QPoint(2,0));
-    QList<QPoint*>* result = chfr->addProfiles(lista,listb);
-    ASSERT_EQ(6,result->size());
-    ASSERT_TRUE(result->at(0)->x()==0);ASSERT_TRUE(result->at(0)->y()==0);
-    ASSERT_TRUE(result->at(1)->x()==0);ASSERT_TRUE(result->at(1)->y()==4);
-    ASSERT_TRUE(result->at(2)->x()==1);ASSERT_TRUE(result->at(2)->y()==4);
-    ASSERT_TRUE(result->at(3)->x()==1);ASSERT_TRUE(result->at(3)->y()==2);
-    ASSERT_TRUE(result->at(4)->x()==2);ASSERT_TRUE(result->at(4)->y()==2);
-    ASSERT_TRUE(result->at(5)->x()==2);ASSERT_TRUE(result->at(5)->y()==0);
+    QList<QPoint*>* result = chfr->addProfiles(lista, listb);
+    ASSERT_EQ(6, result->size());
+
+    int xa[6] = {0, 0, 1, 1, 2, 2};
+    int ya[6] = {0, 4, 4, 2, 2, 0};
+
+    for (int i = 0; i < 6; i++) {
+        EXPECT_EQ(xa[i], result->at(i)->x());
+        EXPECT_EQ(ya[i], result->at(i)->y());
+    }
 }
 
-TEST(AddProfilesTest, Difficult) {
-    QVector<Activity*> vec;
-    Chain* ch = new Chain(0,0,vec,NULL);
-    ChainFrame* chfr = new ChainFrame(ch,new QList<QPoint*>());
-    QList<QPoint*>* lista = new QList<QPoint*>();
-    QList<QPoint*>* listb = new QList<QPoint*>();
-    listb->append(new QPoint(0,0));
-    listb->append(new QPoint(0,3));
-    listb->append(new QPoint(2,3));
-    listb->append(new QPoint(2,1));
-    listb->append(new QPoint(4,1));
-    listb->append(new QPoint(4,0));
+TEST_F(AddProfilesTest, Difficult) {
+    int xa[8] = {1, 1, 2, 2, 3, 3, 5, 5};
+    int ya[8] = {0, 4, 4, 5, 5, 2, 2, 0};
+    for (int i = 0; i < 8; i++) {
+        lista->append(new QPoint(xa[i], ya[i]));
+    }    
 
-    lista->append(new QPoint(1,0));
-    lista->append(new QPoint(1,4));
-    lista->append(new QPoint(2,4));
-    lista->append(new QPoint(2,5));
-    lista->append(new QPoint(3,5));
-    lista->append(new QPoint(3,2));
-    lista->append(new QPoint(5,2));
-    lista->append(new QPoint(5,0));
-    QList<QPoint*>* result = chfr->addProfiles(lista,listb);
+    int xb[6] = {0, 0, 2, 2, 4, 4};
+    int yb[6] = {0, 3, 3, 1, 1, 0};
+    for (int i = 0; i < 6; i++) {
+        listb->append(new QPoint(xb[i], yb[i]));
+    }
 
-    EXPECT_EQ(12,result->size());
-    ASSERT_TRUE(result->at(0)->x()==0);ASSERT_TRUE(result->at(0)->y()==0);
-    ASSERT_TRUE(result->at(1)->x()==0);ASSERT_TRUE(result->at(1)->y()==3);
-    ASSERT_TRUE(result->at(2)->x()==1);ASSERT_TRUE(result->at(2)->y()==3);
-    ASSERT_TRUE(result->at(3)->x()==1);ASSERT_TRUE(result->at(3)->y()==7);
-    ASSERT_TRUE(result->at(4)->x()==2);ASSERT_TRUE(result->at(4)->y()==7);
-    ASSERT_TRUE(result->at(5)->x()==2);ASSERT_TRUE(result->at(5)->y()==6);
-    ASSERT_TRUE(result->at(6)->x()==3);ASSERT_TRUE(result->at(6)->y()==6);
-    ASSERT_TRUE(result->at(7)->x()==3);ASSERT_TRUE(result->at(7)->y()==3);
-    ASSERT_TRUE(result->at(8)->x()==4);ASSERT_TRUE(result->at(8)->y()==3);
-    ASSERT_TRUE(result->at(9)->x()==4);ASSERT_TRUE(result->at(9)->y()==2);
-    ASSERT_TRUE(result->at(10)->x()==5);ASSERT_TRUE(result->at(10)->y()==2);
-    ASSERT_TRUE(result->at(11)->x()==5);ASSERT_TRUE(result->at(11)->y()==0);
+    QList<QPoint*>* result = chfr->addProfiles(lista, listb);
+
+    ASSERT_EQ(12, result->size());
+    int xc[12] = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
+    int yc[12] = {0, 3, 3, 7, 7, 6, 6, 3, 3, 2, 2, 0};
+    for (int i = 0; i < 12; i++) {
+        EXPECT_EQ(xc[i], result->at(i)->x());
+        EXPECT_EQ(yc[i], result->at(i)->y());
+    }
 }
