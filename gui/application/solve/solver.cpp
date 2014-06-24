@@ -195,7 +195,7 @@ void Solver::solverReadOutput() {
            instance->clearSoftPrecedences();
         } else if (line.startsWith("CHAIN: ")) {
             processChainLine(line);
-        } else if(line.startsWith("Instance solved")) {
+        } else if(line.startsWith("Instance solved") || line.startsWith("DONE!")) {
                 setSolved(true);
         } else if(line.startsWith("Instance not solved")) {
                 setSolved(false);
