@@ -31,7 +31,6 @@ void dbc::close() {
     if(db.isOpen()){
         db.close();
     }
-
 }
 
 bool dbc::isOpenDB() {

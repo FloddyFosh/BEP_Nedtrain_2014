@@ -21,7 +21,7 @@ SolverConfigDialog::SolverConfigDialog(Controller * controller, QWidget *parent)
     rightLayout = new QVBoxLayout;
     form = new QFormLayout;
 
-
+    createLayout();
     createSignals();
     setUpLayout();
     initSolvers();

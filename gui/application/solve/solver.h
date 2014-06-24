@@ -86,6 +86,7 @@ private:
     void processFlexLine(QByteArray &line); ///< processes the next 'n + 2' lines 
     void processMutexLine(QByteArray &line);  ///< processes a mutex line outputted by the solver.
     void processChainLine(QByteArray &line); ///< processes a line that contains the list of activities of a chain, outputted by the solver.
+    void createFirstFrame(); ///< Creates the first frame
     void createChainFrame(Chain *c, int res); ///< Create the next frame for chain c
     void eatRemainingOutput(QList<QByteArray> &fields); ///< processes unused output.
     void setFlexGroups(QVector<Group *> groups); ///< set the flexibility values in the group.

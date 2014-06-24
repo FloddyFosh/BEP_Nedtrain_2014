@@ -91,22 +91,7 @@ bool Solver::start(Instance *i) {
     instance = i;
 
     clearBeforeSolving();
-
-    // Save first frame.
-    Frame * first_frame (new Frame);
-    foreach(Group * g, instance->getGroups()) {
-        foreach(Activity * a, g->getActivities()) {
-            wasLocked[a] = g->isLocked();
-        }
-        if (not g->isLocked())
-            g->setST(g->getEST());
-
-        g->setESTFlex(-1);
-        g->setLFTFlex(-1);
-
-        first_frame->addGroup(g);
-    }
-    replayFrames.append(first_frame);
+    createFirstFrame();
     
     QByteArray ba;
     QString s = instance->toString();
@@ -148,6 +133,23 @@ void Solver::clearBeforeSolving() {
     foreach(Precedence* p, instance->getSoftPrecedences()) {
         p->clearFrameNrs();
     }
+}
+
+void Solver::createFirstFrame() {
+    Frame * first_frame (new Frame);
+    foreach(Group * g, instance->getGroups()) {
+        foreach(Activity * a, g->getActivities()) {
+            wasLocked[a] = g->isLocked();
+        }
+        if (not g->isLocked())
+            g->setST(g->getEST());
+
+        g->setESTFlex(-1);
+        g->setLFTFlex(-1);
+
+        first_frame->addGroup(g);
+    }
+    replayFrames.append(first_frame);
 }
 
 void Solver::solverFinished(int x, QProcess::ExitStatus state) {

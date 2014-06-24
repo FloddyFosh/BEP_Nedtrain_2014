@@ -13,6 +13,7 @@
 #include "model/precedence_test.cpp"
 #include "model/group_test.cpp"
 #include "model/comparison_test.cpp"
+#include "model/add_profiles_test.cpp"
 #include "solve/solver_test.cpp"
 #include "util/resourcecalculator_test.cpp"
 #include "widgets/smoke_ui_test.cpp"

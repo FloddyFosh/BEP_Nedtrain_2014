@@ -4,8 +4,6 @@
 #include "ClpInterior.hpp"
 #include "constraints.h"
 
-#include <assert.h>  
-
 #include <set>
 #include <vector>
 #include <string>
