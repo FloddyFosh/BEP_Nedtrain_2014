@@ -6,14 +6,16 @@ In dit hoofdstuk worden alle nieuwe functionaliteiten, van zowel de interface al
 De nieuwe functionaliteit van de solver kan grotendeels worden onderverdeeld in het chaining algoritme en het vinden van flexibiliteitsintervals. Van deze onderdelen zal in deze paragraaf toegelicht worden hoe deze ge\"implementeerd zijn.
 
 \subsubsection{Chaining}
-Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is ge\"implementeerd, waarbij een keuze is tussen drie verschillende methoden voor het selecteren van een chain, namelijk:
+Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is ge\"implementeerd, waarbij een keuze is gemaakt tussen drie verschillende methoden voor het selecteren van een chain, namelijk:
 \begin{itemize}
-\item Selecteer de eerst gevonden geschikte chain.
 \item Selecteer een willekeurige geschikte chain.
+\item Selecteer de eerst gevonden geschikte chain.
 \item Gebruik de heuristiek beschreven in \ref{subsubsec:chainingoplossing}.
 \end{itemize}
 
-Uit analyse van de flexibiliteit en het aantal voorrangsrelaties dat door een algoritme toegevoegd wordt, is besloten om de heuristiek te gebruiken. Deze analyse is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
+Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk van methode gewisseld worden door een kleine aanpassing in de source code. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt, besloten om de heuristiek te gebruiken voor de NedTrain planner. De analyse van de drie mogelijke methoden voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
+
+Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme er voor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
 \subsubsection{Linear Programming}
 Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
