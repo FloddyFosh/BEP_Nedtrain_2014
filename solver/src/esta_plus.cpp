@@ -374,109 +374,118 @@ void update_peaks(node_t *n) {
     update_peakheap(h);
 }
 
-void update_group_peak(node_t *g, node_t *a, node_t *b) {
-    int seen_us;
-    peak2_t *peak = 0;
+void recompute_capacity(int res, peak2_t* peak, node_t* a, node_t* b){
     node_t *m;
+    peak->capacity = 0;
+    vector<node_t *> l;
+    for(int j = 0; (unsigned) j < peak->activities.size(); j++) {
+        m = peak->activities[j];
+        if(m == a || m == b) continue;
+        l.push_back(m);
+        peak->capacity += Q(m->i, m->j, res);
+    }
+    peak->activities = l;
+    heap_add(peakqueue, peak_score(peak), peak);
+}
 
+void copy_activities(peak2_t* from, peak2_t* to){
+    if(!to) {
+        debug("ERROR: assumption failure: lastpeak is not set.\n", 0);
+        exit(1);
+    }
+
+    for(int j = 0; (unsigned) j < from->activities.size(); j++) {
+        node_t *act = from->activities[j];
+        if(act->old_est >= 0) {
+            debug("ERROR: assumption failure: why is act->old_est set??\n", 0);
+            exit(1);
+        }
+        if(act->est + act->len > to->time) {
+            debug("ADD: i=%d, j=%d\n", act->i, act->j);
+            to->activities.push_back(act);
+        }
+    }
+}
+
+void recompute_peaks(int res, peak2_t* lastpeak, node_t* g, node_t* a, node_t* b){
+    peak2_t* peak = 0;
+    for(int i = g->est; i < g->est+g->len; i++) {
+        map<int, peak2_t *>::iterator peakit (peakhash[res].find(i));
+        int newpeak = 0;
+        if(peakit == peakhash[res].end()) {
+            if(i == g->est) {
+                // If there's no peak at the start of g, this resource was not used by
+                // the activity originally starting at this time, and only by the one
+                // starting at old_est. Use lastpeak (which cannot be NULL at this point)
+                // to create a new peak.
+                debug("Creating new peak at %d on resource %d.\n", i, res);
+                newpeak = 1;
+                peak = new peak2_t;
+                peak->time = i;
+                peak->resource = res;
+                copy_activities(lastpeak,peak);
+            } else
+                continue;
+        }
+        else peak = (*peakit).second;
+
+        debug("Found peak at t=%d, recomputing.\n", i);
+        peak->capacity = 0;
+        int seen_us = 0;
+        vector<node_t *> l;
+        for(int j = 0; (unsigned) j < peak->activities.size(); j++) {
+            node_t* m = peak->activities[j];
+            // Remove a and b, but only if they're not equal to g
+            if((a != g && m == a) || (b != g && m == b)) {
+                continue;
+            }
+            l.push_back(m);
+            peak->capacity += Q(m->i, m->j, res);
+            if(m == g) seen_us = 1;
+        }
+        peak->activities = l;
+        // If g is not equal to a or b it is newly created, so it must be added
+        if(!seen_us) {
+            debug("Adding new group to this peak.\n", 0);
+            peak->activities.push_back(g);
+            peak->capacity += Q(g->i, g->j, res);
+        }
+        if(newpeak) {
+            peakhash[res][peak->time] = peak;
+            heap_add(peakqueue, peak_score(peak), peak);
+        }
+    }
+}
+
+void update_group_peak(node_t *g, node_t *a, node_t *b) {
     for(int res = 0; res < tmsp->n_resources; res++) if (R(res)) {
         if(Q(g->i, g->j, res) == 0) continue;
         debug("Updating peaks on resource %d for grouped activity (%d,%d)\n", res, g->i, g->j);
         peak2_t * lastpeak = NULL;
         if(g->old_est >= 0) {
             debug("New EST, remove in [%d,%d).\n", g->old_est, g->est);
-
             for(int i = g->old_est; i < g->est; i++) {
                 // Fix peak in [old_est, est)
                 map<int, peak2_t *>::iterator peakit = peakhash[res].find(i);
                 if(peakit == peakhash[res].end())
                     continue;
-                peak = (*peakit).second;
+                peak2_t* peak = (*peakit).second;
 
                 // Re-compute capacity for this peak & remove a and b from list
-                peak->capacity = 0;
-                vector<node_t *> l;
-                for(int j = 0; (unsigned) j < peak->activities.size(); j++) {
-                    m = peak->activities[j];
-                    if(m == a || m == b) continue;
-                    l.push_back(m);
-                    peak->capacity += Q(m->i, m->j, res);
-                }
-                peak->activities = l;
-                heap_add(peakqueue, peak_score(peak), peak);
+                recompute_capacity(res,peak,a,b);
                 lastpeak = peak;
             }
         }
         debug("Recomputing peaks in [%d, %d)\n", g->est, g->est+g->len);
 
-        for(int i = g->est; i < g->est+g->len; i++) {
-            map<int, peak2_t *>::iterator peakit (peakhash[res].find(i));
-            int newpeak = 0;
-            if(peakit == peakhash[res].end()) {
-                if(i == g->est) {
-                    // If there's no peak at the start of g, this resource was not used by
-                    // the activity originally starting at this time, and only by the one
-                    // starting at old_est. Use lastpeak (which cannot be NULL at this point)
-                    // to create a new peak.
-                    debug("Creating new peak at %d on resource %d.\n", i, res);
-                    newpeak = 1;
-                    peak = new peak2_t;
-                    peak->time = i;
-                    peak->resource = res;
-
-                    if(!lastpeak) {
-                        debug("ERROR: assumption failure: lastpeak is not set.\n", 0);
-                        exit(1);
-                    }
-                    // Copy active activities from lastpeak
-                    for(int j = 0; (unsigned) j < lastpeak->activities.size(); j++) {
-                        node_t *act = lastpeak->activities[j];
-                        if(act->old_est >= 0) {
-                            debug("ERROR: assumption failure: why is act->old_est set??\n", 0);
-                            exit(1);
-                        }
-                        if(act->est + act->len > peak->time) {
-                            debug("ADD: i=%d, j=%d\n", act->i, act->j);
-                            peak->activities.push_back(act);
-                        }
-                    }
-                } else
-                    continue;
-            }
-            else peak = (*peakit).second;
-            debug("Found peak at t=%d, recomputing.\n", i);
-            peak->capacity = 0;
-            seen_us = 0;
-            vector<node_t *> l;
-            for(int j = 0; (unsigned) j < peak->activities.size(); j++) {
-                m = peak->activities[j];
-                // Remove a and b, but only if they're not equal to g
-                if((a != g && m == a) || (b != g && m == b)) {
-                    continue;
-                }
-                l.push_back(m);
-                peak->capacity += Q(m->i, m->j, res);
-                if(m == g) seen_us = 1;
-            }
-            peak->activities = l;
-            // If g is not equal to a or b it is newly created, so it must be added
-            if(!seen_us) {
-                debug("Adding new group to this peak.\n", 0);
-                peak->activities.push_back(g);
-                peak->capacity += Q(g->i, g->j, res);
-            }
-            if(newpeak) {
-                peakhash[res][peak->time] = peak;
-                heap_add(peakqueue, peak_score(peak), peak);
-            }
-        }
+        recompute_peaks(res,lastpeak,g,a,b);
     }
     g->old_est = -1;
 
     // Update peaks for moved successors
     set<node_t *, orderLT> h;
     for(int i = 0; i < len(g->next); i++) {
-        m = g->next[i];
+        node_t* m = g->next[i];
         if(m->old_est < 0) continue;
         h.insert(m);
     }

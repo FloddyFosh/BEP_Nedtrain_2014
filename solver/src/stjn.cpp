@@ -6,6 +6,11 @@
 
 node_t * cycle_node; // hier gedefinieerd
 
+stjn_t *stjn;
+node_t ***acts;
+vector<node_t *> ordinv;
+map<activity *, node_t *> activity_to_node;
+
 void chkEST()
 {
     REP(i, tmsp->n_trains) if (Tr(i)) REP(j, N(i)) if (A(i,j) and len(acts[i][j]->group))
@@ -34,11 +39,6 @@ void chkLST()
     }
     if (wrong) throw 0;
 }
-
-stjn_t *stjn;
-node_t ***acts;
-vector<node_t *> ordinv;
-map<activity *, node_t *> activity_to_node;
 
 void set_precedence(node_t *n, node_t *m) {
     n->next.append(m);

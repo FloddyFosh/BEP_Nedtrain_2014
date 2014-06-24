@@ -7,7 +7,6 @@
 #include "flexibility.h"
 #include "chaining.h"
 
-//extern void print_hele_state();
 extern void handle_neg_cyc();
 int merge_bandwidth;
 
