@@ -148,6 +148,9 @@ Over het algemeen scoort de code bovengemiddeld, hopelijk lukt het om dit niveau
 \cline{2-2}
 \end{tabular}
 
-\subsubsection{Module Coupling}
+\subsubsection{Verbeteringen}
+Aan de hand van de feedback van SIG zijn er vooral aanpassingen gedaan aan code van vorige ontwikkelaars. Zo zijn onder andere de lange en complexe methodes in \texttt{esta\_plus.cpp} en \texttt{solver.cpp} opgegedeeld in meerdere methodes. 
 
-\subsubsection{Unit Size en Complexity}
+Er zijn ook een aantal lange methodes bewust niet aangepast, omdat dit niet de leesbaarheid van de code ten goede zal komen. Zo zijn er methodes, die het menu van de grafische gebruikers interface opbouwt, erg lang, omdat er een heleboel eigenschappen en teksten moeten worden toegevoegd aan dit menu. Deze code is goed uitgelijnd en het is meteen duidelijk wat het doet. 
+
+Aan 'Module Coupling' is vrijwel niets gedaan, omdat voor het verlagen van de 'Module Coupling' grootschalige aanpassingen gedaan moeten worden aan het project. De rede dat methodes in \texttt{intance\_manip.cpp} en \texttt{instance\_misc.cpp} veel worden aangeroepen, komt doordat deze klasse alle informatie bewaart van een instantie. Als in de interface een instantie geopend wordt, moet alle informatie over die instantie worden bijgehouden. Aangezien een instantie \'e\'en ding is, is het ook niet logisch om deze nog verder op te delen. Het is al opgedeeld in twee bestanden, om de coupling te verlagen.
