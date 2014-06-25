@@ -110,11 +110,9 @@ TODO: static builden \\
 TODO: highlighten + verspringen \\
 
 \subsection{Codekwaliteit}
-Om de codekwaliteit te verbeteren zijn er een aantal aanpassingen aan de code gemaakt. Deze veranderingen zorgen dus niet voor nieuwe features, maar voor een betere onderhoudbaarheid van de code, zodat ook ontwikkelaars na dit project makkelijk nieuwe features kunnen toevoegen. Zo zijn alle resources (zoals icoontjes, fonts en dergelijke) aan een speciaal bestand, genaamd \texttt{Resources.qrc}, toegevoegd, die bijhoud van welke resources de interface gebruik maakt. Door de resources op te sommen in \texttt{Resources.qrc} wordt het in de rest van de code makkelijker gebruik te maken van deze resources. Deze verandering is ook nodig om het static builden, wat wordt besproken in paragraaf \ref{sec:gebruiksgemak}, mogelijk te maken.
+Om de codekwaliteit te verbeteren zijn er een aantal aanpassingen aan de code gemaakt. Deze veranderingen zorgen dus niet voor nieuwe features, maar voor een betere onderhoudbaarheid van de code, zodat ook ontwikkelaars na dit project makkelijk nieuwe features kunnen toevoegen. Zo zijn alle resources (zoals icoontjes, fonts en dergelijke) aan een speciaal bestand, genaamd \texttt{Resources.qrc}, toegevoegd, die bijhoud van welke resources de interface gebruik maakt. Door de resources op te sommen in \texttt{Resources.qrc} wordt het in de rest van de code makkelijker gebruik te maken van deze resources. Deze verandering is ook nodig om het static builden, wat wordt besproken in paragraaf \ref{sec:gebruiksgemak}, mogelijk te maken. Ook is het gebruik van \emph{includes} in de code consistenter gemaakt.
 
 In de code van de solver waren veel lange methodes aanwezig, die we hebben opgedeeld. Ook was daar nog typische C code aanwezig, wat niet gebruikelijk is in \cpp\ en soms ook zelfs waarschuwingen gaf tijden compileren. Daarbij is het gebruik van een \texttt{boolean} in plaats van een \texttt{integer} en een \texttt{string} in plaats van een \texttt{char*} een goed voorbeeld. Ook is er code verwijderd dat helemaal niet gebruikt werd. 
-
-Het gebruik van \emph{includes} in code is consistenter gemaakt. Deze aanpassing is vooral op code van de interface toegepast. 
 
 \subsection{Port naar Windows 7}
 Om de toegankelijkheid van de applicatie te vergroten, is er voor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
