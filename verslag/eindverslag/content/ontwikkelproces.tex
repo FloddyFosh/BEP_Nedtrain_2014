@@ -37,10 +37,10 @@ In deze sprint was het doel om de feature van het weergeven van de flexibiliteit
 We hebben in deze sprint veel tijd moeten besteden aan het verslag, maar we hebben gelukkig ook tijd kunnen besteden aan het verder door ontwikkelen van de NedTrain Planner. In deze sprint hebben we de code kwaliteit verbeterd en veel bugs ontdekt die de vorige projecten hebben achter gelaten. De meeste bugs zijn in deze sprint verholpen.
 
 \subsubsection{Sprint 6}
-Aan het begin van deze sprint werd er weer een demo gegeven, zodat de opdrachtgever kan zien hoe het er met de product voor staat. De feedback die verkregen waren tijdens de demo zijn als doelen opgesteld voor deze sprint. Daarnaast moest er in deze sprint ook gekeken worden naar de effici\"entie van de ge\"implementeerde algoritmes, aangezien bij grote instanties de interface vastliep.
+Aan het begin van deze sprint werd er weer een demo gegeven, zodat de opdrachtgever kon zien hoe het er met de product voor staat. De feedback die verkregen waren tijdens de demo zijn als doelen opgesteld voor deze sprint. Daarnaast moest er in deze sprint ook gekeken worden naar de effici\"entie van de ge\"implementeerde algoritmes, aangezien bij grote instanties de interface vastliep.
 
 \textbf{Terugblik} \\
-Na de demo is er besloten om nog \'e\'en laatste feature te implementeren, omdat dit voor de opdrachtgever een vrij hoge prioriteit had. Dit is de rooster feature, die de werking van het chaining algoritme duidelijker maakt. Het vastlopen van de interface is ook verholpen in deze sprint. De algoritmes en de communicatie tussen de solver en de interface zijn effici\"enter gemaakt. Verder zijn er weer behoorlijk wat bugs opgelost en is het verslag afgemaakt. 
+Na de demo is er besloten om nog \'e\'en laatste feature te implementeren, omdat dit voor de opdrachtgever een vrij hoge prioriteit had. Dit is de rooster feature, die de werking van het chaining algoritme duidelijker maakt. Daarnaast is er duidelijker gemaakt welke resources aangepast worden in een stap van de solver, door de desbetreffende resources te highlighten. Het vastlopen van de interface is ook verholpen in deze sprint. De algoritmes en de communicatie tussen de solver en de interface zijn effici\"enter gemaakt. Verder zijn er weer behoorlijk wat bugs opgelost en is het verslag afgemaakt. 
 
 \subsection{Hulpmiddelen}
 Zoals beschreven in het Plan van Aanpak en het Ori\"entatieverslag zijn er voor een aantal hulpmiddelen gekozen om te gebruiken tijdens het project. In deze paragraaft wordt onze ervaring van het gebruik van deze hulpmiddelen besproken, maar ook een aantal resultaten daarvan. 
@@ -126,7 +126,7 @@ Aan het eind van sprint 5 is al onze code opgestuurd naar de Software Improvemen
 \item \textbf{Component independence} - Er moet gestreefd worden naar zo veel mogelijk componenten die niet aangeroepen worden door componenten van andere modules. Alleen interface klassen zouden de communicatie tussen verschillende modules moeten regelen.
 \end{itemize}
 
-In de volgende paragrafen zal het ontvangen feedback van SIG gegeven worden en beschreven welke handelingen zijn uitgevoerd op basis van de feedback om de kwaliteit van de code te verbeteren.
+In de volgende paragrafen zal het ontvangen feedback van SIG en de handelingen die zijn uitgevoerd door ons op basis van de feedback gegeven worden.
 
 \subsubsection{Feedback SIG}
 Van de code die op vrijdag 13 juni 2014 is opgestuurd, is de volgende feedback gekregen.
@@ -149,8 +149,8 @@ Over het algemeen scoort de code bovengemiddeld, hopelijk lukt het om dit niveau
 \end{tabular}
 
 \subsubsection{Verbeteringen}
-Aan de hand van de feedback van SIG zijn er vooral aanpassingen gedaan aan code van vorige ontwikkelaars. Zo zijn onder andere de lange en complexe methodes in \texttt{esta\_plus.cpp} en \texttt{solver.cpp} opgegedeeld in meerdere methodes. 
+Aan de hand van de feedback van SIG zijn er vooral aanpassingen gedaan aan code van vorige projecten. Zo zijn onder andere de lange en complexe methodes in \texttt{esta\_plus.cpp} en \texttt{solver.cpp} opgegedeeld in meerdere methodes. 
 
-Er zijn ook een aantal lange methodes bewust niet aangepast, omdat dit niet de leesbaarheid van de code ten goede zal komen. Zo zijn er methodes, die het menu van de grafische gebruikers interface opbouwt, erg lang, omdat er een heleboel eigenschappen en teksten moeten worden toegevoegd aan dit menu. Deze code is goed uitgelijnd en het is meteen duidelijk wat het doet. 
+In de code van de applicatie zijn ook meerdere methodes opgesplitst. Zo is er nu voor elke klasse die een grafisch venster aanmaakt een methode toegevoegd die de layout van het venster opbouwt, in plaats van dit allemaal in de al behoorlijk lange constructor te doen. Alhoewel deze methode nog steeds bovengemiddeld lang is voor sommige klassen, is deze niet verder opgesplitst, aangezien dit niet de leesbaarheid van de code ten goede zou komen. Deze code is goed uitgelijnd en het is meteen duidelijk wat het doet.
 
-Aan 'Module Coupling' is vrijwel niets gedaan, omdat voor het verlagen van de 'Module Coupling' grootschalige aanpassingen gedaan moeten worden aan het project. De rede dat methodes in \texttt{intance\_manip.cpp} en \texttt{instance\_misc.cpp} veel worden aangeroepen, komt doordat deze klasse alle informatie bewaart van een instantie. Als in de interface een instantie geopend wordt, moet alle informatie over die instantie worden bijgehouden. Aangezien een instantie \'e\'en ding is, is het ook niet logisch om deze nog verder op te delen. Het is al opgedeeld in twee bestanden, om de coupling te verlagen.
+Aan 'Module Coupling' is vrijwel niets gedaan, omdat voor het verlagen van de 'Module Coupling' grootschalige aanpassingen gedaan moesten worden aan het project en hiervoor niet meer genoeg tijd beschikbaar was. De reden dat methodes in \texttt{intance\_manip.cpp} en \texttt{instance\_misc.cpp} veel worden aangeroepen, komt doordat deze klasse alle informatie bewaart van een instantie. Als in de interface een instantie geopend wordt, moet alle informatie over die instantie worden bijgehouden. Aangezien een instantie \'e\'en ding is, is het ook niet logisch om deze nog verder op te delen. Het is al opgedeeld in twee bestanden, om de coupling te verlagen.
