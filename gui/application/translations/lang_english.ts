@@ -111,27 +111,27 @@
     <message>
         <location filename="../widgets/dialogs/activityinfodialog.cpp" line="40"/>
         <source>Earliest start time:</source>
-        <translation></translation>
+        <translation>Earliest starting time:</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/activityinfodialog.cpp" line="41"/>
         <source>Latest start time:</source>
-        <translation></translation>
+        <translation>Latest starting time:</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/activityinfodialog.cpp" line="45"/>
         <source>Earliest flex start time:</source>
-        <translation></translation>
+        <translation>Earliest flex starting time:</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/activityinfodialog.cpp" line="47"/>
         <source>Latest flex start time:</source>
-        <translation></translation>
+        <translation>Latest flex starting time:</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/activityinfodialog.cpp" line="50"/>
         <source>Start time:</source>
-        <translation></translation>
+        <translation>Starting time:</translation>
     </message>
     <message>
         <location filename="../widgets/dialogs/activityinfodialog.cpp" line="23"/>
@@ -1140,7 +1140,8 @@ File not found, not readable or parsing error.</source>
     <message>
         <location filename="../widgets/requirementstable.cpp" line="45"/>
         <source>Minimal needed</source>
-        <translation></translation>
+        <translation>Minimal
+requirement</translation>
     </message>
     <message>
         <location filename="../widgets/requirementstable.cpp" line="47"/>

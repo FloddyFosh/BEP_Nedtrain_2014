@@ -1182,7 +1182,8 @@ Bestand niet gevonden, onleesbaar of parsing error.</translation>
     <message>
         <location filename="../widgets/requirementstable.cpp" line="45"/>
         <source>Minimal needed</source>
-        <translation>Minimaal nodig</translation>
+        <translation>Minimaal
+benodigd</translation>
     </message>
     <message>
         <location filename="../widgets/requirementstable.cpp" line="47"/>
