@@ -20,7 +20,7 @@ Een doenlijk schema $S = \{s_1,\dots ,s_m\}$ bestaande uit starttijden $s_{a,b}$
 
 \subsection{Flexibiliteit}
 \label{subsec:flexprobleem}
-Om ervoor te zorgen dat de flexibiliteit van een schema geoptimaliseerd kan worden, moet de flexibiliteit van een schema eerst goed gedefini\"eerd worden. Hiervoor zal de flexibiliteitsmaat van Wilson \emph{et al.} \cite{wilson2013flexibility} gebruikt worden, omdat deze maat er ook rekening mee houdt dat een schema minder flexibel wordt door het toevoegen van voorrangsrelaties. Om deze te berekenen, moet voor elke activiteit $v_{a,b}$ een interval $[l_v,u_v]$ berekend worden, zodat elke activiteit in zijn eigen interval verschoven kan worden, zonder dat daardoor andere activiteiten verplaatst hoeven te worden. Dit houdt dus in dat de verzameling van intervallen $I_S = \{I_v = [l_v,u_v] | v \in V\}$ voldoet desda voor elke $v \in V$ en voor elke $t_v \in [l_v,u,v]$, een toewijzing van starttijd $t_v$ aan activiteit $v$ een consistent schema oplevert. Vervolgens kan de flexibiliteit van het schema berekend worden door de lengtes van de intervallen bij elkaar op te tellen, zoals in formule \ref{eq:flex1}:
+Om ervoor te zorgen dat de flexibiliteit van een schema geoptimaliseerd kan worden, moet de flexibiliteit van een schema eerst goed gedefini\"eerd worden. Hiervoor zal de flexibiliteitsmaat van Wilson \emph{et al.} \cite{wilson2013flexibility} gebruikt worden, omdat deze maat er ook rekening mee houdt dat een schema minder flexibel wordt door het toevoegen van voorrangsrelaties. Om deze te berekenen, moet voor elke activiteit $v_{a,b}$ een interval $[l_v,u_v]$ berekend worden, zodat elke activiteit in zijn eigen interval verschoven kan worden, zonder dat daardoor andere activiteiten verplaatst hoeven te worden. Dit houdt dus in dat de verzameling van intervallen $I_S = \{I_v = [l_v,u_v] | v \in V\}$ voldoet desda voor elke $v \in V$ en voor elke $t_v \in [l_v,u,v]$, een toewijzing van starttijd $t_v$ aan activiteit $v$ een consistent schema oplevert. Vervolgens kan de flexibiliteit van het schema berekend worden door de lengtes van de intervallen bij elkaar op te tellen, zoals in Formule \ref{eq:flex1}:
 
 \begin{align}
 \label{eq:flex1}
@@ -106,33 +106,33 @@ Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst gepro
 \label{subsubsec:flexoplossing}
 Nu alle constraints door het chaining algoritme aan het model zijn toegevoegd, kan de flexibiliteit van het schema worden geoptimaliseerd, door de probleeminstantie om te zetten naar een Linear Programming \emph{(LP)} probleem. Dit probleem kan in polynomiale tijd opgelost worden door middel van een LP-solver.
 
-De flexibiliteit van een taak kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd (l.s.t.) en $t^-$ de eerste starttijd (e.s.t.) van een taak $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle taken $t \in T$ te nemen, zoals in formule \ref{eq:flex} is weergegeven. 
+De flexibiliteit van een taak kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd (l.s.t.) en $t^-$ de eerste starttijd (e.s.t.) van een taak $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle taken $t \in T$ te nemen, zoals in Formule \ref{eq:flex} is weergegeven. 
 
 \begin{align}
 \label{eq:flex}
     flex_{totaal} = \sum_{t \in T} (t^+ - t^-)
 \end{align}
 
-Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelijkertijd wordt voldaan aan de constraints $(t - t' \leq c) \in C$. Ook mag de e.s.t. niet na de l.s.t. zijn ($t^- \leq t^+ \Rightarrow 0 \leq t^+ - t^-$). Hieruit volgt het LP-probleem zoals in formule \ref{eq:flexLP} weergegeven is.
+Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelijkertijd wordt voldaan aan de constraints $(t - t' \leq c) \in C$. Ook mag de e.s.t. niet na de l.s.t. zijn ($t^- \leq t^+ \Rightarrow 0 \leq t^+ - t^-$). Hieruit volgt het LP-probleem zoals in Formule \ref{eq:flexLP} weergegeven is.
 
 \begin{align}
 \label{eq:flexLP}
 \begin{aligned}
         \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
- \text{subject to:}& \quad 0 \leq t^+ - t^- & \forall t \in T \\
+ \text{met voorwaarden:}& \quad 0 \leq t^+ - t^- & \forall t \in T \\
                    & \quad t^+ - t^- \leq c & \forall (t^+ - t^{'-} \leq c) \in C
 \end{aligned}
 \end{align}
 
-Het nadeel van de formulering in formule \ref{eq:flexLP}, is dat de flexibiliteit niet netjes verdeeld hoeft te worden over de taken. Bij het testen is zelfs gebleken dat de 'Simplex' methode meestal de flexibiliteit juist heel slecht verdeelt. Met de 'Interior Point' methode bleek de flexibiliteit wel beter verdeeld te worden. Beide methoden zijn beschikbaar in de CLP library en komen wel uit op hetzelfde antwoord van de geoptimaliseerde variabele, maar verschillen qua waarden van de andere variabelen. Het exacte verschil tussen deze twee methoden ligt buiten het kader van dit verslag.
+Het nadeel van de formulering in Formule \ref{eq:flexLP}, is dat de flexibiliteit niet netjes verdeeld hoeft te worden over de taken. Bij het testen is zelfs gebleken dat de 'Simplex' methode meestal de flexibiliteit juist heel slecht verdeelt. Met de 'Interior Point' methode bleek de flexibiliteit wel beter verdeeld te worden. Beide methoden zijn beschikbaar in de CLP library en komen wel uit op hetzelfde antwoord van de geoptimaliseerde variabele, maar verschillen qua waarden van de andere variabelen. Het exacte verschil tussen deze twee methoden ligt buiten het kader van dit verslag.
 
-Met het LP-probleem, zoals in formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke taak $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
+Met het LP-probleem, zoals in Formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke taak $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in Formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in Formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
 
 \begin{align}
 \label{eq:flexfirstLP}
 \begin{aligned}
         \text{max:}& \quad min & \\
- \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+ \text{met voorwaarden:}& \quad min \leq t^+ - t^- & \forall t \in T \\
                    & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
 \end{aligned}
 \end{align}
@@ -141,9 +141,9 @@ Met het LP-probleem, zoals in formule \ref{eq:flexfirstLP} staat, wordt de minim
 \label{eq:flexsecondLP}
 \begin{aligned}
         \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
- \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+ \text{met voorwaarden:}& \quad min \leq t^+ - t^- & \forall t \in T \\
                    & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
 \end{aligned}
 \end{align}
 
-Door het toevoegen van de nieuwe constraint $min \leq t^+ - t^-$, kan het voorkomen dat de totale flexibiliteit $flex_{totaal}$ lager is dan bij het gebruik van formule \ref{eq:flexLP}, maar in dit geval is de flexibiliteit wel beter over alle activiteiten verdeeld.
+Door het toevoegen van de nieuwe constraint $min \leq t^+ - t^-$, kan het voorkomen dat de totale flexibiliteit $flex_{totaal}$ lager is dan bij het gebruik van Formule \ref{eq:flexLP}, maar in dit geval is de flexibiliteit wel beter over alle activiteiten verdeeld.
