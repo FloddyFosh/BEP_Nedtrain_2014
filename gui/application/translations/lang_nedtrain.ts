@@ -638,7 +638,7 @@ Please correct your input.</source>
     <message>
         <location filename="../widgets/jobwidget.cpp" line="262"/>
         <source>Job Info</source>
-        <translation>Trein Info</translation>
+        <translation>Treininformatie</translation>
     </message>
     <message>
         <location filename="../widgets/jobwidget.cpp" line="310"/>
@@ -648,7 +648,7 @@ Please correct your input.</source>
     <message>
         <location filename="../widgets/jobwidget.cpp" line="265"/>
         <source>Show resource usage</source>
-        <translation>Resource-verbruik tonen</translation>
+        <translation>Resourceverbruik tonen</translation>
     </message>
 </context>
 <context>
