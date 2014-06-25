@@ -18,7 +18,7 @@ Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en
 Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme er voor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
 \subsubsection{Linear Programming}
-Om voor elke taak een flexibiliteitsinterval te vinden moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) open source library gebruikt. Deze library verwacht als input een stelsel van lineaire vergelijkingen en een variabele om te optimaliseren en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
+Om voor elke activiteit een flexibiliteitsinterval te vinden moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) open source library gebruikt. Deze library verwacht als input een stelsel van lineaire vergelijkingen en een variabele om te optimaliseren en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
 
 De documentatie van CLP is helaas niet heel erg uitgebreid, maar het is desondanks toch gelukt om het LP-probleem door CLP te laten oplossen. Er moet hiervoor een instantie van de klasse \texttt{ClpModel} worden opgebouwd door het aanmaken en bepalen van variabelen en limieten. Er bestaan verschillende instanties van de \texttt{ClpModel} klasse. Zo is er door ons gebruik gemaakt van de modellen \texttt{ClpSimplex} en \texttt{ClpInterior}. Het grote verschil tussen \texttt{ClpSimplex} en \texttt{ClpInterior} is de manier van oplossen, deze gebruiken namelijk respectievelijk de 'Simplex' en de 'Interior Point' methode. Er is zelf nog een \texttt{Constraints} klasse gemaakt om elke variabele een nummer te geven. De variabelen $t^+_0, t^-_0, \ldots, t^+_n$ en $t^-_n$ krijgen respectievelijk de nummers $0, 1, \ldots, 2 \cdot n$ en $2 \cdot n + 1$. Aan het model moet voor elke variabele een onder- en bovengrens worden gesteld. Er moet een objective functie worden opgegeven en ingesteld dat deze gemaximaliseerd moet worden. Vervolgens kan er aan het model constraints worden toegevoegd. Door een solve methode aan te roepen op het model kan er vervolgens met behulp van de variabele nummers de toegekende waarde van de variabele uit het model worden opgevraagd.
 
@@ -75,19 +75,19 @@ Nu is er ook een overzicht van informatie over een trein beschikbaar. Als de geb
 \parbox{.45\linewidth}{
     \center
     \includegraphics[width=.4\textwidth]{../images/taak-info.png}
-    \caption{Taak informatie}
+    \caption{Taakinformatie}
     \label{fig:taak-info}
 }\hfill
 \parbox{.45\linewidth}{
     \center
     \includegraphics[width=.4\textwidth]{../images/trein-info.png}
-    \caption{Trein informatie}
+    \caption{Treininformatie}
     \label{fig:trein-info}
 }
 \end{figure}
 
 \subsubsection{Informatie Solver en Oplossing}
-Na het oplossen van een instantie door de solver worden de uitkomsten en gegevens van de oplossing gecommuniceerd naar de grafische interface. Zo werd er bijvoorbeeld al doorgegeven hoeveel voorrangsrelaties er aan de instantie zijn toegevoegd door de solver. Nu wordt er ook doorgegeven, als de solver gebruik maakt van flexibiliteitsintervallen, wat de totale flexibiliteit van de oplossing is. Als de gebruiker vervolgens aanpassingen maakt en de instantie vervolgens opnieuw laat oplossen, kan er ook meteen gezien worden wat voor effect dit heeft op het aantal precedence constraints en de totale flexibiliteit. Dit wordt gedaan door het kleuren van de tekst en het geven van de nieuwe en de oude gegevens. \emph{(zie Figuur \ref{fig:solver-dialog})} Een groene kleur van de flexibiliteit tekst geeft aan dat de nieuwe oplossing meer of gelijke flexibiliteit heeft, waarbij een rode kleur aangeeft dat de flexibiliteit juist omlaag is gegaan. Hetzelfde geldt voor de tekst van het aantal voorrangsrelaties, waarbij rood aangeeft dat er meer voorrangsrelaties toegevoegd zijn en groen minder of gelijk.
+Na het oplossen van een instantie door de solver worden de uitkomsten en gegevens van de oplossing gecommuniceerd naar de grafische interface. Zo werd er bijvoorbeeld al doorgegeven hoeveel voorrangsrelaties er aan de instantie zijn toegevoegd door de solver. Nu wordt er ook doorgegeven, als de solver gebruik maakt van flexibiliteitsintervallen, wat de totale flexibiliteit van de oplossing is. Als de gebruiker vervolgens aanpassingen maakt en de instantie vervolgens opnieuw laat oplossen, kan er ook meteen gezien worden wat voor effect dit heeft op het aantal voorrangsrelaties en de totale flexibiliteit. Dit wordt gedaan door het kleuren van de tekst en het geven van de nieuwe en de oude gegevens. \emph{(zie Figuur \ref{fig:solver-dialog})} Een groene kleur van de flexibiliteit tekst geeft aan dat de nieuwe oplossing meer of gelijke flexibiliteit heeft, waarbij een rode kleur aangeeft dat de flexibiliteit juist omlaag is gegaan. Hetzelfde geldt voor de tekst van het aantal voorrangsrelaties, waarbij rood aangeeft dat er meer voorrangsrelaties toegevoegd zijn en groen minder of gelijk.
 
 Het is nu ook mogelijk om de tijdsverdeling van de solver na het oplossen te zien. Op deze manier is het meteen duidelijk welk gedeelte van de solver het meest heeft toegedragen aan de totale tijd die de solver nodig had om de instantie op te lossen.
 
