@@ -18,7 +18,7 @@ Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en
 Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme ervoor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
 \subsubsection{Linear Programming}
-Om voor elke taak een flexibiliteitsinterval te vinden moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) open source library gebruikt. Deze library verwacht als input een stelsel van lineaire vergelijkingen en een variabele om te optimaliseren en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
+Om voor elke activiteit een flexibiliteitsinterval te vinden moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) open source library gebruikt. Deze library verwacht als input een stelsel van lineaire vergelijkingen en een variabele om te optimaliseren en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
 
 De documentatie van CLP is helaas niet heel erg uitgebreid, maar het is desondanks toch gelukt om het LP-probleem door CLP te laten oplossen. Er moet hiervoor een instantie van de klasse \texttt{ClpModel} worden opgebouwd door het aanmaken en bepalen van variabelen en limieten. Er bestaan verschillende instanties van de \texttt{ClpModel} klasse. Zo is er door ons gebruik gemaakt van de modellen \texttt{ClpSimplex} en \texttt{ClpInterior}. Het grote verschil tussen \texttt{ClpSimplex} en \texttt{ClpInterior} is de manier van oplossen, deze gebruiken namelijk respectievelijk de 'Simplex' en de 'Interior Point' methode. Er is zelf nog een \texttt{Constraints} klasse gemaakt om elke variabele een nummer te geven. De variabelen $t^+_0, t^-_0, \ldots, t^+_n$ en $t^-_n$ krijgen respectievelijk de nummers $0, 1, \ldots, 2 \cdot n$ en $2 \cdot n + 1$. Aan het model moet voor elke variabele een onder- en bovengrens worden gesteld. Er moet een objective functie worden opgegeven en ingesteld dat deze gemaximaliseerd moet worden. Vervolgens kan er aan het model constraints worden toegevoegd. Door een solve methode aan te roepen op het model kan er vervolgens met behulp van de variabele nummers de toegekende waarde van de variabele uit het model worden opgevraagd.
 
@@ -44,9 +44,9 @@ Als een solver geen chains en/of flexibiliteitsintervallen berekent, zullen voor
 
 In het frame dat in Figuur \ref{fig:GUIfinal} zichtbaar is, wordt een chain van activiteiten, behorende bij de resource 'monteurs', in het bovenste deelvenster getoond. Hierin zijn de rode pijlen voorrangsrelaties die al in de instantie aanwezig waren en zijn de zwarte pijlen later toegevoegd tijdens het oplossen van de instantie.
 
-Zoals eerder genoemd, worden van een resource eerst alle chains tegelijk getoond op een frame en vervolgens elke chain op een apart frame. Tijdens het \'e\'en voor \'e\'en laten zien van de chains, wordt  het profiel van de gebruikte resources stap voor stap opgebouwd. Op het moment dat er nog geen resources gebruikt worden, is het gehele profiel groen. Bij het tonen van een chain worden alle resource units van een resource die door de activiteiten in deze chain gebruikt worden, in het blauw getoond. Dit betekent dus dat deze resource units niet meer door andere activiteiten gebruikt kunnen worden. Deze gebruikte resources zijn dus in de daarop volgende frames grijs gekleurd. Zo wordt in elke frame het grijs gekleurde gebied groter, totdat de gehele resource profile opgevuld is.
+Zoals eerder genoemd, worden van een resource eerst alle chains tegelijk getoond op een frame en vervolgens elke chain op een apart frame. Tijdens het \'e\'en voor \'e\'en laten zien van de chains, wordt  het profiel van de gebruikte resources stap voor stap opgebouwd. Op het moment dat er nog geen resources gebruikt worden, is het gehele profiel groen. Bij het tonen van een chain worden alle resource units van een resource die door de activiteiten in deze chain gebruikt worden, in het blauw getoond. Dit betekent dus dat deze resource units niet meer door andere activiteiten gebruikt kunnen worden. Deze gebruikte resources zijn dus in de daarop volgende frames grijs gekleurd. Zo wordt in elke frame het grijs gekleurde gebied groter, totdat de gehele resource profiel opgevuld is.
 
-\subsubsection*{Flexibiliteitsintervallen}
+\subsubsection{Flexibiliteitsintervallen}
 Zoals in Figuur \ref{fig:flex-interval} is te zien, is het ook mogelijk om in de interface het flexibiliteitsinterval van elke activiteit weer te geven. Activiteiten kunnen vrij bewegen binnen het flexibiliteitsinterval zonder dat er conflicten ontstaan met andere activiteiten. Als de intervallen worden weergegeven, is het niet mogelijk om de activiteiten buiten het bijbehorende interval te verplaatsen. Ook is het niet mogelijk activiteiten zodanig langer te maken dat ze buiten hun flexibiliteitsinterval vallen. Die twee zaken zijn niet mogelijk, om ervoor te zorgen dat het schema flexibel blijft. Als het weergeven van de flexibiliteitsintervallen wordt uitgezet, kunnen de activiteiten wel verplaatst en vergroot worden buiten het flexibiliteitsinterval.
 
 \begin{figure}[H]
@@ -56,8 +56,8 @@ Zoals in Figuur \ref{fig:flex-interval} is te zien, is het ook mogelijk om in de
 \label{fig:flex-interval}
 \end{figure}
 
-\subsubsection*{Rooster}
-Naast het resource profile dat weergegeven kan worden in de onderste helft van de interface \emph{(zie Figuur \ref{fig:GUIfinal})}, is er nu ook een nieuwe manier van het weergeven van de resources die worden gebruikt. Deze nieuwe feature maakt het mogelijk de chains, die worden gegenereerd door het chaining algoritme, op een makkelijker te begrijpen manier weer te geven. De chains van resource units resulteren in een rooster, dat in de onderste helft van de interface kan worden weergegeven \emph{(zie Figuur \ref{fig:rooster})} met behulp van een nieuwe knop. Vooral als de resource units bijvoorbeeld monteurs, schoonmakers of ander personeel zijn, is deze feature erg handig, omdat de werknemers zelf kunnen zien wie op welk moment aan welke trein werkt of pauze heeft. 
+\subsubsection{Rooster}
+Naast het resource profiel dat weergegeven kan worden in de onderste helft van de interface \emph{(zie Figuur \ref{fig:GUIfinal})}, is er nu ook een nieuwe manier van het weergeven van de resources die worden gebruikt. Deze nieuwe feature maakt het mogelijk de chains, die worden gegenereerd door het chaining algoritme, op een makkelijker te begrijpen manier weer te geven. De chains van resource units resulteren in een rooster, dat in de onderste helft van de interface kan worden weergegeven \emph{(zie Figuur \ref{fig:rooster})} met behulp van een nieuwe knop. Vooral als de resource units bijvoorbeeld monteurs, schoonmakers of ander personeel zijn, is deze feature erg handig, omdat de werknemers zelf kunnen zien wie op welk moment aan welke trein werkt of pauze heeft. 
 
 \begin{figure}[H]
 \center
@@ -66,10 +66,10 @@ Naast het resource profile dat weergegeven kan worden in de onderste helft van d
 \label{fig:rooster}
 \end{figure}
 
-\subsubsection*{Informatie Trein en Activiteit}
-Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht zijn de flexibiliteitsintervallen toegevoegd als deze bekend zijn \emph{(zie Figuur \ref{fig:taak-info})}. Als de instantie nog niet opgelost is of als de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekent, dan worden deze niet in het overzicht weergegeven.  
+\subsubsection{Informatie Trein en Activiteit}
+Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Als er van deze activiteit flexibiliteitsintervallen bekend zijn, worden deze aan het overzicht toegevoegd \emph{(zie Figuur \ref{fig:taak-info})}. Als de instantie nog niet opgelost is of als de instantie is opgelost met een solver die geen flexibiliteitsintervallen ondersteunt, dan worden deze niet in het overzicht weergegeven.  
 
-Nu is er ook een overzicht van informatie over een trein beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit, dan wordt er een nieuw scherm \emph{(zie Figuur \ref{fig:trein-info})} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op te lossen. 
+Nu is er ook een overzicht van informatie over een trein beschikbaar. Als de gebruiker met de rechtermuisknop op de tijdlijn van een trein klikt, maar niet op een activiteit, dan verschijnt er een keuzemenu, waarin de optie 'Treininformatie' gekozen kan worden. Daarmee wordt er een nieuw scherm \emph{(zie Figuur \ref{fig:trein-info})} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal voor deze trein nodig zijn. Vanwege de andere voorwaarden aan het probleem betekent het voldoen aan deze minimumwaarden niet altijd dat de instantie oplosbaar is. Andersom geldt wel dat de instantie nooit oplosbaar is als niet aan de minimale benodigde resources voldaan is.
 
 \begin{figure}[H]
 \parbox{.45\linewidth}{
@@ -98,7 +98,7 @@ Het is nu ook mogelijk om de tijdsverdeling van de solver na het oplossen te zie
     \label{fig:solver-dialog}
 \end{figure}
 
-\subsubsection*{Gebruiksgemak}
+\subsubsection{Gebruiksgemak}
 Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode kruis in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
 
 Er zijn ook sneltoetsen toegevoegd voor het in- en uitzoomen en voor het horizontaal scrollen. Er kan in- en uitgezoomd worden door de ctrl-toets ingedrukt te houden en het scrollwiel van de muis  te bewegen. Horizontaal scrollen kan in het venster waarin de muis zich op dat moment bevindt door de shift-toets ingedrukt te houden en het scrollwiel van de muis te bewegen. Deze sneltoetsen zijn ingesteld zodat de gebruiker makkelijker door een probleeminstantie kan navigeren, zonder daarvoor steeds zijn muis naar de menubalk te hoeven verplaatsen.
