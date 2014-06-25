@@ -61,6 +61,7 @@ void RequirementsTable::fillIn() {
             connect(spinners[r], SIGNAL(valueChanged(int)), editor, SLOT(setModified()), Qt::UniqueConnection);
         } else {
             QLabel* resourceLabel = new QLabel(QString::number(getRequiredAmount(r)));
+            resourceLabel->setMargin(3);
             setCellWidget(row, 1, resourceLabel);
         }
         row++;
