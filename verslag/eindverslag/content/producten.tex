@@ -1,5 +1,5 @@
 \section{Opgeleverde Producten en Diensten}
-In dit hoofdstuk worden de opgeleverde producten en diensten beschreven. Er zal gekeken worden naar nieuwe functionaliteit die toegevoegd is aan zowel de interface als de solver. Daarnaast zullen ook een aantal diensten die uitgevoerd zijn en niet gelijk een bijdrage leveren aan functionaliteit worden toegelicht.
+In dit hoofdstuk worden de opgeleverde producten en diensten beschreven. Er zal gekeken worden naar nieuwe functionaliteit die toegevoegd is aan zowel de interface als de solver. Daarnaast zullen ook de uitgevoerde diensten, die niet direct een bijdrage leveren aan de functionaliteit van de applicatie, worden toegelicht.
 
 \subsection{Solver}
 De nieuwe functionaliteit van de solver kan grotendeels worden onderverdeeld in het chaining algoritme en het vinden van flexibiliteitsintervals. Van deze onderdelen zal in deze paragraaf toegelicht worden hoe deze ge\"implementeerd zijn.
@@ -100,7 +100,7 @@ Het is nu ook mogelijk om de tijdsverdeling van de solver na het oplossen te zie
 
 \subsubsection{Gebruiksgemak}
 \label{sec:gebruiksgemak}
-Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode kruis in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
+Om het gebruiksgemak te vergroten, is er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode kruis in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
 
 Er zijn ook sneltoetsen toegevoegd voor het in- en uitzoomen en voor het horizontaal scrollen. Er kan in- en uitgezoomd worden door de ctrl-toets ingedrukt te houden en het scrollwiel van de muis  te bewegen. Horizontaal scrollen kan in het venster waarin de muis zich op dat moment bevindt door de shift-toets ingedrukt te houden en het scrollwiel van de muis te bewegen. Deze sneltoetsen zijn ingesteld zodat de gebruiker makkelijker door een probleeminstantie kan navigeren, zonder daarvoor steeds zijn muis naar de menubalk te hoeven verplaatsen.
 
@@ -113,7 +113,7 @@ Ten slotte nog een feature die ook prettig is voor gebruikers, maar niet visueel
 \subsection{Codekwaliteit}
 Om de codekwaliteit te verbeteren is er een aantal aanpassingen aan de code gemaakt. Deze veranderingen zorgen dus niet voor nieuwe features, maar voor een betere onderhoudbaarheid van de code, zodat ook ontwikkelaars na dit project makkelijk nieuwe features kunnen toevoegen. Zo zijn alle resources (zoals icoontjes, fonts en dergelijke) aan een speciaal bestand, genaamd \texttt{Resources.qrc}, toegevoegd, dat bijhoudt van welke resources de interface gebruik maakt. Door de resources op te sommen in \texttt{Resources.qrc} wordt het in de rest van de code makkelijker hiervan gebruik te maken. Deze verandering is ook nodig voor het static builden van de applicatie, wat wordt besproken in paragraaf \ref{sec:gebruiksgemak}. Ook is het gebruik van \emph{includes} in de code consistenter gemaakt.
 
-In de code van de solver waren veel lange methodes aanwezig, die opgedeeld zijn in een aantal kortere methodes. Ook was er nog typische C code aanwezig, wat niet gebruikelijk is in \cpp\ en soms ook zelfs waarschuwingen gaf tijdens het compileren. Daarbij is het gebruik van een \texttt{boolean} in plaats van een \texttt{integer} en een \texttt{string} in plaats van een \texttt{char*} een goed voorbeeld. Ook is er code verwijderd die helemaal niet gebruikt werd.
+In de code van de solver waren veel lange methodes aanwezig, die opgedeeld zijn in een aantal kortere methodes. Ook was er nog typische C code aanwezig, wat niet gebruikelijk is in \cpp\ en soms ook zelfs waarschuwingen gaf tijdens het compileren. In deze gevallen is zo veel mogelijk geprobeerd om de code te laten voldoen aan  \cpp\ conventies. Daarbij zijn het gebruik van een \texttt{boolean} in plaats van een \texttt{integer} en een \texttt{string} in plaats van een \texttt{char*} goede voorbeelden. Ook is er code verwijderd die helemaal niet gebruikt werd.
 
 \subsection{Port naar Windows 7}
 Om de toegankelijkheid van de applicatie te vergroten, is er voor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
