@@ -4,11 +4,7 @@
 Het roosterprobleem waarmee NedTrain te maken heeft, zal in dit hoofdstuk formeel gedefini\"eerd worden. Vervolgens zullen een aantal oplosmethoden besproken worden voor de verschillende onderdelen van dit probleem.
 
 \subsection{Resource Constrained Project Scheduling Problem}
-<<<<<<< HEAD
-Het probleem waar NedTrain mee te maken heeft, staat ook wel bekend als het \emph{Resource Constrained Project Scheduling Problem (RCPSP)}. Dit probleem kan in verschillende variaties en uitbreidingen voorkomen, maar het globale probleem voor elke variatie is het vinden van een schema bestaande uit activiteiten, zodanig dat de resources die de activiteiten nodig hebben niet de maximale capaciteit van de resources overschrijdt en dat de opgelegde beperkingen niet geschonden worden \cite{lombardi2010constraint}. Het is bekend dat het RCPSP een NP-moeilijk probleem is \cite{blazewicz1983scheduling}. Dat wil zeggen dat er geen polynomiaal algoritme voor dit probleem bekend is. Alleen kleine instanties van dit probleem kunnen in een redelijke tijd opgelost worden. 
-=======
-Het probleem waar NedTrain mee te maken heeft, staat ook wel bekend als het \emph{Resource Constrained Project Scheduling Problem (RCPSP)}. Dit probleem kan in verschillende variaties en uitbreidingen voorkomen, maar het globale probleem voor elke variatie is het vinden van een rooster bestaande uit activiteiten, zodanig dat de resources die de activiteiten nodig hebben niet de maximale capaciteit van de resources overschrijdt en dat de opgelegde beperkingen niet geschonden worden \cite{lombardi2010constraint}. Het is bekend dat het RCPSP een NP-moeilijk probleem is \cite{blazewicz1983scheduling}. Dat wil zeggen dat er geen polynomiaal algoritme voor dit probleem bekend is, waardoor alleen kleine instanties van dit probleem in een redelijke tijd opgelost kunnen worden. 
->>>>>>> 31abb143dbea3450027b98e2091d01911d25a652
+Het probleem waar NedTrain mee te maken heeft, staat ook wel bekend als het \emph{Resource Constrained Project Scheduling Problem (RCPSP)}. Dit probleem kan in verschillende variaties en uitbreidingen voorkomen, maar het globale probleem voor elke variatie is het vinden van een rooster bestaande uit activiteiten, zodanig dat de resources die de activiteiten nodig hebben niet de maximale capaciteit van de resources overschrijdt en dat de opgelegde beperkingen niet geschonden worden \cite{lombardi2010constraint}. Het is bekend dat het RCPSP een NP-moeilijk probleem is \cite{blazewicz1983scheduling}. Dat wil zeggen dat er geen polynomiaal algoritme voor dit probleem bekend is, waardoor alleen kleine instanties van dit probleem in een redelijke tijd opgelost kunnen worden.
 
 De instanties van NedTrain bestaan uit projecten (treinen) $P = \{p_1, \dots , p_n\}$ die uit \'e\'en of meer subactiviteiten $v_{a,b}$ bestaan. De verzameling van alle activiteiten, $\bigcup_{\{p_a \in P\}} V_a$, wordt gedefinieerd als de verzameling $V = \{v_{1,1}, \dots , v_{n,m}\}$. Een project $p_a$ heeft een starttijd \emph{(release time)} $rs_a$ en een deadline $dl_a$. De subactiviteiten van project $p_a$ mogen pas vanaf $rs_a$ uitgevoerd worden, maar moeten wel uiterlijk op $dl_a$ klaar zijn. De b$^e$ activiteit van project $p_a$ wordt weergegeven als $v_{a,b}$. Deze activiteit heeft een tijdsduur van $d_{a,b}$ tijdseenheden.
 
@@ -20,11 +16,11 @@ Een formele definitie van RCPSP kan nu als volgt opgesteld worden:
 Een verzameling projecten $P = \{p_1, \dots ,p_n\}$ met voor elk project $p_a$ een starttijd $rs_a$, een deadline $dl_a$ en een verzameling activiteiten $V_a = \{v_{a,1},\dots ,v_{a,m}\}$ met voor elke activiteit $v_{a,b}$ een tijdsduur $d_{a,b}$. Daarnaast een verzameling van voorrangsrelaties $E \subseteq V \times V = \{(v_{a,b},v_{c,d}) | v_{a,b} \in V_a \wedge v_{c,d} \in V_c \wedge p_a,p_c \in P \}$, een verzameling van $w$ resources $R = \{r_1, \dots ,r_w\}$ met voor elke resource $r_i$ een eindige capaciteit $cap(r_i)$, en voor elke activiteit $v_{a,b} \in V$ een hoeveelheid van resource $r_k \in R$ die nodig is, $req(v_{a,b},r_k)$.
 
 \textbf{Vind:}\\
-Een doenlijk schema $S = \{s_1,\dots ,s_m\}$ bestaande uit starttijden $s_{a,b}$ voor elke activiteit $v_{a,b} \in V$, zodat $rs_a \leq s_{a,b} \wedge s_{a,b} + d_{a,b} \leq dl_a$, waarbij voor elke voorrangsrelatie $(v_{a,b},v_{c,d}) \in E$ geldt dat $s_{a,b} + d_{a,b} \leq s_{c,d}$. Bovendien mag op geen enkel tijdstip de capaciteit van een resource overschreden worden, wat inhoudt dat $\forall r_i \in R$ en $\forall t \in \mathbb{R}$ geldt dat $\Sigma _{\{v_{a,b} \in V | s_{a,b} \leq t \leq s_{a,b} + d_{a,b}\}} req(v_{a,b},r_i) \leq cap(r_i)$.
+Een schema $S = \{s_1,\dots ,s_m\}$ bestaande uit starttijden $s_{a,b}$ voor elke activiteit $v_{a,b} \in V$, zodat $rs_a \leq s_{a,b} \wedge s_{a,b} + d_{a,b} \leq dl_a$, waarbij voor elke voorrangsrelatie $(v_{a,b},v_{c,d}) \in E$ geldt dat $s_{a,b} + d_{a,b} \leq s_{c,d}$. Bovendien mag op geen enkel tijdstip de capaciteit van een resource overschreden worden, wat inhoudt dat $\forall r_i \in R$ en $\forall t \in \mathbb{R}$ geldt dat $\Sigma _{\{v_{a,b} \in V | s_{a,b} \leq t \leq s_{a,b} + d_{a,b}\}} req(v_{a,b},r_i) \leq cap(r_i)$.
 
 \subsection{Flexibiliteit}
 \label{subsec:flexprobleem}
-Om ervoor te zorgen dat de flexibiliteit van een schema geoptimaliseerd kan worden, moet de flexibiliteit van een schema eerst goed gedefini\"eerd worden. Een mogelijke (na\"ieve) maat voor de flexibiliteit van een activiteit is simpelweg de grootte van het toegelaten interval van deze activiteit. Deze grootte wordt berekend door het verschil te nemen tussen de eerste starttijd (EST) en de laatste starttijd (LST). De totale flexibiliteit van een schema kan vervolgens berekend worden met Formule \ref{eq:flexSlecht}. Deze flexibiliteit wordt echter niet be\"invloed als er voorrangsrelaties tussen taken worden toegevoegd, terwijl dit wel degelijk een negatieve invloed heeft op de flexibiliteit van het schema. Een aantal andere flexibiliteitsmaten, besproken in \cite{wilson2013flexibility}, houdt ook geen rekening met onderlinge afhankelijkheden van taken bij het vaststellen van de flexibiliteit.
+Om ervoor te zorgen dat de flexibiliteit van een schema geoptimaliseerd kan worden, moet de flexibiliteit van een schema eerst goed gedefini\"eerd worden. Een mogelijke (na\"ieve) maat voor de flexibiliteit van een activiteit is simpelweg de grootte van het toegelaten interval van deze activiteit. Deze grootte wordt berekend door het verschil te nemen tussen de vroegste starttijd (EST) en de laatste starttijd (LST). De totale flexibiliteit van een schema kan vervolgens berekend worden met Formule \ref{eq:flexSlecht}. Deze flexibiliteit wordt echter niet be\"invloed als er voorrangsrelaties tussen taken worden toegevoegd, terwijl dit wel degelijk een negatieve invloed heeft op de flexibiliteit van het schema. Een aantal andere flexibiliteitsmaten, besproken in \cite{wilson2013flexibility}, houdt ook geen rekening met onderlinge afhankelijkheden van taken bij het vaststellen van de flexibiliteit.
 
 \begin{align}
 \label{eq:flexSlecht}
@@ -40,7 +36,7 @@ De flexibiliteitsmaat van Wilson \emph{et al.} \cite{wilson2013flexibility} houd
 
 \subsection{Oplossing}
 \label{subsec:probleemoplossing}
-In de bestaande software was al een algoritme ge\"implementeerd dat een doenlijk schema kan vinden door middel van het ESTA$^+$ algoritme \cite{ronaldevers2010}.
+In de bestaande software was al een algoritme ge\"implementeerd dat een consistent schema kan vinden door middel van het ESTA$^+$ algoritme \cite{ronaldevers2010}.
 Dit algoritme lost het RCPSP op door het vinden en oplossen van \emph{contention peaks}, plekken in het resource profiel waar er meer resource units gebruikt worden dan er beschikbaar zijn. Deze worden veroorzaakt doordat er te veel activiteiten die dezelfde resource gebruiken tegelijk uitgevoerd worden. Deze contention peaks kunnen ge\"elimineerd worden door tussen ten minste 1 paar van de betreffende activiteiten een voorrangsrelatie toe te voegen. Het $ESTA^+$ algoritme levert als oplossing voor elke activiteit een starttijd, zodat het gehele schema consistent is. Als er echter met activiteiten geschoven wordt, kan het schema nog wel inconsistent worden.
 
 \subsubsection{Chaining}
@@ -112,43 +108,35 @@ Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst gepro
 
 \subsubsection{Linear Programming}
 \label{subsubsec:flexoplossing}
-Nu alle constraints door het chaining algoritme aan het model zijn toegevoegd, kan de flexibiliteit van het schema worden geoptimaliseerd, door de probleeminstantie om te zetten naar een Linear Programming \emph{(LP)} probleem. Dit probleem kan in polynomiale tijd opgelost worden door middel van een LP-solver.
+Nu alle voorrangsrelaties door het chaining algoritme aan het model zijn toegevoegd, kan de flexibiliteit van het schema worden geoptimaliseerd, door de probleeminstantie om te zetten naar een Linear Programming \emph{(LP)} probleem. Dit probleem kan in polynomiale tijd opgelost worden door middel van een LP-solver.
 
-<<<<<<< HEAD
-De flexibiliteit van een activiteit kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd (l.s.t.) en $t^-$ de eerste starttijd (e.s.t.) van een activiteit $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle activiteiten $t \in T$ te nemen, zoals in Formule \ref{eq:flex} is weergegeven. 
-=======
-De flexibiliteit van een activiteit kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd en $t^-$ de eerste starttijd van een activiteit $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle activiteiten $t \in T$ te nemen, zoals in Formule \ref{eq:flex} is weergegeven.
->>>>>>> 31abb143dbea3450027b98e2091d01911d25a652
+De flexibiliteit van een activiteit kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd en $t^-$ de vroegste starttijd van een activiteit $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle activiteiten $t \in T$ te nemen, zoals in Formule \ref{eq:flex} is weergegeven.
 
 \begin{align}
 \label{eq:flex}
     flex_{totaal} = \sum_{t \in T} (t^+ - t^-)
 \end{align}
 
-Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelijkertijd wordt voldaan aan de constraints $(t - t' \leq c) \in C$. Ook mag de EST niet na de LST. zijn ($t^- \leq t^+ \Rightarrow 0 \leq t^+ - t^-$). Hieruit volgt het LP-probleem zoals in formule \ref{eq:flexLP} weergegeven is.
+Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelijkertijd wordt voldaan aan de voorwaarden $(t - t' \leq c) \in C$. Ook mag de EST niet na de LST zijn ($t^- \leq t^+ \Rightarrow 0 \leq t^+ - t^-$). Hieruit volgt het LP-probleem zoals in formule \ref{eq:flexLP} weergegeven is.
 
 \begin{align}
 \label{eq:flexLP}
 \begin{aligned}
         \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
- \text{subject to:}& \quad 0 \leq t^+ - t^- & \forall t \in T \\
+ \text{met voorwaarden:}& \quad 0 \leq t^+ - t^- & \forall t \in T \\
                    & \quad t^+ - t^- \leq c & \forall (t^+ - t^{'-} \leq c) \in C
 \end{aligned}
 \end{align}
 
 Het nadeel van de formulering in formule \ref{eq:flexLP}, is dat de flexibiliteit niet netjes verdeeld hoeft te worden over de taken. Bij het testen is zelfs gebleken dat de 'Simplex' methode meestal de flexibiliteit juist heel slecht verdeelt. Met de 'Interior Point' methode bleek de flexibiliteit wel beter verdeeld te worden. Beide methoden zijn beschikbaar in de CLP library en komen wel uit op hetzelfde antwoord van de geoptimaliseerde variabele, maar verschillen qua waarden van de andere variabelen. Het exacte verschil tussen deze twee methoden ligt buiten het kader van dit verslag.
 
-<<<<<<< HEAD
-Met het LP-probleem, zoals in Formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke activiteit $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in Formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in Formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke activiteit minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
-=======
-Met het LP-probleem, zoals in Formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke activiteit $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in Formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in Formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke activiteit minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$).
->>>>>>> 31abb143dbea3450027b98e2091d01911d25a652
+Met het LP-probleem dat weergegeven is in Formule \ref{eq:flexfirstLP} wordt de minimale flexibiliteit van elke activiteit $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in Formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in Formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke activiteit minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$).
 
 \begin{align}
 \label{eq:flexfirstLP}
 \begin{aligned}
         \text{max:}& \quad min & \\
- \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+ \text{met voorwaarden:}& \quad min \leq t^+ - t^- & \forall t \in T \\
                    & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
 \end{aligned}
 \end{align}
@@ -157,9 +145,9 @@ Met het LP-probleem, zoals in Formule \ref{eq:flexfirstLP} staat, wordt de minim
 \label{eq:flexsecondLP}
 \begin{aligned}
         \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \\
- \text{subject to:}& \quad min \leq t^+ - t^- & \forall t \in T \\
+ \text{met voorwaarden:}& \quad min \leq t^+ - t^- & \forall t \in T \\
                    & \quad t^+ - t'^- \leq c & \forall (t - t' \leq c) \in C
 \end{aligned}
 \end{align}
 
-Door het toevoegen van de nieuwe constraint $min \leq t^+ - t^-$, kan het voorkomen dat de totale flexibiliteit $flex_{totaal}$ lager is dan bij het gebruik van formule \ref{eq:flexLP}, maar in dit geval is de flexibiliteit wel beter over alle activiteiten verdeeld.
+Door het toevoegen van de nieuwe voorwaarde $min \leq t^+ - t^-$, kan het voorkomen dat de totale flexibiliteit $flex_{totaal}$ lager is dan bij het gebruik van formule \ref{eq:flexLP}, maar in dit geval is de flexibiliteit wel beter over alle activiteiten verdeeld.
