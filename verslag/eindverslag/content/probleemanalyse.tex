@@ -18,6 +18,8 @@ Een verzameling projecten $P = \{p_1, \dots ,p_n\}$ met voor elk project $p_a$ e
 \textbf{Vind:}\\
 Een schema $S = \{s_1,\dots ,s_m\}$ bestaande uit starttijden $s_{a,b}$ voor elke activiteit $v_{a,b} \in V$, zodat $rs_a \leq s_{a,b} \wedge s_{a,b} + d_{a,b} \leq dl_a$, waarbij voor elke voorrangsrelatie $(v_{a,b},v_{c,d}) \in E$ geldt dat $s_{a,b} + d_{a,b} \leq s_{c,d}$. Bovendien mag op geen enkel tijdstip de capaciteit van een resource overschreden worden, wat inhoudt dat $\forall r_i \in R$ en $\forall t \in \mathbb{R}$ geldt dat $\Sigma _{\{v_{a,b} \in V | s_{a,b} \leq t \leq s_{a,b} + d_{a,b}\}} req(v_{a,b},r_i) \leq cap(r_i)$.
 
+\newpage
+
 \subsection{Flexibiliteit}
 \label{subsec:flexprobleem}
 Om er voor te zorgen dat de flexibiliteit van een schema geoptimaliseerd kan worden, moet de flexibiliteit van een schema eerst goed gedefini\"eerd worden. Een mogelijke (na\"ieve) maat voor de flexibiliteit van een activiteit is simpelweg de grootte van het toegelaten interval van deze activiteit. Deze grootte wordt berekend door het verschil te nemen tussen de eerste starttijd (EST) en de laatste starttijd (LST). De totale flexibiliteit van een schema kan vervolgens berekend worden met Formule \ref{eq:flexSlecht}. Deze flexibiliteit wordt echter niet be\"invloed als er voorrangsrelaties tussen activiteiten worden toegevoegd, terwijl dit wel degelijk een negatieve invloed heeft op de flexibiliteit van het schema. Een aantal andere flexibiliteitsmaten, besproken in \cite{wilson2013flexibility}, houdt ook geen rekening met onderlinge afhankelijkheden van activiteiten bij het vaststellen van de flexibiliteit.
@@ -105,7 +107,7 @@ Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst gepro
   \EndFunction
 \end{algorithmic}
 \end{algorithm}
-
+\newpage
 \subsubsection{Linear Programming}
 \label{subsubsec:flexoplossing}
 Nu alle voorrangsrelaties door het chaining algoritme aan het model zijn toegevoegd, kan de flexibiliteit van het schema worden geoptimaliseerd, door de probleeminstantie om te zetten naar een Linear Programming \emph{(LP)} probleem. Dit probleem kan in polynomiale tijd opgelost worden door middel van een LP-solver.
