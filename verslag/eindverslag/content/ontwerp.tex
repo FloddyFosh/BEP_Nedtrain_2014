@@ -2,14 +2,16 @@
 Om de ontwerpkeuzes toe te lichten, zal in dit hoofdstuk verder toegelicht worden hoe de NedTrain Planner en de solver werken en ontworpen zijn.
 
 \subsection{Interface}
-Voor de implementatie van nieuwe features aan de interface is voor het grootste deel gebruik gemaakt van de al bestaande klassen. Klassediagrammen van de interface zijn terug te vinden in \cite{bep2012nedtrain}.
+Voor de implementatie van nieuwe features aan de interface is voor het grootste deel gebruik gemaakt van de al bestaande klassen. Klassediagrammen van de aangeleverde interface zijn terug te vinden in \cite{bep2012nedtrain}.
 
 De volgende klassen zijn wel toegevoegd aan het bestaande model:
 \begin{itemize}
-\item \textbf{Chain -} In deze klasse wordt de lijst van activiteiten opgeslagen die bij een bepaalde chain hoort. Een chain is te identificeren door middel van twee gehele getallen: de 
-\item \textbf{ChainFrame -} Deze klasse extend de klasse 'Frame' en wordt gebruikt om in de interface alle voorrangsrelaties van de geselecteerde chain te laten zien.
-\item \textbf{JobInfoDialog -} Dit is een venster waarin informatie, zoals de starttijd en deadline, van een project wordt weergegeven.
+\item \texttt{Chain} - In deze klasse wordt de lijst van activiteiten opgeslagen die bij een bepaalde chain hoort. Een chain is te identificeren door middel van twee gehele getallen: de resourceId en de chainId. De resourceId identificeert de bijbehorende resource en de chainId geeft aan bij welke unit van de resource deze chain hoort.
+\item \texttt{ChainFrame} - Deze klasse is een extensie van de klasse \texttt{Frame} en wordt gebruikt om in de interface alle voorrangsrelaties van de geselecteerde chain te laten zien. Hierin word
+\item \texttt{JobInfoDialog} - Dit is een \texttt{QDialog} venster waarin informatie, zoals de starttijd en deadline, van een project wordt weergegeven.
 \end{itemize}
+
+In figuur \ref{fig:klassediagram} is het klassediagram weergegeven waarin \texttt{Chain} en \texttt{ChainFrame} toegevoegd zijn. De verdere relaties van \texttt{Frame} en \texttt{Resource} zijn voor de duidelijkheid weggelaten, omdat deze in dit geval irrelevant zijn. Bovendien zijn in het klassediagram \texttt{get}- en \texttt{set}-methoden weggelaten.
 
 \subsection{Solver}
 Als de gebruiker op de knop 'solve' drukt, wordt de solver aangeroepen. Deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de tool, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
