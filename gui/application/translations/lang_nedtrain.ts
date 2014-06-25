@@ -184,7 +184,7 @@
     <message>
         <location filename="../widgets/activitywidget.cpp" line="257"/>
         <source>&amp;Activity Info</source>
-        <translation>&amp;Taak Info</translation>
+        <translation>&amp;Taakinformatie</translation>
     </message>
     <message>
         <location filename="../widgets/activitywidget.cpp" line="262"/>
