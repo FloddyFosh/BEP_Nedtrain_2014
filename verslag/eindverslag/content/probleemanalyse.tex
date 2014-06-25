@@ -106,7 +106,7 @@ Als $v_i$ nog meer units van dezelfde resource nodig heeft, wordt er eerst gepro
 \label{subsubsec:flexoplossing}
 Nu alle constraints door het chaining algoritme aan het model zijn toegevoegd, kan de flexibiliteit van het schema worden geoptimaliseerd, door de probleeminstantie om te zetten naar een Linear Programming \emph{(LP)} probleem. Dit probleem kan in polynomiale tijd opgelost worden door middel van een LP-solver.
 
-De flexibiliteit van een taak kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd (l.s.t.) en $t^-$ de eerste starttijd (e.s.t.) van een taak $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle taken $t \in T$ te nemen, zoals in Formule \ref{eq:flex} is weergegeven. 
+De flexibiliteit van een activiteit kan berekend worden door middel van $flex = t^+ - t^-$, waarbij $t^+$ de laatste starttijd (l.s.t.) en $t^-$ de eerste starttijd (e.s.t.) van een activiteit $t$ is. De flexibiliteit van het hele schema wordt, zoals in paragraaf \ref{subsec:flexprobleem}, gemeten door de som van de flexibiliteit van alle activiteiten $t \in T$ te nemen, zoals in Formule \ref{eq:flex} is weergegeven. 
 
 \begin{align}
 \label{eq:flex}
@@ -126,7 +126,7 @@ Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelij
 
 Het nadeel van de formulering in Formule \ref{eq:flexLP}, is dat de flexibiliteit niet netjes verdeeld hoeft te worden over de taken. Bij het testen is zelfs gebleken dat de 'Simplex' methode meestal de flexibiliteit juist heel slecht verdeelt. Met de 'Interior Point' methode bleek de flexibiliteit wel beter verdeeld te worden. Beide methoden zijn beschikbaar in de CLP library en komen wel uit op hetzelfde antwoord van de geoptimaliseerde variabele, maar verschillen qua waarden van de andere variabelen. Het exacte verschil tussen deze twee methoden ligt buiten het kader van dit verslag.
 
-Met het LP-probleem, zoals in Formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke taak $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in Formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in Formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
+Met het LP-probleem, zoals in Formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke activiteit $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in Formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in Formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke activiteit minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
 
 \begin{align}
 \label{eq:flexfirstLP}
