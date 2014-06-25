@@ -23,7 +23,7 @@ In Figuur \ref{fig:klassediagram} is het klassediagram weergegeven waarin \textt
 \subsection{Solver}
 Als de gebruiker op de knop 'solve' drukt, wordt de solver aangeroepen. Deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de applicatie, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
 
-De solver bestaat grofweg uit drie componenten, namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan is ook niets veranderd. Het chaining algoritme, uitgelegd in paragraaf \ref{subsubsec:chainingoplossing}, hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost dit vervolgens op met de COIN LP (CLP) library. Hoe de solver werkt en wat voor aanroepen er gedaan worden, is weergegeven in het sequencediagram in Figuur \ref{fig:sd}.
+De solver bestaat grofweg uit drie componenten, namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en is niet veranderd. Het chaining algoritme, uitgelegd in paragraaf \ref{subsubsec:chainingoplossing}, is wel in dit project ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost dit vervolgens op met de COIN LP (CLP) library. Hoe de solver werkt en wat voor aanroepen er gedaan worden, is weergegeven in het sequencediagram in Figuur \ref{fig:sd}.
 
 \newpage
 \begin{figure}[H]
