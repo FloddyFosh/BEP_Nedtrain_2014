@@ -126,7 +126,7 @@ Het doel is de flexibiliteit te maximaliseren en ervoor te zorgen dat er tegelij
 
 Het nadeel van de formulering in formule \ref{eq:flexLP}, is dat de flexibiliteit niet netjes verdeeld hoeft te worden over de taken. Bij het testen is zelfs gebleken dat de 'Simplex' methode meestal de flexibiliteit juist heel slecht verdeelt. Met de 'Interior Point' methode bleek de flexibiliteit wel beter verdeeld te worden. Beide methoden zijn beschikbaar in de CLP library en komen wel uit op hetzelfde antwoord van de geoptimaliseerde variabele, maar verschillen qua waarden van de andere variabelen. Het exacte verschil tussen deze twee methoden ligt buiten het kader van dit verslag.
 
-Met het LP-probleem, zoals in formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke taak $min$ gemaximaliseerd. Vervolgens wordt met LP-probleem, zoals in formule \ref{eq:flexsecondLP} staat, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
+Met het LP-probleem, zoals in formule \ref{eq:flexfirstLP} staat, wordt de minimale flexibiliteit van elke taak $min$ gemaximaliseerd \cite{wilmer13}. Vervolgens wordt van het LP-probleem, zoals in formule \ref{eq:flexsecondLP}, de totale flexibiliteit gemaximaliseerd. Dit is hetzelfde stelsel als in formule \ref{eq:flexLP}, maar nu met als nieuwe voorwaarde dat elke taak minimaal een flexibiliteit van $min$ moet hebben ($min \leq t^+ - t^ -$). 
 
 \begin{align}
 \label{eq:flexfirstLP}
