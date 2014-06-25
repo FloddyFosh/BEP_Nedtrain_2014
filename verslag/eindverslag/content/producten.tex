@@ -13,7 +13,7 @@ Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chai
 \item Gebruik de heuristiek beschreven in \ref{subsubsec:chainingoplossing}.
 \end{itemize}
 
-Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk van methode gewisseld worden door een kleine aanpassing in de source code. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt, besloten om de heuristiek te gebruiken voor de NedTrain planner. De analyse van de drie mogelijke methoden voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
+Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk van methode gewisseld worden door een kleine aanpassing in de source code. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt, besloten om de heuristiek te gebruiken voor de NedTrain Planner. De analyse van de drie mogelijke methoden voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
 
 Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme er voor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
@@ -67,9 +67,24 @@ Naast het resource profile dat weergegeven kan worden in de onderste helft van d
 \end{figure}
 
 \subsubsection*{Informatie Trein en Activiteit}
-Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht hebben we de flexibiliteitsintervallen toegevoegd als deze bekend zijn. Als de instantie nog niet opgelost is of de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekent, dan worden deze niet in het overzicht weergegeven.  
+Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht hebben we de flexibiliteitsintervallen toegevoegd als deze bekend zijn \emph{(zie Figuur \ref{fig:taak-info})}. Als de instantie nog niet opgelost is of de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekent, dan worden deze niet in het overzicht weergegeven.  
 
-Nu is ook een overzicht van informatie over een taak beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit. Dan wordt er een nieuw scherm \emph{(zie Figuur [??])} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op de lossen. 
+Nu is ook een overzicht van informatie over een taak beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit. Dan wordt er een nieuw scherm \emph{(zie Figuur \ref{fig:trein-info})} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op de lossen. 
+
+\begin{figure}[H]
+\parbox{.45\linewidth}{
+    \center
+    \includegraphics[width=.4\textwidth]{../images/taak-info.png}
+    \caption{Taak informatie}
+    \label{fig:taak-info}
+}\hfill
+\parbox{.45\linewidth}{
+    \center
+    \includegraphics[width=.4\textwidth]{../images/trein-info.png}%
+    \caption{Trein informatie}
+    \label{fig:trein-info}
+}
+\end{figure}
 
 \subsubsection*{Gebruiksgemak}
 Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode knop in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
