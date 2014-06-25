@@ -99,11 +99,22 @@ Het is nu ook mogelijk om de tijdsverdeling van de solver na het oplossen te zie
 \end{figure}
 
 \subsubsection{Gebruiksgemak}
+\label{sec:gebruiksgemak}
 Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode kruis in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
 
 Er zijn ook sneltoetsen toegevoegd voor het in- en uitzoomen en voor het horizontaal scrollen. Er kan in- en uitgezoomd worden door de ctrl-toets ingedrukt te houden en het scrollwiel van de muis  te bewegen. Horizontaal scrollen kan in het venster waarin de muis zich op dat moment bevindt door de shift-toets ingedrukt te houden en het scrollwiel van de muis te bewegen. Deze sneltoetsen zijn ingesteld zodat de gebruiker makkelijker door een probleeminstantie kan navigeren, zonder daarvoor steeds zijn muis naar de menubalk te hoeven verplaatsen.
 
 Nog een feature die voor een verbeterd gebruiksgemak moet zorgen bestaat uit de knopjes voor het van plek verwisselen van taken en resources. Dit is vooral handig als er een nieuwe activiteit of resource wordt toegevoegd, want deze wordt altijd onderaan gezet. 
+
+TODO: static builden \\
+TODO: highlighten + verspringen \\
+
+\subsection{Codekwaliteit}
+Om de codekwaliteit te verbeteren zijn er een aantal aanpassingen aan de code gemaakt. Deze veranderingen zorgen dus niet voor nieuwe features, maar voor een betere onderhoudbaarheid van de code, zodat ook ontwikkelaars na dit project makkelijk nieuwe features kunnen toevoegen. Zo zijn alle resources (zoals icoontjes, fonts en dergelijke) aan een speciaal bestand, genaamd \texttt{Resources.qrc}, toegevoegd, die bijhoud van welke resources de interface gebruik maakt. Door de resources op te sommen in \texttt{Resources.qrc} wordt het in de rest van de code makkelijker gebruik te maken van deze resources. Deze verandering is ook nodig om het static builden, wat wordt besproken in paragraaf \ref{sec:gebruiksgemak}, mogelijk te maken.
+
+In de code van de solver waren veel lange methodes aanwezig, die we hebben opgedeeld. Ook was daar nog typische C code aanwezig, wat niet gebruikelijk is in \cpp\ en soms ook zelfs waarschuwingen gaf tijden compileren. Daarbij is het gebruik van een \texttt{boolean} in plaats van een \texttt{integer} en een \texttt{string} in plaats van een \texttt{char*} een goed voorbeeld. Ook is er code verwijderd dat helemaal niet gebruikt werd. 
+
+Het gebruik van \emph{includes} in code is consistenter gemaakt. Deze aanpassing is vooral op code van de interface toegepast. 
 
 \subsection{Port naar Windows 7}
 Om de toegankelijkheid van de applicatie te vergroten, is er voor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
