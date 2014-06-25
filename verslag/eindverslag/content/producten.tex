@@ -13,7 +13,7 @@ Een nieuwe functionaliteit die is toegevoegd aan de solver is het chaining algor
 \item Gebruik de heuristiek zoals beschreven in paragraaf \ref{subsubsec:chainingoplossing}.
 \end{itemize}
 
-Na een analyse van het aantal voorrangsrelaties dat toegevoegd wordt en de flexibiliteit van elke heuristiek, is er uiteindelijk besloten om de heuristiek zoals beschreven in paragraaf \ref{subsubsec:chainingoplossing} als standaard te gebruiken voor de NedTrain Planner. Deze analyse en de precieze uitkomsten zullen verder worden toegelicht in paragraaf \ref{subsubsec:chaininganalyse}. Door een kleine aanpassing te maken in de source code kan er nog steeds gewisseld worden tussen de drie heuristieken.
+Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk van methode gewisseld worden door een kleine aanpassing in de source code. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt, besloten om de heuristiek te gebruiken voor de NedTrain Planner. De analyse van de drie mogelijke methoden voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
 
 Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme er voor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
@@ -57,7 +57,7 @@ Zoals in Figuur \ref{fig:flex-interval} is te zien, is het ook mogelijk om in de
 \end{figure}
 
 \subsubsection*{Rooster}
-Naast het resource profile dat weergegeven kan worden in de onderste helft van de interface \emph{(zie Figuur \ref{fig:GUIfinal})}, is er nu ook een nieuwe manier van het weergeven van de resources die worden gebruikt. Deze nieuwe feature maakt het mogelijk de chains, die worden gegenereerd door het chaining algoritme, op een eenvoudige manier te begrijpen en te visualiseren. De chains van resource units resulteren in een rooster, dat in de onderste helft van de interface kan worden weergegeven \emph{(zie Figuur \ref{fig:rooster})} met behulp van een nieuwe knop. Vooral als de resource units bijvoorbeeld monteurs, schoonmakers of ander personeel zijn is deze feature erg handig. Dit omdat de planning en de werknemers zelf kunnen zien wanneer wie aan welke activiteit werkt of pauze heeft. 
+Naast het resource profile dat weergegeven kan worden in de onderste helft van de interface \emph{(zie Figuur \ref{fig:GUIfinal})}, is er nu ook een nieuwe manier van het weergeven van de resources die worden gebruikt. Deze nieuwe feature maakt het mogelijk de chains, die worden gegenereerd door het chaining algoritme, op een makkelijker te begrijpen manier weer te geven. De chains van resource units resulteren in een rooster, dat in de onderste helft van de interface kan worden weergegeven \emph{(zie Figuur \ref{fig:rooster})} met behulp van een nieuwe knop. Vooral als de resource units bijvoorbeeld monteurs, schoonmakers of ander personeel zijn, is deze feature erg handig, omdat de werknemers zelf kunnen zien wie op welk moment aan welke trein werkt of pauze heeft. 
 
 \begin{figure}[H]
 \center
@@ -67,24 +67,42 @@ Naast het resource profile dat weergegeven kan worden in de onderste helft van d
 \end{figure}
 
 \subsubsection*{Informatie Trein en Activiteit}
-Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht zijn de flexibiliteitsintervallen toegevoegd als deze bekend zijn. Als de instantie nog niet opgelost is of als de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekend, dan worden deze niet in het overzicht weergegeven.  
+Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht zijn de flexibiliteitsintervallen toegevoegd als deze bekend zijn \emph{(zie Figuur \ref{fig:taak-info})}. Als de instantie nog niet opgelost is of als de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekent, dan worden deze niet in het overzicht weergegeven.  
 
-Nu is er ook een overzicht van informatie over een trein beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit, dan wordt er een nieuw scherm \emph{(zie Figuur [??])} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op te lossen. 
+Nu is er ook een overzicht van informatie over een trein beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit, dan wordt er een nieuw scherm \emph{(zie Figuur \ref{fig:trein-info})} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op te lossen. 
 
 \subsubsection{Informatie Solver en Oplossing}
 Na het oplossen van een instantie door de solver worden de uitkomsten en gegevens van de oplossing gecommuniceerd naar de grafische interface. Zo werd er bijvoorbeeld al doorgegeven hoeveel voorrangsrelaties er aan de instantie zijn toegevoegd door de solver. Nu wordt er ook doorgegeven, als de solver gebruik maakt van flexibiliteitsintervallen, wat de totale flexibiliteit van de oplossing is. Als de gebruiker vervolgens aanpassingen maakt en de instantie vervolgens opnieuw laat oplossen, kan er ook meteen gezien worden wat voor effect dit heeft op het aantal precedence constraints en de totale flexibiliteit. Dit wordt gedaan door het kleuren van de tekst en het geven van de nieuwe en de oude gegevens. \emph{(zie Figuur [??])} Een groene kleur van de flexibiliteit tekst geeft aan dat de nieuwe oplossing meer of gelijke flexibiliteit heeft, waarbij een rode kleur aangeeft dat de flexibiliteit juist omlaag is gegaan. Hetzelfde geldt voor de tekst van het aantal voorrangsrelaties, waarbij rood aangeeft dat er meer voorrangsrelaties toegevoegd zijn en groen minder of gelijk.
 
 Het is nu ook mogelijk om de tijdsverdeling van de solver na het oplossen te zien. Op deze manier is het meteen duidelijk welk gedeelte van de solver het meest heeft toegedragen aan de totale tijd die de solver nodig had om de instantie op te lossen.
 
+\begin{figure}[H]
+\parbox{.45\linewidth}{
+    \center
+    \includegraphics[width=.4\textwidth]{../images/taak-info.png}
+    \caption{Taak informatie}
+    \label{fig:taak-info}
+}\hfill
+\parbox{.45\linewidth}{
+    \center
+    \includegraphics[width=.4\textwidth]{../images/trein-info.png}%
+    \caption{Trein informatie}
+    \label{fig:trein-info}
+}
+\end{figure}
+
 \subsubsection*{Gebruiksgemak}
 Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode kruis in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
 
 Er zijn ook sneltoetsen toegevoegd voor het in- en uitzoomen en voor het horizontaal scrollen. Er kan in- en uitgezoomd worden door de ctrl-toets ingedrukt te houden en het scrollwiel van de muis  te bewegen. Horizontaal scrollen kan in het venster waarin de muis zich op dat moment bevindt door de shift-toets ingedrukt te houden en het scrollwiel van de muis te bewegen. Deze sneltoetsen zijn ingesteld zodat de gebruiker makkelijker door een probleeminstantie kan navigeren, zonder daarvoor steeds zijn muis naar de menubalk te hoeven verplaatsen.
 
-Nog een feature die voor een verbeterd gebruiksgemak moet zorgen zijn de knopjes voor het van plek verwisselen van taken en resources. Dit is vooral handig als er een nieuwe activiteit of resource wordt toegevoegd, want deze worden altijd onderaan gezet. 
+Nog een feature die voor een verbeterd gebruiksgemak moet zorgen bestaat uit de knopjes voor het van plek verwisselen van taken en resources. Dit is vooral handig als er een nieuwe activiteit of resource wordt toegevoegd, want deze wordt altijd onderaan gezet. 
 
 \subsection{Port naar Windows 7}
 Om de toegankelijkheid van de applicatie te vergroten, is er voor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
 
 \subsection{Upgrade naar Qt 5.2}
 De bestaande applicatie was ontwikkeld in versie 4.8 van het Qt framework, maar om de applicatie zo up-to-date mogelijk te houden, is deze geport naar Qt versie 5.2. Hierdoor hoeft een eventuele groep, die de applicatie verder gaat ontwikkelen, niet met een oude versie van het Qt framework te werken. Deze upgrade betekent echter ook dat de applicatie niet meer werkt met Qt 4, maar alleen met versie 5.
+
+\subsection{Behouden van bestaande functionaliteit}
+Bij het ontwikkelen van de nieuwe solver is er rekening mee gehouden worden dat alle bestaande functionaliteit behouden blijft. De interface moet dus blijven werken met de bestaande solver en alle functionaliteiten die in de interface ge\"implementeerd zijn, moeten kunnen functioneren op flexibele schema's. Denk hierbij in het bijzonder aan het kunnen vergrendelen van taken, het kunnen instellen van de flexibiliteit en het kunnen verlagen van de resource capaciteit op bepaalde intervallen.

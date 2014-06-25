@@ -2,16 +2,16 @@
 Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties zal geanalyseerd worden als de flexibiliteit die met verschillende methodes bereikt wordt.
 
 \subsection{Looptijd}
-In dit hoofdstuk een analyse van de looptijd van de solver. Aangezien de opdrachtgever dit nog vooral gebruikt voor onderzoek en educatie zullen de probleeminstanties niet zo erg groot zijn. Daarom is looptijd minder belangrijk. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen van input, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
+In dit hoofdstuk zal een analyse van de looptijd van de solver uitgevoerd worden. Aangezien de opdrachtgever dit nog vooral gebruikt voor onderzoek en educatie zullen de probleeminstanties niet zo erg groot zijn. Daarom is looptijd minder belangrijk. Bij deze analyse delen we de solver op in vijf belangrijke delen: parsen van input, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen gebruiken we een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
 \begin{itemize}
     \item 10 resources, met elk 1 resource unit
     \item 180 projecten, met elk tussen de 4 en de 6 activiteiten
     \item 912 activiteiten, die elk gebruik maken van tussen de 1 en 5 resources
 \end{itemize}
 
-In de Tabellen \ref{tbl:xxl+output} en \ref{tbl:xxl-output} is de duur van de verschillende onderdelen van de solver te vinden. De totale looptijd van de solver zou nog lager kunnen door de hoeveel informatie dat naar \texttt{stdout} wordt gestuurd te verlagen. Dit zou dan niet meer dan 10 seconden kunnen opleveren voor de xxl-instantie. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner.
+In Tabell \ref{tbl:xxl+output} en Tabel \ref{tbl:xxl-output} is de duur van de verschillende onderdelen van de solver te vinden. De totale looptijd van de solver zou nog verlaagd kunnen worden door de hoeveelheid informatie die naar \texttt{stdout} wordt gestuurd te verlagen. Dit zou dan hooguit 10 seconden tijdwinst op kunnen leveren voor de xxl-instantie. Een mogelijkheid is om niet telkens alle informatie van een nieuw frame te printen, maar alleen het verschil met het vorige frame. Een andere mogelijkheid is om niet met een apparte solver te werken die wordt aangeroepen door de NedTrain Planner, maar de solver te integreren in de NedTrain Planner. Dan hoeft er niets te worden uitgeprint, maar dit heeft wel als nadeel dat er dan niet gemakkelijk een nieuwe solver toegevoegd kan worden aan de NedTrain Planner.
 
-Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, heeft het grootste aandeel in de totale looptijd. In de huidige solver wordt de Interior Point methode gebruikt voor het oplossen van LP-problemen, deze is minder dan snel dan de Simplex methode. Uit metingen is gebleken dat de Simplex methode nagenoeg geen tijd kost, dus dit zou een grote snelheidswinst kunnen opleveren. De consequenties van het gebruik van de Simplex methode worden besproken in paragraaf \ref{subsec:flexibiliteit} \nameref{subsec:flexibiliteit}.
+Het onderdeel Linear Programming, die de flexibiliteitsintervallen berekent, heeft het grootste aandeel in de totale looptijd. In de huidige solver wordt de Interior Point methode gebruikt voor het oplossen van LP-problemen. Deze is minder dan snel dan de Simplex methode, maar verdeelt de flexibiliteit wel beter over alle activiteiten. Uit metingen is gebleken dat de Simplex methode nagenoeg geen tijd kost, dus dit zou een grote snelheidswinst kunnen opleveren. De consequenties van het gebruik van de Simplex methode worden besproken in paragraaf \ref{subsec:flexibiliteit} \nameref{subsec:flexibiliteit}.
 
 \begin{table}[H]
 \parbox{.45\linewidth}{
@@ -97,7 +97,7 @@ Hoewel het verschil tussen de 'Eerste chain'-methode en de heuristiek erg klein 
 
 \subsubsection{Linear Programming}
 \label{subsec:flexibiliteit}
-De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die staat gedefinieerd in Formule \ref{eq:mse}. Hoe lager deze MSE is, hoe beter de flexibiliteit is verdeeld over de activiteiten.
+De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met de \emph{Mean Squared Error} (MSE) van de flexibiliteit $MSE(flex)$ die gedefini\"eerd staat in Formule \ref{eq:mse}. Hoe lager deze MSE is, hoe beter de flexibiliteit is verdeeld over alle activiteiten.
 
 \begin{align}
 \label{eq:mse}
@@ -108,7 +108,7 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit geeft en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} worden telkens twee methoden vergeleken in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Hierbij wordt de Interior Point methode afgekort tot IP en de Simplex methode tot S. Met methode $1$ wordt het gebruik van LP-probleem in Formule \ref{eq:flexLP} aangeduid. Met methode $2$ wordt het gebruik van LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP} aangeduid.
+Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit levert en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} wordt in elke cel weergegeven in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Hierbij wordt de Interior Point methode afgekort tot IP en de Simplex methode tot S. Met methode $1$ wordt het gebruik van het LP-probleem in Formule \ref{eq:flexLP} aangeduid en met methode $2$ het gebruik van het LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP}.
 
 \begin{table}[H]
     \centering
@@ -126,6 +126,6 @@ Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste v
     \label{tbl:performanceflexver}
 \end{table}
 
-Met behulp van Tabel \ref{tbl:performanceflexver} waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse} kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Dus IP$_2$ heeft de beste verdeling van flexibiliteit, daarna komen van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
+Met behulp van Tabel \ref{tbl:performanceflexver}, waar de verdeling van flexibiliteit gemeten is met Formule \label{eq:mse}, kan worden bepaald welke methode de beste verdeling van flexibiliteit heeft. Hieruit volgt dat IP$_2$ de beste verdeling van flexibiliteit heeft, gevolgd door van hoog naar laag S$_2$, IP$_1$ en S$_1$. 
 
-De totale flexibiliteit is ook een belangrijk aspect waarmee de prestatie van de solver gemeten kan worden. Bovendien vindt de opdrachtgever het belangrijk dat de totale flexibiliteit niet lijdt onder de verdeling hiervan. Aangezien de totale flexibiliteit van methode $1$ bij elke probleeminstantie groter of gelijk aan de totale flexibiliteit van methode $2$ is, kiezen wij voor methode $1$ in combinatie met Interior Point methode (IP$_1$). Hiermee wordt niet de beste verdeling van flexibiliteit bereikt, maar wel grootste totale flexibiliteit.
+De totale flexibiliteit is ook een belangrijk aspect waarmee de prestatie van de solver gemeten kan worden. Bovendien vindt de opdrachtgever het belangrijk dat de totale flexibiliteit niet lijdt onder de verdeling hiervan. Aangezien de totale flexibiliteit van methode $1$ bij elke probleeminstantie groter of gelijk aan de totale flexibiliteit van methode $2$ is, kiezen wij voor methode $1$ in combinatie met Interior Point methode (IP$_1$). Hiermee wordt niet de beste verdeling van flexibiliteit bereikt, maar wel maximale totale flexibiliteit.

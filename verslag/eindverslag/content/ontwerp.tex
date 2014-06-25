@@ -1,10 +1,20 @@
 \section{Ontwerp}
-Om de ontwerpkeuzes toe te lichten, zal in dit hoofdstuk verder toegelicht worden hoe de NedTrain planner en de solver werken en ontworpen zijn.
+Om de ontwerpkeuzes toe te lichten, zal in dit hoofdstuk verder toegelicht worden hoe de NedTrain Planner en de solver werken en ontworpen zijn.
+
+\subsection{Interface}
+Voor de implementatie van nieuwe features aan de interface is voor het grootste deel gebruik gemaakt van de al bestaande klassen. Klassediagrammen van de interface zijn terug te vinden in \cite{bep2012nedtrain}.
+
+De volgende klassen zijn wel toegevoegd aan het bestaande model:
+\begin{itemize}
+\item \textbf{Chain -} In deze klasse wordt de lijst van activiteiten opgeslagen die bij een bepaalde chain hoort. Een chain is te identificeren door middel van twee gehele getallen: de 
+\item \textbf{ChainFrame -} Deze klasse extend de klasse 'Frame' en wordt gebruikt om in de interface alle voorrangsrelaties van de geselecteerde chain te laten zien.
+\item \textbf{JobInfoDialog -} Dit is een venster waarin informatie, zoals de starttijd en deadline, van een project wordt weergegeven.
+\end{itemize}
 
 \subsection{Solver}
 Als de gebruiker op de knop 'solve' drukt, wordt de solver aangeroepen. Deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de tool, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
 
-De solver bestaat grofweg uit drie componenten, namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan hebben wij ook niets veranderd. Het chaining algoritme, uitgelegd in paragraaf \ref{subsubsec:chainingoplossing}, hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost deze vervolgens op met de COIN LP (CLP) library. Hoe de solver werkt en wat voor aanroepen er gedaan worden, is weergegeven in het sequencediagram in Figuur \ref{fig:sd}.
+De solver bestaat grofweg uit drie componenten, namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan is ook niets veranderd. Het chaining algoritme, uitgelegd in paragraaf \ref{subsubsec:chainingoplossing}, hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost dit vervolgens op met de COIN LP (CLP) library. Hoe de solver werkt en wat voor aanroepen er gedaan worden, is weergegeven in het sequencediagram in Figuur \ref{fig:sd}.
 
 \newpage
 \begin{figure}[H]
@@ -28,7 +38,7 @@ In de bestaande versie van de NedTrain Planner bestond er al een communicatiepro
 \end{itemize}
 De volgende communicatieregels zijn toegevoegd en zijn nodig om de NedTrain Solver te laten communiceren met de nieuwe solver:
 \begin{itemize}
-    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Hierbij is \texttt{<activiteiten>} een lijst van \texttt{\#activiteiten} activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}. Dit wordt gebruikt om in de GUI de constraints te laten zien die door chaining toegevoegd zijn. Als op deze manier een chain wordt geprint, wordt deze aan het laatste frame toegevoegd.
-    \item \texttt{CLEARSOFTPREC}: Als op een regel enkel \texttt{\textquoteleft CLEARSOFTPREC\textquoteright} geprint wordt, worden alle constraints die niet bij de instantie horen, weggehaald. Dit wordt door het chaining algoritme gebruikt, omdat de constraints van het ESTA$^+$-algoritme niet nodig zijn voor chaining. Door het weghalen hiervan, vermindert dus het totaal aantal constraints.
+    \item \texttt{CHAIN}: De syntax is \texttt{\textquoteleft <resourceID> <chainID> <\#activiteiten> <activiteiten> -1\textquoteright}. Hierbij is \texttt{<activiteiten>} een lijst van \texttt{\#activiteiten} activiteiten met elke activiteit in de vorm \texttt{<projectID> <taakID>}. Dit wordt gebruikt om in de GUI de voorrangsrelaties te laten zien die door chaining toegevoegd zijn. Als op deze manier een chain wordt geprint, wordt deze aan het laatste frame toegevoegd.
+    \item \texttt{CLEARSOFTPREC}: Als op een regel enkel \texttt{\textquoteleft CLEARSOFTPREC\textquoteright} geprint wordt, worden alle zogenaamde 'soft precedence constraints' verwijderd. Dit zijn voorrangsrelaties die tijdens het oplossingsproces worden toegevoegd en niet bij de instantie horen. Deze aanroep wordt door het chaining algoritme gebruikt, omdat de voorrangsrelaties van het ESTA$^+$-algoritme overbodig zijn voor chaining. Door het weghalen hiervan, vermindert dus het totaal aantal voorrangsrelaties.
     \item \texttt{FLEX}: Geeft een lijst van EST's en LST's waarmee de flexibiliteitsintervallen bepaald kunnen worden. De syntax is \texttt{\textquoteleft FLEX: <minflex> <flextotaal> <variabelen> -1\textquoteright}. Hierbij geeft \texttt{-1} het einde van de lijst aan en is \texttt{<variabelen>} een lijst is van EST's en LST's met de syntax \texttt{\textquoteleft <projectID> <taakID> - <tijd>\textquoteright} voor de EST en \texttt{\textquoteleft <projectID> <taakID> + <tijd>\textquoteright} voor de LST.
 \end{itemize}
