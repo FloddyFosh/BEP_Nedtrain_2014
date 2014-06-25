@@ -5,7 +5,7 @@ In dit hoofdstuk worden de opgeleverde producten en diensten beschreven. Er zal 
 De nieuwe functionaliteit van de solver kan grotendeels worden onderverdeeld in het chaining algoritme en het vinden van flexibiliteitsintervals. Van deze onderdelen zal in deze paragraaf toegelicht worden hoe deze ge\"implementeerd zijn.
 
 \subsubsection{Chaining}
-Een nieuwe functionaliteit die is toegevoegd aan de solver is het chaining algoritme, zoals ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}. Er zijn voor dit algoritme drie verschillende heuristieken voor het selecteren van een chain ge\"implementeerd, namelijk:
+Een nieuwe functionaliteit die is toegevoegd aan de solver is het chaining algoritme, zoals ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}. Er zijn voor dit algoritme drie verschillende methoden voor het selecteren van een chain ge\"implementeerd, namelijk:
 
 \begin{itemize}
 \item Selecteer een willekeurige geschikte chain.
@@ -13,7 +13,7 @@ Een nieuwe functionaliteit die is toegevoegd aan de solver is het chaining algor
 \item Gebruik de heuristiek zoals beschreven in paragraaf \ref{subsubsec:chainingoplossing}.
 \end{itemize}
 
-Om alle drie heuristieken te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk gewisseld worden van heuristiek door een kleine aanpassing in de source code te maken. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt besloten om de heuristiek zoals beschreven in paragraaf \ref{subsubsec:chainingoplossing} te gebruiken voor de NedTrain Planner. De analyse van de drie mogelijke heuristieken voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
+Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk gewisseld worden van methode door een kleine aanpassing in de source code te maken. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt besloten om de heuristiek zoals beschreven in paragraaf \ref{subsubsec:chainingoplossing} te gebruiken voor de NedTrain Planner. De analyse van de drie mogelijke heuristieken voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
 
 Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme ervoor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
