@@ -1,5 +1,5 @@
 \section{Ontwerp}
-Om de ontwerpkeuzes toe te lichten, zal in dit hoofdstuk verder toegelicht worden hoe de NedTrain Planner en de solver werken en ontworpen zijn.
+In dit hoofdstuk zal het ontwerp van de NedTrain Planner besproken worden. Aangezien de applicatie al voor een groot gedeelte bestond, moet er voortgebouwd worden op het bestaande ontwerp van de vorige projecten. Allereerst zal het ontwerp van de interface besproken worden. Vervolgens zal het ontwerp van de solver gegeven worden en zal er toegelicht worden hoe de communicatie tussen de nieuwe solver en de interface werkt.
 
 \subsection{Interface}
 Voor de implementatie van nieuwe features aan de interface is voor het grootste deel gebruik gemaakt van de al bestaande klassen. Klassediagrammen van de aangeleverde interface zijn terug te vinden in \cite{bep2012nedtrain}.
@@ -7,11 +7,11 @@ Voor de implementatie van nieuwe features aan de interface is voor het grootste 
 De volgende klassen zijn wel toegevoegd aan het bestaande model:
 \begin{itemize}
 \item \texttt{Chain} - In deze klasse wordt de lijst van activiteiten opgeslagen die bij een bepaalde chain hoort. Een chain is te identificeren door middel van twee gehele getallen: de resourceId en de chainId. De resourceId identificeert de bijbehorende resource en de chainId geeft aan bij welke unit van de resource deze chain hoort.
-\item \texttt{ChainFrame} - Deze klasse is een extensie van de klasse \texttt{Frame} en wordt gebruikt om in de interface alle voorrangsrelaties van de geselecteerde chain te laten zien. Hierin word
+\item \texttt{ChainFrame} - Deze klasse is een extensie van de klasse \texttt{Frame} en wordt gebruikt om in de interface alle voorrangsrelaties van de geselecteerde chain te laten zien. Daarnaast kan uit deze klasse het resource profiel van de betreffende chain berekend worden.
 \item \texttt{JobInfoDialog} - Dit is een \texttt{QDialog} venster waarin informatie, zoals de starttijd en deadline, van een project wordt weergegeven.
 \end{itemize}
 
-In figuur \ref{fig:klassediagram} is het klassediagram weergegeven waarin \texttt{Chain} en \texttt{ChainFrame} toegevoegd zijn. De verdere relaties van \texttt{Frame} en \texttt{Resource} zijn voor de duidelijkheid weggelaten, omdat deze in dit geval irrelevant zijn. Bovendien zijn in het klassediagram \texttt{get}- en \texttt{set}-methoden weggelaten.
+In Figuur \ref{fig:klassediagram} is het klassediagram weergegeven waarin \texttt{Chain} en \texttt{ChainFrame} toegevoegd zijn. De verdere relaties van \texttt{Frame} en \texttt{Resource} zijn voor de duidelijkheid weggelaten, omdat deze in dit geval irrelevant zijn. Bovendien zijn in het klassediagram \texttt{get}- en \texttt{set}-methoden weggelaten.
 
 \begin{figure}[H]
 \centering
@@ -21,7 +21,7 @@ In figuur \ref{fig:klassediagram} is het klassediagram weergegeven waarin \textt
 \end{figure}
 
 \subsection{Solver}
-Als de gebruiker op de knop 'solve' drukt, wordt de solver aangeroepen. Deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de tool, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
+Als de gebruiker op de knop 'solve' drukt, wordt de solver aangeroepen. Deze leest de probleeminstantie in en verwerkt deze. Uiteindelijk geeft de solver weer informatie terug aan de applicatie, die de informatie weergeeft op het scherm. Deze informatie bestaat onder andere uit de chains en de flexibiliteitsintervallen.
 
 De solver bestaat grofweg uit drie componenten, namelijk het ESTA$^+$ algoritme, het chaining algoritme en een algoritme voor het berekenen van de flexibiliteitsintervallen. Het ESTA$^+$ algoritme was al ge\"implementeerd door onze voorgangers en hieraan is ook niets veranderd. Het chaining algoritme, uitgelegd in paragraaf \ref{subsubsec:chainingoplossing}, hebben we zelf ge\"implementeerd. De code voor het berekenen van de flexibiliteitsintervallen bouwt een LP-probleem op en lost dit vervolgens op met de COIN LP (CLP) library. Hoe de solver werkt en wat voor aanroepen er gedaan worden, is weergegeven in het sequencediagram in Figuur \ref{fig:sd}.
 
@@ -35,7 +35,7 @@ De solver bestaat grofweg uit drie componenten, namelijk het ESTA$^+$ algoritme,
 
 \newpage
 \subsection{Communicatie}
-In de bestaande versie van de NedTrain Planner bestond er al een communicatieprotocol voor communicatie tussen de NedTrain Planner en de bestaande solver. Deze communicatieregels worden ook gebruikt door de nieuwe solver \cite{bep2012nedtrain} en zijn als volgt:
+In de bestaande versie van de NedTrain Planner bestond al een communicatieprotocol voor communicatie tussen de NedTrain Planner en de bestaande solver. Deze communicatieregels worden ook gebruikt door de nieuwe solver \cite{bep2012nedtrain} en zijn als volgt:
 \begin{itemize}
     \item \texttt{PROGRESS}: geeft een indicatie (in procenten) van de voortgang van het solveproces. De syntax is \texttt{\textquoteleft PROGRESS: <percentage>\textquoteright}.
     \item \texttt{ERROR}: geeft bericht van een interne fout in de solver (een invariant tijdens het solve proces blijkt niet waar te zijn). Dit zou niet mogen optreden.
