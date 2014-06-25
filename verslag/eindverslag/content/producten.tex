@@ -1,16 +1,16 @@
 \section{Opgeleverde Producten en Diensten}
-
-In dit hoofdstuk worden alle nieuwe functionaliteiten, van zowel de interface als de solver, opgesomd. Bovendien zijn er ook diensten geleverd, die niet direct als extra functionaliteit van de solver gezien kunnen worden, die ook genoemd zullen worden.
+In dit hoofdstuk worden de opgeleverde producten en diensten beschreven. Er zal gekeken worden naar nieuwe functionaliteit die toegevoegd is aan zowel de interface als de solver. Daarnaast zullen ook een aantal diensten die uitgevoerd zijn en niet gelijk een bijdrage leveren aan functionaliteit worden toegelicht.
 
 \subsection{Solver}
 De nieuwe functionaliteit van de solver kan grotendeels worden onderverdeeld in het chaining algoritme en het vinden van flexibiliteitsintervals. Van deze onderdelen zal in deze paragraaf toegelicht worden hoe deze ge\"implementeerd zijn.
 
 \subsubsection{Chaining}
-Het chaining algoritme, dat is ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}, is ge\"implementeerd, waarbij een keuze is gemaakt tussen drie verschillende methoden voor het selecteren van een chain, namelijk:
+Een nieuwe functionaliteit die is toegevoegd aan de solver is het chaining algoritme, zoals ge\"introduceerd in paragraaf \ref{subsubsec:chainingoplossing}. Er zijn voor dit algoritme drie verschillende heuristieken voor het selecteren van een chain ge\"implementeerd, namelijk:
+
 \begin{itemize}
 \item Selecteer een willekeurige geschikte chain.
 \item Selecteer de eerst gevonden geschikte chain.
-\item Gebruik de heuristiek beschreven in \ref{subsubsec:chainingoplossing}.
+\item Gebruik de heuristiek zoals beschreven in paragraaf \ref{subsubsec:chainingoplossing}.
 \end{itemize}
 
 Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en kan er gemakkelijk van methode gewisseld worden door een kleine aanpassing in de source code. Uiteindelijk is door middel van de analyse van de flexibiliteit en het aantal voorrangsrelaties dat door de algoritmes toegevoegd wordt, besloten om de heuristiek te gebruiken voor de NedTrain Planner. De analyse van de drie mogelijke methoden voor het selecteren van een chain is weergegeven in paragraaf \ref{subsubsec:chaininganalyse}.
@@ -18,12 +18,12 @@ Om alle drie methoden te kunnen analyseren, zijn deze allen ge\"implementeerd en
 Het chaining algoritme is een vereiste voor het berekenen van flexibiliteitsintervallen, omdat dit algoritme er voor zorgt dat elke oplossing die consistent is met de tijdsconstraints, ook consistent is met de resource constraints. Hierdoor wordt het mogelijk om activiteiten te verschuiven, zonder dat er resource conflicten kunnen ontstaan.
 
 \subsubsection{Linear Programming}
-Om voor elke taak een flexibiliteitsinterval te vinden, moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) library gebruikt. Deze library verwacht als input een stelsel lineaire vergelijkingen en een variabele om te optimaliseren, en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
+Om voor elke taak een flexibiliteitsinterval te vinden moet er, zoals beschreven in paragraaf \ref{subsec:probleemoplossing}, een LP-probleem opgelost worden. Om dit gemakkelijk te kunnen doen, wordt de CLP\footnote{\href{https://projects.coin-or.org/Clp}{projects.coin-or.org/Clp}} (COIN-OR Linear Programming) open source library gebruikt. Deze library verwacht als input een stelsel van lineaire vergelijkingen en een variabele om te optimaliseren en geeft als output de geoptimaliseerde waarde en voor elke variabele de toekenning.
 
-De documentatie van CLP is helaas niet heel erg uitgebreid, maar het is desondanks toch gelukt om het LP-probleem door CLP te laten oplossen. Er wordt gebruik gemaakt van een model dat een instance is van de \texttt{ClpSimplex} of de \texttt{ClpInterior} klasse. Deze twee klassen zijn beide een 'child' klasse van \texttt{ClpModel}. Het grote verschil tussen \texttt{ClpSimplex} en \texttt{ClpInterior} is de wijze van oplossen, deze gebruiken respectievelijk de 'Simplex' en de 'Interior Point' methode. Wij hebben zelf nog een \texttt{Constraints} klasse gemaakt om elke variabele een nummer te geven. De variabelen $t^+_0, t^-_0, \ldots, t^+_n$ en $t^-_n$ krijgen respectievelijk de nummers $0, 1, \ldots, 2 \cdot n$ en $2 \cdot n + 1$. Aan het model moet voor elke variabele een onder- en bovengrens worden gesteld. Er moet een objective functie worden opgegeven en ingesteld dat deze gemaximaliseerd moet worden. Vervolgens kan er aan het model constraints worden toegevoegd. Door een solve methode aan te roepen op het model kan er vervolgens met behulp van de variabele nummers de toegekende waarde van de variabele uit het model worden opgevraagd. 
+De documentatie van CLP is helaas niet heel erg uitgebreid, maar het is desondanks toch gelukt om het LP-probleem door CLP te laten oplossen. Er moet hiervoor een instantie van de klasse \texttt{ClpModel} worden opgebouwd door het aanmaken en bepalen van variabelen en limieten. Er bestaan verschillende instanties van de \texttt{ClpModel} klasse. Zo is er door ons gebruik gemaakt van de modellen \texttt{ClpSimplex} en \texttt{ClpInterior}. Het grote verschil tussen \texttt{ClpSimplex} en \texttt{ClpInterior} is de manier van oplossen, deze gebruiken namelijk respectievelijk de 'Simplex' en de 'Interior Point' methode. Er is zelf nog een \texttt{Constraints} klasse gemaakt om elke variabele een nummer te geven. De variabelen $t^+_0, t^-_0, \ldots, t^+_n$ en $t^-_n$ krijgen respectievelijk de nummers $0, 1, \ldots, 2 \cdot n$ en $2 \cdot n + 1$. Aan het model moet voor elke variabele een onder- en bovengrens worden gesteld. Er moet een objective functie worden opgegeven en ingesteld dat deze gemaximaliseerd moet worden. Vervolgens kan er aan het model constraints worden toegevoegd. Door een solve methode aan te roepen op het model kan er vervolgens met behulp van de variabele nummers de toegekende waarde van de variabele uit het model worden opgevraagd.
 
 \subsection{Interface}
-Er zijn grote en kleine veranderingen aan de interface toegebracht. Kleine veranderingen zijn onder andere bugfixes voor bugs die zijn achtergelaten door de vorige groep, die aan de NedTrain Planner heeft gewerkt. De grootste veranderingen aan de interface zijn het weergeven van de chains en de flexibiliteitsintervallen. Deze worden in de interface weergegeven, zoals deze is afgebeeld in Figuur \ref{fig:GUIfinal}.
+Er zijn grote en kleine veranderingen aan de interface toegebracht. Kleine veranderingen zijn onder andere het oplossen van bugs die zijn achtergelaten door de vorige projecten die ook aan de NedTrain Planner hebben gewerkt. De grootste veranderingen aan de interface zijn het weergeven van de chains en de flexibiliteitsintervallen. Een voorbeeld van de nieuwe interface kan worden gezien in Figuur \ref{fig:GUIfinal}.
 
 \begin{figure}[H]
 \centering
@@ -32,22 +32,22 @@ Er zijn grote en kleine veranderingen aan de interface toegebracht. Kleine veran
 \label{fig:GUIfinal}
 \end{figure}
 
-In Figuur \ref{fig:GUIfinal} is in de rechterbovenhoek een schuifbalk te zien, waarmee verschillende stappen van het proces van de solver laten zien kunnen worden in de interface. Naar zo'n stap, waarin de toestand van alle activiteiten opgeslagen in, zal vanaf nu gerefereerd worden als een frame. De volgende frames worden toegevoegd na het uitvoeren van een solver:
+In Figuur \ref{fig:GUIfinal} is in de rechterbovenhoek een schuifbalk te zien, waarmee de gebruiker door de verschillende stappen van het proces van de solver kan lopen. Voor elke stap is er een frame opgeslagen waarin de toestand van alle activiteiten staan voor dat moment in het proces van de solver. Als de gebruiker de stappen doorloopt, wordt de corresponderende frame getoond met de opgeslagen informatie in de interface. De volgende frames worden opgeslagen bij het uitvoeren van een solver:
 \begin{itemize}
 \item Een frame met de begintoestand van de instantie.
-\item Voor elke voorrangsrelatie die tijdens het ESTA$^+$ algoritme toegevoegd wordt, een nieuw frame met daarop alleen de nieuwe voorrangsrelatie en eventuele veranderingen in starttijden van de activiteiten.
+\item Voor elke voorrangsrelatie die tijdens het ESTA$^+$ algoritme toegevoegd wordt, een nieuwe frame met daarin alleen de nieuwe voorrangsrelatie en eventuele veranderingen in starttijden van de activiteiten.
 \item Een frame zonder voorrangsrelaties, waarin geen resource conflicten meer aanwezig zijn. Op dit moment worden alle eerder toegevoegde voorrangsrelaties verwijderd.
-\item Voor elke resource een frame waarop alle bij deze resource horende chains getoond worden. Vervolgens een apart frame voor elke chain, die elk bij 1 resource unit hoort. Voor lege chains zal geen frame toegevoegd worden, maar voor chains met maar 1 activiteit wel.
+\item Voor elke resource een frame waarin alle bij deze resource horende chains getoond worden. Vervolgens een aparte frame voor elke chain, die elk bij \'e\'en resource unit hoort. Voor lege chains zal er geen frame aangemaakt worden, maar voor chains met maar \'e\'en activiteit wel.
 \item Tenslotte een frame waarin voor elke activiteit in het blauw een flexibiliteitsinterval te zien is. Activiteiten worden ook verplaatst, zodat ze zich volledig in het blauwe interval bevinden.
 \end{itemize}
 Als een solver geen chains en/of flexibiliteitsintervallen berekent, zullen voor deze stappen geen frames worden toegevoegd en zullen alleen de frames van het ESTA$^+$-algoritme getoond worden.
 
 In het frame dat in Figuur \ref{fig:GUIfinal} zichtbaar is, wordt een chain van activiteiten, behorende bij de resource 'monteurs', in het bovenste deelvenster getoond. Hierin zijn de rode pijlen voorrangsrelaties die al in de instantie aanwezig waren en zijn de zwarte pijlen later toegevoegd tijdens het oplossen van de instantie.
 
-Zoals eerder genoemd, worden van een resource eerst alle chains tegelijk getoond op een frame, en vervolgens elke chain op een apart frame. Tijdens het \'e\'en voor \'e\'en laten zien van de chains, wordt  het profiel van de gebruikte resources stap voor stap opgebouwd. Op het moment dat er nog geen resources gebruikt worden, is het gehele profiel groen. Bij het tonen van een chain worden alle resource units die door de activiteiten in deze chain gebruikt worden, in het blauw getoond. Dit betekent dus dat deze resource units niet meer door andere activiteiten gebruikt kunnen worden. Deze gebruikte resources zijn dus in daarop volgende frames grijs gekleurd. Zo wordt in elke frame het grijs gekleurde gebied groter, totdat elke resource unit gebruikt is.
+Zoals eerder genoemd, worden van een resource eerst alle chains tegelijk getoond op een frame en vervolgens elke chain op een apart frame. Tijdens het \'e\'en voor \'e\'en laten zien van de chains, wordt  het profiel van de gebruikte resources stap voor stap opgebouwd. Op het moment dat er nog geen resources gebruikt worden, is het gehele profiel groen. Bij het tonen van een chain worden alle resource units van een resource die door de activiteiten in deze chain gebruikt worden, in het blauw getoond. Dit betekent dus dat deze resource units niet meer door andere activiteiten gebruikt kunnen worden. Deze gebruikte resources zijn dus in de daarop volgende frames grijs gekleurd. Zo wordt in elke frame het grijs gekleurde gebied groter, totdat de gehele resource profile opgevuld is.
 
 \subsubsection*{Flexibiliteitsintervallen}
-Zoals in Figuur \ref{fig:flex-interval} is te zien, is het ook mogelijk om het flexibiliteitsinterval van elke activiteit weer te geven in de interface. Activiteiten kunnen vrij bewegen binnen het flexibiliteitsinterval zonder dat er conflicten ontstaan met andere activiteiten. Als de intervallen worden weergegeven, is het niet mogelijk om de activiteiten buiten het bijbehorende interval te verplaatsen. Ook is het niet mogelijk activiteiten zodanig langer te maken dat ze buiten hun flexibiliteitsinterval vallen. Die twee zaken zijn niet mogelijk, om ervoor te zorgen dat het schema flexibel blijft. Als het weergeven van de flexibiliteitsintervallen wordt uitgezet, kunnen de activiteiten wel verplaatst en vergroot worden buiten het flexibiliteitsinterval.
+Zoals in Figuur \ref{fig:flex-interval} is te zien, is het ook mogelijk om in de interface het flexibiliteitsinterval van elke activiteit weer te geven. Activiteiten kunnen vrij bewegen binnen het flexibiliteitsinterval zonder dat er conflicten ontstaan met andere activiteiten. Als de intervallen worden weergegeven, is het niet mogelijk om de activiteiten buiten het bijbehorende interval te verplaatsen. Ook is het niet mogelijk activiteiten zodanig langer te maken dat ze buiten hun flexibiliteitsinterval vallen. Die twee zaken zijn niet mogelijk, om ervoor te zorgen dat het schema flexibel blijft. Als het weergeven van de flexibiliteitsintervallen wordt uitgezet, kunnen de activiteiten wel verplaatst en vergroot worden buiten het flexibiliteitsinterval.
 
 \begin{figure}[H]
 \center
@@ -67,9 +67,9 @@ Naast het resource profile dat weergegeven kan worden in de onderste helft van d
 \end{figure}
 
 \subsubsection*{Informatie Trein en Activiteit}
-Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht hebben we de flexibiliteitsintervallen toegevoegd als deze bekend zijn \emph{(zie Figuur \ref{fig:taak-info})}. Als de instantie nog niet opgelost is of de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekent, dan worden deze niet in het overzicht weergegeven.  
+Het was al mogelijk om van een activiteit de informatie weer te geven in een klein overzicht. Aan dit overzicht zijn de flexibiliteitsintervallen toegevoegd als deze bekend zijn \emph{(zie Figuur \ref{fig:taak-info})}. Als de instantie nog niet opgelost is of als de instantie is opgelost met een solver die geen flexibiliteitsintervallen berekent, dan worden deze niet in het overzicht weergegeven.  
 
-Nu is ook een overzicht van informatie over een taak beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit. Dan wordt er een nieuw scherm \emph{(zie Figuur \ref{fig:trein-info})} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op de lossen. 
+Nu is er ook een overzicht van informatie over een trein beschikbaar. Als de gebruiker op de tijdlijn van een trein klikt, maar niet op een activiteit, dan wordt er een nieuw scherm \emph{(zie Figuur \ref{fig:trein-info})} geopend met daarop informatie zoals het aantal activiteiten en de hoeveelheid resources die minimaal nodig zijn voor deze trein om de probleeminstantie op te lossen. 
 
 \begin{figure}[H]
 \parbox{.45\linewidth}{
@@ -80,21 +80,33 @@ Nu is ook een overzicht van informatie over een taak beschikbaar. Als de gebruik
 }\hfill
 \parbox{.45\linewidth}{
     \center
-    \includegraphics[width=.4\textwidth]{../images/trein-info.png}%
+    \includegraphics[width=.4\textwidth]{../images/trein-info.png}
     \caption{Trein informatie}
     \label{fig:trein-info}
 }
 \end{figure}
 
+\subsubsection{Informatie Solver en Oplossing}
+Na het oplossen van een instantie door de solver worden de uitkomsten en gegevens van de oplossing gecommuniceerd naar de grafische interface. Zo werd er bijvoorbeeld al doorgegeven hoeveel voorrangsrelaties er aan de instantie zijn toegevoegd door de solver. Nu wordt er ook doorgegeven, als de solver gebruik maakt van flexibiliteitsintervallen, wat de totale flexibiliteit van de oplossing is. Als de gebruiker vervolgens aanpassingen maakt en de instantie vervolgens opnieuw laat oplossen, kan er ook meteen gezien worden wat voor effect dit heeft op het aantal precedence constraints en de totale flexibiliteit. Dit wordt gedaan door het kleuren van de tekst en het geven van de nieuwe en de oude gegevens. \emph{(zie Figuur \ref{fig:solver-dialog})} Een groene kleur van de flexibiliteit tekst geeft aan dat de nieuwe oplossing meer of gelijke flexibiliteit heeft, waarbij een rode kleur aangeeft dat de flexibiliteit juist omlaag is gegaan. Hetzelfde geldt voor de tekst van het aantal voorrangsrelaties, waarbij rood aangeeft dat er meer voorrangsrelaties toegevoegd zijn en groen minder of gelijk.
+
+Het is nu ook mogelijk om de tijdsverdeling van de solver na het oplossen te zien. Op deze manier is het meteen duidelijk welk gedeelte van de solver het meest heeft toegedragen aan de totale tijd die de solver nodig had om de instantie op te lossen.
+
+\begin{figure}[H]
+    \center
+    \includegraphics[width=.7\textwidth]{../images/solver-dialog.png}
+    \caption{Venster na oplossen van instantie}
+    \label{fig:solver-dialog}
+\end{figure}
+
 \subsubsection*{Gebruiksgemak}
-Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode knop in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
+Om het gebruiksgemak te vergroten, zijn er een aantal sneltoetsen toegevoegd. Ook is het sluiten van instanties veranderd, want waar eerst instanties gesloten konden worden met een grote rode kruis in de menubalk, is er nu op elke tab van een instantie een klein kruisje geplaatst, waarmee de instantie gesloten kan worden. Dit ontwerp ziet er intu\"itief uit en wordt ook gebruikt door veel bekende browsers zoals Google Chrome en Mozilla FireFox.
 
 Er zijn ook sneltoetsen toegevoegd voor het in- en uitzoomen en voor het horizontaal scrollen. Er kan in- en uitgezoomd worden door de ctrl-toets ingedrukt te houden en het scrollwiel van de muis  te bewegen. Horizontaal scrollen kan in het venster waarin de muis zich op dat moment bevindt door de shift-toets ingedrukt te houden en het scrollwiel van de muis te bewegen. Deze sneltoetsen zijn ingesteld zodat de gebruiker makkelijker door een probleeminstantie kan navigeren, zonder daarvoor steeds zijn muis naar de menubalk te hoeven verplaatsen.
 
 Nog een feature die voor een verbeterd gebruiksgemak moet zorgen bestaat uit de knopjes voor het van plek verwisselen van taken en resources. Dit is vooral handig als er een nieuwe activiteit of resource wordt toegevoegd, want deze wordt altijd onderaan gezet. 
 
 \subsection{Port naar Windows 7}
-Om de toegankelijkheid van de applicatie te vergroten, is ervoor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
+Om de toegankelijkheid van de applicatie te vergroten, is er voor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
 
 \subsection{Upgrade naar Qt 5.2}
 De bestaande applicatie was ontwikkeld in versie 4.8 van het Qt framework, maar om de applicatie zo up-to-date mogelijk te houden, is deze geport naar Qt versie 5.2. Hierdoor hoeft een eventuele groep, die de applicatie verder gaat ontwikkelen, niet met een oude versie van het Qt framework te werken. Deze upgrade betekent echter ook dat de applicatie niet meer werkt met Qt 4, maar alleen met versie 5.
