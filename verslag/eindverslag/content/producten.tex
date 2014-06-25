@@ -106,13 +106,14 @@ Er zijn ook sneltoetsen toegevoegd voor het in- en uitzoomen en voor het horizon
 
 Nog een feature die voor een verbeterd gebruiksgemak moet zorgen bestaat uit de knopjes voor het van plek verwisselen van taken en resources. Dit is vooral handig als er een nieuwe activiteit of resource wordt toegevoegd, want deze wordt altijd onderaan gezet. 
 
-TODO: static builden \\
-TODO: highlighten + verspringen \\
+Tijdens het doorlopen van de stappen van het chaining algoritme in de interfaces worden chains opgebouwd voor de resource units van alle resources. Als op een moment chains voor worden aangemaakt voor een bepaalde resource krijgt deze een opvallende kleur. Als dan in de volgende stap een chains worden gemaakt voor een andere resource, dan verspringt het beeld naar die resource en wordt deze ook gehighlight. 
+
+Ten slotte nog een feature die ook prettig is voor gebruikers, maar niet visueel is. Het is mogelijk de applicatie zo te compileren, dat een gebruiker met hetzelfde besturingssysteem de applicatie meteen kan gebruiken, zonder extra software te installeren. Die manier van compileren wordt ook wel \emph{static builden} genoemd. In de \emph{static build} zitten alle afbeeldingen, icoontjes, fonts en externe libraries erbij. Dit maakt het installeren van de applicatie voor de gebruiker stukken gemakkelijker, aagezien er nog al wat afbeeldingen, libraries, ect gebruikt worden in het project. 
 
 \subsection{Codekwaliteit}
 Om de codekwaliteit te verbeteren is er een aantal aanpassingen aan de code gemaakt. Deze veranderingen zorgen dus niet voor nieuwe features, maar voor een betere onderhoudbaarheid van de code, zodat ook ontwikkelaars na dit project makkelijk nieuwe features kunnen toevoegen. Zo zijn alle resources (zoals icoontjes, fonts en dergelijke) aan een speciaal bestand, genaamd \texttt{Resources.qrc}, toegevoegd, dat bijhoudt van welke resources de interface gebruik maakt. Door de resources op te sommen in \texttt{Resources.qrc} wordt het in de rest van de code makkelijker hiervan gebruik te maken. Deze verandering is ook nodig voor het static builden van de applicatie, wat wordt besproken in paragraaf \ref{sec:gebruiksgemak}. Ook is het gebruik van \emph{includes} in de code consistenter gemaakt.
 
-In de code van de solver waren veel lange methodes aanwezig, die we hebben opgedeeld. Ook was daar nog typische C code aanwezig, wat niet gebruikelijk is in \cpp\ en soms ook zelfs waarschuwingen gaf tijden compileren. Daarbij is het gebruik van een \texttt{boolean} in plaats van een \texttt{integer} en een \texttt{string} in plaats van een \texttt{char*} een goed voorbeeld. Ook is er code verwijderd die helemaal niet gebruikt werd. 
+In de code van de solver waren veel lange methodes aanwezig, die opgedeeld zijn in een aantal kortere methodes. Ook was er nog typische C code aanwezig, wat niet gebruikelijk is in \cpp\ en soms ook zelfs waarschuwingen gaf tijdens het compileren. Daarbij is het gebruik van een \texttt{boolean} in plaats van een \texttt{integer} en een \texttt{string} in plaats van een \texttt{char*} een goed voorbeeld. Ook is er code verwijderd die helemaal niet gebruikt werd.
 
 \subsection{Port naar Windows 7}
 Om de toegankelijkheid van de applicatie te vergroten, is er voor gezorgd dat deze ook op het besturingssysteem Windows 7 werkt. Hierbij is het ook nog steeds mogelijk om deze op Unix-based systemen te draaien, zoals Ubuntu. Alle functies van het programma moeten dus zowel op Windows 7 als op Ubuntu correct werken.
