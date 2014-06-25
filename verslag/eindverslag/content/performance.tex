@@ -1,5 +1,5 @@
 \section{Performance}
-Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties als de flexibiliteit die met verschillende methodes bereikt wordt zullen geanalyseerd worden.
+Om de gebruikte oplossingsmethoden te verantwoorden, zullen deze in dit hoofdstuk vergeleken worden met andere mogelijke methoden. Zowel de looptijd van het oplossen van verschillende probleeminstanties als de flexibiliteit die met verschillende methoden bereikt wordt zullen geanalyseerd worden.
 
 \subsection{Looptijd}
 In dit hoofdstuk zal een analyse van de looptijd van de solver uitgevoerd worden. Aangezien de opdrachtgever de applicatie voornamelijk gebruikt voor onderzoek en educatie zullen de probleeminstanties kleiner zijn dan in de realiteit. Bij deze analyse wordt de solver opgedeeld in vijf belangrijke delen: parsen van input, STJN, ESTA$^+$, chaining en LP. Om de looptijd te bepalen wordt er gebruik gemaakt van een grote probleeminstantie genaamd 'xxl-instance'. Deze probleeminstantie bestaat uit:
@@ -108,7 +108,7 @@ De verdeling van de flexibiliteit over alle activiteiten kan gemeten worden met 
 \end{aligned}
 \end{align}
 
-Er is met $2040$ probleeminstanties getest welke van de vier methodes de beste verdeling van flexibiliteit levert en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} wordt in elke cel weergegeven in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Hierbij wordt de Interior Point methode afgekort tot IP en de Simplex methode tot S. Met methode $1$ wordt het gebruik van het LP-probleem in Formule \ref{eq:flexLP} aangeduid en met methode $2$ het gebruik van het LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP}.
+Er is met $2040$ probleeminstanties getest welke van de vier methoden de beste verdeling van flexibiliteit levert en welke de grootste totale flexibiliteit heeft. In Tabel \ref{tbl:performanceflexver} wordt in elke cel weergegeven in hoeveel procent van de gevallen de 'rij' beter is dan de 'kolom'. Hierbij wordt de Interior Point methode afgekort tot IP en de Simplex methode tot S. Met methode $1$ wordt het gebruik van het LP-probleem in Formule \ref{eq:flexLP} aangeduid en met methode $2$ het gebruik van het LP-probleem in de Formules \ref{eq:flexfirstLP} en \ref{eq:flexsecondLP}.
 
 \begin{table}[H]
     \centering
