@@ -34,6 +34,7 @@ void add_resource(int i, int capacity, char* name) {
     resource* r = new resource;
     r->capacity = capacity;
     r->name = strdup(name);
+    r->isMutexResource = false;
 
     vector<resource *> & res (tmsp->resources);
     if (i >= len(res)) res.resize(i + 1, NULL);
@@ -113,6 +114,7 @@ void add_train_mutexes() {
 
     for (i = 0; i < tmsp->n_trains; i++, r++) if (Tr(i)) {
         add_resource(r, 1, strdup(Tr(i)->name));
+        R(r)->isMutexResource = true;
         for (j = 0; j < N(i); j++) if (A(i,j)) {
             add_requirement(i, j, r, 1);
         }

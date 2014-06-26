@@ -16,6 +16,7 @@ typedef struct resource {
 	int capacity;
 	char* name;
 	vector<requirement *> requirements;
+    bool isMutexResource;
 } resource;
 
 typedef struct train {

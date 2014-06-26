@@ -19,6 +19,8 @@ vector<activity*> getActivities();
 
 bool compareEST(const activity* a, const activity* b);
 bool operator<(const chainId& a, const chainId& b);
+bool isFeasibleConstraint(activity* act1, activity* act2);
+void addMutexConstraints();
 
 void initializeChains();
 chainId selectFirstChain(int tr, int act, int res); //returns id of the first feasible chain that is found
@@ -34,6 +36,6 @@ void add_frame();
 void print_chain(int i, int j);
 
 //returns true if process was successful
-bool chaining();
+bool chaining(int add_mutexes);
 
 #endif

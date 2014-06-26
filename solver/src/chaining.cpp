@@ -39,6 +39,7 @@ bool operator<(const chainId& a, const chainId& b){
 void initializeChains(){
     chains.clear();
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
+        if(!R(r_i)) continue;
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             chainId newId = {r_i,u_j};
             chain newChain = {};
@@ -52,6 +53,17 @@ bool isFeasibleConstraint(activity* act1, activity* act2){
     int prevLft = act2->est + act2->duration + act2->flex;
     if(act2->est == -1) prevLft = Tr(act2->i)->due_date;
     return curEst >= prevLft;
+}
+
+void addMutexConstraints(){
+    for(int i=0; i<tmsp->n_trains; ++i){
+        if(!Tr(i)) continue;
+        vector<activity*> acts = Tr(i)->activities;
+        sort(acts.begin(), acts.end(), compareEST);
+        for(int j=1; j<len(acts); ++j){
+            add_precedence(acts[j-1]->i, acts[j-1]->j, acts[j]->i, acts[j]->j, false);
+        }
+    }
 }
 
 chainId selectFirstChain(int tr, int act, int res){
@@ -206,7 +218,7 @@ void print_chain(int i, int j) {
     output(" -1\n");
 }
 
-bool chaining() {
+bool chaining(int add_mutexes) {
     /* PSEUDOCODE: [Generating Robust Partial Order Schedules, Policella 2004]
     Input: A problem P and one of its fixed-times schedules S
     Output: A partial order solution POS
@@ -239,7 +251,13 @@ bool chaining() {
     initializeChains();
     add_frame();
 
+    if(add_mutexes){
+        addMutexConstraints();
+        add_frame();
+    }
+
     for(int i=0; i<tmsp->n_resources; i++){
+        if(!R(i) || R(i)->isMutexResource) continue;
         FOREACH(activities, it){
             activity* act = *it;
             if(useHeuristic){
