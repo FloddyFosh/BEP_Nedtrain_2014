@@ -39,6 +39,7 @@ bool operator<(const chainId& a, const chainId& b){
 void initializeChains(){
     chains.clear();
     for(int r_i=0; r_i<tmsp->n_resources; r_i++){
+        if(!R(r_i)) continue;
         for(int u_j=0; u_j<R(r_i)->capacity; u_j++){
             chainId newId = {r_i,u_j};
             chain newChain = {};
@@ -240,6 +241,7 @@ bool chaining() {
     add_frame();
 
     for(int i=0; i<tmsp->n_resources; i++){
+        if(!R(i)) continue;
         FOREACH(activities, it){
             activity* act = *it;
             if(useHeuristic){
