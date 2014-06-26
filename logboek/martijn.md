@@ -46,3 +46,7 @@ Datum      | Uren   | Beschrijving
 19-06-2014 | 7      | Verslag
 20-06-2014 | 7      | Tests en verslag
 22-06-2014 | 4      | Tests en verslag
+23-06-2014 | 7      | Testscoverage en verslag
+24-06-2014 | 8      | Code gereed maken voor SIG en opsturen, verder werken aan verslag
+25-06-2014 | 9      | Verslag afmaken en inleveren
+26-06-2014 | 7      | Presentatie maken
