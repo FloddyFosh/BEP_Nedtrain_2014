@@ -1,3 +1,33 @@
 \begin{frame}\frametitle{Flexibiliteit}
-    \huge{\hfill Tijd voor wat flexibiliteit! \hfill}
+    \begin{itemize}
+        \item Hoe wordt flexibiliteit gemeten?
+        \begin{itemize}
+            \item Voor \'e\'en taak: $flex_t = t^+ - t^-$
+            \item Voor hele rooster: $flex_{totaal} = \sum_{t \in T}(t^+ - t^-)$
+        \end{itemize}
+        \item Onafhankelijke intervallen
+    \end{itemize}
+
+    \definecolor{darkgreen}{rgb}{0, 0.5, 0}
+    \definecolor{lightgreen}{rgb}{0, 0.7, 0}
+    \newcommand{\widthpic}{100mm}
+    \newcommand{\heightpic}{10mm}
+    \newcommand{\offset}{2mm}
+    \begin{tikzpicture}
+        \coordinate (A) at (0, \heightpic /2);
+        \coordinate (B) at (\widthpic, \heightpic /2);
+        \coordinate (A1) at (0, 0);
+        \coordinate (A2) at (0, \heightpic);
+        \coordinate (B1) at (\widthpic, 0);
+        \coordinate (B2) at (\widthpic, \heightpic);
+
+        \draw [very thick] (A) -- (B);
+
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<1>] (10mm, \offset) rectangle (35mm, 8mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<2>] (0mm, \offset) rectangle (25mm, 8mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<3>] (75mm, \offset) rectangle (100mm, 8mm);
+
+        \draw [very thick] (A1) -- (A2);
+        \draw [very thick] (B1) -- (B2);
+    \end{tikzpicture}
 \end{frame}
