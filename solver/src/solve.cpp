@@ -15,7 +15,7 @@ int solve(int merge_bw, int add_mutexes) {
 
     if(!solveSTJN()) return 0;
     if(!solveESTA(add_mutexes)) return 0;
-    if(!solveChaining()) return 0;
+    if(!solveChaining(add_mutexes)) return 0;
     if(!solveLP()) return 0;
 
     return 1;
@@ -53,10 +53,10 @@ int solveESTA(int add_mutexes) {
     return 1;
 }
 
-int solveChaining() {
+int solveChaining(int add_mutexes) {
     cdebug("\nRunning Chaining algorithm.\n");
     timing_start("Chaining");
-    if(chaining()){
+    if(chaining(add_mutexes)){
         solverProgress(75);
         timing_stop("Chaining");
     } else {
