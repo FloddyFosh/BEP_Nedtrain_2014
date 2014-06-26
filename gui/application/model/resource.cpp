@@ -48,11 +48,7 @@ void Resource::clearChains() {
 }
 
 void Resource::addActToChain(Activity* act, int chainId) {
-    if(!chains.contains(chainId)){
-        QVector<Activity*> actVec;
-        Chain* newChain = new Chain(_id,chainId,actVec,this);
-        chains.insert(chainId, newChain);
-    }
+    initializeChain(chainId);
     Chain* chain = getChain(chainId);
     if(!chain->getActivities()->empty()){
         Activity* lastAct = chain->getActivities()->last();
@@ -62,6 +58,13 @@ void Resource::addActToChain(Activity* act, int chainId) {
         }
     }
     chain->addActivity(act);
+}
+
+void Resource::initializeChain(int chainId){
+    if(chains.contains(chainId)) return;
+    QVector<Activity*> actVec;
+    Chain* newChain = new Chain(_id,chainId,actVec,this);
+    chains.insert(chainId, newChain);
 }
 
 void Resource::addActivity(Requirement *req) {

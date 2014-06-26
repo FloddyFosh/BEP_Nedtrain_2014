@@ -79,6 +79,11 @@ public:
      */
     void addActToChain(Activity *act, int chainId);
 
+    /**
+     * @param chainId id of the resource unit of which the chain will be initialized
+     */
+    void initializeChain(int chainId);
+
     /** Add an activity that requires this resource. The parameter is a Requirement pointer
       * that has an activity pointer and an integer amount. This method is used when an
       * activity is created through the GUI.

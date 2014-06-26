@@ -382,6 +382,7 @@ void Solver::processChainLine(QByteArray &line) {
     while(res != -1){
         Resource* curResource = resources[res];
         chain = fields.takeFirst().toInt();
+        curResource->initializeChain(chain);
         numActs = fields.takeFirst().toInt();
         for(int i=0;i<numActs;i++){
             ai = fields.takeFirst().toInt();
