@@ -10,7 +10,8 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{amsmath}
 \usepackage{amsthm}
-
+\usepackage{graphicx}
+\usepackage{tikz}
 \mode<presentation>{\usetheme{tud}}
 
 \title[NedTrain Planner]{NedTrain Planner}
@@ -37,6 +38,14 @@
 \newcommand{\field}[1]{\mathbb{#1}}
 \newcommand{\Zset}{\field{Z}}
 
+\tikzset{
+  invisible/.style={opacity=0},
+  visible on/.style={alt={#1{}{invisible}}},
+  alt/.code args={<#1>#2#3}{%
+    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+  },
+}
+
 \begin{document}
 
 {
@@ -46,8 +55,11 @@
 \frame{\titlepage}
 }
 
+\input{slides/inhoudsopgave}
 \input{slides/opdrachtgever}
+\input{slides/flex}
 \input{slides/linearprogramming}
+\input{slides/chaining}
 \input{slides/demo}
 
 \end{document}
