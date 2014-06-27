@@ -135,3 +135,4 @@ coin-Clp/Clp/test/*.mps
 !libgtest_win32.a
 !libgtest_win64.a
 !verslag/voorbeelden/*
+!presentatie/images/*
