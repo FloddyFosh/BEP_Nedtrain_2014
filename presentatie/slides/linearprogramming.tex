@@ -1,14 +1,14 @@
 \begin{frame}\frametitle{Linear Programming}
     \begin{itemize}
-        \item<1-> $a \prec b \quad \Rightarrow \quad a^+ + d_a \leq b^- \quad \Rightarrow \quad a^+ - b^- \leq d_a$ 
-        \item<3-> COIN-OR Linear Programming Solver (CLP)
+        \item \only<1->{$a \prec b$} \only<2->{$\quad \Rightarrow \quad a^+ + d_a \leq b^-$} \only<3->{$\quad \Rightarrow \quad a^+ - b^- \leq -d_a$}
+        \item<5-> COIN-OR Linear Programming Solver (CLP)
     \end{itemize}
 
-    \begin{definitie}<2->
+    \begin{definitie}<4->
         \begin{align}
             \text{max:}& \quad \sum_{t \in T} (t^+ - t^-) & \nonumber \\
             \text{met voorwaarden:} & \quad 0 \leq t^+ - t^- & \forall t \in T \nonumber \\
-                                    & \quad t^+ - t^- \leq c & \forall (t^+ - t^{'-} \leq c) \in C \nonumber
+                                    & \quad a^+ - b^- \leq -d_a & \forall (a \prec b) \in C \nonumber
         \end{align}
     \end{definitie}
 \end{frame}

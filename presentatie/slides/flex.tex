@@ -1,11 +1,9 @@
-\begin{frame}\frametitle{Flexibiliteit}
+\begin{frame}\frametitle{Flexibiliteit (1)}
     \begin{itemize}
         \item Hoe wordt flexibiliteit gemeten?
         \begin{itemize}
-            \item Voor \'e\'en taak: $flex_t = t^+ - t^-$
-            \item Voor hele rooster: $flex_{totaal} = \sum_{t \in T}(t^+ - t^-)$
+            \item<4-> Voor \'e\'en taak: $flex_t = t^+ - t^-$
         \end{itemize}
-        \item Onafhankelijke intervallen
     \end{itemize}
 
     \definecolor{darkgreen}{rgb}{0, 0.5, 0}
@@ -24,10 +22,121 @@
         \draw [very thick] (A) -- (B);
 
         \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<1>] (10mm, \offset) rectangle (35mm, 8mm);
-        %\filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<2>] (0mm, \offset) rectangle (25mm, 8mm);
-        %\filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<3>] (75mm, \offset) rectangle (100mm, 8mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<2>] (0mm, \offset) rectangle (25mm, 8mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<3->] (75mm, \offset) rectangle (100mm, 8mm);
+
+        \node[visible on=<2->] at (0mm,-3mm) {$t^-$};
+        \node[visible on=<3->] at (75mm,-3mm) {$t^+$};
 
         \draw [very thick] (A1) -- (A2);
         \draw [very thick] (B1) -- (B2);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}\frametitle{Flexibiliteit (2)}
+    \begin{itemize}
+        \item Hoe wordt flexibiliteit gemeten?
+        \begin{itemize}
+            \item Voor \'e\'en taak: $flex_t = t^+ - t^-$
+            \item Voor hele schema: $flex_{totaal} = \sum_{t \in T}(t^+ - t^-)$    
+            \item<2-> Voorrangsrelatie: $a \prec b$
+        \end{itemize}
+    \end{itemize}
+
+    \newcommand{\widthpic}{100mm}
+    \definecolor{darkgreen}{rgb}{0, 0.5, 0}
+    \definecolor{lightgreen}{rgb}{0, 0.7, 0}
+    \definecolor{darkblue}{rgb}{0, 0, 0.5}
+    \definecolor{lightblue}{rgb}{0.1, 0.1, 0.9}
+    \newcommand{\offset}{2mm}
+    \begin{tikzpicture}
+        \coordinate (A) at (0, 17mm);
+        \coordinate (B) at (\widthpic, 17mm);
+        \coordinate (A1) at (0, 12mm);
+        \coordinate (A2) at (0, 22mm);
+        \coordinate (B1) at (\widthpic, 12mm);
+        \coordinate (B2) at (\widthpic, 20mm);
+
+        \coordinate (C) at (0, 5mm);
+        \coordinate (D) at (\widthpic, 5mm);
+        \coordinate (C1) at (0, 0mm);
+        \coordinate (C2) at (0, 10mm);
+        \coordinate (D1) at (\widthpic, 0mm);
+        \coordinate (D2) at (\widthpic, 10mm);
+
+        \draw [very thick] (A) -- (B);
+        \draw [very thick] (C) -- (D);
+
+        \node at (-5mm,17mm) {$a$};
+        \node at (-5mm,5mm) {$b$};
+
+        % ergens in het midden
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<1-2>] (10mm, 14mm) rectangle (35mm, 20mm);
+        \filldraw[very thick, draw=darkblue,fill=lightblue, visible on=<1-2>] (55mm, 2mm) rectangle (75mm, 8mm);
+
+        % aan het begin
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<3>] (0mm, 14mm) rectangle (25mm, 20mm);
+        \filldraw[very thick, draw=darkblue,fill=lightblue, visible on=<3>] (25mm, 2mm) rectangle (45mm, 8mm);
+
+        % aan het einde
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<4->] (55mm, 14mm) rectangle (80mm, 20mm);
+        \filldraw[very thick, draw=darkblue,fill=lightblue, visible on=<4->] (80mm, 2mm) rectangle (100mm, 8mm);
+        
+        % curly bracket
+        \draw [decorate,decoration={brace,amplitude=10pt}, visible on=<5>]
+        (0mm,23mm) -- (55mm,23mm) node [black,midway, yshift=6mm] 
+        {\footnotesize $flex_{totaal}$};
+
+        \draw [very thick] (A1) -- (A2);
+        \draw [very thick] (B1) -- (B2);
+        \draw [very thick] (C1) -- (C2);
+        \draw [very thick] (D1) -- (D2);
+
+        \draw [line width=1.2mm, ->, visible on=<2>] (22mm, 17mm) -- (65mm, 5mm);
+        \draw [line width=0.5mm, ->, visible on=<2>, white] (22.3mm, 16.9mm) -- (64.5mm, 5.1mm);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}\frametitle{Flexibiliteit (3)}
+    \begin{itemize}
+        \item Voor hele schema: $flex_{totaal} = \sum_{t \in T}(t^+ - t^-)$
+        \item Onafhankelijke intervallen
+    \end{itemize}
+
+    \newcommand{\widthpic}{100mm}
+    \definecolor{darkgreen}{rgb}{0, 0.5, 0}
+    \definecolor{lightgreen}{rgb}{0, 0.7, 0}
+    \definecolor{darkblue}{rgb}{0, 0, 0.5}
+    \definecolor{lightblue}{rgb}{0.1, 0.1, 0.9}
+    \newcommand{\offset}{2mm}
+    \begin{tikzpicture}
+        \coordinate (A) at (0, 17mm);
+        \coordinate (B) at (52.5mm, 17mm);
+        \coordinate (A1) at (0, 12mm);
+        \coordinate (A2) at (0, 22mm);
+        \coordinate (B1) at (52.5mm, 12mm);
+        \coordinate (B2) at (52.5mm, 20mm);
+
+        \coordinate (C) at (52.5mm, 5mm);
+        \coordinate (D) at (\widthpic, 5mm);
+        \coordinate (C1) at (52.5mm, 0mm);
+        \coordinate (C2) at (52.5mm, 10mm);
+        \coordinate (D1) at (\widthpic, 0mm);
+        \coordinate (D2) at (\widthpic, 10mm);
+
+        \draw [very thick] (A) -- (B);
+        \draw [very thick] (C) -- (D);
+
+        \node at (-5mm,17mm) {$a$};
+        \node at (-5mm,5mm) {$b$};
+
+        % ergens in het midden
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen] (10mm, 14mm) rectangle (35mm, 20mm);
+        \filldraw[very thick, draw=darkblue,fill=lightblue] (55mm, 2mm) rectangle (75mm, 8mm);
+        
+        \draw [very thick] (A1) -- (A2);
+        \draw [very thick] (B1) -- (B2);
+        \draw [very thick] (C1) -- (C2);
+        \draw [very thick] (D1) -- (D2);
     \end{tikzpicture}
 \end{frame}
