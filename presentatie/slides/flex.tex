@@ -6,8 +6,6 @@
         \end{itemize}
     \end{itemize}
 
-    \definecolor{darkgreen}{rgb}{0, 0.5, 0}
-    \definecolor{lightgreen}{rgb}{0, 0.7, 0}
     \newcommand{\widthpic}{100mm}
     \newcommand{\heightpic}{10mm}
     \newcommand{\offset}{2mm}
@@ -44,10 +42,6 @@
     \end{itemize}
 
     \newcommand{\widthpic}{100mm}
-    \definecolor{darkgreen}{rgb}{0, 0.5, 0}
-    \definecolor{lightgreen}{rgb}{0, 0.7, 0}
-    \definecolor{darkblue}{rgb}{0, 0, 0.5}
-    \definecolor{lightblue}{rgb}{0.1, 0.1, 0.9}
     \newcommand{\offset}{2mm}
     \begin{tikzpicture}
         \coordinate (A) at (0, 17mm);
@@ -72,15 +66,15 @@
 
         % ergens in het midden
         \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<1-2>] (10mm, 14mm) rectangle (35mm, 20mm);
-        \filldraw[very thick, draw=darkblue,fill=lightblue, visible on=<1-2>] (55mm, 2mm) rectangle (75mm, 8mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<1-2>] (55mm, 2mm) rectangle (75mm, 8mm);
 
         % aan het begin
         \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<3>] (0mm, 14mm) rectangle (25mm, 20mm);
-        \filldraw[very thick, draw=darkblue,fill=lightblue, visible on=<3>] (25mm, 2mm) rectangle (45mm, 8mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<3>] (25mm, 2mm) rectangle (45mm, 8mm);
 
         % aan het einde
         \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<4->] (55mm, 14mm) rectangle (80mm, 20mm);
-        \filldraw[very thick, draw=darkblue,fill=lightblue, visible on=<4->] (80mm, 2mm) rectangle (100mm, 8mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<4->] (80mm, 2mm) rectangle (100mm, 8mm);
         
         % curly bracket
         \draw [decorate,decoration={brace,amplitude=10pt}, visible on=<5>]
@@ -92,8 +86,7 @@
         \draw [very thick] (C1) -- (C2);
         \draw [very thick] (D1) -- (D2);
 
-        \draw [line width=1.2mm, ->, visible on=<2>] (22mm, 17mm) -- (65mm, 5mm);
-        \draw [line width=0.5mm, ->, visible on=<2>, white] (22.3mm, 16.9mm) -- (64.5mm, 5.1mm);
+        \draw [very thick, ->, visible on=<2>] (22mm, 17mm) -- (65mm, 5mm);
     \end{tikzpicture}
 \end{frame}
 
@@ -104,10 +97,6 @@
     \end{itemize}
 
     \newcommand{\widthpic}{100mm}
-    \definecolor{darkgreen}{rgb}{0, 0.5, 0}
-    \definecolor{lightgreen}{rgb}{0, 0.7, 0}
-    \definecolor{darkblue}{rgb}{0, 0, 0.5}
-    \definecolor{lightblue}{rgb}{0.1, 0.1, 0.9}
     \newcommand{\offset}{2mm}
     \begin{tikzpicture}
         \coordinate (A) at (0, 17mm);
@@ -132,7 +121,7 @@
 
         % ergens in het midden
         \filldraw[very thick, draw=darkgreen,fill=lightgreen] (10mm, 14mm) rectangle (35mm, 20mm);
-        \filldraw[very thick, draw=darkblue,fill=lightblue] (55mm, 2mm) rectangle (75mm, 8mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow] (55mm, 2mm) rectangle (75mm, 8mm);
         
         \draw [very thick] (A1) -- (A2);
         \draw [very thick] (B1) -- (B2);
