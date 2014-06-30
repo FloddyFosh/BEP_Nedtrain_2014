@@ -1,6 +1,7 @@
 \begin{frame}[fragile]\frametitle{Chaining}
     \begin{itemize}      
         \item Resource conflicten oplossen
+        %\item<8-> $a \prec b$
     \end{itemize}
     \vspace{5mm}
     \newcommand{\widthpic}{100mm}
@@ -15,27 +16,26 @@
 
         % onder de resources
         % taak A
-        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<1>] (17.5mm, -15mm) rectangle (47.5mm, -5mm) node[pos=.5] {$R_2$};
-        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<1-2>] (17.5mm, -25mm) rectangle (47.5mm, -15mm) node[pos=.5] {$R_2$};
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<2-3>] (17.5mm, -15mm) rectangle (47.5mm, -5mm) node[pos=.5] {$R_2$};
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<2-4>] (17.5mm, -25mm) rectangle (47.5mm, -15mm) node[pos=.5] {$R_2$};
+        \node[visible on=<2-4>] at (13mm,-15mm) {$a$};
 
         % taak B
-        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<1-3>] (57.5mm, -15mm) rectangle (82.5mm, -5mm) node[pos=.5] {$R_1$};
-        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<1-4>] (57.5mm, -25mm) rectangle (82.5mm, -15mm) node[pos=.5] {$R_2$};
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<3-5>] (57.5mm, -15mm) rectangle (82.5mm, -5mm) node[pos=.5] {$R_1$};
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<3-6>] (57.5mm, -25mm) rectangle (82.5mm, -15mm) node[pos=.5] {$R_2$};
+        \node[visible on=<3-6>] at (86mm,-15mm) {$b$};
             
         % geplaatst
         % taak A
-        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<2->] (0mm, 10mm) rectangle (30mm, 20mm);
-        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<3->] (0mm, 0mm) rectangle (30mm, 10mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<4->] (0mm, 10mm) rectangle (30mm, 20mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen, visible on=<5->] (0mm, 0mm) rectangle (30mm, 10mm);
 
         % taak B
-        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<4>] (0mm, 20mm) rectangle (25mm, 30mm);
-        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<5->] (40mm, 20mm) rectangle (65mm, 30mm);
-        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<5->] (40mm, 10mm) rectangle (65mm, 20mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<6>] (0mm, 20mm) rectangle (25mm, 30mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<7->] (40mm, 20mm) rectangle (65mm, 30mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow, visible on=<7->] (40mm, 10mm) rectangle (65mm, 20mm);
 
-        \draw[very thick] (A) -- (B);
-        \draw[very thick] (B) -- (C);
-        \draw[very thick] (C) -- (D);
-        \draw[very thick] (A) -- (D);
+        \draw[very thick] (A) rectangle (C);
 
         \dashline{1 * \heightpic / 3};
         \normline{2 * \heightpic / 3};
@@ -43,6 +43,49 @@
         \node at (-5mm, 25mm) {$R_1$};
         \node at (-5mm, 10mm) {$R_2$};
         
-        \draw [->, very thick, visible on=<6->] (25mm, 15mm) -- (45mm, 15mm);
+        \draw [->, very thick, visible on=<8->] (25mm, 15mm) -- (45mm, 15mm);
     \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{Chaining}
+	\addtocounter{framenumber}{-1}
+    \begin{itemize}      
+        \item Resource conflicten oplossen
+    \end{itemize}
+    \vspace{5mm}
+    \newcommand{\widthpic}{100mm}
+    \newcommand{\heightpic}{30mm}
+    \newcommand\dashline[1]{\draw[thick, dashed] (0, #1) -- (100mm, #1)}
+    \newcommand\normline[1]{\draw[very thick] (0, #1) -- (100mm, #1)}
+    \begin{tikzpicture}
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (\widthpic, 0);
+        \coordinate (C) at (\widthpic, \heightpic);
+        \coordinate (D) at (0, \heightpic);
+            
+        % geplaatst
+        % taak A
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen] (0mm, 10mm) rectangle (30mm, 20mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen] (0mm, 0mm) rectangle (30mm, 10mm);
+
+        % taak B
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow] (40mm, 20mm) rectangle (65mm, 30mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow] (40mm, 10mm) rectangle (65mm, 20mm);
+
+        \draw[very thick] (A) rectangle (C);
+
+        \dashline{1 * \heightpic / 3};
+        \normline{2 * \heightpic / 3};
+
+        \node at (-5mm, 25mm) {$R_1$};
+        \node at (-5mm, 10mm) {$R_2$};
+        
+        \draw [->, very thick] (25mm, 15mm) -- (45mm, 15mm);
+    \end{tikzpicture}
+    
+    \begin{itemize}
+    		\item $a \prec b$
+    \end{itemize}
+    
+    \vspace{16mm}
 \end{frame}
