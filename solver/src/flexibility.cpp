@@ -116,7 +116,7 @@ void addConstraints(Constraints* constraints) {
         ss2 << i2 << ' ' << j2;
         string var1(ss1.str());
         string var2(ss2.str());
-        constraints->addConstraint(var1.c_str() , var2.c_str() , -1 * D(i1, j1));
+        constraints->addConstraint(var1.c_str() , var2.c_str() , -1 * (D(i1, j1) + A(i1, j1)->flex));
     }
 }
 
