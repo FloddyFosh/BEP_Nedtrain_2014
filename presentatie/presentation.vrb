@@ -1,0 +1,41 @@
+\frametitle{Chaining}
+\addtocounter{framenumber}{-1}
+    \begin{itemize}
+        \item Resource conflicten oplossen
+    \end{itemize}
+    \vspace{5mm}
+    \newcommand{\widthpic}{100mm}
+    \newcommand{\heightpic}{30mm}
+    \newcommand\dashline[1]{\draw[thick, dashed] (0, #1) -- (100mm, #1)}
+    \newcommand\normline[1]{\draw[very thick] (0, #1) -- (100mm, #1)}
+    \begin{tikzpicture}
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (\widthpic, 0);
+        \coordinate (C) at (\widthpic, \heightpic);
+        \coordinate (D) at (0, \heightpic);
+
+        % geplaatst
+        % taak A
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen] (0mm, 10mm) rectangle (30mm, 20mm);
+        \filldraw[very thick, draw=darkgreen,fill=lightgreen] (0mm, 0mm) rectangle (30mm, 10mm);
+
+        % taak B
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow] (40mm, 20mm) rectangle (65mm, 30mm);
+        \filldraw[very thick, draw=darkyellow,fill=lightyellow] (40mm, 10mm) rectangle (65mm, 20mm);
+
+        \draw[very thick] (A) rectangle (C);
+
+        \dashline{1 * \heightpic / 3};
+        \normline{2 * \heightpic / 3};
+
+        \node at (-5mm, 25mm) {$R_1$};
+        \node at (-5mm, 10mm) {$R_2$};
+
+        \draw [->, very thick] (25mm, 15mm) -- (45mm, 15mm);
+    \end{tikzpicture}
+
+    \begin{itemize}
+     \item $a \prec b$
+    \end{itemize}
+
+    \vspace{16mm}

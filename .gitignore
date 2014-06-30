@@ -48,6 +48,7 @@ build-nedtrain-Desktop-Debug/
 *.pdf
 *.nav
 *.snm
+*.vrb
 
 # Windows-specific
 Thumbs.db
