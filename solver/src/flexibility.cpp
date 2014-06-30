@@ -131,7 +131,7 @@ void addLimits(Constraints* constraints) {
                 ss1 << activities[k]->i << ' ' << activities[k]->j;
                 string var(ss1.str());
 
-                constraints->setUpperLimit(var.c_str(), activities[k]->lst+activities[k]->flex);
+                constraints->setUpperLimit(var.c_str(), activities[k]->lst);
                 constraints->setLowerLimit(var.c_str(), activities[k]->est);
 
                 constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
