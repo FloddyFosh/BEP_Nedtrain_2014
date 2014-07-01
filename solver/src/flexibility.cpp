@@ -97,10 +97,7 @@ map<string, int> useClpToSolve (Constraints* constraints) {
     map<string, int> output;   
     for(int i = 0; i < n_cols; i+=2) {
         string varname = constraints->getVariableName(i/2);
-        long unsigned int temp = varname.find(string(" "));
-        int i1 = atoi(varname.substr(0, temp).c_str());
-        int j1 = atoi(varname.substr(temp, varname.length()-1).c_str());
-        output[varname + " +"] = (int) (sol[i] + A(i1, j1)->flex + epsilon);
+        output[varname + " +"] = (int) (sol[i] + constraints->getFlex(i/2) + epsilon);
         output[varname + " -"] = (int) (sol[i+1] + epsilon);
     }
     return output;
@@ -138,6 +135,7 @@ void addLimits(Constraints* constraints) {
                 constraints->setLowerLimit(var.c_str(), activities[k]->est);
 
                 constraints->setLocked(var.c_str(), activities[k]->est == activities[k]->lst);
+                constraints->setFlex(var.c_str(), activities[k]->flex);
             }
         }
     }
