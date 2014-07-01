@@ -1,7 +1,6 @@
 \begin{frame}[fragile]\frametitle{Chaining (1)}
     \begin{itemize}      
         \item Resource conflicten oplossen
-        %\item<8-> $a \prec b$
     \end{itemize}
     \vspace{5mm}
     \newcommand{\widthpic}{100mm}
@@ -42,8 +41,6 @@
 
         \node at (-5mm, 25mm) {$R_1$};
         \node at (-5mm, 10mm) {$R_2$};
-        
-        \draw [->, very thick, visible on=<8->] (25mm, 15mm) -- (45mm, 15mm);
     \end{tikzpicture}
 \end{frame}
 
@@ -97,7 +94,7 @@
     \newcommand\normline[1]{\draw[very thick] (0, #1) -- (100mm, #1)}
     
 	\begin{itemize}
-		\item Minimaliseren van het aantal constraints.
+		\item Minimaliseren van het aantal voorrangsrelaties.
 	\end{itemize}
 	\vspace{5mm}
     
@@ -138,6 +135,5 @@
         \draw [->, very thick, visible on=<3->] (60mm, 25mm) -- (80mm, 25mm);
         \draw [->, very thick, visible on=<5->] (60mm, 15mm) -- (80mm, 15mm);
         \draw [->, very thick] (25mm, 15mm) -- (45mm, 15mm);
-        %\draw [->, very thick, visible on=<2>] (60mm, 15mm) -- (70mm, -15mm);
     \end{tikzpicture}
 \end{frame}
