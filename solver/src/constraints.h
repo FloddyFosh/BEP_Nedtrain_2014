@@ -26,6 +26,7 @@ class Constraints {
         map<int, int> upperLimits; // maybe new struct for variables?
         map<int, int> lowerLimits; // " "
         map<int, bool> locks;      // " "
+        map<int, int> flex;        // maybe new struct for variabes?
         vector<Constraint> constraintVector;
 
     public:
@@ -42,6 +43,8 @@ class Constraints {
         void setLowerLimit(string name, int lowerLimit);
         bool getLocked(int id);
         void setLocked(string name, bool locked);
+        int getFlex(int id);
+        void setFlex(string name, int amount);
 };
 
 #endif

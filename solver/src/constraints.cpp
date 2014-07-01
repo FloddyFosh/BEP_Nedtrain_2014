@@ -1,6 +1,6 @@
 #include "constraints.h"
 
-#include <assert.h>  
+#include <assert.h>
 
 Constraints::Constraints() {
 }
@@ -77,4 +77,16 @@ bool Constraints::getLocked(int id) {
 void Constraints::setLocked(string name, bool locked) {
     int id = addVariable(name);
     locks[id] = locked;
+}
+
+int Constraints::getFlex(int id) {    
+    if(flex.count(id)) {
+        return flex[id];
+    }
+    throw NoSuchVariableException(id);
+}
+
+void Constraints::setFlex(string name, int amount) {
+    int id = addVariable(name);
+    flex[id] = amount;
 }

@@ -14,6 +14,7 @@ TEST_F(FlexibilityTest, Test_1) {
     cstr.setUpperLimit("a", 42);
     cstr.setLowerLimit("a", 0);
     cstr.setLocked("a", false);
+    cstr.setFlex("a", 0);
 
     useClpToSolve(&cstr);
 
@@ -44,6 +45,12 @@ TEST_F(FlexibilityTest, Test_2) {
     cstr.setLocked("D", false);
     cstr.setLocked("E", false);
 
+    cstr.setFlex("A", 0);
+    cstr.setFlex("B", 0);
+    cstr.setFlex("C", 0);
+    cstr.setFlex("D", 0);
+    cstr.setFlex("E", 0);
+
     useClpToSolve(&cstr);
 
     EXPECT_EQ(29, getFlexibility());
@@ -67,6 +74,11 @@ TEST_F(FlexibilityTest, Test_3) {
     cstr.setLocked("B", false);    
     cstr.setLocked("F", false);
     cstr.setLocked("G", false);
+
+    cstr.setFlex("A", 0);
+    cstr.setFlex("B", 0);
+    cstr.setFlex("F", 0);
+    cstr.setFlex("G", 0);
 
     useClpToSolve(&cstr);
 
