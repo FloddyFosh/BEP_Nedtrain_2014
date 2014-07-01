@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+
+\begin{document}
+
+{\Huge Demo Draaiboek}
+
+\section{Voorbereiding}
+\begin{itemize}
+	\item 'Paint flexibility intervals' uit
+	\item 'Paint feasible intervals' aan
+	\item Mutexes/grouping uit (geen argumenten in solve config)
+	\item 'Clear generated constraints before solving' uit
+\end{itemize}
+
+\section{TMS Demo}
+\begin{itemize}
+\item \textbf{Open demo instance}
+\item Uitleggen:
+\begin{itemize}
+	\item activiteiten
+	\item resources
+	\item resource profiel \textbf{Scroll naar beneden (monteurs)}
+	\item constraints
+\end{itemize}
+\item \textbf{Solve met TMS}
+\item Enkele oplossing waarbij elke activiteit op vroegste starttijd begint.
+\item \textbf{Verschuif groene activiteit (3,5) naar rechts}
+\item Resource conflicten ontstaan
+\item Leidt ons naar de probleemstelling.
+\end{itemize}
+
+
+\section{Flex Demo}
+\begin{itemize}
+	\item \textbf{Open demo instance}
+	\item \textbf{Solve met chaining}
+	\item Op scherm na oplossen:
+	\item \begin{itemize}
+		\item Aantal constraints
+		\item Totale flexibiliteit
+		\item More $\rightarrow$ tijden
+	\end{itemize}
+	\item \textbf{Scroll resources naar beneden}
+	\item \textbf{Verschuif groene activiteit (3,5) heen en weer}
+	\item Geen conflicten door chaining
+	\item \textbf{Ga naar 'matrix' resource view}
+	\item \textbf{Verschuif groene activiteit (3,5) heen en weer}
+	\item Omdat er geen resource conflicten meer zijn, kunnen we flexibele intervallen berekenen.
+	\item \textbf{Enable 'Paint flexibility intervals'}
+	\item \textbf{Disable 'Paint feasible intervals'}
+	\item Elke activiteit krijgt een blauw interval voor verschuiven zonder dat daardoor andere activiteiten verschuiven.
+	\item \textbf{Verschuif paarse activiteit (4,8) en groene activiteit (4,5) heen en weer}
+	\item Stappenbalk:
+	\item \begin{itemize}
+		\item \textbf{Schuif naar begin}
+		\item Eerst worden constraints weergegeven die door bestaande algoritme worden toegevoegd.
+		\item Frame 7: consistent schema, nu volgt chaining
+		\item \textbf{Skip naar beginframe monteurs (20?): overzicht alle chains van deze resource}
+		\item \textbf{Laat aparte frames zien van monteurs}
+		\item \textbf{Disable 'matrix' view}
+		\item \textbf{Skip naar overzicht beginframe monteurs (20?)}
+		\item \textbf{Klik door naar einde monteurs}
+		\item \textbf{Skip naar einde}
+	\end{itemize}
+	\item \textbf{Verlaag capaciteit monteurs naar 7}
+	\item \textbf{Solve de instantie opnieuw}
+	\item \textbf{Lock rode activiteit (3,8)}
+	\item \textbf{Set flex van oranje activiteit (3,3) op 2}
+	\item \textbf{Solve de instantie opnieuw}
+	\item Voor volledig overzicht van features: zie verslag
+\end{itemize}
+
+\end{document}

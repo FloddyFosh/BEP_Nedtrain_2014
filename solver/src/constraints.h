@@ -23,9 +23,9 @@ class Constraints {
     private:
         map<string, int> variablesId;
         map<int, string> variablesName;
-        map<int, int> upperLimits;
-        map<int, int> lowerLimits;
-        map<int, bool> locks;
+        map<int, int> upperLimits; // maybe new struct for variables?
+        map<int, int> lowerLimits; // " "
+        map<int, bool> locks;      // " "
         vector<Constraint> constraintVector;
 
     public:
